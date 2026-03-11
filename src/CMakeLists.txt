@@ -1,3 +1,21 @@
+set(CMAKE_AUTOMOC ON)
+set(CMAKE_AUTORCC ON)
+set(CMAKE_AUTOUIC ON)
+
+find_package(Qt5 REQUIRED COMPONENTS
+    Core
+    Quick
+    Widgets
+)
+add_definitions(-DQT_NO_EMIT)
+
+if (MSVC)
+    add_compile_options(/wd4503)  # decorated name length exceeded
+    add_compile_options(/wd4661)  # no suitable definition provided for explicit template instantiation request
+    add_compile_options(/wd4267)  # conversion from 'size_t' to 'int', possible loss of data
+    add_compile_options(/wd4244)  # conversion from 'double' to 'float', possible loss of data
+    add_compile_options(/wd4244)  # conversion from 'double' to 'float', possible loss of data
+endif()
 
 set ( root_src
   lodepng.cpp
@@ -457,7 +475,7 @@ set ( c_src
   ../libs/miniz/miniz.c
 )
 set_property ( SOURCE ${c_src} APPEND PROPERTY COMPILE_DEFINITIONS MINIZ_NO_STDIO )
-set_property ( SOURCE Engine/Scalers/xbrz.cpp APPEND_STRING PROPERTY COMPILE_FLAGS -Wno-unused\ )
+#set_property ( SOURCE Engine/Scalers/xbrz.cpp APPEND_STRING PROPERTY COMPILE_FLAGS -Wno-unused\ )
 
 set ( data_install_dir bin )
 if ( "${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU" AND "${CMAKE_BUILD_TYPE}" STREQUAL "Debug" )
@@ -515,9 +533,9 @@ if ( MSVC )
   if ( FATAL_WARNING )
     add_compile_options ( /WX )
   endif ( FATAL_WARNING )
-  set ( CMAKE_EXE_LINKER_FLAGS "/manifest:no" )
-  set ( CMAKE_MODULE_LINKER_FLAGS "/manifest:no" )
-  set ( CMAKE_SHARED_LINKER_FLAGS="/manifest:no" )
+  set ( CMAKE_EXE_LINKER_FLAGS "/MANIFEST:NO" )
+  set ( CMAKE_MODULE_LINKER_FLAGS "/MANIFEST:NO" )
+  set ( CMAKE_SHARED_LINKER_FLAGS="/MANIFEST:NO" )
 endif ()
 
 if ( DUMP_CORE )
@@ -599,6 +617,14 @@ endif ()
 
 add_executable ( openxcom  ${application_type} ${openxcom_src} ${openxcom_icon} )
 
+target_link_libraries(openxcom
+    Qt5::Core
+    Qt5::Quick
+    Qt5::Widgets
+)
+
+
+
 if ( EMBED_ASSETS )
   add_dependencies(openxcom zips)
 endif ()
@@ -621,7 +647,9 @@ if (${CMAKE_SYSTEM_NAME} MATCHES FreeBSD OR ${CMAKE_SYSTEM_NAME} MATCHES NetBSD 
 endif ()
 
 if (WIN32)
-  set(CMAKE_EXE_LINKER_FLAGS -Wl,--export-all-symbols)
+    if (MINGW)
+        set(CMAKE_EXE_LINKER_FLAGS -Wl,--export-all-symbols)
+    endif(MINGW)
   set(WIN32_LIBS imagehlp dbghelp)
 endif(WIN32)
 

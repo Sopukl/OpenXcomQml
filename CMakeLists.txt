@@ -83,6 +83,9 @@ endif ()
 
 # Include rapidyaml lib
 include_directories(${CMAKE_SOURCE_DIR}/libs/rapidyaml)
+if(MSVC)
+    add_compile_options(/bigobj)
+endif()
 
 if(NOT UNIX AND IS_DIRECTORY ${DEPS_DIR})
    include_directories ( ${DEPS_DIR}/include/SDL ${DEPS_DIR}/include )
