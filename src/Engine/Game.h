@@ -20,6 +20,7 @@
 #include <list>
 #include <string>
 #include <SDL.h>
+#include <QObject>
 
 namespace OpenXcom
 {
@@ -41,9 +42,14 @@ class GeoscapeState;
  * the game's resources and contains a stack state machine to handle all the
  * initializations, events and blits of each state, as well as transitions.
  */
-class Game
+class Game: public QObject
 {
+	Q_OBJECT
 private:
+	enum ApplicationState { RUNNING = 0, SLOWED = 1, PAUSED = 2 } runningState = RUNNING;
+	ApplicationState kbFocusRun[4] = { RUNNING, RUNNING, SLOWED, PAUSED };
+	ApplicationState stateRun[4] = { SLOWED, PAUSED, PAUSED, PAUSED };
+
 	SDL_Event _event;
 	Screen *_screen;
 	Cursor *_cursor;
@@ -60,6 +66,10 @@ private:
 	int _scrollStep;
 	static const double VOLUME_GRADIENT;
 
+	void processEvents();
+	void processLogic();
+  protected:
+    void timerEvent(QTimerEvent*) override;
 public:
 	/// Creates a new game and initializes SDL.
 	Game(const std::string &title);
@@ -167,6 +177,8 @@ public:
 
 	/// Gets the scroll step value.
 	int getScrollStep() const { return _scrollStep; }
+  signals:
+    void aboutToQuit();
 };
 
 }

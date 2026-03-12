@@ -27,6 +27,8 @@
 #include "Engine/Options.h"
 #include "Engine/FileMap.h"
 #include "Menu/StartState.h"
+#include <QGuiApplication>
+#include <QObject>
 
 /** @mainpage
  * @author OpenXcom Developers
@@ -91,8 +93,6 @@ void exceptionLogger()
 	exit(EXIT_FAILURE);
 }
 
-Game *game = 0;
-
 // If you can't tell what the main() is for you should have your
 // programming license revoked...
 int main(int argc, char *argv[])
@@ -114,6 +114,7 @@ int main(int argc, char *argv[])
 	std::set_terminate(exceptionLogger);
 #endif
 #endif
+	QGuiApplication app(argc, argv);
 	YAML::setGlobalErrorHandler();
 	CrossPlatform::getErrorDialog();
 	CrossPlatform::processArgs(argc, argv);
@@ -124,23 +125,9 @@ int main(int argc, char *argv[])
 	Options::baseXResolution = Options::displayWidth;
 	Options::baseYResolution = Options::displayHeight;
 
-	game = new Game(title.str());
-	State::setGamePtr(game);
-	game->setState(new StartState);
-	game->run();
+	Game game(title.str());
 
-	bool startUpdate = game->getUpdateFlag();
-
-	// Comment those two for faster exit.
-	delete game;
-	FileMap::clear(true, false); // make valgrind happy
-
-	if (startUpdate)
-	{
-		CrossPlatform::startUpdateProcess();
-	}
-
-	return EXIT_SUCCESS;
+	return app.exec();
 }
 
 namespace OpenXcom
