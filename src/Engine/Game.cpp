@@ -21,6 +21,7 @@
 #include <algorithm>
 #include <cmath>
 #include <qguiapplication.h>
+#include <qwidget.h>
 #include <sstream>
 #include <SDL_mixer.h>
 #include "State.h"
@@ -47,7 +48,7 @@
 #include "../Menu/StartState.h"
 #include <algorithm>
 #include "../fallthrough.h"
-
+#include "../version.h"
 namespace OpenXcom
 {
 
@@ -62,13 +63,21 @@ Sint16 yrel = 0;
  * creates the display screen and sets up the cursor.
  * @param title Title of the game window.
  */
-Game::Game(const std::string &title) : _screen(0), _cursor(0), _lang(0), _save(0), _mod(0), _quit(false), _init(false), _update(false),  _mouseActive(true), _timeUntilNextFrame(0),
+Game::Game(QWidget*_wnd) : QObject(_wnd), wnd(_wnd), _screen(0), _cursor(0), _lang(0), _save(0), _mod(0), _quit(false), _init(false), _update(false),  _mouseActive(true), _timeUntilNextFrame(0),
 	_ctrl(false), _alt(false), _shift(false), _rmb(false), _mmb(false), _scrollStep(1)
 {
+	std::ostringstream title;
+	title << "OpenXcom " << OPENXCOM_VERSION_SHORT << OPENXCOM_VERSION_GIT;
+
+
 	Options::reload = false;
 	Options::mute = false;
 
 	// Initialize SDL
+	// char env[64];
+	// snprintf(env, sizeof(env), "SDL_WINDOWID=%ld", (long)wnd->winId());
+	// SDL_putenv(env);
+
 	if (SDL_Init(SDL_INIT_VIDEO) < 0)
 	{
 		Log(LOG_ERROR) << SDL_GetError();
@@ -87,7 +96,7 @@ Game::Game(const std::string &title) : _screen(0), _cursor(0), _lang(0), _save(0
 	CrossPlatform::setWindowIcon(IDI_ICON1, "openxcom.png");
 
 	// Set the window caption
-	SDL_WM_SetCaption(title.c_str(), 0);
+	SDL_WM_SetCaption(title.str().c_str(), 0);
 
 	// Set up unicode
 	SDL_EnableUNICODE(1);

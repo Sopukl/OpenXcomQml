@@ -27,8 +27,8 @@
 #include "Engine/Options.h"
 #include "Engine/FileMap.h"
 #include "Menu/StartState.h"
-#include <QGuiApplication>
-#include <QObject>
+#include <QApplication>
+#include "GameWindow.h"
 
 /** @mainpage
  * @author OpenXcom Developers
@@ -114,7 +114,7 @@ int main(int argc, char *argv[])
 	std::set_terminate(exceptionLogger);
 #endif
 #endif
-	QGuiApplication app(argc, argv);
+	QApplication app(argc, argv);
 	YAML::setGlobalErrorHandler();
 	CrossPlatform::getErrorDialog();
 	CrossPlatform::processArgs(argc, argv);
@@ -125,7 +125,11 @@ int main(int argc, char *argv[])
 	Options::baseXResolution = Options::displayWidth;
 	Options::baseYResolution = Options::displayHeight;
 
-	Game game(title.str());
+	GameWindow mainWindow;
+	mainWindow.resize(Options::displayWidth, Options::displayHeight);
+	mainWindow.show();
+	mainWindow.start();
+	//Game game(&mainWindow);
 
 	return app.exec();
 }

@@ -22,6 +22,8 @@
 #include <SDL.h>
 #include <QObject>
 
+class QWidget;
+
 namespace OpenXcom
 {
 
@@ -50,6 +52,7 @@ private:
 	ApplicationState kbFocusRun[4] = { RUNNING, RUNNING, SLOWED, PAUSED };
 	ApplicationState stateRun[4] = { SLOWED, PAUSED, PAUSED, PAUSED };
 
+	QWidget *wnd;
 	SDL_Event _event;
 	Screen *_screen;
 	Cursor *_cursor;
@@ -72,7 +75,7 @@ private:
     void timerEvent(QTimerEvent*) override;
 public:
 	/// Creates a new game and initializes SDL.
-	Game(const std::string &title);
+	Game(QWidget*);
 	/// Cleans up all the game's resources and shuts down SDL.
 	~Game();
 	/// Starts the game's state machine.
