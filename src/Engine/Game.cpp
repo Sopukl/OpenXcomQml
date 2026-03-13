@@ -74,9 +74,9 @@ Game::Game(QWidget*_wnd) : QObject(_wnd), wnd(_wnd), _screen(0), _cursor(0), _la
 	Options::mute = false;
 
 	// Initialize SDL
-	// char env[64];
-	// snprintf(env, sizeof(env), "SDL_WINDOWID=%ld", (long)wnd->winId());
-	// SDL_putenv(env);
+	char env[64];
+	snprintf(env, sizeof(env), "SDL_WINDOWID=%ld", (long)wnd->winId());
+	SDL_putenv(env);
 
 	if (SDL_Init(SDL_INIT_VIDEO) < 0)
 	{
