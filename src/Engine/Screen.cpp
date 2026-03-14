@@ -18,6 +18,8 @@
  */
 #include "Screen.h"
 #include <algorithm>
+#include <qdebug.h>
+#include <qglobal.h>
 #include <sstream>
 #include <cmath>
 #include <iomanip>
@@ -373,12 +375,16 @@ void Screen::resetDisplay(bool resetVideo, bool noShaders)
 			SDL_SetCursor(SDL_CreateCursor(&cursor, &cursor, 1,1,0,0));
 		}
 #endif
-		_screen = SDL_SetVideoMode(width, height, _bpp, _flags);
+		//_screen = SDL_SetVideoMode(width, height, _bpp, _flags);
+		_screen = SDL_CreateRGBSurface(SDL_SWSURFACE, width, height, _bpp, 0,0,0,0);
+		qDebug() << "screen created " << width << height;
 		if (_screen == 0)
 		{
 			Log(LOG_ERROR) << SDL_GetError();
 			Log(LOG_INFO) << "Attempting to set display to default resolution...";
-			_screen = SDL_SetVideoMode(640, 400, _bpp, _flags);
+			//_screen = SDL_SetVideoMode(640, 400, _bpp, _flags);
+			_screen = SDL_CreateRGBSurface(SDL_SWSURFACE, 640, 400, _bpp, 0,0,0,0);
+
 			if (_screen == 0)
 			{
 				if (_flags & SDL_OPENGL)

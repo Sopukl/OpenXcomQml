@@ -23,7 +23,6 @@
 #include "Engine/Exception.h"
 #include "Engine/Logger.h"
 #include "Engine/CrossPlatform.h"
-#include "Engine/Game.h"
 #include "Engine/Options.h"
 #include "Engine/FileMap.h"
 #include "Menu/StartState.h"
@@ -128,8 +127,6 @@ int main(int argc, char *argv[])
 	GameWindow mainWindow;
 	mainWindow.resize(Options::displayWidth, Options::displayHeight);
 	mainWindow.show();
-	mainWindow.start();
-	//Game game(&mainWindow);
 
 	return app.exec();
 }

@@ -73,10 +73,7 @@ Game::Game(QWidget*_wnd) : QObject(_wnd), wnd(_wnd), _screen(0), _cursor(0), _la
 	Options::reload = false;
 	Options::mute = false;
 
-	// Initialize SDL
-	char env[64];
-	snprintf(env, sizeof(env), "SDL_WINDOWID=%ld", (long)wnd->winId());
-	SDL_putenv(env);
+	// // Initialize SDL
 
 	if (SDL_Init(SDL_INIT_VIDEO) < 0)
 	{
@@ -105,18 +102,18 @@ Game::Game(QWidget*_wnd) : QObject(_wnd), wnd(_wnd), _screen(0), _cursor(0), _la
 	// Create display
 	_screen = new Screen();
 
-	// Create cursor
+	// // Create cursor
 	_cursor = new Cursor(9, 13);
 
-	// Create invisible hardware cursor to workaround bug with absolute positioning pointing devices
-	SDL_ShowCursor(SDL_ENABLE);
-	Uint8 cursor = 0;
-	SDL_SetCursor(SDL_CreateCursor(&cursor, &cursor, 1,1,0,0));
+	// // Create invisible hardware cursor to workaround bug with absolute positioning pointing devices
+	// // SDL_ShowCursor(SDL_ENABLE);
+	// // Uint8 cursor = 0;
+	// // SDL_SetCursor(SDL_CreateCursor(&cursor, &cursor, 1,1,0,0));
 
-	// Create fps counter
+	// // Create fps counter
 	_fpsCounter = new FpsCounter(15, 5, 0, 0);
 
-	// Create blank language
+	// // Create blank language
 	_lang = new Language();
 
 	_timeOfLastFrame = 0;
