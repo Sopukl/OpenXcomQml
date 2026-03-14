@@ -71,8 +71,6 @@ private:
 
 	void processEvents();
 	void processLogic();
-  protected:
-    void timerEvent(QTimerEvent*) override;
 public:
 	/// Creates a new game and initializes SDL.
 	Game(QWidget*);

@@ -11,12 +11,9 @@
 #ifdef Q_OS_WIN
 SDLKey convertScanCodeToSDLKey(quint32 scanCode)
 {
-	// В Windows скан-коды - это OEM-сканкоды (8 бит)
-	// Бит 0x80 означает, что клавиша отпущена, нам нужны только младшие 7 бит
 	scanCode &= 0x7F;
 
 	switch (scanCode) {
-	// Буквы и цифры
 	case 0x10: return SDLK_q;  // Q
 	case 0x11: return SDLK_w;  // W
 	case 0x12: return SDLK_e;  // E
@@ -44,7 +41,7 @@ SDLKey convertScanCodeToSDLKey(quint32 scanCode)
 	case 0x28: return SDLK_QUOTE;       // '
 	case 0x29: return SDLK_BACKQUOTE;   // `
 
-	case 0x2B: return SDLK_BACKSLASH;   // \ (для русской раскладки может быть \ или /)
+	case 0x2B: return SDLK_BACKSLASH;
 	case 0x2C: return SDLK_z;  // Z
 	case 0x2D: return SDLK_x;  // X
 	case 0x2E: return SDLK_c;  // C
@@ -56,7 +53,6 @@ SDLKey convertScanCodeToSDLKey(quint32 scanCode)
 	case 0x34: return SDLK_PERIOD;  // .
 	case 0x35: return SDLK_SLASH;   // /
 
-	// Цифры
 	case 0x02: return SDLK_1;
 	case 0x03: return SDLK_2;
 	case 0x04: return SDLK_3;
@@ -68,16 +64,15 @@ SDLKey convertScanCodeToSDLKey(quint32 scanCode)
 	case 0x0A: return SDLK_9;
 	case 0x0B: return SDLK_0;
 
-	// Спецклавиши
 	case 0x01: return SDLK_ESCAPE;
 	case 0x0C: return SDLK_MINUS;     // -
 	case 0x0D: return SDLK_EQUALS;    // =
 	case 0x0E: return SDLK_BACKSPACE;
 	case 0x0F: return SDLK_TAB;
-	case 0x1D: return SDLK_LCTRL;     // Левый Ctrl
-	case 0x2A: return SDLK_LSHIFT;    // Левый Shift
-	case 0x36: return SDLK_RSHIFT;    // Правый Shift
-	case 0x38: return SDLK_LALT;       // Левый Alt
+	case 0x1D: return SDLK_LCTRL;     // Left Ctrl
+	case 0x2A: return SDLK_LSHIFT;    // Left Shift
+	case 0x36: return SDLK_RSHIFT;    // Right Shift
+	case 0x38: return SDLK_LALT;       // Left Alt
 	case 0x39: return SDLK_SPACE;
 	case 0x3A: return SDLK_CAPSLOCK;
 	case 0x3B: return SDLK_F1;
@@ -118,9 +113,7 @@ SDLKey convertScanCodeToSDLKey(quint32 scanCode)
 #include <X11/X.h>
 
 SDLKey convertLinuxKeyToSDLKey(quint32 nativeKey) {
-	// В Linux nativeVirtualKey() возвращает KeySym из X11
 	switch (nativeKey) {
-	// Буквы (XK_ - из X11/keysymdef.h)
 	case XK_q: return SDLK_q;
 	case XK_w: return SDLK_w;
 	case XK_e: return SDLK_e;
@@ -148,12 +141,9 @@ SDLKey convertLinuxKeyToSDLKey(quint32 nativeKey) {
 	case XK_n: return SDLK_n;
 	case XK_m: return SDLK_m;
 
-	// Русские буквы (если X11 поддерживает)
-	case XK_Cyrillic_a: return SDLK_f;        // ф
-	case XK_Cyrillic_be: return SDLK_comma;   // б??
-	// ... и так далее
+	case XK_Cyrillic_a: return SDLK_f;
+	case XK_Cyrillic_be: return SDLK_comma;
 
-	// Цифры
 	case XK_0: return SDLK_0;
 	case XK_1: return SDLK_1;
 	case XK_2: return SDLK_2;
@@ -165,7 +155,6 @@ SDLKey convertLinuxKeyToSDLKey(quint32 nativeKey) {
 	case XK_8: return SDLK_8;
 	case XK_9: return SDLK_9;
 
-	// Спецклавиши
 	case XK_Escape: return SDLK_ESCAPE;
 	case XK_Return: return SDLK_RETURN;
 	case XK_Tab: return SDLK_TAB;
@@ -213,130 +202,6 @@ SDLKey convertLinuxKeyToSDLKey(quint32 nativeKey) {
 
 namespace OpenXcom
 {
-	SDLKey convertQtKey(int qtKey)
-	{
-		switch (qtKey) {
-		// Буквы и цифры
-		case Qt::Key_A: return SDLK_a;
-		case Qt::Key_B: return SDLK_b;
-		case Qt::Key_C: return SDLK_c;
-		case Qt::Key_D: return SDLK_d;
-		case Qt::Key_E: return SDLK_e;
-		case Qt::Key_F: return SDLK_f;
-		case Qt::Key_G: return SDLK_g;
-		case Qt::Key_H: return SDLK_h;
-		case Qt::Key_I: return SDLK_i;
-		case Qt::Key_J: return SDLK_j;
-		case Qt::Key_K: return SDLK_k;
-		case Qt::Key_L: return SDLK_l;
-		case Qt::Key_M: return SDLK_m;
-		case Qt::Key_N: return SDLK_n;
-		case Qt::Key_O: return SDLK_o;
-		case Qt::Key_P: return SDLK_p;
-		case Qt::Key_Q: return SDLK_q;
-		case Qt::Key_R: return SDLK_r;
-		case Qt::Key_S: return SDLK_s;
-		case Qt::Key_T: return SDLK_t;
-		case Qt::Key_U: return SDLK_u;
-		case Qt::Key_V: return SDLK_v;
-		case Qt::Key_W: return SDLK_w;
-		case Qt::Key_X: return SDLK_x;
-		case Qt::Key_Y: return SDLK_y;
-		case Qt::Key_Z: return SDLK_z;
-
-		case Qt::Key_0: return SDLK_0;
-		case Qt::Key_1: return SDLK_1;
-		case Qt::Key_2: return SDLK_2;
-		case Qt::Key_3: return SDLK_3;
-		case Qt::Key_4: return SDLK_4;
-		case Qt::Key_5: return SDLK_5;
-		case Qt::Key_6: return SDLK_6;
-		case Qt::Key_7: return SDLK_7;
-		case Qt::Key_8: return SDLK_8;
-		case Qt::Key_9: return SDLK_9;
-
-		// Функциональные клавиши
-		case Qt::Key_F1: return SDLK_F1;
-		case Qt::Key_F2: return SDLK_F2;
-		case Qt::Key_F3: return SDLK_F3;
-		case Qt::Key_F4: return SDLK_F4;
-		case Qt::Key_F5: return SDLK_F5;
-		case Qt::Key_F6: return SDLK_F6;
-		case Qt::Key_F7: return SDLK_F7;
-		case Qt::Key_F8: return SDLK_F8;
-		case Qt::Key_F9: return SDLK_F9;
-		case Qt::Key_F10: return SDLK_F10;
-		case Qt::Key_F11: return SDLK_F11;
-		case Qt::Key_F12: return SDLK_F12;
-		case Qt::Key_F13: return SDLK_F13;
-		case Qt::Key_F14: return SDLK_F14;
-		case Qt::Key_F15: return SDLK_F15;
-
-		// Стрелки
-		case Qt::Key_Up: return SDLK_UP;
-		case Qt::Key_Down: return SDLK_DOWN;
-		case Qt::Key_Left: return SDLK_LEFT;
-		case Qt::Key_Right: return SDLK_RIGHT;
-
-		// Управление
-		case Qt::Key_Shift: return SDLK_LSHIFT;  // Левый shift по умолчанию
-		case Qt::Key_Control: return SDLK_LCTRL;  // Левый ctrl по умолчанию
-		case Qt::Key_Alt: return SDLK_LALT;       // Левый alt по умолчанию
-		case Qt::Key_Meta: return SDLK_LMETA;     // Windows/Command key
-		case Qt::Key_AltGr: return SDLK_RALT;      // Правый alt (AltGr)
-
-		case Qt::Key_Return: return SDLK_RETURN;
-		case Qt::Key_Enter: return SDLK_KP_ENTER;  // Enter на цифровой клавиатуре
-		case Qt::Key_Escape: return SDLK_ESCAPE;
-		case Qt::Key_Backspace: return SDLK_BACKSPACE;
-		case Qt::Key_Tab: return SDLK_TAB;
-		case Qt::Key_Space: return SDLK_SPACE;
-		case Qt::Key_CapsLock: return SDLK_CAPSLOCK;
-		case Qt::Key_NumLock: return SDLK_NUMLOCK;
-		case Qt::Key_ScrollLock: return SDLK_SCROLLOCK;
-		case Qt::Key_Pause: return SDLK_PAUSE;
-
-		case Qt::Key_Insert: return SDLK_INSERT;
-		case Qt::Key_Delete: return SDLK_DELETE;
-		case Qt::Key_Home: return SDLK_HOME;
-		case Qt::Key_End: return SDLK_END;
-		case Qt::Key_PageUp: return SDLK_PAGEUP;
-		case Qt::Key_PageDown: return SDLK_PAGEDOWN;
-
-		// Символы
-		case Qt::Key_Comma: return SDLK_COMMA;
-		case Qt::Key_Period: return SDLK_PERIOD;
-		case Qt::Key_Slash: return SDLK_SLASH;
-		case Qt::Key_Backslash: return SDLK_BACKSLASH;
-		case Qt::Key_Semicolon: return SDLK_SEMICOLON;
-		case Qt::Key_Apostrophe: return SDLK_QUOTE;
-		case Qt::Key_BracketLeft: return SDLK_LEFTBRACKET;
-		case Qt::Key_BracketRight: return SDLK_RIGHTBRACKET;
-		case Qt::Key_Minus: return SDLK_MINUS;
-		case Qt::Key_Equal: return SDLK_EQUALS;
-		case Qt::Key_QuoteDbl: return SDLK_QUOTEDBL;
-
-		// Цифровая клавиатура
-		case Qt::Key_0 - Qt::KeypadModifier: return SDLK_KP0;
-		case Qt::Key_1 - Qt::KeypadModifier: return SDLK_KP1;
-		case Qt::Key_2 - Qt::KeypadModifier: return SDLK_KP2;
-		case Qt::Key_3 - Qt::KeypadModifier: return SDLK_KP3;
-		case Qt::Key_4 - Qt::KeypadModifier: return SDLK_KP4;
-		case Qt::Key_5 - Qt::KeypadModifier: return SDLK_KP5;
-		case Qt::Key_6 - Qt::KeypadModifier: return SDLK_KP6;
-		case Qt::Key_7 - Qt::KeypadModifier: return SDLK_KP7;
-		case Qt::Key_8 - Qt::KeypadModifier: return SDLK_KP8;
-		case Qt::Key_9 - Qt::KeypadModifier: return SDLK_KP9;
-
-		case Qt::Key_Asterisk: return SDLK_KP_MULTIPLY;
-		case Qt::Key_Plus: return SDLK_KP_PLUS;
-		case Qt::Key_Minus - Qt::KeypadModifier: return SDLK_KP_MINUS;
-		case Qt::Key_Slash - Qt::KeypadModifier: return SDLK_KP_DIVIDE;
-		case Qt::Key_Period - Qt::KeypadModifier: return SDLK_KP_PERIOD;
-
-		default: return SDLK_UNKNOWN;
-		}
-	}
 	SDLMod convertQtModifiers(Qt::KeyboardModifiers qtMods)
 	{
 		SDLMod sdlMods = KMOD_NONE;
@@ -364,16 +229,11 @@ namespace OpenXcom
 		return sdlMods;
 	}
 
-
 	SDLKey getPhysicalKey(QKeyEvent* event) {
-	// Пытаемся получить скан-код (платформозависимо)
 #ifdef Q_OS_WIN
-		// В Windows можно использовать nativeScanCode()
 		quint32 nativeScanCode = event->nativeScanCode();
-		// Конвертировать скан-код в SDLKey
 		return convertScanCodeToSDLKey(nativeScanCode);
 #elif defined(Q_OS_LINUX)
-		// В Linux можно использовать nativeVirtualKey()
 		quint32 nativeKey = event->nativeVirtualKey();
 		return convertLinuxKeyToSDLKey(nativeKey);
 #else
@@ -388,7 +248,6 @@ namespace OpenXcom
 	{
 		setMouseTracking(true);
 		startTimer(10);
-
 	}
 
 	void GameWindow::pushSDLEvent(Uint32 type, int x, int y, Uint8 button)
@@ -428,6 +287,7 @@ namespace OpenXcom
 		default: return 0;
 		}
 	}
+
 	Uint8 GameWindow::getMouseState()
 	{
 		Uint8 state = 0;
@@ -474,7 +334,17 @@ namespace OpenXcom
 		QWidget::keyPressEvent(event);
 		SDL_Event e;
 		e.type = SDL_KEYDOWN;
-		e.key.keysym.sym = getPhysicalKey(event);//convertQtKey(event->key());
+		e.key.keysym.sym = getPhysicalKey(event);
+		e.key.keysym.mod = convertQtModifiers(event->modifiers());
+		SDL_PushEvent(&e);
+	}
+
+	void GameWindow::keyReleaseEvent(QKeyEvent *event)
+	{
+		QWidget::keyReleaseEvent(event);
+		SDL_Event e;
+		e.type = SDL_KEYDOWN;
+		e.key.keysym.sym = getPhysicalKey(event);
 		e.key.keysym.mod = convertQtModifiers(event->modifiers());
 		SDL_PushEvent(&e);
 	}
@@ -487,10 +357,8 @@ namespace OpenXcom
 		{
 			SDL_Surface* screen = m_Game.getScreen()->getSurface();
 
-			// Блокируем SDL surface для чтения
 			SDL_LockSurface(screen);
 
-			// Создаем QImage из пиксельных данных SDL
 			QImage image(
 				(const uchar*)screen->pixels,
 				screen->w,
@@ -526,7 +394,7 @@ namespace OpenXcom
 
 	void GameWindow::timerEvent(QTimerEvent *)
 	{
+		m_Game.run();
 		update();
 	}
-
 }

@@ -120,7 +120,6 @@ Game::Game(QWidget*_wnd) : QObject(_wnd), wnd(_wnd), _screen(0), _cursor(0), _la
 
 	State::setGamePtr(this);
 	setState(new StartState());
-	startTimer(10);
 }
 
 /**
@@ -339,11 +338,6 @@ void Game::processLogic()
 		_cursor->blit(_screen->getSurface());
 		_screen->flip();
 	}
-}
-
-void Game::timerEvent(QTimerEvent *)
-{
-	run();
 }
 
 void Game::run()
