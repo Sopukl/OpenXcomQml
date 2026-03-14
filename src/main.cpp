@@ -119,13 +119,11 @@ int main(int argc, char *argv[])
 	CrossPlatform::processArgs(argc, argv);
 	if (!Options::init())
 		return EXIT_SUCCESS;
-	std::ostringstream title;
-	title << "OpenXcom " << OPENXCOM_VERSION_SHORT << OPENXCOM_VERSION_GIT;
 	Options::baseXResolution = Options::displayWidth;
 	Options::baseYResolution = Options::displayHeight;
 
 	GameWindow mainWindow;
-	mainWindow.resize(Options::displayWidth, Options::displayHeight);
+	mainWindow.setFixedSize(Options::displayWidth, Options::displayHeight);
 	mainWindow.show();
 
 	return app.exec();
