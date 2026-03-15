@@ -2078,8 +2078,8 @@ void Globe::toggleRadarLines()
 void Globe::resize()
 {
 	Surface *surfaces[4] = {this, _markers, _countries, _radars};
-	int width = Options::baseXGeoscape - 64;
-	int height = Options::baseYGeoscape;
+	int width = options1.baseXGeoscape - 64;
+	int height = options1.baseYGeoscape;
 
 	for (int i = 0; i < 4; ++i)
 	{

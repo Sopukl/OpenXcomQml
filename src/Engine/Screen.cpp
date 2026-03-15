@@ -105,8 +105,8 @@ void Screen::makeVideoFlags()
 	}
 
 	_bpp = (use32bitScaler() || useOpenGL()) ? 32 : 8;
-	_baseWidth = Options::baseXResolution;
-	_baseHeight = Options::baseYResolution;
+	_baseWidth = options1.baseXResolution;
+	_baseHeight = options1.baseYResolution;
 }
 
 
@@ -610,8 +610,8 @@ bool Screen::use32bitScaler()
 {
 	int w = options1.displayWidth();
 	int h = options1.displayHeight();
-	int baseW = Options::baseXResolution;
-	int baseH = Options::baseYResolution;
+	int baseW = options1.baseXResolution;
+	int baseH = options1.baseYResolution;
 	int maxScale = 0;
 
 	if (Options::useHQXFilter)
@@ -733,10 +733,10 @@ void Screen::updateScale(int type, int &width, int &height, bool change)
 	width = std::max(width, Screen::ORIGINAL_WIDTH);
 	height = std::max(height, Screen::ORIGINAL_HEIGHT);
 
-	if (change && (Options::baseXResolution != width || Options::baseYResolution != height))
+	if (change && (options1.baseXResolution != width || options1.baseYResolution != height))
 	{
-		Options::baseXResolution = width;
-		Options::baseYResolution = height;
+		options1.baseXResolution = width;
+		options1.baseYResolution = height;
 	}
 }
 

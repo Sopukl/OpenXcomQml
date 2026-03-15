@@ -97,9 +97,9 @@ void OptionsDefaultsState::btnYesClick(Action *action)
 		// my development/debug defaults
 		Options::debug = true;
 		Options::language = "en-US";
-		Options::musicVolume = 15;
-		Options::soundVolume = 15;
-		Options::uiVolume = 15;
+		options1.setMusicVolume(15);
+		options1.setSoundVolume(15);
+		options1.setUiVolume(15);
 		Options::keyFps = SDLK_UNKNOWN;
 		Options::playIntro = false;
 		Options::autosave = false;

@@ -95,13 +95,13 @@ InventoryState::InventoryState(bool tu, BattlescapeState *parent, Base *base, bo
 
 	if (Options::maximizeInfoScreens)
 	{
-		Options::baseXResolution = Screen::ORIGINAL_WIDTH;
-		Options::baseYResolution = Screen::ORIGINAL_HEIGHT;
+		options1.baseXResolution = Screen::ORIGINAL_WIDTH;
+		options1.baseYResolution = Screen::ORIGINAL_HEIGHT;
 		_game->getScreen()->resetDisplay(false);
 	}
 	else if (_battleGame->isBaseCraftInventory())
 	{
-		Screen::updateScale(Options::battlescapeScale, Options::baseXBattlescape, Options::baseYBattlescape, true);
+		Screen::updateScale(Options::battlescapeScale, options1.baseXBattlescape, options1.baseYBattlescape, true);
 		_game->getScreen()->resetDisplay(false);
 	}
 
@@ -363,7 +363,7 @@ InventoryState::~InventoryState()
 	{
 		if (Options::maximizeInfoScreens)
 		{
-			Screen::updateScale(Options::battlescapeScale, Options::baseXBattlescape, Options::baseYBattlescape, true);
+			Screen::updateScale(Options::battlescapeScale, options1.baseXBattlescape, options1.baseYBattlescape, true);
 			_game->getScreen()->resetDisplay(false);
 		}
 
@@ -378,7 +378,7 @@ InventoryState::~InventoryState()
 	}
 	else
 	{
-		Screen::updateScale(Options::geoscapeScale, Options::baseXGeoscape, Options::baseYGeoscape, true);
+		Screen::updateScale(Options::geoscapeScale, options1.baseXGeoscape, options1.baseYGeoscape, true);
 		_game->getScreen()->resetDisplay(false);
 	}
 }

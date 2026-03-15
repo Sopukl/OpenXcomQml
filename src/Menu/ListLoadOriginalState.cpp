@@ -193,15 +193,15 @@ void ListLoadOriginalState::btnSlotClick(Action *action)
 
 			SaveConverter converter(_saves[n].id, _game->getMod());
 			_game->setSavedGame(converter.loadOriginal());
-			Options::baseXResolution = Options::baseXGeoscape;
-			Options::baseYResolution = Options::baseYGeoscape;
+			options1.baseXResolution = options1.baseXGeoscape;
+			options1.baseYResolution = options1.baseYGeoscape;
 			_game->getScreen()->resetDisplay(false);
 			_game->setState(new GeoscapeState);
 			if (_game->getSavedGame()->getSavedBattle() != 0)
 			{
 				_game->getSavedGame()->getSavedBattle()->loadMapResources(_game->getMod());
-				Options::baseXResolution = Options::baseXBattlescape;
-				Options::baseYResolution = Options::baseYBattlescape;
+				options1.baseXResolution = options1.baseXBattlescape;
+				options1.baseYResolution = options1.baseYBattlescape;
 				_game->getScreen()->resetDisplay(false);
 				BattlescapeState *bs = new BattlescapeState;
 				_game->pushState(bs);

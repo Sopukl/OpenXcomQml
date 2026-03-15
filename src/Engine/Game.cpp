@@ -189,7 +189,7 @@ void Game::processEvents()
 					runningState = RUNNING;
 					if (Options::backgroundMute)
 					{
-						setVolume(Options::soundVolume, Options::musicVolume, Options::uiVolume);
+						setVolume(options1.soundVolume(), options1.musicVolume(), options1.uiVolume());
 					}
 				}
 			}
@@ -205,8 +205,8 @@ void Game::processEvents()
 					options1.setDisplayHeight(Options::newDisplayHeight);
 
 					int dX = 0, dY = 0;
-					Screen::updateScale(Options::battlescapeScale, Options::baseXBattlescape, Options::baseYBattlescape, false);
-					Screen::updateScale(Options::geoscapeScale, Options::baseXGeoscape, Options::baseYGeoscape, false);
+					Screen::updateScale(Options::battlescapeScale, options1.baseXBattlescape, options1.baseYBattlescape, false);
+					Screen::updateScale(Options::geoscapeScale, options1.baseXGeoscape, options1.baseYGeoscape, false);
 					for (auto* state : _states)
 					{
 						state->resize(dX, dY);
@@ -716,18 +716,18 @@ void Game::initAudio()
 	}
 
 	Uint16 format = MIX_DEFAULT_FORMAT;
-	if (Options::audioBitDepth == 8)
+	if (options1.audioBitDepth() == 8)
 		format = AUDIO_S8;
 
-	if (Options::audioSampleRate % 11025 != 0)
+	if (options1.audioSampleRate() % 11025 != 0)
 	{
-		Log(LOG_WARNING) << "Custom sample rate " << Options::audioSampleRate << "Hz, audio that doesn't match will be distorted!";
+		Log(LOG_WARNING) << "Custom sample rate " << options1.audioSampleRate() << "Hz, audio that doesn't match will be distorted!";
 		Log(LOG_WARNING) << "SDL_mixer only supports multiples of 11025Hz.";
 	}
-	int minChunk = Options::audioSampleRate / 11025 * 512;
-	Options::audioChunkSize = std::max(minChunk, Options::audioChunkSize);
+	int minChunk = options1.audioSampleRate() / 11025 * 512;
+	options1.setAudioChunkSize(std::max(minChunk, options1.audioChunkSize()));
 
-	if (Mix_OpenAudio(Options::audioSampleRate, format, MIX_DEFAULT_CHANNELS, Options::audioChunkSize) != 0)
+	if (Mix_OpenAudio(options1.audioSampleRate(), format, MIX_DEFAULT_CHANNELS, options1.audioChunkSize()) != 0)
 	{
 		Log(LOG_ERROR) << Mix_GetError();
 		Log(LOG_WARNING) << "Sound device failed, audio disabled.";
@@ -744,7 +744,7 @@ void Game::initAudio()
 		Mix_ReserveChannels(5);
 		Mix_GroupChannels(1, 2, 0);
 		Log(LOG_INFO) << "SDL_mixer initialized successfully.";
-		setVolume(Options::soundVolume, Options::musicVolume, Options::uiVolume);
+		setVolume(options1.soundVolume(), options1.musicVolume(), options1.uiVolume());
 	}
 }
 

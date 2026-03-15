@@ -42,8 +42,8 @@ ScannerState::ScannerState (BattleAction *action) : _action(action)
 {
 	if (Options::maximizeInfoScreens)
 	{
-		Options::baseXResolution = Screen::ORIGINAL_WIDTH;
-		Options::baseYResolution = Screen::ORIGINAL_HEIGHT;
+		options1.baseXResolution = Screen::ORIGINAL_WIDTH;
+		options1.baseYResolution = Screen::ORIGINAL_HEIGHT;
 		_game->getScreen()->resetDisplay(false);
 	}
 	_bg = new InteractiveSurface(320, 200);
@@ -127,7 +127,7 @@ void ScannerState::exitClick(Action *)
 {
 	if (Options::maximizeInfoScreens)
 	{
-		Screen::updateScale(Options::battlescapeScale, Options::baseXBattlescape, Options::baseYBattlescape, true);
+		Screen::updateScale(Options::battlescapeScale, options1.baseXBattlescape, options1.baseYBattlescape, true);
 		_game->getScreen()->resetDisplay(false);
 	}
 	_game->popState();

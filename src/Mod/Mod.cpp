@@ -6347,7 +6347,7 @@ Music* Mod::loadMusic(MusicFormat fmt, RuleMusic* rule, CatFile* adlibcat, CatFi
 		// Try Adlib music
 		if (fmt == MUSIC_ADLIB)
 		{
-			if (adlibcat && Options::audioBitDepth == 16)
+			if (adlibcat && options1.audioBitDepth() == 16)
 			{
 				if (track < adlibcat->size())
 				{

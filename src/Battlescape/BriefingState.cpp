@@ -55,8 +55,8 @@ namespace OpenXcom
  */
 BriefingState::BriefingState(Craft *craft, Base *base, bool infoOnly, BriefingData *customBriefing) : _infoOnly(infoOnly), _disableCutsceneAndMusic(false)
 {
-	Options::baseXResolution = Options::baseXGeoscape;
-	Options::baseYResolution = Options::baseYGeoscape;
+	options1.baseXResolution = options1.baseXGeoscape;
+	options1.baseYResolution = options1.baseYGeoscape;
 	_game->getScreen()->resetDisplay(false);
 
 	_screen = true;
@@ -270,8 +270,8 @@ void BriefingState::init()
 void BriefingState::btnOkClick(Action *)
 {
 	_game->popState();
-	Options::baseXResolution = Options::baseXBattlescape;
-	Options::baseYResolution = Options::baseYBattlescape;
+	options1.baseXResolution = options1.baseXBattlescape;
+	options1.baseYResolution = options1.baseYBattlescape;
 	_game->getScreen()->resetDisplay(false);
 	if (_infoOnly) return;
 
@@ -294,8 +294,8 @@ void BriefingState::btnOkClick(Action *)
 	}
 	else
 	{
-		Options::baseXResolution = Options::baseXGeoscape;
-		Options::baseYResolution = Options::baseYGeoscape;
+		options1.baseXResolution = options1.baseXGeoscape;
+		options1.baseYResolution = options1.baseYGeoscape;
 		_game->getScreen()->resetDisplay(false);
 		delete bs;
 		_game->pushState(new AliensCrashState);

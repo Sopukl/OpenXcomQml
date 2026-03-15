@@ -369,7 +369,7 @@ static struct AudioSequence
 				{
 					soundInFile *sf = (*sounds) + command;
 					int channel = trackPosition % 4; // use at most four channels to play sound effects
-					double ratio = (double)Options::soundVolume / MIX_MAX_VOLUME;
+					double ratio = (double)options1.soundVolume() / MIX_MAX_VOLUME;
 					Log(LOG_DEBUG) << "playing: " << sf->catFile << ":" << sf->sound << " for index " << command;
 					s = mod->getSound(sf->catFile, sf->sound/*, false*/);
 					if (s)
@@ -401,8 +401,8 @@ void VideoState::init()
 
 	bool ufoIntroSoundFileDosExists = false;
 	bool ufoIntroSoundFileWinExists = false;
-	int prevMusicVol = Options::musicVolume;
-	int prevSoundVol = Options::soundVolume;
+	int prevMusicVol = options1.musicVolume();
+	int prevSoundVol = options1.soundVolume();
 	if (_useUfoAudioSequence)
 	{
 		const auto& soundDir = FileMap::getVFolderContents("SOUND");
@@ -417,14 +417,15 @@ void VideoState::init()
 		{
 			// ensure user can hear both music and sound effects for the
 			// vanilla intro sequence
-			Options::musicVolume = Options::soundVolume = std::max(prevMusicVol, prevSoundVol);
-			_game->setVolume(Options::soundVolume, Options::musicVolume, -1);
+			options1.setMusicVolume(std::max(prevMusicVol, prevSoundVol));
+			options1.setSoundVolume(std::max(prevMusicVol, prevSoundVol));
+			_game->setVolume(options1.soundVolume(), options1.musicVolume(), -1);
 		}
 	}
 	_game->getCursor()->setVisible(false);
 
-	int dx = (Options::baseXResolution - Screen::ORIGINAL_WIDTH) / 2;
-	int dy = (Options::baseYResolution - Screen::ORIGINAL_HEIGHT) / 2;
+	int dx = (options1.baseXResolution - Screen::ORIGINAL_WIDTH) / 2;
+	int dy = (options1.baseYResolution - Screen::ORIGINAL_HEIGHT) / 2;
 
 	// We can only do a fade out in 8bpp, otherwise instantly end it
 	bool fade = (_game->getScreen()->getSurface()->format->BitsPerPixel == 8);
@@ -532,9 +533,9 @@ void VideoState::init()
 
 	if (_useUfoAudioSequence)
 	{
-		Options::musicVolume = prevMusicVol;
-		Options::soundVolume = prevSoundVol;
-		_game->setVolume(Options::soundVolume, Options::musicVolume, Options::uiVolume);
+		options1.setMusicVolume(prevMusicVol);
+		options1.setSoundVolume(prevSoundVol);
+		_game->setVolume(options1.soundVolume(), options1.musicVolume(), options1.uiVolume());
 	}
 
 #ifndef __NO_MUSIC

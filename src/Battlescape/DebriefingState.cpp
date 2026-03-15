@@ -89,8 +89,8 @@ DebriefingState::DebriefingState() :
 {
 	_missionStatistics = new MissionStatistics();
 
-	Options::baseXResolution = Options::baseXGeoscape;
-	Options::baseYResolution = Options::baseYGeoscape;
+	options1.baseXResolution = options1.baseXGeoscape;
+	options1.baseYResolution = options1.baseYGeoscape;
 	_game->getScreen()->resetDisplay(false);
 
 	// Restore the cursor in case something weird happened

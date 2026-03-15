@@ -41,7 +41,7 @@ std::map<int, int> AdlibMusic::delayRates;
  */
 AdlibMusic::AdlibMusic(float volume) : Music(), _data(0), _size(0), _volume(volume)
 {
-	rate = Options::audioSampleRate;
+	rate = options1.audioSampleRate();
 	if (!opl[0])
 	{
 		opl[0] = OPLCreate(OPL_TYPE_YM3812, 3579545, rate);
@@ -130,7 +130,7 @@ void AdlibMusic::player(void *udata, Uint8 *stream, int len)
 {
 #ifndef __NO_MUSIC
 	// Check SDL volume for Background Mute functionality
-	if (Options::musicVolume == 0 || Mix_VolumeMusic(-1) == 0)
+	if (options1.musicVolume() == 0 || Mix_VolumeMusic(-1) == 0)
 		return;
 	if (Options::musicAlwaysLoop && !func_is_music_playing())
 	{
@@ -145,7 +145,7 @@ void AdlibMusic::player(void *udata, Uint8 *stream, int len)
 		int i = std::min(delay, len);
 		if (i)
 		{
-			float volume = Game::volumeExponent(Options::musicVolume);
+			float volume = Game::volumeExponent(options1.musicVolume());
 			YM3812UpdateOne(opl[0], (INT16*)stream, i / 2, 2, volume);
 			YM3812UpdateOne(opl[1], ((INT16*)stream) + 1, i / 2, 2, volume);
 			stream += i;

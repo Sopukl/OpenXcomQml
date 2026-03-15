@@ -53,10 +53,10 @@ StartState::StartState() : _anim(0)
 	//updateScale() uses newDisplayWidth/Height and needs to be set ahead of time
 	Options::newDisplayWidth = options1.displayWidth();
 	Options::newDisplayHeight = options1.displayHeight();
-	Screen::updateScale(Options::geoscapeScale, Options::baseXGeoscape, Options::baseYGeoscape, false);
-	Screen::updateScale(Options::battlescapeScale, Options::baseXBattlescape, Options::baseYBattlescape, false);
-	Options::baseXResolution = options1.displayWidth();
-	Options::baseYResolution = options1.displayHeight();
+	Screen::updateScale(Options::geoscapeScale, options1.baseXGeoscape, options1.baseYGeoscape, false);
+	Screen::updateScale(Options::battlescapeScale, options1.baseXBattlescape, options1.baseYBattlescape, false);
+	options1.baseXResolution = options1.displayWidth();
+	options1.baseYResolution = options1.displayHeight();
 	_game->getScreen()->resetDisplay(false, true);
 
 	// Create objects
@@ -69,7 +69,7 @@ StartState::StartState() : _anim(0)
 	_font->loadTerminal();
 	_lang = new Language();
 
-	_text = new Text(Options::baseXResolution, Options::baseYResolution, 0, 0);
+	_text = new Text(options1.baseXResolution, options1.baseYResolution, 0, 0);
 	_cursor = new Text(_font->getWidth(), _font->getHeight(), 0, 0);
 	_timer = new Timer(150);
 

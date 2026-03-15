@@ -51,8 +51,8 @@ UnitInfoState::UnitInfoState(BattleUnit *unit, BattlescapeState *parent, bool fr
 {
 	if (Options::maximizeInfoScreens)
 	{
-		Options::baseXResolution = Screen::ORIGINAL_WIDTH;
-		Options::baseYResolution = Screen::ORIGINAL_HEIGHT;
+		options1.baseXResolution = Screen::ORIGINAL_WIDTH;
+		options1.baseYResolution = Screen::ORIGINAL_HEIGHT;
 		_game->getScreen()->resetDisplay(false);
 	}
 	_battleGame = _game->getSavedGame()->getSavedBattle();
@@ -770,7 +770,7 @@ void UnitInfoState::exitClick(Action *)
 {
 	if (!_fromInventory && Options::maximizeInfoScreens)
 	{
-		Screen::updateScale(Options::battlescapeScale, Options::baseXBattlescape, Options::baseYBattlescape, true);
+		Screen::updateScale(Options::battlescapeScale, options1.baseXBattlescape, options1.baseYBattlescape, true);
 		_game->getScreen()->resetDisplay(false);
 	}
 	_game->popState();

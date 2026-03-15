@@ -196,7 +196,7 @@ void SaveGameState::think()
 
 			if (_type == SAVE_IRONMAN_END)
 			{
-				Screen::updateScale(Options::geoscapeScale, Options::baseXGeoscape, Options::baseYGeoscape, true);
+				Screen::updateScale(Options::geoscapeScale, options1.baseXGeoscape, options1.baseYGeoscape, true);
 				_game->getScreen()->resetDisplay(false);
 
 				_game->setState(new MainMenuState);

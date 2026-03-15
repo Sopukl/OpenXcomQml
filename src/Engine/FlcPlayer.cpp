@@ -81,7 +81,7 @@ enum PlayingState
 
 FlcPlayer::FlcPlayer() : _fileBuf(0), _mainScreen(0), _realScreen(0), _game(0)
 {
-	_volume = Game::volumeExponent(Options::musicVolume);
+	_volume = Game::volumeExponent(options1.musicVolume());
 }
 
 FlcPlayer::~FlcPlayer()
@@ -152,8 +152,8 @@ bool FlcPlayer::init(const char *filename, void(*frameCallBack)(), Game *game, b
 		// base resolution of video is higher than our surface width
 		// and our display resolution allows a hi-res video
 		// set base resolution to video resolution
-		Options::baseXResolution = _screenWidth;
-		Options::baseYResolution = _screenHeight;
+		options1.baseXResolution = _screenWidth;
+		options1.baseYResolution = _screenHeight;
 		_realScreen->resetDisplay();
 	}
 	// If the current surface used is at 8bpp use it

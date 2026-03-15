@@ -110,8 +110,8 @@ BattlescapeState::BattlescapeState() :
 
 	std::fill_n(_visibleUnit, 10, (BattleUnit*)(0));
 
-	const int screenWidth = Options::baseXResolution;
-	const int screenHeight = Options::baseYResolution;
+	const int screenWidth = options1.baseXResolution;
+	const int screenHeight = options1.baseYResolution;
 	const int iconsWidth = _game->getMod()->getInterface("battlescape")->getElement("icons")->w;
 	const int iconsHeight = _game->getMod()->getInterface("battlescape")->getElement("icons")->h;
 	const int visibleMapHeight = screenHeight - iconsHeight;
@@ -780,7 +780,7 @@ void BattlescapeState::init()
 	if (_save->getAmbientSound() != Mod::NO_SOUND)
 	{
 		_game->getMod()->getSoundByDepth(_save->getDepth(), _save->getAmbientSound())->loop();
-		_game->setVolume(Options::soundVolume, Options::musicVolume, Options::uiVolume);
+		_game->setVolume(options1.soundVolume(), options1.musicVolume(), options1.uiVolume());
 	}
 
 	State::init();
@@ -3592,8 +3592,8 @@ void BattlescapeState::finishBattle(bool abort, int inExitArea)
 		if (isPreview)
 		{
 			// skip Debriefing
-			Options::baseXResolution = Options::baseXGeoscape;
-			Options::baseYResolution = Options::baseYGeoscape;
+			options1.baseXResolution = options1.baseXGeoscape;
+			options1.baseYResolution = options1.baseYGeoscape;
 			_game->getScreen()->resetDisplay(false);
 
 			// Restore the cursor in case something weird happened
@@ -4002,8 +4002,8 @@ void BattlescapeState::txtTooltipOut(Action *action)
  */
 void BattlescapeState::resize(int &dX, int &dY)
 {
-	dX = Options::baseXResolution;
-	dY = Options::baseYResolution;
+	dX = options1.baseXResolution;
+	dY = options1.baseYResolution;
 	int divisor = 1;
 	double pixelRatioY = 1.0;
 
@@ -4042,13 +4042,13 @@ void BattlescapeState::resize(int &dX, int &dY)
 		return;
 	}
 
-	Options::baseXResolution = std::max(Screen::ORIGINAL_WIDTH, int(options1.displayWidth() / divisor));
-	Options::baseYResolution = std::max(Screen::ORIGINAL_HEIGHT, int(options1.displayHeight() / pixelRatioY / divisor));
+	options1.baseXResolution = std::max(Screen::ORIGINAL_WIDTH, int(options1.displayWidth() / divisor));
+	options1.baseYResolution = std::max(Screen::ORIGINAL_HEIGHT, int(options1.displayHeight() / pixelRatioY / divisor));
 
-	dX = Options::baseXResolution - dX;
-	dY = Options::baseYResolution - dY;
-	_map->setWidth(Options::baseXResolution);
-	_map->setHeight(Options::baseYResolution);
+	dX = options1.baseXResolution - dX;
+	dY = options1.baseYResolution - dY;
+	_map->setWidth(options1.baseXResolution);
+	_map->setHeight(options1.baseYResolution);
 	_map->getCamera()->resize();
 	_map->getCamera()->jumpXY(dX/2, dY/2);
 

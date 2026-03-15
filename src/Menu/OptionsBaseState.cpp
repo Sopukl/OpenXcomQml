@@ -205,18 +205,18 @@ void OptionsBaseState::setCategory(TextButton *button)
 void OptionsBaseState::btnOkClick(Action *)
 {
 	Options::switchDisplay();
-	int dX = Options::baseXResolution;
-	int dY = Options::baseYResolution;
-	Screen::updateScale(Options::battlescapeScale, Options::baseXBattlescape, Options::baseYBattlescape, _origin == OPT_BATTLESCAPE);
-	Screen::updateScale(Options::geoscapeScale, Options::baseXGeoscape, Options::baseYGeoscape, _origin != OPT_BATTLESCAPE);
-	dX = Options::baseXResolution - dX;
-	dY = Options::baseYResolution - dY;
+	int dX = options1.baseXResolution;
+	int dY = options1.baseYResolution;
+	Screen::updateScale(Options::battlescapeScale, options1.baseXBattlescape, options1.baseYBattlescape, _origin == OPT_BATTLESCAPE);
+	Screen::updateScale(Options::geoscapeScale, options1.baseXGeoscape, options1.baseYGeoscape, _origin != OPT_BATTLESCAPE);
+	dX = options1.baseXResolution - dX;
+	dY = options1.baseYResolution - dY;
 	recenter(dX, dY);
 	Options::save();
 	_game->loadLanguages();
 	_game->getScreen()->resetDisplay();
 	SDL_WM_GrabInput(Options::captureMouse);
-	_game->setVolume(Options::soundVolume, Options::musicVolume, Options::uiVolume);
+	_game->setVolume(options1.soundVolume(), options1.musicVolume(), options1.uiVolume());
 	if (Options::reload && _origin == OPT_MENU)
 	{
 		_game->setState(new StartState);
@@ -249,9 +249,9 @@ void OptionsBaseState::btnCancelClick(Action *)
 	Options::reload = false;
 	Options::load();
 	SDL_WM_GrabInput(Options::captureMouse);
-	Screen::updateScale(Options::battlescapeScale, Options::baseXBattlescape, Options::baseYBattlescape, _origin == OPT_BATTLESCAPE);
-	Screen::updateScale(Options::geoscapeScale, Options::baseXGeoscape, Options::baseYGeoscape, _origin != OPT_BATTLESCAPE);
-	_game->setVolume(Options::soundVolume, Options::musicVolume, Options::uiVolume);
+	Screen::updateScale(Options::battlescapeScale, options1.baseXBattlescape, options1.baseYBattlescape, _origin == OPT_BATTLESCAPE);
+	Screen::updateScale(Options::geoscapeScale, options1.baseXGeoscape, options1.baseYGeoscape, _origin != OPT_BATTLESCAPE);
+	_game->setVolume(options1.soundVolume(), options1.musicVolume(), options1.uiVolume());
 	_game->popState();
 }
 

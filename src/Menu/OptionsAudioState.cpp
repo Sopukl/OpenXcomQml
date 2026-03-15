@@ -97,7 +97,7 @@ OptionsAudioState::OptionsAudioState(OptionsOrigin origin) : OptionsBaseState(or
 	_txtMusicVolume->setText(tr("STR_MUSIC_VOLUME"));
 
 	_slrMusicVolume->setRange(0, SDL_MIX_MAXVOLUME);
-	_slrMusicVolume->setValue(Options::musicVolume);
+	_slrMusicVolume->setValue(options1.musicVolume());
 	_slrMusicVolume->onChange((ActionHandler)&OptionsAudioState::slrMusicVolumeChange);
 	_slrMusicVolume->setTooltip("STR_MUSIC_VOLUME_DESC");
 	_slrMusicVolume->onMouseIn((ActionHandler)&OptionsAudioState::txtTooltipIn);
@@ -106,7 +106,7 @@ OptionsAudioState::OptionsAudioState(OptionsOrigin origin) : OptionsBaseState(or
 	_txtSoundVolume->setText(tr("STR_SFX_VOLUME"));
 
 	_slrSoundVolume->setRange(0, SDL_MIX_MAXVOLUME);
-	_slrSoundVolume->setValue(Options::soundVolume);
+	_slrSoundVolume->setValue(options1.soundVolume());
 	_slrSoundVolume->onChange((ActionHandler)&OptionsAudioState::slrSoundVolumeChange);
 	_slrSoundVolume->onMouseRelease((ActionHandler)&OptionsAudioState::slrSoundVolumeRelease);
 	_slrSoundVolume->setTooltip("STR_SFX_VOLUME_DESC");
@@ -116,7 +116,7 @@ OptionsAudioState::OptionsAudioState(OptionsOrigin origin) : OptionsBaseState(or
 	_txtUiVolume->setText(tr("STR_UI_VOLUME"));
 
 	_slrUiVolume->setRange(0, SDL_MIX_MAXVOLUME);
-	_slrUiVolume->setValue(Options::uiVolume);
+	_slrUiVolume->setValue(options1.uiVolume());
 	_slrUiVolume->onChange((ActionHandler)&OptionsAudioState::slrUiVolumeChange);
 	_slrUiVolume->onMouseRelease((ActionHandler)&OptionsAudioState::slrUiVolumeRelease);
 	_slrUiVolume->setTooltip("STR_UI_VOLUME_DESC");
@@ -210,8 +210,8 @@ OptionsAudioState::~OptionsAudioState()
  */
 void OptionsAudioState::slrMusicVolumeChange(Action *)
 {
-	Options::musicVolume = _slrMusicVolume->getValue();
-	_game->setVolume(Options::soundVolume, Options::musicVolume, Options::uiVolume);
+	options1.setMusicVolume(_slrMusicVolume->getValue());
+	_game->setVolume(options1.soundVolume(), options1.musicVolume(), options1.uiVolume());
 }
 
 /**
@@ -220,8 +220,8 @@ void OptionsAudioState::slrMusicVolumeChange(Action *)
  */
 void OptionsAudioState::slrSoundVolumeChange(Action *)
 {
-	Options::soundVolume = _slrSoundVolume->getValue();
-	_game->setVolume(Options::soundVolume, Options::musicVolume, Options::uiVolume);
+	options1.setSoundVolume(_slrSoundVolume->getValue());
+	_game->setVolume(options1.soundVolume(), options1.musicVolume(), options1.uiVolume());
 }
 
 /**
@@ -239,8 +239,8 @@ void OptionsAudioState::slrSoundVolumeRelease(Action *)
  */
 void OptionsAudioState::slrUiVolumeChange(Action *)
 {
-	Options::uiVolume = _slrUiVolume->getValue();
-	_game->setVolume(Options::soundVolume, Options::musicVolume, Options::uiVolume);
+	options1.setUiVolume(_slrUiVolume->getValue());
+	_game->setVolume(options1.soundVolume(), options1.musicVolume(), options1.uiVolume());
 }
 
 /**

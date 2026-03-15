@@ -170,15 +170,15 @@ void LoadGameState::think()
 			_game->setSavedGame(s);
 			if (_game->getSavedGame()->getEnding() != END_NONE)
 			{
-				Options::baseXResolution = Screen::ORIGINAL_WIDTH;
-				Options::baseYResolution = Screen::ORIGINAL_HEIGHT;
+				options1.baseXResolution = Screen::ORIGINAL_WIDTH;
+				options1.baseYResolution = Screen::ORIGINAL_HEIGHT;
 				_game->getScreen()->resetDisplay(false);
 				_game->setState(new StatisticsState);
 			}
 			else
 			{
-				Options::baseXResolution = Options::baseXGeoscape;
-				Options::baseYResolution = Options::baseYGeoscape;
+				options1.baseXResolution = options1.baseXGeoscape;
+				options1.baseYResolution = options1.baseYGeoscape;
 				_game->getScreen()->resetDisplay(false);
 				if (origBattleState != 0)
 				{
@@ -189,8 +189,8 @@ void LoadGameState::think()
 				if (_game->getSavedGame()->getSavedBattle() != 0)
 				{
 					_game->getSavedGame()->getSavedBattle()->loadMapResources(_game->getMod());
-					Options::baseXResolution = Options::baseXBattlescape;
-					Options::baseYResolution = Options::baseYBattlescape;
+					options1.baseXResolution = options1.baseXBattlescape;
+					options1.baseYResolution = options1.baseYBattlescape;
 					_game->getScreen()->resetDisplay(false);
 					BattlescapeState *bs = new BattlescapeState;
 					_game->pushState(bs);

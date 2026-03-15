@@ -110,7 +110,7 @@ void AbandonGameState::btnYesClick(Action *)
 		_game->getMod()->getSoundByDepth(0, _game->getSavedGame()->getSavedBattle()->getAmbientSound())->stopLoop();
 	if (!_game->getSavedGame()->isIronman())
 	{
-		Screen::updateScale(Options::geoscapeScale, Options::baseXGeoscape, Options::baseYGeoscape, true);
+		Screen::updateScale(Options::geoscapeScale, options1.baseXGeoscape, options1.baseYGeoscape, true);
 		_game->getScreen()->resetDisplay(false);
 
 		_game->setState(new MainMenuState);

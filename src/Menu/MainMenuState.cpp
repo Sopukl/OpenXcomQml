@@ -51,7 +51,7 @@ GoToMainMenuState::~GoToMainMenuState()
 
 void GoToMainMenuState::init()
 {
-	Screen::updateScale(Options::geoscapeScale, Options::baseXGeoscape, Options::baseYGeoscape, true);
+	Screen::updateScale(Options::geoscapeScale, options1.baseXGeoscape, options1.baseYGeoscape, true);
 	_game->getScreen()->resetDisplay(false);
 	_game->setState(new MainMenuState(_updateCheck));
 }
@@ -535,11 +535,11 @@ void MainMenuState::btnUpdateClick(Action*)
  */
 void MainMenuState::resize(int &dX, int &dY)
 {
-	dX = Options::baseXResolution;
-	dY = Options::baseYResolution;
-	Screen::updateScale(Options::geoscapeScale, Options::baseXGeoscape, Options::baseYGeoscape, true);
-	dX = Options::baseXResolution - dX;
-	dY = Options::baseYResolution - dY;
+	dX = options1.baseXResolution;
+	dY = options1.baseYResolution;
+	Screen::updateScale(Options::geoscapeScale, options1.baseXGeoscape, options1.baseYGeoscape, true);
+	dX = options1.baseXResolution - dX;
+	dY = options1.baseYResolution - dY;
 	State::resize(dX, dY);
 }
 

@@ -108,8 +108,6 @@ void createOptionsOXC()
 
 #ifdef __MOBILE__
 	_info.push_back(OptionInfo(OPTION_OXC, "maxFrameSkip", &maxFrameSkip, 0, "STR_FRAMESKIP", "STR_GENERAL"));
-#else
-	_info.push_back(OptionInfo(OPTION_OXC, "maxFrameSkip", &maxFrameSkip, 0));
 #endif
 	_info.push_back(OptionInfo(OPTION_OXC, "traceAI", &traceAI, false));
 	_info.push_back(OptionInfo(OPTION_OXC, "verboseLogging", &verboseLogging, false));
@@ -131,9 +129,6 @@ void createOptionsOXC()
 	_info.push_back(OptionInfo(OPTION_OXC, "useOpenGLSmoothing", &useOpenGLSmoothing, true));
 	_info.push_back(OptionInfo(OPTION_OXC, "debug", &debug, false));
 	_info.push_back(OptionInfo(OPTION_OXC, "debugUi", &debugUi, false));
-	_info.push_back(OptionInfo(OPTION_OXC, "soundVolume", &soundVolume, 2*(MIX_MAX_VOLUME/3)));
-	_info.push_back(OptionInfo(OPTION_OXC, "musicVolume", &musicVolume, 2*(MIX_MAX_VOLUME/3)));
-	_info.push_back(OptionInfo(OPTION_OXC, "uiVolume", &uiVolume, MIX_MAX_VOLUME/3));
 	_info.push_back(OptionInfo(OPTION_OXC, "language", &language, ""));
 	_info.push_back(OptionInfo(OPTION_OXC, "battleScrollSpeed", &battleScrollSpeed, 8));
 #ifdef __MOBILE__
@@ -160,9 +155,6 @@ void createOptionsOXC()
 	_info.push_back(OptionInfo(OPTION_OXC, "globeRadarLines", &globeRadarLines, true));
 	_info.push_back(OptionInfo(OPTION_OXC, "globeFlightPaths", &globeFlightPaths, true));
 	_info.push_back(OptionInfo(OPTION_OXC, "globeAllRadarsOnBaseBuild", &globeAllRadarsOnBaseBuild, true));
-	_info.push_back(OptionInfo(OPTION_OXC, "audioSampleRate", &audioSampleRate, 22050));
-	_info.push_back(OptionInfo(OPTION_OXC, "audioBitDepth", &audioBitDepth, 16));
-	_info.push_back(OptionInfo(OPTION_OXC, "audioChunkSize", &audioChunkSize, 1024));
 	_info.push_back(OptionInfo(OPTION_OXC, "pauseMode", &pauseMode, 0));
 	_info.push_back(OptionInfo(OPTION_OXC, "battleNotifyDeath", &battleNotifyDeath, false));
 	_info.push_back(OptionInfo(OPTION_OXC, "showFundsOnGeoscape", &showFundsOnGeoscape, false));
@@ -1299,7 +1291,7 @@ bool load(const std::string &filename)
  */
 bool save(bool reset, const std::string& filename)
 {
-	options1.saveDisplaySettings();
+	options1.saveSettings();
 	std::string yaml;
 	std::string filepath = _configFolder + filename + ".cfg";
 	try
