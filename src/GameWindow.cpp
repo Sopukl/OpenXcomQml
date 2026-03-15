@@ -3,9 +3,10 @@
 #include <QDebug>
 #include <QPainter>
 #include <QMouseEvent>
+#include "Engine/Options.h"
 #ifdef Q_OS_WIN
 #include <windows.h>
-#include <dinput.h> // Для DirectInput скан-кодов
+#include <dinput.h>
 #endif
 
 #ifdef Q_OS_WIN
@@ -248,6 +249,19 @@ namespace OpenXcom
 	{
 		setMouseTracking(true);
 		startTimer(10);
+
+		connect(&options1, &Options1::displayWidthChanged,
+				this, &GameWindow::resize_Window);
+		connect(&options1, &Options1::displayHeightChanged,
+				this, &GameWindow::resize_Window);
+
+		resize_Window();
+	}
+
+	void GameWindow::resize_Window()
+	{
+		setFixedSize(options1.displayWidth(),
+					 options1.displayHeight());
 	}
 
 	void GameWindow::pushSDLEvent(Uint32 type, int x, int y, Uint8 button)

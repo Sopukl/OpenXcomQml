@@ -147,7 +147,7 @@ bool FlcPlayer::init(const char *filename, void(*frameCallBack)(), Game *game, b
 		Log(LOG_ERROR) << "Flx file failed header check.";
 		return false;
 	}
-	if (_screenWidth > _realScreen->getSurface()->w && Options::displayWidth >= _screenWidth)
+	if (_screenWidth > _realScreen->getSurface()->w && options1.displayWidth() >= _screenWidth)
 	{
 		// base resolution of video is higher than our surface width
 		// and our display resolution allows a hi-res video
@@ -242,8 +242,10 @@ void FlcPlayer::SDLPolling()
 		case SDL_VIDEORESIZE:
 			if (Options::allowResize)
 			{
-				Options::newDisplayWidth = Options::displayWidth = std::max(Screen::ORIGINAL_WIDTH, event.resize.w);
-				Options::newDisplayHeight = Options::displayHeight = std::max(Screen::ORIGINAL_HEIGHT, event.resize.h);
+				Options::newDisplayWidth = std::max(Screen::ORIGINAL_WIDTH, event.resize.w);
+				Options::newDisplayHeight = std::max(Screen::ORIGINAL_HEIGHT, event.resize.h);
+				options1.setDisplayWidth(Options::newDisplayWidth);
+				options1.setDisplayHeight(Options::newDisplayHeight);
 				if (_mainScreen != _realScreen->getSurface())
 				{
 					_realScreen->resetDisplay();

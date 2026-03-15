@@ -99,8 +99,8 @@ void createOptionsOXC()
 	_info.push_back(OptionInfo(OPTION_OXC, "asyncBlit", &asyncBlit, false));
 	_info.push_back(OptionInfo(OPTION_OXC, "keyboardMode", (int*)&keyboardMode, KEYBOARD_OFF));
 #else
-	_info.push_back(OptionInfo(OPTION_OXC, "displayWidth", &displayWidth, Screen::ORIGINAL_WIDTH*2));
-	_info.push_back(OptionInfo(OPTION_OXC, "displayHeight", &displayHeight, Screen::ORIGINAL_HEIGHT*2));
+	// _info.push_back(OptionInfo(OPTION_OXC, "displayWidth", &displayWidth, Screen::ORIGINAL_WIDTH*2));
+	// _info.push_back(OptionInfo(OPTION_OXC, "displayHeight", &displayHeight, Screen::ORIGINAL_HEIGHT*2));
 	_info.push_back(OptionInfo(OPTION_OXC, "fullscreen", &fullscreen, false));
 	_info.push_back(OptionInfo(OPTION_OXC, "asyncBlit", &asyncBlit, true));
 	_info.push_back(OptionInfo(OPTION_OXC, "keyboardMode", (int*)&keyboardMode, KEYBOARD_ON));
@@ -1299,6 +1299,7 @@ bool load(const std::string &filename)
  */
 bool save(bool reset, const std::string& filename)
 {
+	options1.saveDisplaySettings();
 	std::string yaml;
 	std::string filepath = _configFolder + filename + ".cfg";
 	try
@@ -1446,8 +1447,8 @@ std::vector<const ModInfo *> getActiveMods()
  */
 void backupDisplay()
 {
-	Options::newDisplayWidth = Options::displayWidth;
-	Options::newDisplayHeight = Options::displayHeight;
+	Options::newDisplayWidth = options1.displayWidth();
+	Options::newDisplayHeight = options1.displayHeight();
 	Options::newBattlescapeScale = Options::battlescapeScale;
 	Options::newGeoscapeScale = Options::geoscapeScale;
 	Options::newOpenGL = Options::useOpenGL;
@@ -1469,8 +1470,16 @@ void backupDisplay()
  */
 void switchDisplay()
 {
-	std::swap(displayWidth, newDisplayWidth);
-	std::swap(displayHeight, newDisplayHeight);
+	quint32 tmp;
+
+	tmp = newDisplayWidth;
+	newDisplayWidth = options1.displayWidth();
+	options1.setDisplayWidth(tmp);
+
+	tmp = newDisplayHeight;
+	newDisplayHeight = options1.displayHeight();
+	options1.setDisplayHeight(tmp);
+
 	std::swap(useOpenGL, newOpenGL);
 	std::swap(useScaleFilter, newScaleFilter);
 	std::swap(battlescapeScale, newBattlescapeScale);

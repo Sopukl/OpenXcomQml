@@ -20,6 +20,7 @@ endif()
 set ( root_src
   lodepng.cpp
   main.cpp
+  GameWindow.cpp
   md5.cpp
 )
 set ( basescape_src
@@ -174,6 +175,7 @@ set ( engine_src
   Engine/OpenGL.cpp
   Engine/OptionInfo.cpp
   Engine/Options.cpp
+  Engine/Options1.cpp
   Engine/Palette.cpp
   Engine/RNG.cpp
   Engine/Scalers/hq2x.cpp
@@ -615,8 +617,7 @@ if (( APPLE AND CREATE_BUNDLE ) OR CPACK_GENERATOR STREQUAL "7Z" )
   set ( CMAKE_INSTALL_BINDIR "." )
 endif ()
 
-add_executable ( openxcom  ${application_type} ${openxcom_src} ${openxcom_icon}
-    GameWindow.h GameWindow.cpp )
+add_executable ( openxcom  ${application_type} ${openxcom_src} ${openxcom_icon})
 
 target_link_libraries(openxcom
     Qt5::Core

@@ -25,6 +25,8 @@ namespace OpenXcom
 		explicit GameWindow(QWidget* parent = nullptr);
 
 	  signals:
+	  private slots:
+		void resize_Window();
 	  private:
 		void pushSDLEvent(Uint32 type, int x, int y, Uint8 button = 0);
 		Uint8 getMouseState();

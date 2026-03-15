@@ -199,8 +199,11 @@ void Game::processEvents()
 			{
 				if (!startupEvent)
 				{
-					Options::newDisplayWidth = Options::displayWidth = std::max(Screen::ORIGINAL_WIDTH, _event.resize.w);
-					Options::newDisplayHeight = Options::displayHeight = std::max(Screen::ORIGINAL_HEIGHT, _event.resize.h);
+					Options::newDisplayWidth = std::max(Screen::ORIGINAL_WIDTH, _event.resize.w);
+					Options::newDisplayHeight = std::max(Screen::ORIGINAL_HEIGHT, _event.resize.h);
+					options1.setDisplayWidth(Options::newDisplayWidth);
+					options1.setDisplayHeight(Options::newDisplayHeight);
+
 					int dX = 0, dY = 0;
 					Screen::updateScale(Options::battlescapeScale, Options::baseXBattlescape, Options::baseYBattlescape, false);
 					Screen::updateScale(Options::geoscapeScale, Options::baseXGeoscape, Options::baseYGeoscape, false);

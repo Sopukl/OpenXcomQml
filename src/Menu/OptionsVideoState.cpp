@@ -86,7 +86,7 @@ OptionsVideoState::OptionsVideoState(OptionsOrigin origin) : OptionsBaseState(or
 		for (i = 0; _res[i]; ++i)
 		{
 			if (_resCurrent == -1 &&
-				((_res[i]->w == Options::displayWidth && _res[i]->h <= Options::displayHeight) || _res[i]->w < Options::displayWidth))
+				((_res[i]->w == options1.displayWidth() && _res[i]->h <= options1.displayHeight()) || _res[i]->w < options1.displayWidth()))
 			{
 				_resCurrent = i;
 			}
@@ -154,8 +154,8 @@ OptionsVideoState::OptionsVideoState(OptionsOrigin origin) : OptionsBaseState(or
 	_txtDisplayHeight->onChange((ActionHandler)&OptionsVideoState::txtDisplayHeightChange);
 
 	std::ostringstream ssW, ssH;
-	ssW << Options::displayWidth;
-	ssH << Options::displayHeight;
+	ssW << options1.displayWidth();
+	ssH << options1.displayHeight();
 	_txtDisplayWidth->setText(ssW.str());
 	_txtDisplayHeight->setText(ssH.str());
 
@@ -635,10 +635,10 @@ void OptionsVideoState::resize(int &dX, int &dY)
 {
 	OptionsBaseState::resize(dX, dY);
 	std::ostringstream ss;
-	ss << Options::displayWidth;
+	ss << options1.displayWidth();
 	_txtDisplayWidth->setText(ss.str());
 	ss.str("");
-	ss << Options::displayHeight;
+	ss << options1.displayHeight();
 	_txtDisplayHeight->setText(ss.str());
 }
 

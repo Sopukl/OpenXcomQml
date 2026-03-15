@@ -51,12 +51,12 @@ std::string StartState::error;
 StartState::StartState() : _anim(0)
 {
 	//updateScale() uses newDisplayWidth/Height and needs to be set ahead of time
-	Options::newDisplayWidth = Options::displayWidth;
-	Options::newDisplayHeight = Options::displayHeight;
+	Options::newDisplayWidth = options1.displayWidth();
+	Options::newDisplayHeight = options1.displayHeight();
 	Screen::updateScale(Options::geoscapeScale, Options::baseXGeoscape, Options::baseYGeoscape, false);
 	Screen::updateScale(Options::battlescapeScale, Options::baseXBattlescape, Options::baseYBattlescape, false);
-	Options::baseXResolution = Options::displayWidth;
-	Options::baseYResolution = Options::displayHeight;
+	Options::baseXResolution = options1.displayWidth();
+	Options::baseYResolution = options1.displayHeight();
 	_game->getScreen()->resetDisplay(false, true);
 
 	// Create objects

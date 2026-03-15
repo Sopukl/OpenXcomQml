@@ -4042,8 +4042,8 @@ void BattlescapeState::resize(int &dX, int &dY)
 		return;
 	}
 
-	Options::baseXResolution = std::max(Screen::ORIGINAL_WIDTH, Options::displayWidth / divisor);
-	Options::baseYResolution = std::max(Screen::ORIGINAL_HEIGHT, (int)(Options::displayHeight / pixelRatioY / divisor));
+	Options::baseXResolution = std::max(Screen::ORIGINAL_WIDTH, int(options1.displayWidth() / divisor));
+	Options::baseYResolution = std::max(Screen::ORIGINAL_HEIGHT, int(options1.displayHeight() / pixelRatioY / divisor));
 
 	dX = Options::baseXResolution - dX;
 	dY = Options::baseYResolution - dY;

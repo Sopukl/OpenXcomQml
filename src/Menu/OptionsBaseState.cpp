@@ -224,8 +224,8 @@ void OptionsBaseState::btnOkClick(Action *)
 	else
 	{
 		// Confirm any video options changes
-		if (Options::displayWidth != Options::newDisplayWidth ||
-			Options::displayHeight != Options::newDisplayHeight ||
+		if (options1.displayWidth() != Options::newDisplayWidth ||
+			options1.displayHeight() != Options::newDisplayHeight ||
 			Options::useOpenGL != Options::newOpenGL ||
 			Options::useScaleFilter != Options::newScaleFilter ||
 			Options::useHQXFilter != Options::newHQXFilter ||
@@ -337,8 +337,8 @@ void OptionsBaseState::txtTooltipOut(Action *action)
  */
 void OptionsBaseState::resize(int &dX, int &dY)
 {
-	Options::newDisplayWidth = Options::displayWidth;
-	Options::newDisplayHeight = Options::displayHeight;
+	Options::newDisplayWidth = options1.displayWidth();
+	Options::newDisplayHeight = options1.displayHeight();
 	State::resize(dX, dY);
 }
 

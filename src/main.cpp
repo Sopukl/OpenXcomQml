@@ -119,11 +119,10 @@ int main(int argc, char *argv[])
 	CrossPlatform::processArgs(argc, argv);
 	if (!Options::init())
 		return EXIT_SUCCESS;
-	Options::baseXResolution = Options::displayWidth;
-	Options::baseYResolution = Options::displayHeight;
+	Options::baseXResolution = options1.displayWidth();
+	Options::baseYResolution = options1.displayHeight();
 
 	GameWindow mainWindow;
-	mainWindow.setFixedSize(Options::displayWidth, Options::displayHeight);
 	mainWindow.show();
 
 	return app.exec();

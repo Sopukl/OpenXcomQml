@@ -328,8 +328,8 @@ void Screen::resetDisplay(bool resetVideo, bool noShaders)
 	Uint32 oldFlags = _flags;
 #endif
 
-	int width = Options::displayWidth;
-	int height = Options::displayHeight;
+	int width = options1.displayWidth();
+	int height = options1.displayHeight();
 	makeVideoFlags();
 
 	if (!_surface || (_surface->format->BitsPerPixel != _bpp ||
@@ -401,8 +401,8 @@ void Screen::resetDisplay(bool resetVideo, bool noShaders)
 		clear();
 	}
 
-	Options::displayWidth = getWidth();
-	Options::displayHeight = getHeight();
+	options1.setDisplayWidth(getWidth());
+	options1.setDisplayHeight(getHeight());
 	_scaleX = getWidth() / (double)_baseWidth;
 	_scaleY = getHeight() / (double)_baseHeight;
 
@@ -608,8 +608,8 @@ void Screen::screenshot(const std::string &filename) const
  */
 bool Screen::use32bitScaler()
 {
-	int w = Options::displayWidth;
-	int h = Options::displayHeight;
+	int w = options1.displayWidth();
+	int h = options1.displayHeight();
 	int baseW = Options::baseXResolution;
 	int baseH = Options::baseYResolution;
 	int maxScale = 0;
@@ -691,36 +691,36 @@ void Screen::updateScale(int type, int &width, int &height, bool change)
 		height = Screen::ORIGINAL_HEIGHT * 2;
 		break;
 	case SCALE_SCREEN_DIV_10:
-		width = Options::displayWidth / 10.0;
-		height = Options::displayHeight / pixelRatioY / 10.0;
+		width = options1.displayWidth() / 10.0;
+		height = options1.displayHeight() / pixelRatioY / 10.0;
 		break;
 	case SCALE_SCREEN_DIV_8:
-		width = Options::displayWidth / 8.0;
-		height = Options::displayHeight / pixelRatioY / 8.0;
+		width = options1.displayWidth() / 8.0;
+		height = options1.displayHeight() / pixelRatioY / 8.0;
 		break;
 	case SCALE_SCREEN_DIV_6:
-		width = Options::displayWidth / 6.0;
-		height = Options::displayHeight / pixelRatioY / 6.0;
+		width = options1.displayWidth() / 6.0;
+		height = options1.displayHeight() / pixelRatioY / 6.0;
 		break;
 	case SCALE_SCREEN_DIV_5:
-		width = Options::displayWidth / 5.0;
-		height = Options::displayHeight / pixelRatioY / 5.0;
+		width = options1.displayWidth() / 5.0;
+		height = options1.displayHeight() / pixelRatioY / 5.0;
 		break;
 	case SCALE_SCREEN_DIV_4:
-		width = Options::displayWidth / 4.0;
-		height = Options::displayHeight / pixelRatioY / 4.0;
+		width = options1.displayWidth() / 4.0;
+		height = options1.displayHeight() / pixelRatioY / 4.0;
 		break;
 	case SCALE_SCREEN_DIV_3:
-		width = Options::displayWidth / 3.0;
-		height = Options::displayHeight / pixelRatioY / 3.0;
+		width = options1.displayWidth() / 3.0;
+		height = options1.displayHeight() / pixelRatioY / 3.0;
 		break;
 	case SCALE_SCREEN_DIV_2:
-		width = Options::displayWidth / 2.0;
-		height = Options::displayHeight / pixelRatioY  / 2.0;
+		width = options1.displayWidth() / 2.0;
+		height = options1.displayHeight() / pixelRatioY  / 2.0;
 		break;
 	case SCALE_SCREEN:
-		width = Options::displayWidth;
-		height = Options::displayHeight / pixelRatioY;
+		width = options1.displayWidth();
+		height = options1.displayHeight() / pixelRatioY;
 		break;
 	case SCALE_ORIGINAL:
 	default:
