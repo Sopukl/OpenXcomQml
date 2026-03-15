@@ -12,9 +12,14 @@ namespace OpenXcom
     Options1::Options1():
         QSettings(openXComFolder()+"/Options1.cfg", IniFormat)
     {
+        beginGroup("General");
+            m_PauseMode = value("pauseMode", 0).value<qint32>();
+        endGroup();
         beginGroup("Video");
             m_DisplayWidth = value("displayWidth", 640).value<qint32>();
             m_DisplayHeight = value("displayHeight", 480).value<qint32>();
+            m_WindowedModePositionX = value("windowedModePositionX").value<qint32>();
+            m_WindowedModePositionY = value("windowedModePositionY").value<qint32>();
         endGroup();
         beginGroup("Audio");
         m_SoundVolume = value("soundVolume", 2*(MIX_MAX_VOLUME/3)).value<qint32>();
@@ -62,9 +67,14 @@ namespace OpenXcom
 
 	void Options1::saveSettings()
 	{
+		beginGroup("General");
+			setValue("pauseMode", m_PauseMode);
+		endGroup();
 		beginGroup("Video");
 			setValue("displayWidth", m_DisplayWidth);
 			setValue("displayHeight", m_DisplayHeight);
+			setValue("windowedModePositionX", m_WindowedModePositionX);
+			setValue("windowedModePositionY", m_WindowedModePositionY);
 		endGroup();
 		beginGroup("Audio");
 			setValue("soundVolume", m_SoundVolume);
@@ -161,4 +171,47 @@ namespace OpenXcom
 			Q_EMIT audioChunkSizeChanged();
 		}
 	}
+
+	qint32 Options1::pauseMode() const
+	{
+		return m_PauseMode;
+	}
+
+	void Options1::setPauseMode(qint32 newPauseMode)
+	{
+		if (m_PauseMode != newPauseMode)
+		{
+			m_PauseMode = newPauseMode;
+			Q_EMIT pauseModeChanged();
+		}
+	}
+
+	qint32 Options1::windowedModePositionX() const
+	{
+		return m_WindowedModePositionX;
+	}
+
+	void Options1::setWindowedModePositionX(qint32 newWindowedModePositionX)
+	{
+		if (m_WindowedModePositionX != newWindowedModePositionX)
+		{
+			m_WindowedModePositionX = newWindowedModePositionX;
+			Q_EMIT windowedModePositionXChanged();
+		}
+	}
+
+	qint32 Options1::windowedModePositionY() const
+	{
+		return m_WindowedModePositionY;
+	}
+
+	void Options1::setWindowedModePositionY(qint32 newWindowedModePositionY)
+	{
+		if (m_WindowedModePositionY != newWindowedModePositionY)
+		{
+			m_WindowedModePositionY = newWindowedModePositionY;
+			Q_EMIT windowedModePositionYChanged();
+		}
+	}
+
 }

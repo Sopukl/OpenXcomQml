@@ -7,9 +7,14 @@ namespace OpenXcom
 	{
 		Q_OBJECT
 
+		//general
+		//
+		Q_PROPERTY(qint32 pauseMode READ pauseMode WRITE setPauseMode NOTIFY pauseModeChanged FINAL)
 		//video
 		Q_PROPERTY(qint32 displayWidth  READ displayWidth  WRITE setDisplayWidth  NOTIFY displayWidthChanged  FINAL)
 		Q_PROPERTY(qint32 displayHeight READ displayHeight WRITE setDisplayHeight NOTIFY displayHeightChanged FINAL)
+		Q_PROPERTY(qint32 windowedModePositionX READ windowedModePositionX WRITE setWindowedModePositionX NOTIFY windowedModePositionXChanged FINAL)
+		Q_PROPERTY(qint32 windowedModePositionY READ windowedModePositionY WRITE setWindowedModePositionY NOTIFY windowedModePositionYChanged FINAL)
 		//audio
 		Q_PROPERTY(qint32 soundVolume READ soundVolume WRITE setSoundVolume NOTIFY soundVolumeChanged FINAL)
 		Q_PROPERTY(qint32 musicVolume READ musicVolume WRITE setMusicVolume NOTIFY musicVolumeChanged FINAL)
@@ -64,6 +69,12 @@ namespace OpenXcom
 		void audioSampleRateChanged();
 		void audioBitDepthChanged();
 		void audioChunkSizeChanged();
+		void pauseModeChanged();
+
+		void windowedModePositionXChanged();
+
+		void windowedModePositionYChanged();
+
 	  private:
 		qint32 m_DisplayWidth;
 		qint32 m_DisplayHeight;
@@ -73,6 +84,11 @@ namespace OpenXcom
 		qint32 m_AudioSampleRate;
 		qint32 m_AudioBitDepth;
 		qint32 m_AudioChunkSize;
+		qint32 m_PauseMode;
+
+		qint32 m_WindowedModePositionX;
+
+		qint32 m_WindowedModePositionY;
 
 	  public:
 		qint32 maxFrameSkip;
@@ -82,6 +98,12 @@ namespace OpenXcom
 		qint32 baseYGeoscape;
 		qint32 baseXBattlescape;
 		qint32 baseYBattlescape;
+		qint32 pauseMode() const;
+		void setPauseMode(qint32 newPauseMode);
+		qint32 windowedModePositionX() const;
+		void setWindowedModePositionX(qint32 newWindowedModePositionX);
+		qint32 windowedModePositionY() const;
+		void setWindowedModePositionY(qint32 newWindowedModePositionY);
 	};
 
 	inline Options1 options1;

@@ -79,7 +79,7 @@ void Screen::makeVideoFlags()
 	// Handle window positioning
 	if (!Options::fullscreen && Options::rootWindowedMode)
 	{
-		snprintf(VIDEO_WINDOW_POS, VIDEO_WINDOW_POS_LEN, "SDL_VIDEO_WINDOW_POS=%d,%d", Options::windowedModePositionX, Options::windowedModePositionY);
+		snprintf(VIDEO_WINDOW_POS, VIDEO_WINDOW_POS_LEN, "SDL_VIDEO_WINDOW_POS=%d,%d", options1.windowedModePositionX(), options1.windowedModePositionY());
 		SDL_putenv(VIDEO_WINDOW_POS);
 		SDL_putenv((char *)SDL_VIDEO_CENTERED_UNSET);
 	}

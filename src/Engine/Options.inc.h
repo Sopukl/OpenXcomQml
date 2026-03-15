@@ -2,7 +2,7 @@
 // To add a new option, add a new variable entry and a corresponding OptionInfo in Options.cpp
 
 // General options
-OPT int pauseMode, windowedModePositionX, windowedModePositionY, FPS, FPSInactive,
+OPT int FPS, FPSInactive,
 	changeValueByMouseWheel, dragScrollTimeTolerance, dragScrollPixelTolerance, mousewheelSpeed, autosaveFrequency;
 OPT bool fullscreen, asyncBlit, playIntro, useScaleFilter, useHQXFilter, useXBRZFilter, useOpenGL, checkOpenGLErrors, vSyncForOpenGL, useOpenGLSmoothing,
 	autosave, allowResize, borderless, debug, debugUi, fpsCounter, newSeedOnLoad, keepAspectRatio, nonSquarePixelRatio,

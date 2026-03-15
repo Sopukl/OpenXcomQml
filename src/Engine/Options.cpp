@@ -155,12 +155,9 @@ void createOptionsOXC()
 	_info.push_back(OptionInfo(OPTION_OXC, "globeRadarLines", &globeRadarLines, true));
 	_info.push_back(OptionInfo(OPTION_OXC, "globeFlightPaths", &globeFlightPaths, true));
 	_info.push_back(OptionInfo(OPTION_OXC, "globeAllRadarsOnBaseBuild", &globeAllRadarsOnBaseBuild, true));
-	_info.push_back(OptionInfo(OPTION_OXC, "pauseMode", &pauseMode, 0));
 	_info.push_back(OptionInfo(OPTION_OXC, "battleNotifyDeath", &battleNotifyDeath, false));
 	_info.push_back(OptionInfo(OPTION_OXC, "showFundsOnGeoscape", &showFundsOnGeoscape, false));
 	_info.push_back(OptionInfo(OPTION_OXC, "allowResize", &allowResize, false));
-	_info.push_back(OptionInfo(OPTION_OXC, "windowedModePositionX", &windowedModePositionX, 0));
-	_info.push_back(OptionInfo(OPTION_OXC, "windowedModePositionY", &windowedModePositionY, 0));
 	_info.push_back(OptionInfo(OPTION_OXC, "borderless", &borderless, false));
 	_info.push_back(OptionInfo(OPTION_OXC, "captureMouse", (bool*)&captureMouse, false));
 	_info.push_back(OptionInfo(OPTION_OXC, "battleTooltips", &battleTooltips, true));
@@ -1449,8 +1446,8 @@ void backupDisplay()
 	Options::newOpenGLShader = Options::useOpenGLShader;
 	Options::newXBRZFilter = Options::useXBRZFilter;
 	Options::newRootWindowedMode = Options::rootWindowedMode;
-	Options::newWindowedModePositionX = Options::windowedModePositionX;
-	Options::newWindowedModePositionY = Options::windowedModePositionY;
+	Options::newWindowedModePositionX = options1.windowedModePositionX();
+	Options::newWindowedModePositionY = options1.windowedModePositionY();
 	Options::newFullscreen = Options::fullscreen;
 	Options::newAllowResize = Options::allowResize;
 	Options::newBorderless = Options::borderless;
@@ -1480,8 +1477,15 @@ void switchDisplay()
 	std::swap(useOpenGLShader, newOpenGLShader);
 	std::swap(useXBRZFilter, newXBRZFilter);
 	std::swap(rootWindowedMode, newRootWindowedMode);
-	std::swap(windowedModePositionX, newWindowedModePositionX);
-	std::swap(windowedModePositionY, newWindowedModePositionY);
+
+	tmp = newWindowedModePositionX;
+	newWindowedModePositionX = options1.windowedModePositionX();
+	options1.setWindowedModePositionX(tmp);
+
+	tmp = newWindowedModePositionY;
+	newWindowedModePositionY = options1.windowedModePositionY();
+	options1.setWindowedModePositionY(tmp);
+
 	std::swap(fullscreen, newFullscreen);
 	std::swap(allowResize, newAllowResize);
 	std::swap(borderless, newBorderless);
