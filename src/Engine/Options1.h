@@ -1,6 +1,27 @@
 #pragma once
 #include <QSettings>
 
+//OPTION, get/set/notify/save to file
+#define OPTION(type, name) \
+Q_PROPERTY(type name READ name WRITE set##name NOTIFY name##Changed FINAL) \
+	public: \
+	type name() const { return m_##name; } \
+	void set##name(type value) { \
+		if (m_##name != value) { \
+			m_##name = value; \
+			Q_EMIT name##Changed(); \
+	} \
+} \
+	Q_SIGNAL void name##Changed(); \
+	private: \
+	type m_##name;
+
+//MEMBER, no get/set/notify/ no save to file
+#define MEMBER(type, name) \
+	Q_PROPERTY(type name MEMBER name FINAL) \
+	public: \
+	type name;
+
 namespace OpenXcom
 {
 	class Options1 final: public QSettings
@@ -8,102 +29,51 @@ namespace OpenXcom
 		Q_OBJECT
 
 		//general
-		//
-		Q_PROPERTY(qint32 pauseMode READ pauseMode WRITE setPauseMode NOTIFY pauseModeChanged FINAL)
+		OPTION(qint32, pauseMode)
+		OPTION(qint32, changeValueByMouseWheel)
+		OPTION(qint32, dragScrollTimeTolerance)
+		OPTION(qint32, dragScrollPixelTolerance)
+		OPTION(qint32, mousewheelSpeed)
+		OPTION(qint32, autosaveFrequency)
+
+		OPTION(bool, fullscreen)
+		OPTION(bool, asyncBlit)
+		OPTION(bool, playIntro)
+		OPTION(bool, useScaleFilter)
+		OPTION(bool, useHQXFilter)
+		OPTION(bool, useXBRZFilter)
+		OPTION(bool, useOpenGL)
+		OPTION(bool, checkOpenGLErrors)
+		OPTION(bool, vSyncForOpenGL)
+		OPTION(bool, useOpenGLSmoothing)
 		//video
-		Q_PROPERTY(qint32 displayWidth  READ displayWidth  WRITE setDisplayWidth  NOTIFY displayWidthChanged  FINAL)
-		Q_PROPERTY(qint32 displayHeight READ displayHeight WRITE setDisplayHeight NOTIFY displayHeightChanged FINAL)
-		Q_PROPERTY(qint32 windowedModePositionX READ windowedModePositionX WRITE setWindowedModePositionX NOTIFY windowedModePositionXChanged FINAL)
-		Q_PROPERTY(qint32 windowedModePositionY READ windowedModePositionY WRITE setWindowedModePositionY NOTIFY windowedModePositionYChanged FINAL)
+		OPTION(qint32, displayWidth)
+		OPTION(qint32, displayHeight)
+		OPTION(qint32, windowedModePositionX)
+		OPTION(qint32, windowedModePositionY)
+		OPTION(qint32, maxFPS)
+		OPTION(qint32, maxFPSInactive)
 		//audio
-		Q_PROPERTY(qint32 soundVolume READ soundVolume WRITE setSoundVolume NOTIFY soundVolumeChanged FINAL)
-		Q_PROPERTY(qint32 musicVolume READ musicVolume WRITE setMusicVolume NOTIFY musicVolumeChanged FINAL)
-		Q_PROPERTY(qint32 uiVolume    READ uiVolume    WRITE setUiVolume    NOTIFY uiVolumeChanged    FINAL)
-		Q_PROPERTY(qint32 audioSampleRate READ audioSampleRate WRITE setAudioSampleRate NOTIFY audioSampleRateChanged FINAL)
-		Q_PROPERTY(qint32 audioBitDepth   READ audioBitDepth   WRITE setAudioBitDepth   NOTIFY audioBitDepthChanged   FINAL)
-		Q_PROPERTY(qint32 audioChunkSize  READ audioChunkSize  WRITE setAudioChunkSize  NOTIFY audioChunkSizeChanged  FINAL)
+		OPTION(qint32, soundVolume)
+		OPTION(qint32, musicVolume)
+		OPTION(qint32, uiVolume)
+		OPTION(qint32, audioSampleRate)
+		OPTION(qint32, audioBitDepth)
+		OPTION(qint32, audioChunkSize)
 
 		//other
-		Q_PROPERTY(qint32 maxFrameSkip MEMBER maxFrameSkip FINAL)
-		Q_PROPERTY(qint32 baseXResolution MEMBER baseXResolution FINAL)
-		Q_PROPERTY(qint32 baseYResolution MEMBER baseYResolution FINAL)
-		Q_PROPERTY(qint32 baseXGeoscape MEMBER baseXGeoscape FINAL)
-		Q_PROPERTY(qint32 baseYGeoscape MEMBER baseYGeoscape FINAL)
-		Q_PROPERTY(qint32 baseXBattlescape MEMBER baseXBattlescape FINAL)
-		Q_PROPERTY(qint32 baseYBattlescape MEMBER baseYBattlescape FINAL)
+		MEMBER(qint32, maxFrameSkip)
+		MEMBER(qint32, baseXResolution)
+		MEMBER(qint32, baseYResolution)
+		MEMBER(qint32, baseXGeoscape)
+		MEMBER(qint32, baseYGeoscape)
+		MEMBER(qint32, baseXBattlescape)
+		MEMBER(qint32, baseYBattlescape)
 	  public:
 		Options1();
 		~Options1();
 
-		qint32 displayWidth() const;
-		void setDisplayWidth(qint32 newDisplayWidth);
-
-		qint32 displayHeight() const;
-		void setDisplayHeight(qint32 newDisplayHeight);
-
-		qint32 soundVolume() const;
-		void setSoundVolume(qint32 newSoundVolume);
-
-		qint32 musicVolume() const;
-		void setMusicVolume(qint32 newMusicVolume);
-
-		qint32 uiVolume() const;
-		void setUiVolume(qint32 newUiVolume);
-
-		qint32 audioSampleRate() const;
-		void setAudioSampleRate(qint32 newAudioSampleRate);
-
-		qint32 audioBitDepth() const;
-		void setAudioBitDepth(qint32 newAudioBitDepth);
-
-		qint32 audioChunkSize() const;
-		void setAudioChunkSize(qint32 newAudioChunkSize);
-
 		void saveSettings();
-	  signals:
-		void displayWidthChanged();
-		void displayHeightChanged();
-		void soundVolumeChanged();
-		void musicVolumeChanged();
-		void uiVolumeChanged();
-		void audioSampleRateChanged();
-		void audioBitDepthChanged();
-		void audioChunkSizeChanged();
-		void pauseModeChanged();
-
-		void windowedModePositionXChanged();
-
-		void windowedModePositionYChanged();
-
-	  private:
-		qint32 m_DisplayWidth;
-		qint32 m_DisplayHeight;
-		qint32 m_SoundVolume;
-		qint32 m_MusicVolume;
-		qint32 m_UiVolume;
-		qint32 m_AudioSampleRate;
-		qint32 m_AudioBitDepth;
-		qint32 m_AudioChunkSize;
-		qint32 m_PauseMode;
-
-		qint32 m_WindowedModePositionX;
-
-		qint32 m_WindowedModePositionY;
-
-	  public:
-		qint32 maxFrameSkip;
-		qint32 baseXResolution;
-		qint32 baseYResolution;
-		qint32 baseXGeoscape;
-		qint32 baseYGeoscape;
-		qint32 baseXBattlescape;
-		qint32 baseYBattlescape;
-		qint32 pauseMode() const;
-		void setPauseMode(qint32 newPauseMode);
-		qint32 windowedModePositionX() const;
-		void setWindowedModePositionX(qint32 newWindowedModePositionX);
-		qint32 windowedModePositionY() const;
-		void setWindowedModePositionY(qint32 newWindowedModePositionY);
 	};
 
 	inline Options1 options1;

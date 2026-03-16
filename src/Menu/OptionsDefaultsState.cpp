@@ -97,11 +97,11 @@ void OptionsDefaultsState::btnYesClick(Action *action)
 		// my development/debug defaults
 		Options::debug = true;
 		Options::language = "en-US";
-		options1.setMusicVolume(15);
-		options1.setSoundVolume(15);
-		options1.setUiVolume(15);
+		options1.setmusicVolume(15);
+		options1.setsoundVolume(15);
+		options1.setuiVolume(15);
 		Options::keyFps = SDLK_UNKNOWN;
-		Options::playIntro = false;
+		options1.setplayIntro(false);
 		Options::autosave = false;
 		Options::showFundsOnGeoscape = true;
 		Options::battleFireSpeed = 16;

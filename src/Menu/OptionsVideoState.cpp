@@ -243,15 +243,15 @@ OptionsVideoState::OptionsVideoState(OptionsOrigin origin) : OptionsBaseState(or
 		}
 #endif
 	}
-	else if (Options::useScaleFilter)
+	else if (options1.useScaleFilter())
 	{
 		selFilter = 1;
 	}
-	else if (Options::useHQXFilter)
+	else if (options1.useHQXFilter())
 	{
 		selFilter = 2;
 	}
-	else if (Options::useXBRZFilter)
+	else if (options1.useXBRZFilter())
 	{
 		selFilter = 3;
 	}
@@ -273,7 +273,7 @@ OptionsVideoState::OptionsVideoState(OptionsOrigin origin) : OptionsBaseState(or
 	displayModes.push_back(tr("STR_RESIZABLE"));
 
 	int displayMode = 0;
-	if (Options::fullscreen)
+	if (options1.fullscreen())
 	{
 		displayMode = 1;
 	}

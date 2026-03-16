@@ -624,7 +624,7 @@ void CraftEquipmentState::lstEquipmentMousePress(Action *action)
 		if (action->getAbsoluteXMouse() >= _lstEquipment->getArrowsLeftEdge() &&
 			action->getAbsoluteXMouse() <= _lstEquipment->getArrowsRightEdge())
 		{
-			moveRightByValue(Options::changeValueByMouseWheel);
+			moveRightByValue(options1.changeValueByMouseWheel());
 		}
 	}
 	else if (action->getDetails()->button.button == SDL_BUTTON_WHEELDOWN)
@@ -634,7 +634,7 @@ void CraftEquipmentState::lstEquipmentMousePress(Action *action)
 		if (action->getAbsoluteXMouse() >= _lstEquipment->getArrowsLeftEdge() &&
 			action->getAbsoluteXMouse() <= _lstEquipment->getArrowsRightEdge())
 		{
-			moveLeftByValue(Options::changeValueByMouseWheel);
+			moveLeftByValue(options1.changeValueByMouseWheel());
 		}
 	}
 	else if (_game->isMiddleClick(action, true))

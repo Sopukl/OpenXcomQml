@@ -905,7 +905,7 @@ void BattlescapeState::mapOver(Action *action)
 		if ((SDL_GetMouseState(0,0)&SDL_BUTTON(Options::battleDragScrollButton)) == 0)
 		{ // so we missed again the mouse-release :(
 			// Check if we have to revoke the scrolling, because it was too short in time, so it was a click
-			if ((!_mouseMovedOverThreshold) && ((int)(SDL_GetTicks() - _mouseScrollingStartTime) <= (Options::dragScrollTimeTolerance)))
+			if ((!_mouseMovedOverThreshold) && ((int)(SDL_GetTicks() - _mouseScrollingStartTime) <= (options1.dragScrollTimeTolerance())))
 			{
 				_map->getCamera()->setMapOffset(_mapOffsetBeforeMouseScrolling);
 			}
@@ -929,7 +929,7 @@ void BattlescapeState::mapOver(Action *action)
 		_totalMouseMoveY += action->getDetails()->motion.yrel;
 		if (!_mouseMovedOverThreshold)
 		{
-			_mouseMovedOverThreshold = ((std::abs(_totalMouseMoveX) > Options::dragScrollPixelTolerance) || (std::abs(_totalMouseMoveY) > Options::dragScrollPixelTolerance));
+			_mouseMovedOverThreshold = ((std::abs(_totalMouseMoveX) > options1.dragScrollPixelTolerance()) || (std::abs(_totalMouseMoveY) > options1.dragScrollPixelTolerance()));
 		}
 
 		// Scrolling
@@ -1038,7 +1038,7 @@ void BattlescapeState::mapClick(Action *action)
 		&& (SDL_GetMouseState(0,0)&SDL_BUTTON(Options::battleDragScrollButton)) == 0)
 		{   // so we missed again the mouse-release :(
 			// Check if we have to revoke the scrolling, because it was too short in time, so it was a click
-			if ((!_mouseMovedOverThreshold) && ((int)(SDL_GetTicks() - _mouseScrollingStartTime) <= (Options::dragScrollTimeTolerance)))
+			if ((!_mouseMovedOverThreshold) && ((int)(SDL_GetTicks() - _mouseScrollingStartTime) <= (options1.dragScrollTimeTolerance())))
 			{
 				_map->getCamera()->setMapOffset(_mapOffsetBeforeMouseScrolling);
 			}
@@ -1061,7 +1061,7 @@ void BattlescapeState::mapClick(Action *action)
 			return;
 		}
 		// Check if we have to revoke the scrolling, because it was too short in time, so it was a click
-		if ((!_mouseMovedOverThreshold) && ((int)(SDL_GetTicks() - _mouseScrollingStartTime) <= (Options::dragScrollTimeTolerance)))
+		if ((!_mouseMovedOverThreshold) && ((int)(SDL_GetTicks() - _mouseScrollingStartTime) <= (options1.dragScrollTimeTolerance())))
 		{
 			_isMouseScrolled = false;
 			stopScrolling(action);

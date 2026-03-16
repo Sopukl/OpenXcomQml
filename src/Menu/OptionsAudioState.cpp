@@ -210,7 +210,7 @@ OptionsAudioState::~OptionsAudioState()
  */
 void OptionsAudioState::slrMusicVolumeChange(Action *)
 {
-	options1.setMusicVolume(_slrMusicVolume->getValue());
+	options1.setmusicVolume(_slrMusicVolume->getValue());
 	_game->setVolume(options1.soundVolume(), options1.musicVolume(), options1.uiVolume());
 }
 
@@ -220,7 +220,7 @@ void OptionsAudioState::slrMusicVolumeChange(Action *)
  */
 void OptionsAudioState::slrSoundVolumeChange(Action *)
 {
-	options1.setSoundVolume(_slrSoundVolume->getValue());
+	options1.setsoundVolume(_slrSoundVolume->getValue());
 	_game->setVolume(options1.soundVolume(), options1.musicVolume(), options1.uiVolume());
 }
 
@@ -239,7 +239,7 @@ void OptionsAudioState::slrSoundVolumeRelease(Action *)
  */
 void OptionsAudioState::slrUiVolumeChange(Action *)
 {
-	options1.setUiVolume(_slrUiVolume->getValue());
+	options1.setuiVolume(_slrUiVolume->getValue());
 	_game->setVolume(options1.soundVolume(), options1.musicVolume(), options1.uiVolume());
 }
 

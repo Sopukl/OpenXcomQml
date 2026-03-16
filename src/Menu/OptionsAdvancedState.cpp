@@ -346,11 +346,11 @@ void OptionsAdvancedState::lstOptionsClick(Action *action)
 		int *i = setting->asInt();
 
 		int increment = (button == SDL_BUTTON_LEFT) ? 1 : -1; // left-click increases, right-click decreases
-		if (i == &Options::changeValueByMouseWheel || i == &Options::FPS || i == &Options::FPSInactive || i == &Options::oxceWoundedDefendBaseIf)
+		/*if (i == &options1.changeValueByMouseWheel() || i == &Options::FPS || i == &Options::FPSInactive || i == &Options::oxceWoundedDefendBaseIf)
 		{
 			increment *= 10;
 		}
-		else if (i == &Options::oxceResearchScrollSpeedWithCtrl || i == &Options::oxceManufactureScrollSpeedWithCtrl || i == &Options::oxceReactionFireThreshold)
+		else*/ if (i == &Options::oxceResearchScrollSpeedWithCtrl || i == &Options::oxceManufactureScrollSpeedWithCtrl || i == &Options::oxceReactionFireThreshold)
 		{
 			increment *= 5;
 		}
@@ -366,31 +366,31 @@ void OptionsAdvancedState::lstOptionsClick(Action *action)
 			min = 0;
 			max = 3;
 		}
-		else if (i == &Options::changeValueByMouseWheel)
-		{
-			min = 0;
-			max = 100;
-		}
-		else if (i == &Options::FPS)
-		{
-			min = 0;
-			max = 120;
-		}
-		else if (i == &Options::FPSInactive) {
-			min = 10;
-			max = 120;
-		}
-		else if (i == &Options::mousewheelSpeed)
+		// else if (i == &options1.changeValueByMouseWheel())
+		// {
+		// 	min = 0;
+		// 	max = 100;
+		// }
+		// else if (i == &Options::FPS)
+		// {
+		// 	min = 0;
+		// 	max = 120;
+		// }
+		// else if (i == &Options::FPSInactive) {
+		// 	min = 10;
+		// 	max = 120;
+		// }
+/*		else if (i == &options1.mousewheelSpeed())
 		{
 			min = 1;
 			max = 7;
 		}
-		else if (i == &Options::autosaveFrequency)
+		else if (i == &options1.autosaveFrequency())
 		{
 			min = 1;
 			max = 5;
 		}
-		else if (i == &Options::oxceGeoAutosaveFrequency)
+		else*/ if (i == &Options::oxceGeoAutosaveFrequency)
 		{
 			min = 0;
 			max = 10;

@@ -417,8 +417,8 @@ void VideoState::init()
 		{
 			// ensure user can hear both music and sound effects for the
 			// vanilla intro sequence
-			options1.setMusicVolume(std::max(prevMusicVol, prevSoundVol));
-			options1.setSoundVolume(std::max(prevMusicVol, prevSoundVol));
+			options1.setmusicVolume(std::max(prevMusicVol, prevSoundVol));
+			options1.setsoundVolume(std::max(prevMusicVol, prevSoundVol));
 			_game->setVolume(options1.soundVolume(), options1.musicVolume(), -1);
 		}
 	}
@@ -533,8 +533,8 @@ void VideoState::init()
 
 	if (_useUfoAudioSequence)
 	{
-		options1.setMusicVolume(prevMusicVol);
-		options1.setSoundVolume(prevSoundVol);
+		options1.setmusicVolume(prevMusicVol);
+		options1.setsoundVolume(prevSoundVol);
 		_game->setVolume(options1.soundVolume(), options1.musicVolume(), options1.uiVolume());
 	}
 

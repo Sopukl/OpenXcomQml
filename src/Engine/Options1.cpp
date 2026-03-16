@@ -1,6 +1,10 @@
 #include "Options1.h"
 #include <QStandardPaths>
 #include <SDL_mixer.h>
+#define readValue(name, type, defaultValue) \
+    m_##name = value(#name, defaultValue).value<type>();
+#define writeValue(name, value) \
+    setValue(#name, value);
 
 namespace OpenXcom
 {
@@ -13,205 +17,88 @@ namespace OpenXcom
         QSettings(openXComFolder()+"/Options1.cfg", IniFormat)
     {
         beginGroup("General");
-            m_PauseMode = value("pauseMode", 0).value<qint32>();
-        endGroup();
+            readValue(pauseMode,  qint32, 0)
+            readValue(maxFPS, qint32, 60)
+            readValue(maxFPSInactive, qint32, 30)
+            readValue(pauseMode, qint32, 0)
+            readValue(changeValueByMouseWheel, qint32, 0)
+            readValue(dragScrollTimeTolerance, qint32, 300)
+            readValue(dragScrollPixelTolerance, qint32, 10)
+            readValue(mousewheelSpeed, qint32, 3)
+            readValue(autosaveFrequency, qint32, 5)
+
+			readValue(fullscreen, bool, false)
+			readValue(asyncBlit, bool, false)
+			readValue(playIntro, bool, false)
+			readValue(useScaleFilter, bool, false)
+			readValue(useHQXFilter, bool, false)
+			readValue(useXBRZFilter, bool, false)
+			readValue(useOpenGL, bool, false)
+			readValue(checkOpenGLErrors, bool, false)
+			readValue(vSyncForOpenGL, bool, true)
+			readValue(useOpenGLSmoothing, bool, false)
+		endGroup();
         beginGroup("Video");
-            m_DisplayWidth = value("displayWidth", 640).value<qint32>();
-            m_DisplayHeight = value("displayHeight", 480).value<qint32>();
-            m_WindowedModePositionX = value("windowedModePositionX").value<qint32>();
-            m_WindowedModePositionY = value("windowedModePositionY").value<qint32>();
+            readValue(displayWidth,  qint32, 640)
+            readValue(displayHeight, qint32, 480)
+            readValue(windowedModePositionX, qint32, 0)
+            readValue(windowedModePositionY, qint32, 0)
         endGroup();
         beginGroup("Audio");
-        m_SoundVolume = value("soundVolume", 2*(MIX_MAX_VOLUME/3)).value<qint32>();
-        m_MusicVolume = value("musicVolume", 2*(MIX_MAX_VOLUME/3)).value<qint32>();
-        m_UiVolume = value("uiVolume", (MIX_MAX_VOLUME/3)).value<qint32>();
-        m_AudioSampleRate = value("audioSampleRate", 22050).value<qint32>();
-        m_AudioBitDepth = value("audioBitDepth", 16).value<qint32>();
-        m_AudioChunkSize = value("audioChunkSize", 1024).value<qint32>();
+            readValue(soundVolume,  qint32, 2*(MIX_MAX_VOLUME/3))
+            readValue(musicVolume,  qint32, 2*(MIX_MAX_VOLUME/3))
+            readValue(uiVolume,  qint32, (MIX_MAX_VOLUME/3))
+            readValue(audioSampleRate,  qint32, 22050)
+            readValue(audioBitDepth,  qint32, 16)
+            readValue(audioChunkSize,  qint32, 1024)
         endGroup();
-
-        saveSettings();
     }
 
 	Options1::~Options1()
 	{
-	}
-
-	qint32 Options1::displayWidth() const
-	{
-		return m_DisplayWidth;
-	}
-
-	void Options1::setDisplayWidth(qint32 newDisplayWidth)
-	{
-		if (m_DisplayWidth != newDisplayWidth)
-		{
-			m_DisplayWidth = newDisplayWidth;
-			Q_EMIT displayWidthChanged();
-		}
-	}
-
-	qint32 Options1::displayHeight() const
-	{
-		return m_DisplayHeight;
-	}
-
-	void Options1::setDisplayHeight(qint32 newDisplayHeight)
-	{
-		if (m_DisplayHeight != newDisplayHeight)
-		{
-			m_DisplayHeight = newDisplayHeight;
-			Q_EMIT displayHeightChanged();
-		}
+		saveSettings();
 	}
 
 	void Options1::saveSettings()
 	{
 		beginGroup("General");
-			setValue("pauseMode", m_PauseMode);
+			writeValue(pauseMode, m_pauseMode);
+			writeValue(maxFPS, m_maxFPS)
+			writeValue(maxFPSInactive, m_maxFPSInactive)
+			writeValue(pauseMode, m_pauseMode)
+			writeValue(changeValueByMouseWheel, m_changeValueByMouseWheel)
+			writeValue(dragScrollTimeTolerance, m_dragScrollTimeTolerance)
+			writeValue(dragScrollPixelTolerance, m_dragScrollPixelTolerance)
+			writeValue(mousewheelSpeed, m_mousewheelSpeed)
+			writeValue(autosaveFrequency, m_autosaveFrequency)
+
+			writeValue(fullscreen, m_fullscreen)
+			writeValue(asyncBlit, m_asyncBlit)
+			writeValue(playIntro, m_playIntro)
+			writeValue(useScaleFilter, m_useScaleFilter)
+			writeValue(useHQXFilter, m_useHQXFilter)
+			writeValue(useXBRZFilter, m_useXBRZFilter)
+			writeValue(useOpenGL, m_useOpenGL)
+			writeValue(checkOpenGLErrors, m_checkOpenGLErrors)
+			writeValue(vSyncForOpenGL, m_vSyncForOpenGL)
+			writeValue(useOpenGLSmoothing, m_useOpenGLSmoothing)
+
 		endGroup();
 		beginGroup("Video");
-			setValue("displayWidth", m_DisplayWidth);
-			setValue("displayHeight", m_DisplayHeight);
-			setValue("windowedModePositionX", m_WindowedModePositionX);
-			setValue("windowedModePositionY", m_WindowedModePositionY);
+			writeValue(displayWidth, m_displayWidth)
+			writeValue(displayHeight, m_displayHeight)
+			writeValue(windowedModePositionX, m_windowedModePositionX)
+			writeValue(windowedModePositionY, m_windowedModePositionY)
 		endGroup();
 		beginGroup("Audio");
-			setValue("soundVolume", m_SoundVolume);
-			setValue("musicVolume", m_MusicVolume);
-			setValue("uiVolume", m_UiVolume);
-			setValue("audioSampleRate", m_AudioSampleRate);
-			setValue("audioBitDepth", m_AudioBitDepth);
-			setValue("audioChunkSize", m_AudioChunkSize);
+			writeValue(soundVolume, m_soundVolume)
+			writeValue(musicVolume, m_musicVolume)
+			writeValue(uiVolume, m_uiVolume)
+			writeValue(audioSampleRate, m_audioSampleRate)
+			writeValue(audioBitDepth, m_audioBitDepth)
+			writeValue(audioChunkSize, m_audioChunkSize)
 		endGroup();
 
 		sync();
 	}
-
-	int Options1::soundVolume() const
-	{
-		return m_SoundVolume;
-	}
-
-	void Options1::setSoundVolume(int newSoundVolume)
-	{
-		if (m_SoundVolume != newSoundVolume)
-		{
-			m_SoundVolume = newSoundVolume;
-			Q_EMIT soundVolumeChanged();
-		}
-	}
-
-	int Options1::musicVolume() const
-	{
-		return m_MusicVolume;
-	}
-
-	void Options1::setMusicVolume(int newMusicVolume)
-	{
-		if (m_MusicVolume != newMusicVolume)
-		{
-			m_MusicVolume = newMusicVolume;
-			Q_EMIT musicVolumeChanged();
-		}
-	}
-
-	qint32 Options1::uiVolume() const
-	{
-		return m_UiVolume;
-	}
-
-	void Options1::setUiVolume(qint32 newUiVolume)
-	{
-		if (m_UiVolume != newUiVolume)
-		{
-			m_UiVolume = newUiVolume;
-			Q_EMIT uiVolumeChanged();
-		}
-	}
-
-	qint32 Options1::audioSampleRate() const
-	{
-		return m_AudioSampleRate;
-	}
-
-	void Options1::setAudioSampleRate(qint32 newAudioSampleRate)
-	{
-		if (m_AudioSampleRate != newAudioSampleRate)
-		{
-			m_AudioSampleRate = newAudioSampleRate;
-			Q_EMIT audioSampleRateChanged();
-		}
-	}
-
-	qint32 Options1::audioBitDepth() const
-	{
-		return m_AudioBitDepth;
-	}
-
-	void Options1::setAudioBitDepth(qint32 newAudioBitDepth)
-	{
-		if (m_AudioBitDepth != newAudioBitDepth)
-		{
-			m_AudioBitDepth = newAudioBitDepth;
-			Q_EMIT audioBitDepthChanged();
-		}
-	}
-
-	qint32 Options1::audioChunkSize() const
-	{
-		return m_AudioChunkSize;
-	}
-
-	void Options1::setAudioChunkSize(qint32 newAudioChunkSize)
-	{
-		if (m_AudioChunkSize != newAudioChunkSize)
-		{
-			m_AudioChunkSize = newAudioChunkSize;
-			Q_EMIT audioChunkSizeChanged();
-		}
-	}
-
-	qint32 Options1::pauseMode() const
-	{
-		return m_PauseMode;
-	}
-
-	void Options1::setPauseMode(qint32 newPauseMode)
-	{
-		if (m_PauseMode != newPauseMode)
-		{
-			m_PauseMode = newPauseMode;
-			Q_EMIT pauseModeChanged();
-		}
-	}
-
-	qint32 Options1::windowedModePositionX() const
-	{
-		return m_WindowedModePositionX;
-	}
-
-	void Options1::setWindowedModePositionX(qint32 newWindowedModePositionX)
-	{
-		if (m_WindowedModePositionX != newWindowedModePositionX)
-		{
-			m_WindowedModePositionX = newWindowedModePositionX;
-			Q_EMIT windowedModePositionXChanged();
-		}
-	}
-
-	qint32 Options1::windowedModePositionY() const
-	{
-		return m_WindowedModePositionY;
-	}
-
-	void Options1::setWindowedModePositionY(qint32 newWindowedModePositionY)
-	{
-		if (m_WindowedModePositionY != newWindowedModePositionY)
-		{
-			m_WindowedModePositionY = newWindowedModePositionY;
-			Q_EMIT windowedModePositionYChanged();
-		}
-	}
-
 }

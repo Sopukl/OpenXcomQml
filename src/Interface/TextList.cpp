@@ -923,7 +923,7 @@ void TextList::scrollUp(bool toMax, bool scrollByWheel, size_t howMany)
 		{
 			if (scrollByWheel)
 			{
-				scrollTo(_scroll - std::min((size_t)(Options::mousewheelSpeed), _scroll));
+				scrollTo(_scroll - std::min((size_t)(options1.mousewheelSpeed()), _scroll));
 			}
 			else
 			{
@@ -952,7 +952,7 @@ void TextList::scrollDown(bool toMax, bool scrollByWheel, size_t howMany)
 		{
 			if (scrollByWheel)
 			{
-				scrollTo(_scroll + Options::mousewheelSpeed);
+				scrollTo(_scroll + options1.mousewheelSpeed());
 			}
 			else
 			{
@@ -1178,7 +1178,7 @@ void TextList::think()
 void TextList::mousePress(Action *action, State *state)
 {
 	bool allowScroll = true;
-	if (Options::changeValueByMouseWheel != 0)
+	if (options1.changeValueByMouseWheel() != 0)
 	{
 		allowScroll = (action->getAbsoluteXMouse() < _arrowsLeftEdge || action->getAbsoluteXMouse() > _arrowsRightEdge);
 	}

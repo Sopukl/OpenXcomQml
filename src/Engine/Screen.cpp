@@ -58,7 +58,7 @@ static const char* SDL_VIDEO_WINDOW_POS_UNSET = "SDL_VIDEO_WINDOW_POS=";
 void Screen::makeVideoFlags()
 {
 	_flags = SDL_HWSURFACE|SDL_DOUBLEBUF|SDL_HWPALETTE;
-	if (Options::asyncBlit)
+	if (options1.asyncBlit())
 	{
 		_flags |= SDL_ASYNCBLIT;
 	}
@@ -77,7 +77,7 @@ void Screen::makeVideoFlags()
 	}
 
 	// Handle window positioning
-	if (!Options::fullscreen && Options::rootWindowedMode)
+	if (!options1.fullscreen() && Options::rootWindowedMode)
 	{
 		snprintf(VIDEO_WINDOW_POS, VIDEO_WINDOW_POS_LEN, "SDL_VIDEO_WINDOW_POS=%d,%d", options1.windowedModePositionX(), options1.windowedModePositionY());
 		SDL_putenv(VIDEO_WINDOW_POS);
@@ -95,7 +95,7 @@ void Screen::makeVideoFlags()
 	}
 
 	// Handle display mode
-	if (Options::fullscreen)
+	if (options1.fullscreen())
 	{
 		_flags |= SDL_FULLSCREEN;
 	}
@@ -163,7 +163,7 @@ void Screen::handle(Action *action)
 
 	if (action->getDetails()->type == SDL_KEYDOWN && action->getDetails()->key.keysym.sym == SDLK_RETURN && (SDL_GetModState() & KMOD_ALT) != 0)
 	{
-		Options::fullscreen = !Options::fullscreen;
+		options1.setfullscreen(!options1.fullscreen());
 		resetDisplay();
 	}
 	else if (action->getDetails()->type == SDL_KEYDOWN && action->getDetails()->key.keysym.sym == Options::keyScreenshot)
@@ -389,7 +389,7 @@ void Screen::resetDisplay(bool resetVideo, bool noShaders)
 			{
 				if (_flags & SDL_OPENGL)
 				{
-					Options::useOpenGL = false;
+					options1.setuseOpenGL(false);
 				}
 				throw Exception(SDL_GetError());
 			}
@@ -401,8 +401,8 @@ void Screen::resetDisplay(bool resetVideo, bool noShaders)
 		clear();
 	}
 
-	options1.setDisplayWidth(getWidth());
-	options1.setDisplayHeight(getHeight());
+	options1.setdisplayWidth(getWidth());
+	options1.setdisplayHeight(getHeight());
 	_scaleX = getWidth() / (double)_baseWidth;
 	_scaleY = getHeight() / (double)_baseHeight;
 
@@ -416,7 +416,7 @@ void Screen::resetDisplay(bool resetVideo, bool noShaders)
 	{
 		cursorInBlackBands = false;
 	}
-	else if (Options::fullscreen)
+	else if (options1.fullscreen())
 	{
 		cursorInBlackBands = Options::cursorInBlackBandsInFullscreen;
 	}
@@ -485,9 +485,9 @@ void Screen::resetDisplay(bool resetVideo, bool noShaders)
 	if (useOpenGL())
 	{
 #ifndef __NO_OPENGL
-		OpenGL::checkErrors = Options::checkOpenGLErrors;
+		OpenGL::checkErrors = options1.checkOpenGLErrors();
 		glOutput.init(_baseWidth, _baseHeight);
-		glOutput.linear = Options::useOpenGLSmoothing; // setting from shader file will override this, though
+		glOutput.linear = options1.useOpenGLSmoothing(); // setting from shader file will override this, though
 		if (!noShaders && FileMap::fileExists(Options::useOpenGLShader))
 		{
 			if (!glOutput.set_shader(Options::useOpenGLShader.c_str()))
@@ -495,7 +495,7 @@ void Screen::resetDisplay(bool resetVideo, bool noShaders)
 				Options::useOpenGLShader = "";
 			}
 		}
-		glOutput.setVSync(Options::vSyncForOpenGL);
+		glOutput.setVSync(options1.vSyncForOpenGL());
 #endif
 	}
 
@@ -614,11 +614,11 @@ bool Screen::use32bitScaler()
 	int baseH = options1.baseYResolution;
 	int maxScale = 0;
 
-	if (Options::useHQXFilter)
+	if (options1.useHQXFilter())
 	{
 		maxScale = 4;
 	}
-	else if (Options::useXBRZFilter)
+	else if (options1.useXBRZFilter())
 	{
 		maxScale = 6;
 	}
@@ -642,7 +642,7 @@ bool Screen::useOpenGL()
 #ifdef __NO_OPENGL
 	return false;
 #else
-	return Options::useOpenGL;
+	return options1.useOpenGL();
 #endif
 }
 

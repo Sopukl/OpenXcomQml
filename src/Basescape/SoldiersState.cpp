@@ -767,7 +767,7 @@ void SoldiersState::lstSoldiersClick(Action *action)
  */
 void SoldiersState::lstSoldiersMousePress(Action *action)
 {
-	if (Options::changeValueByMouseWheel == 0)
+	if (options1.changeValueByMouseWheel() == 0)
 		return;
 	unsigned int row = _lstSoldiers->getSelectedRow();
 	size_t numSoldiers = _base->getSoldiers()->size();

@@ -82,7 +82,7 @@ SaveGameState::SaveGameState(OptionsOrigin origin, SaveType type, SDL_Color *pal
 		if (currentTurn > 0 && Options::autosaveSlots >= 2 && Options::autosaveSlots <= 10)
 		{
 			// multi-slot autosave
-			int slotIndex = (currentTurn / Options::autosaveFrequency) % Options::autosaveSlots;
+			int slotIndex = (currentTurn / options1.autosaveFrequency()) % Options::autosaveSlots;
 			_filename = "_" + std::to_string(slotIndex) + SavedGame::AUTOSAVE_BATTLESCAPE;
 		}
 		else

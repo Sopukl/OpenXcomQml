@@ -1006,7 +1006,7 @@ void SellState::lstItemsMousePress(Action *action)
 		if (action->getAbsoluteXMouse() >= _lstItems->getArrowsLeftEdge() &&
 			action->getAbsoluteXMouse() <= _lstItems->getArrowsRightEdge())
 		{
-			changeByValue(Options::changeValueByMouseWheel, 1);
+			changeByValue(options1.changeValueByMouseWheel(), 1);
 		}
 	}
 	else if (action->getDetails()->button.button == SDL_BUTTON_WHEELDOWN)
@@ -1016,7 +1016,7 @@ void SellState::lstItemsMousePress(Action *action)
 		if (action->getAbsoluteXMouse() >= _lstItems->getArrowsLeftEdge() &&
 			action->getAbsoluteXMouse() <= _lstItems->getArrowsRightEdge())
 		{
-			changeByValue(Options::changeValueByMouseWheel, -1);
+			changeByValue(options1.changeValueByMouseWheel(), -1);
 		}
 	}
 	else if (_game->isRightClick(action, true))

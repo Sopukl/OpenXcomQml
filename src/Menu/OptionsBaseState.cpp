@@ -226,9 +226,9 @@ void OptionsBaseState::btnOkClick(Action *)
 		// Confirm any video options changes
 		if (options1.displayWidth() != Options::newDisplayWidth ||
 			options1.displayHeight() != Options::newDisplayHeight ||
-			Options::useOpenGL != Options::newOpenGL ||
-			Options::useScaleFilter != Options::newScaleFilter ||
-			Options::useHQXFilter != Options::newHQXFilter ||
+			options1.useOpenGL() != Options::newOpenGL ||
+			options1.useScaleFilter() != Options::newScaleFilter ||
+			options1.useHQXFilter() != Options::newHQXFilter ||
 			Options::useOpenGLShader != Options::newOpenGLShader)
 		{
 			_game->pushState(new OptionsConfirmState(_origin));

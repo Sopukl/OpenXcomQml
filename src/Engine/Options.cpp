@@ -99,36 +99,35 @@ void createOptionsOXC()
 	_info.push_back(OptionInfo(OPTION_OXC, "asyncBlit", &asyncBlit, false));
 	_info.push_back(OptionInfo(OPTION_OXC, "keyboardMode", (int*)&keyboardMode, KEYBOARD_OFF));
 #else
-	// _info.push_back(OptionInfo(OPTION_OXC, "displayWidth", &displayWidth, Screen::ORIGINAL_WIDTH*2));
-	// _info.push_back(OptionInfo(OPTION_OXC, "displayHeight", &displayHeight, Screen::ORIGINAL_HEIGHT*2));
-	_info.push_back(OptionInfo(OPTION_OXC, "fullscreen", &fullscreen, false));
-	_info.push_back(OptionInfo(OPTION_OXC, "asyncBlit", &asyncBlit, true));
+	//# _info.push_back(OptionInfo(OPTION_OXC, "displayWidth", &displayWidth, Screen::ORIGINAL_WIDTH*2));
+	//# _info.push_back(OptionInfo(OPTION_OXC, "displayHeight", &displayHeight, Screen::ORIGINAL_HEIGHT*2));
+	//# _info.push_back(OptionInfo(OPTION_OXC, "fullscreen", &fullscreen, false));
+	//# _info.push_back(OptionInfo(OPTION_OXC, "asyncBlit", &asyncBlit, true));
 	_info.push_back(OptionInfo(OPTION_OXC, "keyboardMode", (int*)&keyboardMode, KEYBOARD_ON));
 #endif
 
 #ifdef __MOBILE__
 	_info.push_back(OptionInfo(OPTION_OXC, "maxFrameSkip", &maxFrameSkip, 0, "STR_FRAMESKIP", "STR_GENERAL"));
+#else
+	//# _info.push_back(OptionInfo(OPTION_OXC, "maxFrameSkip", &maxFrameSkip, 0));
 #endif
 	_info.push_back(OptionInfo(OPTION_OXC, "traceAI", &traceAI, false));
 	_info.push_back(OptionInfo(OPTION_OXC, "verboseLogging", &verboseLogging, false));
 	_info.push_back(OptionInfo(OPTION_OXC, "StereoSound", &StereoSound, true));
-	//_info.push_back(OptionInfo(OPTION_OXC, "baseXResolution", &baseXResolution, Screen::ORIGINAL_WIDTH));
-	//_info.push_back(OptionInfo(OPTION_OXC, "baseYResolution", &baseYResolution, Screen::ORIGINAL_HEIGHT));
-	//_info.push_back(OptionInfo(OPTION_OXC, "baseXGeoscape", &baseXGeoscape, Screen::ORIGINAL_WIDTH));
-	//_info.push_back(OptionInfo(OPTION_OXC, "baseYGeoscape", &baseYGeoscape, Screen::ORIGINAL_HEIGHT));
-	//_info.push_back(OptionInfo(OPTION_OXC, "baseXBattlescape", &baseXBattlescape, Screen::ORIGINAL_WIDTH));
-	//_info.push_back(OptionInfo(OPTION_OXC, "baseYBattlescape", &baseYBattlescape, Screen::ORIGINAL_HEIGHT));
 	_info.push_back(OptionInfo(OPTION_OXC, "geoscapeScale", &geoscapeScale, 0));
 	_info.push_back(OptionInfo(OPTION_OXC, "battlescapeScale", &battlescapeScale, 0));
-	_info.push_back(OptionInfo(OPTION_OXC, "useScaleFilter", &useScaleFilter, false));
-	_info.push_back(OptionInfo(OPTION_OXC, "useHQXFilter", &useHQXFilter, false));
-	_info.push_back(OptionInfo(OPTION_OXC, "useXBRZFilter", &useXBRZFilter, false));
-	_info.push_back(OptionInfo(OPTION_OXC, "useOpenGL", &useOpenGL, false));
-	_info.push_back(OptionInfo(OPTION_OXC, "checkOpenGLErrors", &checkOpenGLErrors, false));
+	//# _info.push_back(OptionInfo(OPTION_OXC, "useScaleFilter", &useScaleFilter, false));
+	//# _info.push_back(OptionInfo(OPTION_OXC, "useHQXFilter", &useHQXFilter, false));
+	//# _info.push_back(OptionInfo(OPTION_OXC, "useXBRZFilter", &useXBRZFilter, false));
+	//# _info.push_back(OptionInfo(OPTION_OXC, "useOpenGL", &useOpenGL, false));
+	//#_info.push_back(OptionInfo(OPTION_OXC, "checkOpenGLErrors", &checkOpenGLErrors, false));
 	_info.push_back(OptionInfo(OPTION_OXC, "useOpenGLShader", &useOpenGLShader, "Shaders/Raw.OpenGL.shader"));
-	_info.push_back(OptionInfo(OPTION_OXC, "useOpenGLSmoothing", &useOpenGLSmoothing, true));
+	//#_info.push_back(OptionInfo(OPTION_OXC, "useOpenGLSmoothing", &useOpenGLSmoothing, true));
 	_info.push_back(OptionInfo(OPTION_OXC, "debug", &debug, false));
 	_info.push_back(OptionInfo(OPTION_OXC, "debugUi", &debugUi, false));
+	//# _info.push_back(OptionInfo(OPTION_OXC, "soundVolume", &soundVolume, 2*(MIX_MAX_VOLUME/3)));
+	//# _info.push_back(OptionInfo(OPTION_OXC, "musicVolume", &musicVolume, 2*(MIX_MAX_VOLUME/3)));
+	//# _info.push_back(OptionInfo(OPTION_OXC, "uiVolume", &uiVolume, MIX_MAX_VOLUME/3));
 	_info.push_back(OptionInfo(OPTION_OXC, "language", &language, ""));
 	_info.push_back(OptionInfo(OPTION_OXC, "battleScrollSpeed", &battleScrollSpeed, 8));
 #ifdef __MOBILE__
@@ -138,8 +137,8 @@ void createOptionsOXC()
 	_info.push_back(OptionInfo(OPTION_OXC, "battleEdgeScroll", (int*)&battleEdgeScroll, SCROLL_AUTO));
 	_info.push_back(OptionInfo(OPTION_OXC, "battleDragScrollButton", &battleDragScrollButton, 0)); // different default in OXCE
 #endif
-	_info.push_back(OptionInfo(OPTION_OXC, "dragScrollTimeTolerance", &dragScrollTimeTolerance, 300)); // miliSecond
-	_info.push_back(OptionInfo(OPTION_OXC, "dragScrollPixelTolerance", &dragScrollPixelTolerance, 10)); // count of pixels
+	//# _info.push_back(OptionInfo(OPTION_OXC, "dragScrollTimeTolerance", &dragScrollTimeTolerance, 300)); // miliSecond
+	//# _info.push_back(OptionInfo(OPTION_OXC, "dragScrollPixelTolerance", &dragScrollPixelTolerance, 10)); // count of pixels
 	_info.push_back(OptionInfo(OPTION_OXC, "battleFireSpeed", &battleFireSpeed, 6));
 	_info.push_back(OptionInfo(OPTION_OXC, "battleXcomSpeed", &battleXcomSpeed, 30));
 	battleXcomSpeedOrig = -1;
@@ -155,9 +154,15 @@ void createOptionsOXC()
 	_info.push_back(OptionInfo(OPTION_OXC, "globeRadarLines", &globeRadarLines, true));
 	_info.push_back(OptionInfo(OPTION_OXC, "globeFlightPaths", &globeFlightPaths, true));
 	_info.push_back(OptionInfo(OPTION_OXC, "globeAllRadarsOnBaseBuild", &globeAllRadarsOnBaseBuild, true));
+	//# _info.push_back(OptionInfo(OPTION_OXC, "audioSampleRate", &audioSampleRate, 22050));
+	//# _info.push_back(OptionInfo(OPTION_OXC, "audioBitDepth", &audioBitDepth, 16));
+	//# _info.push_back(OptionInfo(OPTION_OXC, "audioChunkSize", &audioChunkSize, 1024));
+	//# _info.push_back(OptionInfo(OPTION_OXC, "pauseMode", &pauseMode, 0));
 	_info.push_back(OptionInfo(OPTION_OXC, "battleNotifyDeath", &battleNotifyDeath, false));
 	_info.push_back(OptionInfo(OPTION_OXC, "showFundsOnGeoscape", &showFundsOnGeoscape, false));
 	_info.push_back(OptionInfo(OPTION_OXC, "allowResize", &allowResize, false));
+	//# _info.push_back(OptionInfo(OPTION_OXC, "windowedModePositionX", &windowedModePositionX, 0));
+	//# _info.push_back(OptionInfo(OPTION_OXC, "windowedModePositionY", &windowedModePositionY, 0));
 	_info.push_back(OptionInfo(OPTION_OXC, "borderless", &borderless, false));
 	_info.push_back(OptionInfo(OPTION_OXC, "captureMouse", (bool*)&captureMouse, false));
 	_info.push_back(OptionInfo(OPTION_OXC, "battleTooltips", &battleTooltips, true));
@@ -193,13 +198,13 @@ void createOptionsOXC()
 void createAdvancedOptionsOXC()
 {
 	// advanced options
-	_info.push_back(OptionInfo(OPTION_OXC, "playIntro", &playIntro, true, "STR_PLAYINTRO", "STR_GENERAL"));
+	//#_info.push_back(OptionInfo(OPTION_OXC, "playIntro", &playIntro, true, "STR_PLAYINTRO", "STR_GENERAL"));
 	_info.push_back(OptionInfo(OPTION_OXC, "autosave", &autosave, true, "STR_AUTOSAVE", "STR_GENERAL"));
-	_info.push_back(OptionInfo(OPTION_OXC, "autosaveFrequency", &autosaveFrequency, 5, "STR_AUTOSAVE_FREQUENCY", "STR_GENERAL"));
+	//# _info.push_back(OptionInfo(OPTION_OXC, "autosaveFrequency", &autosaveFrequency, 5, "STR_AUTOSAVE_FREQUENCY", "STR_GENERAL"));
 	_info.push_back(OptionInfo(OPTION_OXC, "newSeedOnLoad", &newSeedOnLoad, false, "STR_NEWSEEDONLOAD", "STR_GENERAL"));
 	_info.push_back(OptionInfo(OPTION_OXC, "lazyLoadResources", &lazyLoadResources, true, "STR_LAZY_LOADING", "STR_GENERAL")); // exposed in OXCE
-	_info.push_back(OptionInfo(OPTION_OXC, "mousewheelSpeed", &mousewheelSpeed, 3, "STR_MOUSEWHEEL_SPEED", "STR_GENERAL"));
-	_info.push_back(OptionInfo(OPTION_OXC, "changeValueByMouseWheel", &changeValueByMouseWheel, 0, "STR_CHANGEVALUEBYMOUSEWHEEL", "STR_GENERAL"));
+	//# _info.push_back(OptionInfo(OPTION_OXC, "mousewheelSpeed", &mousewheelSpeed, 3, "STR_MOUSEWHEEL_SPEED", "STR_GENERAL"));
+	//# _info.push_back(OptionInfo(OPTION_OXC, "changeValueByMouseWheel", &changeValueByMouseWheel, 0, "STR_CHANGEVALUEBYMOUSEWHEEL", "STR_GENERAL"));
 
 // this should probably be any small screen touch-device, i don't know the defines for all of them so i'll cover android and IOS as i imagine they're more common
 #ifdef __MOBILE__
@@ -220,9 +225,9 @@ void createAdvancedOptionsOXC()
 	_info.push_back(OptionInfo(OPTION_OXC, "FPS", &FPS, 15, "STR_FPS_LIMIT", "STR_GENERAL"));
 	_info.push_back(OptionInfo(OPTION_OXC, "FPSInactive", &FPSInactive, 15, "STR_FPS_INACTIVE_LIMIT", "STR_GENERAL"));
 #else
-	_info.push_back(OptionInfo(OPTION_OXC, "FPS", &FPS, 60, "STR_FPS_LIMIT", "STR_GENERAL"));
-	_info.push_back(OptionInfo(OPTION_OXC, "FPSInactive", &FPSInactive, 30, "STR_FPS_INACTIVE_LIMIT", "STR_GENERAL"));
-	_info.push_back(OptionInfo(OPTION_OXC, "vSyncForOpenGL", &vSyncForOpenGL, true, "STR_VSYNC_FOR_OPENGL", "STR_GENERAL")); // exposed in OXCE
+	//# _info.push_back(OptionInfo(OPTION_OXC, "FPS", &FPS, 60, "STR_FPS_LIMIT", "STR_GENERAL"));
+	//# _info.push_back(OptionInfo(OPTION_OXC, "FPSInactive", &FPSInactive, 30, "STR_FPS_INACTIVE_LIMIT", "STR_GENERAL"));
+	//#_info.push_back(OptionInfo(OPTION_OXC, "vSyncForOpenGL", &vSyncForOpenGL, true, "STR_VSYNC_FOR_OPENGL", "STR_GENERAL")); // exposed in OXCE
 #endif
 
 	_info.push_back(OptionInfo(OPTION_OXC, "geoDragScrollInvert", &geoDragScrollInvert, false, "STR_DRAGSCROLLINVERT", "STR_GEOSCAPE")); // true drags away from the cursor, false drags towards (like a grab)
@@ -1288,7 +1293,6 @@ bool load(const std::string &filename)
  */
 bool save(bool reset, const std::string& filename)
 {
-	options1.saveSettings();
 	std::string yaml;
 	std::string filepath = _configFolder + filename + ".cfg";
 	try
@@ -1440,15 +1444,15 @@ void backupDisplay()
 	Options::newDisplayHeight = options1.displayHeight();
 	Options::newBattlescapeScale = Options::battlescapeScale;
 	Options::newGeoscapeScale = Options::geoscapeScale;
-	Options::newOpenGL = Options::useOpenGL;
-	Options::newScaleFilter = Options::useScaleFilter;
-	Options::newHQXFilter = Options::useHQXFilter;
+	Options::newOpenGL = options1.useOpenGL();
+	Options::newScaleFilter = options1.useScaleFilter();
+	Options::newHQXFilter = options1.useHQXFilter();
 	Options::newOpenGLShader = Options::useOpenGLShader;
-	Options::newXBRZFilter = Options::useXBRZFilter;
+	Options::newXBRZFilter = options1.useXBRZFilter();
 	Options::newRootWindowedMode = Options::rootWindowedMode;
 	Options::newWindowedModePositionX = options1.windowedModePositionX();
 	Options::newWindowedModePositionY = options1.windowedModePositionY();
-	Options::newFullscreen = Options::fullscreen;
+	Options::newFullscreen = options1.fullscreen();
 	Options::newAllowResize = Options::allowResize;
 	Options::newBorderless = Options::borderless;
 }
@@ -1459,34 +1463,49 @@ void backupDisplay()
  */
 void switchDisplay()
 {
-	quint32 tmp;
+	qint32 tmp;
+	tmp = options1.displayWidth();
+	options1.setdisplayWidth(newDisplayWidth);
+	newDisplayWidth = tmp;
 
-	tmp = newDisplayWidth;
-	newDisplayWidth = options1.displayWidth();
-	options1.setDisplayWidth(tmp);
+	tmp = options1.displayHeight();
+	options1.setdisplayHeight(newDisplayHeight);
+	newDisplayHeight = tmp;
 
-	tmp = newDisplayHeight;
-	newDisplayHeight = options1.displayHeight();
-	options1.setDisplayHeight(tmp);
+	bool btmp;
+	btmp = options1.useOpenGL();
+	options1.setuseOpenGL(newOpenGL);
+	newOpenGL = btmp;
 
-	std::swap(useOpenGL, newOpenGL);
-	std::swap(useScaleFilter, newScaleFilter);
+	btmp = options1.useScaleFilter();
+	options1.setuseScaleFilter(newScaleFilter);
+	newScaleFilter = btmp;
+
+	btmp = options1.useHQXFilter();
+	options1.setuseHQXFilter(newHQXFilter);
+	newHQXFilter = btmp;
+
+	btmp = options1.fullscreen();
+	options1.setfullscreen(newFullscreen);
+	newFullscreen = btmp;
+
+	btmp = options1.useXBRZFilter();
+	options1.setuseXBRZFilter(newXBRZFilter);
+	newXBRZFilter = btmp;
+
 	std::swap(battlescapeScale, newBattlescapeScale);
 	std::swap(geoscapeScale, newGeoscapeScale);
-	std::swap(useHQXFilter, newHQXFilter);
 	std::swap(useOpenGLShader, newOpenGLShader);
-	std::swap(useXBRZFilter, newXBRZFilter);
 	std::swap(rootWindowedMode, newRootWindowedMode);
 
-	tmp = newWindowedModePositionX;
-	newWindowedModePositionX = options1.windowedModePositionX();
-	options1.setWindowedModePositionX(tmp);
+	tmp = options1.windowedModePositionX();
+	options1.setwindowedModePositionX(newWindowedModePositionX);
+	newWindowedModePositionX = tmp;
 
-	tmp = newWindowedModePositionY;
-	newWindowedModePositionY = options1.windowedModePositionY();
-	options1.setWindowedModePositionY(tmp);
+	tmp = options1.windowedModePositionY();
+	options1.setwindowedModePositionY(newWindowedModePositionY);
+	newWindowedModePositionY = tmp;
 
-	std::swap(fullscreen, newFullscreen);
 	std::swap(allowResize, newAllowResize);
 	std::swap(borderless, newBorderless);
 }

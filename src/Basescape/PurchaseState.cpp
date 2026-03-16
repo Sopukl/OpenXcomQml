@@ -966,7 +966,7 @@ void PurchaseState::lstItemsMousePress(Action *action)
 		if (action->getAbsoluteXMouse() >= _lstItems->getArrowsLeftEdge() &&
 			action->getAbsoluteXMouse() <= _lstItems->getArrowsRightEdge())
 		{
-			increaseByValue(Options::changeValueByMouseWheel);
+			increaseByValue(options1.changeValueByMouseWheel());
 		}
 	}
 	else if (action->getDetails()->button.button == SDL_BUTTON_WHEELDOWN)
@@ -976,7 +976,7 @@ void PurchaseState::lstItemsMousePress(Action *action)
 		if (action->getAbsoluteXMouse() >= _lstItems->getArrowsLeftEdge() &&
 			action->getAbsoluteXMouse() <= _lstItems->getArrowsRightEdge())
 		{
-			decreaseByValue(Options::changeValueByMouseWheel);
+			decreaseByValue(options1.changeValueByMouseWheel());
 		}
 	}
 	else if (_game->isMiddleClick(action, true))

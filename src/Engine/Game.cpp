@@ -201,8 +201,8 @@ void Game::processEvents()
 				{
 					Options::newDisplayWidth = std::max(Screen::ORIGINAL_WIDTH, _event.resize.w);
 					Options::newDisplayHeight = std::max(Screen::ORIGINAL_HEIGHT, _event.resize.h);
-					options1.setDisplayWidth(Options::newDisplayWidth);
-					options1.setDisplayHeight(Options::newDisplayHeight);
+					options1.setdisplayWidth(Options::newDisplayWidth);
+					options1.setdisplayHeight(Options::newDisplayHeight);
 
 					int dX = 0, dY = 0;
 					Screen::updateScale(Options::battlescapeScale, options1.baseXBattlescape, options1.baseYBattlescape, false);
@@ -308,10 +308,10 @@ void Game::processLogic()
 {
 	_states.back()->think();
 	_fpsCounter->think();
-	if (Options::FPS > 0 && !(Options::useOpenGL && Options::vSyncForOpenGL))
+	if (options1.maxFPS() > 0 && !(options1.useOpenGL() && options1.vSyncForOpenGL()))
 	{
 		// Update our FPS delay time based on the time of the last draw.
-		int fps = SDL_GetAppState() & SDL_APPINPUTFOCUS ? Options::FPS : Options::FPSInactive;
+		int fps = SDL_GetAppState() & SDL_APPINPUTFOCUS ? options1.maxFPS() : options1.maxFPSInactive();
 
 		_timeUntilNextFrame = (1000.0f / fps) - (SDL_GetTicks() - _timeOfLastFrame);
 	}
@@ -725,7 +725,7 @@ void Game::initAudio()
 		Log(LOG_WARNING) << "SDL_mixer only supports multiples of 11025Hz.";
 	}
 	int minChunk = options1.audioSampleRate() / 11025 * 512;
-	options1.setAudioChunkSize(std::max(minChunk, options1.audioChunkSize()));
+	options1.setaudioChunkSize(std::max(minChunk, options1.audioChunkSize()));
 
 	if (Mix_OpenAudio(options1.audioSampleRate(), format, MIX_DEFAULT_CHANNELS, options1.audioChunkSize()) != 0)
 	{

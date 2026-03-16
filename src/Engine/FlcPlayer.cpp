@@ -244,8 +244,8 @@ void FlcPlayer::SDLPolling()
 			{
 				Options::newDisplayWidth = std::max(Screen::ORIGINAL_WIDTH, event.resize.w);
 				Options::newDisplayHeight = std::max(Screen::ORIGINAL_HEIGHT, event.resize.h);
-				options1.setDisplayWidth(Options::newDisplayWidth);
-				options1.setDisplayHeight(Options::newDisplayHeight);
+				options1.setdisplayWidth(Options::newDisplayWidth);
+				options1.setdisplayHeight(Options::newDisplayHeight);
 				if (_mainScreen != _realScreen->getSurface())
 				{
 					_realScreen->resetDisplay();

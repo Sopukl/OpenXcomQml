@@ -518,7 +518,7 @@ void ManageAlienContainmentState::lstItemsMousePress(Action *action)
 		if (action->getAbsoluteXMouse() >= _lstAliens->getArrowsLeftEdge() &&
 			action->getAbsoluteXMouse() <= _lstAliens->getArrowsRightEdge())
 		{
-			increaseByValue(Options::changeValueByMouseWheel);
+			increaseByValue(options1.changeValueByMouseWheel());
 		}
 	}
 	else if (action->getDetails()->button.button == SDL_BUTTON_WHEELDOWN)
@@ -528,7 +528,7 @@ void ManageAlienContainmentState::lstItemsMousePress(Action *action)
 		if (action->getAbsoluteXMouse() >= _lstAliens->getArrowsLeftEdge() &&
 			action->getAbsoluteXMouse() <= _lstAliens->getArrowsRightEdge())
 		{
-			decreaseByValue(Options::changeValueByMouseWheel);
+			decreaseByValue(options1.changeValueByMouseWheel());
 		}
 	}
 	else if (_game->isMiddleClick(action, true))

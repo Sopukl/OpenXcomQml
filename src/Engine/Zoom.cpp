@@ -731,7 +731,7 @@ int Zoom::_zoomSurfaceY(SDL_Surface * src, SDL_Surface * dst, int flipx, int fli
 
 	if (Screen::use32bitScaler())
 	{
-		if (Options::useXBRZFilter)
+		if (options1.useXBRZFilter())
 		{
 			// check the resolution to see which scale we need
 			for (size_t factor = 2; factor <= 6; factor++)
@@ -744,7 +744,7 @@ int Zoom::_zoomSurfaceY(SDL_Surface * src, SDL_Surface * dst, int flipx, int fli
 			}
 		}
 
-		if (Options::useHQXFilter)
+		if (options1.useHQXFilter())
 		{
 			static bool initDone = false;
 
@@ -776,7 +776,7 @@ int Zoom::_zoomSurfaceY(SDL_Surface * src, SDL_Surface * dst, int flipx, int fli
 		}
 	}
 
-	if (Options::useScaleFilter)
+	if (options1.useScaleFilter())
 	{
 		// check the resolution to see which of scale2x, scale3x, etc. we need
 		for (size_t factor = 2; factor <= 4; factor++)

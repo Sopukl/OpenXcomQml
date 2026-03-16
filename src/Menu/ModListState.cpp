@@ -461,7 +461,7 @@ void ModListState::moveModDown(Action *action, unsigned int row, bool max)
 
 void ModListState::lstModsMousePress(Action *action)
 {
-	if (Options::changeValueByMouseWheel == 0)
+	if (options1.changeValueByMouseWheel() == 0)
 		return;
 	unsigned int row = _lstMods->getSelectedRow();
 	size_t numMods = _mods.size();
