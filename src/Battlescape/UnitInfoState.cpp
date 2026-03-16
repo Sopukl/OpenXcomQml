@@ -49,7 +49,7 @@ namespace OpenXcom
  */
 UnitInfoState::UnitInfoState(BattleUnit *unit, BattlescapeState *parent, bool fromInventory, bool mindProbe) : _unit(unit), _parent(parent), _fromInventory(fromInventory), _mindProbe(mindProbe)
 {
-	if (Options::maximizeInfoScreens)
+	if (options1.maximizeInfoScreens())
 	{
 		options1.baseXResolution = Screen::ORIGINAL_WIDTH;
 		options1.baseYResolution = Screen::ORIGINAL_HEIGHT;
@@ -768,7 +768,7 @@ void UnitInfoState::btnNextClick(Action *action)
  */
 void UnitInfoState::exitClick(Action *)
 {
-	if (!_fromInventory && Options::maximizeInfoScreens)
+	if (!_fromInventory && options1.maximizeInfoScreens())
 	{
 		Screen::updateScale(Options::battlescapeScale, options1.baseXBattlescape, options1.baseYBattlescape, true);
 		_game->getScreen()->resetDisplay(false);

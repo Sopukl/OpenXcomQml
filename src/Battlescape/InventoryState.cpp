@@ -93,7 +93,7 @@ InventoryState::InventoryState(bool tu, BattlescapeState *parent, Base *base, bo
 		}
 	}
 
-	if (Options::maximizeInfoScreens)
+	if (options1.maximizeInfoScreens())
 	{
 		options1.baseXResolution = Screen::ORIGINAL_WIDTH;
 		options1.baseYResolution = Screen::ORIGINAL_HEIGHT;
@@ -361,7 +361,7 @@ InventoryState::~InventoryState()
 
 	if (!_battleGame->isBaseCraftInventory())
 	{
-		if (Options::maximizeInfoScreens)
+		if (options1.maximizeInfoScreens())
 		{
 			Screen::updateScale(Options::battlescapeScale, options1.baseXBattlescape, options1.baseYBattlescape, true);
 			_game->getScreen()->resetDisplay(false);

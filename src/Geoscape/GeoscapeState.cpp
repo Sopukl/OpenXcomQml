@@ -548,11 +548,11 @@ void GeoscapeState::handle(Action *action)
 			}
 		}
 		// "ctrl-d" - enable debug mode
-		if (Options::debug && action->getDetails()->key.keysym.sym == SDLK_d && _game->isCtrlPressed())
+		if (options1.debug() && action->getDetails()->key.keysym.sym == SDLK_d && _game->isCtrlPressed())
 		{
 			btnDebugClick(nullptr);
 		}
-		if (Options::debug && _game->getSavedGame()->getDebugMode() && _game->isCtrlPressed())
+		if (options1.debug() && _game->getSavedGame()->getDebugMode() && _game->isCtrlPressed())
 		{
 			// "ctrl-1"
 			if (action->getDetails()->key.keysym.sym == SDLK_1)
@@ -2830,7 +2830,7 @@ void GeoscapeState::time1Day()
 		{
 			popup(new SaveGameState(OPT_GEOSCAPE, SAVE_IRONMAN, _palette));
 		}
-		else if (Options::autosave)
+		else if (options1.autosave())
 		{
 			popup(new SaveGameState(OPT_GEOSCAPE, SAVE_AUTO_GEOSCAPE, _palette, saveGame->getDaysPassed()));
 		}
@@ -4007,7 +4007,7 @@ void GeoscapeState::determineAlienMissions(bool isNewMonth, const RuleEvent* eve
 		if (process)
 		{
 			bool rngret = RNG::percent(command->getExecutionOdds());
-			if (Options::verboseLogging && Options::oxceGeoscapeDebugLogMaxEntries > 0)
+			if (options1.verboseLogging() && Options::oxceGeoscapeDebugLogMaxEntries > 0)
 			{
 				std::ostringstream ss;
 				ss << "month: " << month;
@@ -4742,7 +4742,7 @@ void GeoscapeState::resize(int &dX, int &dY)
 	int divisor = 1;
 	double pixelRatioY = 1.0;
 
-	if (Options::nonSquarePixelRatio)
+	if (options1.nonSquarePixelRatio())
 	{
 		pixelRatioY = 1.2;
 	}

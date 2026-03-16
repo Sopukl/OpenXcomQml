@@ -876,7 +876,7 @@ void DebriefingState::btnOkClick(Action *)
 		{
 			_game->pushState(new SaveGameState(OPT_GEOSCAPE, SAVE_IRONMAN, _palette));
 		}
-		else if (Options::autosave)
+		else if (options1.autosave())
 		{
 			_game->pushState(new SaveGameState(OPT_GEOSCAPE, SAVE_AUTO_GEOSCAPE, _palette));
 		}

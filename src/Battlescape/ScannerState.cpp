@@ -40,7 +40,7 @@ namespace OpenXcom
  */
 ScannerState::ScannerState (BattleAction *action) : _action(action)
 {
-	if (Options::maximizeInfoScreens)
+	if (options1.maximizeInfoScreens())
 	{
 		options1.baseXResolution = Screen::ORIGINAL_WIDTH;
 		options1.baseYResolution = Screen::ORIGINAL_HEIGHT;
@@ -125,7 +125,7 @@ void ScannerState::think()
  */
 void ScannerState::exitClick(Action *)
 {
-	if (Options::maximizeInfoScreens)
+	if (options1.maximizeInfoScreens())
 	{
 		Screen::updateScale(Options::battlescapeScale, options1.baseXBattlescape, options1.baseYBattlescape, true);
 		_game->getScreen()->resetDisplay(false);

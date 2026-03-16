@@ -135,7 +135,7 @@ ExtendedGeoscapeLinksState::ExtendedGeoscapeLinksState(GeoscapeState* parent) : 
 	_btnMusic->setText(tmp);
 	_btnMusic->onMouseClick((ActionHandler)&ExtendedGeoscapeLinksState::btnMusicClick);
 
-	if (Options::debug)
+	if (options1.debug())
 	{
 		_btnTest->setText(tr("STR_TOGGLE_DEBUG_MODE"));
 	}
@@ -197,7 +197,7 @@ void ExtendedGeoscapeLinksState::btnMusicClick(Action *)
 void ExtendedGeoscapeLinksState::btnTestClick(Action *)
 {
 	_game->popState();
-	if (Options::debug)
+	if (options1.debug())
 	{
 		_parent->btnDebugClick(nullptr);
 	}

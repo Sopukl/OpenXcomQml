@@ -1841,7 +1841,7 @@ void Globe::mouseOver(Action *action, State *state)
 
 		_isMouseScrolled = true;
 
-		if (Options::touchEnabled == false)
+		if (options1.touchEnabled() == false)
 		{
 			// Set the mouse cursor back
 			SDL_EventState(SDL_MOUSEMOTION, SDL_IGNORE);
@@ -1870,7 +1870,7 @@ void Globe::mouseOver(Action *action, State *state)
 			center(_cenLon + newLon / (Options::geoScrollSpeed / 10), _cenLat + newLat / (Options::geoScrollSpeed / 10));
 		}
 
-		if (Options::touchEnabled == false)
+		if (options1.touchEnabled() == false)
 		{
 			// We don't want to see the mouse-cursor jumping :)
 			action->setMouseAction(_xBeforeMouseScrolling, _yBeforeMouseScrolling, getX(), getY());
@@ -1880,7 +1880,7 @@ void Globe::mouseOver(Action *action, State *state)
 		_game->getCursor()->handle(action);
 	}
 
-	if (Options::touchEnabled == false &&
+	if (options1.touchEnabled() == false &&
 		_isMouseScrolling &&
 		(action->getDetails()->motion.x != _xBeforeMouseScrolling ||
 		action->getDetails()->motion.y != _yBeforeMouseScrolling))

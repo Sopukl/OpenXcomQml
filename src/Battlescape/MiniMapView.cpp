@@ -343,7 +343,7 @@ void MiniMapView::mouseOver(Action *action, State *state)
 
 		_isMouseScrolled = true;
 
-		if (Options::touchEnabled == false)
+		if (options1.touchEnabled() == false)
 		{
 			// Set the mouse cursor back
 			SDL_EventState(SDL_MOUSEMOTION, SDL_IGNORE);
@@ -392,7 +392,7 @@ void MiniMapView::mouseOver(Action *action, State *state)
 		_camera->centerOnPosition(Position(newX,newY,_camera->getViewLevel()));
 		_redraw = true;
 
-		if (Options::touchEnabled == false)
+		if (options1.touchEnabled() == false)
 		{
 			// We don't want to see the mouse-cursor jumping :)
 			if (Options::battleDragScrollInvert)

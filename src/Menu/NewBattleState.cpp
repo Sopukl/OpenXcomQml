@@ -206,7 +206,7 @@ NewBattleState::NewBattleState() :
 
 	_txtAlienTech->setText(tr("STR_ALIEN_TECH_LEVEL"));
 
-	if (Options::debug)
+	if (options1.debug())
 	{
 		_missionTypes = _game->getMod()->getDeploymentsList();
 	}

@@ -240,7 +240,7 @@ void FlcPlayer::SDLPolling()
 			_playingState = SKIPPED;
 			break;
 		case SDL_VIDEORESIZE:
-			if (Options::allowResize)
+			if (options1.allowResize())
 			{
 				Options::newDisplayWidth = std::max(Screen::ORIGINAL_WIDTH, event.resize.w);
 				Options::newDisplayHeight = std::max(Screen::ORIGINAL_HEIGHT, event.resize.h);

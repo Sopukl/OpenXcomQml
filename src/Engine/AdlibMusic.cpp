@@ -132,7 +132,7 @@ void AdlibMusic::player(void *udata, Uint8 *stream, int len)
 	// Check SDL volume for Background Mute functionality
 	if (options1.musicVolume() == 0 || Mix_VolumeMusic(-1) == 0)
 		return;
-	if (Options::musicAlwaysLoop && !func_is_music_playing())
+	if (options1.musicAlwaysLoop() && !func_is_music_playing())
 	{
 		AdlibMusic *music = (AdlibMusic*)udata;
 		music->play();

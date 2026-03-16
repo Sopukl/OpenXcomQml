@@ -167,7 +167,7 @@ OptionsVideoState::OptionsVideoState(OptionsOrigin origin) : OptionsBaseState(or
 	_txtOptions->setText(tr("STR_DISPLAY_OPTIONS"));
 
 	_btnLetterbox->setText(tr("STR_LETTERBOXED"));
-	_btnLetterbox->setPressed(Options::keepAspectRatio);
+	_btnLetterbox->setPressed(options1.keepAspectRatio());
 	_btnLetterbox->onMouseClick((ActionHandler)&OptionsVideoState::btnLetterboxClick);
 	_btnLetterbox->setTooltip("STR_LETTERBOXED_DESC");
 	_btnLetterbox->onMouseIn((ActionHandler)&OptionsVideoState::txtTooltipIn);
@@ -181,7 +181,7 @@ OptionsVideoState::OptionsVideoState(OptionsOrigin origin) : OptionsBaseState(or
 	_btnLockMouse->onMouseOut((ActionHandler)&OptionsVideoState::txtTooltipOut);
 
 	_btnRootWindowedMode->setText(tr("STR_FIXED_WINDOW_POSITION"));
-	_btnRootWindowedMode->setPressed(Options::rootWindowedMode);
+	_btnRootWindowedMode->setPressed(options1.rootWindowedMode());
 	_btnRootWindowedMode->onMouseClick((ActionHandler)&OptionsVideoState::btnRootWindowedModeClick);
 	_btnRootWindowedMode->setTooltip("STR_FIXED_WINDOW_POSITION_DESC");
 	_btnRootWindowedMode->onMouseIn((ActionHandler)&OptionsVideoState::txtTooltipIn);
@@ -277,11 +277,11 @@ OptionsVideoState::OptionsVideoState(OptionsOrigin origin) : OptionsBaseState(or
 	{
 		displayMode = 1;
 	}
-	else if (Options::borderless)
+	else if (options1.borderless())
 	{
 		displayMode = 2;
 	}
-	else if (Options::allowResize)
+	else if (options1.allowResize())
 	{
 		displayMode = 3;
 	}
@@ -579,7 +579,7 @@ void OptionsVideoState::updateDisplayMode(Action *)
  */
 void OptionsVideoState::btnLetterboxClick(Action *)
 {
-	Options::keepAspectRatio = _btnLetterbox->getPressed();
+    options1.setkeepAspectRatio(_btnLetterbox->getPressed());
 }
 
 /**

@@ -2628,7 +2628,7 @@ bool parseReturn(const ScriptProcData& spd, ParserWriter& ph, const ScriptRefDat
  */
 bool parseDebugLog(const ScriptProcData& spd, ParserWriter& ph, const ScriptRefData* begin, const ScriptRefData* end)
 {
-	if (!Options::debug)
+	if (!options1.debug())
 	{
 		return true;
 	}
@@ -3905,7 +3905,7 @@ void ScriptParserBase::parseCode(ScriptContainerBase& container, const std::stri
  */
 void ScriptParserBase::logScriptMetadata(bool haveEvents, const std::string& groupName) const
 {
-	if (Options::debug && Options::verboseLogging)
+	if (options1.debug() && options1.verboseLogging())
 	{
 		auto argType = [&](ArgEnum type) -> std::string
 		{

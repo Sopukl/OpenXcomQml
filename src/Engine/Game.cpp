@@ -53,7 +53,7 @@ namespace OpenXcom
 {
 
 const double Game::VOLUME_GRADIENT = 10.0;
-bool startupEvent = Options::allowResize;
+bool startupEvent = options1.allowResize();
 Uint32 lastMouseMoveEvent = 0;
 Sint16 xrel = 0;
 Sint16 yrel = 0;
@@ -169,7 +169,7 @@ void Game::processEvents()
 				if (!(currentState & SDL_APPACTIVE))
 				{
 					runningState = stateRun[options1.pauseMode()];
-					if (Options::backgroundMute)
+					if (options1.backgroundMute())
 					{
 						setVolume(0, 0, 0);
 					}
@@ -178,7 +178,7 @@ void Game::processEvents()
 				else if (!(currentState & SDL_APPINPUTFOCUS))
 				{
 					runningState = kbFocusRun[options1.pauseMode()];
-					if (Options::backgroundMute)
+					if (options1.backgroundMute())
 					{
 						setVolume(0, 0, 0);
 					}
@@ -187,7 +187,7 @@ void Game::processEvents()
 				else
 				{
 					runningState = RUNNING;
-					if (Options::backgroundMute)
+					if (options1.backgroundMute())
 					{
 						setVolume(options1.soundVolume(), options1.musicVolume(), options1.uiVolume());
 					}
@@ -195,7 +195,7 @@ void Game::processEvents()
 			}
 			break;
 		case SDL_VIDEORESIZE:
-			if (Options::allowResize)
+			if (options1.allowResize())
 			{
 				if (!startupEvent)
 				{
@@ -277,7 +277,7 @@ void Game::processEvents()
 						}
 					}
 				}
-				else if (Options::debug)
+				else if (options1.debug())
 				{
 					if (action.getDetails()->key.keysym.sym == SDLK_t && isCtrlPressed())
 					{
@@ -286,7 +286,7 @@ void Game::processEvents()
 					// "ctrl-u" debug UI
 					else if (action.getDetails()->key.keysym.sym == SDLK_u && isCtrlPressed())
 					{
-						Options::debugUi = !Options::debugUi;
+						options1.setdebugUi(!options1.debugUi());
 						_states.back()->redrawText();
 					}
 				}

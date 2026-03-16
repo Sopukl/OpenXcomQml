@@ -184,7 +184,7 @@ void StartState::think()
 			Options::reload = false;
 		}
 		_game->getCursor()->setVisible(true);
-		_game->getFpsCounter()->setVisible(Options::fpsCounter);
+		_game->getFpsCounter()->setVisible(options1.fpsCounter());
 		break;
 	default:
 		break;

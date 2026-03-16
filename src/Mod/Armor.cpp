@@ -359,7 +359,7 @@ void Armor::afterLoad(const Mod* mod)
 					layerItem.assign(buf.data(), formattedLen);
 
 					//check if surface is valid
-					if (Options::lazyLoadResources == false)
+					if (options1.lazyLoadResources() == false)
 					{
 						//TODO: remove `const_cast`
 						mod->checkForSoftError(const_cast<Mod*>(mod)->getSurface(layerItem, false) == nullptr, _type, "Missing surface definition for '" + layerItem + "'", LOG_ERROR);

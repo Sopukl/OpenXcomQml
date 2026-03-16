@@ -112,8 +112,8 @@ void createOptionsOXC()
 	//# _info.push_back(OptionInfo(OPTION_OXC, "maxFrameSkip", &maxFrameSkip, 0));
 #endif
 	_info.push_back(OptionInfo(OPTION_OXC, "traceAI", &traceAI, false));
-	_info.push_back(OptionInfo(OPTION_OXC, "verboseLogging", &verboseLogging, false));
-	_info.push_back(OptionInfo(OPTION_OXC, "StereoSound", &StereoSound, true));
+	//# _info.push_back(OptionInfo(OPTION_OXC, "verboseLogging", &verboseLogging, false));
+	//# _info.push_back(OptionInfo(OPTION_OXC, "StereoSound", &StereoSound, true));
 	_info.push_back(OptionInfo(OPTION_OXC, "geoscapeScale", &geoscapeScale, 0));
 	_info.push_back(OptionInfo(OPTION_OXC, "battlescapeScale", &battlescapeScale, 0));
 	//# _info.push_back(OptionInfo(OPTION_OXC, "useScaleFilter", &useScaleFilter, false));
@@ -123,8 +123,8 @@ void createOptionsOXC()
 	//#_info.push_back(OptionInfo(OPTION_OXC, "checkOpenGLErrors", &checkOpenGLErrors, false));
 	_info.push_back(OptionInfo(OPTION_OXC, "useOpenGLShader", &useOpenGLShader, "Shaders/Raw.OpenGL.shader"));
 	//#_info.push_back(OptionInfo(OPTION_OXC, "useOpenGLSmoothing", &useOpenGLSmoothing, true));
-	_info.push_back(OptionInfo(OPTION_OXC, "debug", &debug, false));
-	_info.push_back(OptionInfo(OPTION_OXC, "debugUi", &debugUi, false));
+	//# _info.push_back(OptionInfo(OPTION_OXC, "debug", &debug, false));
+	//# _info.push_back(OptionInfo(OPTION_OXC, "debugUi", &debugUi, false));
 	//# _info.push_back(OptionInfo(OPTION_OXC, "soundVolume", &soundVolume, 2*(MIX_MAX_VOLUME/3)));
 	//# _info.push_back(OptionInfo(OPTION_OXC, "musicVolume", &musicVolume, 2*(MIX_MAX_VOLUME/3)));
 	//# _info.push_back(OptionInfo(OPTION_OXC, "uiVolume", &uiVolume, MIX_MAX_VOLUME/3));
@@ -149,7 +149,7 @@ void createOptionsOXC()
 #else
 	_info.push_back(OptionInfo(OPTION_OXC, "battleNewPreviewPath", (int*)&battleNewPreviewPath, PATH_NONE)); // requires double-click to confirm moves
 #endif
-	_info.push_back(OptionInfo(OPTION_OXC, "fpsCounter", &fpsCounter, false));
+	//#_info.push_back(OptionInfo(OPTION_OXC, "fpsCounter", &fpsCounter, false));
 	_info.push_back(OptionInfo(OPTION_OXC, "globeDetail", &globeDetail, true));
 	_info.push_back(OptionInfo(OPTION_OXC, "globeRadarLines", &globeRadarLines, true));
 	_info.push_back(OptionInfo(OPTION_OXC, "globeFlightPaths", &globeFlightPaths, true));
@@ -160,17 +160,17 @@ void createOptionsOXC()
 	//# _info.push_back(OptionInfo(OPTION_OXC, "pauseMode", &pauseMode, 0));
 	_info.push_back(OptionInfo(OPTION_OXC, "battleNotifyDeath", &battleNotifyDeath, false));
 	_info.push_back(OptionInfo(OPTION_OXC, "showFundsOnGeoscape", &showFundsOnGeoscape, false));
-	_info.push_back(OptionInfo(OPTION_OXC, "allowResize", &allowResize, false));
+	//#_info.push_back(OptionInfo(OPTION_OXC, "allowResize", &allowResize, false));
 	//# _info.push_back(OptionInfo(OPTION_OXC, "windowedModePositionX", &windowedModePositionX, 0));
 	//# _info.push_back(OptionInfo(OPTION_OXC, "windowedModePositionY", &windowedModePositionY, 0));
-	_info.push_back(OptionInfo(OPTION_OXC, "borderless", &borderless, false));
+	//#_info.push_back(OptionInfo(OPTION_OXC, "borderless", &borderless, false));
 	_info.push_back(OptionInfo(OPTION_OXC, "captureMouse", (bool*)&captureMouse, false));
 	_info.push_back(OptionInfo(OPTION_OXC, "battleTooltips", &battleTooltips, true));
-	_info.push_back(OptionInfo(OPTION_OXC, "keepAspectRatio", &keepAspectRatio, true));
-	_info.push_back(OptionInfo(OPTION_OXC, "nonSquarePixelRatio", &nonSquarePixelRatio, false));
-	_info.push_back(OptionInfo(OPTION_OXC, "cursorInBlackBandsInFullscreen", &cursorInBlackBandsInFullscreen, false));
-	_info.push_back(OptionInfo(OPTION_OXC, "cursorInBlackBandsInWindow", &cursorInBlackBandsInWindow, true));
-	_info.push_back(OptionInfo(OPTION_OXC, "cursorInBlackBandsInBorderlessWindow", &cursorInBlackBandsInBorderlessWindow, false));
+	//# _info.push_back(OptionInfo(OPTION_OXC, "keepAspectRatio", &keepAspectRatio, true));
+	//# _info.push_back(OptionInfo(OPTION_OXC, "nonSquarePixelRatio", &nonSquarePixelRatio, false));
+	//# _info.push_back(OptionInfo(OPTION_OXC, "cursorInBlackBandsInFullscreen", &cursorInBlackBandsInFullscreen, false));
+	//# _info.push_back(OptionInfo(OPTION_OXC, "cursorInBlackBandsInWindow", &cursorInBlackBandsInWindow, true));
+	//# _info.push_back(OptionInfo(OPTION_OXC, "cursorInBlackBandsInBorderlessWindow", &cursorInBlackBandsInBorderlessWindow, false));
 	_info.push_back(OptionInfo(OPTION_OXC, "saveOrder", (int*)&saveOrder, SORT_DATE_DESC));
 	_info.push_back(OptionInfo(OPTION_OXC, "geoClockSpeed", &geoClockSpeed, 80));
 	_info.push_back(OptionInfo(OPTION_OXC, "dogfightSpeed", &dogfightSpeed, 30));
@@ -184,25 +184,25 @@ void createOptionsOXC()
 	_info.push_back(OptionInfo(OPTION_OXC, "preferredSound", (int*)&preferredSound, SOUND_AUTO));
 	_info.push_back(OptionInfo(OPTION_OXC, "preferredVideo", (int*)&preferredVideo, VIDEO_FMV));
 	_info.push_back(OptionInfo(OPTION_OXC, "wordwrap", (int*)&wordwrap, WRAP_AUTO));
-	_info.push_back(OptionInfo(OPTION_OXC, "musicAlwaysLoop", &musicAlwaysLoop, false));
+	//#_info.push_back(OptionInfo(OPTION_OXC, "musicAlwaysLoop", &musicAlwaysLoop, false));
 #ifdef __MOBILE
 	_info.push_back(OptionInfo(OPTION_OXC, "touchEnabled", &touchEnabled, true));
 #else
-	_info.push_back(OptionInfo(OPTION_OXC, "touchEnabled", &touchEnabled, false));
+	//#_info.push_back(OptionInfo(OPTION_OXC, "touchEnabled", &touchEnabled, false));
 #endif
-	_info.push_back(OptionInfo(OPTION_OXC, "rootWindowedMode", &rootWindowedMode, false));
-	_info.push_back(OptionInfo(OPTION_OXC, "backgroundMute", &backgroundMute, false));
-	_info.push_back(OptionInfo(OPTION_OXC, "soldierDiaries", &soldierDiaries, true));
+	//#_info.push_back(OptionInfo(OPTION_OXC, "rootWindowedMode", &rootWindowedMode, false));
+	//#_info.push_back(OptionInfo(OPTION_OXC, "backgroundMute", &backgroundMute, false));
+	//#_info.push_back(OptionInfo(OPTION_OXC, "soldierDiaries", &soldierDiaries, true));
 }
 
 void createAdvancedOptionsOXC()
 {
 	// advanced options
 	//#_info.push_back(OptionInfo(OPTION_OXC, "playIntro", &playIntro, true, "STR_PLAYINTRO", "STR_GENERAL"));
-	_info.push_back(OptionInfo(OPTION_OXC, "autosave", &autosave, true, "STR_AUTOSAVE", "STR_GENERAL"));
+	//#_info.push_back(OptionInfo(OPTION_OXC, "autosave", &autosave, true, "STR_AUTOSAVE", "STR_GENERAL"));
 	//# _info.push_back(OptionInfo(OPTION_OXC, "autosaveFrequency", &autosaveFrequency, 5, "STR_AUTOSAVE_FREQUENCY", "STR_GENERAL"));
-	_info.push_back(OptionInfo(OPTION_OXC, "newSeedOnLoad", &newSeedOnLoad, false, "STR_NEWSEEDONLOAD", "STR_GENERAL"));
-	_info.push_back(OptionInfo(OPTION_OXC, "lazyLoadResources", &lazyLoadResources, true, "STR_LAZY_LOADING", "STR_GENERAL")); // exposed in OXCE
+	//#_info.push_back(OptionInfo(OPTION_OXC, "newSeedOnLoad", &newSeedOnLoad, false, "STR_NEWSEEDONLOAD", "STR_GENERAL"));
+	//#_info.push_back(OptionInfo(OPTION_OXC, "lazyLoadResources", &lazyLoadResources, true, "STR_LAZY_LOADING", "STR_GENERAL")); // exposed in OXCE
 	//# _info.push_back(OptionInfo(OPTION_OXC, "mousewheelSpeed", &mousewheelSpeed, 3, "STR_MOUSEWHEEL_SPEED", "STR_GENERAL"));
 	//# _info.push_back(OptionInfo(OPTION_OXC, "changeValueByMouseWheel", &changeValueByMouseWheel, 0, "STR_CHANGEVALUEBYMOUSEWHEEL", "STR_GENERAL"));
 
@@ -218,7 +218,7 @@ void createAdvancedOptionsOXC()
 		_info.push_back(OptionInfo(OPTION_OXC, "maximizeInfoScreens", &maximizeInfoScreens, false, "STR_MAXIMIZE_INFO_SCREENS", "STR_GENERAL"));
 	#endif
 #else
-	_info.push_back(OptionInfo(OPTION_OXC, "maximizeInfoScreens", &maximizeInfoScreens, false, "STR_MAXIMIZE_INFO_SCREENS", "STR_GENERAL"));
+	//#_info.push_back(OptionInfo(OPTION_OXC, "maximizeInfoScreens", &maximizeInfoScreens, false, "STR_MAXIMIZE_INFO_SCREENS", "STR_GENERAL"));
 #endif
 
 #ifdef __MORPHOS__
@@ -834,7 +834,7 @@ bool init()
 	Logger::reportingLevel() = LOG_INFO;
 #endif
 
-	if (Options::verboseLogging)
+	if (options1.verboseLogging())
 		Logger::reportingLevel() = LOG_VERBOSE;
 
 	// this enables writes to the log file and filters already emitted messages
@@ -1449,12 +1449,12 @@ void backupDisplay()
 	Options::newHQXFilter = options1.useHQXFilter();
 	Options::newOpenGLShader = Options::useOpenGLShader;
 	Options::newXBRZFilter = options1.useXBRZFilter();
-	Options::newRootWindowedMode = Options::rootWindowedMode;
+	Options::newRootWindowedMode = options1.rootWindowedMode();
 	Options::newWindowedModePositionX = options1.windowedModePositionX();
 	Options::newWindowedModePositionY = options1.windowedModePositionY();
 	Options::newFullscreen = options1.fullscreen();
-	Options::newAllowResize = Options::allowResize;
-	Options::newBorderless = Options::borderless;
+	Options::newAllowResize = options1.allowResize();
+	Options::newBorderless = options1.borderless();
 }
 
 /**
@@ -1496,7 +1496,10 @@ void switchDisplay()
 	std::swap(battlescapeScale, newBattlescapeScale);
 	std::swap(geoscapeScale, newGeoscapeScale);
 	std::swap(useOpenGLShader, newOpenGLShader);
-	std::swap(rootWindowedMode, newRootWindowedMode);
+
+	btmp = options1.rootWindowedMode();
+	options1.setrootWindowedMode(newRootWindowedMode);
+	newRootWindowedMode = btmp;
 
 	tmp = options1.windowedModePositionX();
 	options1.setwindowedModePositionX(newWindowedModePositionX);
@@ -1506,8 +1509,13 @@ void switchDisplay()
 	options1.setwindowedModePositionY(newWindowedModePositionY);
 	newWindowedModePositionY = tmp;
 
-	std::swap(allowResize, newAllowResize);
-	std::swap(borderless, newBorderless);
+	btmp = options1.allowResize();
+	options1.setallowResize(newAllowResize);
+	newAllowResize = btmp;
+
+	btmp = options1.borderless();
+	options1.setborderless(newBorderless);
+	newBorderless = btmp;
 }
 
 }

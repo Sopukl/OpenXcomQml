@@ -873,7 +873,7 @@ Font *Mod::getFont(const std::string &name, bool error) const
  */
 void Mod::lazyLoadSurface(const std::string &name)
 {
-	if (Options::lazyLoadResources)
+	if (options1.lazyLoadResources())
 	{
 		auto i = _extraSprites.find(name);
 		if (i != _extraSprites.end())
@@ -978,7 +978,7 @@ void Mod::playMusic(const std::string &name, int id)
 	{
 		int loop = -1;
 		// hacks
-		if (!Options::musicAlwaysLoop && (name == "GMSTORY" || name == "GMWIN" || name == "GMLOSE"))
+		if (!options1.musicAlwaysLoop() && (name == "GMSTORY" || name == "GMWIN" || name == "GMLOSE"))
 		{
 			loop = 0;
 		}
@@ -1173,7 +1173,7 @@ bool Mod::checkForSoftError(bool check, const std::string &parent, const std::st
  */
 void Mod::verifySpriteOffset(const std::string &parent, const int& sprite, const std::string &set) const
 {
-	if (Options::lazyLoadResources)
+	if (options1.lazyLoadResources())
 	{
 		// we can't check if index is correct when set is loaded
 		return;
@@ -1203,7 +1203,7 @@ void Mod::verifySpriteOffset(const std::string &parent, const int& sprite, const
  */
 void Mod::verifySpriteOffset(const std::string &parent, const std::vector<int>& sprites, const std::string &set) const
 {
-	if (Options::lazyLoadResources)
+	if (options1.lazyLoadResources())
 	{
 		// we can't check if index is correct when set is loaded
 		return;
@@ -2140,7 +2140,7 @@ static void throwModOnErrorHelper(const std::string& modId, const std::string& e
 		<< Options::getModInfos().at(modId).getName()
 		<< "'";
 
-	if (!Options::debug)
+	if (!options1.debug())
 	{
 		Log(LOG_WARNING) << "disabling mod with invalid ruleset: " << modId;
 		auto it = std::find(Options::mods.begin(), Options::mods.end(), std::pair<std::string, bool>(modId, true));
@@ -6055,8 +6055,8 @@ void Mod::loadExtraResources()
 	}
 #endif
 
-	Log(LOG_INFO) << "Lazy loading: " << Options::lazyLoadResources;
-	if (!Options::lazyLoadResources)
+	Log(LOG_INFO) << "Lazy loading: " << options1.lazyLoadResources();
+	if (!options1.lazyLoadResources())
 	{
 		Log(LOG_INFO) << "Loading extra resources from ruleset...";
 		for (auto& pair : _extraSprites)

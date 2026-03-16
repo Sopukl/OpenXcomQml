@@ -189,7 +189,7 @@ OptionsAudioState::OptionsAudioState(OptionsOrigin origin) : OptionsBaseState(or
 	_txtOptions->setText(tr("STR_SOUND_OPTIONS"));
 
 	_btnBackgroundMute->setText(tr("STR_BACKGROUND_MUTE"));
-	_btnBackgroundMute->setPressed(Options::backgroundMute);
+	_btnBackgroundMute->setPressed(options1.backgroundMute());
 	_btnBackgroundMute->onMouseClick((ActionHandler)&OptionsAudioState::btnBackgroundMuteClick);
 	_btnBackgroundMute->setTooltip("STR_BACKGROUND_MUTE_DESC");
 	_btnBackgroundMute->onMouseIn((ActionHandler)&OptionsAudioState::txtTooltipIn);
@@ -287,7 +287,7 @@ void OptionsAudioState::cbxSoundFormatChange(Action *)
  */
 void OptionsAudioState::btnBackgroundMuteClick(Action*)
 {
-	Options::backgroundMute = _btnBackgroundMute->getPressed();
+    options1.setbackgroundMute(_btnBackgroundMute->getPressed());
 }
 
 }

@@ -847,7 +847,7 @@ void BattlescapeState::init()
 		{
 			_game->pushState(new SaveGameState(OPT_BATTLESCAPE, SAVE_IRONMAN, _palette));
 		}
-		else if (Options::autosave)
+		else if (options1.autosave())
 		{
 			_game->pushState(new SaveGameState(OPT_BATTLESCAPE, SAVE_AUTO_BATTLESCAPE, _palette, currentTurn));
 		}
@@ -916,7 +916,7 @@ void BattlescapeState::mapOver(Action *action)
 
 		_isMouseScrolled = true;
 
-		if (Options::touchEnabled == false)
+		if (options1.touchEnabled() == false)
 		{
 			// Set the mouse cursor back
 			SDL_EventState(SDL_MOUSEMOTION, SDL_IGNORE);
@@ -949,7 +949,7 @@ void BattlescapeState::mapOver(Action *action)
 				_totalMouseMoveY = -(int) (delta2.y * action->getYScale());
 			}
 
-			if (Options::touchEnabled == false)
+			if (options1.touchEnabled() == false)
 			{
 				action->getDetails()->motion.x = _xBeforeMouseScrolling;
 				action->getDetails()->motion.y = _yBeforeMouseScrolling;
@@ -981,7 +981,7 @@ void BattlescapeState::mapOver(Action *action)
 			_cursorPosition.x = Clamp(cursorX, barWidth, _game->getScreen()->getWidth() - barWidth - (int)(Round(action->getXScale())));
 			_cursorPosition.y = Clamp(cursorY, barHeight, _game->getScreen()->getHeight() - barHeight - (int)(Round(action->getYScale())));
 
-			if (Options::touchEnabled == false)
+			if (options1.touchEnabled() == false)
 			{
 				action->getDetails()->motion.x = _cursorPosition.x;
 				action->getDetails()->motion.y = _cursorPosition.y;
@@ -2700,7 +2700,7 @@ inline void BattlescapeState::handle(Action *action)
 		{
 			State::handle(action);
 
-			if (Options::touchEnabled == false && _isMouseScrolling && !Options::battleDragScrollInvert)
+			if (options1.touchEnabled() == false && _isMouseScrolling && !Options::battleDragScrollInvert)
 			{
 				_map->setSelectorPosition((_cursorPosition.x - _game->getScreen()->getCursorLeftBlackBand()) / action->getXScale(), (_cursorPosition.y - _game->getScreen()->getCursorTopBlackBand()) / action->getYScale());
 			}
@@ -3013,7 +3013,7 @@ inline void BattlescapeState::handle(Action *action)
 						}
 					}
 				}
-				if (Options::debug)
+				if (options1.debug())
 				{
 					// "ctrl-d" - enable debug mode
 					if (key == SDLK_d && ctrlPressed)
@@ -4007,7 +4007,7 @@ void BattlescapeState::resize(int &dX, int &dY)
 	int divisor = 1;
 	double pixelRatioY = 1.0;
 
-	if (Options::nonSquarePixelRatio)
+	if (options1.nonSquarePixelRatio())
 	{
 		pixelRatioY = 1.2;
 	}

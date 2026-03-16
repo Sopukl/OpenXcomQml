@@ -292,7 +292,7 @@ void StatisticsState::listStats()
 	_lstStats->addRow(2, tr("STR_AVERAGE_MONTHLY_RATING").c_str(), Unicode::formatNumber(monthlyScore).c_str());
 	_lstStats->addRow(2, tr("STR_TOTAL_INCOME").c_str(), Unicode::formatFunding(totalIncome).c_str());
 	_lstStats->addRow(2, tr("STR_TOTAL_EXPENDITURE").c_str(), Unicode::formatFunding(totalExpenses).c_str());
-	if (Options::soldierDiaries)
+	if (options1.soldierDiaries())
 	{
 		_lstStats->addRow(2, tr("STR_MISSIONS_WON").c_str(), Unicode::formatNumber(missionsWin).c_str());
 		_lstStats->addRow(2, tr("STR_MISSIONS_LOST").c_str(), Unicode::formatNumber(missionsLoss).c_str());
@@ -303,7 +303,7 @@ void StatisticsState::listStats()
 	_lstStats->addRow(2, tr("STR_SOLDIERS_RECRUITED").c_str(), Unicode::formatNumber(soldiersRecruited).c_str());
 	_lstStats->addRow(2, tr("STR_SOLDIERS_LOST").c_str(), Unicode::formatNumber(soldiersLost).c_str());
 	_lstStats->addRow(2, tr("STR_VEHICLES_LOST").c_str(), Unicode::formatNumber(vehiclesLost).c_str()); // "STR_TANKS_DESTROYED" from DebriefingState
-	if (Options::soldierDiaries)
+	if (options1.soldierDiaries())
 	{
 		_lstStats->addRow(2, tr("STR_ALIEN_KILLS").c_str(), Unicode::formatNumber(aliensKilled).c_str());
 		_lstStats->addRow(2, tr("STR_ALIEN_CAPTURES").c_str(), Unicode::formatNumber(aliensCaptured).c_str());
@@ -315,14 +315,14 @@ void StatisticsState::listStats()
 		_lstStats->addRow(2, tr("STR_TOTAL_DAYS_WOUNDED").c_str(), Unicode::formatNumber(daysWounded).c_str());
 	}
 	_lstStats->addRow(2, tr("STR_TOTAL_UFOS").c_str(), Unicode::formatNumber(ufosDetected).c_str());
-	if (Options::soldierDiaries)
+	if (options1.soldierDiaries())
 	{
 		_lstStats->addRow(2, tr("STR_TOTAL_ALIEN_BASES").c_str(), Unicode::formatNumber(alienBases).c_str());
 		_lstStats->addRow(2, tr("STR_ALIEN_BASES_DESTROYED").c_str(), Unicode::formatNumber(alienBasesDestroyed).c_str());
 	}
 	_lstStats->addRow(2, tr("STR_COUNTRIES_LOST").c_str(), Unicode::formatNumber(countriesLost).c_str());
 	_lstStats->addRow(2, tr("STR_TOTAL_TERROR_SITES").c_str(), Unicode::formatNumber(terrorSites).c_str());
-	if (Options::soldierDiaries)
+	if (options1.soldierDiaries())
 	{
 		_lstStats->addRow(2, tr("STR_TOTAL_BASES").c_str(), Unicode::formatNumber(xcomBases).c_str());
 		_lstStats->addRow(2, tr("STR_XCOM_BASES_LOST").c_str(), Unicode::formatNumber(xcomBasesLost).c_str());

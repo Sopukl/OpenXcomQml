@@ -495,7 +495,7 @@ void Text::draw()
 	}
 
 	// Show text borders for debugging
-	if (Options::debugUi)
+	if (options1.debugUi())
 	{
 		SDL_Rect r;
 		r.w = getWidth();

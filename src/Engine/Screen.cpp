@@ -71,19 +71,19 @@ void Screen::makeVideoFlags()
 		SDL_GL_SetAttribute( SDL_GL_DEPTH_SIZE, 16 );
 		SDL_GL_SetAttribute( SDL_GL_DOUBLEBUFFER, 1 );
 	}
-	if (Options::allowResize)
+	if (options1.allowResize())
 	{
 		_flags |= SDL_RESIZABLE;
 	}
 
 	// Handle window positioning
-	if (!options1.fullscreen() && Options::rootWindowedMode)
+	if (!options1.fullscreen() && options1.rootWindowedMode())
 	{
 		snprintf(VIDEO_WINDOW_POS, VIDEO_WINDOW_POS_LEN, "SDL_VIDEO_WINDOW_POS=%d,%d", options1.windowedModePositionX(), options1.windowedModePositionY());
 		SDL_putenv(VIDEO_WINDOW_POS);
 		SDL_putenv((char *)SDL_VIDEO_CENTERED_UNSET);
 	}
-	else if (Options::borderless)
+	else if (options1.borderless())
 	{
 		SDL_putenv((char *)SDL_VIDEO_WINDOW_POS_UNSET);
 		SDL_putenv((char *)SDL_VIDEO_CENTERED_CENTER);
@@ -99,7 +99,7 @@ void Screen::makeVideoFlags()
 	{
 		_flags |= SDL_FULLSCREEN;
 	}
-	if (Options::borderless)
+	if (options1.borderless())
 	{
 		_flags |= SDL_NOFRAME;
 	}
@@ -148,7 +148,7 @@ SDL_Surface *Screen::getSurface()
  */
 void Screen::handle(Action *action)
 {
-	if (Options::debug)
+	if (options1.debug())
 	{
 		if (action->getDetails()->type == SDL_KEYDOWN && action->getDetails()->key.keysym.sym == SDLK_F8 && (SDL_GetModState() & KMOD_ALT) != 0)
 		{
@@ -407,29 +407,29 @@ void Screen::resetDisplay(bool resetVideo, bool noShaders)
 	_scaleY = getHeight() / (double)_baseHeight;
 
 	double pixelRatioY = 1.0;
-	if (Options::nonSquarePixelRatio && !Options::allowResize)
+	if (options1.nonSquarePixelRatio() && !options1.allowResize())
 	{
 		pixelRatioY = 1.2;
 	}
 	bool cursorInBlackBands;
-	if (!Options::keepAspectRatio)
+	if (!options1.keepAspectRatio())
 	{
 		cursorInBlackBands = false;
 	}
 	else if (options1.fullscreen())
 	{
-		cursorInBlackBands = Options::cursorInBlackBandsInFullscreen;
+		cursorInBlackBands = options1.cursorInBlackBandsInFullscreen();
 	}
-	else if (!Options::borderless)
+	else if (!options1.borderless())
 	{
-		cursorInBlackBands = Options::cursorInBlackBandsInWindow;
+		cursorInBlackBands = options1.cursorInBlackBandsInWindow();
 	}
 	else
 	{
-		cursorInBlackBands = Options::cursorInBlackBandsInBorderlessWindow;
+		cursorInBlackBands = options1.cursorInBlackBandsInBorderlessWindow();
 	}
 
-	if (_scaleX > _scaleY && Options::keepAspectRatio)
+	if (_scaleX > _scaleY && options1.keepAspectRatio())
 	{
 		int targetWidth = (int)floor(_scaleY * (double)_baseWidth);
 		_topBlackBand = _bottomBlackBand = 0;
@@ -451,7 +451,7 @@ void Screen::resetDisplay(bool resetVideo, bool noShaders)
 			_cursorLeftBlackBand = 0;
 		}
 	}
-	else if (_scaleY > _scaleX && Options::keepAspectRatio)
+	else if (_scaleY > _scaleX && options1.keepAspectRatio())
 	{
 		int targetHeight = (int)floor(_scaleX * (double)_baseHeight * pixelRatioY);
 		_topBlackBand = (getHeight() - targetHeight) / 2;
@@ -675,7 +675,7 @@ void Screen::updateScale(int type, int &width, int &height, bool change)
 {
 	double pixelRatioY = 1.0;
 
-	if (Options::nonSquarePixelRatio)
+	if (options1.nonSquarePixelRatio())
 	{
 		pixelRatioY = 1.2;
 	}

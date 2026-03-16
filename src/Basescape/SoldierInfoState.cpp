@@ -321,7 +321,7 @@ SoldierInfoState::SoldierInfoState(Base *base, size_t soldierId, bool forceLimit
 
 	_btnDiary->setText(tr("STR_DIARY"));
 	_btnDiary->onMouseClick((ActionHandler)&SoldierInfoState::btnDiaryClick);
-	_btnDiary->setVisible(Options::soldierDiaries);
+	_btnDiary->setVisible(options1.soldierDiaries());
 
 	_txtPsionic->setText(tr("STR_IN_PSIONIC_TRAINING"));
 
@@ -494,7 +494,7 @@ void SoldierInfoState::init()
 	_txtKills->setText(tr("STR_KILLS").arg(_soldier->getKills()));
 
 	_txtStuns->setText(tr("STR_STUNS").arg(_soldier->getStuns()));
-	_txtStuns->setVisible(!Options::soldierDiaries);
+	_txtStuns->setVisible(!options1.soldierDiaries());
 
 	std::string craft;
 	if (_soldier->getCraft() == 0)

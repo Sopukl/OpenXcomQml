@@ -45,7 +45,7 @@ namespace OpenXcom
  */
 AlienInventoryState::AlienInventoryState(BattleUnit *unit)
 {
-	if (Options::maximizeInfoScreens)
+	if (options1.maximizeInfoScreens())
 	{
 		options1.baseXResolution = Screen::ORIGINAL_WIDTH;
 		options1.baseYResolution = Screen::ORIGINAL_HEIGHT;
@@ -245,7 +245,7 @@ AlienInventoryState::AlienInventoryState(BattleUnit *unit)
 	}
 
 	// --------------------- DEBUG INDICATORS ---------------------
-	if (!Options::debug)
+	if (!options1.debug())
 		return;
 
 	auto* weaponL = unit->getLeftHandWeapon();
@@ -306,7 +306,7 @@ AlienInventoryState::AlienInventoryState(BattleUnit *unit)
  */
 AlienInventoryState::~AlienInventoryState()
 {
-	if (Options::maximizeInfoScreens)
+	if (options1.maximizeInfoScreens())
 	{
 		Screen::updateScale(Options::battlescapeScale, options1.baseXBattlescape, options1.baseYBattlescape, true);
 		_game->getScreen()->resetDisplay(false);

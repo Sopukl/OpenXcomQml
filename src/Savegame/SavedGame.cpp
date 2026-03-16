@@ -392,7 +392,7 @@ void SavedGame::load(const std::string &filename, Mod *mod, Language *lang)
 	const auto& reader = documents[1].useIndex();
 	reader.tryRead("difficulty", _difficulty);
 	reader.tryRead("end", _end);
-	if (reader["rng"] && (_ironman || !Options::newSeedOnLoad))
+	if (reader["rng"] && (_ironman || !options1.newSeedOnLoad()))
 		RNG::setSeed(reader["rng"].readVal<uint64_t>());
 	reader.tryRead("monthsPassed", _monthsPassed);
 	reader.tryRead("daysPassed", _daysPassed);
@@ -873,7 +873,7 @@ void SavedGame::save(const std::string &filename, Mod *mod) const
 		if (!_globalCraftLoadoutName[j].empty())
 			writer.write(writer.saveString("globalCraftLoadoutName" + std::to_string(j)), _globalCraftLoadoutName[j]);
 	}
-	if (Options::soldierDiaries)
+	if (options1.soldierDiaries())
 		saveVector(writer, _missionStatistics, "missionStatistics");
 
 	if (!_autosales.empty())

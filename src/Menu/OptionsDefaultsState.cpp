@@ -95,14 +95,14 @@ void OptionsDefaultsState::btnYesClick(Action *action)
 	if (_game->isCtrlPressed())
 	{
 		// my development/debug defaults
-		Options::debug = true;
+		options1.setdebug(true);
 		Options::language = "en-US";
 		options1.setmusicVolume(15);
 		options1.setsoundVolume(15);
 		options1.setuiVolume(15);
 		Options::keyFps = SDLK_UNKNOWN;
 		options1.setplayIntro(false);
-		Options::autosave = false;
+		options1.setautosave(false);
 		Options::showFundsOnGeoscape = true;
 		Options::battleFireSpeed = 16;
 		Options::battleXcomSpeed = 1;
