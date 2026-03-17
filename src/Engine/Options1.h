@@ -1,5 +1,8 @@
 #pragma once
 #include <QSettings>
+#include "Language.h"
+#include <SDL_keysym.h>
+#include <SDL_video.h>
 #include <string>
 
 //OPTION, get/set/notify/save to file
@@ -24,9 +27,19 @@ Q_PROPERTY(type name READ name WRITE set##name NOTIFY name##Changed FINAL) \
 	type name;
 
 
-Q_DECLARE_METATYPE(std::string)
 namespace OpenXcom
 {
+	/// Keyboard input modes.
+	enum KeyboardType { KEYBOARD_OFF, KEYBOARD_ON, KEYBOARD_VIRTUAL };
+	/// Savegame sorting modes.
+	enum SaveSort { SORT_NAME_ASC, SORT_NAME_DESC, SORT_DATE_ASC, SORT_DATE_DESC };
+	/// Music format preferences.
+	enum MusicFormat { MUSIC_AUTO, MUSIC_FLAC, MUSIC_OGG, MUSIC_MP3, MUSIC_MOD, MUSIC_WAV, MUSIC_ADLIB, MUSIC_GM, MUSIC_MIDI };
+	/// Sound format preferences.
+	enum SoundFormat { SOUND_AUTO, SOUND_14, SOUND_10 };
+	/// Video format preferences.
+	enum VideoFormat { VIDEO_FMV, VIDEO_SLIDE };
+	/// Path preview modes (can be OR'd together).
 	class Options1 final: public QSettings
 	{
 		Q_OBJECT
@@ -73,13 +86,19 @@ namespace OpenXcom
 		OPTION(bool, backgroundMute)
 
 		OPTION(QString, language)
-		OPTION(qint32, keyboardMode)
-		OPTION(qint32, saveOrder)
-		OPTION(qint32, preferredMusic)
-		OPTION(qint32, preferredSound)
-		OPTION(qint32, preferredVideo)
-		OPTION(qint32, captureMouse)
-		OPTION(qint32, wordwrap)
+		OPTION(KeyboardType, keyboardMode)
+		OPTION(SaveSort, saveOrder)
+		OPTION(MusicFormat, preferredMusic)
+		OPTION(SoundFormat, preferredSound)
+		OPTION(VideoFormat, preferredVideo)
+		OPTION(SDL_GrabMode, captureMouse)
+		OPTION(TextWrapping, wordwrap)
+		OPTION(SDLKey, keyOk)
+		OPTION(SDLKey, keyCancel)
+		OPTION(SDLKey, keyScreenshot)
+		OPTION(SDLKey, keyFps)
+		OPTION(SDLKey, keyQuickLoad)
+		OPTION(SDLKey, keyQuickSave)
 		OPTION(QString, useOpenGLShader)
 		//video
 		OPTION(qint32, displayWidth)
@@ -113,3 +132,14 @@ namespace OpenXcom
 
 	inline Options1 options1;
 }
+	Q_DECLARE_METATYPE(std::string)
+	Q_DECLARE_METATYPE(SDLKey)
+	Q_DECLARE_METATYPE(SDL_GrabMode)
+	Q_DECLARE_METATYPE(OpenXcom::KeyboardType)
+	Q_DECLARE_METATYPE(OpenXcom::SaveSort)
+	Q_DECLARE_METATYPE(OpenXcom::MusicFormat)
+	Q_DECLARE_METATYPE(OpenXcom::SoundFormat)
+	Q_DECLARE_METATYPE(OpenXcom::VideoFormat)
+	Q_DECLARE_METATYPE(OpenXcom::TextDirection)
+	Q_DECLARE_METATYPE(OpenXcom::TextWrapping)
+

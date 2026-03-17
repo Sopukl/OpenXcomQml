@@ -17,28 +17,17 @@
  * You should have received a copy of the GNU General Public License
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
+#include "Options1.h"
 #include <string>
 #include <vector>
 #include "OptionInfo.h"
 #include "ModInfo.h"
-#include "Language.h"
-#include "Options1.h"
 
 namespace OpenXcom
 {
 
 /// Battlescape drag scrolling types.
 enum ScrollType { SCROLL_NONE, SCROLL_TRIGGER, SCROLL_AUTO };
-/// Keyboard input modes.
-enum KeyboardType { KEYBOARD_OFF, KEYBOARD_ON, KEYBOARD_VIRTUAL };
-/// Savegame sorting modes.
-enum SaveSort { SORT_NAME_ASC, SORT_NAME_DESC, SORT_DATE_ASC, SORT_DATE_DESC };
-/// Music format preferences.
-enum MusicFormat { MUSIC_AUTO, MUSIC_FLAC, MUSIC_OGG, MUSIC_MP3, MUSIC_MOD, MUSIC_WAV, MUSIC_ADLIB, MUSIC_GM, MUSIC_MIDI };
-/// Sound format preferences.
-enum SoundFormat { SOUND_AUTO, SOUND_14, SOUND_10 };
-/// Video format preferences.
-enum VideoFormat { VIDEO_FMV, VIDEO_SLIDE };
 /// Path preview modes (can be OR'd together).
 enum PathPreview {
 	PATH_NONE         = 0x00, // 0000 (must always be zero)
