@@ -174,7 +174,7 @@ OptionsVideoState::OptionsVideoState(OptionsOrigin origin) : OptionsBaseState(or
 	_btnLetterbox->onMouseOut((ActionHandler)&OptionsVideoState::txtTooltipOut);
 
 	_btnLockMouse->setText(tr("STR_LOCK_MOUSE"));
-	_btnLockMouse->setPressed(Options::captureMouse == SDL_GRAB_ON);
+	_btnLockMouse->setPressed(options1.captureMouse() == SDL_GRAB_ON);
 	_btnLockMouse->onMouseClick((ActionHandler)&OptionsVideoState::btnLockMouseClick);
 	_btnLockMouse->setTooltip("STR_LOCK_MOUSE_DESC");
 	_btnLockMouse->onMouseIn((ActionHandler)&OptionsVideoState::txtTooltipIn);
@@ -588,8 +588,8 @@ void OptionsVideoState::btnLetterboxClick(Action *)
  */
 void OptionsVideoState::btnLockMouseClick(Action *)
 {
-	Options::captureMouse = (SDL_GrabMode)_btnLockMouse->getPressed();
-	SDL_WM_GrabInput(Options::captureMouse);
+	options1.setcaptureMouse((SDL_GrabMode)_btnLockMouse->getPressed());
+	SDL_WM_GrabInput(SDL_GrabMode(options1.captureMouse()));
 }
 
 /**
@@ -651,7 +651,7 @@ void OptionsVideoState::handle(Action *action)
 	State::handle(action);
 	if (action->getDetails()->type == SDL_KEYDOWN && action->getDetails()->key.keysym.sym == SDLK_g && _game->isCtrlPressed())
 	{
-		_btnLockMouse->setPressed(Options::captureMouse == SDL_GRAB_ON);
+		_btnLockMouse->setPressed(options1.captureMouse() == SDL_GRAB_ON);
 	}
 }
 

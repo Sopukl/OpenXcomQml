@@ -87,7 +87,7 @@ Game::Game(QWidget*_wnd) : QObject(_wnd), wnd(_wnd), _screen(0), _cursor(0), _la
 	initAudio();
 
 	// trap the mouse inside the window
-	SDL_WM_GrabInput(Options::captureMouse);
+	SDL_WM_GrabInput(SDL_GrabMode(options1.captureMouse()));
 
 	// Set the window icon
 	CrossPlatform::setWindowIcon(IDI_ICON1, "openxcom.png");
@@ -256,8 +256,8 @@ void Game::processEvents()
 				// "ctrl-g" grab input
 				if (action.getDetails()->key.keysym.sym == SDLK_g && isCtrlPressed())
 				{
-					Options::captureMouse = (SDL_GrabMode)(!Options::captureMouse);
-					SDL_WM_GrabInput(Options::captureMouse);
+					options1.setcaptureMouse(SDL_GrabMode(!options1.captureMouse()));
+					SDL_WM_GrabInput(SDL_GrabMode(options1.captureMouse()));
 				}
 				// "ctrl-n" notes UI
 				else if (action.getDetails()->key.keysym.sym == SDLK_n && isCtrlPressed() && !isAltPressed())

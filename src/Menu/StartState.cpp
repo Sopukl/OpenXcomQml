@@ -257,7 +257,7 @@ void StartState::animate()
 					else
 					{
 						addLine("SoundBlaster Sound Effects");
-						if (Options::preferredMusic == MUSIC_MIDI)
+						if (options1.preferredMusic() == MUSIC_MIDI)
 							addLine("General MIDI Music");
 						else
 							addLine("SoundBlaster Music");

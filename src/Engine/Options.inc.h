@@ -2,12 +2,7 @@
 // To add a new option, add a new variable entry and a corresponding OptionInfo in Options.cpp
 
 // General options
-OPT SaveSort saveOrder;
-OPT MusicFormat preferredMusic;
-OPT SoundFormat preferredSound;
-OPT VideoFormat preferredVideo;
-OPT SDL_GrabMode captureMouse;
-OPT TextWrapping wordwrap;
+
 OPT SDLKey keyOk, keyCancel, keyScreenshot, keyFps, keyQuickLoad, keyQuickSave;
 
 // Geoscape options

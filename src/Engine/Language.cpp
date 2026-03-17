@@ -110,7 +110,7 @@ Language::Language() : _handler(0), _direction(DIRECTION_LTR), _wrap(WRAP_WORDS)
 	{
 		_direction = DIRECTION_RTL;
 	}
-	if (Options::wordwrap == WRAP_AUTO)
+	if (options1.wordwrap() == WRAP_AUTO)
 	{
 		if (std::find(_cjk.begin(), _cjk.end(), id) == _cjk.end())
 		{
@@ -123,7 +123,7 @@ Language::Language() : _handler(0), _direction(DIRECTION_LTR), _wrap(WRAP_WORDS)
 	}
 	else
 	{
-		_wrap = Options::wordwrap;
+		_wrap = TextWrapping(options1.wordwrap());
 	}
 }
 

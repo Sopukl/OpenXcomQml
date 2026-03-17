@@ -215,7 +215,7 @@ void OptionsBaseState::btnOkClick(Action *)
 	Options::save();
 	_game->loadLanguages();
 	_game->getScreen()->resetDisplay();
-	SDL_WM_GrabInput(Options::captureMouse);
+	SDL_WM_GrabInput(SDL_GrabMode(options1.captureMouse()));
 	_game->setVolume(options1.soundVolume(), options1.musicVolume(), options1.uiVolume());
 	if (Options::reload && _origin == OPT_MENU)
 	{
@@ -248,7 +248,7 @@ void OptionsBaseState::btnCancelClick(Action *)
 {
 	Options::reload = false;
 	Options::load();
-	SDL_WM_GrabInput(Options::captureMouse);
+	SDL_WM_GrabInput(SDL_GrabMode(options1.captureMouse()));
 	Screen::updateScale(Options::battlescapeScale, options1.baseXBattlescape, options1.baseYBattlescape, _origin == OPT_BATTLESCAPE);
 	Screen::updateScale(Options::geoscapeScale, options1.baseXGeoscape, options1.baseYGeoscape, _origin != OPT_BATTLESCAPE);
 	_game->setVolume(options1.soundVolume(), options1.musicVolume(), options1.uiVolume());

@@ -164,14 +164,14 @@ void createOptionsOXC()
 	//# _info.push_back(OptionInfo(OPTION_OXC, "windowedModePositionX", &windowedModePositionX, 0));
 	//# _info.push_back(OptionInfo(OPTION_OXC, "windowedModePositionY", &windowedModePositionY, 0));
 	//#_info.push_back(OptionInfo(OPTION_OXC, "borderless", &borderless, false));
-	_info.push_back(OptionInfo(OPTION_OXC, "captureMouse", (bool*)&captureMouse, false));
+	//#_info.push_back(OptionInfo(OPTION_OXC, "captureMouse", (bool*)&captureMouse, false));
 	_info.push_back(OptionInfo(OPTION_OXC, "battleTooltips", &battleTooltips, true));
 	//# _info.push_back(OptionInfo(OPTION_OXC, "keepAspectRatio", &keepAspectRatio, true));
 	//# _info.push_back(OptionInfo(OPTION_OXC, "nonSquarePixelRatio", &nonSquarePixelRatio, false));
 	//# _info.push_back(OptionInfo(OPTION_OXC, "cursorInBlackBandsInFullscreen", &cursorInBlackBandsInFullscreen, false));
 	//# _info.push_back(OptionInfo(OPTION_OXC, "cursorInBlackBandsInWindow", &cursorInBlackBandsInWindow, true));
 	//# _info.push_back(OptionInfo(OPTION_OXC, "cursorInBlackBandsInBorderlessWindow", &cursorInBlackBandsInBorderlessWindow, false));
-	_info.push_back(OptionInfo(OPTION_OXC, "saveOrder", (int*)&saveOrder, SORT_DATE_DESC));
+	//#_info.push_back(OptionInfo(OPTION_OXC, "saveOrder", (int*)&saveOrder, SORT_DATE_DESC));
 	_info.push_back(OptionInfo(OPTION_OXC, "geoClockSpeed", &geoClockSpeed, 80));
 	_info.push_back(OptionInfo(OPTION_OXC, "dogfightSpeed", &dogfightSpeed, 30));
 	_info.push_back(OptionInfo(OPTION_OXC, "geoScrollSpeed", &geoScrollSpeed, 20));
@@ -180,10 +180,10 @@ void createOptionsOXC()
 #else
 	_info.push_back(OptionInfo(OPTION_OXC, "geoDragScrollButton", &geoDragScrollButton, SDL_BUTTON_MIDDLE));
 #endif
-	_info.push_back(OptionInfo(OPTION_OXC, "preferredMusic", (int*)&preferredMusic, MUSIC_AUTO));
-	_info.push_back(OptionInfo(OPTION_OXC, "preferredSound", (int*)&preferredSound, SOUND_AUTO));
-	_info.push_back(OptionInfo(OPTION_OXC, "preferredVideo", (int*)&preferredVideo, VIDEO_FMV));
-	_info.push_back(OptionInfo(OPTION_OXC, "wordwrap", (int*)&wordwrap, WRAP_AUTO));
+	//# _info.push_back(OptionInfo(OPTION_OXC, "preferredMusic", (int*)&preferredMusic, MUSIC_AUTO));
+	//# _info.push_back(OptionInfo(OPTION_OXC, "preferredSound", (int*)&preferredSound, SOUND_AUTO));
+	//# _info.push_back(OptionInfo(OPTION_OXC, "preferredVideo", (int*)&preferredVideo, VIDEO_FMV));
+	//# _info.push_back(OptionInfo(OPTION_OXC, "wordwrap", (int*)&wordwrap, WRAP_AUTO));
 	//#_info.push_back(OptionInfo(OPTION_OXC, "musicAlwaysLoop", &musicAlwaysLoop, false));
 #ifdef __MOBILE
 	_info.push_back(OptionInfo(OPTION_OXC, "touchEnabled", &touchEnabled, true));

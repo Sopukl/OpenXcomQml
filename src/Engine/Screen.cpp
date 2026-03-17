@@ -371,7 +371,7 @@ void Screen::resetDisplay(bool resetVideo, bool noShaders)
 			SDL_ShowCursor(SDL_ENABLE);
 			SDL_EnableUNICODE(1);
 			SDL_WM_SetCaption(title.c_str(), 0);
-			SDL_WM_GrabInput(Options::captureMouse);
+			SDL_WM_GrabInput(SDL_GrabMode(options1.captureMouse()));
 			SDL_SetCursor(SDL_CreateCursor(&cursor, &cursor, 1,1,0,0));
 		}
 #endif

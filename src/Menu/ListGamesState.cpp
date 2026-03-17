@@ -191,7 +191,7 @@ void ListGamesState::init()
 	{
 		_saves = SavedGame::getList(_game->getLanguage(), _autoquick);
 		_lstSaves->clearList();
-		sortList(Options::saveOrder);
+		sortList(SaveSort(options1.saveOrder()));
 	}
 	catch (Exception &e)
 	{
@@ -207,7 +207,7 @@ void ListGamesState::updateArrows()
 {
 	_sortName->setShape(ARROW_NONE);
 	_sortDate->setShape(ARROW_NONE);
-	switch (Options::saveOrder)
+	switch (options1.saveOrder())
 	{
 	case SORT_NAME_ASC:
 		_sortName->setShape(ARROW_SMALL_UP);
@@ -320,17 +320,17 @@ void ListGamesState::sortNameClick(Action *)
 {
 	if (_sortable)
 	{
-		if (Options::saveOrder == SORT_NAME_ASC)
+		if (options1.saveOrder() == SORT_NAME_ASC)
 		{
-			Options::saveOrder = SORT_NAME_DESC;
+			options1.setsaveOrder(SORT_NAME_DESC);
 		}
 		else
 		{
-			Options::saveOrder = SORT_NAME_ASC;
+			options1.setsaveOrder(SORT_NAME_ASC);
 		}
 		updateArrows();
 		_lstSaves->clearList();
-		sortList(Options::saveOrder);
+		sortList(SaveSort(options1.saveOrder()));
 	}
 }
 
@@ -342,17 +342,17 @@ void ListGamesState::sortDateClick(Action *)
 {
 	if (_sortable)
 	{
-		if (Options::saveOrder == SORT_DATE_ASC)
+		if (options1.saveOrder() == SORT_DATE_ASC)
 		{
-			Options::saveOrder = SORT_DATE_DESC;
+			options1.setsaveOrder(SORT_DATE_DESC);
 		}
 		else
 		{
-			Options::saveOrder = SORT_DATE_ASC;
+			options1.setsaveOrder(SORT_DATE_ASC);
 		}
 		updateArrows();
 		_lstSaves->clearList();
-		sortList(Options::saveOrder);
+		sortList(SaveSort(options1.saveOrder()));
 	}
 }
 

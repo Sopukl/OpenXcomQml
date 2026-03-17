@@ -63,6 +63,12 @@ namespace OpenXcom
 
 			readValue(language, QString, "")
 			readValue(keyboardMode, qint32, KEYBOARD_ON)
+			readValue(saveOrder, qint32, SORT_DATE_DESC)
+			readValue(preferredMusic, qint32, MUSIC_AUTO)
+			readValue(preferredSound, qint32, SOUND_AUTO)
+			readValue(preferredVideo, qint32, VIDEO_FMV)
+			readValue(captureMouse, qint32, 0)
+			readValue(wordwrap, qint32, WRAP_AUTO)
 			readValue(useOpenGLShader, QString, "Shaders/Raw.OpenGL.shader")
 		endGroup();
         beginGroup("Video");
@@ -133,6 +139,12 @@ namespace OpenXcom
 			writeValue(backgroundMute, m_backgroundMute)
 			writeValue(language, m_language)
 			writeValue(keyboardMode, m_keyboardMode)
+			writeValue(saveOrder, m_saveOrder)
+			writeValue(preferredMusic, m_preferredMusic)
+			writeValue(preferredSound, m_preferredSound)
+			writeValue(preferredVideo, m_preferredVideo)
+			writeValue(captureMouse, m_captureMouse)
+			writeValue(wordwrap, m_wordwrap)
 			writeValue(useOpenGLShader, m_useOpenGLShader)
 		endGroup();
 		beginGroup("Video");

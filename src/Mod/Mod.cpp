@@ -5546,9 +5546,9 @@ void Mod::loadVanillaResources()
 
 			// Try the preferred format first, otherwise use the default priority
 			std::string *cats[] = { 0, catsWin, catsDos };
-			if (Options::preferredSound == SOUND_14)
+			if (options1.preferredSound() == SOUND_14)
 				cats[0] = catsWin;
-			else if (Options::preferredSound == SOUND_10)
+			else if (options1.preferredSound() == SOUND_10)
 				cats[0] = catsDos;
 
 			Options::currentSound = SOUND_AUTO;
@@ -6034,7 +6034,7 @@ void Mod::loadExtraResources()
 		}
 
 		// Try the preferred format first, otherwise use the default priority
-		MusicFormat priority[] = { Options::preferredMusic, MUSIC_FLAC, MUSIC_OGG, MUSIC_MP3, MUSIC_MOD, MUSIC_WAV, MUSIC_ADLIB, MUSIC_GM, MUSIC_MIDI };
+		MusicFormat priority[] = { MusicFormat(options1.preferredMusic()), MUSIC_FLAC, MUSIC_OGG, MUSIC_MP3, MUSIC_MOD, MUSIC_WAV, MUSIC_ADLIB, MUSIC_GM, MUSIC_MIDI };
 		for (auto& pair : _musicDefs)
 		{
 			Music *music = 0;

@@ -74,6 +74,12 @@ namespace OpenXcom
 
 		OPTION(QString, language)
 		OPTION(qint32, keyboardMode)
+		OPTION(qint32, saveOrder)
+		OPTION(qint32, preferredMusic)
+		OPTION(qint32, preferredSound)
+		OPTION(qint32, preferredVideo)
+		OPTION(qint32, captureMouse)
+		OPTION(qint32, wordwrap)
 		OPTION(QString, useOpenGLShader)
 		//video
 		OPTION(qint32, displayWidth)

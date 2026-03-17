@@ -145,7 +145,7 @@ OptionsAudioState::OptionsAudioState(OptionsOrigin origin) : OptionsBaseState(or
 	_txtMusicFormat->setText(tr("STR_PREFERRED_MUSIC_FORMAT"));
 
 	_cbxMusicFormat->setOptions(musicText);
-	_cbxMusicFormat->setSelected(Options::preferredMusic);
+	_cbxMusicFormat->setSelected(options1.preferredMusic());
 	_cbxMusicFormat->setTooltip("STR_PREFERRED_MUSIC_FORMAT_DESC");
 	_cbxMusicFormat->onChange((ActionHandler)&OptionsAudioState::cbxMusicFormatChange);
 	_cbxMusicFormat->onMouseIn((ActionHandler)&OptionsAudioState::txtTooltipIn);
@@ -158,7 +158,7 @@ OptionsAudioState::OptionsAudioState(OptionsOrigin origin) : OptionsBaseState(or
 	_txtSoundFormat->setText(tr("STR_PREFERRED_SFX_FORMAT"));
 
 	_cbxSoundFormat->setOptions(soundText);
-	_cbxSoundFormat->setSelected(Options::preferredSound);
+	_cbxSoundFormat->setSelected(options1.preferredSound());
 	_cbxSoundFormat->setTooltip("STR_PREFERRED_SFX_FORMAT_DESC");
 	_cbxSoundFormat->onChange((ActionHandler)&OptionsAudioState::cbxSoundFormatChange);
 	_cbxSoundFormat->onMouseIn((ActionHandler)&OptionsAudioState::txtTooltipIn);
@@ -170,7 +170,7 @@ OptionsAudioState::OptionsAudioState(OptionsOrigin origin) : OptionsBaseState(or
 	_txtVideoFormat->setText(tr("STR_PREFERRED_VIDEO_FORMAT"));
 
 	_cbxVideoFormat->setOptions(videoText);
-	_cbxVideoFormat->setSelected(Options::preferredVideo);
+	_cbxVideoFormat->setSelected(options1.preferredVideo());
 	_cbxVideoFormat->setTooltip("STR_PREFERRED_VIDEO_FORMAT_DESC");
 	_cbxVideoFormat->onChange((ActionHandler)&OptionsAudioState::cbxVideoFormatChange);
 	_cbxVideoFormat->onMouseIn((ActionHandler)&OptionsAudioState::txtTooltipIn);
@@ -258,7 +258,7 @@ void OptionsAudioState::slrUiVolumeRelease(Action *)
  */
 void OptionsAudioState::cbxVideoFormatChange(Action *)
 {
-	Options::preferredVideo = (VideoFormat)_cbxVideoFormat->getSelected();
+    options1.setpreferredVideo((VideoFormat)_cbxVideoFormat->getSelected());
 }
 
 /**
@@ -267,7 +267,7 @@ void OptionsAudioState::cbxVideoFormatChange(Action *)
  */
 void OptionsAudioState::cbxMusicFormatChange(Action *)
 {
-	Options::preferredMusic = (MusicFormat)_cbxMusicFormat->getSelected();
+	options1.setpreferredMusic((MusicFormat)_cbxMusicFormat->getSelected());
 	Options::reload = true;
 }
 
@@ -277,7 +277,7 @@ void OptionsAudioState::cbxMusicFormatChange(Action *)
  */
 void OptionsAudioState::cbxSoundFormatChange(Action *)
 {
-	Options::preferredSound = (SoundFormat)_cbxSoundFormat->getSelected();
+	options1.setpreferredSound((SoundFormat)_cbxSoundFormat->getSelected());
 	Options::reload = true;
 }
 
