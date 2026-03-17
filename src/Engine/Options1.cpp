@@ -77,6 +77,13 @@ namespace OpenXcom
 			readValue(keyQuickSave, SDLKey, SDLK_F5)
 			readValue(useOpenGLShader, QString, "Shaders/Raw.OpenGL.shader")
 		endGroup();
+		beginGroup("Geoscape");
+			readValue(geoClockSpeed, qint32, 80)
+			readValue(dogfightSpeed, qint32, 30)
+			readValue(geoScrollSpeed, qint32, 20)
+			readValue(geoDragScrollButton, qint32, SDL_BUTTON_LEFT)
+			readValue(geoscapeScale, qint32, 0)
+		endGroup();
         beginGroup("Video");
             readValue(displayWidth,  qint32, 640)
             readValue(displayHeight, qint32, 480)
@@ -158,6 +165,13 @@ namespace OpenXcom
 			writeValue(keyQuickLoad, m_keyQuickLoad)
 			writeValue(keyQuickSave, m_keyQuickSave)
 			writeValue(useOpenGLShader, m_useOpenGLShader)
+		endGroup();
+		beginGroup("Geoscape");
+			writeValue(geoClockSpeed, m_geoClockSpeed)
+			writeValue(dogfightSpeed, m_dogfightSpeed)
+			writeValue(geoScrollSpeed, m_geoScrollSpeed)
+			writeValue(geoDragScrollButton, m_geoDragScrollButton)
+			writeValue(geoscapeScale, m_geoscapeScale)
 		endGroup();
 		beginGroup("Video");
 			writeValue(displayWidth, m_displayWidth)

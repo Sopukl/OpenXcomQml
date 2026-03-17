@@ -114,7 +114,7 @@ void createOptionsOXC()
 	_info.push_back(OptionInfo(OPTION_OXC, "traceAI", &traceAI, false));
 	//# _info.push_back(OptionInfo(OPTION_OXC, "verboseLogging", &verboseLogging, false));
 	//# _info.push_back(OptionInfo(OPTION_OXC, "StereoSound", &StereoSound, true));
-	_info.push_back(OptionInfo(OPTION_OXC, "geoscapeScale", &geoscapeScale, 0));
+	//#_info.push_back(OptionInfo(OPTION_OXC, "geoscapeScale", &geoscapeScale, 0));
 	_info.push_back(OptionInfo(OPTION_OXC, "battlescapeScale", &battlescapeScale, 0));
 	//# _info.push_back(OptionInfo(OPTION_OXC, "useScaleFilter", &useScaleFilter, false));
 	//# _info.push_back(OptionInfo(OPTION_OXC, "useHQXFilter", &useHQXFilter, false));
@@ -172,13 +172,13 @@ void createOptionsOXC()
 	//# _info.push_back(OptionInfo(OPTION_OXC, "cursorInBlackBandsInWindow", &cursorInBlackBandsInWindow, true));
 	//# _info.push_back(OptionInfo(OPTION_OXC, "cursorInBlackBandsInBorderlessWindow", &cursorInBlackBandsInBorderlessWindow, false));
 	//#_info.push_back(OptionInfo(OPTION_OXC, "saveOrder", (int*)&saveOrder, SORT_DATE_DESC));
-	_info.push_back(OptionInfo(OPTION_OXC, "geoClockSpeed", &geoClockSpeed, 80));
-	_info.push_back(OptionInfo(OPTION_OXC, "dogfightSpeed", &dogfightSpeed, 30));
-	_info.push_back(OptionInfo(OPTION_OXC, "geoScrollSpeed", &geoScrollSpeed, 20));
+	//#_info.push_back(OptionInfo(OPTION_OXC, "geoClockSpeed", &geoClockSpeed, 80));
+	//#_info.push_back(OptionInfo(OPTION_OXC, "dogfightSpeed", &dogfightSpeed, 30));
+	//#_info.push_back(OptionInfo(OPTION_OXC, "geoScrollSpeed", &geoScrollSpeed, 20));
 #ifdef __MOBILE__
 	_info.push_back(OptionInfo(OPTION_OXC, "geoDragScrollButton", &geoDragScrollButton, SDL_BUTTON_LEFT));
 #else
-	_info.push_back(OptionInfo(OPTION_OXC, "geoDragScrollButton", &geoDragScrollButton, SDL_BUTTON_MIDDLE));
+	//#_info.push_back(OptionInfo(OPTION_OXC, "geoDragScrollButton", &geoDragScrollButton, SDL_BUTTON_MIDDLE));
 #endif
 	//# _info.push_back(OptionInfo(OPTION_OXC, "preferredMusic", (int*)&preferredMusic, MUSIC_AUTO));
 	//# _info.push_back(OptionInfo(OPTION_OXC, "preferredSound", (int*)&preferredSound, SOUND_AUTO));
@@ -1443,7 +1443,7 @@ void backupDisplay()
 	Options::newDisplayWidth = options1.displayWidth();
 	Options::newDisplayHeight = options1.displayHeight();
 	Options::newBattlescapeScale = Options::battlescapeScale;
-	Options::newGeoscapeScale = Options::geoscapeScale;
+	Options::newGeoscapeScale = options1.geoscapeScale();
 	Options::newOpenGL = options1.useOpenGL();
 	Options::newScaleFilter = options1.useScaleFilter();
 	Options::newHQXFilter = options1.useHQXFilter();
@@ -1494,7 +1494,9 @@ void switchDisplay()
 	newXBRZFilter = btmp;
 
 	std::swap(battlescapeScale, newBattlescapeScale);
-	std::swap(geoscapeScale, newGeoscapeScale);
+	tmp = options1.geoscapeScale();
+	options1.setgeoscapeScale(newGeoscapeScale);
+	newGeoscapeScale = tmp;
 
 	std::string stmp;
 	stmp = options1.useOpenGLShader().toStdString();

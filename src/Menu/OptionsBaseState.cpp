@@ -208,7 +208,7 @@ void OptionsBaseState::btnOkClick(Action *)
 	int dX = options1.baseXResolution;
 	int dY = options1.baseYResolution;
 	Screen::updateScale(Options::battlescapeScale, options1.baseXBattlescape, options1.baseYBattlescape, _origin == OPT_BATTLESCAPE);
-	Screen::updateScale(Options::geoscapeScale, options1.baseXGeoscape, options1.baseYGeoscape, _origin != OPT_BATTLESCAPE);
+	Screen::updateScale(options1.geoscapeScale(), options1.baseXGeoscape, options1.baseYGeoscape, _origin != OPT_BATTLESCAPE);
 	dX = options1.baseXResolution - dX;
 	dY = options1.baseYResolution - dY;
 	recenter(dX, dY);
@@ -250,7 +250,7 @@ void OptionsBaseState::btnCancelClick(Action *)
 	Options::load();
 	SDL_WM_GrabInput(SDL_GrabMode(options1.captureMouse()));
 	Screen::updateScale(Options::battlescapeScale, options1.baseXBattlescape, options1.baseYBattlescape, _origin == OPT_BATTLESCAPE);
-	Screen::updateScale(Options::geoscapeScale, options1.baseXGeoscape, options1.baseYGeoscape, _origin != OPT_BATTLESCAPE);
+	Screen::updateScale(options1.geoscapeScale(), options1.baseXGeoscape, options1.baseYGeoscape, _origin != OPT_BATTLESCAPE);
 	_game->setVolume(options1.soundVolume(), options1.musicVolume(), options1.uiVolume());
 	_game->popState();
 }

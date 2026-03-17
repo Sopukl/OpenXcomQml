@@ -199,12 +199,12 @@ GeoscapeState::GeoscapeState() : _pause(false), _zoomInEffectDone(false), _zoomO
 	_txtTraining = new Text(59, 17, screenWidth - 61, screenHeight / 2 + 100 + trainingIndicatorOffset);
 
 	_timeSpeed = _btn5Secs;
-	_gameTimer = new Timer(Options::geoClockSpeed);
+	_gameTimer = new Timer(options1.geoClockSpeed());
 
-	_zoomInEffectTimer = new Timer(Options::dogfightSpeed);
-	_zoomOutEffectTimer = new Timer(Options::dogfightSpeed);
-	_dogfightStartTimer = new Timer(Options::dogfightSpeed);
-	_dogfightTimer = new Timer(Options::dogfightSpeed);
+	_zoomInEffectTimer = new Timer(options1.dogfightSpeed());
+	_zoomOutEffectTimer = new Timer(options1.dogfightSpeed());
+	_dogfightStartTimer = new Timer(options1.dogfightSpeed());
+	_dogfightTimer = new Timer(options1.dogfightSpeed());
 
 	_txtDebug = new Text(254, 32, 0, 0);
 	_cbxRegion = new ComboBox(this, 150, 16, 0, 36);
@@ -533,18 +533,18 @@ void GeoscapeState::handle(Action *action)
 		{
 			if (action->getDetails()->key.keysym.sym == SDLK_1)
 			{
-				Options::dogfightSpeed = 50;
-				_dogfightTimer->setInterval(Options::dogfightSpeed);
+				options1.setdogfightSpeed(50);
+				_dogfightTimer->setInterval(options1.dogfightSpeed());
 			}
 			else if (action->getDetails()->key.keysym.sym == SDLK_2)
 			{
-				Options::dogfightSpeed = 35;
-				_dogfightTimer->setInterval(Options::dogfightSpeed);
+				options1.setdogfightSpeed(35);
+				_dogfightTimer->setInterval(options1.dogfightSpeed());
 			}
 			else if (action->getDetails()->key.keysym.sym == SDLK_3)
 			{
-				Options::dogfightSpeed = 20;
-				_dogfightTimer->setInterval(Options::dogfightSpeed);
+				options1.setdogfightSpeed(20);
+				_dogfightTimer->setInterval(options1.dogfightSpeed());
 			}
 		}
 		// "ctrl-d" - enable debug mode
@@ -4746,7 +4746,7 @@ void GeoscapeState::resize(int &dX, int &dY)
 	{
 		pixelRatioY = 1.2;
 	}
-	switch (Options::geoscapeScale)
+	switch (options1.geoscapeScale())
 	{
 	case SCALE_SCREEN_DIV_10:
 		divisor = 10;

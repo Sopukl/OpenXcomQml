@@ -100,6 +100,13 @@ namespace OpenXcom
 		OPTION(SDLKey, keyQuickLoad)
 		OPTION(SDLKey, keyQuickSave)
 		OPTION(QString, useOpenGLShader)
+
+		//geoscape
+		OPTION(qint32, geoClockSpeed)
+		OPTION(qint32, dogfightSpeed)
+		OPTION(qint32, geoScrollSpeed)
+		OPTION(qint32, geoDragScrollButton)
+		OPTION(qint32, geoscapeScale)
 		//video
 		OPTION(qint32, displayWidth)
 		OPTION(qint32, displayHeight)

@@ -948,8 +948,8 @@ void Globe::blink()
  */
 void Globe::rotate()
 {
-	_cenLon += _rotLon * ((110 - Options::geoScrollSpeed) / 100.0) / (_zoom+1);
-	_cenLat += _rotLat * ((110 - Options::geoScrollSpeed) / 100.0) / (_zoom+1);
+	_cenLon += _rotLon * ((110 - options1.geoScrollSpeed()) / 100.0) / (_zoom+1);
+	_cenLat += _rotLat * ((110 - options1.geoScrollSpeed()) / 100.0) / (_zoom+1);
 	_game->getSavedGame()->setGlobeLongitude(_cenLon);
 	_game->getSavedGame()->setGlobeLatitude(_cenLat);
 	invalidate();
@@ -1827,7 +1827,7 @@ void Globe::mouseOver(Action *action, State *state)
 		// the mouse-release event is missed for any reason.
 		// (checking: is the dragScroll-mouse-button still pressed?)
 		// However if the SDL is also missed the release event, then it is to no avail :(
-		if (0 == (SDL_GetMouseState(0, 0)&SDL_BUTTON(Options::geoDragScrollButton)))
+		if (0 == (SDL_GetMouseState(0, 0)&SDL_BUTTON(options1.geoDragScrollButton())))
 		{ // so we missed again the mouse-release :(
 			// Check if we have to revoke the scrolling, because it was too short in time, so it was a click
 			if ((!_mouseMovedOverThreshold) && ((int)(SDL_GetTicks() - _mouseScrollingStartTime) <= (options1.dragScrollTimeTolerance())))
@@ -1861,13 +1861,13 @@ void Globe::mouseOver(Action *action, State *state)
 		{
 			double newLon = ((double)_totalMouseMoveX / action->getXScale()) * ROTATE_LONGITUDE/(_zoom+1)/2;
 			double newLat = ((double)_totalMouseMoveY / action->getYScale()) * ROTATE_LATITUDE/(_zoom+1)/2;
-			center(_lonBeforeMouseScrolling + newLon / (Options::geoScrollSpeed / 10), _latBeforeMouseScrolling + newLat / (Options::geoScrollSpeed / 10));
+			center(_lonBeforeMouseScrolling + newLon / (options1.geoScrollSpeed() / 10), _latBeforeMouseScrolling + newLat / (options1.geoScrollSpeed() / 10));
 		}
 		else
 		{
 			double newLon = -action->getDetails()->motion.xrel * ROTATE_LONGITUDE/(_zoom+1)/2;
 			double newLat = -action->getDetails()->motion.yrel * ROTATE_LATITUDE/(_zoom+1)/2;
-			center(_cenLon + newLon / (Options::geoScrollSpeed / 10), _cenLat + newLat / (Options::geoScrollSpeed / 10));
+			center(_cenLon + newLon / (options1.geoScrollSpeed() / 10), _cenLat + newLat / (options1.geoScrollSpeed() / 10));
 		}
 
 		if (options1.touchEnabled() == false)
@@ -1905,7 +1905,7 @@ void Globe::mousePress(Action *action, State *state)
 	double lon, lat;
 	cartToPolar((Sint16)floor(action->getAbsoluteXMouse()), (Sint16)floor(action->getAbsoluteYMouse()), &lon, &lat);
 
-	if (action->getDetails()->button.button == Options::geoDragScrollButton)
+	if (action->getDetails()->button.button == options1.geoDragScrollButton())
 	{
 		_isMouseScrolling = true;
 		_isMouseScrolled = false;
@@ -1932,7 +1932,7 @@ void Globe::mouseRelease(Action *action, State *state)
 {
 	double lon, lat;
 	cartToPolar((Sint16)floor(action->getAbsoluteXMouse()), (Sint16)floor(action->getAbsoluteYMouse()), &lon, &lat);
-	if (action->getDetails()->button.button == Options::geoDragScrollButton)
+	if (action->getDetails()->button.button == options1.geoDragScrollButton())
 	{
 		stopScrolling(action);
 	}
@@ -1969,8 +1969,8 @@ void Globe::mouseClick(Action *action, State *state)
 	// (this part handles the release if it is missed and now an other button is used)
 	if (_isMouseScrolling)
 	{
-		if (action->getDetails()->button.button != Options::geoDragScrollButton
-			&& 0 == (SDL_GetMouseState(0, 0)&SDL_BUTTON(Options::geoDragScrollButton)))
+		if (action->getDetails()->button.button != options1.geoDragScrollButton()
+			&& 0 == (SDL_GetMouseState(0, 0)&SDL_BUTTON(options1.geoDragScrollButton())))
 		{ // so we missed again the mouse-release :(
 			// Check if we have to revoke the scrolling, because it was too short in time, so it was a click
 			if ((!_mouseMovedOverThreshold) && ((int)(SDL_GetTicks() - _mouseScrollingStartTime) <= (options1.dragScrollTimeTolerance())))
@@ -1986,7 +1986,7 @@ void Globe::mouseClick(Action *action, State *state)
 	if (_isMouseScrolling)
 	{
 		// While scrolling, other buttons are ineffective
-		if (action->getDetails()->button.button == Options::geoDragScrollButton)
+		if (action->getDetails()->button.button == options1.geoDragScrollButton())
 		{
 			_isMouseScrolling = false;
 			stopScrolling(action);

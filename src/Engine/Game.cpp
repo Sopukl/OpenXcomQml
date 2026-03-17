@@ -206,7 +206,7 @@ void Game::processEvents()
 
 					int dX = 0, dY = 0;
 					Screen::updateScale(Options::battlescapeScale, options1.baseXBattlescape, options1.baseYBattlescape, false);
-					Screen::updateScale(Options::geoscapeScale, options1.baseXGeoscape, options1.baseYGeoscape, false);
+					Screen::updateScale(options1.geoscapeScale(), options1.baseXGeoscape, options1.baseYGeoscape, false);
 					for (auto* state : _states)
 					{
 						state->resize(dX, dY);

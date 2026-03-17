@@ -90,7 +90,7 @@ OptionsGeoscapeState::OptionsGeoscapeState(OptionsOrigin origin) : OptionsBaseSt
 	dragScrolls.push_back(tr("STR_RIGHT_MOUSE_BUTTON"));
 
 	_cbxDragScroll->setOptions(dragScrolls);
-	_cbxDragScroll->setSelected(Options::geoDragScrollButton);
+	_cbxDragScroll->setSelected(options1.geoDragScrollButton());
 	_cbxDragScroll->onChange((ActionHandler)&OptionsGeoscapeState::cbxDragScrollChange);
 	_cbxDragScroll->setTooltip("STR_DRAG_SCROLL_DESC");
 	_cbxDragScroll->onMouseIn((ActionHandler)&OptionsGeoscapeState::txtTooltipIn);
@@ -99,7 +99,7 @@ OptionsGeoscapeState::OptionsGeoscapeState(OptionsOrigin origin) : OptionsBaseSt
 	_txtScrollSpeed->setText(tr("STR_SCROLL_SPEED"));
 
 	_slrScrollSpeed->setRange(100, 10);
-	_slrScrollSpeed->setValue(Options::geoScrollSpeed);
+	_slrScrollSpeed->setValue(options1.geoScrollSpeed());
 	_slrScrollSpeed->setTooltip("STR_SCROLL_SPEED_GEO_DESC");
 	_slrScrollSpeed->onChange((ActionHandler)&OptionsGeoscapeState::slrScrollSpeedChange);
 	_slrScrollSpeed->onMouseIn((ActionHandler)&OptionsGeoscapeState::txtTooltipIn);
@@ -108,7 +108,7 @@ OptionsGeoscapeState::OptionsGeoscapeState(OptionsOrigin origin) : OptionsBaseSt
 	_txtDogfightSpeed->setText(tr("STR_DOGFIGHT_SPEED"));
 
 	_slrDogfightSpeed->setRange(50, 20);
-	_slrDogfightSpeed->setValue(Options::dogfightSpeed);
+	_slrDogfightSpeed->setValue(options1.dogfightSpeed());
 	_slrDogfightSpeed->onChange((ActionHandler)&OptionsGeoscapeState::slrDogfightSpeedChange);
 	_slrDogfightSpeed->setTooltip("STR_DOGFIGHT_SPEED_DESC");
 	_slrDogfightSpeed->onMouseIn((ActionHandler)&OptionsGeoscapeState::txtTooltipIn);
@@ -117,7 +117,7 @@ OptionsGeoscapeState::OptionsGeoscapeState(OptionsOrigin origin) : OptionsBaseSt
 	_txtClockSpeed->setText(tr("STR_CLOCK_SPEED"));
 
 	_slrClockSpeed->setRange(250, 10);
-	_slrClockSpeed->setValue(Options::geoClockSpeed);
+	_slrClockSpeed->setValue(options1.geoClockSpeed());
 	_slrClockSpeed->setTooltip("STR_CLOCK_SPEED_DESC");
 	_slrClockSpeed->onChange((ActionHandler)&OptionsGeoscapeState::slrClockSpeedChange);
 	_slrClockSpeed->onMouseIn((ActionHandler)&OptionsGeoscapeState::txtTooltipIn);
@@ -170,7 +170,7 @@ OptionsGeoscapeState::~OptionsGeoscapeState()
  */
 void OptionsGeoscapeState::cbxDragScrollChange(Action *)
 {
-	Options::geoDragScrollButton = _cbxDragScroll->getSelected();
+    options1.setgeoDragScrollButton(_cbxDragScroll->getSelected());
 }
 
 /**
@@ -179,7 +179,7 @@ void OptionsGeoscapeState::cbxDragScrollChange(Action *)
  */
 void OptionsGeoscapeState::slrScrollSpeedChange(Action *)
 {
-	Options::geoScrollSpeed = _slrScrollSpeed->getValue();
+    options1.setgeoScrollSpeed(_slrScrollSpeed->getValue());
 }
 
 /**
@@ -188,7 +188,7 @@ void OptionsGeoscapeState::slrScrollSpeedChange(Action *)
  */
 void OptionsGeoscapeState::slrDogfightSpeedChange(Action *)
 {
-	Options::dogfightSpeed = _slrDogfightSpeed->getValue();
+    options1.setdogfightSpeed(_slrDogfightSpeed->getValue());
 }
 
 /**
@@ -197,7 +197,7 @@ void OptionsGeoscapeState::slrDogfightSpeedChange(Action *)
  */
 void OptionsGeoscapeState::slrClockSpeedChange(Action *)
 {
-	Options::geoClockSpeed = _slrClockSpeed->getValue();
+    options1.setgeoClockSpeed(_slrClockSpeed->getValue());
 }
 
 /**
