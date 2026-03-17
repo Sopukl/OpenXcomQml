@@ -33,7 +33,7 @@ int OpenXcom::psiStrengthStat(const Game *game, const Soldier *s)
 }
 int OpenXcom::psiSkillStat(const Game *game, const Soldier *s)
 {
-	// when Options::anytimePsiTraining is turned on, psiSkill can actually have a negative value
+	// when options1.anytimePsiTraining() is turned on, psiSkill can actually have a negative value
 	if (s->getCurrentStats()->psiSkill > 0)
 	{
 		return s->getStatsWithAllBonuses()->psiSkill;
@@ -75,7 +75,7 @@ int OpenXcom::psiStrengthStatBase(const Game *game, const Soldier *s)
 }
 int OpenXcom::psiSkillStatBase(const Game *game, const Soldier *s)
 {
-	// when Options::anytimePsiTraining is turned on, psiSkill can actually have a negative value
+	// when options1.anytimePsiTraining() is turned on, psiSkill can actually have a negative value
 	if (s->getCurrentStats()->psiSkill > 0)
 	{
 		return s->getCurrentStats()->psiSkill;
@@ -117,7 +117,7 @@ int OpenXcom::psiStrengthStatPlus(const Game *game, const Soldier *s)
 }
 int OpenXcom::psiSkillStatPlus(const Game *game, const Soldier *s)
 {
-	// when Options::anytimePsiTraining is turned on, psiSkill can actually have a negative value
+	// when options1.anytimePsiTraining() is turned on, psiSkill can actually have a negative value
 	if (s->getCurrentStats()->psiSkill > 0)
 	{
 		return s->getStatsWithSoldierBonusesOnly()->psiSkill;

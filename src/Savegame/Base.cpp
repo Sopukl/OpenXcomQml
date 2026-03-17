@@ -108,7 +108,7 @@ Base::~Base()
 void Base::load(const YAML::YamlNodeReader& reader, SavedGame *save, bool newGame, bool newBattleGame)
 {
 	Target::load(reader);
-	if (!newGame || !Options::customInitialBase || newBattleGame)
+	if (!newGame || !options1.customInitialBase() || newBattleGame)
 	{
 		for (const auto& facilityReader : reader["facilities"].children())
 		{
@@ -2220,7 +2220,7 @@ BasePlacementErrors Base::isAreaInUse(BaseAreaSubset area, const RuleBaseFacilit
 			}
 			else if (bf->getIfHadPreviousFacility())
 			{
-				if (Options::storageLimitsEnforced)
+				if (options1.storageLimitsEnforced())
 				{
 					// with enforced limits we can't allow upgrades that make (temporarily) insufficient storage in a base
 					available.addWithoutStores(rule);
@@ -2239,7 +2239,7 @@ BasePlacementErrors Base::isAreaInUse(BaseAreaSubset area, const RuleBaseFacilit
 	// sum new one too.
 	if (replacement)
 	{
-		if (Options::storageLimitsEnforced)
+		if (options1.storageLimitsEnforced())
 		{
 			// with enforced limits we can't allow upgrades that make (temporarily) insufficient storage in a base
 			available.addWithoutStores(replacement);
@@ -2312,7 +2312,7 @@ BasePlacementErrors Base::isAreaInUse(BaseAreaSubset area, const RuleBaseFacilit
 		if (replacement)
 		{
 			// same as like with storage, only when limits are not enforced you can upgrade full prison
-			if (!Options::storageLimitsEnforced)
+			if (!options1.storageLimitsEnforced())
 			{
 				sumAvailablePrisons(replacement);
 			}

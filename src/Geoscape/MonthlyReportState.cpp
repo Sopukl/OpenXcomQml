@@ -344,7 +344,7 @@ void MonthlyReportState::btnOkClick(Action *)
 		{
 			psi = psi || xbase->getAvailablePsiLabs();
 		}
-		if (psi && !Options::anytimePsiTraining)
+		if (psi && !options1.anytimePsiTraining())
 		{
 			_game->pushState(new PsiTrainingState);
 		}

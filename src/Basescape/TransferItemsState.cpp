@@ -164,7 +164,7 @@ TransferItemsState::TransferItemsState(Base *baseFrom, Base *baseTo, DebriefingS
 	for (auto* craft : *_baseFrom->getCrafts())
 	{
 		if (_debriefingState) break;
-		if (craft->getStatus() != "STR_OUT" || (Options::canTransferCraftsWhileAirborne && craft->getFuel() >= craft->getFuelLimit(_baseTo)))
+		if (craft->getStatus() != "STR_OUT" || (options1.canTransferCraftsWhileAirborne() && craft->getFuel() >= craft->getFuelLimit(_baseTo)))
 		{
 			TransferRow row = { TRANSFER_CRAFT, craft, craft->getName(_game->getLanguage()),  (int)(25 * _distance), 1, 0, 0, -3, 0, 0, (int)(25 * _distance) };
 			_items.push_back(row);
@@ -527,7 +527,7 @@ void TransferItemsState::updateList()
  */
 void TransferItemsState::btnOkClick(Action *)
 {
-	if (Options::storageLimitsEnforced && !AreSame(_iQty, 0.0))
+	if (options1.storageLimitsEnforced() && !AreSame(_iQty, 0.0))
 	{
 		// check again (because of items with negative size)
 		// But only check the base whose available space is decreasing.
@@ -922,7 +922,7 @@ void TransferItemsState::increaseByValue(int change)
 		{
 			errorMessage = tr("STR_NO_FREE_ACCOMODATION_CREW");
 		}
-		else if (Options::storageLimitsEnforced)
+		else if (options1.storageLimitsEnforced())
 		{
 			double used = craft->getTotalItemStorageSize();
 			if (used > 0.0 && _baseTo->storesOverfull(_iQty + used))
@@ -939,7 +939,7 @@ void TransferItemsState::increaseByValue(int change)
 		}
 		if (selItem->isAlien())
 		{
-			if (Options::storageLimitsEnforced * _aQty + 1 > _baseTo->getAvailableContainment(selItem->getPrisonType()) - Options::storageLimitsEnforced * _baseTo->getUsedContainment(selItem->getPrisonType()))
+			if (options1.storageLimitsEnforced() * _aQty + 1 > _baseTo->getAvailableContainment(selItem->getPrisonType()) - options1.storageLimitsEnforced() * _baseTo->getUsedContainment(selItem->getPrisonType()))
 			{
 				errorMessage = trAlt("STR_NO_ALIEN_CONTAINMENT_FOR_TRANSFER", selItem->getPrisonType());
 			}
@@ -965,13 +965,13 @@ void TransferItemsState::increaseByValue(int change)
 			_pQty += craft->getNumTotalSoldiers();
 			_iQty += craft->getTotalItemStorageSize();
 			getRow().amount++;
-			if (!Options::canTransferCraftsWhileAirborne || craft->getStatus() != "STR_OUT")
+			if (!options1.canTransferCraftsWhileAirborne() || craft->getStatus() != "STR_OUT")
 				_total += getRow().cost;
 			break;
 		case TRANSFER_ITEM:
 			if (selItem->isAlien())
 			{
-				int freeContainment = Options::storageLimitsEnforced ? _baseTo->getAvailableContainment(selItem->getPrisonType()) - _baseTo->getUsedContainment(selItem->getPrisonType()) - _aQty : INT_MAX;
+				int freeContainment = options1.storageLimitsEnforced() ? _baseTo->getAvailableContainment(selItem->getPrisonType()) - _baseTo->getUsedContainment(selItem->getPrisonType()) - _aQty : INT_MAX;
 				change = std::min(std::min(freeContainment, getRow().qtySrc - getRow().amount), change);
 			}
 			// both aliens and items
@@ -1048,7 +1048,7 @@ void TransferItemsState::decreaseByValue(int change)
 		break;
 	}
 	getRow().amount -= change;
-	if (!Options::canTransferCraftsWhileAirborne || 0 == craft || craft->getStatus() != "STR_OUT")
+	if (!options1.canTransferCraftsWhileAirborne() || 0 == craft || craft->getStatus() != "STR_OUT")
 		_total -= getRow().cost * change;
 	updateItemStrings();
 }

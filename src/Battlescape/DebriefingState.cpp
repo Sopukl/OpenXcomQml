@@ -95,7 +95,7 @@ DebriefingState::DebriefingState() :
 
 	// Restore the cursor in case something weird happened
 	_game->getCursor()->setVisible(true);
-	_limitsEnforced = Options::storageLimitsEnforced ? 1 : 0;
+	_limitsEnforced = options1.storageLimitsEnforced() ? 1 : 0;
 
 	// Create objects
 	_window = new Window(this, 320, 200, 0, 0);
@@ -424,7 +424,7 @@ void DebriefingState::init()
 			RuleItem *rule = _game->getMod()->getItem(itemType);
 
 			int qty = _base->getStorageItems()->getItem(rule);
-			if (qty > 0 && (Options::canSellLiveAliens || !rule->isAlien()))
+			if (qty > 0 && (options1.canSellLiveAliens() || !rule->isAlien()))
 			{
 
 				// IGNORE vehicles and their ammo
@@ -953,7 +953,7 @@ void DebriefingState::btnOkClick(Action *)
 				}
 			}
 
-			if (Options::storageLimitsEnforced && _base->storesOverfull())
+			if (options1.storageLimitsEnforced() && _base->storesOverfull())
 			{
 				_game->pushState(new SellState(_base, 0, OPT_BATTLESCAPE));
 				_game->pushState(new ErrorMessageState(tr("STR_STORAGE_EXCEEDED").arg(_base->getName()), _palette, _game->getMod()->getInterface("debriefing")->getElement("errorMessage")->color, "BACK01.SCR", _game->getMod()->getInterface("debriefing")->getElement("errorPalette")->color));

@@ -190,7 +190,7 @@ void NewGameState::btnOkClick(Action *)
 			// fixed location, custom name
 			_game->pushState(new BaseNameState(base, gs->getGlobe(), true, true));
 		}
-		else if (Options::customInitialBase)
+		else if (options1.customInitialBase())
 		{
 			// fixed location, fixed name
 			_game->pushState(new PlaceLiftState(base, gs->getGlobe(), true));

@@ -1979,7 +1979,7 @@ bool BattlescapeGenerator::placeItemByLayout(BattleItem *item, const std::vector
 					item->setSlot(layoutItem->getSlot());
 					item->setSlotX(layoutItem->getSlotX());
 					item->setSlotY(layoutItem->getSlotY());
-					if (Options::includePrimeStateInSavedLayout && item->getRules()->getFuseTimerType() != BFT_NONE)
+					if (options1.includePrimeStateInSavedLayout() && item->getRules()->getFuseTimerType() != BFT_NONE)
 					{
 						item->setFuseTimer(layoutItem->getFuseTimer());
 					}

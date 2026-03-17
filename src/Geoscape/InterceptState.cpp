@@ -376,7 +376,7 @@ InterceptState::InterceptState(Globe *globe, bool useCustomSound, Base *base, Ta
 				}
 				else
 				{
-					bool craftAvailable = Options::craftLaunchAlways || status == "STR_READY" || status == "STR_OUT";
+					bool craftAvailable = options1.craftLaunchAlways() || status == "STR_READY" || status == "STR_OUT";
 					if (craftAvailable)
 					{
 						double craftDistanceToTarget = std::get<1>(tuple);
@@ -431,7 +431,7 @@ void InterceptState::lstCraftsLeftClick(Action *)
 	auto allowStart = [&](Craft* c)
 	{
 		return c->getStatus() == "STR_READY" || (
-			 (c->getStatus() == "STR_OUT" || Options::craftLaunchAlways) &&
+			 (c->getStatus() == "STR_OUT" || options1.craftLaunchAlways()) &&
 			 !c->getLowFuel() &&
 			 !c->getMissionComplete() );
 	};

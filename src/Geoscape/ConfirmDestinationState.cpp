@@ -66,7 +66,7 @@ ConfirmDestinationState::ConfirmDestinationState(std::vector<Craft*> crafts, Tar
 
 	if (_crafts.size() == 1)
 	{
-		transferAvailable = (Options::canTransferCraftsWhileAirborne && base != 0 && base != _crafts.front()->getBase() && _crafts.front()->arePilotsOnboard(_game->getMod()));
+		transferAvailable = (options1.canTransferCraftsWhileAirborne() && base != 0 && base != _crafts.front()->getBase() && _crafts.front()->arePilotsOnboard(_game->getMod()));
 	}
 
 	int btnOkX = transferAvailable ? 29 : 68;
@@ -425,7 +425,7 @@ void ConfirmDestinationState::btnTransferClick(Action *)
 	{
 		errorMessage = tr("STR_NO_FREE_ACCOMODATION_CREW");
 	}
-	else if (Options::storageLimitsEnforced && targetBase->storesOverfull(_crafts.front()->getTotalItemStorageSize()))
+	else if (options1.storageLimitsEnforced() && targetBase->storesOverfull(_crafts.front()->getTotalItemStorageSize()))
 	{
 		errorMessage = tr("STR_NOT_ENOUGH_STORE_SPACE_FOR_CRAFT");
 	}

@@ -153,7 +153,7 @@ PurchaseState::PurchaseState(Base *base, CannotReequipState *parent) : _base(bas
 
 	_txtPurchases->setText(tr("STR_COST_OF_PURCHASES").arg(Unicode::formatFunding(_total)));
 
-	_txtSpaceUsed->setVisible(Options::storageLimitsEnforced);
+	_txtSpaceUsed->setVisible(options1.storageLimitsEnforced());
 	std::ostringstream ss;
 	ss << _base->getUsedStores() << ":" << _base->getAvailableStores();
 	_txtSpaceUsed->setText(tr("STR_SPACE_USED").arg(ss.str()));

@@ -56,7 +56,7 @@ namespace OpenXcom
 ManageAlienContainmentState::ManageAlienContainmentState(Base *base, int prisonType, OptionsOrigin origin) :
 	_base(base), _prisonType(prisonType), _origin(origin), _sel(0), _aliensSold(0), _total(0), _doNotReset(false), _threeButtons(false)
 {
-	_threeButtons = Options::canSellLiveAliens && Options::retainCorpses;
+	_threeButtons = options1.canSellLiveAliens() && options1.retainCorpses();
 
 	// Create objects
 	_window = new Window(this, 320, 200, 0, 0);
@@ -155,7 +155,7 @@ ManageAlienContainmentState::ManageAlienContainmentState(Base *base, int prisonT
 	_txtInterrogatedAliens->setVerticalAlign(ALIGN_BOTTOM);
 
 	_lstAliens->setArrowColumn(184, ARROW_HORIZONTAL);
-	if (Options::canSellLiveAliens) {
+	if (options1.canSellLiveAliens()) {
 		_lstAliens->setColumns(5, 120, 40, 64, 46, 46);
 	} else {
 		_lstAliens->setColumns(5, 150, 10, 64, 46, 46);
@@ -253,7 +253,7 @@ void ManageAlienContainmentState::resetListAndTotals()
 			}
 
 			std::string formattedCost = "";
-			if (Options::canSellLiveAliens)
+			if (options1.canSellLiveAliens())
 			{
 				int64_t adjustedCost = rule->getSellCostAdjusted(_base, _game->getSavedGame());
 				formattedCost = Unicode::formatFunding(adjustedCost / 1000).append("K");
@@ -267,7 +267,7 @@ void ManageAlienContainmentState::resetListAndTotals()
 	{
 		_aliens.push_back(researchName);
 		_qtys.push_back(0);
-		_lstAliens->addRow(5, tr(researchName).c_str(), Options::canSellLiveAliens ? "-" : "", "0", "0", "1");
+		_lstAliens->addRow(5, tr(researchName).c_str(), options1.canSellLiveAliens() ? "-" : "", "0", "0", "1");
 		_lstAliens->setRowColor(_qtys.size() -1, _lstAliens->getSecondaryColor());
 	}
 
@@ -280,7 +280,7 @@ void ManageAlienContainmentState::resetListAndTotals()
 
 		_txtUsed->setText(tr("STR_SPACE_USED").arg(usedContainment));
 
-		if (Options::canSellLiveAliens)
+		if (options1.canSellLiveAliens())
 		{
 			_txtValueOfSales->setText(tr("STR_VALUE_OF_SALES").arg(Unicode::formatFunding(_total)));
 		}
@@ -289,7 +289,7 @@ void ManageAlienContainmentState::resetListAndTotals()
 	// update buttons
 	{
 		bool overCrowded = false;
-		if (availableContainment == 0 || Options::storageLimitsEnforced)
+		if (availableContainment == 0 || options1.storageLimitsEnforced())
 		{
 			overCrowded = (freeContainment < 0);
 		}
@@ -323,7 +323,7 @@ void ManageAlienContainmentState::think()
  */
 void ManageAlienContainmentState::btnOkClick(Action *)
 {
-	bool sell = Options::canSellLiveAliens && !Options::retainCorpses; // in all other cases, it's kill, not sell
+	bool sell = options1.canSellLiveAliens() && !options1.retainCorpses(); // in all other cases, it's kill, not sell
 	dealWithSelectedAliens(sell);
 }
 
@@ -380,7 +380,7 @@ void ManageAlienContainmentState::dealWithSelectedAliens(bool sell)
 	}
 	_game->popState();
 
-	if (Options::storageLimitsEnforced && _base->storesOverfull())
+	if (options1.storageLimitsEnforced() && _base->storesOverfull())
 	{
 		if (_origin == OPT_BATTLESCAPE)
 		{
@@ -616,7 +616,7 @@ void ManageAlienContainmentState::updateStrings()
 	int aliens = _base->getUsedContainment(_prisonType) - _aliensSold;
 	int availableContainment = _base->getAvailableContainment(_prisonType);
 	int spaces = availableContainment - aliens;
-	if (availableContainment == 0 || Options::storageLimitsEnforced)
+	if (availableContainment == 0 || options1.storageLimitsEnforced())
 	{
 		_btnOk->setVisible(spaces >= 0);
 		_btnSell->setVisible(spaces >= 0 && _threeButtons);
@@ -624,7 +624,7 @@ void ManageAlienContainmentState::updateStrings()
 	_txtAvailable->setText(tr("STR_SPACE_AVAILABLE").arg(spaces));
 	_txtUsed->setText(tr("STR_SPACE_USED").arg(aliens));
 
-	if (Options::canSellLiveAliens)
+	if (options1.canSellLiveAliens())
 	{
 		// we could probably keep track of _total with each change (only adding deltas), but I am lazy today
 		_total = 0;

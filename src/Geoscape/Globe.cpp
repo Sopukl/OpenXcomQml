@@ -750,7 +750,7 @@ bool Globe::insideFakeUnderwaterTexture(double lon, double lat) const
  */
 void Globe::toggleDetail()
 {
-	Options::globeDetail = !Options::globeDetail;
+	options1.setglobeDetail(!options1.globeDetail());
 	drawDetail();
 }
 
@@ -1023,7 +1023,7 @@ Cord Globe::getSunDirection(double lon, double lat) const
 	const double rot = curTime * 2*M_PI;
 	double sun;
 
-	if (Options::globeSeasons)
+	if (options1.globeSeasons())
 	{
 		const int MonthDays1[] = {0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334, 365};
 		const int MonthDays2[] = {0, 31, 60, 91, 121, 152, 182, 213, 244, 274, 305, 335, 366};
@@ -1069,7 +1069,7 @@ Cord Globe::getSunDirection(double lon, double lat) const
 
 void Globe::drawShadow()
 {
-	if (Options::globeSurfaceCache)
+	if (options1.globeSurfaceCache())
 	{
 		ShaderMove<Cord> earth = ShaderMove<Cord>(SurfaceRaw<Cord>(_earthData[_zoom], getWidth(), getHeight()));
 		ShaderRepeat<Sint16> noise = ShaderRepeat<Sint16>(SurfaceRaw<Sint16>(static_data.random_noise, static_data.random_surf_size, static_data.random_surf_size));
@@ -1165,7 +1165,7 @@ void Globe::drawRadars()
 {
 	_radars->clear();
 
-	if (!Options::globeRadarLines)
+	if (!options1.globeRadarLines())
 		return;
 
 	double tr, range;
@@ -1190,7 +1190,7 @@ void Globe::drawRadars()
 		{
 			range = Nautical(_game->getMod()->getBaseFacility(facType)->getRadarRange());
 			drawGlobeCircle(_hoverLat,_hoverLon,range,48);
-			if (Options::globeAllRadarsOnBaseBuild) ranges.push_back(range);
+			if (options1.globeAllRadarsOnBaseBuild()) ranges.push_back(range);
 		}
 	}
 
@@ -1203,7 +1203,7 @@ void Globe::drawRadars()
 		if (( !(AreSame(lon, 0.0) && AreSame(lat, 0.0)) )/* &&
 			!pointBack(xbase->getLongitude(), xbase->getLatitude())*/)
 		{
-			if (_hover && Options::globeAllRadarsOnBaseBuild)
+			if (_hover && options1.globeAllRadarsOnBaseBuild())
 			{
 				for (size_t j=0; j<ranges.size(); j++) drawGlobeCircle(lat,lon,ranges[j],48);
 			}
@@ -1362,7 +1362,7 @@ void Globe::drawDetail()
 {
 	_countries->clear();
 
-	if (!Options::globeDetail)
+	if (!options1.globeDetail())
 		return;
 
 	// Draw the country borders
@@ -1648,7 +1648,7 @@ void Globe::drawFlights()
 {
 	//_radars->clear();
 
-	if (!Options::globeFlightPaths)
+	if (!options1.globeFlightPaths())
 		return;
 
 	// Lock the surface
@@ -1857,7 +1857,7 @@ void Globe::mouseOver(Action *action, State *state)
 			_mouseMovedOverThreshold = ((std::abs(_totalMouseMoveX) > options1.dragScrollPixelTolerance()) || (std::abs(_totalMouseMoveY) > options1.dragScrollPixelTolerance()));
 
 		// Scrolling
-		if (Options::geoDragScrollInvert)
+		if (options1.geoDragScrollInvert())
 		{
 			double newLon = ((double)_totalMouseMoveX / action->getXScale()) * ROTATE_LONGITUDE/(_zoom+1)/2;
 			double newLat = ((double)_totalMouseMoveY / action->getYScale()) * ROTATE_LATITUDE/(_zoom+1)/2;
@@ -2068,7 +2068,7 @@ size_t Globe::getZoom() const
  */
 void Globe::toggleRadarLines()
 {
-	Options::globeRadarLines = !Options::globeRadarLines;
+	options1.setglobeRadarLines(!options1.globeRadarLines());
 	drawRadars();
 }
 
@@ -2114,7 +2114,7 @@ void Globe::setupRadii(int width, int height)
 	_radius = _zoomRadius[_zoom];
 	_radiusStep = (_zoomRadius[DOGFIGHT_ZOOM] - _zoomRadius[0]) / 10.0;
 
-	if (Options::globeSurfaceCache)
+	if (options1.globeSurfaceCache())
 	{
 		_earthData.resize(_zoomRadius.size());
 		//filling normal field for each radius

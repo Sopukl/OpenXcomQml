@@ -496,7 +496,7 @@ void BasescapeState::viewRightClick(Action *)
 			case 2: _game->pushState(new ManufactureState(_base)); break;
 			case 3: _game->pushState(new ResearchState(_base)); break;
 			case 4: _game->pushState(new AllocateTrainingState(_base)); break;
-			case 5: if (Options::anytimePsiTraining) _game->pushState(new AllocatePsiTrainingState(_base)); break;
+			case 5: if (options1.anytimePsiTraining()) _game->pushState(new AllocatePsiTrainingState(_base)); break;
 			case 6: _game->pushState(new SoldiersState(_base)); break;
 			case 7: _game->pushState(new SellState(_base, 0)); break;
 			default: _game->popState(); break;
@@ -535,7 +535,7 @@ void BasescapeState::viewRightClick(Action *)
 	{
 		_game->pushState(new SoldiersState(_base));
 	}
-	else if (f->getRules()->getPsiLaboratories() > 0 && Options::anytimePsiTraining && _base->getAvailablePsiLabs() > 0)
+	else if (f->getRules()->getPsiLaboratories() > 0 && options1.anytimePsiTraining() && _base->getAvailablePsiLabs() > 0)
 	{
 		_game->pushState(new AllocatePsiTrainingState(_base));
 	}

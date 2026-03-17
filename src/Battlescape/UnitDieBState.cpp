@@ -278,7 +278,7 @@ void UnitDieBState::convertUnitToCorpse()
 	Position lastPosition = _unit->getPosition();
 	int size = _unit->getArmor()->getSize();
 	bool dropItems = (_unit->hasInventory() &&
-		(!Options::weaponSelfDestruction ||
+		(!options1.weaponSelfDestruction() ||
 		(_unit->getOriginalFaction() != FACTION_HOSTILE || _unit->getStatus() == STATUS_UNCONSCIOUS)));
 
 	if (!_noSound)

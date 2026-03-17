@@ -87,7 +87,7 @@ void SellState::delayedInit()
 	}
 	_delayedInitDone = true;
 
-	bool overfull = _debriefingState == 0 && Options::storageLimitsEnforced && _base->storesOverfull();
+	bool overfull = _debriefingState == 0 && options1.storageLimitsEnforced() && _base->storesOverfull();
 	bool overfullCritical = overfull ? _base->storesOverfullCritical() : false;
 
 	// Create objects
@@ -159,7 +159,7 @@ void SellState::delayedInit()
 
 	_txtFunds->setText(tr("STR_FUNDS").arg(Unicode::formatFunding(_game->getSavedGame()->getFunds())));
 
-	_txtSpaceUsed->setVisible(Options::storageLimitsEnforced);
+	_txtSpaceUsed->setVisible(options1.storageLimitsEnforced());
 
 	std::ostringstream ss;
 	ss << _base->getUsedStores() << ":" << _base->getAvailableStores();
@@ -252,7 +252,7 @@ void SellState::delayedInit()
 		else
 		{
 			qty = _base->getStorageItems()->getItem(rule);
-			if (Options::storageLimitsEnforced && (_origin == OPT_BATTLESCAPE || overfullCritical))
+			if (options1.storageLimitsEnforced() && (_origin == OPT_BATTLESCAPE || overfullCritical))
 			{
 				for (auto* transfer : *_base->getTransfers())
 				{
@@ -271,7 +271,7 @@ void SellState::delayedInit()
 				}
 			}
 		}
-		if (qty > 0 && (Options::canSellLiveAliens || !rule->isAlien()))
+		if (qty > 0 && (options1.canSellLiveAliens() || !rule->isAlien()))
 		{
 			TransferRow row = { TRANSFER_ITEM, rule, tr(itemType), rule->getSellCostAdjusted(_base, _game->getSavedGame()), qty, 0, 0, rule->getListOrder(), rule->getSize(), qty * rule->getSize(), (int64_t)qty * rule->getSellCostAdjusted(_base, _game->getSavedGame()) };
 			if ((_debriefingState != 0) && (_game->getSavedGame()->getAutosell(rule)))
@@ -1251,7 +1251,7 @@ void SellState::updateItemStrings()
 	}
 	ss3 << ":" << _base->getAvailableStores();
 	_txtSpaceUsed->setText(tr("STR_SPACE_USED").arg(ss3.str()));
-	if (_debriefingState == 0 && Options::storageLimitsEnforced)
+	if (_debriefingState == 0 && options1.storageLimitsEnforced())
 	{
 		_btnOk->setVisible(!_base->storesOverfull(_spaceChange));
 	}

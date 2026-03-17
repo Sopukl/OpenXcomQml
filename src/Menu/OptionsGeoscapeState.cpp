@@ -126,21 +126,21 @@ OptionsGeoscapeState::OptionsGeoscapeState(OptionsOrigin origin) : OptionsBaseSt
 	_txtGlobeDetails->setText(tr("STR_GLOBE_DETAILS"));
 
 	_btnGlobeCountries->setText(tr("STR_GLOBE_COUNTRIES"));
-	_btnGlobeCountries->setPressed(Options::globeDetail);
+	_btnGlobeCountries->setPressed(options1.globeDetail());
 	_btnGlobeCountries->onMouseClick((ActionHandler)&OptionsGeoscapeState::btnGlobeCountriesClick);
 	_btnGlobeCountries->setTooltip("STR_GLOBE_COUNTRIES_DESC");
 	_btnGlobeCountries->onMouseIn((ActionHandler)&OptionsGeoscapeState::txtTooltipIn);
 	_btnGlobeCountries->onMouseOut((ActionHandler)&OptionsGeoscapeState::txtTooltipOut);
 
 	_btnGlobeRadars->setText(tr("STR_GLOBE_RADARS"));
-	_btnGlobeRadars->setPressed(Options::globeRadarLines);
+	_btnGlobeRadars->setPressed(options1.globeRadarLines());
 	_btnGlobeRadars->onMouseClick((ActionHandler)&OptionsGeoscapeState::btnGlobeRadarsClick);
 	_btnGlobeRadars->setTooltip("STR_GLOBE_RADARS_DESC");
 	_btnGlobeRadars->onMouseIn((ActionHandler)&OptionsGeoscapeState::txtTooltipIn);
 	_btnGlobeRadars->onMouseOut((ActionHandler)&OptionsGeoscapeState::txtTooltipOut);
 
 	_btnGlobePaths->setText(tr("STR_GLOBE_FLIGHT_PATHS"));
-	_btnGlobePaths->setPressed(Options::globeFlightPaths);
+	_btnGlobePaths->setPressed(options1.globeFlightPaths());
 	_btnGlobePaths->onMouseClick((ActionHandler)&OptionsGeoscapeState::btnGlobePathsClick);
 	_btnGlobePaths->setTooltip("STR_GLOBE_FLIGHT_PATHS_DESC");
 	_btnGlobePaths->onMouseIn((ActionHandler)&OptionsGeoscapeState::txtTooltipIn);
@@ -206,7 +206,7 @@ void OptionsGeoscapeState::slrClockSpeedChange(Action *)
  */
 void OptionsGeoscapeState::btnGlobeCountriesClick(Action *)
 {
-	Options::globeDetail = _btnGlobeCountries->getPressed();
+    options1.setglobeDetail(_btnGlobeCountries->getPressed());
 }
 
 /**
@@ -215,7 +215,7 @@ void OptionsGeoscapeState::btnGlobeCountriesClick(Action *)
  */
 void OptionsGeoscapeState::btnGlobeRadarsClick(Action *)
 {
-	Options::globeRadarLines = _btnGlobeRadars->getPressed();
+    options1.setglobeRadarLines(_btnGlobeRadars->getPressed());
 }
 
 /**
@@ -224,7 +224,7 @@ void OptionsGeoscapeState::btnGlobeRadarsClick(Action *)
  */
 void OptionsGeoscapeState::btnGlobePathsClick(Action *)
 {
-	Options::globeFlightPaths = _btnGlobePaths->getPressed();
+    options1.setglobeFlightPaths(_btnGlobePaths->getPressed());
 }
 
 /**

@@ -80,25 +80,25 @@ BaseInfoState::BaseInfoState(Base *base, BasescapeState *state) : _base(base), _
 	_txtWorkshops = new Text(114, 9, 8, 113);
 	_numWorkshops = new Text(40, 9, 126, 113);
 	_barWorkshops = new Bar(150, 5, 166, 115);
-	if (Options::storageLimitsEnforced)
+	if (options1.storageLimitsEnforced())
 	{
 		_txtContainment = new Text(114, 9, 8, 123);
 		_numContainment = new Text(40, 9, 126, 123);
 		_barContainment = new Bar(150, 5, 166, 125);
 	}
-	_txtHangars = new Text(114, 9, 8, Options::storageLimitsEnforced ? 133 : 123);
-	_numHangars = new Text(40, 9, 126, Options::storageLimitsEnforced ? 133 : 123);
-	_barHangars = new Bar(150, 5, 166, Options::storageLimitsEnforced ? 135 : 125);
+	_txtHangars = new Text(114, 9, 8, options1.storageLimitsEnforced() ? 133 : 123);
+	_numHangars = new Text(40, 9, 126, options1.storageLimitsEnforced() ? 133 : 123);
+	_barHangars = new Bar(150, 5, 166, options1.storageLimitsEnforced() ? 135 : 125);
 
-	_txtDefense = new Text(114, 9, 8, Options::storageLimitsEnforced ? 147 : 138);
-	_numDefense = new Text(40, 9, 126, Options::storageLimitsEnforced ? 147 : 138);
-	_barDefense = new Bar(150, 5, 166, Options::storageLimitsEnforced ? 149 : 140);
-	_txtShortRange = new Text(114, 9, 8, Options::storageLimitsEnforced ? 157 : 153);
-	_numShortRange = new Text(40, 9, 126, Options::storageLimitsEnforced ? 157 : 153);
-	_barShortRange = new Bar(150, 5, 166, Options::storageLimitsEnforced ? 159 : 155);
-	_txtLongRange = new Text(114, 9, 8, Options::storageLimitsEnforced ? 167 : 163);
-	_numLongRange = new Text(40, 9, 126, Options::storageLimitsEnforced ? 167 : 163);
-	_barLongRange = new Bar(150, 5, 166, Options::storageLimitsEnforced ? 169 : 165);
+	_txtDefense = new Text(114, 9, 8, options1.storageLimitsEnforced() ? 147 : 138);
+	_numDefense = new Text(40, 9, 126, options1.storageLimitsEnforced() ? 147 : 138);
+	_barDefense = new Bar(150, 5, 166, options1.storageLimitsEnforced() ? 149 : 140);
+	_txtShortRange = new Text(114, 9, 8, options1.storageLimitsEnforced() ? 157 : 153);
+	_numShortRange = new Text(40, 9, 126, options1.storageLimitsEnforced() ? 157 : 153);
+	_barShortRange = new Bar(150, 5, 166, options1.storageLimitsEnforced() ? 159 : 155);
+	_txtLongRange = new Text(114, 9, 8, options1.storageLimitsEnforced() ? 167 : 163);
+	_numLongRange = new Text(40, 9, 126, options1.storageLimitsEnforced() ? 167 : 163);
+	_barLongRange = new Bar(150, 5, 166, options1.storageLimitsEnforced() ? 169 : 165);
 
 	// Set palette
 	setInterface("baseInfo");
@@ -135,7 +135,7 @@ BaseInfoState::BaseInfoState(Base *base, BasescapeState *state) : _base(base), _
 	add(_txtWorkshops, "text2", "baseInfo");
 	add(_numWorkshops, "numbers", "baseInfo");
 	add(_barWorkshops, "facilityBars", "baseInfo");
-	if (Options::storageLimitsEnforced)
+	if (options1.storageLimitsEnforced())
 	{
 		add(_txtContainment, "text2", "baseInfo");
 		add(_numContainment, "numbers", "baseInfo");
@@ -159,7 +159,7 @@ BaseInfoState::BaseInfoState(Base *base, BasescapeState *state) : _base(base), _
 
 	// Set up objects
 	std::ostringstream ss;
-	if (Options::storageLimitsEnforced)
+	if (options1.storageLimitsEnforced())
 	{
 		ss << "ALT";
 	}
@@ -228,7 +228,7 @@ BaseInfoState::BaseInfoState(Base *base, BasescapeState *state) : _base(base), _
 
 	_barWorkshops->setScale(0.5);
 
-	if (Options::storageLimitsEnforced)
+	if (options1.storageLimitsEnforced())
 	{
 		_txtContainment->setText(tr("STR_ALIEN_CONTAINMENT"));
 
@@ -379,7 +379,7 @@ void BaseInfoState::init()
 		_barWorkshops->setScale(1.0);
 	}
 
-	if (Options::storageLimitsEnforced)
+	if (options1.storageLimitsEnforced())
 	{
 		std::ostringstream ss72;
 		ss72 << _base->getUsedContainment(0) << ":" << _base->getAvailableContainment(0);

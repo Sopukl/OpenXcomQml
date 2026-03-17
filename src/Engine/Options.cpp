@@ -150,10 +150,10 @@ void createOptionsOXC()
 	_info.push_back(OptionInfo(OPTION_OXC, "battleNewPreviewPath", (int*)&battleNewPreviewPath, PATH_NONE)); // requires double-click to confirm moves
 #endif
 	//#_info.push_back(OptionInfo(OPTION_OXC, "fpsCounter", &fpsCounter, false));
-	_info.push_back(OptionInfo(OPTION_OXC, "globeDetail", &globeDetail, true));
-	_info.push_back(OptionInfo(OPTION_OXC, "globeRadarLines", &globeRadarLines, true));
-	_info.push_back(OptionInfo(OPTION_OXC, "globeFlightPaths", &globeFlightPaths, true));
-	_info.push_back(OptionInfo(OPTION_OXC, "globeAllRadarsOnBaseBuild", &globeAllRadarsOnBaseBuild, true));
+	//# _info.push_back(OptionInfo(OPTION_OXC, "globeDetail", &globeDetail, true));
+	//# _info.push_back(OptionInfo(OPTION_OXC, "globeRadarLines", &globeRadarLines, true));
+	//# _info.push_back(OptionInfo(OPTION_OXC, "globeFlightPaths", &globeFlightPaths, true));
+	//# _info.push_back(OptionInfo(OPTION_OXC, "globeAllRadarsOnBaseBuild", &globeAllRadarsOnBaseBuild, true));
 	//# _info.push_back(OptionInfo(OPTION_OXC, "audioSampleRate", &audioSampleRate, 22050));
 	//# _info.push_back(OptionInfo(OPTION_OXC, "audioBitDepth", &audioBitDepth, 16));
 	//# _info.push_back(OptionInfo(OPTION_OXC, "audioChunkSize", &audioChunkSize, 1024));
@@ -230,19 +230,19 @@ void createAdvancedOptionsOXC()
 	//#_info.push_back(OptionInfo(OPTION_OXC, "vSyncForOpenGL", &vSyncForOpenGL, true, "STR_VSYNC_FOR_OPENGL", "STR_GENERAL")); // exposed in OXCE
 #endif
 
-	_info.push_back(OptionInfo(OPTION_OXC, "geoDragScrollInvert", &geoDragScrollInvert, false, "STR_DRAGSCROLLINVERT", "STR_GEOSCAPE")); // true drags away from the cursor, false drags towards (like a grab)
-	_info.push_back(OptionInfo(OPTION_OXC, "aggressiveRetaliation", &aggressiveRetaliation, false, "STR_AGGRESSIVERETALIATION", "STR_GEOSCAPE"));
-	_info.push_back(OptionInfo(OPTION_OXC, "customInitialBase", &customInitialBase, false, "STR_CUSTOMINITIALBASE", "STR_GEOSCAPE"));
+	//#_info.push_back(OptionInfo(OPTION_OXC, "geoDragScrollInvert", &geoDragScrollInvert, false, "STR_DRAGSCROLLINVERT", "STR_GEOSCAPE")); // true drags away from the cursor, false drags towards (like a grab)
+	//#_info.push_back(OptionInfo(OPTION_OXC, "aggressiveRetaliation", &aggressiveRetaliation, false, "STR_AGGRESSIVERETALIATION", "STR_GEOSCAPE"));
+	//#_info.push_back(OptionInfo(OPTION_OXC, "customInitialBase", &customInitialBase, false, "STR_CUSTOMINITIALBASE", "STR_GEOSCAPE"));
 	_info.push_back(OptionInfo(OPTION_OXC, "allowBuildingQueue", &allowBuildingQueue, false, "STR_ALLOWBUILDINGQUEUE", "STR_GEOSCAPE"));
-	_info.push_back(OptionInfo(OPTION_OXC, "craftLaunchAlways", &craftLaunchAlways, false, "STR_CRAFTLAUNCHALWAYS", "STR_GEOSCAPE"));
-	_info.push_back(OptionInfo(OPTION_OXC, "storageLimitsEnforced", &storageLimitsEnforced, false, "STR_STORAGELIMITSENFORCED", "STR_GEOSCAPE"));
-	_info.push_back(OptionInfo(OPTION_OXC, "canSellLiveAliens", &canSellLiveAliens, false, "STR_CANSELLLIVEALIENS", "STR_GEOSCAPE"));
-	_info.push_back(OptionInfo(OPTION_OXC, "anytimePsiTraining", &anytimePsiTraining, false, "STR_ANYTIMEPSITRAINING", "STR_GEOSCAPE"));
-	_info.push_back(OptionInfo(OPTION_OXC, "globeSeasons", &globeSeasons, false, "STR_GLOBESEASONS", "STR_GEOSCAPE"));
-	_info.push_back(OptionInfo(OPTION_OXC, "globeSurfaceCache", &globeSurfaceCache, true)); //hidden for now
+	//#_info.push_back(OptionInfo(OPTION_OXC, "craftLaunchAlways", &craftLaunchAlways, false, "STR_CRAFTLAUNCHALWAYS", "STR_GEOSCAPE"));
+	//#_info.push_back(OptionInfo(OPTION_OXC, "storageLimitsEnforced", &storageLimitsEnforced, false, "STR_STORAGELIMITSENFORCED", "STR_GEOSCAPE"));
+	//#_info.push_back(OptionInfo(OPTION_OXC, "canSellLiveAliens", &canSellLiveAliens, false, "STR_CANSELLLIVEALIENS", "STR_GEOSCAPE"));
+	//#_info.push_back(OptionInfo(OPTION_OXC, "anytimePsiTraining", &anytimePsiTraining, false, "STR_ANYTIMEPSITRAINING", "STR_GEOSCAPE"));
+	//#_info.push_back(OptionInfo(OPTION_OXC, "globeSeasons", &globeSeasons, false, "STR_GLOBESEASONS", "STR_GEOSCAPE"));
+	//#_info.push_back(OptionInfo(OPTION_OXC, "globeSurfaceCache", &globeSurfaceCache, true)); //hidden for now
 	_info.push_back(OptionInfo(OPTION_OXC, "psiStrengthEval", &psiStrengthEval, false, "STR_PSISTRENGTHEVAL", "STR_GEOSCAPE"));
-	_info.push_back(OptionInfo(OPTION_OXC, "canTransferCraftsWhileAirborne", &canTransferCraftsWhileAirborne, false, "STR_CANTRANSFERCRAFTSWHILEAIRBORNE", "STR_GEOSCAPE")); // When the craft can reach the destination base with its fuel
-	_info.push_back(OptionInfo(OPTION_OXC, "retainCorpses", &retainCorpses, false, "STR_RETAINCORPSES", "STR_GEOSCAPE"));
+	//#_info.push_back(OptionInfo(OPTION_OXC, "canTransferCraftsWhileAirborne", &canTransferCraftsWhileAirborne, false, "STR_CANTRANSFERCRAFTSWHILEAIRBORNE", "STR_GEOSCAPE")); // When the craft can reach the destination base with its fuel
+	//#_info.push_back(OptionInfo(OPTION_OXC, "retainCorpses", &retainCorpses, false, "STR_RETAINCORPSES", "STR_GEOSCAPE"));
 	_info.push_back(OptionInfo(OPTION_OXC, "fieldPromotions", &fieldPromotions, false, "STR_FIELDPROMOTIONS", "STR_GEOSCAPE"));
 	//_info.push_back(OptionInfo(OPTION_OXC, "meetingPoint", &meetingPoint, false, "STR_MEETINGPOINT", "STR_GEOSCAPE")); // intentionally disabled in OXCE
 
@@ -252,7 +252,7 @@ void createAdvancedOptionsOXC()
 	_info.push_back(OptionInfo(OPTION_OXC, "showMoreStatsInInventoryView", &showMoreStatsInInventoryView, false, "STR_SHOWMORESTATSININVENTORYVIEW", "STR_BATTLESCAPE"));
 	_info.push_back(OptionInfo(OPTION_OXC, "battleHairBleach", &battleHairBleach, true, "STR_BATTLEHAIRBLEACH", "STR_BATTLESCAPE"));
 	_info.push_back(OptionInfo(OPTION_OXC, "battleInstantGrenade", &battleInstantGrenade, false, "STR_BATTLEINSTANTGRENADE", "STR_BATTLESCAPE"));
-	_info.push_back(OptionInfo(OPTION_OXC, "includePrimeStateInSavedLayout", &includePrimeStateInSavedLayout, false, "STR_INCLUDE_PRIMESTATE_IN_SAVED_LAYOUT", "STR_BATTLESCAPE"));
+	//#_info.push_back(OptionInfo(OPTION_OXC, "includePrimeStateInSavedLayout", &includePrimeStateInSavedLayout, false, "STR_INCLUDE_PRIMESTATE_IN_SAVED_LAYOUT", "STR_BATTLESCAPE"));
 	_info.push_back(OptionInfo(OPTION_OXC, "battleExplosionHeight", &battleExplosionHeight, 0, "STR_BATTLEEXPLOSIONHEIGHT", "STR_BATTLESCAPE"));
 	_info.push_back(OptionInfo(OPTION_OXC, "battleAutoEnd", &battleAutoEnd, false, "STR_BATTLEAUTOEND", "STR_BATTLESCAPE"));
 	_info.push_back(OptionInfo(OPTION_OXC, "battleSmoothCamera", &battleSmoothCamera, false, "STR_BATTLESMOOTHCAMERA", "STR_BATTLESCAPE"));
@@ -262,7 +262,7 @@ void createAdvancedOptionsOXC()
 #else
 	_info.push_back(OptionInfo(OPTION_OXC, "battleConfirmFireMode", &battleConfirmFireMode, false, "STR_BATTLECONFIRMFIREMODE", "STR_BATTLESCAPE"));
 #endif
-	_info.push_back(OptionInfo(OPTION_OXC, "weaponSelfDestruction", &weaponSelfDestruction, false, "STR_WEAPONSELFDESTRUCTION", "STR_BATTLESCAPE"));
+	//#_info.push_back(OptionInfo(OPTION_OXC, "weaponSelfDestruction", &weaponSelfDestruction, false, "STR_WEAPONSELFDESTRUCTION", "STR_BATTLESCAPE"));
 	_info.push_back(OptionInfo(OPTION_OXC, "allowPsionicCapture", &allowPsionicCapture, false, "STR_ALLOWPSIONICCAPTURE", "STR_BATTLESCAPE"));
 	_info.push_back(OptionInfo(OPTION_OXC, "allowPsiStrengthImprovement", &allowPsiStrengthImprovement, false, "STR_ALLOWPSISTRENGTHIMPROVEMENT", "STR_BATTLESCAPE"));
 	_info.push_back(OptionInfo(OPTION_OXC, "strafe", &strafe, false, "STR_STRAFE", "STR_BATTLESCAPE"));

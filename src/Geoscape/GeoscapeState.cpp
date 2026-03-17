@@ -1515,7 +1515,7 @@ bool DetectXCOMBase::operator()(const Ufo *ufo) const
 {
 	if (ufo->getTrajectoryPoint() <= 1) return false;
 	if (ufo->getTrajectory().getZone(ufo->getTrajectoryPoint()) == 5) return false;
-	if ((ufo->getMission()->getRules().getObjective() != OBJECTIVE_RETALIATION && !Options::aggressiveRetaliation) ||	// only UFOs on retaliation missions actively scan for bases
+	if ((ufo->getMission()->getRules().getObjective() != OBJECTIVE_RETALIATION && !options1.aggressiveRetaliation()) ||	// only UFOs on retaliation missions actively scan for bases
 		ufo->getTrajectory().getID() == UfoTrajectory::RETALIATION_ASSAULT_RUN || 										// UFOs attacking a base don't detect!
 		ufo->isCrashed() ||																								// Crashed UFOs don't detect!
 		ufo->getStatus() == Ufo::IGNORE_ME ||
@@ -1578,7 +1578,7 @@ void GeoscapeState::time10Minutes()
 			}
 		}
 	}
-	if (Options::aggressiveRetaliation)
+	if (options1.aggressiveRetaliation())
 	{
 		// Detect as many bases as possible.
 		for (auto* xbase : *_game->getSavedGame()->getBases())
@@ -2225,7 +2225,7 @@ void GeoscapeState::time1Hour()
 			}
 		}
 
-		if (Options::storageLimitsEnforced)
+		if (options1.storageLimitsEnforced())
 		{
 			if (xbase->storesOverfull())
 			{
@@ -2480,7 +2480,7 @@ void GeoscapeState::time1Day()
 			project = nullptr;
 
 			// 3b. handle interrogation
-			if (Options::retainCorpses && research->needItem() && research->destroyItem())
+			if (options1.retainCorpses() && research->needItem() && research->destroyItem())
 			{
 				auto* ruleUnit = mod->getUnit(research->getName(), false); // don't use getNeededItem()
 				if (ruleUnit)
@@ -2674,7 +2674,7 @@ void GeoscapeState::time1Day()
 			popup(new TrainingFinishedState(xbase, trainingFinishedList, false));
 		}
 		// Handle psionic training
-		if (xbase->getAvailablePsiLabs() > 0 && Options::anytimePsiTraining)
+		if (xbase->getAvailablePsiLabs() > 0 && options1.anytimePsiTraining())
 		{
 			std::vector<Soldier*> psiTrainingFinishedList;
 			for (auto* s : *xbase->getSoldiers())
@@ -2881,7 +2881,7 @@ void GeoscapeState::time1Month()
 	determineAlienMissions();
 
 	// Handle Psi-Training and initiate a new retaliation mission, if applicable
-	if (!Options::anytimePsiTraining)
+	if (!options1.anytimePsiTraining())
 	{
 		bool psiStrengthEval = (Options::psiStrengthEval && _game->getSavedGame()->isResearched(_game->getMod()->getPsiRequirements()));
 		for (auto* xbase : *_game->getSavedGame()->getBases())
