@@ -76,7 +76,7 @@ SelectMusicTrackState::SelectMusicTrackState(SelectMusicTrackOrigin origin) : _o
 
 	_btnCancel->setText(tr("STR_CANCEL_UC"));
 	_btnCancel->onMouseClick((ActionHandler)&SelectMusicTrackState::btnCancelClick);
-	_btnCancel->onKeyboardPress((ActionHandler)&SelectMusicTrackState::btnCancelClick, Options::keyCancel);
+	_btnCancel->onKeyboardPress((ActionHandler)&SelectMusicTrackState::btnCancelClick, options1.keyCancel());
 
 	_lstTracks->setColumns(1, 172);
 	_lstTracks->setSelectable(true);

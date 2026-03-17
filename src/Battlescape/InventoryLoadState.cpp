@@ -71,7 +71,7 @@ InventoryLoadState::InventoryLoadState(InventoryState *parent) : _parent(parent)
 	_btnCancel->setHighContrast(true);
 	_btnCancel->setText(tr("STR_CANCEL_UC"));
 	_btnCancel->onMouseClick((ActionHandler)&InventoryLoadState::btnCancelClick);
-	_btnCancel->onKeyboardPress((ActionHandler)&InventoryLoadState::btnCancelClick, Options::keyCancel);
+	_btnCancel->onKeyboardPress((ActionHandler)&InventoryLoadState::btnCancelClick, options1.keyCancel());
 
 	for (int i = 0; i < Options::oxceMaxEquipmentLayoutTemplates; ++i)
 	{

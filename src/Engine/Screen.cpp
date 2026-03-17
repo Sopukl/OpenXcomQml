@@ -166,7 +166,7 @@ void Screen::handle(Action *action)
 		options1.setfullscreen(!options1.fullscreen());
 		resetDisplay();
 	}
-	else if (action->getDetails()->type == SDL_KEYDOWN && action->getDetails()->key.keysym.sym == Options::keyScreenshot)
+	else if (action->getDetails()->type == SDL_KEYDOWN && action->getDetails()->key.keysym.sym == options1.keyScreenshot())
 	{
 		std::ostringstream ss;
 		int i = 0;

@@ -73,11 +73,11 @@ AbandonGameState::AbandonGameState(OptionsOrigin origin) : _origin(origin)
 
 	_btnYes->setText(tr("STR_YES"));
 	_btnYes->onMouseClick((ActionHandler)&AbandonGameState::btnYesClick);
-	_btnYes->onKeyboardPress((ActionHandler)&AbandonGameState::btnYesClick, Options::keyOk);
+	_btnYes->onKeyboardPress((ActionHandler)&AbandonGameState::btnYesClick, options1.keyOk());
 
 	_btnNo->setText(tr("STR_NO"));
 	_btnNo->onMouseClick((ActionHandler)&AbandonGameState::btnNoClick);
-	_btnNo->onKeyboardPress((ActionHandler)&AbandonGameState::btnNoClick, Options::keyCancel);
+	_btnNo->onKeyboardPress((ActionHandler)&AbandonGameState::btnNoClick, options1.keyCancel());
 
 	_txtTitle->setAlign(ALIGN_CENTER);
 	_txtTitle->setBig();

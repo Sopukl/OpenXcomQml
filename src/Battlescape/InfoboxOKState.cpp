@@ -58,8 +58,8 @@ InfoboxOKState::InfoboxOKState(const std::string &msg)
 
 	_btnOk->setText(tr("STR_OK"));
 	_btnOk->onMouseClick((ActionHandler)&InfoboxOKState::btnOkClick);
-	_btnOk->onKeyboardPress((ActionHandler)&InfoboxOKState::btnOkClick, Options::keyOk);
-	_btnOk->onKeyboardPress((ActionHandler)&InfoboxOKState::btnOkClick, Options::keyCancel);
+	_btnOk->onKeyboardPress((ActionHandler)&InfoboxOKState::btnOkClick, options1.keyOk());
+	_btnOk->onKeyboardPress((ActionHandler)&InfoboxOKState::btnOkClick, options1.keyCancel());
 	_btnOk->setHighContrast(true);
 
 	_txtTitle->setBig();

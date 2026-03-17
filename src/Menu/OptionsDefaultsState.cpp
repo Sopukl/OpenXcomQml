@@ -59,11 +59,11 @@ OptionsDefaultsState::OptionsDefaultsState(OptionsOrigin origin, OptionsBaseStat
 
 	_btnYes->setText(tr("STR_YES"));
 	_btnYes->onMouseClick((ActionHandler)&OptionsDefaultsState::btnYesClick);
-	_btnYes->onKeyboardPress((ActionHandler)&OptionsDefaultsState::btnYesClick, Options::keyOk);
+	_btnYes->onKeyboardPress((ActionHandler)&OptionsDefaultsState::btnYesClick, options1.keyOk());
 
 	_btnNo->setText(tr("STR_NO"));
 	_btnNo->onMouseClick((ActionHandler)&OptionsDefaultsState::btnNoClick);
-	_btnNo->onKeyboardPress((ActionHandler)&OptionsDefaultsState::btnNoClick, Options::keyCancel);
+	_btnNo->onKeyboardPress((ActionHandler)&OptionsDefaultsState::btnNoClick, options1.keyCancel());
 
 	_txtTitle->setAlign(ALIGN_CENTER);
 	_txtTitle->setBig();
@@ -100,7 +100,7 @@ void OptionsDefaultsState::btnYesClick(Action *action)
 		options1.setmusicVolume(15);
 		options1.setsoundVolume(15);
 		options1.setuiVolume(15);
-		Options::keyFps = SDLK_UNKNOWN;
+		options1.setkeyFps(SDLK_UNKNOWN);
 		options1.setplayIntro(false);
 		options1.setautosave(false);
 		Options::showFundsOnGeoscape = true;

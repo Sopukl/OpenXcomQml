@@ -92,8 +92,8 @@ BaseDefenseState::BaseDefenseState(Base *base, Ufo *ufo, GeoscapeState *state, b
 
 	_btnOk->setText(tr("STR_OK"));
 	_btnOk->onMouseClick((ActionHandler)&BaseDefenseState::btnOkClick);
-	_btnOk->onKeyboardPress((ActionHandler)&BaseDefenseState::btnOkClick, Options::keyOk);
-	_btnOk->onKeyboardPress((ActionHandler)&BaseDefenseState::btnOkClick, Options::keyCancel);
+	_btnOk->onKeyboardPress((ActionHandler)&BaseDefenseState::btnOkClick, options1.keyOk());
+	_btnOk->onKeyboardPress((ActionHandler)&BaseDefenseState::btnOkClick, options1.keyCancel());
 	_btnOk->setVisible(false);
 
 	_btnStart->setText(tr("STR_START_FIRING"));

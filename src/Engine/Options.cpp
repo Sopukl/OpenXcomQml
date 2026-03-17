@@ -275,12 +275,12 @@ void createAdvancedOptionsOXC()
 void createControlsOXC()
 {
 	// controls
-	_info.push_back(OptionInfo(OPTION_OXC, "keyOk", &keyOk, SDLK_RETURN, "STR_OK", "STR_GENERAL"));
-	_info.push_back(OptionInfo(OPTION_OXC, "keyCancel", &keyCancel, SDLK_ESCAPE, "STR_CANCEL", "STR_GENERAL"));
-	_info.push_back(OptionInfo(OPTION_OXC, "keyScreenshot", &keyScreenshot, SDLK_F12, "STR_SCREENSHOT", "STR_GENERAL"));
-	_info.push_back(OptionInfo(OPTION_OXC, "keyFps", &keyFps, SDLK_F7, "STR_FPS_COUNTER", "STR_GENERAL"));
-	_info.push_back(OptionInfo(OPTION_OXC, "keyQuickSave", &keyQuickSave, SDLK_F5, "STR_QUICK_SAVE", "STR_GENERAL"));
-	_info.push_back(OptionInfo(OPTION_OXC, "keyQuickLoad", &keyQuickLoad, SDLK_F9, "STR_QUICK_LOAD", "STR_GENERAL"));
+	//# _info.push_back(OptionInfo(OPTION_OXC, "keyOk", &keyOk, SDLK_RETURN, "STR_OK", "STR_GENERAL"));
+	//# _info.push_back(OptionInfo(OPTION_OXC, "keyCancel", &keyCancel, SDLK_ESCAPE, "STR_CANCEL", "STR_GENERAL"));
+	//# _info.push_back(OptionInfo(OPTION_OXC, "keyScreenshot", &keyScreenshot, SDLK_F12, "STR_SCREENSHOT", "STR_GENERAL"));
+	//# _info.push_back(OptionInfo(OPTION_OXC, "keyFps", &keyFps, SDLK_F7, "STR_FPS_COUNTER", "STR_GENERAL"));
+	//# _info.push_back(OptionInfo(OPTION_OXC, "keyQuickSave", &keyQuickSave, SDLK_F5, "STR_QUICK_SAVE", "STR_GENERAL"));
+	//# _info.push_back(OptionInfo(OPTION_OXC, "keyQuickLoad", &keyQuickLoad, SDLK_F9, "STR_QUICK_LOAD", "STR_GENERAL"));
 	_info.push_back(OptionInfo(OPTION_OXC, "keyGeoLeft", &keyGeoLeft, SDLK_LEFT, "STR_ROTATE_LEFT", "STR_GEOSCAPE"));
 	_info.push_back(OptionInfo(OPTION_OXC, "keyGeoRight", &keyGeoRight, SDLK_RIGHT, "STR_ROTATE_RIGHT", "STR_GEOSCAPE"));
 	_info.push_back(OptionInfo(OPTION_OXC, "keyGeoUp", &keyGeoUp, SDLK_UP, "STR_ROTATE_UP", "STR_GEOSCAPE"));

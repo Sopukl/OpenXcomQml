@@ -65,10 +65,10 @@ TrainingFinishedState::TrainingFinishedState(Base *base, const std::vector<Soldi
 
 	_btnOk->setText(tr("STR_OK"));
 	_btnOk->onMouseClick((ActionHandler)&TrainingFinishedState::btnOkClick);
-	_btnOk->onKeyboardPress((ActionHandler)&TrainingFinishedState::btnOkClick, Options::keyCancel);
+	_btnOk->onKeyboardPress((ActionHandler)&TrainingFinishedState::btnOkClick, options1.keyCancel());
 	_btnOpen->setText(tr(_psi ? "STR_PSI_TRAINING" : "STR_TRAINING"));
 	_btnOpen->onMouseClick((ActionHandler)&TrainingFinishedState::btnOpenClick);
-	_btnOpen->onKeyboardPress((ActionHandler)&TrainingFinishedState::btnOpenClick, Options::keyOk);
+	_btnOpen->onKeyboardPress((ActionHandler)&TrainingFinishedState::btnOpenClick, options1.keyOk());
 	_txtTitle->setBig();
 	_txtTitle->setAlign(ALIGN_CENTER);
 	_txtTitle->setText(tr(_psi ? "STR_PSI_TRAINING_FINISHED" : "STR_TRAINING_FINISHED").arg(base->getName()));

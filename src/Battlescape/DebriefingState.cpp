@@ -180,8 +180,8 @@ DebriefingState::DebriefingState() :
 
 	_btnOk->setText(tr("STR_OK"));
 	_btnOk->onMouseClick((ActionHandler)&DebriefingState::btnOkClick);
-	_btnOk->onKeyboardPress((ActionHandler)&DebriefingState::btnOkClick, Options::keyOk);
-	_btnOk->onKeyboardPress((ActionHandler)&DebriefingState::btnOkClick, Options::keyCancel);
+	_btnOk->onKeyboardPress((ActionHandler)&DebriefingState::btnOkClick, options1.keyOk());
+	_btnOk->onKeyboardPress((ActionHandler)&DebriefingState::btnOkClick, options1.keyCancel());
 
 	_btnStats->onMouseClick((ActionHandler)&DebriefingState::btnStatsClick);
 

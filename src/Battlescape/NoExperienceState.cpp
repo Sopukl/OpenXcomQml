@@ -67,7 +67,7 @@ NoExperienceState::NoExperienceState()
 	_btnCancel->setText(tr("STR_CANCEL_UC"));
 	_btnCancel->setHighContrast(true);
 	_btnCancel->onMouseClick((ActionHandler)&NoExperienceState::btnCancelClick);
-	_btnCancel->onKeyboardPress((ActionHandler)&NoExperienceState::btnCancelClick, Options::keyCancel);
+	_btnCancel->onKeyboardPress((ActionHandler)&NoExperienceState::btnCancelClick, options1.keyCancel());
 
 	_lstSoldiers->setColumns(1, 172);
 	_lstSoldiers->setSelectable(true);

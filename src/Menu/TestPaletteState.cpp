@@ -53,7 +53,7 @@ TestPaletteState::TestPaletteState(const std::string &palette, PaletteActionType
 	centerAllSurfaces();
 
 	_btnCancel->onMouseClick((ActionHandler)&TestPaletteState::btnCancelClick);
-	_btnCancel->onKeyboardPress((ActionHandler)&TestPaletteState::btnCancelClick, Options::keyCancel);
+	_btnCancel->onKeyboardPress((ActionHandler)&TestPaletteState::btnCancelClick, options1.keyCancel());
 
 	// basic palette
 	if (action == PAT_PREVIEW)

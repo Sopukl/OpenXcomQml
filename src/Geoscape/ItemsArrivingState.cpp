@@ -75,11 +75,11 @@ ItemsArrivingState::ItemsArrivingState(GeoscapeState *state) : _state(state), _b
 
 	_btnOk->setText(tr("STR_OK"));
 	_btnOk->onMouseClick((ActionHandler)&ItemsArrivingState::btnOkClick);
-	_btnOk->onKeyboardPress((ActionHandler)&ItemsArrivingState::btnOkClick, Options::keyCancel);
+	_btnOk->onKeyboardPress((ActionHandler)&ItemsArrivingState::btnOkClick, options1.keyCancel());
 
 	_btnGotoBase->setText(tr("STR_GO_TO_BASE"));
 	_btnGotoBase->onMouseClick((ActionHandler)&ItemsArrivingState::btnGotoBaseClick);
-	_btnGotoBase->onKeyboardPress((ActionHandler)&ItemsArrivingState::btnGotoBaseClick, Options::keyOk);
+	_btnGotoBase->onKeyboardPress((ActionHandler)&ItemsArrivingState::btnGotoBaseClick, options1.keyOk());
 
 	_txtTitle->setBig();
 	_txtTitle->setAlign(ALIGN_CENTER);

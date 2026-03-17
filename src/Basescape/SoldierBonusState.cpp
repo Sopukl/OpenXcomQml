@@ -77,7 +77,7 @@ SoldierBonusState::SoldierBonusState(Base *base, size_t soldier) : _base(base), 
 
 	_btnCancel->setText(tr("STR_CANCEL_UC"));
 	_btnCancel->onMouseClick((ActionHandler)&SoldierBonusState::btnCancelClick);
-	_btnCancel->onKeyboardPress((ActionHandler)&SoldierBonusState::btnCancelClick, Options::keyCancel);
+	_btnCancel->onKeyboardPress((ActionHandler)&SoldierBonusState::btnCancelClick, options1.keyCancel());
 
 	Soldier *s = _base ? _base->getSoldiers()->at(_soldier) : _game->getSavedGame()->getDeadSoldiers()->at(_soldier);
 	_txtTitle->setAlign(ALIGN_CENTER);

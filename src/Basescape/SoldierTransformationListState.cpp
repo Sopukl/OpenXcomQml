@@ -93,8 +93,8 @@ SoldierTransformationListState::SoldierTransformationListState(Base *base, Combo
 
 	_btnOK->setText(tr("STR_OK"));
 	_btnOK->onMouseClick((ActionHandler)&SoldierTransformationListState::btnOkClick);
-	_btnOK->onKeyboardPress((ActionHandler)&SoldierTransformationListState::btnOkClick, Options::keyCancel);
-	_btnOK->onKeyboardPress((ActionHandler)&SoldierTransformationListState::btnOkClick, Options::keyOk);
+	_btnOK->onKeyboardPress((ActionHandler)&SoldierTransformationListState::btnOkClick, options1.keyCancel());
+	_btnOK->onKeyboardPress((ActionHandler)&SoldierTransformationListState::btnOkClick, options1.keyOk());
 
 	std::vector<std::string> availableOptions;
 	availableOptions.push_back("STR_ALL_SOLDIER_TYPES");

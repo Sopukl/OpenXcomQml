@@ -141,7 +141,7 @@ void PrimeGrenadeState::handle(Action *action)
 		if (!_inInventoryView) _action->value = -1;
 		_game->popState();
 	}
-	else if (action->getDetails()->type == SDL_KEYDOWN && action->getDetails()->key.keysym.sym == Options::keyCancel)
+	else if (action->getDetails()->type == SDL_KEYDOWN && action->getDetails()->key.keysym.sym == options1.keyCancel())
 	{
 		if (!_inInventoryView) _action->value = -1;
 		_game->popState();

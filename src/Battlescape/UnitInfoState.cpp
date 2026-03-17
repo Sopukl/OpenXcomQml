@@ -275,7 +275,7 @@ UnitInfoState::UnitInfoState(BattleUnit *unit, BattlescapeState *parent, bool fr
 	_game->getMod()->getSurface("UNIBORD.PCK")->blitNShade(_bg, 0, 0);
 
 	_exit->onMouseClick((ActionHandler)&UnitInfoState::exitClick);
-	_exit->onKeyboardPress((ActionHandler)&UnitInfoState::exitClick, Options::keyCancel);
+	_exit->onKeyboardPress((ActionHandler)&UnitInfoState::exitClick, options1.keyCancel());
 	_exit->onKeyboardPress((ActionHandler)&UnitInfoState::exitClick, Options::keyBattleStats);
 
 	Uint8 color = _game->getMod()->getInterface("stats")->getElement("text")->color;

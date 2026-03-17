@@ -83,7 +83,7 @@ SoldierTransformState::SoldierTransformState(Base* base, size_t soldier) : _base
 
 	_btnCancel->setText(tr("STR_CANCEL_UC"));
 	_btnCancel->onMouseClick((ActionHandler)&SoldierTransformState::btnCancelClick);
-	_btnCancel->onKeyboardPress((ActionHandler)&SoldierTransformState::btnCancelClick, Options::keyCancel);
+	_btnCancel->onKeyboardPress((ActionHandler)&SoldierTransformState::btnCancelClick, options1.keyCancel());
 
 	Soldier *s = _base->getSoldiers()->at(_soldier);
 	_txtTitle->setAlign(ALIGN_CENTER);

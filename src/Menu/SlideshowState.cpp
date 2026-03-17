@@ -43,8 +43,8 @@ SlideshowState::SlideshowState(const SlideshowHeader &slideshowHeader, const std
 			new InteractiveSurface(Screen::ORIGINAL_WIDTH, Screen::ORIGINAL_HEIGHT, 0, 0);
 		slide->loadImage(def.imagePath);
 		slide->onMouseClick((ActionHandler)&SlideshowState::screenClick);
-		slide->onKeyboardPress((ActionHandler)&SlideshowState::screenClick, Options::keyOk);
-		slide->onKeyboardPress((ActionHandler)&SlideshowState::screenSkip, Options::keyCancel);
+		slide->onKeyboardPress((ActionHandler)&SlideshowState::screenClick, options1.keyOk());
+		slide->onKeyboardPress((ActionHandler)&SlideshowState::screenSkip, options1.keyCancel());
 		slide->setVisible(false);
 		_slides.push_back(slide);
 		setStatePalette(slide->getPalette());

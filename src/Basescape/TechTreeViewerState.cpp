@@ -139,7 +139,7 @@ TechTreeViewerState::TechTreeViewerState(const RuleResearch *r, const RuleManufa
 
 	_btnOk->setText(tr("STR_OK"));
 	_btnOk->onMouseClick((ActionHandler)&TechTreeViewerState::btnOkClick);
-	_btnOk->onKeyboardPress((ActionHandler)&TechTreeViewerState::btnOkClick, Options::keyCancel);
+	_btnOk->onKeyboardPress((ActionHandler)&TechTreeViewerState::btnOkClick, options1.keyCancel());
 	_btnOk->onKeyboardPress((ActionHandler)&TechTreeViewerState::btnBackClick, SDLK_BACKSPACE);
 
 	if (Options::oxceDisableTechTreeViewer)

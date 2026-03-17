@@ -59,11 +59,11 @@ ConfirmLoadState::ConfirmLoadState(OptionsOrigin origin, const std::string &file
 
 	_btnYes->setText(tr("STR_YES"));
 	_btnYes->onMouseClick((ActionHandler)&ConfirmLoadState::btnYesClick);
-	_btnYes->onKeyboardPress((ActionHandler)&ConfirmLoadState::btnYesClick, Options::keyOk);
+	_btnYes->onKeyboardPress((ActionHandler)&ConfirmLoadState::btnYesClick, options1.keyOk());
 
 	_btnNo->setText(tr("STR_NO"));
 	_btnNo->onMouseClick((ActionHandler)&ConfirmLoadState::btnNoClick);
-	_btnNo->onKeyboardPress((ActionHandler)&ConfirmLoadState::btnNoClick, Options::keyCancel);
+	_btnNo->onKeyboardPress((ActionHandler)&ConfirmLoadState::btnNoClick, options1.keyCancel());
 
 	_txtText->setAlign(ALIGN_CENTER);
 	_txtText->setBig();

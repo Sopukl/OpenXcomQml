@@ -72,7 +72,7 @@ StatisticsState::StatisticsState()
 
 	_btnOk->setText(tr("STR_OK"));
 	_btnOk->onMouseClick((ActionHandler)&StatisticsState::btnOkClick);
-	_btnOk->onKeyboardPress((ActionHandler)&StatisticsState::btnOkClick, Options::keyOk);
+	_btnOk->onKeyboardPress((ActionHandler)&StatisticsState::btnOkClick, options1.keyOk());
 
 	_txtTitle->setBig();
 	_txtTitle->setAlign(ALIGN_CENTER);

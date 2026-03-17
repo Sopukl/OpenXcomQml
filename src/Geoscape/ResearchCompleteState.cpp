@@ -65,11 +65,11 @@ ResearchCompleteState::ResearchCompleteState(const RuleResearch *newResearch, co
 
 	_btnOk->setText(tr("STR_OK"));
 	_btnOk->onMouseClick((ActionHandler)&ResearchCompleteState::btnOkClick);
-	_btnOk->onKeyboardPress((ActionHandler)&ResearchCompleteState::btnOkClick, Options::keyCancel);
+	_btnOk->onKeyboardPress((ActionHandler)&ResearchCompleteState::btnOkClick, options1.keyCancel());
 
 	_btnReport->setText(tr("STR_VIEW_REPORTS"));
 	_btnReport->onMouseClick((ActionHandler)&ResearchCompleteState::btnReportClick);
-	_btnReport->onKeyboardPress((ActionHandler)&ResearchCompleteState::btnReportClick, Options::keyOk);
+	_btnReport->onKeyboardPress((ActionHandler)&ResearchCompleteState::btnReportClick, options1.keyOk());
 
 	_txtBase->setAlign(ALIGN_CENTER);
 	_txtBase->setText(base->getName());

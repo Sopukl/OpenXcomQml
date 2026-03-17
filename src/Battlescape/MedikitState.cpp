@@ -182,7 +182,7 @@ MedikitState::MedikitState (BattleUnit *targetUnit, BattleAction *action, TileEn
 	_partTxt->setHighContrast(true);
 	_woundTxt->setHighContrast(true);
 	_endButton->onMouseClick((ActionHandler)&MedikitState::onEndClick);
-	_endButton->onKeyboardPress((ActionHandler)&MedikitState::onEndClick, Options::keyCancel);
+	_endButton->onKeyboardPress((ActionHandler)&MedikitState::onEndClick, options1.keyCancel());
 	_healButton->onMouseClick((ActionHandler)&MedikitState::onHealClick);
 	_healButton->onKeyboardPress((ActionHandler)&MedikitState::onHealClick, SDLK_3);
 	_stimulantButton->onMouseClick((ActionHandler)&MedikitState::onStimulantClick);

@@ -291,11 +291,11 @@ NewBattleState::NewBattleState() :
 
 	_btnOk->setText(tr("STR_OK"));
 	_btnOk->onMouseClick((ActionHandler)&NewBattleState::btnOkClick);
-	_btnOk->onKeyboardPress((ActionHandler)&NewBattleState::btnOkClick, Options::keyOk);
+	_btnOk->onKeyboardPress((ActionHandler)&NewBattleState::btnOkClick, options1.keyOk());
 
 	_btnCancel->setText(tr("STR_CANCEL"));
 	_btnCancel->onMouseClick((ActionHandler)&NewBattleState::btnCancelClick);
-	_btnCancel->onKeyboardPress((ActionHandler)&NewBattleState::btnCancelClick, Options::keyCancel);
+	_btnCancel->onKeyboardPress((ActionHandler)&NewBattleState::btnCancelClick, options1.keyCancel());
 
 	load();
 

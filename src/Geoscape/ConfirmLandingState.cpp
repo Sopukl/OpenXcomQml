@@ -82,7 +82,7 @@ ConfirmLandingState::ConfirmLandingState(Craft *craft, Texture *missionTexture, 
 
 	_btnYes->setText(tr("STR_YES"));
 	_btnYes->onMouseClick((ActionHandler)&ConfirmLandingState::btnYesClick);
-	_btnYes->onKeyboardPress((ActionHandler)&ConfirmLandingState::btnYesClick, Options::keyOk);
+	_btnYes->onKeyboardPress((ActionHandler)&ConfirmLandingState::btnYesClick, options1.keyOk());
 
 	if (_game->isCtrlPressed())
 	{
@@ -93,7 +93,7 @@ ConfirmLandingState::ConfirmLandingState(Craft *craft, Texture *missionTexture, 
 		_btnNo->setText(tr("STR_NO"));
 	}
 	_btnNo->onMouseClick((ActionHandler)&ConfirmLandingState::btnNoClick);
-	_btnNo->onKeyboardPress((ActionHandler)&ConfirmLandingState::btnNoClick, Options::keyCancel);
+	_btnNo->onKeyboardPress((ActionHandler)&ConfirmLandingState::btnNoClick, options1.keyCancel());
 	_btnNo->onKeyboardPress((ActionHandler)&ConfirmLandingState::togglePatrolButton, SDLK_LCTRL);
 	_btnNo->onKeyboardRelease((ActionHandler)&ConfirmLandingState::togglePatrolButton, SDLK_LCTRL);
 	_btnNo->onKeyboardPress((ActionHandler)&ConfirmLandingState::togglePatrolButton, SDLK_RCTRL);

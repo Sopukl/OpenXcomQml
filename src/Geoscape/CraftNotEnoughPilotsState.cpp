@@ -60,11 +60,11 @@ CraftNotEnoughPilotsState::CraftNotEnoughPilotsState(Craft *craft) : _craft(craf
 
 	_btnOk->setText(tr("STR_OK"));
 	_btnOk->onMouseClick((ActionHandler)&CraftNotEnoughPilotsState::btnOkClick);
-	_btnOk->onKeyboardPress((ActionHandler)&CraftNotEnoughPilotsState::btnOkClick, Options::keyCancel);
+	_btnOk->onKeyboardPress((ActionHandler)&CraftNotEnoughPilotsState::btnOkClick, options1.keyCancel());
 
 	_btnAssignPilots->setText(tr("STR_ASSIGN_PILOTS"));
 	_btnAssignPilots->onMouseClick((ActionHandler)&CraftNotEnoughPilotsState::btnAssignPilotsClick);
-	_btnAssignPilots->onKeyboardPress((ActionHandler)&CraftNotEnoughPilotsState::btnAssignPilotsClick, Options::keyOk);
+	_btnAssignPilots->onKeyboardPress((ActionHandler)&CraftNotEnoughPilotsState::btnAssignPilotsClick, options1.keyOk());
 	if (_craft->getMissionComplete() || _craft->getStatus() == "STR_OUT")
 	{
 		_btnAssignPilots->setVisible(false);

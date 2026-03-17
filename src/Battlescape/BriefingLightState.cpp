@@ -75,8 +75,8 @@ BriefingLightState::BriefingLightState(AlienDeployment *deployment)
 	// Set up objects
 	_btnOk->setText(tr("STR_OK"));
 	_btnOk->onMouseClick((ActionHandler)&BriefingLightState::btnOkClick);
-	_btnOk->onKeyboardPress((ActionHandler)&BriefingLightState::btnOkClick, Options::keyOk);
-	_btnOk->onKeyboardPress((ActionHandler)&BriefingLightState::btnOkClick, Options::keyCancel);
+	_btnOk->onKeyboardPress((ActionHandler)&BriefingLightState::btnOkClick, options1.keyOk());
+	_btnOk->onKeyboardPress((ActionHandler)&BriefingLightState::btnOkClick, options1.keyCancel());
 
 	_btnArmors->setText(tr("STR_WHAT_CAN_I_WEAR"));
 	_btnArmors->onMouseClick((ActionHandler)&BriefingLightState::btnArmorsClick);

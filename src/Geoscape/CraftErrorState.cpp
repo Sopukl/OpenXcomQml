@@ -64,10 +64,10 @@ CraftErrorState::CraftErrorState(GeoscapeState *state, const std::string &msg, b
 	_btnOk->onMouseClick((ActionHandler)&CraftErrorState::btnOkClick);
 	if (enableHotkeys)
 	{
-		_btnOk->onKeyboardPress((ActionHandler)&CraftErrorState::btnOkClick, Options::keyCancel);
+		_btnOk->onKeyboardPress((ActionHandler)&CraftErrorState::btnOkClick, options1.keyCancel());
 		if (!_state)
 		{
-			_btnOk->onKeyboardPress((ActionHandler)&CraftErrorState::btnOkClick, Options::keyOk);
+			_btnOk->onKeyboardPress((ActionHandler)&CraftErrorState::btnOkClick, options1.keyOk());
 		}
 	}
 
@@ -75,7 +75,7 @@ CraftErrorState::CraftErrorState(GeoscapeState *state, const std::string &msg, b
 	_btnOk5Secs->onMouseClick((ActionHandler)&CraftErrorState::btnOk5SecsClick);
 	if (enableHotkeys && _state)
 	{
-		_btnOk5Secs->onKeyboardPress((ActionHandler)&CraftErrorState::btnOk5SecsClick, Options::keyOk);
+		_btnOk5Secs->onKeyboardPress((ActionHandler)&CraftErrorState::btnOk5SecsClick, options1.keyOk());
 	}
 	_btnOk5Secs->setVisible(_state != 0);
 

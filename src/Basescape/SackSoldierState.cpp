@@ -65,11 +65,11 @@ SackSoldierState::SackSoldierState(Base *base, size_t soldierId) : _base(base), 
 
 	_btnOk->setText(tr("STR_OK"));
 	_btnOk->onMouseClick((ActionHandler)&SackSoldierState::btnOkClick);
-	_btnOk->onKeyboardPress((ActionHandler)&SackSoldierState::btnOkClick, Options::keyOk);
+	_btnOk->onKeyboardPress((ActionHandler)&SackSoldierState::btnOkClick, options1.keyOk());
 
 	_btnCancel->setText(tr("STR_CANCEL_UC"));
 	_btnCancel->onMouseClick((ActionHandler)&SackSoldierState::btnCancelClick);
-	_btnCancel->onKeyboardPress((ActionHandler)&SackSoldierState::btnCancelClick, Options::keyCancel);
+	_btnCancel->onKeyboardPress((ActionHandler)&SackSoldierState::btnCancelClick, options1.keyCancel());
 
 	_txtTitle->setAlign(ALIGN_CENTER);
 	_txtTitle->setText(tr("STR_SACK"));

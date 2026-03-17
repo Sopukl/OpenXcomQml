@@ -105,7 +105,7 @@ ExtendedBattlescapeLinksState::ExtendedBattlescapeLinksState(BattlescapeState* p
 
 	_btnOk->setText(tr("STR_OK"));
 	_btnOk->onMouseClick((ActionHandler)&ExtendedBattlescapeLinksState::btnOkClick);
-	_btnOk->onKeyboardPress((ActionHandler)&ExtendedBattlescapeLinksState::btnOkClick, Options::keyCancel);
+	_btnOk->onKeyboardPress((ActionHandler)&ExtendedBattlescapeLinksState::btnOkClick, options1.keyCancel());
 
 	_btnTouch->setText(tr("STR_TOGGLE_TOUCH_BUTTONS"));
 	_btnTouch->onMouseClick((ActionHandler)&ExtendedBattlescapeLinksState::btnTouchClick);

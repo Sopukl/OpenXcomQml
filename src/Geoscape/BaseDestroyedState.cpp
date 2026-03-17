@@ -78,8 +78,8 @@ BaseDestroyedState::BaseDestroyedState(Base *base, const Ufo* ufo, bool missiles
 
 	_btnOk->setText(tr("STR_OK"));
 	_btnOk->onMouseClick((ActionHandler)&BaseDestroyedState::btnOkClick);
-	_btnOk->onKeyboardPress((ActionHandler)&BaseDestroyedState::btnOkClick, Options::keyOk);
-	_btnOk->onKeyboardPress((ActionHandler)&BaseDestroyedState::btnOkClick, Options::keyCancel);
+	_btnOk->onKeyboardPress((ActionHandler)&BaseDestroyedState::btnOkClick, options1.keyOk());
+	_btnOk->onKeyboardPress((ActionHandler)&BaseDestroyedState::btnOkClick, options1.keyCancel());
 
 	_txtMessage->setAlign(ALIGN_CENTER);
 	_txtMessage->setBig();

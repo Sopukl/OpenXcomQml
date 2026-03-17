@@ -85,8 +85,8 @@ void ErrorMessageState::create(const std::string &str, SDL_Color *palette, Uint8
 	_btnOk->setColor(color);
 	_btnOk->setText(tr("STR_OK"));
 	_btnOk->onMouseClick((ActionHandler)&ErrorMessageState::btnOkClick);
-	_btnOk->onKeyboardPress((ActionHandler)&ErrorMessageState::btnOkClick, Options::keyOk);
-	_btnOk->onKeyboardPress((ActionHandler)&ErrorMessageState::btnOkClick, Options::keyCancel);
+	_btnOk->onKeyboardPress((ActionHandler)&ErrorMessageState::btnOkClick, options1.keyOk());
+	_btnOk->onKeyboardPress((ActionHandler)&ErrorMessageState::btnOkClick, options1.keyCancel());
 
 	_txtMessage->setColor(color);
 	if (color2 != 0) // just in case, probably not needed

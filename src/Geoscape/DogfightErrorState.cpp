@@ -61,11 +61,11 @@ DogfightErrorState::DogfightErrorState(Craft *craft, const std::string &msg) : _
 
 	_btnIntercept->setText(tr("STR_CONTINUE_INTERCEPTION_PURSUIT"));
 	_btnIntercept->onMouseClick((ActionHandler)&DogfightErrorState::btnInterceptClick);
-	_btnIntercept->onKeyboardPress((ActionHandler)&DogfightErrorState::btnInterceptClick, Options::keyCancel);
+	_btnIntercept->onKeyboardPress((ActionHandler)&DogfightErrorState::btnInterceptClick, options1.keyCancel());
 
 	_btnBase->setText(tr("STR_RETURN_TO_BASE"));
 	_btnBase->onMouseClick((ActionHandler)&DogfightErrorState::btnBaseClick);
-	_btnBase->onKeyboardPress((ActionHandler)&DogfightErrorState::btnBaseClick, Options::keyOk);
+	_btnBase->onKeyboardPress((ActionHandler)&DogfightErrorState::btnBaseClick, options1.keyOk());
 
 	_txtCraft->setAlign(ALIGN_CENTER);
 	_txtCraft->setBig();

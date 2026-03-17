@@ -61,8 +61,8 @@ CommendationLateState::CommendationLateState(std::vector<Soldier*> soldiersMedal
 
 	_btnOk->setText(tr("STR_OK"));
 	_btnOk->onMouseClick((ActionHandler)&CommendationLateState::btnOkClick);
-	_btnOk->onKeyboardPress((ActionHandler)&CommendationLateState::btnOkClick, Options::keyOk);
-	_btnOk->onKeyboardPress((ActionHandler)&CommendationLateState::btnOkClick, Options::keyCancel);
+	_btnOk->onKeyboardPress((ActionHandler)&CommendationLateState::btnOkClick, options1.keyOk());
+	_btnOk->onKeyboardPress((ActionHandler)&CommendationLateState::btnOkClick, options1.keyCancel());
 
 	_txtTitle->setBig();
 	_txtTitle->setAlign(ALIGN_CENTER);

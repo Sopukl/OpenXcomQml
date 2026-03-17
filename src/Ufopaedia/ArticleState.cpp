@@ -230,8 +230,8 @@ namespace OpenXcom
 
 		_btnOk->setText(tr("STR_OK"));
 		_btnOk->onMouseClick((ActionHandler)&ArticleState::btnOkClick);
-		_btnOk->onKeyboardPress((ActionHandler)&ArticleState::btnOkClick,Options::keyOk);
-		_btnOk->onKeyboardPress((ActionHandler)&ArticleState::btnOkClick,Options::keyCancel);
+		_btnOk->onKeyboardPress((ActionHandler)&ArticleState::btnOkClick,options1.keyOk());
+		_btnOk->onKeyboardPress((ActionHandler)&ArticleState::btnOkClick,options1.keyCancel());
 		_btnOk->onKeyboardPress((ActionHandler)&ArticleState::btnResetMusicClick, Options::keySelectMusicTrack);
 		_btnPrev->setText("<<");
 		_btnPrev->onMouseClick((ActionHandler)&ArticleState::btnPrevClick);

@@ -115,11 +115,11 @@ OptionsBaseState::OptionsBaseState(OptionsOrigin origin) : _origin(origin), _gro
 
 	_btnOk->setText(tr("STR_OK"));
 	_btnOk->onMouseClick((ActionHandler)&OptionsBaseState::btnOkClick);
-	_btnOk->onKeyboardPress((ActionHandler)&OptionsBaseState::btnOkClick, Options::keyOk);
+	_btnOk->onKeyboardPress((ActionHandler)&OptionsBaseState::btnOkClick, options1.keyOk());
 
 	_btnCancel->setText(tr("STR_CANCEL"));
 	_btnCancel->onMouseClick((ActionHandler)&OptionsBaseState::btnCancelClick);
-	_btnCancel->onKeyboardPress((ActionHandler)&OptionsBaseState::btnCancelClick, Options::keyCancel);
+	_btnCancel->onKeyboardPress((ActionHandler)&OptionsBaseState::btnCancelClick, options1.keyCancel());
 
 	_btnDefault->setText(tr("STR_RESTORE_DEFAULTS"));
 	_btnDefault->onMouseClick((ActionHandler)&OptionsBaseState::btnDefaultClick);

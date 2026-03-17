@@ -55,8 +55,8 @@ UfoLostState::UfoLostState(const std::string &id) : _id(id)
 
 	_btnOk->setText(tr("STR_OK"));
 	_btnOk->onMouseClick((ActionHandler)&UfoLostState::btnOkClick);
-	_btnOk->onKeyboardPress((ActionHandler)&UfoLostState::btnOkClick, Options::keyOk);
-	_btnOk->onKeyboardPress((ActionHandler)&UfoLostState::btnOkClick, Options::keyCancel);
+	_btnOk->onKeyboardPress((ActionHandler)&UfoLostState::btnOkClick, options1.keyOk());
+	_btnOk->onKeyboardPress((ActionHandler)&UfoLostState::btnOkClick, options1.keyCancel());
 
 	_txtTitle->setBig();
 	_txtTitle->setAlign(ALIGN_CENTER);

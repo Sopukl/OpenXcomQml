@@ -76,12 +76,12 @@ ConfirmEndMissionState::ConfirmEndMissionState(SavedBattleGame *battleGame, int 
 	_btnOk->setText(tr("STR_OK"));
 	_btnOk->setHighContrast(true);
 	_btnOk->onMouseClick((ActionHandler)&ConfirmEndMissionState::btnOkClick);
-	_btnOk->onKeyboardPress((ActionHandler)&ConfirmEndMissionState::btnOkClick, Options::keyOk);
+	_btnOk->onKeyboardPress((ActionHandler)&ConfirmEndMissionState::btnOkClick, options1.keyOk());
 
 	_btnCancel->setText(tr("STR_CANCEL_UC"));
 	_btnCancel->setHighContrast(true);
 	_btnCancel->onMouseClick((ActionHandler)&ConfirmEndMissionState::btnCancelClick);
-	_btnCancel->onKeyboardPress((ActionHandler)&ConfirmEndMissionState::btnCancelClick, Options::keyCancel);
+	_btnCancel->onKeyboardPress((ActionHandler)&ConfirmEndMissionState::btnCancelClick, options1.keyCancel());
 	_btnCancel->onKeyboardPress((ActionHandler)&ConfirmEndMissionState::btnCancelClick, Options::keyBattleAbort);
 
 	centerAllSurfaces();

@@ -67,8 +67,8 @@ TransfersState::TransfersState(Base *base) : _base(base)
 
 	_btnOk->setText(tr("STR_OK"));
 	_btnOk->onMouseClick((ActionHandler)&TransfersState::btnOkClick);
-	_btnOk->onKeyboardPress((ActionHandler)&TransfersState::btnOkClick, Options::keyOk);
-	_btnOk->onKeyboardPress((ActionHandler)&TransfersState::btnOkClick, Options::keyCancel);
+	_btnOk->onKeyboardPress((ActionHandler)&TransfersState::btnOkClick, options1.keyOk());
+	_btnOk->onKeyboardPress((ActionHandler)&TransfersState::btnOkClick, options1.keyCancel());
 
 	_txtTitle->setBig();
 	_txtTitle->setAlign(ALIGN_CENTER);

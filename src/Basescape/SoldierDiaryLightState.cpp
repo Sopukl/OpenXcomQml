@@ -61,8 +61,8 @@ SoldierDiaryLightState::SoldierDiaryLightState(Soldier* soldier) : _soldier(sold
 
 	_btnOk->setText(tr("STR_OK"));
 	_btnOk->onMouseClick((ActionHandler)&SoldierDiaryLightState::btnOkClick);
-	_btnOk->onKeyboardPress((ActionHandler)&SoldierDiaryLightState::btnOkClick, Options::keyOk);
-	_btnOk->onKeyboardPress((ActionHandler)&SoldierDiaryLightState::btnOkClick, Options::keyCancel);
+	_btnOk->onKeyboardPress((ActionHandler)&SoldierDiaryLightState::btnOkClick, options1.keyOk());
+	_btnOk->onKeyboardPress((ActionHandler)&SoldierDiaryLightState::btnOkClick, options1.keyCancel());
 
 	_txtTitle->setAlign(ALIGN_CENTER);
 	_txtTitle->setText(tr("STR_NEUTRALIZATIONS_BY_WEAPON"));

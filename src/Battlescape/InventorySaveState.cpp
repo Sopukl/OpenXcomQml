@@ -80,7 +80,7 @@ InventorySaveState::InventorySaveState(InventoryState *parent) : _parent(parent)
 	_btnCancel->setHighContrast(true);
 	_btnCancel->setText(tr("STR_CANCEL_UC"));
 	_btnCancel->onMouseClick((ActionHandler)&InventorySaveState::btnCancelClick);
-	_btnCancel->onKeyboardPress((ActionHandler)&InventorySaveState::btnCancelClick, Options::keyCancel);
+	_btnCancel->onKeyboardPress((ActionHandler)&InventorySaveState::btnCancelClick, options1.keyCancel());
 
 	_btnSave->setHighContrast(true);
 	_btnSave->setText(tr("STR_SAVE_UC"));

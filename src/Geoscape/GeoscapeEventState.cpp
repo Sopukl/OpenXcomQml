@@ -100,8 +100,8 @@ GeoscapeEventState::GeoscapeEventState(const RuleEvent& eventRule) : _eventRule(
 
 	_btnOk->setText(tr("STR_OK"));
 	_btnOk->onMouseClick((ActionHandler)& GeoscapeEventState::btnOkClick);
-	_btnOk->onKeyboardPress((ActionHandler)&GeoscapeEventState::btnOkClick, Options::keyOk);
-	_btnOk->onKeyboardPress((ActionHandler)&GeoscapeEventState::btnOkClick, Options::keyCancel);
+	_btnOk->onKeyboardPress((ActionHandler)&GeoscapeEventState::btnOkClick, options1.keyOk());
+	_btnOk->onKeyboardPress((ActionHandler)&GeoscapeEventState::btnOkClick, options1.keyCancel());
 
 	_btnItemsArriving->setText(tr("STR_ITEMS_ARRIVING"));
 	_btnItemsArriving->onMouseClick((ActionHandler)&GeoscapeEventState::btnItemsArrivingClick);

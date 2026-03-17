@@ -59,7 +59,7 @@ TrainingState::TrainingState()
 
 	_btnOk->setText(tr("STR_OK"));
 	_btnOk->onMouseClick((ActionHandler)&TrainingState::btnOkClick);
-	_btnOk->onKeyboardPress((ActionHandler)&TrainingState::btnOkClick, Options::keyCancel);
+	_btnOk->onKeyboardPress((ActionHandler)&TrainingState::btnOkClick, options1.keyCancel());
 
 	_txtTitle->setBig();
 	_txtTitle->setAlign(ALIGN_CENTER);

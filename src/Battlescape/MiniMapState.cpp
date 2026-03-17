@@ -77,7 +77,7 @@ MiniMapState::MiniMapState (Camera * camera, SavedBattleGame * battleGame)
 	_btnLvlUp->onMouseClick((ActionHandler)&MiniMapState::btnLevelUpClick);
 	_btnLvlDwn->onMouseClick((ActionHandler)&MiniMapState::btnLevelDownClick);
 	_btnOk->onMouseClick((ActionHandler)&MiniMapState::btnOkClick);
-	_btnOk->onKeyboardPress((ActionHandler)&MiniMapState::btnOkClick, Options::keyCancel);
+	_btnOk->onKeyboardPress((ActionHandler)&MiniMapState::btnOkClick, options1.keyCancel());
 	_btnOk->onKeyboardPress((ActionHandler)&MiniMapState::btnOkClick, Options::keyBattleMap);
 	_txtLevel->setBig();
 	_txtLevel->setHighContrast(true);

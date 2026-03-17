@@ -69,7 +69,7 @@ TechTreeSelectState::TechTreeSelectState(TechTreeViewerState *parent) : _parent(
 
 	_btnOk->setText(tr("STR_OK"));
 	_btnOk->onMouseClick((ActionHandler)&TechTreeSelectState::btnOkClick);
-	_btnOk->onKeyboardPress((ActionHandler)&TechTreeSelectState::btnOkClick, Options::keyCancel);
+	_btnOk->onKeyboardPress((ActionHandler)&TechTreeSelectState::btnOkClick, options1.keyCancel());
 
 	_lstTopics->setColumns(1, 198);
 	_lstTopics->setSelectable(true);

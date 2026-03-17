@@ -677,7 +677,7 @@ void GeoscapeState::handle(Action *action)
 		// quick save and quick load
 		if (!_game->getSavedGame()->isIronman())
 		{
-			if (action->getDetails()->key.keysym.sym == Options::keyQuickSave)
+			if (action->getDetails()->key.keysym.sym == options1.keyQuickSave())
 			{
 				popup(new SaveGameState(OPT_GEOSCAPE, SAVE_QUICK, _palette));
 			}
@@ -685,7 +685,7 @@ void GeoscapeState::handle(Action *action)
 			{
 				popup(new SaveGameState(OPT_GEOSCAPE, SAVE_INSTA, _palette));
 			}
-			else if (action->getDetails()->key.keysym.sym == Options::keyQuickLoad)
+			else if (action->getDetails()->key.keysym.sym == options1.keyQuickLoad())
 			{
 				popup(new LoadGameState(OPT_GEOSCAPE, SAVE_QUICK, _palette));
 			}

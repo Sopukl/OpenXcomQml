@@ -89,7 +89,7 @@ NewResearchListState::NewResearchListState(Base *base, bool sortByCost) : _base(
 
 	_btnOK->setText(tr("STR_OK"));
 	_btnOK->onMouseClick((ActionHandler)&NewResearchListState::btnOKClick);
-	_btnOK->onKeyboardPress((ActionHandler)&NewResearchListState::btnOKClick, Options::keyCancel);
+	_btnOK->onKeyboardPress((ActionHandler)&NewResearchListState::btnOKClick, options1.keyCancel());
 	_btnOK->onKeyboardPress((ActionHandler)&NewResearchListState::btnMarkAllAsSeenClick, Options::keyMarkAllAsSeen);
 
 	_isSortingEnabled = _game->getMod()->getEnableNewResearchSorting();

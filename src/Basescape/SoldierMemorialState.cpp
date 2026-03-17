@@ -79,7 +79,7 @@ SoldierMemorialState::SoldierMemorialState()
 
 	_btnOk->setText(tr("STR_OK"));
 	_btnOk->onMouseClick((ActionHandler)&SoldierMemorialState::btnOkClick);
-	_btnOk->onKeyboardPress((ActionHandler)&SoldierMemorialState::btnOkClick, Options::keyCancel);
+	_btnOk->onKeyboardPress((ActionHandler)&SoldierMemorialState::btnOkClick, options1.keyCancel());
 
 	_btnStatistics->setText(tr("STR_STATISTICS"));
 	_btnStatistics->onMouseClick((ActionHandler)&SoldierMemorialState::btnStatisticsClick);

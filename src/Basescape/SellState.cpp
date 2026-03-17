@@ -140,11 +140,11 @@ void SellState::delayedInit()
 
 	_btnOk->setText(tr("STR_SELL_SACK"));
 	_btnOk->onMouseClick((ActionHandler)&SellState::btnOkClick);
-	_btnOk->onKeyboardPress((ActionHandler)&SellState::btnOkClick, Options::keyOk);
+	_btnOk->onKeyboardPress((ActionHandler)&SellState::btnOkClick, options1.keyOk());
 
 	_btnCancel->setText(tr("STR_CANCEL"));
 	_btnCancel->onMouseClick((ActionHandler)&SellState::btnCancelClick);
-	_btnCancel->onKeyboardPress((ActionHandler)&SellState::btnCancelClick, Options::keyCancel);
+	_btnCancel->onKeyboardPress((ActionHandler)&SellState::btnCancelClick, options1.keyCancel());
 
 	_btnTransfer->setText(tr("STR_GO_TO_TRANSFERS"));
 	_btnTransfer->onMouseClick((ActionHandler)&SellState::btnTransferClick);

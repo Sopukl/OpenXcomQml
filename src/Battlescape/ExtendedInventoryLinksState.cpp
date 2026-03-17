@@ -97,7 +97,7 @@ ExtendedInventoryLinksState::ExtendedInventoryLinksState(InventoryState* parent,
 
 	_btnOk->setText(tr("STR_OK"));
 	_btnOk->onMouseClick((ActionHandler)&ExtendedInventoryLinksState::btnOkClick);
-	_btnOk->onKeyboardPress((ActionHandler)&ExtendedInventoryLinksState::btnOkClick, Options::keyCancel);
+	_btnOk->onKeyboardPress((ActionHandler)&ExtendedInventoryLinksState::btnOkClick, options1.keyCancel());
 
 	_btnArmor->setText(tr("STR_INVENTORY_ARMOR"));
 	_btnArmor->onMouseClick((ActionHandler)&ExtendedInventoryLinksState::btnArmorClick);

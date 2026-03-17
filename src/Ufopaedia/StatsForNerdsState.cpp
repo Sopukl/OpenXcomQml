@@ -268,7 +268,7 @@ void StatsForNerdsState::buildUI(bool debug, bool ids, bool defaults)
 
 	_btnOk->setText(tr("STR_OK"));
 	_btnOk->onMouseClick((ActionHandler)&StatsForNerdsState::btnOkClick);
-	_btnOk->onKeyboardPress((ActionHandler)&StatsForNerdsState::btnOkClick, Options::keyCancel);
+	_btnOk->onKeyboardPress((ActionHandler)&StatsForNerdsState::btnOkClick, options1.keyCancel());
 	_btnOk->onKeyboardPress((ActionHandler)&StatsForNerdsState::btnScrollUpClick, Options::keyGeoUp);
 	_btnOk->onKeyboardPress((ActionHandler)&StatsForNerdsState::btnScrollDownClick, Options::keyGeoDown);
 

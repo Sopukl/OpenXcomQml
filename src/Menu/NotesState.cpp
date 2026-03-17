@@ -94,11 +94,11 @@ NotesState::NotesState(OptionsOrigin origin) : _origin(origin), _previousSelecte
 
 	_btnSave->setText(tr("STR_SAVE_UC"));
 	_btnSave->onMouseClick((ActionHandler)&NotesState::btnSaveClick);
-	//_btnSave->onKeyboardPress((ActionHandler)&NotesState::btnSaveClick, Options::keyOk);
+	//_btnSave->onKeyboardPress((ActionHandler)&NotesState::btnSaveClick, options1.keyOk());
 
 	_btnCancel->setText(tr("STR_CANCEL_UC"));
 	_btnCancel->onMouseClick((ActionHandler)&NotesState::btnCancelClick);
-	_btnCancel->onKeyboardPress((ActionHandler)&NotesState::btnCancelClick, Options::keyCancel);
+	_btnCancel->onKeyboardPress((ActionHandler)&NotesState::btnCancelClick, options1.keyCancel());
 }
 
 /**

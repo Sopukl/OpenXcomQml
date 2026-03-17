@@ -134,7 +134,7 @@ UfoDetectedState::UfoDetectedState(Ufo *ufo, GeoscapeState *state, bool detected
 		_btnCancel->setText(tr("STR_CANCEL_UC"));
 	}
 	_btnCancel->onMouseClick((ActionHandler)&UfoDetectedState::btnCancelClick);
-	_btnCancel->onKeyboardPress((ActionHandler)&UfoDetectedState::btnCancelClick, Options::keyCancel);
+	_btnCancel->onKeyboardPress((ActionHandler)&UfoDetectedState::btnCancelClick, options1.keyCancel());
 	_btnCancel->onKeyboardPress((ActionHandler)&UfoDetectedState::toggleCancel, SDLK_LCTRL);
 	_btnCancel->onKeyboardRelease((ActionHandler)&UfoDetectedState::toggleCancel, SDLK_LCTRL);
 	_btnCancel->onKeyboardPress((ActionHandler)&UfoDetectedState::toggleCancel, SDLK_RCTRL);

@@ -73,7 +73,7 @@ InventoryPersonalState::InventoryPersonalState(Soldier* soldier)
 	_btnCancel->setHighContrast(true);
 	_btnCancel->setText(tr("STR_CANCEL_UC"));
 	_btnCancel->onMouseClick((ActionHandler)&InventoryPersonalState::btnCancelClick);
-	_btnCancel->onKeyboardPress((ActionHandler)&InventoryPersonalState::btnCancelClick, Options::keyCancel);
+	_btnCancel->onKeyboardPress((ActionHandler)&InventoryPersonalState::btnCancelClick, options1.keyCancel());
 
 	// 1. tally items
 	std::map<const RuleItem*, int> summary;

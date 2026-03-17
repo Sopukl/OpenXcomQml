@@ -97,7 +97,7 @@ PauseState::PauseState(OptionsOrigin origin) : _origin(origin)
 
 	_btnCancel->setText(tr("STR_CANCEL_UC"));
 	_btnCancel->onMouseClick((ActionHandler)&PauseState::btnCancelClick);
-	_btnCancel->onKeyboardPress((ActionHandler)&PauseState::btnCancelClick, Options::keyCancel);
+	_btnCancel->onKeyboardPress((ActionHandler)&PauseState::btnCancelClick, options1.keyCancel());
 	if (origin == OPT_GEOSCAPE)
 	{
 		_btnCancel->onKeyboardPress((ActionHandler)&PauseState::btnCancelClick, Options::keyGeoOptions);

@@ -98,7 +98,7 @@ ManufactureStartState::ManufactureStartState(Base *base, RuleManufacture *item) 
 
 	_btnCancel->setText(tr("STR_CANCEL_UC"));
 	_btnCancel->onMouseClick((ActionHandler)&ManufactureStartState::btnCancelClick);
-	_btnCancel->onKeyboardPress((ActionHandler)&ManufactureStartState::btnCancelClick, Options::keyCancel);
+	_btnCancel->onKeyboardPress((ActionHandler)&ManufactureStartState::btnCancelClick, options1.keyCancel());
 
 	bool productionPossible = _item->haveEnoughMoneyForOneMoreUnit(_game->getSavedGame()->getFunds());
 	// check available workspace later
@@ -211,7 +211,7 @@ ManufactureStartState::ManufactureStartState(Base *base, RuleManufacture *item) 
 
 	_btnStart->setText(tr("STR_START_PRODUCTION"));
 	_btnStart->onMouseClick((ActionHandler)&ManufactureStartState::btnStartClick);
-	_btnStart->onKeyboardPress((ActionHandler)&ManufactureStartState::btnStartClick, Options::keyOk);
+	_btnStart->onKeyboardPress((ActionHandler)&ManufactureStartState::btnStartClick, options1.keyOk());
 	_btnStart->setVisible(productionPossible);
 
 	if (_item)

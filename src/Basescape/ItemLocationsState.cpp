@@ -71,7 +71,7 @@ ItemLocationsState::ItemLocationsState(const RuleItem* selectedItem)
 
 	_btnOk->setText(tr("STR_OK"));
 	_btnOk->onMouseClick((ActionHandler)&ItemLocationsState::btnOkClick);
-	_btnOk->onKeyboardPress((ActionHandler)&ItemLocationsState::btnOkClick, Options::keyCancel);
+	_btnOk->onKeyboardPress((ActionHandler)&ItemLocationsState::btnOkClick, options1.keyCancel());
 
 	_lstLocations->setColumns(3, 100, 40, 30);
 	_lstLocations->setBackground(_window);

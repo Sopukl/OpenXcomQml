@@ -65,10 +65,10 @@ NewPossibleFacilityState::NewPossibleFacilityState(Base *base, Globe *globe, con
 
 	_btnOk->setText(tr("STR_OK"));
 	_btnOk->onMouseClick((ActionHandler)&NewPossibleFacilityState::btnOkClick);
-	_btnOk->onKeyboardPress((ActionHandler)&NewPossibleFacilityState::btnOkClick, Options::keyCancel);
+	_btnOk->onKeyboardPress((ActionHandler)&NewPossibleFacilityState::btnOkClick, options1.keyCancel());
 	_btnOpen->setText(tr("STR_BASES"));
 	_btnOpen->onMouseClick((ActionHandler)&NewPossibleFacilityState::btnOpenClick);
-	_btnOpen->onKeyboardPress((ActionHandler)&NewPossibleFacilityState::btnOpenClick, Options::keyOk);
+	_btnOpen->onKeyboardPress((ActionHandler)&NewPossibleFacilityState::btnOpenClick, options1.keyOk());
 	_txtTitle->setBig();
 	_txtTitle->setAlign(ALIGN_CENTER);
 	_txtTitle->setText(tr("STR_WE_CAN_NOW_BUILD"));

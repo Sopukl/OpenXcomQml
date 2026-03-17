@@ -76,7 +76,7 @@ CraftEquipmentSaveState::CraftEquipmentSaveState(CraftEquipmentState *parent) : 
 
 	_btnCancel->setText(tr("STR_CANCEL_UC"));
 	_btnCancel->onMouseClick((ActionHandler)&CraftEquipmentSaveState::btnCancelClick);
-	_btnCancel->onKeyboardPress((ActionHandler)&CraftEquipmentSaveState::btnCancelClick, Options::keyCancel);
+	_btnCancel->onKeyboardPress((ActionHandler)&CraftEquipmentSaveState::btnCancelClick, options1.keyCancel());
 
 	_btnSave->setText(tr("STR_SAVE_UC"));
 	_btnSave->onMouseClick((ActionHandler)&CraftEquipmentSaveState::btnSaveClick);

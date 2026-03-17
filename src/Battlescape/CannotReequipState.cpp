@@ -77,8 +77,8 @@ CannotReequipState::CannotReequipState(std::vector<ReequipStat> &missingItems, B
 
 	_btnOk->setText(tr("STR_OK"));
 	_btnOk->onMouseClick((ActionHandler)&CannotReequipState::btnOkClick);
-	_btnOk->onKeyboardPress((ActionHandler)&CannotReequipState::btnOkClick, Options::keyOk);
-	_btnOk->onKeyboardPress((ActionHandler)&CannotReequipState::btnOkClick, Options::keyCancel);
+	_btnOk->onKeyboardPress((ActionHandler)&CannotReequipState::btnOkClick, options1.keyOk());
+	_btnOk->onKeyboardPress((ActionHandler)&CannotReequipState::btnOkClick, options1.keyCancel());
 
 	_txtTitle->setText(tr("STR_NOT_ENOUGH_EQUIPMENT_TO_FULLY_RE_EQUIP_SQUAD"));
 	_txtTitle->setAlign(ALIGN_CENTER);

@@ -114,11 +114,11 @@ NewGameState::NewGameState()
 
 	_btnOk->setText(tr("STR_OK"));
 	_btnOk->onMouseClick((ActionHandler)&NewGameState::btnOkClick);
-	_btnOk->onKeyboardPress((ActionHandler)&NewGameState::btnOkClick, Options::keyOk);
+	_btnOk->onKeyboardPress((ActionHandler)&NewGameState::btnOkClick, options1.keyOk());
 
 	_btnCancel->setText(tr("STR_CANCEL"));
 	_btnCancel->onMouseClick((ActionHandler)&NewGameState::btnCancelClick);
-	_btnCancel->onKeyboardPress((ActionHandler)&NewGameState::btnCancelClick, Options::keyCancel);
+	_btnCancel->onKeyboardPress((ActionHandler)&NewGameState::btnCancelClick, options1.keyCancel());
 
 	_txtTitle->setAlign(ALIGN_CENTER);
 	_txtTitle->setText(tr("STR_SELECT_DIFFICULTY_LEVEL"));

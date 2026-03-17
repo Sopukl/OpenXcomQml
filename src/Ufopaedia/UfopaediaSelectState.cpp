@@ -79,7 +79,7 @@ namespace OpenXcom
 
 		_btnOk->setText(tr("STR_OK"));
 		_btnOk->onMouseClick((ActionHandler)&UfopaediaSelectState::btnOkClick);
-		_btnOk->onKeyboardPress((ActionHandler)&UfopaediaSelectState::btnOkClick,Options::keyCancel);
+		_btnOk->onKeyboardPress((ActionHandler)&UfopaediaSelectState::btnOkClick,options1.keyCancel());
 		_btnOk->onKeyboardPress((ActionHandler)&UfopaediaSelectState::btnMarkAllAsSeenClick, Options::keyMarkAllAsSeen);
 
 		_lstSelection->setColumns(1, 206);

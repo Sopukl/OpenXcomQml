@@ -64,10 +64,10 @@ NewPossibleCraftState::NewPossibleCraftState(Base * base, const std::vector<Rule
 
 	_btnOk->setText(tr("STR_OK"));
 	_btnOk->onMouseClick((ActionHandler)&NewPossibleCraftState::btnOkClick);
-	_btnOk->onKeyboardPress((ActionHandler)&NewPossibleCraftState::btnOkClick, Options::keyCancel);
+	_btnOk->onKeyboardPress((ActionHandler)&NewPossibleCraftState::btnOkClick, options1.keyCancel());
 	_btnPurchase->setText(tr("STR_PURCHASE_HIRE_PERSONNEL"));
 	_btnPurchase->onMouseClick((ActionHandler)&NewPossibleCraftState::btnPurchaseClick);
-	_btnPurchase->onKeyboardPress((ActionHandler)&NewPossibleCraftState::btnPurchaseClick, Options::keyOk);
+	_btnPurchase->onKeyboardPress((ActionHandler)&NewPossibleCraftState::btnPurchaseClick, options1.keyOk());
 	_txtTitle->setBig();
 	_txtTitle->setAlign(ALIGN_CENTER);
 	_txtTitle->setText(tr("STR_WE_CAN_NOW_RENT"));

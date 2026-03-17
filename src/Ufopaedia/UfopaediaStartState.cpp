@@ -111,7 +111,7 @@ namespace OpenXcom
 
 		_btnOk->setText(tr("STR_OK"));
 		_btnOk->onMouseClick((ActionHandler)&UfopaediaStartState::btnOkClick);
-		_btnOk->onKeyboardPress((ActionHandler)&UfopaediaStartState::btnOkClick, Options::keyCancel);
+		_btnOk->onKeyboardPress((ActionHandler)&UfopaediaStartState::btnOkClick, options1.keyCancel());
 		_btnOk->onKeyboardPress((ActionHandler)&UfopaediaStartState::btnOkClick, Options::keyGeoUfopedia);
 
 		_btnScrollUp->setVisible(_cats.size() > _maxButtons);

@@ -3131,7 +3131,7 @@ inline void BattlescapeState::handle(Action *action)
 				// quick save and quick load
 				if (!_game->getSavedGame()->isIronman() && !_save->isPreview())
 				{
-					if (key == Options::keyQuickSave)
+					if (key == options1.keyQuickSave())
 					{
 						_game->pushState(new SaveGameState(OPT_BATTLESCAPE, SAVE_QUICK, _palette));
 					}
@@ -3139,7 +3139,7 @@ inline void BattlescapeState::handle(Action *action)
 					{
 						_game->pushState(new SaveGameState(OPT_BATTLESCAPE, SAVE_INSTA, _palette));
 					}
-					else if (key == Options::keyQuickLoad)
+					else if (key == options1.keyQuickLoad())
 					{
 						_game->pushState(new LoadGameState(OPT_BATTLESCAPE, SAVE_QUICK, _palette));
 					}

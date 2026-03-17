@@ -144,7 +144,7 @@ ModListState::ModListState() : _curMasterIdx(0)
 
 	_btnOk->setText(tr("STR_OK"));
 	_btnOk->onMouseClick((ActionHandler)&ModListState::btnOkClick);
-	_btnOk->onKeyboardPress((ActionHandler)&ModListState::btnOkClick, Options::keyOk);
+	_btnOk->onKeyboardPress((ActionHandler)&ModListState::btnOkClick, options1.keyOk());
 
 	_btnOpenFolder->setText(tr("STR_OPEN_MODS_FOLDER"));
 	_btnOpenFolder->onMouseClick((ActionHandler)&ModListState::btnOpenFolderClick);
@@ -154,7 +154,7 @@ ModListState::ModListState() : _curMasterIdx(0)
 
 	_btnCancel->setText(tr("STR_CANCEL"));
 	_btnCancel->onMouseClick((ActionHandler)&ModListState::btnCancelClick);
-	_btnCancel->onKeyboardPress((ActionHandler)&ModListState::btnCancelClick, Options::keyCancel);
+	_btnCancel->onKeyboardPress((ActionHandler)&ModListState::btnCancelClick, options1.keyCancel());
 
 	_txtTooltip->setWordWrap(true);
 }

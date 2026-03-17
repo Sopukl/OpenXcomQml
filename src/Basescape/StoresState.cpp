@@ -129,8 +129,8 @@ StoresState::StoresState(Base *base) : _base(base)
 
 	_btnOk->setText(tr("STR_OK"));
 	_btnOk->onMouseClick((ActionHandler)&StoresState::btnOkClick);
-	_btnOk->onKeyboardPress((ActionHandler)&StoresState::btnOkClick, Options::keyOk);
-	_btnOk->onKeyboardPress((ActionHandler)&StoresState::btnOkClick, Options::keyCancel);
+	_btnOk->onKeyboardPress((ActionHandler)&StoresState::btnOkClick, options1.keyOk());
+	_btnOk->onKeyboardPress((ActionHandler)&StoresState::btnOkClick, options1.keyCancel());
 
 	_btnGrandTotal->setText(tr("STR_GRAND_TOTAL"));
 	_btnGrandTotal->onMouseClick((ActionHandler)&StoresState::btnGrandTotalClick);

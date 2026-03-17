@@ -96,8 +96,8 @@ GlobalResearchDiaryState::GlobalResearchDiaryState() : _doNotReset(false)
 
 	_btnOk->setText(tr("STR_OK"));
 	_btnOk->onMouseClick((ActionHandler)&GlobalResearchDiaryState::btnOkClick);
-	_btnOk->onKeyboardPress((ActionHandler)&GlobalResearchDiaryState::btnOkClick, Options::keyOk);
-	_btnOk->onKeyboardPress((ActionHandler)&GlobalResearchDiaryState::btnOkClick, Options::keyCancel);
+	_btnOk->onKeyboardPress((ActionHandler)&GlobalResearchDiaryState::btnOkClick, options1.keyOk());
+	_btnOk->onKeyboardPress((ActionHandler)&GlobalResearchDiaryState::btnOkClick, options1.keyCancel());
 
 	_txtTitle->setBig();
 	_txtTitle->setAlign(ALIGN_CENTER);

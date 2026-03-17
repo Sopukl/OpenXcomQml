@@ -67,7 +67,7 @@ TurnDiaryState::TurnDiaryState(const HitLog *hitLog)
 	_btnCancel->setText(tr("STR_CANCEL_UC"));
 	_btnCancel->setHighContrast(true);
 	_btnCancel->onMouseClick((ActionHandler)&TurnDiaryState::btnCancelClick);
-	_btnCancel->onKeyboardPress((ActionHandler)&TurnDiaryState::btnCancelClick, Options::keyCancel);
+	_btnCancel->onKeyboardPress((ActionHandler)&TurnDiaryState::btnCancelClick, options1.keyCancel());
 
 	_lstTurnDiary->setColumns(1, 172);
 	_lstTurnDiary->setSelectable(true);

@@ -123,7 +123,7 @@ SelectDestinationState::SelectDestinationState(std::vector<Craft*> crafts, Globe
 
 	_btnCancel->setText(tr("STR_CANCEL_UC"));
 	_btnCancel->onMouseClick((ActionHandler)&SelectDestinationState::btnCancelClick);
-	_btnCancel->onKeyboardPress((ActionHandler)&SelectDestinationState::btnCancelClick, Options::keyCancel);
+	_btnCancel->onKeyboardPress((ActionHandler)&SelectDestinationState::btnCancelClick, options1.keyCancel());
 
 	_txtTitle->setText(tr("STR_SELECT_DESTINATION"));
 	_txtTitle->setVerticalAlign(ALIGN_MIDDLE);

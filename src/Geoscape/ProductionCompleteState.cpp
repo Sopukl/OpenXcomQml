@@ -79,7 +79,7 @@ ProductionCompleteState::ProductionCompleteState(Base *base, const std::string &
 
 	_btnOk->setText(tr("STR_OK"));
 	_btnOk->onMouseClick((ActionHandler)&ProductionCompleteState::btnOkClick);
-	_btnOk->onKeyboardPress((ActionHandler)&ProductionCompleteState::btnOkClick, Options::keyCancel);
+	_btnOk->onKeyboardPress((ActionHandler)&ProductionCompleteState::btnOkClick, options1.keyCancel());
 
 	if (_endType != PROGRESS_CONSTRUCTION)
 	{

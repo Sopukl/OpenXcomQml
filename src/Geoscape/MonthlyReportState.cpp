@@ -90,13 +90,13 @@ MonthlyReportState::MonthlyReportState(Globe *globe) : _gameOver(0), _ratingTota
 
 	_btnOk->setText(tr("STR_OK"));
 	_btnOk->onMouseClick((ActionHandler)&MonthlyReportState::btnOkClick);
-	_btnOk->onKeyboardPress((ActionHandler)&MonthlyReportState::btnOkClick, Options::keyOk);
-	_btnOk->onKeyboardPress((ActionHandler)&MonthlyReportState::btnOkClick, Options::keyCancel);
+	_btnOk->onKeyboardPress((ActionHandler)&MonthlyReportState::btnOkClick, options1.keyOk());
+	_btnOk->onKeyboardPress((ActionHandler)&MonthlyReportState::btnOkClick, options1.keyCancel());
 
 	_btnBigOk->setText(tr("STR_OK"));
 	_btnBigOk->onMouseClick((ActionHandler)&MonthlyReportState::btnOkClick);
-	_btnBigOk->onKeyboardPress((ActionHandler)&MonthlyReportState::btnOkClick, Options::keyOk);
-	_btnBigOk->onKeyboardPress((ActionHandler)&MonthlyReportState::btnOkClick, Options::keyCancel);
+	_btnBigOk->onKeyboardPress((ActionHandler)&MonthlyReportState::btnOkClick, options1.keyOk());
+	_btnBigOk->onKeyboardPress((ActionHandler)&MonthlyReportState::btnOkClick, options1.keyCancel());
 	_btnBigOk->setVisible(false);
 
 	_txtTitle->setBig();

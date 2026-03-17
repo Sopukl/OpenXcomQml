@@ -75,7 +75,7 @@ GlobalAlienContainmentState::GlobalAlienContainmentState(bool openedFromBasescap
 
 	_btnOk->setText(tr("STR_OK"));
 	_btnOk->onMouseClick((ActionHandler)&GlobalAlienContainmentState::btnOkClick);
-	_btnOk->onKeyboardPress((ActionHandler)&GlobalAlienContainmentState::btnOkClick, Options::keyCancel);
+	_btnOk->onKeyboardPress((ActionHandler)&GlobalAlienContainmentState::btnOkClick, options1.keyCancel());
 
 	_txtTitle->setBig();
 	_txtTitle->setAlign(ALIGN_CENTER);

@@ -100,8 +100,8 @@ FundingState::FundingState()
 
 	_btnOk->setText(tr("STR_OK"));
 	_btnOk->onMouseClick((ActionHandler)&FundingState::btnOkClick);
-	_btnOk->onKeyboardPress((ActionHandler)&FundingState::btnOkClick, Options::keyOk);
-	_btnOk->onKeyboardPress((ActionHandler)&FundingState::btnOkClick, Options::keyCancel);
+	_btnOk->onKeyboardPress((ActionHandler)&FundingState::btnOkClick, options1.keyOk());
+	_btnOk->onKeyboardPress((ActionHandler)&FundingState::btnOkClick, options1.keyCancel());
 	_btnOk->onKeyboardPress((ActionHandler)&FundingState::btnOkClick, Options::keyGeoFunding);
 
 	_txtTitle->setAlign(ALIGN_CENTER);

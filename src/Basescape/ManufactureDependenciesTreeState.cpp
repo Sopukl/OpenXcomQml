@@ -71,7 +71,7 @@ ManufactureDependenciesTreeState::ManufactureDependenciesTreeState(const std::st
 
 	_btnOk->setText(tr("STR_OK"));
 	_btnOk->onMouseClick((ActionHandler)&ManufactureDependenciesTreeState::btnOkClick);
-	_btnOk->onKeyboardPress((ActionHandler)&ManufactureDependenciesTreeState::btnOkClick, Options::keyCancel);
+	_btnOk->onKeyboardPress((ActionHandler)&ManufactureDependenciesTreeState::btnOkClick, options1.keyCancel());
 
 	_lstTopics->setColumns(1, 182);
 	_lstTopics->setBackground(_window);

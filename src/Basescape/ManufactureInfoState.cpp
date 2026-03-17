@@ -185,8 +185,8 @@ void ManufactureInfoState::buildUi()
 
 	_btnOk->setText(tr("STR_OK"));
 	_btnOk->onMouseClick((ActionHandler)&ManufactureInfoState::btnOkClick);
-	_btnOk->onKeyboardPress((ActionHandler)&ManufactureInfoState::btnOkClick, Options::keyOk);
-	_btnOk->onKeyboardPress((ActionHandler)&ManufactureInfoState::btnOkClick, Options::keyCancel);
+	_btnOk->onKeyboardPress((ActionHandler)&ManufactureInfoState::btnOkClick, options1.keyOk());
+	_btnOk->onKeyboardPress((ActionHandler)&ManufactureInfoState::btnOkClick, options1.keyCancel());
 
 	if (!_item && _production)
 	{

@@ -73,11 +73,11 @@ SoldierAvatarState::SoldierAvatarState(Base *base, size_t soldier) : _base(base)
 
 	_btnCancel->setText(tr("STR_CANCEL_UC"));
 	_btnCancel->onMouseClick((ActionHandler)&SoldierAvatarState::btnCancelClick);
-	_btnCancel->onKeyboardPress((ActionHandler)&SoldierAvatarState::btnCancelClick, Options::keyCancel);
+	_btnCancel->onKeyboardPress((ActionHandler)&SoldierAvatarState::btnCancelClick, options1.keyCancel());
 
 	_btnOk->setText(tr("STR_OK"));
 	_btnOk->onMouseClick((ActionHandler)&SoldierAvatarState::btnOkClick);
-	_btnOk->onKeyboardPress((ActionHandler)&SoldierAvatarState::btnOkClick, Options::keyOk);
+	_btnOk->onKeyboardPress((ActionHandler)&SoldierAvatarState::btnOkClick, options1.keyOk());
 
 	Soldier *s = _base->getSoldiers()->at(_soldier);
 	_origAvatar = SoldierAvatar("original", s->getGender(), s->getLook(), s->getLookVariant());

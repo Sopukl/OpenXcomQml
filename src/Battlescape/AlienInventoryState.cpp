@@ -100,7 +100,7 @@ AlienInventoryState::AlienInventoryState(BattleUnit *unit)
 		_soldier->setVisible(false);
 		_txtLeftHand->setVisible(false);
 		_txtRightHand->setVisible(false);
-		_btnArmor->onKeyboardPress((ActionHandler)&AlienInventoryState::btnOkClick, Options::keyCancel);
+		_btnArmor->onKeyboardPress((ActionHandler)&AlienInventoryState::btnOkClick, options1.keyCancel());
 		_inv->setVisible(false);
 		return;
 	}
@@ -144,7 +144,7 @@ AlienInventoryState::AlienInventoryState(BattleUnit *unit)
 	_txtRightHand->setVisible(false);
 
 	_btnArmor->onKeyboardPress((ActionHandler)&AlienInventoryState::btnToggleClick, SDLK_F1);
-	_btnArmor->onKeyboardPress((ActionHandler)&AlienInventoryState::btnOkClick, Options::keyCancel);
+	_btnArmor->onKeyboardPress((ActionHandler)&AlienInventoryState::btnOkClick, options1.keyCancel());
 	_btnArmor->onMouseClick((ActionHandler)&AlienInventoryState::btnArmorClickMiddle, SDL_BUTTON_MIDDLE);
 
 	_soldier->clear();

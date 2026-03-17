@@ -59,8 +59,8 @@ ResearchRequiredState::ResearchRequiredState(RuleItem *item)
 
 	_btnOk->setText(tr("STR_OK"));
 	_btnOk->onMouseClick((ActionHandler)&ResearchRequiredState::btnOkClick);
-	_btnOk->onKeyboardPress((ActionHandler)&ResearchRequiredState::btnOkClick, Options::keyCancel);
-	_btnOk->onKeyboardPress((ActionHandler)&ResearchRequiredState::btnOkClick, Options::keyOk);
+	_btnOk->onKeyboardPress((ActionHandler)&ResearchRequiredState::btnOkClick, options1.keyCancel());
+	_btnOk->onKeyboardPress((ActionHandler)&ResearchRequiredState::btnOkClick, options1.keyOk());
 
 	_txtTitle->setBig();
 	_txtTitle->setAlign(ALIGN_CENTER);

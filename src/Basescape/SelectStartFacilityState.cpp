@@ -46,7 +46,7 @@ SelectStartFacilityState::SelectStartFacilityState(Base *base, State *state, Glo
 
 	_btnOk->setText(tr("STR_RESET"));
 	_btnOk->onMouseClick((ActionHandler)&SelectStartFacilityState::btnOkClick);
-	_btnOk->onKeyboardPress(0, Options::keyCancel);
+	_btnOk->onKeyboardPress(0, options1.keyCancel());
 
 	_lstFacilities->onMouseClick((ActionHandler)&SelectStartFacilityState::lstFacilitiesClick);
 }

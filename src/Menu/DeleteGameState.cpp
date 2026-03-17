@@ -64,11 +64,11 @@ DeleteGameState::DeleteGameState(OptionsOrigin origin, const std::string &save) 
 
 	_btnYes->setText(tr("STR_YES"));
 	_btnYes->onMouseClick((ActionHandler)&DeleteGameState::btnYesClick);
-	_btnYes->onKeyboardPress((ActionHandler)&DeleteGameState::btnYesClick, Options::keyOk);
+	_btnYes->onKeyboardPress((ActionHandler)&DeleteGameState::btnYesClick, options1.keyOk());
 
 	_btnNo->setText(tr("STR_NO"));
 	_btnNo->onMouseClick((ActionHandler)&DeleteGameState::btnNoClick);
-	_btnNo->onKeyboardPress((ActionHandler)&DeleteGameState::btnNoClick, Options::keyCancel);
+	_btnNo->onKeyboardPress((ActionHandler)&DeleteGameState::btnNoClick, options1.keyCancel());
 
 	_txtMessage->setAlign(ALIGN_CENTER);
 	_txtMessage->setBig();

@@ -86,7 +86,7 @@ ExperienceOverviewState::ExperienceOverviewState(BattlescapeState* parent) : _pa
 	_btnOk->setHighContrast(true);
 	_btnOk->setText(tr("STR_OK"));
 	_btnOk->onMouseClick((ActionHandler)&ExperienceOverviewState::btnOkClick);
-	_btnOk->onKeyboardPress((ActionHandler)&ExperienceOverviewState::btnOkClick, Options::keyCancel);
+	_btnOk->onKeyboardPress((ActionHandler)&ExperienceOverviewState::btnOkClick, options1.keyCancel());
 
 	_txtTitle->setHighContrast(true);
 	_txtTitle->setBig();

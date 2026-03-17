@@ -68,7 +68,7 @@ SoldierRankState::SoldierRankState(Base* base, size_t soldierId) : _base(base), 
 
 	_btnCancel->setText(tr("STR_CANCEL_UC"));
 	_btnCancel->onMouseClick((ActionHandler)&SoldierRankState::btnCancelClick);
-	_btnCancel->onKeyboardPress((ActionHandler)&SoldierRankState::btnCancelClick, Options::keyCancel);
+	_btnCancel->onKeyboardPress((ActionHandler)&SoldierRankState::btnCancelClick, options1.keyCancel());
 
 	Soldier *soldier = _base->getSoldiers()->at(_soldierId);
 	_txtTitle->setAlign(ALIGN_CENTER);

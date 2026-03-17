@@ -81,7 +81,7 @@ GlobalResearchState::GlobalResearchState(bool openedFromBasescape) : _openedFrom
 
 	_btnOk->setText(tr("STR_OK"));
 	_btnOk->onMouseClick((ActionHandler)&GlobalResearchState::btnOkClick);
-	_btnOk->onKeyboardPress((ActionHandler)&GlobalResearchState::btnOkClick, Options::keyCancel);
+	_btnOk->onKeyboardPress((ActionHandler)&GlobalResearchState::btnOkClick, options1.keyCancel());
 
 	_txtTitle->setBig();
 	_txtTitle->setAlign(ALIGN_CENTER);

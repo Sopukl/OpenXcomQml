@@ -91,11 +91,11 @@ SetWindowedRootState::SetWindowedRootState(OptionsOrigin origin, OptionsVideoSta
 
 	_btnOk->setText(tr("STR_OK"));
 	_btnOk->onMouseClick((ActionHandler)&SetWindowedRootState::btnOkClick);
-	_btnOk->onKeyboardPress((ActionHandler)&SetWindowedRootState::btnOkClick, Options::keyOk);
+	_btnOk->onKeyboardPress((ActionHandler)&SetWindowedRootState::btnOkClick, options1.keyOk());
 
 	_btnCancel->setText(tr("STR_CANCEL"));
 	_btnCancel->onMouseClick((ActionHandler)&SetWindowedRootState::btnCancelClick);
-	_btnCancel->onKeyboardPress((ActionHandler)&SetWindowedRootState::btnCancelClick, Options::keyCancel);
+	_btnCancel->onKeyboardPress((ActionHandler)&SetWindowedRootState::btnCancelClick, options1.keyCancel());
 
 	if (_origin == OPT_BATTLESCAPE)
 	{

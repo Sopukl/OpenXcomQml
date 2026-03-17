@@ -147,18 +147,18 @@ void ResearchInfoState::buildUi()
 	_timerLess->onTimer((StateHandler)&ResearchInfoState::less);
 
 	_btnOk->onMouseClick((ActionHandler)&ResearchInfoState::btnOkClick);
-	_btnOk->onKeyboardPress((ActionHandler)&ResearchInfoState::btnOkClick, Options::keyOk);
+	_btnOk->onKeyboardPress((ActionHandler)&ResearchInfoState::btnOkClick, options1.keyOk());
 	if (_rule)
 	{
 		_btnOk->setText(tr("STR_START_PROJECT"));
 		_btnCancel->setText(tr("STR_CANCEL_UC"));
-		_btnCancel->onKeyboardPress((ActionHandler)&ResearchInfoState::btnCancelClick, Options::keyCancel);
+		_btnCancel->onKeyboardPress((ActionHandler)&ResearchInfoState::btnCancelClick, options1.keyCancel());
 	}
 	else
 	{
 		_btnOk->setText(tr("STR_OK"));
 		_btnCancel->setText(tr("STR_CANCEL_PROJECT"));
-		_btnOk->onKeyboardPress((ActionHandler)&ResearchInfoState::btnOkClick, Options::keyCancel);
+		_btnOk->onKeyboardPress((ActionHandler)&ResearchInfoState::btnOkClick, options1.keyCancel());
 	}
 	_btnCancel->onMouseClick((ActionHandler)&ResearchInfoState::btnCancelClick);
 

@@ -81,7 +81,7 @@ TargetInfoState::TargetInfoState(Target *target, Globe *globe) : _target(target)
 
 	_btnOk->setText(tr("STR_OK"));
 	_btnOk->onMouseClick((ActionHandler)&TargetInfoState::btnOkClick);
-	_btnOk->onKeyboardPress((ActionHandler)&TargetInfoState::btnOkClick, Options::keyCancel);
+	_btnOk->onKeyboardPress((ActionHandler)&TargetInfoState::btnOkClick, options1.keyCancel());
 
 	_edtTitle->setBig();
 	_edtTitle->setAlign(ALIGN_CENTER);

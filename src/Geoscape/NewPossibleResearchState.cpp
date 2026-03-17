@@ -65,10 +65,10 @@ NewPossibleResearchState::NewPossibleResearchState(Base * base, const std::vecto
 
 	_btnOk->setText(tr("STR_OK"));
 	_btnOk->onMouseClick((ActionHandler)&NewPossibleResearchState::btnOkClick);
-	_btnOk->onKeyboardPress((ActionHandler)&NewPossibleResearchState::btnOkClick, Options::keyCancel);
+	_btnOk->onKeyboardPress((ActionHandler)&NewPossibleResearchState::btnOkClick, options1.keyCancel());
 	_btnResearch->setText(tr("STR_ALLOCATE_RESEARCH"));
 	_btnResearch->onMouseClick((ActionHandler)&NewPossibleResearchState::btnResearchClick);
-	_btnResearch->onKeyboardPress((ActionHandler)&NewPossibleResearchState::btnResearchClick, Options::keyOk);
+	_btnResearch->onKeyboardPress((ActionHandler)&NewPossibleResearchState::btnResearchClick, options1.keyOk());
 	_txtTitle->setBig();
 	_txtTitle->setAlign(ALIGN_CENTER);
 

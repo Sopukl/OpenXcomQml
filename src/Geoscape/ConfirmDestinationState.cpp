@@ -99,7 +99,7 @@ ConfirmDestinationState::ConfirmDestinationState(std::vector<Craft*> crafts, Tar
 
 	_btnOk->setText(tr("STR_OK"));
 	_btnOk->onMouseClick((ActionHandler)&ConfirmDestinationState::btnOkClick);
-	_btnOk->onKeyboardPress((ActionHandler)&ConfirmDestinationState::btnOkClick, Options::keyOk);
+	_btnOk->onKeyboardPress((ActionHandler)&ConfirmDestinationState::btnOkClick, options1.keyOk());
 
 	_btnTransfer->setText(tr("STR_TRANSFER_UC"));
 	_btnTransfer->onMouseClick((ActionHandler)&ConfirmDestinationState::btnTransferClick);
@@ -107,7 +107,7 @@ ConfirmDestinationState::ConfirmDestinationState(std::vector<Craft*> crafts, Tar
 
 	_btnCancel->setText(tr("STR_CANCEL_UC"));
 	_btnCancel->onMouseClick((ActionHandler)&ConfirmDestinationState::btnCancelClick);
-	_btnCancel->onKeyboardPress((ActionHandler)&ConfirmDestinationState::btnCancelClick, Options::keyCancel);
+	_btnCancel->onKeyboardPress((ActionHandler)&ConfirmDestinationState::btnCancelClick, options1.keyCancel());
 
 	_btnFollowWingLeader->setText(tr("STR_FOLLOW_WING_LEADER_QUESTION"));
 	_btnFollowWingLeader->setVisible(false);

@@ -163,7 +163,7 @@ TestState::TestState()
 
 	_btnCancel->setText(tr("STR_CANCEL"));
 	_btnCancel->onMouseClick((ActionHandler)&TestState::btnCancelClick);
-	_btnCancel->onKeyboardPress((ActionHandler)&TestState::btnCancelClick, Options::keyCancel);
+	_btnCancel->onKeyboardPress((ActionHandler)&TestState::btnCancelClick, options1.keyCancel());
 }
 
 TestState::~TestState()

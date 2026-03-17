@@ -102,11 +102,11 @@ SoldierTransformationState::SoldierTransformationState(RuleSoldierTransformation
 
 	_btnCancel->setText(tr("STR_CANCEL_UC"));
 	_btnCancel->onMouseClick((ActionHandler)&SoldierTransformationState::btnCancelClick);
-	_btnCancel->onKeyboardPress((ActionHandler)&SoldierTransformationState::btnCancelClick, Options::keyCancel);
+	_btnCancel->onKeyboardPress((ActionHandler)&SoldierTransformationState::btnCancelClick, options1.keyCancel());
 
 	_btnStart->setText(tr(_transformationRule->getName()));
 	_btnStart->onMouseClick((ActionHandler)&SoldierTransformationState::btnStartClick);
-	_btnStart->onKeyboardPress((ActionHandler)&SoldierTransformationState::btnStartClick, Options::keyOk);
+	_btnStart->onKeyboardPress((ActionHandler)&SoldierTransformationState::btnStartClick, options1.keyOk());
 
 	if (_filteredListOfSoldiers && _filteredListOfSoldiers->size() > 1)
 	{

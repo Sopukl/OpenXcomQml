@@ -55,8 +55,8 @@ AliensCrashState::AliensCrashState()
 	_btnOk->setHighContrast(true);
 	_btnOk->setText(tr("STR_OK"));
 	_btnOk->onMouseClick((ActionHandler)&AliensCrashState::btnOkClick);
-	_btnOk->onKeyboardPress((ActionHandler)&AliensCrashState::btnOkClick, Options::keyOk);
-	_btnOk->onKeyboardPress((ActionHandler)&AliensCrashState::btnOkClick, Options::keyCancel);
+	_btnOk->onKeyboardPress((ActionHandler)&AliensCrashState::btnOkClick, options1.keyOk());
+	_btnOk->onKeyboardPress((ActionHandler)&AliensCrashState::btnOkClick, options1.keyCancel());
 
 	_txtTitle->setHighContrast(true);
 	_txtTitle->setText(tr("STR_ALL_ALIENS_KILLED_IN_CRASH"));
