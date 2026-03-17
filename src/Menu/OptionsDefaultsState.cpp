@@ -96,7 +96,7 @@ void OptionsDefaultsState::btnYesClick(Action *action)
 	{
 		// my development/debug defaults
 		options1.setdebug(true);
-		Options::language = "en-US";
+		options1.language() = "en-US";
 		options1.setmusicVolume(15);
 		options1.setsoundVolume(15);
 		options1.setuiVolume(15);

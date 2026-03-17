@@ -623,7 +623,7 @@ void Game::loadLanguages()
 	std::string currentLang = defaultLang;
 
 	// No language set, detect based on system
-	if (Options::language.empty())
+	if (options1.language().isEmpty())
 	{
 		std::string locale = CrossPlatform::getLocale();
 		std::string lang = locale.substr(0, locale.find_first_of('-'));
@@ -649,9 +649,9 @@ void Game::loadLanguages()
 	else
 	{
 		// Use options language
-		if (FileMap::fileExists("Language/" + Options::language + ".yml"))
+		if (FileMap::fileExists("Language/" + options1.language().toStdString() + ".yml"))
 		{
-			currentLang = Options::language;
+			currentLang = options1.language().toStdString();
 		}
 		// Language not found, use default
 		else
@@ -659,7 +659,7 @@ void Game::loadLanguages()
 			currentLang = defaultLang;
 		}
 	}
-	Options::language = currentLang;
+	options1.setlanguage(QString::fromStdString(currentLang));
 
 	delete _lang;
 	_lang = new Language();

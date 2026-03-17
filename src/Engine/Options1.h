@@ -1,5 +1,6 @@
 #pragma once
 #include <QSettings>
+#include <string>
 
 //OPTION, get/set/notify/save to file
 #define OPTION(type, name) \
@@ -22,6 +23,8 @@ Q_PROPERTY(type name READ name WRITE set##name NOTIFY name##Changed FINAL) \
 	public: \
 	type name;
 
+
+Q_DECLARE_METATYPE(std::string)
 namespace OpenXcom
 {
 	class Options1 final: public QSettings
@@ -68,6 +71,10 @@ namespace OpenXcom
 		OPTION(bool, rootWindowedMode)
 		OPTION(bool, lazyLoadResources)
 		OPTION(bool, backgroundMute)
+
+		OPTION(QString, language)
+		OPTION(qint32, keyboardMode)
+		OPTION(QString, useOpenGLShader)
 		//video
 		OPTION(qint32, displayWidth)
 		OPTION(qint32, displayHeight)

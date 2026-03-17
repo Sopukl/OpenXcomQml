@@ -304,7 +304,7 @@ void TextEdit::draw()
 {
 	Surface::draw();
 	UString newValue = _value;
-	if (Options::keyboardMode == KEYBOARD_OFF)
+	if (options1.keyboardMode() == KEYBOARD_OFF)
 	{
 		if (_isFocused && _blink)
 		{
@@ -326,7 +326,7 @@ void TextEdit::draw()
 	}
 
 	_text->blit(this->getSurface());
-	if (Options::keyboardMode == KEYBOARD_ON)
+	if (options1.keyboardMode() == KEYBOARD_ON)
 	{
 		if (_isFocused && _blink)
 		{
@@ -472,7 +472,7 @@ void TextEdit::mousePress(Action *action, State *state)
 void TextEdit::keyboardPress(Action *action, State *state)
 {
 	bool enterPressed = false;
-	if (Options::keyboardMode == KEYBOARD_OFF)
+	if (options1.keyboardMode() == KEYBOARD_OFF)
 	{
 		switch (action->getDetails()->key.keysym.sym)
 		{
@@ -506,7 +506,7 @@ void TextEdit::keyboardPress(Action *action, State *state)
 			break;
 		}
 	}
-	else if (Options::keyboardMode == KEYBOARD_ON)
+	else if (options1.keyboardMode() == KEYBOARD_ON)
 	{
 		switch (action->getDetails()->key.keysym.sym)
 		{

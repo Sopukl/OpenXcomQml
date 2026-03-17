@@ -100,7 +100,7 @@ Language::Language() : _handler(0), _direction(DIRECTION_LTR), _wrap(WRAP_WORDS)
 		_cjk.push_back("zh-TW");
 	}
 
-	std::string id = Options::language;
+	std::string id = options1.language().toStdString();
 	_handler = LanguagePlurality::create(id);
 	if (std::find(_rtl.begin(), _rtl.end(), id) == _rtl.end())
 	{
@@ -306,7 +306,7 @@ LocalizedText Language::getString(const std::string &id, unsigned n) const
 		if (notFoundIds.end() == notFoundIds.find(id))
 		{
 			notFoundIds.insert(id);
-			Log(LOG_WARNING) << id << " not found in " << Options::language;
+			Log(LOG_WARNING) << id << " not found in " << options1.language().toStdString();
 		}
 		return id;
 	}
@@ -315,7 +315,7 @@ LocalizedText Language::getString(const std::string &id, unsigned n) const
 		if (notFoundIds.end() == notFoundIds.find(id))
 		{
 			notFoundIds.insert(id);
-			Log(LOG_WARNING) << id << " has plural format in ``" << Options::language << "``. Code assumes singular format.";
+			Log(LOG_WARNING) << id << " has plural format in ``" << options1.language().toStdString() << "``. Code assumes singular format.";
 //		Hint: Change ``getstring(ID).arg(value)`` to ``getString(ID, value)`` in appropriate files.
 		}
 		return s->second;

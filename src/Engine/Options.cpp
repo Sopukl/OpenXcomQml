@@ -103,7 +103,7 @@ void createOptionsOXC()
 	//# _info.push_back(OptionInfo(OPTION_OXC, "displayHeight", &displayHeight, Screen::ORIGINAL_HEIGHT*2));
 	//# _info.push_back(OptionInfo(OPTION_OXC, "fullscreen", &fullscreen, false));
 	//# _info.push_back(OptionInfo(OPTION_OXC, "asyncBlit", &asyncBlit, true));
-	_info.push_back(OptionInfo(OPTION_OXC, "keyboardMode", (int*)&keyboardMode, KEYBOARD_ON));
+	//#_info.push_back(OptionInfo(OPTION_OXC, "keyboardMode", (int*)&keyboardMode, KEYBOARD_ON));
 #endif
 
 #ifdef __MOBILE__
@@ -121,14 +121,14 @@ void createOptionsOXC()
 	//# _info.push_back(OptionInfo(OPTION_OXC, "useXBRZFilter", &useXBRZFilter, false));
 	//# _info.push_back(OptionInfo(OPTION_OXC, "useOpenGL", &useOpenGL, false));
 	//#_info.push_back(OptionInfo(OPTION_OXC, "checkOpenGLErrors", &checkOpenGLErrors, false));
-	_info.push_back(OptionInfo(OPTION_OXC, "useOpenGLShader", &useOpenGLShader, "Shaders/Raw.OpenGL.shader"));
+	//#_info.push_back(OptionInfo(OPTION_OXC, "useOpenGLShader", &useOpenGLShader, "Shaders/Raw.OpenGL.shader"));
 	//#_info.push_back(OptionInfo(OPTION_OXC, "useOpenGLSmoothing", &useOpenGLSmoothing, true));
 	//# _info.push_back(OptionInfo(OPTION_OXC, "debug", &debug, false));
 	//# _info.push_back(OptionInfo(OPTION_OXC, "debugUi", &debugUi, false));
 	//# _info.push_back(OptionInfo(OPTION_OXC, "soundVolume", &soundVolume, 2*(MIX_MAX_VOLUME/3)));
 	//# _info.push_back(OptionInfo(OPTION_OXC, "musicVolume", &musicVolume, 2*(MIX_MAX_VOLUME/3)));
 	//# _info.push_back(OptionInfo(OPTION_OXC, "uiVolume", &uiVolume, MIX_MAX_VOLUME/3));
-	_info.push_back(OptionInfo(OPTION_OXC, "language", &language, ""));
+	//#_info.push_back(OptionInfo(OPTION_OXC, "language", &language, ""));
 	_info.push_back(OptionInfo(OPTION_OXC, "battleScrollSpeed", &battleScrollSpeed, 8));
 #ifdef __MOBILE__
 	_info.push_back(OptionInfo(OPTION_OXC, "battleEdgeScroll", (int*)&battleEdgeScroll, SCROLL_NONE));
@@ -1447,7 +1447,7 @@ void backupDisplay()
 	Options::newOpenGL = options1.useOpenGL();
 	Options::newScaleFilter = options1.useScaleFilter();
 	Options::newHQXFilter = options1.useHQXFilter();
-	Options::newOpenGLShader = Options::useOpenGLShader;
+	Options::newOpenGLShader = options1.useOpenGLShader().toStdString();
 	Options::newXBRZFilter = options1.useXBRZFilter();
 	Options::newRootWindowedMode = options1.rootWindowedMode();
 	Options::newWindowedModePositionX = options1.windowedModePositionX();
@@ -1495,7 +1495,11 @@ void switchDisplay()
 
 	std::swap(battlescapeScale, newBattlescapeScale);
 	std::swap(geoscapeScale, newGeoscapeScale);
-	std::swap(useOpenGLShader, newOpenGLShader);
+
+	std::string stmp;
+	stmp = options1.useOpenGLShader().toStdString();
+	options1.setuseOpenGLShader(QString::fromStdString(newOpenGLShader));
+	newOpenGLShader = stmp;
 
 	btmp = options1.rootWindowedMode();
 	options1.setrootWindowedMode(newRootWindowedMode);

@@ -1,4 +1,5 @@
 #include "Options1.h"
+#include "Options.h"
 #include <QStandardPaths>
 #include <SDL_mixer.h>
 #define readValue(name, type, defaultValue) \
@@ -59,6 +60,10 @@ namespace OpenXcom
 			readValue(rootWindowedMode, bool, false)
 			readValue(lazyLoadResources, bool, true)
 			readValue(backgroundMute, bool, true)
+
+			readValue(language, QString, "")
+			readValue(keyboardMode, qint32, KEYBOARD_ON)
+			readValue(useOpenGLShader, QString, "Shaders/Raw.OpenGL.shader")
 		endGroup();
         beginGroup("Video");
             readValue(displayWidth,  qint32, 640)
@@ -126,6 +131,9 @@ namespace OpenXcom
 			writeValue(rootWindowedMode, m_rootWindowedMode)
 			writeValue(lazyLoadResources, m_lazyLoadResources)
 			writeValue(backgroundMute, m_backgroundMute)
+			writeValue(language, m_language)
+			writeValue(keyboardMode, m_keyboardMode)
+			writeValue(useOpenGLShader, m_useOpenGLShader)
 		endGroup();
 		beginGroup("Video");
 			writeValue(displayWidth, m_displayWidth)

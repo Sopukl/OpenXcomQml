@@ -194,7 +194,7 @@ OptionsVideoState::OptionsVideoState(OptionsOrigin origin) : OptionsBaseState(or
 	_cbxLanguage->setOptions(names);
 	for (size_t i = 0; i < names.size(); ++i)
 	{
-		if (_langs[i] == Options::language)
+		if (_langs[i] == options1.language().toStdString())
 		{
 			_cbxLanguage->setSelected(i);
 			break;
@@ -232,7 +232,7 @@ OptionsVideoState::OptionsVideoState(OptionsOrigin origin) : OptionsBaseState(or
 	if (Screen::useOpenGL())
 	{
 #ifndef __NO_OPENGL
-		std::string path = Options::useOpenGLShader;
+		std::string path = options1.useOpenGLShader().toStdString();
 		for (size_t i = 0; i < _filters.size(); ++i)
 		{
 			if (_filters[i] == path)
@@ -495,7 +495,7 @@ void OptionsVideoState::txtDisplayHeightChange(Action *)
  */
 void OptionsVideoState::cbxLanguageChange(Action *)
 {
-	Options::language = _langs[_cbxLanguage->getSelected()];
+    options1.setlanguage(QString::fromStdString(_langs[_cbxLanguage->getSelected()]));
 }
 
 /**

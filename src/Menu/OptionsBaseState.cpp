@@ -229,7 +229,7 @@ void OptionsBaseState::btnOkClick(Action *)
 			options1.useOpenGL() != Options::newOpenGL ||
 			options1.useScaleFilter() != Options::newScaleFilter ||
 			options1.useHQXFilter() != Options::newHQXFilter ||
-			Options::useOpenGLShader != Options::newOpenGLShader)
+			options1.useOpenGLShader().toStdString() != Options::newOpenGLShader)
 		{
 			_game->pushState(new OptionsConfirmState(_origin));
 		}

@@ -96,23 +96,23 @@ void exceptionLogger()
 // programming license revoked...
 int main(int argc, char *argv[])
 {
-#ifndef DUMP_CORE
-#ifdef _MSC_VER
-	// Uncomment to check memory leaks in VS
-	//_CrtSetDbgFlag ( _CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF );
+// #ifndef DUMP_CORE
+// #ifdef _MSC_VER
+// 	// Uncomment to check memory leaks in VS
+// 	//_CrtSetDbgFlag ( _CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF );
 
-	SetUnhandledExceptionFilter(crashLogger);
-#ifdef __MINGW32__
-	// MinGW can use SJLJ or Dwarf exceptions, because of this SEH can't catch it.
-	std::set_terminate(exceptionLogger);
-#endif
-	// Uncomment to debug crash handler
-	// AddVectoredContinueHandler(1, crashLogger);
-#else
-	signal(SIGSEGV, signalLogger);
-	std::set_terminate(exceptionLogger);
-#endif
-#endif
+// 	SetUnhandledExceptionFilter(crashLogger);
+// #ifdef __MINGW32__
+// 	// MinGW can use SJLJ or Dwarf exceptions, because of this SEH can't catch it.
+// 	std::set_terminate(exceptionLogger);
+// #endif
+// 	// Uncomment to debug crash handler
+// 	// AddVectoredContinueHandler(1, crashLogger);
+// #else
+// 	signal(SIGSEGV, signalLogger);
+// 	std::set_terminate(exceptionLogger);
+// #endif
+// #endif
 	QApplication app(argc, argv);
 	YAML::setGlobalErrorHandler();
 	CrossPlatform::getErrorDialog();

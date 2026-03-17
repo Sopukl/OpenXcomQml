@@ -15,6 +15,7 @@ if (MSVC)
     add_compile_options(/wd4267)  # conversion from 'size_t' to 'int', possible loss of data
     add_compile_options(/wd4244)  # conversion from 'double' to 'float', possible loss of data
     add_compile_options(/wd4244)  # conversion from 'double' to 'float', possible loss of data
+    add_compile_options(/wd5030)  # attribute [[gnu::always_inline]] is not recognized
 endif()
 
 set ( root_src

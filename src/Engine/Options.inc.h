@@ -2,8 +2,6 @@
 // To add a new option, add a new variable entry and a corresponding OptionInfo in Options.cpp
 
 // General options
-OPT std::string language, useOpenGLShader;
-OPT KeyboardType keyboardMode;
 OPT SaveSort saveOrder;
 OPT MusicFormat preferredMusic;
 OPT SoundFormat preferredSound;
