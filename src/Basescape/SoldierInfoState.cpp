@@ -256,24 +256,24 @@ SoldierInfoState::SoldierInfoState(Base *base, size_t soldierId, bool forceLimit
 	if (_base == 0)
 	{
 		_btnPrev->onMouseClick((ActionHandler)&SoldierInfoState::btnNextClick);
-		_btnPrev->onKeyboardPress((ActionHandler)&SoldierInfoState::btnNextClick, Options::keyBattlePrevUnit);
+		_btnPrev->onKeyboardPress((ActionHandler)&SoldierInfoState::btnNextClick, options1.keyBattlePrevUnit());
 	}
 	else
 	{
 		_btnPrev->onMouseClick((ActionHandler)&SoldierInfoState::btnPrevClick);
-		_btnPrev->onKeyboardPress((ActionHandler)&SoldierInfoState::btnPrevClick, Options::keyBattlePrevUnit);
+		_btnPrev->onKeyboardPress((ActionHandler)&SoldierInfoState::btnPrevClick, options1.keyBattlePrevUnit());
 	}
 
 	_btnNext->setText(">>");
 	if (_base == 0)
 	{
 		_btnNext->onMouseClick((ActionHandler)&SoldierInfoState::btnPrevClick);
-		_btnNext->onKeyboardPress((ActionHandler)&SoldierInfoState::btnPrevClick, Options::keyBattleNextUnit);
+		_btnNext->onKeyboardPress((ActionHandler)&SoldierInfoState::btnPrevClick, options1.keyBattleNextUnit());
 	}
 	else
 	{
 		_btnNext->onMouseClick((ActionHandler)&SoldierInfoState::btnNextClick);
-		_btnNext->onKeyboardPress((ActionHandler)&SoldierInfoState::btnNextClick, Options::keyBattleNextUnit);
+		_btnNext->onKeyboardPress((ActionHandler)&SoldierInfoState::btnNextClick, options1.keyBattleNextUnit());
 	}
 
 	_btnArmor->setText(tr("STR_ARMOR"));

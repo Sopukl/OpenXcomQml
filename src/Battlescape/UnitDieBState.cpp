@@ -204,7 +204,7 @@ void UnitDieBState::think()
 						game->pushState(new InfoboxOKState(game->getLanguage()->getString("STR_HAS_DIED_FROM_A_FATAL_WOUND", _unit->getGender()).arg(_unit->getName(game->getLanguage()))));
 					}
 				}
-				else if (Options::battleNotifyDeath && _unit->getGeoscapeSoldier() != 0)
+				else if (options1.battleNotifyDeath() && _unit->getGeoscapeSoldier() != 0)
 				{
 					// Note: yes, this condition is necessary, init() will filter out most duplicates, but not everything
 					if (_unit->getNotificationShown() < 2)

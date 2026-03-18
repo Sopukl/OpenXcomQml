@@ -2388,7 +2388,7 @@ int RuleItem::calculateLimits(int& upperLimit, int& lowerLimit, int depth, Battl
 	upperLimit = type == BA_THROW ? 200 : getAimRange();
 	lowerLimit = type == BA_THROW ?   0 : getMinRange();
 
-	if (Options::battleUFOExtenderAccuracy)
+	if (options1.battleUFOExtenderAccuracy())
 	{
 		switch (type)
 		{

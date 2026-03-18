@@ -2305,7 +2305,7 @@ Node *SavedBattleGame::getPatrolNode(bool scout, BattleUnit *unit, Node *fromNod
 
 	if (fromNode == 0)
 	{
-		if (Options::traceAI) { Log(LOG_INFO) << "This alien got lost. :("; }
+		if (options1.traceAI()) { Log(LOG_INFO) << "This alien got lost. :("; }
 		fromNode = getNodes()->at(RNG::generate(0, getNodes()->size() - 1));
 		while (fromNode->isDummy())
 		{
@@ -2347,7 +2347,7 @@ Node *SavedBattleGame::getPatrolNode(bool scout, BattleUnit *unit, Node *fromNod
 
 	if (compliantNodes.empty())
 	{
-		if (Options::traceAI) { Log(LOG_INFO) << (scout ? "Scout " : "Guard") << " found on patrol node! XXX XXX XXX"; }
+		if (options1.traceAI()) { Log(LOG_INFO) << (scout ? "Scout " : "Guard") << " found on patrol node! XXX XXX XXX"; }
 		if (unit->isBigUnit() && !scout)
 		{
 			return getPatrolNode(true, unit, fromNode); // move dammit
@@ -2366,7 +2366,7 @@ Node *SavedBattleGame::getPatrolNode(bool scout, BattleUnit *unit, Node *fromNod
 		if (!preferred) return 0;
 
 		// non-scout patrols to highest value unoccupied node that's not fromNode
-		if (Options::traceAI) { Log(LOG_INFO) << "Choosing node flagged " << preferred->getFlags(); }
+		if (options1.traceAI()) { Log(LOG_INFO) << "Choosing node flagged " << preferred->getFlags(); }
 		return preferred;
 	}
 }

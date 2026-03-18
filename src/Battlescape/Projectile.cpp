@@ -48,7 +48,7 @@ namespace OpenXcom
 Projectile::Projectile(Mod *mod, SavedBattleGame *save, BattleAction action, Position origin, Position targetVoxel, BattleItem *ammo) : _mod(mod), _save(save), _action(action), _ammo(ammo), _origin(origin), _targetVoxel(targetVoxel), _position(0), _distance(0.0f), _bulletSprite(-1), _reversed(false), _vaporColor(-1), _vaporDensity(-1), _vaporProbability(5)
 {
 	// this is the number of pixels the sprite will move between frames
-	_speed = Options::battleFireSpeed;
+	_speed = options1.battleFireSpeed();
 	if (_action.weapon)
 	{
 		if (_action.type != BA_THROW)
@@ -131,7 +131,7 @@ int Projectile::calculateTrajectory(double accuracy, const Position& originVoxel
 		!_trajectory.empty() &&
 		_action.actor->getFaction() == FACTION_PLAYER &&
 		_action.autoShotCounter == 1 &&
-		(!_save->isCtrlPressed(true) || !Options::forceFire) &&
+		(!_save->isCtrlPressed(true) || !options1.forceFire()) &&
 		_save->getBattleGame()->getPanicHandled() &&
 		_action.type != BA_LAUNCH &&
 		!_action.sprayTargeting)
@@ -228,7 +228,7 @@ int Projectile::calculateThrow(double accuracy)
 	else
 	{
 		BattleUnit *tu = targetTile->getOverlappingUnit(_save);
-		if (Options::forceFire && _save->isCtrlPressed(true) && _save->getSide() == FACTION_PLAYER)
+		if (options1.forceFire() && _save->isCtrlPressed(true) && _save->getSide() == FACTION_PLAYER)
 		{
 			targets.push_back(_action.target.toVoxel() + Position(0, 0, 12));
 			forced = true;

@@ -26,34 +26,6 @@
 namespace OpenXcom
 {
 
-/// Battlescape drag scrolling types.
-enum ScrollType { SCROLL_NONE, SCROLL_TRIGGER, SCROLL_AUTO };
-/// Path preview modes (can be OR'd together).
-enum PathPreview {
-	PATH_NONE         = 0x00, // 0000 (must always be zero)
-	PATH_ARROWS       = 0x01, // 0001
-	PATH_TU_COST      = 0x02, // 0010
-	PATH_ARROW_TU     = 0x03, // 0011
-	PATH_ENERGY_COST  = 0x04, // 0100
-	PATH_ARROW_ENERGY = 0x05, // 0101
-	PATH_TU_ENERGY    = 0x06, // 0110
-	PATH_FULL         = 0x07  // 0111 (must always be all values combined)
-};
-
-enum ScaleType
-{
-	SCALE_ORIGINAL,
-	SCALE_15X,
-	SCALE_2X,
-	SCALE_SCREEN_DIV_3,
-	SCALE_SCREEN_DIV_2,
-	SCALE_SCREEN,
-	SCALE_SCREEN_DIV_4,
-	SCALE_SCREEN_DIV_5,
-	SCALE_SCREEN_DIV_6,
-	SCALE_SCREEN_DIV_8,
-	SCALE_SCREEN_DIV_10
-};
 /**
  * Container for all the various global game options
  * and customizable settings.

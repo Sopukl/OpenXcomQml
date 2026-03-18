@@ -124,24 +124,24 @@ SoldierDiaryOverviewState::SoldierDiaryOverviewState(Base *base, size_t soldierI
 	if (_base == 0)
 	{
 		_btnPrev->onMouseClick((ActionHandler)&SoldierDiaryOverviewState::btnNextClick);
-		_btnPrev->onKeyboardPress((ActionHandler)&SoldierDiaryOverviewState::btnNextClick, Options::keyBattlePrevUnit);
+		_btnPrev->onKeyboardPress((ActionHandler)&SoldierDiaryOverviewState::btnNextClick, options1.keyBattlePrevUnit());
 	}
 	else
 	{
 		_btnPrev->onMouseClick((ActionHandler)&SoldierDiaryOverviewState::btnPrevClick);
-		_btnPrev->onKeyboardPress((ActionHandler)&SoldierDiaryOverviewState::btnPrevClick, Options::keyBattlePrevUnit);
+		_btnPrev->onKeyboardPress((ActionHandler)&SoldierDiaryOverviewState::btnPrevClick, options1.keyBattlePrevUnit());
 	}
 
 	_btnNext->setText(">>");
 	if (_base == 0)
 	{
 		_btnNext->onMouseClick((ActionHandler)&SoldierDiaryOverviewState::btnPrevClick);
-		_btnNext->onKeyboardPress((ActionHandler)&SoldierDiaryOverviewState::btnPrevClick, Options::keyBattleNextUnit);
+		_btnNext->onKeyboardPress((ActionHandler)&SoldierDiaryOverviewState::btnPrevClick, options1.keyBattleNextUnit());
 	}
 	else
 	{
 		_btnNext->onMouseClick((ActionHandler)&SoldierDiaryOverviewState::btnNextClick);
-		_btnNext->onKeyboardPress((ActionHandler)&SoldierDiaryOverviewState::btnNextClick, Options::keyBattleNextUnit);
+		_btnNext->onKeyboardPress((ActionHandler)&SoldierDiaryOverviewState::btnNextClick, options1.keyBattleNextUnit());
 	}
 
 	_txtTitle->setBig();

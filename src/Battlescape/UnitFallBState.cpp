@@ -56,9 +56,9 @@ void UnitFallBState::init()
 {
 	_terrain = _parent->getTileEngine();
 	if (_parent->getSave()->getSide() == FACTION_PLAYER)
-		_parent->setStateInterval(Options::battleXcomSpeed);
+		_parent->setStateInterval(options1.battleXcomSpeed());
 	else
-		_parent->setStateInterval(Options::battleAlienSpeed);
+		_parent->setStateInterval(options1.battleAlienSpeed());
 
 }
 

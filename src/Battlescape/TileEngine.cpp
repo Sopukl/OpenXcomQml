@@ -1451,7 +1451,7 @@ bool TileEngine::calculateUnitsInFOV(BattleUnit* unit, const Position eventPos, 
 {
 	size_t oldNumVisibleUnits = unit->getUnitsSpottedThisTurn().size();
 	bool useTurretDirection = false;
-	if (Options::strafe && (unit->getTurretType() > -1)) {
+	if (options1.strafe() && (unit->getTurretType() > -1)) {
 		useTurretDirection = true;
 	}
 
@@ -1544,7 +1544,7 @@ void TileEngine::calculateTilesInFOV(BattleUnit *unit, const Position eventPos, 
 	bool useTurretDirection = false;
 	bool skipNarrowArcTest = false;
 	int direction;
-	if (Options::strafe && (unit->getTurretType() > -1)) {
+	if (options1.strafe() && (unit->getTurretType() > -1)) {
 		direction = unit->getTurretDirection();
 		useTurretDirection = true;
 	}
@@ -1948,7 +1948,7 @@ bool TileEngine::isTileInLOS(BattleAction *action, Tile *tile, bool drawing)
 	std::vector<Position> _trajectory;
 	bool seen = false;
 
-	bool forceFire = Options::forceFire && _save->isCtrlPressed(true) && _save->getSide() == FACTION_PLAYER;
+	bool forceFire = options1.forceFire() && _save->isCtrlPressed(true) && _save->getSide() == FACTION_PLAYER;
 
 	// Primary LOF check
 	if (forceFire)
@@ -3342,7 +3342,7 @@ void TileEngine::explode(BattleActionAttack attack, Position center, int power, 
 		power /= 2;
 	}
 
-	int exHeight = Clamp(Options::battleExplosionHeight, 0, 3);
+	int exHeight = Clamp(options1.battleExplosionHeight(), 0, 3);
 	int vertdec = 1000; //default flat explosion
 
 	switch (exHeight)
@@ -4814,7 +4814,7 @@ bool TileEngine::psiAttack(BattleActionAttack attack, BattleUnit *victim)
 			victim->allowReselect();
 			victim->abortTurn(); // resets unit status to STANDING
 			// if all units from either faction are mind controlled - auto-end the mission.
-			if (_save->getSide() == FACTION_PLAYER && Options::allowPsionicCapture)
+			if (_save->getSide() == FACTION_PLAYER && options1.allowPsionicCapture())
 			{
 				_save->getBattleGame()->autoEndBattle();
 			}

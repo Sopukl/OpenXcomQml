@@ -89,7 +89,7 @@ NextTurnState::NextTurnState(SavedBattleGame *battleGame, BattlescapeState *stat
 	{
 		if (Options::battleAlienSpeedOrig != -1)
 		{
-			Options::battleAlienSpeed = Options::battleAlienSpeedOrig;
+			options1.setbattleAlienSpeed(Options::battleAlienSpeedOrig);
 			Options::battleAlienSpeedOrig = -1;
 		}
 	}
@@ -307,7 +307,7 @@ NextTurnState::NextTurnState(SavedBattleGame *battleGame, BattlescapeState *stat
 		}
 	}
 
-	if (Options::skipNextTurnScreen && message.empty() && messageReinforcements.empty())
+	if (options1.skipNextTurnScreen() && message.empty() && messageReinforcements.empty())
 	{
 		_timer = new Timer(NEXT_TURN_DELAY);
 		_timer->onTimer((StateHandler)&NextTurnState::close);

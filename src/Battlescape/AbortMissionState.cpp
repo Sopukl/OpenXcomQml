@@ -178,7 +178,7 @@ AbortMissionState::AbortMissionState(SavedBattleGame *battleGame, BattlescapeSta
 	_btnCancel->setHighContrast(true);
 	_btnCancel->onMouseClick((ActionHandler)&AbortMissionState::btnCancelClick);
 	_btnCancel->onKeyboardPress((ActionHandler)&AbortMissionState::btnCancelClick, options1.keyCancel());
-	_btnCancel->onKeyboardPress((ActionHandler)&AbortMissionState::btnCancelClick, Options::keyBattleAbort);
+	_btnCancel->onKeyboardPress((ActionHandler)&AbortMissionState::btnCancelClick, options1.keyBattleAbort());
 
 	centerAllSurfaces();
 }

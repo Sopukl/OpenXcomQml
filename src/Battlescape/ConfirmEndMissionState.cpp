@@ -82,7 +82,7 @@ ConfirmEndMissionState::ConfirmEndMissionState(SavedBattleGame *battleGame, int 
 	_btnCancel->setHighContrast(true);
 	_btnCancel->onMouseClick((ActionHandler)&ConfirmEndMissionState::btnCancelClick);
 	_btnCancel->onKeyboardPress((ActionHandler)&ConfirmEndMissionState::btnCancelClick, options1.keyCancel());
-	_btnCancel->onKeyboardPress((ActionHandler)&ConfirmEndMissionState::btnCancelClick, Options::keyBattleAbort);
+	_btnCancel->onKeyboardPress((ActionHandler)&ConfirmEndMissionState::btnCancelClick, options1.keyBattleAbort());
 
 	centerAllSurfaces();
 }

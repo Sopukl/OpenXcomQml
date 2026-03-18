@@ -40,6 +40,32 @@ namespace OpenXcom
 	/// Video format preferences.
 	enum VideoFormat { VIDEO_FMV, VIDEO_SLIDE };
 	/// Path preview modes (can be OR'd together).
+	enum ScrollType { SCROLL_NONE, SCROLL_TRIGGER, SCROLL_AUTO };
+	enum PathPreview {
+		PATH_NONE         = 0x00,
+		PATH_ARROWS       = 0x01,
+		PATH_TU_COST      = 0x02,
+		PATH_ARROW_TU     = 0x03,
+		PATH_ENERGY_COST  = 0x04,
+		PATH_ARROW_ENERGY = 0x05,
+		PATH_TU_ENERGY    = 0x06,
+		PATH_FULL         = 0x07
+	};
+	enum ScaleType
+	{
+		SCALE_ORIGINAL,
+		SCALE_15X,
+		SCALE_2X,
+		SCALE_SCREEN_DIV_3,
+		SCALE_SCREEN_DIV_2,
+		SCALE_SCREEN,
+		SCALE_SCREEN_DIV_4,
+		SCALE_SCREEN_DIV_5,
+		SCALE_SCREEN_DIV_6,
+		SCALE_SCREEN_DIV_8,
+		SCALE_SCREEN_DIV_10
+	};
+
 	class Options1 final: public QSettings
 	{
 		Q_OBJECT
@@ -158,6 +184,80 @@ namespace OpenXcom
 		OPTION(SDLKey, keyBaseSelect6)
 		OPTION(SDLKey, keyBaseSelect7)
 		OPTION(SDLKey, keyBaseSelect8)
+
+		//battlescape
+		OPTION(ScrollType, battleEdgeScroll)
+		OPTION(PathPreview, battleNewPreviewPath)
+		OPTION(qint32, battleScrollSpeed)
+		OPTION(qint32, battleDragScrollButton)
+		OPTION(qint32, battleFireSpeed)
+		OPTION(qint32, battleXcomSpeed)
+		OPTION(qint32, battleAlienSpeed)
+		OPTION(qint32, battleExplosionHeight)
+		OPTION(qint32, battlescapeScale)
+
+		OPTION(bool, traceAI)
+		OPTION(bool, sneakyAI)
+		OPTION(bool, battleInstantGrenade)
+		OPTION(bool, battleNotifyDeath)
+		OPTION(bool, battleTooltips)
+		OPTION(bool, battleHairBleach)
+		OPTION(bool, battleAutoEnd)
+		OPTION(bool, strafe)
+		OPTION(bool, forceFire)
+		OPTION(bool, showMoreStatsInInventoryView)
+		OPTION(bool, allowPsionicCapture)
+		OPTION(bool, skipNextTurnScreen)
+		OPTION(bool, disableAutoEquip)
+		OPTION(bool, battleDragScrollInvert)
+		OPTION(bool, battleUFOExtenderAccuracy)
+		OPTION(bool, battleConfirmFireMode)
+		OPTION(bool, battleSmoothCamera)
+		OPTION(bool, noAlienPanicMessages)
+		OPTION(bool, alienBleeding)
+
+		OPTION(SDLKey, keyBattleLeft)
+		OPTION(SDLKey, keyBattleRight)
+		OPTION(SDLKey, keyBattleUp)
+		OPTION(SDLKey, keyBattleDown)
+		OPTION(SDLKey, keyBattleLevelUp)
+		OPTION(SDLKey, keyBattleLevelDown)
+		OPTION(SDLKey, keyBattleCenterUnit)
+		OPTION(SDLKey, keyBattlePrevUnit)
+		OPTION(SDLKey, keyBattleNextUnit)
+		OPTION(SDLKey, keyBattleDeselectUnit)
+		OPTION(SDLKey, keyBattleUseLeftHand)
+		OPTION(SDLKey, keyBattleUseRightHand)
+		OPTION(SDLKey, keyBattleInventory)
+		OPTION(SDLKey, keyBattleMap)
+		OPTION(SDLKey, keyBattleOptions)
+		OPTION(SDLKey, keyBattleEndTurn)
+		OPTION(SDLKey, keyBattleAbort)
+		OPTION(SDLKey, keyBattleStats)
+		OPTION(SDLKey, keyBattleKneel)
+		OPTION(SDLKey, keyBattleReserveKneel)
+		OPTION(SDLKey, keyBattleReload)
+		OPTION(SDLKey, keyBattlePersonalLighting)
+		OPTION(SDLKey, keyBattleReserveNone)
+		OPTION(SDLKey, keyBattleReserveSnap)
+		OPTION(SDLKey, keyBattleReserveAimed)
+		OPTION(SDLKey, keyBattleReserveAuto)
+		OPTION(SDLKey, keyBattleCenterEnemy1)
+		OPTION(SDLKey, keyBattleCenterEnemy2)
+		OPTION(SDLKey, keyBattleCenterEnemy3)
+		OPTION(SDLKey, keyBattleCenterEnemy4)
+		OPTION(SDLKey, keyBattleCenterEnemy5)
+		OPTION(SDLKey, keyBattleCenterEnemy6)
+		OPTION(SDLKey, keyBattleCenterEnemy7)
+		OPTION(SDLKey, keyBattleCenterEnemy8)
+		OPTION(SDLKey, keyBattleCenterEnemy9)
+		OPTION(SDLKey, keyBattleCenterEnemy10)
+		OPTION(SDLKey, keyBattleVoxelView)
+		OPTION(SDLKey, keyBattleZeroTUs)
+		OPTION(SDLKey, keyInvCreateTemplate)
+		OPTION(SDLKey, keyInvApplyTemplate)
+		OPTION(SDLKey, keyInvClear)
+		OPTION(SDLKey, keyInvAutoEquip)
 		//video
 		OPTION(qint32, displayWidth)
 		OPTION(qint32, displayHeight)
@@ -190,14 +290,18 @@ namespace OpenXcom
 
 	inline Options1 options1;
 }
-	Q_DECLARE_METATYPE(std::string)
-	Q_DECLARE_METATYPE(SDLKey)
-	Q_DECLARE_METATYPE(SDL_GrabMode)
-	Q_DECLARE_METATYPE(OpenXcom::KeyboardType)
-	Q_DECLARE_METATYPE(OpenXcom::SaveSort)
-	Q_DECLARE_METATYPE(OpenXcom::MusicFormat)
-	Q_DECLARE_METATYPE(OpenXcom::SoundFormat)
-	Q_DECLARE_METATYPE(OpenXcom::VideoFormat)
-	Q_DECLARE_METATYPE(OpenXcom::TextDirection)
-	Q_DECLARE_METATYPE(OpenXcom::TextWrapping)
+
+Q_DECLARE_METATYPE(std::string)
+Q_DECLARE_METATYPE(SDLKey)
+Q_DECLARE_METATYPE(SDL_GrabMode)
+Q_DECLARE_METATYPE(OpenXcom::KeyboardType)
+Q_DECLARE_METATYPE(OpenXcom::SaveSort)
+Q_DECLARE_METATYPE(OpenXcom::MusicFormat)
+Q_DECLARE_METATYPE(OpenXcom::SoundFormat)
+Q_DECLARE_METATYPE(OpenXcom::VideoFormat)
+Q_DECLARE_METATYPE(OpenXcom::ScrollType)
+Q_DECLARE_METATYPE(OpenXcom::PathPreview)
+Q_DECLARE_METATYPE	(OpenXcom::ScaleType)
+Q_DECLARE_METATYPE(OpenXcom::TextDirection)
+Q_DECLARE_METATYPE(OpenXcom::TextWrapping)
 

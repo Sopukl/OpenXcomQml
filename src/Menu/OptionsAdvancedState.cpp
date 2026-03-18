@@ -361,11 +361,11 @@ void OptionsAdvancedState::lstOptionsClick(Action *action)
 		*i += increment;
 
 		int min = 0, max = 0;
-		if (i == &Options::battleExplosionHeight)
-		{
-			min = 0;
-			max = 3;
-		}
+		// if (i == &options1.battleExplosionHeight())
+		// {
+		// 	min = 0;
+		// 	max = 3;
+		// }
 		// else if (i == &options1.changeValueByMouseWheel())
 		// {
 		// 	min = 0;

@@ -78,7 +78,7 @@ MiniMapState::MiniMapState (Camera * camera, SavedBattleGame * battleGame)
 	_btnLvlDwn->onMouseClick((ActionHandler)&MiniMapState::btnLevelDownClick);
 	_btnOk->onMouseClick((ActionHandler)&MiniMapState::btnOkClick);
 	_btnOk->onKeyboardPress((ActionHandler)&MiniMapState::btnOkClick, options1.keyCancel());
-	_btnOk->onKeyboardPress((ActionHandler)&MiniMapState::btnOkClick, Options::keyBattleMap);
+	_btnOk->onKeyboardPress((ActionHandler)&MiniMapState::btnOkClick, options1.keyBattleMap());
 	_txtLevel->setBig();
 	_txtLevel->setHighContrast(true);
 	_txtLevel->setText(tr("STR_LEVEL_SHORT").arg(camera->getViewLevel()));
@@ -124,7 +124,7 @@ void MiniMapState::btnOkClick(Action *)
 {
 	if (options1.maximizeInfoScreens())
 	{
-		Screen::updateScale(Options::battlescapeScale, options1.baseXBattlescape, options1.baseYBattlescape, true);
+		Screen::updateScale(options1.battlescapeScale(), options1.baseXBattlescape, options1.baseYBattlescape, true);
 		_game->getScreen()->resetDisplay(false);
 	}
 	_game->popState();

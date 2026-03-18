@@ -66,7 +66,7 @@ void UnitWalkBState::init()
 	_pf = _parent->getPathfinding();
 	_terrain = _parent->getTileEngine();
 	_target = _action.target;
-	if (Options::traceAI) { Log(LOG_INFO) << "Walking from: " << _unit->getPosition() << "," << " to " << _target;}
+	if (options1.traceAI()) { Log(LOG_INFO) << "Walking from: " << _unit->getPosition() << "," << " to " << _target;}
 	int dir = _pf->getStartDirection();
 	if (!_action.strafe && dir != -1 && dir != _unit->getDirection())
 	{
@@ -264,7 +264,7 @@ void UnitWalkBState::think()
 		// check if we did spot new units
 		if (unitSpotted && !_action.desperate && _unit->getCharging() == 0 && !_falling)
 		{
-			if (Options::traceAI) { Log(LOG_INFO) << "Uh-oh! Company!"; }
+			if (options1.traceAI()) { Log(LOG_INFO) << "Uh-oh! Company!"; }
 			_unit->setHiding(false); // clearly we're not hidden now
 			postPathProcedures();
 			return;
@@ -429,7 +429,7 @@ void UnitWalkBState::think()
 				_preMovementCost = _preMovementCost * _unit->getTurnCost();
 				_unit->spendTimeUnits(_preMovementCost);
 			}
-			if (Options::traceAI) { Log(LOG_INFO) << "Egads! A turn reveals new units! I must pause!"; }
+			if (options1.traceAI()) { Log(LOG_INFO) << "Egads! A turn reveals new units! I must pause!"; }
 			_unit->setHiding(false); // not hidden, are we...
 			_unit->abortTurn(); //revert to a standing state.
 			return cancelCurentMove();
@@ -519,9 +519,9 @@ void UnitWalkBState::postPathProcedures()
 void UnitWalkBState::setNormalWalkSpeed()
 {
 	if (_unit->getFaction() == FACTION_PLAYER)
-		_parent->setStateInterval(Options::battleXcomSpeed);
+		_parent->setStateInterval(options1.battleXcomSpeed());
 	else
-		_parent->setStateInterval(Options::battleAlienSpeed);
+		_parent->setStateInterval(options1.battleAlienSpeed());
 }
 
 

@@ -91,7 +91,7 @@ void Pathfinding::calculate(BattleUnit *unit, Position endPosition, BattleAction
 	// i'm DONE with these out of bounds errors.
 	if (endPosition.x > _save->getMapSizeX() - size || endPosition.y > _save->getMapSizeY() - size || endPosition.x < 0 || endPosition.y < 0) return;
 
-	bool sneak = Options::sneakyAI && unit->getFaction() == FACTION_HOSTILE;
+	bool sneak = options1.sneakyAI() && unit->getFaction() == FACTION_HOSTILE;
 
 	Position startPosition = unit->getPosition();
 	MovementType movementType = getMovementType(unit, missileTarget, bam);
@@ -1193,8 +1193,8 @@ bool Pathfinding::previewPath(bool bRemove)
 	}
 	else
 	{
-		_ctrlUsed = Options::strafe && _save->isCtrlPressed(true);
-		_altUsed = Options::strafe && _save->isAltPressed(true);
+		_ctrlUsed = options1.strafe() && _save->isCtrlPressed(true);
+		_altUsed = options1.strafe() && _save->isAltPressed(true);
 	}
 
 	refreshPath();

@@ -355,7 +355,7 @@ void BattlescapeGame::handleAI(BattleUnit *unit)
 	{
 		_playedAggroSound = false;
 		unit->setHiding(false);
-		if (Options::traceAI) { Log(LOG_INFO) << "#" << unit->getId() << "--" << unit->getType(); }
+		if (options1.traceAI()) { Log(LOG_INFO) << "#" << unit->getId() << "--" << unit->getType(); }
 	}
 
 	BattleAction action;
@@ -1221,7 +1221,7 @@ void BattlescapeGame::statePushBack(BattleState *bs)
  */
 void BattlescapeGame::popState()
 {
-	if (Options::traceAI)
+	if (options1.traceAI())
 	{
 		Log(LOG_INFO) << "BattlescapeGame::popState() #" << _AIActionCounter << " with " << (_save->getSelectedUnit() ? _save->getSelectedUnit()->getTimeUnits() : -9999) << " TU";
 	}
@@ -1547,7 +1547,7 @@ bool BattlescapeGame::handlePanickingUnit(BattleUnit *unit)
 
 	// show a little infobox with the name of the unit and "... is panicking"
 	Game *game = _parentState->getGame();
-	if (unit->getVisible() || !Options::noAlienPanicMessages)
+	if (unit->getVisible() || !options1.noAlienPanicMessages())
 	{
 		getMap()->getCamera()->centerOnPosition(unit->getPosition());
 		if (status == STATUS_PANICKING)
@@ -1618,7 +1618,7 @@ bool BattlescapeGame::handlePanickingUnit(BattleUnit *unit)
   */
 bool BattlescapeGame::cancelCurrentAction(bool bForce)
 {
-	bool bPreviewed = Options::battleNewPreviewPath != PATH_NONE;
+	bool bPreviewed = options1.battleNewPreviewPath() != PATH_NONE;
 
 	if (_save->getPathfinding()->removePreview() && bPreviewed) return true;
 
@@ -1656,7 +1656,7 @@ bool BattlescapeGame::cancelCurrentAction(bool bForce)
 			}
 			else
 			{
-				if (Options::battleConfirmFireMode && !_currentAction.waypoints.empty())
+				if (options1.battleConfirmFireMode() && !_currentAction.waypoints.empty())
 				{
 					_currentAction.waypoints.pop_back();
 					getMap()->getWaypoints()->pop_back();
@@ -1724,7 +1724,7 @@ bool BattlescapeGame::isBusy() const
  */
 void BattlescapeGame::primaryAction(Position pos)
 {
-	bool bPreviewed = Options::battleNewPreviewPath != PATH_NONE;
+	bool bPreviewed = options1.battleNewPreviewPath() != PATH_NONE;
 
 	getMap()->resetObstacles();
 
@@ -1745,7 +1745,7 @@ void BattlescapeGame::primaryAction(Position pos)
 			int maxWaypoints = _currentAction.weapon->getRules()->getSprayWaypoints();
 			if ((int)_currentAction.waypoints.size() >= maxWaypoints ||
 				(_save->isCtrlPressed(true) && _save->isShiftPressed(true)) ||
-				(!Options::battleConfirmFireMode && (int)_currentAction.waypoints.size() == maxWaypoints - 1))
+				(!options1.battleConfirmFireMode() && (int)_currentAction.waypoints.size() == maxWaypoints - 1))
 			{
 				// If we're firing early, pick one last waypoint.
 				if ((int)_currentAction.waypoints.size() < maxWaypoints)
@@ -1897,7 +1897,7 @@ void BattlescapeGame::primaryAction(Position pos)
 				}
 			}
 		}
-		else if (Options::battleConfirmFireMode && (_currentAction.waypoints.empty() || pos != _currentAction.waypoints.front()))
+		else if (options1.battleConfirmFireMode() && (_currentAction.waypoints.empty() || pos != _currentAction.waypoints.front()))
 		{
 			_currentAction.waypoints.clear();
 			_currentAction.waypoints.push_back(pos);
@@ -1909,7 +1909,7 @@ void BattlescapeGame::primaryAction(Position pos)
 			_currentAction.target = pos;
 			getMap()->setCursorType(CT_NONE);
 
-			if (Options::battleConfirmFireMode)
+			if (options1.battleConfirmFireMode())
 			{
 				_currentAction.waypoints.clear();
 				getMap()->getWaypoints()->clear();
@@ -1944,8 +1944,8 @@ void BattlescapeGame::primaryAction(Position pos)
 		}
 		else if (playableUnitSelected())
 		{
-			bool isCtrlPressed = Options::strafe && _save->isCtrlPressed(true);
-			bool isAltPressed = Options::strafe && _save->isAltPressed(true);
+			bool isCtrlPressed = options1.strafe() && _save->isCtrlPressed(true);
+			bool isAltPressed = options1.strafe() && _save->isAltPressed(true);
 			bool isShiftPressed = _save->isShiftPressed(true);
 			if (bPreviewed && (
 				_currentAction.target != pos ||
@@ -2013,7 +2013,7 @@ void BattlescapeGame::secondaryAction(Position pos)
 	//  -= turn to or open door =-
 	_currentAction.target = pos;
 	_currentAction.actor = _save->getSelectedUnit();
-	_currentAction.strafe = Options::strafe && _save->isCtrlPressed(true) && _save->getSelectedUnit()->getTurretType() > -1;
+	_currentAction.strafe = options1.strafe() && _save->isCtrlPressed(true) && _save->getSelectedUnit()->getTurretType() > -1;
 	statePushBack(new UnitTurnBState(this, _currentAction));
 }
 
@@ -2993,7 +2993,7 @@ BattlescapeTally BattlescapeGame::tallyUnits()
 		{
 			if (bu->getOriginalFaction() == FACTION_HOSTILE)
 			{
-				if (Options::allowPsionicCapture && bu->getFaction() == FACTION_PLAYER && bu->getCapturable())
+				if (options1.allowPsionicCapture() && bu->getFaction() == FACTION_PLAYER && bu->getCapturable())
 				{
 					// don't count psi-captured units
 				}
@@ -3084,7 +3084,7 @@ bool BattlescapeGame::convertInfected()
 		{
 			retVal = true;
 			bu->setRespawn(false);
-			if (Options::battleNotifyDeath && bu->getFaction() == FACTION_PLAYER)
+			if (options1.battleNotifyDeath() && bu->getFaction() == FACTION_PLAYER)
 			{
 				Game *game = _parentState->getGame();
 				game->pushState(new InfoboxState(game->getLanguage()->getString("STR_HAS_BEEN_KILLED", bu->getGender()).arg(bu->getName(game->getLanguage()))));
@@ -3343,7 +3343,7 @@ void BattlescapeGame::autoEndBattle()
 	{
 		return;
 	}
-	if (Options::battleAutoEnd)
+	if (options1.battleAutoEnd())
 	{
 		if (_save->getVIPSurvivalPercentage() > 0 && _save->getVIPEscapeType() != ESCAPE_NONE)
 		{

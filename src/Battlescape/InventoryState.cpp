@@ -101,7 +101,7 @@ InventoryState::InventoryState(bool tu, BattlescapeState *parent, Base *base, bo
 	}
 	else if (_battleGame->isBaseCraftInventory())
 	{
-		Screen::updateScale(Options::battlescapeScale, options1.baseXBattlescape, options1.baseYBattlescape, true);
+		Screen::updateScale(options1.battlescapeScale(), options1.baseXBattlescape, options1.baseYBattlescape, true);
 		_game->getScreen()->resetDisplay(false);
 	}
 
@@ -176,7 +176,7 @@ InventoryState::InventoryState(bool tu, BattlescapeState *parent, Base *base, bo
 	add(_txtPosition, "textSlot", "inventory", _bg);
 
 	// move the TU display down to make room for the weight display
-	if (Options::showMoreStatsInInventoryView)
+	if (options1.showMoreStatsInInventoryView())
 	{
 		_txtTus->setY(_txtTus->getY() + 8);
 	}
@@ -222,7 +222,7 @@ InventoryState::InventoryState(bool tu, BattlescapeState *parent, Base *base, bo
 
 	_btnOk->onMouseClick((ActionHandler)&InventoryState::btnOkClick);
 	_btnOk->onKeyboardPress((ActionHandler)&InventoryState::btnOkClick, options1.keyCancel());
-	_btnOk->onKeyboardPress((ActionHandler)&InventoryState::btnOkClick, Options::keyBattleInventory);
+	_btnOk->onKeyboardPress((ActionHandler)&InventoryState::btnOkClick, options1.keyBattleInventory());
 	_btnOk->onKeyboardPress((ActionHandler)&InventoryState::btnUfopaediaClick, options1.keyGeoUfopedia());
 	_btnOk->onKeyboardPress((ActionHandler)&InventoryState::btnArmorClick, Options::keyInventoryArmor);
 	_btnOk->onKeyboardPress((ActionHandler)&InventoryState::btnArmorClickRight, Options::keyInventoryAvatar);
@@ -241,13 +241,13 @@ InventoryState::InventoryState(bool tu, BattlescapeState *parent, Base *base, bo
 	_btnOk->onKeyboardRelease((ActionHandler)&InventoryState::invMouseOver, SDLK_RALT);
 
 	_btnPrev->onMouseClick((ActionHandler)&InventoryState::btnPrevClick);
-	_btnPrev->onKeyboardPress((ActionHandler)&InventoryState::btnPrevClick, Options::keyBattlePrevUnit);
+	_btnPrev->onKeyboardPress((ActionHandler)&InventoryState::btnPrevClick, options1.keyBattlePrevUnit());
 	_btnPrev->setTooltip("STR_PREVIOUS_UNIT");
 	_btnPrev->onMouseIn((ActionHandler)&InventoryState::txtTooltipIn);
 	_btnPrev->onMouseOut((ActionHandler)&InventoryState::txtTooltipOut);
 
 	_btnNext->onMouseClick((ActionHandler)&InventoryState::btnNextClick);
-	_btnNext->onKeyboardPress((ActionHandler)&InventoryState::btnNextClick, Options::keyBattleNextUnit);
+	_btnNext->onKeyboardPress((ActionHandler)&InventoryState::btnNextClick, options1.keyBattleNextUnit());
 	_btnNext->setTooltip("STR_NEXT_UNIT");
 	_btnNext->onMouseIn((ActionHandler)&InventoryState::txtTooltipIn);
 	_btnNext->onMouseOut((ActionHandler)&InventoryState::txtTooltipOut);
@@ -262,8 +262,8 @@ InventoryState::InventoryState(bool tu, BattlescapeState *parent, Base *base, bo
 	_btnGround->setTooltip("STR_SCROLL_RIGHT");
 	_btnGround->onMouseIn((ActionHandler)&InventoryState::txtTooltipIn);
 	_btnGround->onMouseOut((ActionHandler)&InventoryState::txtTooltipOut);
-	_btnGround->onKeyboardPress((ActionHandler)&InventoryState::btnGroundClickBackward, Options::keyBattleLeft);
-	_btnGround->onKeyboardPress((ActionHandler)&InventoryState::btnGroundClickForward, Options::keyBattleRight);
+	_btnGround->onKeyboardPress((ActionHandler)&InventoryState::btnGroundClickBackward, options1.keyBattleLeft());
+	_btnGround->onKeyboardPress((ActionHandler)&InventoryState::btnGroundClickForward, options1.keyBattleRight());
 
 	_btnRank->onMouseClick((ActionHandler)&InventoryState::btnRankClick);
 	_btnRank->setTooltip("STR_UNIT_STATS");
@@ -280,15 +280,15 @@ InventoryState::InventoryState(bool tu, BattlescapeState *parent, Base *base, bo
 	}
 
 	_btnCreateTemplate->onMouseClick((ActionHandler)&InventoryState::btnCreateTemplateClick);
-	_btnCreateTemplate->onKeyboardPress((ActionHandler)&InventoryState::btnCreateTemplateClick, Options::keyInvCreateTemplate);
+	_btnCreateTemplate->onKeyboardPress((ActionHandler)&InventoryState::btnCreateTemplateClick, options1.keyInvCreateTemplate());
 	_btnCreateTemplate->setTooltip("STR_CREATE_INVENTORY_TEMPLATE");
 	_btnCreateTemplate->onMouseIn((ActionHandler)&InventoryState::txtTooltipIn);
 	_btnCreateTemplate->onMouseOut((ActionHandler)&InventoryState::txtTooltipOut);
 
 	_btnApplyTemplate->onMouseClick((ActionHandler)&InventoryState::btnApplyTemplateClick);
-	_btnApplyTemplate->onKeyboardPress((ActionHandler)&InventoryState::btnApplyTemplateClick, Options::keyInvApplyTemplate);
-	_btnApplyTemplate->onKeyboardPress((ActionHandler)&InventoryState::onClearInventory, Options::keyInvClear);
-	_btnApplyTemplate->onKeyboardPress((ActionHandler)&InventoryState::onAutoequip, Options::keyInvAutoEquip);
+	_btnApplyTemplate->onKeyboardPress((ActionHandler)&InventoryState::btnApplyTemplateClick, options1.keyInvApplyTemplate());
+	_btnApplyTemplate->onKeyboardPress((ActionHandler)&InventoryState::onClearInventory, options1.keyInvClear());
+	_btnApplyTemplate->onKeyboardPress((ActionHandler)&InventoryState::onAutoequip, options1.keyInvAutoEquip());
 	_btnApplyTemplate->setTooltip("STR_APPLY_INVENTORY_TEMPLATE");
 	_btnApplyTemplate->onMouseIn((ActionHandler)&InventoryState::txtTooltipIn);
 	_btnApplyTemplate->onMouseOut((ActionHandler)&InventoryState::txtTooltipOut);
@@ -339,11 +339,11 @@ InventoryState::InventoryState(bool tu, BattlescapeState *parent, Base *base, bo
 	}
 
 	_txtTus->setVisible(_tu);
-	_txtWeight->setVisible(Options::showMoreStatsInInventoryView);
-	_txtStatLine1->setVisible(Options::showMoreStatsInInventoryView && !_tu);
-	_txtStatLine2->setVisible(Options::showMoreStatsInInventoryView && !_tu);
-	_txtStatLine3->setVisible(Options::showMoreStatsInInventoryView && !_tu);
-	_txtStatLine4->setVisible(Options::showMoreStatsInInventoryView && !_tu);
+	_txtWeight->setVisible(options1.showMoreStatsInInventoryView());
+	_txtStatLine1->setVisible(options1.showMoreStatsInInventoryView() && !_tu);
+	_txtStatLine2->setVisible(options1.showMoreStatsInInventoryView() && !_tu);
+	_txtStatLine3->setVisible(options1.showMoreStatsInInventoryView() && !_tu);
+	_txtStatLine4->setVisible(options1.showMoreStatsInInventoryView() && !_tu);
 }
 
 static void _clearInventoryTemplate(std::vector<EquipmentLayoutItem*> &inventoryTemplate)
@@ -363,7 +363,7 @@ InventoryState::~InventoryState()
 	{
 		if (options1.maximizeInfoScreens())
 		{
-			Screen::updateScale(Options::battlescapeScale, options1.baseXBattlescape, options1.baseYBattlescape, true);
+			Screen::updateScale(options1.battlescapeScale(), options1.baseXBattlescape, options1.baseYBattlescape, true);
 			_game->getScreen()->resetDisplay(false);
 		}
 
@@ -2133,7 +2133,7 @@ void InventoryState::handle(Action *action)
 			_prev_key = 0, _key_repeats = 0;
 		}
 
-		if (action->getDetails()->key.keysym.sym == Options::keyInvClear)
+		if (action->getDetails()->key.keysym.sym == options1.keyInvClear())
 		{
 			if (_game->isCtrlPressed() && _game->isAltPressed())
 			{
@@ -2228,7 +2228,7 @@ void InventoryState::think()
  */
 void InventoryState::txtTooltipInExtraOK(Action *action)
 {
-	if (_inv->getSelectedItem() == 0 && Options::battleTooltips)
+	if (_inv->getSelectedItem() == 0 && options1.battleTooltips())
 	{
 		_currentTooltip = action->getSender()->getTooltip();
 
@@ -2268,7 +2268,7 @@ void InventoryState::txtTooltipInExtraOK(Action *action)
  */
 void InventoryState::txtTooltipIn(Action *action)
 {
-	if (_inv->getSelectedItem() == 0 && Options::battleTooltips)
+	if (_inv->getSelectedItem() == 0 && options1.battleTooltips())
 	{
 		_currentTooltip = action->getSender()->getTooltip();
 		_txtItem->setText(tr(_currentTooltip));
@@ -2281,7 +2281,7 @@ void InventoryState::txtTooltipIn(Action *action)
  */
 void InventoryState::txtTooltipOut(Action *action)
 {
-	if (_inv->getSelectedItem() == 0 && Options::battleTooltips)
+	if (_inv->getSelectedItem() == 0 && options1.battleTooltips())
 	{
 		if (_currentTooltip == action->getSender()->getTooltip())
 		{

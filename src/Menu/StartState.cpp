@@ -54,7 +54,7 @@ StartState::StartState() : _anim(0)
 	Options::newDisplayWidth = options1.displayWidth();
 	Options::newDisplayHeight = options1.displayHeight();
 	Screen::updateScale(options1.geoscapeScale(), options1.baseXGeoscape, options1.baseYGeoscape, false);
-	Screen::updateScale(Options::battlescapeScale, options1.baseXBattlescape, options1.baseYBattlescape, false);
+	Screen::updateScale(options1.battlescapeScale(), options1.baseXBattlescape, options1.baseYBattlescape, false);
 	options1.baseXResolution = options1.displayWidth();
 	options1.baseYResolution = options1.displayHeight();
 	_game->getScreen()->resetDisplay(false, true);

@@ -104,7 +104,7 @@ PauseState::PauseState(OptionsOrigin origin) : _origin(origin)
 	}
 	else if (origin == OPT_BATTLESCAPE)
 	{
-		_btnCancel->onKeyboardPress((ActionHandler)&PauseState::btnCancelClick, Options::keyBattleOptions);
+		_btnCancel->onKeyboardPress((ActionHandler)&PauseState::btnCancelClick, options1.keyBattleOptions());
 		if (!_game->getSavedGame()->getSavedBattle()->getBattleGame()->getStates().empty())
 		{
 			_btnOptions->setVisible(false);

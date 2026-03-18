@@ -132,7 +132,7 @@ CraftEquipmentState::CraftEquipmentState(Base *base, size_t craft) :
 	_btnInventory->setText(tr("STR_INVENTORY"));
 	_btnInventory->onMouseClick((ActionHandler)&CraftEquipmentState::btnInventoryClick);
 	_btnInventory->setVisible(craftHasACrew && !_isNewBattle);
-	_btnInventory->onKeyboardPress((ActionHandler)&CraftEquipmentState::btnInventoryClick, Options::keyBattleInventory);
+	_btnInventory->onKeyboardPress((ActionHandler)&CraftEquipmentState::btnInventoryClick, options1.keyBattleInventory());
 
 	_txtTitle->setBig();
 	if (Options::oxceBaseTouchButtons)

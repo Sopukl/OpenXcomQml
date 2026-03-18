@@ -205,7 +205,7 @@ void Game::processEvents()
 					options1.setdisplayHeight(Options::newDisplayHeight);
 
 					int dX = 0, dY = 0;
-					Screen::updateScale(Options::battlescapeScale, options1.baseXBattlescape, options1.baseYBattlescape, false);
+					Screen::updateScale(options1.battlescapeScale(), options1.baseXBattlescape, options1.baseYBattlescape, false);
 					Screen::updateScale(options1.geoscapeScale(), options1.baseXGeoscape, options1.baseYGeoscape, false);
 					for (auto* state : _states)
 					{

@@ -77,7 +77,7 @@ BattlescapeGenerator::BattlescapeGenerator(Game *game) :
 	_unitSequence(0), _craftInventoryTile(0), _alienCustomDeploy(0), _alienCustomMission(0), _alienItemLevel(0), _ufoDamagePercentage(0),
 	_baseInventory(false), _generateFuel(true), _craftDeployed(false), _ufoDeployed(false), _craftZ(0), _craftPos(), _markAsReinforcementsBlock(0), _blocksToDo(0), _dummy(0)
 {
-	_allowAutoLoadout = !Options::disableAutoEquip;
+	_allowAutoLoadout = !options1.disableAutoEquip();
 	if (_game->getSavedGame()->getDisableSoldierEquipment())
 	{
 		_allowAutoLoadout = false;

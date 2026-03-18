@@ -50,7 +50,7 @@ AIModule::AIModule(SavedBattleGame *save, BattleUnit *unit, Node *node) :
 	_escapeTUs(0), _ambushTUs(0), _weaponPickedUp(false), _rifle(false), _melee(false), _blaster(false), _grenade(false),
 	_didPsi(false), _AIMode(AI_PATROL), _closestDist(100), _fromNode(node), _toNode(0), _foundBaseModuleToDestroy(false)
 {
-	_traceAI = Options::traceAI;
+	_traceAI = options1.traceAI();
 
 	_reserve = BA_NONE;
 	_intelligence = _unit->getIntelligence();
@@ -2161,7 +2161,7 @@ int AIModule::explosiveEfficacy(Position targetPos, BattleUnit *attackingUnit, i
 	int efficacy = AIW_SCALE * desperation;
 
 	// don't go kamikaze unless we're already doomed.
-	if (abs(attackingUnit->getPosition().z - targetPos.z) <= Options::battleExplosionHeight && distance <= radius)
+	if (abs(attackingUnit->getPosition().z - targetPos.z) <= options1.battleExplosionHeight() && distance <= radius)
 	{
 		efficacy -= AIW_SCALE * 4;
 	}
@@ -2186,7 +2186,7 @@ int AIModule::explosiveEfficacy(Position targetPos, BattleUnit *attackingUnit, i
 			// don't count the target twice
 			bu != target &&
 			// don't count units that probably won't be affected cause they're out of range
-			abs(bu->getPosition().z - targetPos.z) <= Options::battleExplosionHeight &&
+			abs(bu->getPosition().z - targetPos.z) <= options1.battleExplosionHeight() &&
 			Position::distance2d(bu->getPosition(), targetPos) <= radius)
 		{
 			if (bu->getTile()->getDangerous())

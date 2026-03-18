@@ -111,11 +111,11 @@ void createOptionsOXC()
 #else
 	//# _info.push_back(OptionInfo(OPTION_OXC, "maxFrameSkip", &maxFrameSkip, 0));
 #endif
-	_info.push_back(OptionInfo(OPTION_OXC, "traceAI", &traceAI, false));
+	//# _info.push_back(OptionInfo(OPTION_OXC, "traceAI", &traceAI, false));
 	//# _info.push_back(OptionInfo(OPTION_OXC, "verboseLogging", &verboseLogging, false));
 	//# _info.push_back(OptionInfo(OPTION_OXC, "StereoSound", &StereoSound, true));
 	//#_info.push_back(OptionInfo(OPTION_OXC, "geoscapeScale", &geoscapeScale, 0));
-	_info.push_back(OptionInfo(OPTION_OXC, "battlescapeScale", &battlescapeScale, 0));
+	//#_info.push_back(OptionInfo(OPTION_OXC, "battlescapeScale", &battlescapeScale, 0));
 	//# _info.push_back(OptionInfo(OPTION_OXC, "useScaleFilter", &useScaleFilter, false));
 	//# _info.push_back(OptionInfo(OPTION_OXC, "useHQXFilter", &useHQXFilter, false));
 	//# _info.push_back(OptionInfo(OPTION_OXC, "useXBRZFilter", &useXBRZFilter, false));
@@ -129,25 +129,25 @@ void createOptionsOXC()
 	//# _info.push_back(OptionInfo(OPTION_OXC, "musicVolume", &musicVolume, 2*(MIX_MAX_VOLUME/3)));
 	//# _info.push_back(OptionInfo(OPTION_OXC, "uiVolume", &uiVolume, MIX_MAX_VOLUME/3));
 	//#_info.push_back(OptionInfo(OPTION_OXC, "language", &language, ""));
-	_info.push_back(OptionInfo(OPTION_OXC, "battleScrollSpeed", &battleScrollSpeed, 8));
+	//#_info.push_back(OptionInfo(OPTION_OXC, "battleScrollSpeed", &battleScrollSpeed, 8));
 #ifdef __MOBILE__
 	_info.push_back(OptionInfo(OPTION_OXC, "battleEdgeScroll", (int*)&battleEdgeScroll, SCROLL_NONE));
 	_info.push_back(OptionInfo(OPTION_OXC, "battleDragScrollButton", &battleDragScrollButton, SDL_BUTTON_LEFT));
 #else
-	_info.push_back(OptionInfo(OPTION_OXC, "battleEdgeScroll", (int*)&battleEdgeScroll, SCROLL_AUTO));
-	_info.push_back(OptionInfo(OPTION_OXC, "battleDragScrollButton", &battleDragScrollButton, 0)); // different default in OXCE
+	//#_info.push_back(OptionInfo(OPTION_OXC, "battleEdgeScroll", (int*)&battleEdgeScroll, SCROLL_AUTO));
+	//#_info.push_back(OptionInfo(OPTION_OXC, "battleDragScrollButton", &battleDragScrollButton, 0)); // different default in OXCE
 #endif
 	//# _info.push_back(OptionInfo(OPTION_OXC, "dragScrollTimeTolerance", &dragScrollTimeTolerance, 300)); // miliSecond
 	//# _info.push_back(OptionInfo(OPTION_OXC, "dragScrollPixelTolerance", &dragScrollPixelTolerance, 10)); // count of pixels
-	_info.push_back(OptionInfo(OPTION_OXC, "battleFireSpeed", &battleFireSpeed, 6));
-	_info.push_back(OptionInfo(OPTION_OXC, "battleXcomSpeed", &battleXcomSpeed, 30));
+	//#_info.push_back(OptionInfo(OPTION_OXC, "battleFireSpeed", &battleFireSpeed, 6));
+	//#_info.push_back(OptionInfo(OPTION_OXC, "battleXcomSpeed", &battleXcomSpeed, 30));
 	battleXcomSpeedOrig = -1;
 	battleAlienSpeedOrig = -1;
-	_info.push_back(OptionInfo(OPTION_OXC, "battleAlienSpeed", &battleAlienSpeed, 30));
+	//#_info.push_back(OptionInfo(OPTION_OXC, "battleAlienSpeed", &battleAlienSpeed, 30));
 #ifdef __MOBILE__
 	_info.push_back(OptionInfo(OPTION_OXC, "battleNewPreviewPath", (int*)&battleNewPreviewPath, PATH_FULL)); // for android, set full preview by default
 #else
-	_info.push_back(OptionInfo(OPTION_OXC, "battleNewPreviewPath", (int*)&battleNewPreviewPath, PATH_NONE)); // requires double-click to confirm moves
+	//#_info.push_back(OptionInfo(OPTION_OXC, "battleNewPreviewPath", (int*)&battleNewPreviewPath, PATH_NONE)); // requires double-click to confirm moves
 #endif
 	//#_info.push_back(OptionInfo(OPTION_OXC, "fpsCounter", &fpsCounter, false));
 	//# _info.push_back(OptionInfo(OPTION_OXC, "globeDetail", &globeDetail, true));
@@ -158,14 +158,14 @@ void createOptionsOXC()
 	//# _info.push_back(OptionInfo(OPTION_OXC, "audioBitDepth", &audioBitDepth, 16));
 	//# _info.push_back(OptionInfo(OPTION_OXC, "audioChunkSize", &audioChunkSize, 1024));
 	//# _info.push_back(OptionInfo(OPTION_OXC, "pauseMode", &pauseMode, 0));
-	_info.push_back(OptionInfo(OPTION_OXC, "battleNotifyDeath", &battleNotifyDeath, false));
+	//# _info.push_back(OptionInfo(OPTION_OXC, "battleNotifyDeath", &battleNotifyDeath, false));
 	//#_info.push_back(OptionInfo(OPTION_OXC, "showFundsOnGeoscape", &showFundsOnGeoscape, false));
 	//#_info.push_back(OptionInfo(OPTION_OXC, "allowResize", &allowResize, false));
 	//# _info.push_back(OptionInfo(OPTION_OXC, "windowedModePositionX", &windowedModePositionX, 0));
 	//# _info.push_back(OptionInfo(OPTION_OXC, "windowedModePositionY", &windowedModePositionY, 0));
 	//#_info.push_back(OptionInfo(OPTION_OXC, "borderless", &borderless, false));
 	//#_info.push_back(OptionInfo(OPTION_OXC, "captureMouse", (bool*)&captureMouse, false));
-	_info.push_back(OptionInfo(OPTION_OXC, "battleTooltips", &battleTooltips, true));
+	//# _info.push_back(OptionInfo(OPTION_OXC, "battleTooltips", &battleTooltips, true));
 	//# _info.push_back(OptionInfo(OPTION_OXC, "keepAspectRatio", &keepAspectRatio, true));
 	//# _info.push_back(OptionInfo(OPTION_OXC, "nonSquarePixelRatio", &nonSquarePixelRatio, false));
 	//# _info.push_back(OptionInfo(OPTION_OXC, "cursorInBlackBandsInFullscreen", &cursorInBlackBandsInFullscreen, false));
@@ -246,30 +246,30 @@ void createAdvancedOptionsOXC()
 	//#_info.push_back(OptionInfo(OPTION_OXC, "fieldPromotions", &fieldPromotions, false, "STR_FIELDPROMOTIONS", "STR_GEOSCAPE"));
 	//_info.push_back(OptionInfo(OPTION_OXC, "meetingPoint", &meetingPoint, false, "STR_MEETINGPOINT", "STR_GEOSCAPE")); // intentionally disabled in OXCE
 
-	_info.push_back(OptionInfo(OPTION_OXC, "battleDragScrollInvert", &battleDragScrollInvert, false, "STR_DRAGSCROLLINVERT", "STR_BATTLESCAPE")); // true drags away from the cursor, false drags towards (like a grab)
-	_info.push_back(OptionInfo(OPTION_OXC, "sneakyAI", &sneakyAI, false, "STR_SNEAKYAI", "STR_BATTLESCAPE"));
-	_info.push_back(OptionInfo(OPTION_OXC, "battleUFOExtenderAccuracy", &battleUFOExtenderAccuracy, false, "STR_BATTLEUFOEXTENDERACCURACY", "STR_BATTLESCAPE"));
-	_info.push_back(OptionInfo(OPTION_OXC, "showMoreStatsInInventoryView", &showMoreStatsInInventoryView, false, "STR_SHOWMORESTATSININVENTORYVIEW", "STR_BATTLESCAPE"));
-	_info.push_back(OptionInfo(OPTION_OXC, "battleHairBleach", &battleHairBleach, true, "STR_BATTLEHAIRBLEACH", "STR_BATTLESCAPE"));
-	_info.push_back(OptionInfo(OPTION_OXC, "battleInstantGrenade", &battleInstantGrenade, false, "STR_BATTLEINSTANTGRENADE", "STR_BATTLESCAPE"));
+	//# _info.push_back(OptionInfo(OPTION_OXC, "battleDragScrollInvert", &battleDragScrollInvert, false, "STR_DRAGSCROLLINVERT", "STR_BATTLESCAPE")); // true drags away from the cursor, false drags towards (like a grab)
+	//# _info.push_back(OptionInfo(OPTION_OXC, "sneakyAI", &sneakyAI, false, "STR_SNEAKYAI", "STR_BATTLESCAPE"));
+	//# _info.push_back(OptionInfo(OPTION_OXC, "battleUFOExtenderAccuracy", &battleUFOExtenderAccuracy, false, "STR_BATTLEUFOEXTENDERACCURACY", "STR_BATTLESCAPE"));
+	//# _info.push_back(OptionInfo(OPTION_OXC, "showMoreStatsInInventoryView", &showMoreStatsInInventoryView, false, "STR_SHOWMORESTATSININVENTORYVIEW", "STR_BATTLESCAPE"));
+	//# _info.push_back(OptionInfo(OPTION_OXC, "battleHairBleach", &battleHairBleach, true, "STR_BATTLEHAIRBLEACH", "STR_BATTLESCAPE"));
+	//# _info.push_back(OptionInfo(OPTION_OXC, "battleInstantGrenade", &battleInstantGrenade, false, "STR_BATTLEINSTANTGRENADE", "STR_BATTLESCAPE"));
 	//#_info.push_back(OptionInfo(OPTION_OXC, "includePrimeStateInSavedLayout", &includePrimeStateInSavedLayout, false, "STR_INCLUDE_PRIMESTATE_IN_SAVED_LAYOUT", "STR_BATTLESCAPE"));
-	_info.push_back(OptionInfo(OPTION_OXC, "battleExplosionHeight", &battleExplosionHeight, 0, "STR_BATTLEEXPLOSIONHEIGHT", "STR_BATTLESCAPE"));
-	_info.push_back(OptionInfo(OPTION_OXC, "battleAutoEnd", &battleAutoEnd, false, "STR_BATTLEAUTOEND", "STR_BATTLESCAPE"));
-	_info.push_back(OptionInfo(OPTION_OXC, "battleSmoothCamera", &battleSmoothCamera, false, "STR_BATTLESMOOTHCAMERA", "STR_BATTLESCAPE"));
-	_info.push_back(OptionInfo(OPTION_OXC, "disableAutoEquip", &disableAutoEquip, false, "STR_DISABLEAUTOEQUIP", "STR_BATTLESCAPE"));
+	//#_info.push_back(OptionInfo(OPTION_OXC, "battleExplosionHeight", &battleExplosionHeight, 0, "STR_BATTLEEXPLOSIONHEIGHT", "STR_BATTLESCAPE"));
+	//# _info.push_back(OptionInfo(OPTION_OXC, "battleAutoEnd", &battleAutoEnd, false, "STR_BATTLEAUTOEND", "STR_BATTLESCAPE"));
+	//# _info.push_back(OptionInfo(OPTION_OXC, "battleSmoothCamera", &battleSmoothCamera, false, "STR_BATTLESMOOTHCAMERA", "STR_BATTLESCAPE"));
+	//# _info.push_back(OptionInfo(OPTION_OXC, "disableAutoEquip", &disableAutoEquip, false, "STR_DISABLEAUTOEQUIP", "STR_BATTLESCAPE"));
 #ifdef __MOBILE__
 	_info.push_back(OptionInfo(OPTION_OXC, "battleConfirmFireMode", &battleConfirmFireMode, true, "STR_BATTLECONFIRMFIREMODE", "STR_BATTLESCAPE"));
 #else
-	_info.push_back(OptionInfo(OPTION_OXC, "battleConfirmFireMode", &battleConfirmFireMode, false, "STR_BATTLECONFIRMFIREMODE", "STR_BATTLESCAPE"));
+	//# _info.push_back(OptionInfo(OPTION_OXC, "battleConfirmFireMode", &battleConfirmFireMode, false, "STR_BATTLECONFIRMFIREMODE", "STR_BATTLESCAPE"));
 #endif
 	//#_info.push_back(OptionInfo(OPTION_OXC, "weaponSelfDestruction", &weaponSelfDestruction, false, "STR_WEAPONSELFDESTRUCTION", "STR_BATTLESCAPE"));
-	_info.push_back(OptionInfo(OPTION_OXC, "allowPsionicCapture", &allowPsionicCapture, false, "STR_ALLOWPSIONICCAPTURE", "STR_BATTLESCAPE"));
+	//# _info.push_back(OptionInfo(OPTION_OXC, "allowPsionicCapture", &allowPsionicCapture, false, "STR_ALLOWPSIONICCAPTURE", "STR_BATTLESCAPE"));
 	//#_info.push_back(OptionInfo(OPTION_OXC, "allowPsiStrengthImprovement", &allowPsiStrengthImprovement, false, "STR_ALLOWPSISTRENGTHIMPROVEMENT", "STR_BATTLESCAPE"));
-	_info.push_back(OptionInfo(OPTION_OXC, "strafe", &strafe, false, "STR_STRAFE", "STR_BATTLESCAPE"));
-	_info.push_back(OptionInfo(OPTION_OXC, "forceFire", &forceFire, true, "STR_FORCE_FIRE", "STR_BATTLESCAPE"));
-	_info.push_back(OptionInfo(OPTION_OXC, "skipNextTurnScreen", &skipNextTurnScreen, false, "STR_SKIPNEXTTURNSCREEN", "STR_BATTLESCAPE"));
-	_info.push_back(OptionInfo(OPTION_OXC, "noAlienPanicMessages", &noAlienPanicMessages, false, "STR_NOALIENPANICMESSAGES", "STR_BATTLESCAPE"));
-	_info.push_back(OptionInfo(OPTION_OXC, "alienBleeding", &alienBleeding, false, "STR_ALIENBLEEDING", "STR_BATTLESCAPE"));
+	//# _info.push_back(OptionInfo(OPTION_OXC, "strafe", &strafe, false, "STR_STRAFE", "STR_BATTLESCAPE"));
+	//# _info.push_back(OptionInfo(OPTION_OXC, "forceFire", &forceFire, true, "STR_FORCE_FIRE", "STR_BATTLESCAPE"));
+	//# _info.push_back(OptionInfo(OPTION_OXC, "skipNextTurnScreen", &skipNextTurnScreen, false, "STR_SKIPNEXTTURNSCREEN", "STR_BATTLESCAPE"));
+	//# _info.push_back(OptionInfo(OPTION_OXC, "noAlienPanicMessages", &noAlienPanicMessages, false, "STR_NOALIENPANICMESSAGES", "STR_BATTLESCAPE"));
+	//# _info.push_back(OptionInfo(OPTION_OXC, "alienBleeding", &alienBleeding, false, "STR_ALIENBLEEDING", "STR_BATTLESCAPE"));
 }
 
 void createControlsOXC()
@@ -309,48 +309,48 @@ void createControlsOXC()
 	//# _info.push_back(OptionInfo(OPTION_OXC, "keyBaseSelect6", &keyBaseSelect6, SDLK_6, "STR_SELECT_BASE_6", "STR_GEOSCAPE"));
 	//# _info.push_back(OptionInfo(OPTION_OXC, "keyBaseSelect7", &keyBaseSelect7, SDLK_7, "STR_SELECT_BASE_7", "STR_GEOSCAPE"));
 	//# _info.push_back(OptionInfo(OPTION_OXC, "keyBaseSelect8", &keyBaseSelect8, SDLK_8, "STR_SELECT_BASE_8", "STR_GEOSCAPE"));
-	_info.push_back(OptionInfo(OPTION_OXC, "keyBattleLeft", &keyBattleLeft, SDLK_LEFT, "STR_SCROLL_LEFT", "STR_BATTLESCAPE"));
-	_info.push_back(OptionInfo(OPTION_OXC, "keyBattleRight", &keyBattleRight, SDLK_RIGHT, "STR_SCROLL_RIGHT", "STR_BATTLESCAPE"));
-	_info.push_back(OptionInfo(OPTION_OXC, "keyBattleUp", &keyBattleUp, SDLK_UP, "STR_SCROLL_UP", "STR_BATTLESCAPE"));
-	_info.push_back(OptionInfo(OPTION_OXC, "keyBattleDown", &keyBattleDown, SDLK_DOWN, "STR_SCROLL_DOWN", "STR_BATTLESCAPE"));
-	_info.push_back(OptionInfo(OPTION_OXC, "keyBattleLevelUp", &keyBattleLevelUp, SDLK_PAGEUP, "STR_VIEW_LEVEL_ABOVE", "STR_BATTLESCAPE"));
-	_info.push_back(OptionInfo(OPTION_OXC, "keyBattleLevelDown", &keyBattleLevelDown, SDLK_PAGEDOWN, "STR_VIEW_LEVEL_BELOW", "STR_BATTLESCAPE"));
-	_info.push_back(OptionInfo(OPTION_OXC, "keyBattleCenterUnit", &keyBattleCenterUnit, SDLK_HOME, "STR_CENTER_SELECTED_UNIT", "STR_BATTLESCAPE"));
-	_info.push_back(OptionInfo(OPTION_OXC, "keyBattlePrevUnit", &keyBattlePrevUnit, SDLK_UNKNOWN, "STR_PREVIOUS_UNIT", "STR_BATTLESCAPE")); // different default in OXCE
-	_info.push_back(OptionInfo(OPTION_OXC, "keyBattleNextUnit", &keyBattleNextUnit, SDLK_TAB, "STR_NEXT_UNIT", "STR_BATTLESCAPE"));
-	_info.push_back(OptionInfo(OPTION_OXC, "keyBattleDeselectUnit", &keyBattleDeselectUnit, SDLK_BACKSLASH, "STR_DESELECT_UNIT", "STR_BATTLESCAPE"));
-	_info.push_back(OptionInfo(OPTION_OXC, "keyBattleUseLeftHand", &keyBattleUseLeftHand, SDLK_q, "STR_USE_LEFT_HAND", "STR_BATTLESCAPE"));
-	_info.push_back(OptionInfo(OPTION_OXC, "keyBattleUseRightHand", &keyBattleUseRightHand, SDLK_e, "STR_USE_RIGHT_HAND", "STR_BATTLESCAPE"));
-	_info.push_back(OptionInfo(OPTION_OXC, "keyBattleInventory", &keyBattleInventory, SDLK_i, "STR_INVENTORY", "STR_BATTLESCAPE"));
-	_info.push_back(OptionInfo(OPTION_OXC, "keyBattleMap", &keyBattleMap, SDLK_m, "STR_MINIMAP", "STR_BATTLESCAPE"));
-	_info.push_back(OptionInfo(OPTION_OXC, "keyBattleOptions", &keyBattleOptions, SDLK_ESCAPE, "STR_OPTIONS", "STR_BATTLESCAPE"));
-	_info.push_back(OptionInfo(OPTION_OXC, "keyBattleEndTurn", &keyBattleEndTurn, SDLK_BACKSPACE, "STR_END_TURN", "STR_BATTLESCAPE"));
-	_info.push_back(OptionInfo(OPTION_OXC, "keyBattleAbort", &keyBattleAbort, SDLK_a, "STR_ABORT_MISSION", "STR_BATTLESCAPE"));
-	_info.push_back(OptionInfo(OPTION_OXC, "keyBattleStats", &keyBattleStats, SDLK_s, "STR_UNIT_STATS", "STR_BATTLESCAPE"));
-	_info.push_back(OptionInfo(OPTION_OXC, "keyBattleKneel", &keyBattleKneel, SDLK_k, "STR_KNEEL", "STR_BATTLESCAPE"));
-	_info.push_back(OptionInfo(OPTION_OXC, "keyBattleReload", &keyBattleReload, SDLK_r, "STR_RELOAD", "STR_BATTLESCAPE"));
-	_info.push_back(OptionInfo(OPTION_OXC, "keyBattlePersonalLighting", &keyBattlePersonalLighting, SDLK_l, "STR_TOGGLE_PERSONAL_LIGHTING", "STR_BATTLESCAPE"));
-	_info.push_back(OptionInfo(OPTION_OXC, "keyBattleReserveNone", &keyBattleReserveNone, SDLK_F1, "STR_DONT_RESERVE_TIME_UNITS", "STR_BATTLESCAPE"));
-	_info.push_back(OptionInfo(OPTION_OXC, "keyBattleReserveSnap", &keyBattleReserveSnap, SDLK_F2, "STR_RESERVE_TIME_UNITS_FOR_SNAP_SHOT", "STR_BATTLESCAPE"));
-	_info.push_back(OptionInfo(OPTION_OXC, "keyBattleReserveAimed", &keyBattleReserveAimed, SDLK_F3, "STR_RESERVE_TIME_UNITS_FOR_AIMED_SHOT", "STR_BATTLESCAPE"));
-	_info.push_back(OptionInfo(OPTION_OXC, "keyBattleReserveAuto", &keyBattleReserveAuto, SDLK_F4, "STR_RESERVE_TIME_UNITS_FOR_AUTO_SHOT", "STR_BATTLESCAPE"));
-	_info.push_back(OptionInfo(OPTION_OXC, "keyBattleReserveKneel", &keyBattleReserveKneel, SDLK_j, "STR_RESERVE_TIME_UNITS_FOR_KNEEL", "STR_BATTLESCAPE"));
-	_info.push_back(OptionInfo(OPTION_OXC, "keyBattleZeroTUs", &keyBattleZeroTUs, SDLK_DELETE, "STR_EXPEND_ALL_TIME_UNITS", "STR_BATTLESCAPE"));
-	_info.push_back(OptionInfo(OPTION_OXC, "keyBattleCenterEnemy1", &keyBattleCenterEnemy1, SDLK_1, "STR_CENTER_ON_ENEMY_1", "STR_BATTLESCAPE"));
-	_info.push_back(OptionInfo(OPTION_OXC, "keyBattleCenterEnemy2", &keyBattleCenterEnemy2, SDLK_2, "STR_CENTER_ON_ENEMY_2", "STR_BATTLESCAPE"));
-	_info.push_back(OptionInfo(OPTION_OXC, "keyBattleCenterEnemy3", &keyBattleCenterEnemy3, SDLK_3, "STR_CENTER_ON_ENEMY_3", "STR_BATTLESCAPE"));
-	_info.push_back(OptionInfo(OPTION_OXC, "keyBattleCenterEnemy4", &keyBattleCenterEnemy4, SDLK_4, "STR_CENTER_ON_ENEMY_4", "STR_BATTLESCAPE"));
-	_info.push_back(OptionInfo(OPTION_OXC, "keyBattleCenterEnemy5", &keyBattleCenterEnemy5, SDLK_5, "STR_CENTER_ON_ENEMY_5", "STR_BATTLESCAPE"));
-	_info.push_back(OptionInfo(OPTION_OXC, "keyBattleCenterEnemy6", &keyBattleCenterEnemy6, SDLK_6, "STR_CENTER_ON_ENEMY_6", "STR_BATTLESCAPE"));
-	_info.push_back(OptionInfo(OPTION_OXC, "keyBattleCenterEnemy7", &keyBattleCenterEnemy7, SDLK_7, "STR_CENTER_ON_ENEMY_7", "STR_BATTLESCAPE"));
-	_info.push_back(OptionInfo(OPTION_OXC, "keyBattleCenterEnemy8", &keyBattleCenterEnemy8, SDLK_8, "STR_CENTER_ON_ENEMY_8", "STR_BATTLESCAPE"));
-	_info.push_back(OptionInfo(OPTION_OXC, "keyBattleCenterEnemy9", &keyBattleCenterEnemy9, SDLK_9, "STR_CENTER_ON_ENEMY_9", "STR_BATTLESCAPE"));
-	_info.push_back(OptionInfo(OPTION_OXC, "keyBattleCenterEnemy10", &keyBattleCenterEnemy10, SDLK_0, "STR_CENTER_ON_ENEMY_10", "STR_BATTLESCAPE"));
-	_info.push_back(OptionInfo(OPTION_OXC, "keyBattleVoxelView", &keyBattleVoxelView, SDLK_F10, "STR_SAVE_VOXEL_VIEW", "STR_BATTLESCAPE"));
-	_info.push_back(OptionInfo(OPTION_OXC, "keyInvCreateTemplate", &keyInvCreateTemplate, SDLK_c, "STR_CREATE_INVENTORY_TEMPLATE", "STR_BATTLESCAPE"));
-	_info.push_back(OptionInfo(OPTION_OXC, "keyInvApplyTemplate", &keyInvApplyTemplate, SDLK_v, "STR_APPLY_INVENTORY_TEMPLATE", "STR_BATTLESCAPE"));
-	_info.push_back(OptionInfo(OPTION_OXC, "keyInvClear", &keyInvClear, SDLK_x, "STR_CLEAR_INVENTORY", "STR_BATTLESCAPE"));
-	_info.push_back(OptionInfo(OPTION_OXC, "keyInvAutoEquip", &keyInvAutoEquip, SDLK_z, "STR_AUTO_EQUIP", "STR_BATTLESCAPE"));
+	//# _info.push_back(OptionInfo(OPTION_OXC, "keyBattleLeft", &keyBattleLeft, SDLK_LEFT, "STR_SCROLL_LEFT", "STR_BATTLESCAPE"));
+	//# _info.push_back(OptionInfo(OPTION_OXC, "keyBattleRight", &keyBattleRight, SDLK_RIGHT, "STR_SCROLL_RIGHT", "STR_BATTLESCAPE"));
+	//# _info.push_back(OptionInfo(OPTION_OXC, "keyBattleUp", &keyBattleUp, SDLK_UP, "STR_SCROLL_UP", "STR_BATTLESCAPE"));
+	//# _info.push_back(OptionInfo(OPTION_OXC, "keyBattleDown", &keyBattleDown, SDLK_DOWN, "STR_SCROLL_DOWN", "STR_BATTLESCAPE"));
+	//# _info.push_back(OptionInfo(OPTION_OXC, "keyBattleLevelUp", &keyBattleLevelUp, SDLK_PAGEUP, "STR_VIEW_LEVEL_ABOVE", "STR_BATTLESCAPE"));
+	//# _info.push_back(OptionInfo(OPTION_OXC, "keyBattleLevelDown", &keyBattleLevelDown, SDLK_PAGEDOWN, "STR_VIEW_LEVEL_BELOW", "STR_BATTLESCAPE"));
+	//# _info.push_back(OptionInfo(OPTION_OXC, "keyBattleCenterUnit", &keyBattleCenterUnit, SDLK_HOME, "STR_CENTER_SELECTED_UNIT", "STR_BATTLESCAPE"));
+	//# _info.push_back(OptionInfo(OPTION_OXC, "keyBattlePrevUnit", &keyBattlePrevUnit, SDLK_UNKNOWN, "STR_PREVIOUS_UNIT", "STR_BATTLESCAPE")); // different default in OXCE
+	//# _info.push_back(OptionInfo(OPTION_OXC, "keyBattleNextUnit", &keyBattleNextUnit, SDLK_TAB, "STR_NEXT_UNIT", "STR_BATTLESCAPE"));
+	//# _info.push_back(OptionInfo(OPTION_OXC, "keyBattleDeselectUnit", &keyBattleDeselectUnit, SDLK_BACKSLASH, "STR_DESELECT_UNIT", "STR_BATTLESCAPE"));
+	//# _info.push_back(OptionInfo(OPTION_OXC, "keyBattleUseLeftHand", &keyBattleUseLeftHand, SDLK_q, "STR_USE_LEFT_HAND", "STR_BATTLESCAPE"));
+	//# _info.push_back(OptionInfo(OPTION_OXC, "keyBattleUseRightHand", &keyBattleUseRightHand, SDLK_e, "STR_USE_RIGHT_HAND", "STR_BATTLESCAPE"));
+	//# _info.push_back(OptionInfo(OPTION_OXC, "keyBattleInventory", &keyBattleInventory, SDLK_i, "STR_INVENTORY", "STR_BATTLESCAPE"));
+	//# _info.push_back(OptionInfo(OPTION_OXC, "keyBattleMap", &keyBattleMap, SDLK_m, "STR_MINIMAP", "STR_BATTLESCAPE"));
+	//# _info.push_back(OptionInfo(OPTION_OXC, "keyBattleOptions", &keyBattleOptions, SDLK_ESCAPE, "STR_OPTIONS", "STR_BATTLESCAPE"));
+	//# _info.push_back(OptionInfo(OPTION_OXC, "keyBattleEndTurn", &keyBattleEndTurn, SDLK_BACKSPACE, "STR_END_TURN", "STR_BATTLESCAPE"));
+	//# _info.push_back(OptionInfo(OPTION_OXC, "keyBattleAbort", &keyBattleAbort, SDLK_a, "STR_ABORT_MISSION", "STR_BATTLESCAPE"));
+	//# _info.push_back(OptionInfo(OPTION_OXC, "keyBattleStats", &keyBattleStats, SDLK_s, "STR_UNIT_STATS", "STR_BATTLESCAPE"));
+	//# _info.push_back(OptionInfo(OPTION_OXC, "keyBattleKneel", &keyBattleKneel, SDLK_k, "STR_KNEEL", "STR_BATTLESCAPE"));
+	//# _info.push_back(OptionInfo(OPTION_OXC, "keyBattleReload", &keyBattleReload, SDLK_r, "STR_RELOAD", "STR_BATTLESCAPE"));
+	//# _info.push_back(OptionInfo(OPTION_OXC, "keyBattlePersonalLighting", &keyBattlePersonalLighting, SDLK_l, "STR_TOGGLE_PERSONAL_LIGHTING", "STR_BATTLESCAPE"));
+	//# _info.push_back(OptionInfo(OPTION_OXC, "keyBattleReserveNone", &keyBattleReserveNone, SDLK_F1, "STR_DONT_RESERVE_TIME_UNITS", "STR_BATTLESCAPE"));
+	//# _info.push_back(OptionInfo(OPTION_OXC, "keyBattleReserveSnap", &keyBattleReserveSnap, SDLK_F2, "STR_RESERVE_TIME_UNITS_FOR_SNAP_SHOT", "STR_BATTLESCAPE"));
+	//# _info.push_back(OptionInfo(OPTION_OXC, "keyBattleReserveAimed", &keyBattleReserveAimed, SDLK_F3, "STR_RESERVE_TIME_UNITS_FOR_AIMED_SHOT", "STR_BATTLESCAPE"));
+	//# _info.push_back(OptionInfo(OPTION_OXC, "keyBattleReserveAuto", &keyBattleReserveAuto, SDLK_F4, "STR_RESERVE_TIME_UNITS_FOR_AUTO_SHOT", "STR_BATTLESCAPE"));
+	//# _info.push_back(OptionInfo(OPTION_OXC, "keyBattleReserveKneel", &keyBattleReserveKneel, SDLK_j, "STR_RESERVE_TIME_UNITS_FOR_KNEEL", "STR_BATTLESCAPE"));
+	//# _info.push_back(OptionInfo(OPTION_OXC, "keyBattleZeroTUs", &keyBattleZeroTUs, SDLK_DELETE, "STR_EXPEND_ALL_TIME_UNITS", "STR_BATTLESCAPE"));
+	//# _info.push_back(OptionInfo(OPTION_OXC, "keyBattleCenterEnemy1", &keyBattleCenterEnemy1, SDLK_1, "STR_CENTER_ON_ENEMY_1", "STR_BATTLESCAPE"));
+	//# _info.push_back(OptionInfo(OPTION_OXC, "keyBattleCenterEnemy2", &keyBattleCenterEnemy2, SDLK_2, "STR_CENTER_ON_ENEMY_2", "STR_BATTLESCAPE"));
+	//# _info.push_back(OptionInfo(OPTION_OXC, "keyBattleCenterEnemy3", &keyBattleCenterEnemy3, SDLK_3, "STR_CENTER_ON_ENEMY_3", "STR_BATTLESCAPE"));
+	//# _info.push_back(OptionInfo(OPTION_OXC, "keyBattleCenterEnemy4", &keyBattleCenterEnemy4, SDLK_4, "STR_CENTER_ON_ENEMY_4", "STR_BATTLESCAPE"));
+	//# _info.push_back(OptionInfo(OPTION_OXC, "keyBattleCenterEnemy5", &keyBattleCenterEnemy5, SDLK_5, "STR_CENTER_ON_ENEMY_5", "STR_BATTLESCAPE"));
+	//# _info.push_back(OptionInfo(OPTION_OXC, "keyBattleCenterEnemy6", &keyBattleCenterEnemy6, SDLK_6, "STR_CENTER_ON_ENEMY_6", "STR_BATTLESCAPE"));
+	//# _info.push_back(OptionInfo(OPTION_OXC, "keyBattleCenterEnemy7", &keyBattleCenterEnemy7, SDLK_7, "STR_CENTER_ON_ENEMY_7", "STR_BATTLESCAPE"));
+	//# _info.push_back(OptionInfo(OPTION_OXC, "keyBattleCenterEnemy8", &keyBattleCenterEnemy8, SDLK_8, "STR_CENTER_ON_ENEMY_8", "STR_BATTLESCAPE"));
+	//# _info.push_back(OptionInfo(OPTION_OXC, "keyBattleCenterEnemy9", &keyBattleCenterEnemy9, SDLK_9, "STR_CENTER_ON_ENEMY_9", "STR_BATTLESCAPE"));
+	//# _info.push_back(OptionInfo(OPTION_OXC, "keyBattleCenterEnemy10", &keyBattleCenterEnemy10, SDLK_0, "STR_CENTER_ON_ENEMY_10", "STR_BATTLESCAPE"));
+	//# _info.push_back(OptionInfo(OPTION_OXC, "keyBattleVoxelView", &keyBattleVoxelView, SDLK_F10, "STR_SAVE_VOXEL_VIEW", "STR_BATTLESCAPE"));
+	//# _info.push_back(OptionInfo(OPTION_OXC, "keyInvCreateTemplate", &keyInvCreateTemplate, SDLK_c, "STR_CREATE_INVENTORY_TEMPLATE", "STR_BATTLESCAPE"));
+	//# _info.push_back(OptionInfo(OPTION_OXC, "keyInvApplyTemplate", &keyInvApplyTemplate, SDLK_v, "STR_APPLY_INVENTORY_TEMPLATE", "STR_BATTLESCAPE"));
+	//# _info.push_back(OptionInfo(OPTION_OXC, "keyInvClear", &keyInvClear, SDLK_x, "STR_CLEAR_INVENTORY", "STR_BATTLESCAPE"));
+	//# _info.push_back(OptionInfo(OPTION_OXC, "keyInvAutoEquip", &keyInvAutoEquip, SDLK_z, "STR_AUTO_EQUIP", "STR_BATTLESCAPE"));
 }
 
 void createOptionsOXCE()
@@ -1442,7 +1442,7 @@ void backupDisplay()
 {
 	Options::newDisplayWidth = options1.displayWidth();
 	Options::newDisplayHeight = options1.displayHeight();
-	Options::newBattlescapeScale = Options::battlescapeScale;
+	Options::newBattlescapeScale = options1.battlescapeScale();
 	Options::newGeoscapeScale = options1.geoscapeScale();
 	Options::newOpenGL = options1.useOpenGL();
 	Options::newScaleFilter = options1.useScaleFilter();
@@ -1493,7 +1493,9 @@ void switchDisplay()
 	options1.setuseXBRZFilter(newXBRZFilter);
 	newXBRZFilter = btmp;
 
-	std::swap(battlescapeScale, newBattlescapeScale);
+	tmp = options1.battlescapeScale();
+	options1.setbattlescapeScale(newBattlescapeScale);
+	newBattlescapeScale = tmp;
 	tmp = options1.geoscapeScale();
 	options1.setgeoscapeScale(newGeoscapeScale);
 	newGeoscapeScale = tmp;

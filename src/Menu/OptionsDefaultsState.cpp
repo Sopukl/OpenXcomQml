@@ -104,17 +104,17 @@ void OptionsDefaultsState::btnYesClick(Action *action)
 		options1.setplayIntro(false);
 		options1.setautosave(false);
 		options1.setshowFundsOnGeoscape(true);
-		Options::battleFireSpeed = 16;
-		Options::battleXcomSpeed = 1;
-		Options::battleNotifyDeath = true;
-		Options::battleNewPreviewPath = PATH_ARROW_TU;
-		Options::battleUFOExtenderAccuracy = true;
-		Options::showMoreStatsInInventoryView = true;
-		Options::battleAutoEnd = true;
-		Options::disableAutoEquip = true;
-		Options::strafe = true;
-		Options::skipNextTurnScreen = true;
-		Options::alienBleeding = true;
+		options1.setbattleFireSpeed(16);
+		options1.setbattleXcomSpeed(1);
+		options1.setbattleNotifyDeath(true);
+		options1.setbattleNewPreviewPath(PATH_ARROW_TU);
+		options1.setbattleUFOExtenderAccuracy(true);
+		options1.setshowMoreStatsInInventoryView(true);
+		options1.setbattleAutoEnd(true);
+		options1.setdisableAutoEquip(true);
+		options1.setstrafe(true);
+		options1.setskipNextTurnScreen(true);
+		options1.setalienBleeding(true);
 	}
 	_game->loadLanguages();
 	_game->popState();

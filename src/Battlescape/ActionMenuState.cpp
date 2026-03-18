@@ -249,7 +249,7 @@ void ActionMenuState::handle(Action *action)
 	else if (action->getDetails()->type == SDL_KEYDOWN)
 	{
 		auto key = action->getDetails()->key.keysym.sym;
-		if (key == options1.keyCancel() || key == Options::keyBattleUseLeftHand || key == Options::keyBattleUseRightHand)
+		if (key == options1.keyCancel() || key == options1.keyBattleUseLeftHand() || key == options1.keyBattleUseRightHand())
 		{
 			if (key != Options::keyBattleActionItem1 &&
 				key != Options::keyBattleActionItem2 &&

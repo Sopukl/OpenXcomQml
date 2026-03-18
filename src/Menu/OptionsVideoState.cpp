@@ -333,7 +333,7 @@ OptionsVideoState::OptionsVideoState(OptionsOrigin origin) : OptionsBaseState(or
 	_reverseScales.push_back(10);
 
 	if (options1.geoscapeScale() < 0 || options1.geoscapeScale() > 10) options1.setgeoscapeScale(0);
-	if (Options::battlescapeScale < 0 || Options::battlescapeScale > 10) Options::battlescapeScale = 0;
+	if (options1.battlescapeScale() < 0 || options1.battlescapeScale() > 10) options1.setbattlescapeScale(0);
 
 	_cbxGeoScale->setOptions(scales);
 	_cbxGeoScale->setSelected(_scales[options1.geoscapeScale()]);
@@ -345,7 +345,7 @@ OptionsVideoState::OptionsVideoState(OptionsOrigin origin) : OptionsBaseState(or
 	_txtBattleScale->setText(tr("STR_BATTLESCAPE_SCALE"));
 
 	_cbxBattleScale->setOptions(scales);
-	_cbxBattleScale->setSelected(_scales[Options::battlescapeScale]);
+	_cbxBattleScale->setSelected(_scales[options1.battlescapeScale()]);
 	_cbxBattleScale->onChange((ActionHandler)&OptionsVideoState::updateBattlescapeScale);
 	_cbxBattleScale->setTooltip("STR_BATTLESCAPE_SCALE_DESC");
 	_cbxBattleScale->onMouseIn((ActionHandler)&OptionsVideoState::txtTooltipIn);

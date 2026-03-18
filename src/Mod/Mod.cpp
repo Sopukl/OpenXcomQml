@@ -5858,7 +5858,7 @@ void Mod::loadBattlescapeResources()
 	}
 
 	//"fix" of color index in original solders sprites
-	if (Options::battleHairBleach)
+	if (options1.battleHairBleach())
 	{
 		std::string name;
 

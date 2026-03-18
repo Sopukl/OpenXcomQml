@@ -88,11 +88,11 @@ SoldierDiaryMissionState::SoldierDiaryMissionState(Soldier *soldier, int rowEntr
 
 	_btnPrev->setText("<<");
 	_btnPrev->onMouseClick((ActionHandler)&SoldierDiaryMissionState::btnPrevClick);
-	_btnPrev->onKeyboardPress((ActionHandler)&SoldierDiaryMissionState::btnPrevClick, Options::keyBattleNextUnit);
+	_btnPrev->onKeyboardPress((ActionHandler)&SoldierDiaryMissionState::btnPrevClick, options1.keyBattleNextUnit());
 
 	_btnNext->setText(">>");
 	_btnNext->onMouseClick((ActionHandler)&SoldierDiaryMissionState::btnNextClick);
-	_btnNext->onKeyboardPress((ActionHandler)&SoldierDiaryMissionState::btnNextClick, Options::keyBattlePrevUnit);
+	_btnNext->onKeyboardPress((ActionHandler)&SoldierDiaryMissionState::btnNextClick, options1.keyBattlePrevUnit());
 
 	_txtTitle->setAlign(ALIGN_CENTER);
 

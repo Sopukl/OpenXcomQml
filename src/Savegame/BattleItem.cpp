@@ -341,7 +341,7 @@ bool BattleItem::fuseThrowEvent()
 			}
 			else if (event->defaultBehavior)
 			{
-				return _rules->getBattleType() == BT_GRENADE && (Options::battleInstantGrenade || _rules->getFuseTimerType() == BFT_INSTANT);
+				return _rules->getBattleType() == BT_GRENADE && (options1.battleInstantGrenade() || _rules->getFuseTimerType() == BFT_INSTANT);
 			}
 		}
 		return false;

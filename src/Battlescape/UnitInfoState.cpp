@@ -276,7 +276,7 @@ UnitInfoState::UnitInfoState(BattleUnit *unit, BattlescapeState *parent, bool fr
 
 	_exit->onMouseClick((ActionHandler)&UnitInfoState::exitClick);
 	_exit->onKeyboardPress((ActionHandler)&UnitInfoState::exitClick, options1.keyCancel());
-	_exit->onKeyboardPress((ActionHandler)&UnitInfoState::exitClick, Options::keyBattleStats);
+	_exit->onKeyboardPress((ActionHandler)&UnitInfoState::exitClick, options1.keyBattleStats());
 
 	Uint8 color = _game->getMod()->getInterface("stats")->getElement("text")->color;
 	Uint8 color2 = _game->getMod()->getInterface("stats")->getElement("text")->color2;
@@ -466,10 +466,10 @@ UnitInfoState::UnitInfoState(BattleUnit *unit, BattlescapeState *parent, bool fr
 	{
 		_btnPrev->setText("<<");
 		_btnPrev->onMouseClick((ActionHandler)&UnitInfoState::btnPrevClick);
-		_btnPrev->onKeyboardPress((ActionHandler)&UnitInfoState::btnPrevClick, Options::keyBattlePrevUnit);
+		_btnPrev->onKeyboardPress((ActionHandler)&UnitInfoState::btnPrevClick, options1.keyBattlePrevUnit());
 		_btnNext->setText(">>");
 		_btnNext->onMouseClick((ActionHandler)&UnitInfoState::btnNextClick);
-		_btnNext->onKeyboardPress((ActionHandler)&UnitInfoState::btnNextClick, Options::keyBattleNextUnit);
+		_btnNext->onKeyboardPress((ActionHandler)&UnitInfoState::btnNextClick, options1.keyBattleNextUnit());
 	}
 
 }
@@ -770,7 +770,7 @@ void UnitInfoState::exitClick(Action *)
 {
 	if (!_fromInventory && options1.maximizeInfoScreens())
 	{
-		Screen::updateScale(Options::battlescapeScale, options1.baseXBattlescape, options1.baseYBattlescape, true);
+		Screen::updateScale(options1.battlescapeScale(), options1.baseXBattlescape, options1.baseYBattlescape, true);
 		_game->getScreen()->resetDisplay(false);
 	}
 	_game->popState();

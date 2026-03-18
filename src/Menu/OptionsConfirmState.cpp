@@ -138,7 +138,7 @@ void OptionsConfirmState::btnYesClick(Action *)
 void OptionsConfirmState::btnNoClick(Action *)
 {
 	Options::switchDisplay();
-	Screen::updateScale(Options::battlescapeScale, options1.baseXBattlescape, options1.baseYBattlescape, _origin == OPT_BATTLESCAPE);
+	Screen::updateScale(options1.battlescapeScale(), options1.baseXBattlescape, options1.baseYBattlescape, _origin == OPT_BATTLESCAPE);
 	Screen::updateScale(options1.geoscapeScale(), options1.baseXGeoscape, options1.baseYGeoscape, _origin != OPT_BATTLESCAPE);
 	Options::save();
 	_game->getScreen()->resetDisplay();

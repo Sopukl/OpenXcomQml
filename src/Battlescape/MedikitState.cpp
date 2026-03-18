@@ -213,7 +213,7 @@ void MedikitState::onEndClick(Action *)
 {
 	if (options1.maximizeInfoScreens())
 	{
-		Screen::updateScale(Options::battlescapeScale, options1.baseXBattlescape, options1.baseYBattlescape, true);
+		Screen::updateScale(options1.battlescapeScale(), options1.baseXBattlescape, options1.baseYBattlescape, true);
 		_game->getScreen()->resetDisplay(false);
 	}
 	_game->popState();

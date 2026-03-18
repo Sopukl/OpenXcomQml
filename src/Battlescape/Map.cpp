@@ -132,9 +132,9 @@ Map::Map(Game *game, int width, int height, int x, int y, int visibleMapHeight) 
 	_neutralBarColor = itf->color2;
 	_borderBarColor = itf->border;
 
-	PathPreview previewSetting = Options::battleNewPreviewPath;
-	_smoothCamera = Options::battleSmoothCamera;
-	if (Options::traceAI)
+	PathPreview previewSetting = options1.battleNewPreviewPath();
+	_smoothCamera = options1.battleSmoothCamera();
+	if (options1.traceAI())
 	{
 		// turn everything on because we want to see the markers.
 		previewSetting = PATH_ARROW_TU;
@@ -170,7 +170,7 @@ Map::Map(Game *game, int width, int height, int x, int y, int visibleMapHeight) 
 	_obstacleTimer->stop();
 	_obstacleTimer->onTimer((SurfaceHandler)&Map::disableObstacles);
 
-	_showInfoOnCursor = (Options::oxceShowAccuracyOnCrosshair == 1 && Options::battleUFOExtenderAccuracy) || Options::oxceShowAccuracyOnCrosshair == 2;
+	_showInfoOnCursor = (Options::oxceShowAccuracyOnCrosshair == 1 && options1.battleUFOExtenderAccuracy()) || Options::oxceShowAccuracyOnCrosshair == 2;
 	_txtAccuracy = new Text(44, 18, 0, 0);
 	_txtAccuracy->setSmall();
 	_txtAccuracy->setPalette(_game->getScreen()->getPalette());
@@ -2310,7 +2310,7 @@ CursorType Map::getCursorType() const
 void Map::setProjectile(Projectile *projectile)
 {
 	_projectile = projectile;
-	if (projectile && Options::battleSmoothCamera)
+	if (projectile && options1.battleSmoothCamera())
 	{
 		_launch = true;
 	}
