@@ -103,7 +103,7 @@ void OptionsDefaultsState::btnYesClick(Action *action)
 		options1.setkeyFps(SDLK_UNKNOWN);
 		options1.setplayIntro(false);
 		options1.setautosave(false);
-		Options::showFundsOnGeoscape = true;
+		options1.setshowFundsOnGeoscape(true);
 		Options::battleFireSpeed = 16;
 		Options::battleXcomSpeed = 1;
 		Options::battleNotifyDeath = true;

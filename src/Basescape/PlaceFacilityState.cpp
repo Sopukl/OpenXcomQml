@@ -179,7 +179,7 @@ void PlaceFacilityState::viewClick(Action *)
 		{
 			_origFac->setX(_view->getGridX());
 			_origFac->setY(_view->getGridY());
-			if (Options::allowBuildingQueue)
+			if (options1.allowBuildingQueue())
 			{
 				// first reset (maybe the moved facility is not queued anymore)
 				if (abs(_origFac->getBuildTime()) > _rule->getBuildTime()) _origFac->setBuildTime(_rule->getBuildTime());
@@ -372,7 +372,7 @@ void PlaceFacilityState::viewClick(Action *)
 			{
 				_game->getMod()->getSound("GEO.CAT", fac->getRules()->getPlaceSound())->play();
 			}
-			if (Options::allowBuildingQueue)
+			if (options1.allowBuildingQueue())
 			{
 				if (_view->isQueuedBuilding(_rule)) fac->setBuildTime(INT_MAX);
 				_view->reCalcQueuedBuildings();

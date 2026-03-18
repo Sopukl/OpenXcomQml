@@ -4736,7 +4736,7 @@ bool TileEngine::psiAttack(BattleActionAttack attack, BattleUnit *victim)
 			attack.attacker->addPsiSkillExp();
 		}
 	}
-	if (Options::allowPsiStrengthImprovement && isPsiRequired)
+	if (options1.allowPsiStrengthImprovement() && isPsiRequired)
 	{
 		victim->addPsiStrengthExp(); // experience for the victim, not the attacker
 	}
@@ -4823,7 +4823,7 @@ bool TileEngine::psiAttack(BattleActionAttack attack, BattleUnit *victim)
 	}
 	else
 	{
-		if (Options::allowPsiStrengthImprovement && isPsiRequired)
+		if (options1.allowPsiStrengthImprovement() && isPsiRequired)
 		{
 			victim->addPsiStrengthExp(); // experience for the victim, not the attacker
 		}

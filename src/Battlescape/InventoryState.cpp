@@ -668,7 +668,7 @@ void InventoryState::updateStats()
 	{
 		psiSkillWithoutAnyBonuses = unit->getGeoscapeSoldier()->getCurrentStats()->psiSkill;
 	}
-	bool showPsiStrength = (psiSkillWithoutAnyBonuses > 0 || (Options::psiStrengthEval && _game->getSavedGame()->isResearched(_game->getMod()->getPsiRequirements())));
+	bool showPsiStrength = (psiSkillWithoutAnyBonuses > 0 || (options1.psiStrengthEval() && _game->getSavedGame()->isResearched(_game->getMod()->getPsiRequirements())));
 
 	auto updateStatLine = [&](Text* txtField, const std::string& elementId)
 	{

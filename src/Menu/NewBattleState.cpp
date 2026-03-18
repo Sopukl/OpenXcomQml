@@ -528,7 +528,7 @@ void NewBattleState::initSave()
 	base->getCrafts()->push_back(_craft);
 
 	// Generate soldiers
-	bool psiStrengthEval = (Options::psiStrengthEval && save->isResearched(mod->getPsiRequirements()));
+	bool psiStrengthEval = (options1.psiStrengthEval() && save->isResearched(mod->getPsiRequirements()));
 	for (int i = 0; i < 30; ++i)
 	{
 		int randomType = RNG::generate(0, mod->getSoldiersList().size() - 1);

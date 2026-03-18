@@ -5074,7 +5074,7 @@ Soldier *Mod::genSoldier(SavedGame *save, const RuleSoldier* ruleSoldier, int na
 	}
 
 	// calculate new statString
-	soldier->calcStatString(getStatStrings(), (Options::psiStrengthEval && save->isResearched(getPsiRequirements())));
+	soldier->calcStatString(getStatStrings(), (options1.psiStrengthEval() && save->isResearched(getPsiRequirements())));
 
 	return soldier;
 }

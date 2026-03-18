@@ -305,7 +305,7 @@ BasePlacementErrors BaseView::getPlacementError(const RuleBaseFacility *rule, Ba
 		}
 	}
 
-	bool bq=Options::allowBuildingQueue;
+	bool bq=options1.allowBuildingQueue();
 	bool hasConnectingFacility = false;
 
 	// Check for another facility to connect to

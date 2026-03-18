@@ -250,7 +250,7 @@ void SoldierTransformationState::initTransformationData()
 	}
 
 	bool showPsiSkill = currentStats.psiSkill > 0;
-	bool showPsiStrength = showPsiSkill || (Options::psiStrengthEval && _game->getSavedGame()->isResearched(_game->getMod()->getPsiRequirements()));
+	bool showPsiStrength = showPsiSkill || (options1.psiStrengthEval() && _game->getSavedGame()->isResearched(_game->getMod()->getPsiRequirements()));
 
 	UnitStats rerollFlags = _transformationRule->getRerollStats();
 

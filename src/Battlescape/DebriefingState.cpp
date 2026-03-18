@@ -776,7 +776,7 @@ void DebriefingState::init()
 	{
 		if (bu->getGeoscapeSoldier())
 		{
-			if (Options::fieldPromotions && !bu->hasGainedAnyExperience())
+			if (options1.fieldPromotions() && !bu->hasGainedAnyExperience())
 			{
 				// Note: difference from OXC, soldier needs to actually have done something during the mission
 				continue;
@@ -1470,7 +1470,7 @@ void DebriefingState::prepareDebriefing()
 	}
 
 	// time to care for units.
-	bool psiStrengthEval = (Options::psiStrengthEval && save->isResearched(_game->getMod()->getPsiRequirements()));
+	bool psiStrengthEval = (options1.psiStrengthEval() && save->isResearched(_game->getMod()->getPsiRequirements()));
 	bool ignoreLivingCivilians = false;
 	if (ruleDeploy)
 	{

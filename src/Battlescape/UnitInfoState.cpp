@@ -614,7 +614,7 @@ void UnitInfoState::init()
 	{
 		psiSkillWithoutAnyBonuses = _unit->getGeoscapeSoldier()->getCurrentStats()->psiSkill;
 	}
-	if (psiSkillWithoutAnyBonuses > 0 || (Options::psiStrengthEval && _game->getSavedGame()->isResearched(_game->getMod()->getPsiRequirements())))
+	if (psiSkillWithoutAnyBonuses > 0 || (options1.psiStrengthEval() && _game->getSavedGame()->isResearched(_game->getMod()->getPsiRequirements())))
 	{
 		ss.str("");
 		ss << _unit->getBaseStats()->psiStrength;

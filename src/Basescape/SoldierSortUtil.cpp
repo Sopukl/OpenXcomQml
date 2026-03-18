@@ -24,7 +24,7 @@ int OpenXcom::psiStrengthStat(const Game *game, const Soldier *s)
 {
 	// don't reveal psi strength before it would otherwise be known
 	if (s->getCurrentStats()->psiSkill > 0
-		|| (Options::psiStrengthEval
+		|| (options1.psiStrengthEval()
 		&& game->getSavedGame()->isResearched(game->getMod()->getPsiRequirements())))
 	{
 		return s->getStatsWithAllBonuses()->psiStrength;
@@ -66,7 +66,7 @@ int OpenXcom::psiStrengthStatBase(const Game *game, const Soldier *s)
 {
 	// don't reveal psi strength before it would otherwise be known
 	if (s->getCurrentStats()->psiSkill > 0
-		|| (Options::psiStrengthEval
+		|| (options1.psiStrengthEval()
 		&& game->getSavedGame()->isResearched(game->getMod()->getPsiRequirements())))
 	{
 		return s->getCurrentStats()->psiStrength;
@@ -108,7 +108,7 @@ int OpenXcom::psiStrengthStatPlus(const Game *game, const Soldier *s)
 {
 	// don't reveal psi strength before it would otherwise be known
 	if (s->getCurrentStats()->psiSkill > 0
-		|| (Options::psiStrengthEval
+		|| (options1.psiStrengthEval()
 		&& game->getSavedGame()->isResearched(game->getMod()->getPsiRequirements())))
 	{
 		return s->getStatsWithSoldierBonusesOnly()->psiStrength;

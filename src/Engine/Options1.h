@@ -124,6 +124,12 @@ namespace OpenXcom
 		OPTION(bool, customInitialBase)
 		OPTION(bool, aggressiveRetaliation)
 		OPTION(bool, geoDragScrollInvert)
+		OPTION(bool, allowBuildingQueue)
+		OPTION(bool, showFundsOnGeoscape)
+		OPTION(bool, psiStrengthEval)
+		OPTION(bool, allowPsiStrengthImprovement)
+		OPTION(bool, fieldPromotions)
+		OPTION(bool, meetingPoint)
 		//video
 		OPTION(qint32, displayWidth)
 		OPTION(qint32, displayHeight)

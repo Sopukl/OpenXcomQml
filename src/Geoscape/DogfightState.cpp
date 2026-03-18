@@ -2711,7 +2711,7 @@ void DogfightState::awardExperienceToPilots()
 {
 	if (_firedAtLeastOnce && !_experienceAwarded && _craft && _ufo && (_ufo->isCrashed() || _ufo->isDestroyed()))
 	{
-		bool psiStrengthEval = (Options::psiStrengthEval && _game->getSavedGame()->isResearched(_game->getMod()->getPsiRequirements()));
+		bool psiStrengthEval = (options1.psiStrengthEval() && _game->getSavedGame()->isResearched(_game->getMod()->getPsiRequirements()));
 		for (auto* pilot : _craft->getPilotList(false, nullptr)) // refresh already done in the constructor
 		{
 			if (pilot->getCurrentStats()->firing < pilot->getRules()->getStatCaps().firing)

@@ -389,7 +389,7 @@ GeoscapeState::GeoscapeState() : _pause(false), _zoomInEffectDone(false), _zoomO
 	_btnZoomOut->onKeyboardPress((ActionHandler)&GeoscapeState::btnZoomOutLeftClick, Options::keyGeoZoomOut);
 
 	_txtFunds->setAlign(ALIGN_CENTER);
-	_txtFunds->setVisible(Options::showFundsOnGeoscape);
+	_txtFunds->setVisible(options1.showFundsOnGeoscape());
 
 	_txtHour->setBig();
 	_txtHour->setAlign(ALIGN_RIGHT);
@@ -413,7 +413,7 @@ GeoscapeState::GeoscapeState() : _pause(false), _zoomInEffectDone(false), _zoomO
 	_txtSlacking->setAlign(ALIGN_RIGHT);
 	_txtTraining->setAlign(ALIGN_RIGHT);
 
-	if (Options::showFundsOnGeoscape)
+	if (options1.showFundsOnGeoscape())
 	{
 		_txtHour->setY(_txtHour->getY()+6);
 		_txtHour->setSmall();
@@ -799,7 +799,7 @@ void GeoscapeState::think()
  */
 void GeoscapeState::timeDisplay()
 {
-	if (Options::showFundsOnGeoscape)
+	if (options1.showFundsOnGeoscape())
 	{
 		if (Options::oxceGeoShowScoreInsteadOfFunds)
 		{
@@ -2393,7 +2393,7 @@ void GeoscapeState::time1Day()
 
 	SavedGame *saveGame = _game->getSavedGame();
 	Mod *mod = _game->getMod();
-	bool psiStrengthEval = (Options::psiStrengthEval && saveGame->isResearched(mod->getPsiRequirements()));
+	bool psiStrengthEval = (options1.psiStrengthEval() && saveGame->isResearched(mod->getPsiRequirements()));
 
 	auto addResearchDiaryEntryForBase = [&](const RuleResearch* discoveredResearch, DiscoverySourceType sourceType, const Base* sourceBase, const RuleResearch* sourceResearch)
 	{
@@ -2883,7 +2883,7 @@ void GeoscapeState::time1Month()
 	// Handle Psi-Training and initiate a new retaliation mission, if applicable
 	if (!options1.anytimePsiTraining())
 	{
-		bool psiStrengthEval = (Options::psiStrengthEval && _game->getSavedGame()->isResearched(_game->getMod()->getPsiRequirements()));
+		bool psiStrengthEval = (options1.psiStrengthEval() && _game->getSavedGame()->isResearched(_game->getMod()->getPsiRequirements()));
 		for (auto* xbase : *_game->getSavedGame()->getBases())
 		{
 			if (xbase->getAvailablePsiLabs() > 0)

@@ -2415,7 +2415,7 @@ Soldier *SavedGame::inspectSoldiers(std::vector<Soldier*> &soldiers, std::vector
 		if (rankIsMatching)
 		{
 			int score = getSoldierScore(soldier);
-			if (score > highestScore && (!Options::fieldPromotions || std::find(participants.begin(), participants.end(), soldier) != participants.end()))
+			if (score > highestScore && (!options1.fieldPromotions() || std::find(participants.begin(), participants.end(), soldier) != participants.end()))
 			{
 				highestScore = score;
 				highestRanked = soldier;

@@ -277,7 +277,7 @@ void SoldierDiaryPerformanceState::init()
 			}
 		}
 
-		if (_soldier->getCurrentStats()->psiSkill > 0 || (Options::psiStrengthEval && _game->getSavedGame()->isResearched(_game->getMod()->getPsiRequirements())))
+		if (_soldier->getCurrentStats()->psiSkill > 0 || (options1.psiStrengthEval() && _game->getSavedGame()->isResearched(_game->getMod()->getPsiRequirements())))
 		{
 			_lstKillTotals->addRow(4, tr("STR_KILLS").arg(_soldier->getDiary()->getKillTotal()).c_str(),
 										tr("STR_STUNS").arg(_soldier->getDiary()->getStunTotal()).c_str(),

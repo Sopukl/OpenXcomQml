@@ -149,7 +149,7 @@ OptionsGeoscapeState::OptionsGeoscapeState(OptionsOrigin origin) : OptionsBaseSt
 	_txtOptions->setText(tr("STR_USER_INTERFACE_OPTIONS"));
 
 	_btnShowFunds->setText(tr("STR_SHOW_FUNDS"));
-	_btnShowFunds->setPressed(Options::showFundsOnGeoscape);
+	_btnShowFunds->setPressed(options1.showFundsOnGeoscape());
 	_btnShowFunds->onMouseClick((ActionHandler)&OptionsGeoscapeState::btnShowFundsClick);
 	_btnShowFunds->setTooltip("STR_SHOW_FUNDS_DESC");
 	_btnShowFunds->onMouseIn((ActionHandler)&OptionsGeoscapeState::txtTooltipIn);
@@ -233,7 +233,7 @@ void OptionsGeoscapeState::btnGlobePathsClick(Action *)
  */
 void OptionsGeoscapeState::btnShowFundsClick(Action *)
 {
-	Options::showFundsOnGeoscape = _btnShowFunds->getPressed();
+    options1.setshowFundsOnGeoscape(_btnShowFunds->getPressed());
 }
 
 }

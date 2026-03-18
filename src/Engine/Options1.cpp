@@ -100,6 +100,12 @@ namespace OpenXcom
 			readValue(customInitialBase, bool, false)
 			readValue(aggressiveRetaliation, bool, false)
 			readValue(geoDragScrollInvert, bool, false)
+			readValue(allowBuildingQueue, bool, false)
+			readValue(showFundsOnGeoscape, bool, false)
+			readValue(psiStrengthEval, bool, false)
+			readValue(allowPsiStrengthImprovement, bool, false)
+			readValue(fieldPromotions, bool, false)
+			readValue(meetingPoint, bool, false)
 		endGroup();
         beginGroup("Video");
             readValue(displayWidth,  qint32, 640)
@@ -206,6 +212,12 @@ namespace OpenXcom
 			writeValue(customInitialBase, m_customInitialBase)
 			writeValue(aggressiveRetaliation, m_aggressiveRetaliation)
 			writeValue(geoDragScrollInvert, m_geoDragScrollInvert)
+			writeValue(allowBuildingQueue, m_allowBuildingQueue)
+			writeValue(showFundsOnGeoscape, m_showFundsOnGeoscape)
+			writeValue(psiStrengthEval, m_psiStrengthEval)
+			writeValue(allowPsiStrengthImprovement, m_allowPsiStrengthImprovement)
+			writeValue(fieldPromotions, m_fieldPromotions)
+			writeValue(meetingPoint, m_meetingPoint)
 		endGroup();
 		beginGroup("Video");
 			writeValue(displayWidth, m_displayWidth)

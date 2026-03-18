@@ -238,7 +238,7 @@ void Soldier::load(const YAML::YamlNodeReader& node, const Mod *mod, SavedGame *
 		_diary = new SoldierDiary();
 		_diary->load(reader["diary"], mod);
 	}
-	calcStatString(mod->getStatStrings(), (Options::psiStrengthEval && save->isResearched(mod->getPsiRequirements())));
+	calcStatString(mod->getStatStrings(), (options1.psiStrengthEval() && save->isResearched(mod->getPsiRequirements())));
 	reader.tryRead("corpseRecovered", _corpseRecovered);
 	reader.tryRead("previousTransformations", _previousTransformations);
 	reader.tryRead("transformationBonuses", _transformationBonuses);
@@ -1354,7 +1354,7 @@ void Soldier::trainPsi()
 		if (_currentStats.psiSkill <= (psiSkillCap / 2)) _improvement = RNG::generate(5, 12);
 		else if (_currentStats.psiSkill < psiSkillCap) _improvement = RNG::generate(1, 3);
 
-		if (Options::allowPsiStrengthImprovement)
+		if (options1.allowPsiStrengthImprovement())
 		{
 			if (_currentStats.psiStrength <= (psiStrengthCap / 2)) _psiStrImprovement = RNG::generate(5, 12);
 			else if (_currentStats.psiStrength < psiStrengthCap) _psiStrImprovement = RNG::generate(1, 3);
@@ -1384,7 +1384,7 @@ void Soldier::trainPsi1Day()
 			++_currentStats.psiSkill;
 		}
 
-		if (Options::allowPsiStrengthImprovement)
+		if (options1.allowPsiStrengthImprovement())
 		{
 			if (8 * 100 >= _currentStats.psiStrength * RNG::generate(1, 100) && _currentStats.psiStrength < _rules->getStatCaps().psiStrength)
 			{
@@ -1413,7 +1413,7 @@ bool Soldier::isFullyPsiTrained()
 {
 	if (_currentStats.psiSkill >= _rules->getStatCaps().psiSkill)
 	{
-		if (Options::allowPsiStrengthImprovement)
+		if (options1.allowPsiStrengthImprovement())
 		{
 			if (_currentStats.psiStrength >= _rules->getStatCaps().psiStrength)
 			{
