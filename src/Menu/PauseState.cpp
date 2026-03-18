@@ -100,7 +100,7 @@ PauseState::PauseState(OptionsOrigin origin) : _origin(origin)
 	_btnCancel->onKeyboardPress((ActionHandler)&PauseState::btnCancelClick, options1.keyCancel());
 	if (origin == OPT_GEOSCAPE)
 	{
-		_btnCancel->onKeyboardPress((ActionHandler)&PauseState::btnCancelClick, Options::keyGeoOptions);
+		_btnCancel->onKeyboardPress((ActionHandler)&PauseState::btnCancelClick, options1.keyGeoOptions());
 	}
 	else if (origin == OPT_BATTLESCAPE)
 	{

@@ -654,14 +654,14 @@ void BasescapeState::handleKeyPress(Action *action)
 	if (action->getDetails()->type == SDL_KEYDOWN)
 	{
 		SDLKey baseKeys[] = {
-			Options::keyBaseSelect1,
-			Options::keyBaseSelect2,
-			Options::keyBaseSelect3,
-			Options::keyBaseSelect4,
-			Options::keyBaseSelect5,
-			Options::keyBaseSelect6,
-			Options::keyBaseSelect7,
-			Options::keyBaseSelect8
+			options1.keyBaseSelect1(),
+			options1.keyBaseSelect2(),
+			options1.keyBaseSelect3(),
+			options1.keyBaseSelect4(),
+			options1.keyBaseSelect5(),
+			options1.keyBaseSelect6(),
+			options1.keyBaseSelect7(),
+			options1.keyBaseSelect8()
 		};
 		int key = action->getDetails()->key.keysym.sym;
 		for (size_t i = 0; i < _game->getSavedGame()->getBases()->size(); ++i)

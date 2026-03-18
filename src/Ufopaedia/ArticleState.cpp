@@ -235,13 +235,13 @@ namespace OpenXcom
 		_btnOk->onKeyboardPress((ActionHandler)&ArticleState::btnResetMusicClick, Options::keySelectMusicTrack);
 		_btnPrev->setText("<<");
 		_btnPrev->onMouseClick((ActionHandler)&ArticleState::btnPrevClick);
-		_btnPrev->onKeyboardPress((ActionHandler)&ArticleState::btnPrevClick, Options::keyGeoLeft);
+		_btnPrev->onKeyboardPress((ActionHandler)&ArticleState::btnPrevClick, options1.keyGeoLeft());
 		_btnNext->setText(">>");
 		_btnNext->onMouseClick((ActionHandler)&ArticleState::btnNextClick);
-		_btnNext->onKeyboardPress((ActionHandler)&ArticleState::btnNextClick, Options::keyGeoRight);
+		_btnNext->onKeyboardPress((ActionHandler)&ArticleState::btnNextClick, options1.keyGeoRight());
 		_btnInfo->setText(tr("STR_INFO_UFOPEDIA"));
 		_btnInfo->onMouseClick((ActionHandler)&ArticleState::btnInfoClick);
-		_btnInfo->onKeyboardPress((ActionHandler)&ArticleState::btnInfoClick, Options::keyGeoUfopedia);
+		_btnInfo->onKeyboardPress((ActionHandler)&ArticleState::btnInfoClick, options1.keyGeoUfopedia());
 		_btnInfo->setVisible(false);
 	}
 

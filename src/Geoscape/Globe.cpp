@@ -2024,11 +2024,11 @@ void Globe::mouseClick(Action *action, State *state)
 void Globe::keyboardPress(Action *action, State *state)
 {
 	InteractiveSurface::keyboardPress(action, state);
-	if (action->getDetails()->key.keysym.sym == Options::keyGeoToggleDetail)
+	if (action->getDetails()->key.keysym.sym == options1.keyGeoToggleDetail())
 	{
 		toggleDetail();
 	}
-	if (action->getDetails()->key.keysym.sym == Options::keyGeoToggleRadar)
+	if (action->getDetails()->key.keysym.sym == options1.keyGeoToggleRadar())
 	{
 		toggleRadarLines();
 	}

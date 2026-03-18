@@ -269,8 +269,8 @@ void StatsForNerdsState::buildUI(bool debug, bool ids, bool defaults)
 	_btnOk->setText(tr("STR_OK"));
 	_btnOk->onMouseClick((ActionHandler)&StatsForNerdsState::btnOkClick);
 	_btnOk->onKeyboardPress((ActionHandler)&StatsForNerdsState::btnOkClick, options1.keyCancel());
-	_btnOk->onKeyboardPress((ActionHandler)&StatsForNerdsState::btnScrollUpClick, Options::keyGeoUp);
-	_btnOk->onKeyboardPress((ActionHandler)&StatsForNerdsState::btnScrollDownClick, Options::keyGeoDown);
+	_btnOk->onKeyboardPress((ActionHandler)&StatsForNerdsState::btnScrollUpClick, options1.keyGeoUp());
+	_btnOk->onKeyboardPress((ActionHandler)&StatsForNerdsState::btnScrollDownClick, options1.keyGeoDown());
 
 	_btnPreview->setText(tr("STR_CRAFT_DEPLOYMENT_PREVIEW"));
 	_btnPreview->onMouseClick((ActionHandler)&StatsForNerdsState::btnPreviewClick);
@@ -278,11 +278,11 @@ void StatsForNerdsState::buildUI(bool debug, bool ids, bool defaults)
 
 	_btnPrev->setText("<<");
 	_btnPrev->onMouseClick((ActionHandler)&StatsForNerdsState::btnPrevClick);
-	_btnPrev->onKeyboardPress((ActionHandler)&StatsForNerdsState::btnPrevClick, Options::keyGeoLeft);
+	_btnPrev->onKeyboardPress((ActionHandler)&StatsForNerdsState::btnPrevClick, options1.keyGeoLeft());
 
 	_btnNext->setText(">>");
 	_btnNext->onMouseClick((ActionHandler)&StatsForNerdsState::btnNextClick);
-	_btnNext->onKeyboardPress((ActionHandler)&StatsForNerdsState::btnNextClick, Options::keyGeoRight);
+	_btnNext->onKeyboardPress((ActionHandler)&StatsForNerdsState::btnNextClick, options1.keyGeoRight());
 
 	if (Options::oxceDisableStatsForNerds)
 	{

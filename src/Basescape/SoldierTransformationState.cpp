@@ -112,11 +112,11 @@ SoldierTransformationState::SoldierTransformationState(RuleSoldierTransformation
 	{
 		_btnLeftArrow->setText("<<");
 		_btnLeftArrow->onMouseClick((ActionHandler)&SoldierTransformationState::btnLeftArrowClick);
-		_btnLeftArrow->onKeyboardPress((ActionHandler)&SoldierTransformationState::btnLeftArrowClick, Options::keyGeoLeft);
+		_btnLeftArrow->onKeyboardPress((ActionHandler)&SoldierTransformationState::btnLeftArrowClick, options1.keyGeoLeft());
 
 		_btnRightArrow->setText(">>");
 		_btnRightArrow->onMouseClick((ActionHandler)&SoldierTransformationState::btnRightArrowClick);
-		_btnRightArrow->onKeyboardPress((ActionHandler)&SoldierTransformationState::btnRightArrowClick, Options::keyGeoRight);
+		_btnRightArrow->onKeyboardPress((ActionHandler)&SoldierTransformationState::btnRightArrowClick, options1.keyGeoRight());
 	}
 	else
 	{
