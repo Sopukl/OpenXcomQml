@@ -253,6 +253,16 @@ namespace OpenXcom
 			readValue(keyNightVisionToggle, SDLKey, SDLK_SCROLLOCK)
 			readValue(keyNightVisionHold, SDLKey, SDLK_SPACE)
 			readValue(keySelectMusicTrack, SDLKey, SDLK_END)
+			readValue(keyBasescapeBuildNewBase, SDLKey, SDLK_n)
+			readValue(keyBasescapeBaseInfo, SDLKey, SDLK_i)
+			readValue(keyBasescapeSoldiers, SDLKey, SDLK_s)
+			readValue(keyBasescapeCrafts, SDLKey, SDLK_e)
+			readValue(keyBasescapeFacilities, SDLKey, SDLK_f)
+			readValue(keyBasescapeResearch, SDLKey, SDLK_r)
+			readValue(keyBasescapeManufacture, SDLKey, SDLK_m)
+			readValue(keyBasescapeTransfer, SDLKey, SDLK_t)
+			readValue(keyBasescapePurchase, SDLKey, SDLK_p)
+			readValue(keyBasescapeSell, SDLKey, SDLK_l)
 		endGroup();
         beginGroup("Video");
             readValue(displayWidth,  qint32, 640)
@@ -512,6 +522,16 @@ namespace OpenXcom
 			writeValue(keyNightVisionToggle, m_keyNightVisionToggle)
 			writeValue(keyNightVisionHold, m_keyNightVisionHold)
 			writeValue(keySelectMusicTrack, m_keySelectMusicTrack)
+			writeValue(keyBasescapeBuildNewBase, m_keyBasescapeBuildNewBase)
+			writeValue(keyBasescapeBaseInfo, m_keyBasescapeBaseInfo)
+			writeValue(keyBasescapeSoldiers, m_keyBasescapeSoldiers)
+			writeValue(keyBasescapeCrafts, m_keyBasescapeCrafts)
+			writeValue(keyBasescapeFacilities, m_keyBasescapeFacilities)
+			writeValue(keyBasescapeResearch, m_keyBasescapeResearch)
+			writeValue(keyBasescapeManufacture, m_keyBasescapeManufacture)
+			writeValue(keyBasescapeTransfer, m_keyBasescapeTransfer)
+			writeValue(keyBasescapePurchase, m_keyBasescapePurchase)
+			writeValue(keyBasescapeSell, m_keyBasescapeSell)
 		endGroup();
 		beginGroup("Video");
 			writeValue(displayWidth, m_displayWidth)
