@@ -58,7 +58,7 @@ namespace OpenXcom
 		_lstInfo->addRow(0);
 		++_row;
 
-		if (Options::oxcePediaSortResistances == 0)
+		if (options1.oxcePediaSortResistances() == 0)
 		{
 			// Add damage modifiers
 			for (int i = 0; i < DAMAGE_TYPES; ++i)
@@ -88,7 +88,7 @@ namespace OpenXcom
 					counter++;
 				}
 			}
-			if (Options::oxcePediaSortResistances >= 2)
+			if (options1.oxcePediaSortResistances() >= 2)
 			{
 				// Add standard damage (100%)
 				for (int i = 0; i < DAMAGE_TYPES; ++i)

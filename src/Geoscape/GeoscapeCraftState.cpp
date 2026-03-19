@@ -264,10 +264,10 @@ GeoscapeCraftState::GeoscapeCraftState(Craft *craft, Globe *globe, Waypoint *way
 		_txtRedirect->setVisible(false);
 
 		// ETA display
-		if (Options::oxceShowETAMode > 0 && _craft->getDestination())
+		if (options1.oxceShowETAMode() > 0 && _craft->getDestination())
 		{
 			MovingTarget* mt = dynamic_cast<MovingTarget*>(_craft->getDestination());
-			if (Options::oxceShowETAMode == 1 && mt && mt->getSpeed() > 0)
+			if (options1.oxceShowETAMode() == 1 && mt && mt->getSpeed() > 0)
 			{
 				// don't show ETA for moving targets (i.e. UFOs and crafts)
 			}

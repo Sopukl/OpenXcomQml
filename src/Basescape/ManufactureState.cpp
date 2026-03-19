@@ -143,7 +143,7 @@ void ManufactureState::init()
 	State::init();
 	fillProductionList(0);
 
-	if (Options::oxceManufactureScrollSpeed > 0 || Options::oxceManufactureScrollSpeedWithCtrl > 0)
+	if (options1.oxceManufactureScrollSpeed() > 0 || options1.oxceManufactureScrollSpeedWithCtrl() > 0)
 	{
 		// 140 +/- 20
 		_lstManufacture->setNoScrollArea(_txtAllocated->getX() - 40, _txtAllocated->getX());
@@ -269,9 +269,9 @@ void ManufactureState::lstManufactureMousePress(Action *action)
 		return;
 	}
 
-	int change = Options::oxceManufactureScrollSpeed;
+	int change = options1.oxceManufactureScrollSpeed();
 	if (_game->isCtrlPressed())
-		change = Options::oxceManufactureScrollSpeedWithCtrl;
+		change = options1.oxceManufactureScrollSpeedWithCtrl();
 
 	if (action->getDetails()->button.button == SDL_BUTTON_WHEELUP)
 	{

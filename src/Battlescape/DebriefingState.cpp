@@ -785,7 +785,7 @@ void DebriefingState::init()
 		}
 	}
 
-	if (Options::oxceAutomaticPromotions)
+	if (options1.oxceAutomaticPromotions())
 	{
 		_promotions = _game->getSavedGame()->handlePromotions(participants, _game->getMod());
 	}

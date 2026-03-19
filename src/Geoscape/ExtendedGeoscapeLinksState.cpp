@@ -44,7 +44,7 @@ ExtendedGeoscapeLinksState::ExtendedGeoscapeLinksState(GeoscapeState* parent) : 
 	// Create objects
 	_window = new Window(this, 256, 180, 32, 10, POPUP_BOTH);
 	_txtTitle = new Text(220, 17, 50, 33);
-	if (Options::oxceFatFingerLinks)
+	if (options1.oxceFatFingerLinks())
 	{
 		_btnFunding = new TextButton(116, 25, 44, 50);
 		_btnTechTree = new TextButton(116, 25, 161, 50);

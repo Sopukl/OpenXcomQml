@@ -66,10 +66,10 @@ SaveGameState::SaveGameState(OptionsOrigin origin, SaveType type, SDL_Color *pal
 		_filename = "Instasave_" + CrossPlatform::sanitizeFilename(CrossPlatform::now()) + ".sav";
 		break;
 	case SAVE_AUTO_GEOSCAPE:
-		if (Options::oxceGeoAutosaveFrequency > 0 && Options::oxceGeoAutosaveSlots >= 2 && Options::oxceGeoAutosaveSlots <= 10 && currentTurn > 0)
+		if (options1.oxceGeoAutosaveFrequency() > 0 && options1.oxceGeoAutosaveSlots() >= 2 && options1.oxceGeoAutosaveSlots() <= 10 && currentTurn > 0)
 		{
 			// multi-slot autosave
-			int slotIndex = (currentTurn / Options::oxceGeoAutosaveFrequency) % Options::oxceGeoAutosaveSlots;
+			int slotIndex = (currentTurn / options1.oxceGeoAutosaveFrequency()) % options1.oxceGeoAutosaveSlots();
 			_filename = "_" + std::to_string(slotIndex) + SavedGame::AUTOSAVE_GEOSCAPE;
 		}
 		else
@@ -79,10 +79,10 @@ SaveGameState::SaveGameState(OptionsOrigin origin, SaveType type, SDL_Color *pal
 		}
 		break;
 	case SAVE_AUTO_BATTLESCAPE:
-		if (currentTurn > 0 && Options::autosaveSlots >= 2 && Options::autosaveSlots <= 10)
+		if (currentTurn > 0 && options1.autosaveSlots() >= 2 && options1.autosaveSlots() <= 10)
 		{
 			// multi-slot autosave
-			int slotIndex = (currentTurn / options1.autosaveFrequency()) % Options::autosaveSlots;
+			int slotIndex = (currentTurn / options1.autosaveFrequency()) % options1.autosaveSlots();
 			_filename = "_" + std::to_string(slotIndex) + SavedGame::AUTOSAVE_BATTLESCAPE;
 		}
 		else

@@ -77,7 +77,7 @@ NewResearchListState::NewResearchListState(Base *base, bool sortByCost) : _base(
 	touchComponentsAdd("button2", "selectNewResearch", _window);
 
 	_colorNormal = _lstResearch->getColor();
-	_colorNew = Options::oxceHighlightNewTopics ? _lstResearch->getSecondaryColor() : _colorNormal;
+	_colorNew = options1.oxceHighlightNewTopics() ? _lstResearch->getSecondaryColor() : _colorNormal;
 	_colorHidden = _game->getMod()->getInterface("selectNewResearch")->getElement("listExtended")->color;
 
 	centerAllSurfaces();
@@ -130,7 +130,7 @@ NewResearchListState::NewResearchListState(Base *base, bool sortByCost) : _base(
 
 	_btnQuickSearch->setText(""); // redraw
 	_btnQuickSearch->onEnter((ActionHandler)&NewResearchListState::btnQuickSearchApply);
-	_btnQuickSearch->setVisible(Options::oxceQuickSearchButton);
+	_btnQuickSearch->setVisible(options1.oxceQuickSearchButton());
 
 	_btnOK->onKeyboardRelease((ActionHandler)&NewResearchListState::btnQuickSearchToggle, options1.keyToggleQuickSearch());
 }
@@ -182,7 +182,7 @@ void NewResearchListState::onSelectProject(Action *)
 */
 void NewResearchListState::onToggleProjectStatus(Action *)
 {
-	if (!Options::oxceHighlightNewTopics && !_isSortingEnabled)
+	if (!options1.oxceHighlightNewTopics() && !_isSortingEnabled)
 	{
 		// there are no statuses to toggle
 		return;
@@ -195,7 +195,7 @@ void NewResearchListState::onToggleProjectStatus(Action *)
 
 	if (oldState == RuleResearch::RESEARCH_STATUS_NEW)
 	{
-		newState = Options::oxceHighlightNewTopics ? RuleResearch::RESEARCH_STATUS_NORMAL : RuleResearch::RESEARCH_STATUS_HIDDEN;
+		newState = options1.oxceHighlightNewTopics() ? RuleResearch::RESEARCH_STATUS_NORMAL : RuleResearch::RESEARCH_STATUS_HIDDEN;
 	}
 	else if (oldState == RuleResearch::RESEARCH_STATUS_NORMAL)
 	{

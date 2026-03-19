@@ -310,7 +310,7 @@ GeoscapeState::GeoscapeState() : _pause(false), _zoomInEffectDone(false), _zoomO
 	_btnOptions->setGeoscapeButton(true);
 
 	_btnFunding->initText(_game->getMod()->getFont("FONT_GEO_BIG"), _game->getMod()->getFont("FONT_GEO_SMALL"), _game->getLanguage());
-	_btnFunding->setText(Options::oxceLinks ? tr("STR_EXTENDED_UC") : tr("STR_FUNDING_UC"));
+	_btnFunding->setText(options1.oxceLinks() ? tr("STR_EXTENDED_UC") : tr("STR_FUNDING_UC"));
 	_btnFunding->onMouseClick((ActionHandler)&GeoscapeState::btnFundingClick);
 	_btnFunding->onKeyboardPress((ActionHandler)&GeoscapeState::btnFundingClick, options1.keyGeoFunding());
 	_btnFunding->setGeoscapeButton(true);
@@ -1051,7 +1051,7 @@ void GeoscapeState::time5Seconds()
 				AlienMission *mission = ufo->getMission();
 				bool detected = ufo->getDetected();
 				mission->ufoReachedWaypoint(*ufo, *_game, *_globe);
-				if (Options::oxceUfoLandingAlert && ufo->getStatus() == Ufo::LANDED && ufo->getDetected() && ufo->getLandId() != 0)
+				if (options1.oxceUfoLandingAlert() && ufo->getStatus() == Ufo::LANDED && ufo->getDetected() && ufo->getLandId() != 0)
 				{
 					std::string msg = tr("STR_UFO_HAS_LANDED").arg(ufo->getName(_game->getLanguage()));
 					popup(new CraftErrorState(this, msg, true, ufo));
@@ -2814,15 +2814,15 @@ void GeoscapeState::time1Day()
 	// Autosave 3 times a month
 	bool performGeoAutosave = false;
 	int day = saveGame->getTime()->getDay();
-	if (Options::oxceGeoAutosaveFrequency == 0 && (day == 10 || day == 20))
+	if (options1.oxceGeoAutosaveFrequency() == 0 && (day == 10 || day == 20))
 	{
 		// OXC backwards-compatibility
 		performGeoAutosave = true;
 	}
-	else if (Options::oxceGeoAutosaveFrequency >= 1 && Options::oxceGeoAutosaveFrequency <= 10)
+	else if (options1.oxceGeoAutosaveFrequency() >= 1 && options1.oxceGeoAutosaveFrequency() <= 10)
 	{
 		// every X-th day
-		performGeoAutosave = (saveGame->getDaysPassed() % Options::oxceGeoAutosaveFrequency == 0);
+		performGeoAutosave = (saveGame->getDaysPassed() % options1.oxceGeoAutosaveFrequency() == 0);
 	}
 	if (performGeoAutosave)
 	{
@@ -3177,7 +3177,7 @@ void GeoscapeState::btnFundingClick(Action *)
 	{
 		return;
 	}
-	if (Options::oxceLinks)
+	if (options1.oxceLinks())
 	{
 		_game->pushState(new ExtendedGeoscapeLinksState(this));
 	}
@@ -4878,7 +4878,7 @@ void GeoscapeState::updateSlackingIndicator()
 		}
 	}
 
-	if (!Options::oxceEnableSlackingIndicator)
+	if (!options1.oxceEnableSlackingIndicator())
 		return;
 
 	int scientistsSlacking = 0;

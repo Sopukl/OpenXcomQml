@@ -63,7 +63,7 @@ SoldiersState::SoldiersState(Base *base) : _base(base), _origSoldierOrder(*_base
 	bool isTransformationAvailable = availableTransformations.size() > 0;
 
 	// if both training buttons would be displayed, or if there are any transformations, switch to combobox
-	bool showCombobox = isTransformationAvailable || (isPsiBtnVisible && isTrnBtnVisible) || Options::oxceAlternateCraftEquipmentManagement;
+	bool showCombobox = isTransformationAvailable || (isPsiBtnVisible && isTrnBtnVisible) || options1.oxceAlternateCraftEquipmentManagement();
 	// 3 buttons or 2 buttons?
 	bool showThreeButtons = !showCombobox && (isPsiBtnVisible || isTrnBtnVisible);
 

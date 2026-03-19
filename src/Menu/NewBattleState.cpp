@@ -183,8 +183,8 @@ NewBattleState::NewBattleState() :
 	_frameRight->setThickness(3);
 
 	_btnUfoLanded->setText(tr("STR_LANDED"));
-	_btnUfoLanded->setVisible(Options::oxceCrashedOrLanded > 0);
-	_btnUfoLanded->setPressed(Options::oxceCrashedOrLanded > 1);
+	_btnUfoLanded->setVisible(options1.oxceCrashedOrLanded() > 0);
+	_btnUfoLanded->setPressed(options1.oxceCrashedOrLanded() > 1);
 	_txtTitle->setAlign(_btnUfoLanded->getVisible() ? ALIGN_LEFT : ALIGN_CENTER);
 
 	_txtMission->setText(tr("STR_MISSION"));
@@ -985,7 +985,7 @@ void NewBattleState::fillList(NewBattleSelectType selectType, bool isRightClick)
 		_btnCancel->setVisible(true);
 		_btnRandom->setVisible(false);
 		_lstSelect->setVisible(true);
-		_btnQuickSearch->setVisible(Options::oxceQuickSearchButton);
+		_btnQuickSearch->setVisible(options1.oxceQuickSearchButton());
 	}
 
 	std::string searchString = _btnQuickSearch->getText();

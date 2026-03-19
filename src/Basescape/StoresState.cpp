@@ -168,7 +168,7 @@ StoresState::StoresState(Base *base) : _base(base)
 
 	_btnQuickSearch->setText(""); // redraw
 	_btnQuickSearch->onEnter((ActionHandler)&StoresState::btnQuickSearchApply);
-	_btnQuickSearch->setVisible(Options::oxceQuickSearchButton);
+	_btnQuickSearch->setVisible(options1.oxceQuickSearchButton());
 
 	_btnOk->onKeyboardRelease((ActionHandler)&StoresState::btnQuickSearchToggle, options1.keyToggleQuickSearch());
 }

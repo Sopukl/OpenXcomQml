@@ -189,9 +189,9 @@ void ResearchState::lstResearchMousePress(Action *action)
 		return;
 	}
 
-	int change = Options::oxceResearchScrollSpeed;
+	int change = options1.oxceResearchScrollSpeed();
 	if (_game->isCtrlPressed())
-		change = Options::oxceResearchScrollSpeedWithCtrl;
+		change = options1.oxceResearchScrollSpeedWithCtrl();
 
 	if (action->getDetails()->button.button == SDL_BUTTON_WHEELUP)
 	{
@@ -235,7 +235,7 @@ void ResearchState::init()
 	State::init();
 	fillProjectList(0);
 
-	if (Options::oxceResearchScrollSpeed > 0 || Options::oxceResearchScrollSpeedWithCtrl > 0)
+	if (options1.oxceResearchScrollSpeed() > 0 || options1.oxceResearchScrollSpeedWithCtrl() > 0)
 	{
 		// 175 +/- 20
 		_lstResearch->setNoScrollArea(_txtAllocated->getX() - 5, _txtAllocated->getX() + 35);

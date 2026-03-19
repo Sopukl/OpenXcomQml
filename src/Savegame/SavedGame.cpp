@@ -3079,7 +3079,7 @@ void SavedGame::setAutosell(const RuleItem *itype, const bool enabled)
  */
 bool SavedGame::getAutosell(const RuleItem *itype) const
 {
-	if (!Options::oxceAutoSell)
+	if (!options1.oxceAutoSell())
 	{
 		return false;
 	}

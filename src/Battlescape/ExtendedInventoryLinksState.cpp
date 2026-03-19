@@ -42,7 +42,7 @@ ExtendedInventoryLinksState::ExtendedInventoryLinksState(InventoryState* parent,
 	// Create objects
 	_window = new Window(this, 256, inBase ? 180 : 180-14, 32, inBase ? 10 : 10+14, POPUP_BOTH);
 	_txtTitle = new Text(220, 17, 50, inBase ? 33 : 33+23);
-	if (Options::oxceFatFingerLinks)
+	if (options1.oxceFatFingerLinks())
 	{
 		_btnArmor = new TextButton(116, 25, 44, 50);
 		_btnAvatar = new TextButton(116, 25, 161, 50);

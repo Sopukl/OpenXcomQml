@@ -124,7 +124,7 @@ GeoscapeEventState::GeoscapeEventState(const RuleEvent& eventRule) : _eventRule(
 	{
 		_btnItemsArriving->setText(tr("STR_SUMMARY"));
 	}
-	else if (_lstTransfers->getTexts() == 0 || !Options::oxceGeoscapeEventsInstantDelivery)
+	else if (_lstTransfers->getTexts() == 0 || !options1.oxceGeoscapeEventsInstantDelivery())
 	{
 		_btnOk->setX((_btnOk->getX() + _btnItemsArriving->getX()) / 2);
 		_btnItemsArriving->setVisible(false);
@@ -393,7 +393,7 @@ void GeoscapeEventState::eventLogic()
 			ss << -removed;
 			_lstTransfers->addRow(2, tr(ti.first).c_str(), ss.str().c_str());
 		}
-		else if (Options::oxceGeoscapeEventsInstantDelivery)
+		else if (options1.oxceGeoscapeEventsInstantDelivery())
 		{
 			hq->getStorageItems()->addItem(mod->getItem(ti.first, true), ti.second);
 
@@ -415,7 +415,7 @@ void GeoscapeEventState::eventLogic()
 	{
 		Craft* craft = new Craft(craftRule, hq, save->getId(craftRule->getType()));
 		craft->initFixedWeapons(mod);
-		if (Options::oxceGeoscapeEventsInstantDelivery)
+		if (options1.oxceGeoscapeEventsInstantDelivery())
 		{
 			// same as manufacture
 			craft->checkup();

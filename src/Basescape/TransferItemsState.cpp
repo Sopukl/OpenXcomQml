@@ -272,7 +272,7 @@ TransferItemsState::TransferItemsState(Base *baseFrom, Base *baseTo, DebriefingS
 
 	_btnQuickSearch->setText(""); // redraw
 	_btnQuickSearch->onEnter((ActionHandler)&TransferItemsState::btnQuickSearchApply);
-	_btnQuickSearch->setVisible(Options::oxceQuickSearchButton);
+	_btnQuickSearch->setVisible(options1.oxceQuickSearchButton());
 
 	_btnOk->onKeyboardRelease((ActionHandler)&TransferItemsState::btnQuickSearchToggle, options1.keyToggleQuickSearch());
 

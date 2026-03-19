@@ -346,18 +346,18 @@ void OptionsAdvancedState::lstOptionsClick(Action *action)
 		int *i = setting->asInt();
 
 		int increment = (button == SDL_BUTTON_LEFT) ? 1 : -1; // left-click increases, right-click decreases
-		/*if (i == &options1.changeValueByMouseWheel() || i == &Options::FPS || i == &Options::FPSInactive || i == &Options::oxceWoundedDefendBaseIf)
+		/*if (i == &options1.changeValueByMouseWheel() || i == &Options::FPS || i == &Options::FPSInactive || i == &options1.oxceWoundedDefendBaseIf())
 		{
 			increment *= 10;
 		}
-		else*/ if (i == &Options::oxceResearchScrollSpeedWithCtrl || i == &Options::oxceManufactureScrollSpeedWithCtrl || i == &Options::oxceReactionFireThreshold)
+		else if (i == &options1.oxceResearchScrollSpeedWithCtrl() || i == &options1.oxceManufactureScrollSpeedWithCtrl() || i == &options1.oxceReactionFireThreshold())
 		{
 			increment *= 5;
 		}
-		else if (i == &Options::oxceInterceptTableSize)
+		else if (i == &options1.oxceInterceptTableSize())
 		{
 			increment *= 4;
-		}
+		}*/
 		*i += increment;
 
 		int min = 0, max = 0;
@@ -390,40 +390,40 @@ void OptionsAdvancedState::lstOptionsClick(Action *action)
 			min = 1;
 			max = 5;
 		}
-		else*/ if (i == &Options::oxceGeoAutosaveFrequency)
+		else if (i == &options1.oxceGeoAutosaveFrequency())
 		{
 			min = 0;
 			max = 10;
 		}
-		else if (i == &Options::autosaveSlots || i == &Options::oxceGeoAutosaveSlots || i == &Options::oxceResearchScrollSpeed || i == &Options::oxceManufactureScrollSpeed)
+		else if (i == &options1.autosaveSlots() || i == &options1.oxceGeoAutosaveSlots() || i == &options1.oxceResearchScrollSpeed() || i == &options1.oxceManufactureScrollSpeed())
 		{
 			min = 1;
 			max = 10;
 		}
-		else if (i == &Options::oxceInterceptGuiMaintenanceTime || i == &Options::oxceShowETAMode || i == &Options::oxceShowAccuracyOnCrosshair || i == &Options::oxceCrashedOrLanded)
+		else if (i == &options1.oxceInterceptGuiMaintenanceTime() || i == &options1.oxceShowETAMode() || i == &options1.oxceShowAccuracyOnCrosshair() || i == &options1.oxceCrashedOrLanded())
 		{
 			min = 0;
 			max = 2;
 		}
-		else if (i == &Options::oxceInterceptTableSize)
+		else if (i == &options1.oxceInterceptTableSize())
 		{
 			min = 8;
 			max = 80;
 		}
-		else if (i == &Options::oxceWoundedDefendBaseIf || i == &Options::oxceReactionFireThreshold) {
+		else if (i == &options1.oxceWoundedDefendBaseIf() || i == &options1.oxceReactionFireThreshold()) {
 			min = 0;
 			max = 100;
 		}
-		else if (i == &Options::oxceResearchScrollSpeedWithCtrl || i == &Options::oxceManufactureScrollSpeedWithCtrl)
+		else if (i == &options1.oxceResearchScrollSpeedWithCtrl() || i == &options1.oxceManufactureScrollSpeedWithCtrl())
 		{
 			min = 5;
 			max = 50;
 		}
-		else if (i == &Options::oxceAutoNightVisionThreshold) {
+		else if (i == &options1.oxceAutoNightVisionThreshold()) {
 			min = 0;
 			max = 15;
 		}
-		else if (i == &Options::oxceNightVisionColor)
+		else if (i == &options1.oxceNightVisionColor())
 		{
 			// UFO: 1-15, TFTD: 2-16 except 8 and 10
 			if (_isTFTD && ((*i) == 8 || (*i) == 10))
@@ -432,7 +432,7 @@ void OptionsAdvancedState::lstOptionsClick(Action *action)
 			}
 			min = _isTFTD ? 2 : 1;
 			max = _isTFTD ? 16 : 15;
-		}
+		}*/
 
 		if (*i < min)
 		{

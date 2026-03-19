@@ -133,7 +133,7 @@ MainMenuState::MainMenuState(bool updateCheck)
 		CrossPlatform::deleteFile("oxce-upd.bat");
 	}
 
-	if (updateCheck && Options::oxceUpdateCheck)
+	if (updateCheck && options1.oxceUpdateCheck())
 	{
 		int checkProgress = 0;
 		const std::string relativeExeFilename = (_debugInVisualStudio ? "Debug/" + CrossPlatform::getExeFilename(false) : CrossPlatform::getExeFilename(false));

@@ -107,7 +107,7 @@ InventoryPersonalState::InventoryPersonalState(Soldier* soldier)
 	);
 
 	// display armor
-	if (Options::oxcePersonalLayoutIncludingArmor)
+	if (options1.oxcePersonalLayoutIncludingArmor())
 	{
 		std::ostringstream ss1, ss2;
 		auto* armor = soldier->getPersonalEquipmentArmor();

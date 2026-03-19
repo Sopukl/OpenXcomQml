@@ -170,7 +170,7 @@ Map::Map(Game *game, int width, int height, int x, int y, int visibleMapHeight) 
 	_obstacleTimer->stop();
 	_obstacleTimer->onTimer((SurfaceHandler)&Map::disableObstacles);
 
-	_showInfoOnCursor = (Options::oxceShowAccuracyOnCrosshair == 1 && options1.battleUFOExtenderAccuracy()) || Options::oxceShowAccuracyOnCrosshair == 2;
+	_showInfoOnCursor = (options1.oxceShowAccuracyOnCrosshair() == 1 && options1.battleUFOExtenderAccuracy()) || options1.oxceShowAccuracyOnCrosshair() == 2;
 	_txtAccuracy = new Text(44, 18, 0, 0);
 	_txtAccuracy->setSmall();
 	_txtAccuracy->setPalette(_game->getScreen()->getPalette());
@@ -2415,7 +2415,7 @@ void Map::fadeShade()
 	bool hold = SDL_GetKeyState(NULL)[options1.keyNightVisionHold()];
 	if ((_nightVisionOn && !hold) || (!_nightVisionOn && hold))
 	{
-		_nvColor = Options::oxceNightVisionColor;
+		_nvColor = options1.oxceNightVisionColor();
 		_save->setToggleNightVisionTemp(true);
 		_save->setToggleNightVisionColorTemp(_nvColor);
 		if (_fadeShade > NIGHT_VISION_SHADE) // 0 = max brightness

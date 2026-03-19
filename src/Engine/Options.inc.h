@@ -1,51 +1,6 @@
 // Don't worry about Intellisense errors here, as this file is only used in conjunction with Options.h/Options.cpp
 // To add a new option, add a new variable entry and a corresponding OptionInfo in Options.cpp
 
-// OXCE, accessible via GUI
-OPT bool oxceUpdateCheck;
-OPT int autosaveSlots;
-OPT int oxceGeoAutosaveFrequency;
-OPT int oxceGeoAutosaveSlots;
-OPT bool oxceLinks;
-OPT bool oxceLinksDisableTextEdit;
-OPT bool oxceFatFingerLinks;
-OPT bool oxceBattleTouchButtonsEnabled;
-OPT bool oxceQuickSearchButton;
-OPT bool oxceHighlightNewTopics;
-OPT bool oxcePediaShowClipSize;
-OPT int oxcePediaSortResistances; // hidden, unhide if becomes popular?
-
-OPT int oxceInterceptTableSize;
-OPT bool oxceEnableSlackingIndicator;
-OPT int oxceInterceptGuiMaintenanceTime;
-OPT int oxceShowETAMode;
-OPT bool oxceUfoLandingAlert;
-OPT bool oxceRememberDisabledCraftWeapons;
-OPT bool oxceGeoscapeEventsInstantDelivery;
-OPT bool oxceShowBaseNameInPopups;
-
-OPT bool oxceAlternateCraftEquipmentManagement;
-OPT bool oxceBaseInfoScaleEnabled;
-OPT int oxceResearchScrollSpeed;
-OPT int oxceResearchScrollSpeedWithCtrl;
-OPT bool oxceManufactureFilterSuppliesOK;
-OPT int oxceManufactureScrollSpeed;
-OPT int oxceManufactureScrollSpeedWithCtrl;
-OPT bool oxcePersonalLayoutIncludingArmor;
-OPT bool oxceManualPromotions;
-
-OPT int oxceWoundedDefendBaseIf;
-OPT bool oxcePlayBriefingMusicDuringEquipment;
-OPT int oxceNightVisionColor;
-OPT int oxceAutoNightVisionThreshold;
-OPT int oxceShowAccuracyOnCrosshair;
-OPT int oxceReactionFireThreshold;
-OPT bool oxceAutoSell;
-OPT bool oxceAutomaticPromotions;
-OPT bool oxceEnableOffCentreShooting;
-OPT bool oxceUniformShootingSpread;
-OPT int oxceCrashedOrLanded;
-
 // OXCE hidden, accessible only via options.cfg
 /**
  * Verification level of mod data.

@@ -273,7 +273,7 @@ void BaseInfoState::init()
 	ss << _base->getAvailableSoldiers() << ":" << _base->getTotalSoldiers();
 	_numSoldiers->setText(ss.str());
 
-	if (!Options::oxceBaseInfoScaleEnabled || _base->getTotalSoldiers() * _barSoldiers->getScale() < MAX_BAR_WIDTH)
+	if (!options1.oxceBaseInfoScaleEnabled() || _base->getTotalSoldiers() * _barSoldiers->getScale() < MAX_BAR_WIDTH)
 	{
 		_barSoldiers->setMax(_base->getTotalSoldiers());
 		_barSoldiers->setValue(_base->getAvailableSoldiers());
@@ -288,7 +288,7 @@ void BaseInfoState::init()
 	ss2 << _base->getAvailableEngineers() << ":" << _base->getTotalEngineers();
 	_numEngineers->setText(ss2.str());
 
-	if (!Options::oxceBaseInfoScaleEnabled || _base->getTotalEngineers() * _barEngineers->getScale() < MAX_BAR_WIDTH)
+	if (!options1.oxceBaseInfoScaleEnabled() || _base->getTotalEngineers() * _barEngineers->getScale() < MAX_BAR_WIDTH)
 	{
 		_barEngineers->setMax(_base->getTotalEngineers());
 		_barEngineers->setValue(_base->getAvailableEngineers());
@@ -303,7 +303,7 @@ void BaseInfoState::init()
 	ss3 << _base->getAvailableScientists() << ":" << _base->getTotalScientists();
 	_numScientists->setText(ss3.str());
 
-	if (!Options::oxceBaseInfoScaleEnabled || _base->getTotalScientists() * _barScientists->getScale() < MAX_BAR_WIDTH)
+	if (!options1.oxceBaseInfoScaleEnabled() || _base->getTotalScientists() * _barScientists->getScale() < MAX_BAR_WIDTH)
 	{
 		_barScientists->setMax(_base->getTotalScientists());
 		_barScientists->setValue(_base->getAvailableScientists());
@@ -319,7 +319,7 @@ void BaseInfoState::init()
 	ss4 << _base->getUsedQuarters() << ":" << _base->getAvailableQuarters();
 	_numQuarters->setText(ss4.str());
 
-	if (!Options::oxceBaseInfoScaleEnabled || _base->getAvailableQuarters() * _barQuarters->getScale() < MAX_BAR_WIDTH)
+	if (!options1.oxceBaseInfoScaleEnabled() || _base->getAvailableQuarters() * _barQuarters->getScale() < MAX_BAR_WIDTH)
 	{
 		_barQuarters->setMax(_base->getAvailableQuarters());
 		_barQuarters->setValue(_base->getUsedQuarters());
@@ -335,7 +335,7 @@ void BaseInfoState::init()
 	ss5 << (int)floor(_base->getUsedStores() + 0.05) << ":" << _base->getAvailableStores();
 	_numStores->setText(ss5.str());
 
-	if (!Options::oxceBaseInfoScaleEnabled || _base->getAvailableStores() * _barStores->getScale() < MAX_BAR_WIDTH)
+	if (!options1.oxceBaseInfoScaleEnabled() || _base->getAvailableStores() * _barStores->getScale() < MAX_BAR_WIDTH)
 	{
 		_barStores->setMax(_base->getAvailableStores());
 		_barStores->setValue((int)floor(_base->getUsedStores() + 0.05));
@@ -351,7 +351,7 @@ void BaseInfoState::init()
 	ss6 << _base->getUsedLaboratories() << ":" << _base->getAvailableLaboratories();
 	_numLaboratories->setText(ss6.str());
 
-	if (!Options::oxceBaseInfoScaleEnabled || _base->getAvailableLaboratories() * _barLaboratories->getScale() < MAX_BAR_WIDTH)
+	if (!options1.oxceBaseInfoScaleEnabled() || _base->getAvailableLaboratories() * _barLaboratories->getScale() < MAX_BAR_WIDTH)
 	{
 		_barLaboratories->setMax(_base->getAvailableLaboratories());
 		_barLaboratories->setValue(_base->getUsedLaboratories());
@@ -367,7 +367,7 @@ void BaseInfoState::init()
 	ss7 << _base->getUsedWorkshops() << ":" << _base->getAvailableWorkshops();
 	_numWorkshops->setText(ss7.str());
 
-	if (!Options::oxceBaseInfoScaleEnabled || _base->getAvailableWorkshops() * _barWorkshops->getScale() < MAX_BAR_WIDTH)
+	if (!options1.oxceBaseInfoScaleEnabled() || _base->getAvailableWorkshops() * _barWorkshops->getScale() < MAX_BAR_WIDTH)
 	{
 		_barWorkshops->setMax(_base->getAvailableWorkshops());
 		_barWorkshops->setValue(_base->getUsedWorkshops());

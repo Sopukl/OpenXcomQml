@@ -2373,7 +2373,7 @@ void DogfightState::weaponClick(Action * a)
 			_weaponEnabled[i] = !_weaponEnabled[i];
 			recolor(i, _weaponEnabled[i]);
 
-			if (Options::oxceRememberDisabledCraftWeapons)
+			if (options1.oxceRememberDisabledCraftWeapons())
 			{
 				CraftWeapon* w = _craft->getWeapons()->at(i);
 				if (w)

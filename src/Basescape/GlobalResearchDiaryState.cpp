@@ -129,7 +129,7 @@ GlobalResearchDiaryState::GlobalResearchDiaryState() : _doNotReset(false)
 
 	_btnQuickSearch->setText(""); // redraw
 	_btnQuickSearch->onEnter((ActionHandler)&GlobalResearchDiaryState::btnQuickSearchApply);
-	_btnQuickSearch->setVisible(Options::oxceQuickSearchButton);
+	_btnQuickSearch->setVisible(options1.oxceQuickSearchButton());
 
 	_btnOk->onKeyboardRelease((ActionHandler)&GlobalResearchDiaryState::btnQuickSearchToggle, options1.keyToggleQuickSearch());
 

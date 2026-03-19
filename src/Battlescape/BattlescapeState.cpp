@@ -304,7 +304,7 @@ BattlescapeState::BattlescapeState() :
 	}
 
 	// custom OXCE links button
-	if (Options::oxceLinks && _game->getMod()->getSurface("oxceLinks", false))
+	if (options1.oxceLinks() && _game->getMod()->getSurface("oxceLinks", false))
 	{
 		Surface* oxceLinks = _game->getMod()->getSurface("oxceLinks");
 		oxceLinks->blitNShade(_icons, 208, 0);
@@ -510,7 +510,7 @@ BattlescapeState::BattlescapeState() :
 	_btnNextStop->onMouseOut((ActionHandler)&BattlescapeState::txtTooltipOut);
 
 	_btnShowLayers->onMouseClick((ActionHandler)&BattlescapeState::btnShowLayersClick);
-	_btnShowLayers->setTooltip(Options::oxceLinks ? "STR_EXTENDED_LINKS" : "STR_MULTI_LEVEL_VIEW");
+	_btnShowLayers->setTooltip(options1.oxceLinks() ? "STR_EXTENDED_LINKS" : "STR_MULTI_LEVEL_VIEW");
 	_btnShowLayers->onMouseIn((ActionHandler)&BattlescapeState::txtTooltipIn);
 	_btnShowLayers->onMouseOut((ActionHandler)&BattlescapeState::txtTooltipOut);
 	_btnShowLayers->onKeyboardPress((ActionHandler)&BattlescapeState::btnShowLayersClickOrig, options1.keyBattleShowLayers());
@@ -610,7 +610,7 @@ BattlescapeState::BattlescapeState() :
 	//_btnStats->onKeyboardPress((ActionHandler)&BattlescapeState::btnTouchButtonsClick, SDLK_t); // for debugging only
 
 	// automatic night vision
-	if (_save->getGlobalShade() > Options::oxceAutoNightVisionThreshold)
+	if (_save->getGlobalShade() > options1.oxceAutoNightVisionThreshold())
 	{
 		bool ignore = (enviro && enviro->ignoreAutoNightVisionUserSetting());
 		if (!ignore)
@@ -704,7 +704,7 @@ BattlescapeState::BattlescapeState() :
 	_btnReserveAuto->setGroup(&_reserve);
 
 	// Set music
-	if (!Options::oxcePlayBriefingMusicDuringEquipment)
+	if (!options1.oxcePlayBriefingMusicDuringEquipment())
 	{
 		if (_save->getMusic().empty())
 		{
@@ -809,7 +809,7 @@ void BattlescapeState::init()
 	if (_firstInit)
 	{
 		// Set music
-		if (Options::oxcePlayBriefingMusicDuringEquipment)
+		if (options1.oxcePlayBriefingMusicDuringEquipment())
 		{
 			if (_save->getMusic() == "")
 			{
@@ -1403,7 +1403,7 @@ void BattlescapeState::selectPreviousPlayerUnit(bool checkReselect, bool setRese
  */
 void BattlescapeState::btnShowLayersClick(Action *)
 {
-	if (Options::oxceLinks)
+	if (options1.oxceLinks())
 	{
 		_game->pushState(new ExtendedBattlescapeLinksState(this, _save));
 	}
@@ -1799,17 +1799,17 @@ void BattlescapeState::toggleTouchButtons(bool deactivate, bool tryToReactivate)
 
 	if (tryToReactivate)
 	{
-		_touchButtonsEnabled = Options::oxceBattleTouchButtonsEnabled; // restore
+		_touchButtonsEnabled = options1.oxceBattleTouchButtonsEnabled(); // restore
 	}
 	else if (deactivate)
 	{
-		Options::oxceBattleTouchButtonsEnabled = _touchButtonsEnabled; // backup
+		options1.setoxceBattleTouchButtonsEnabled(_touchButtonsEnabled); // backup
 		_touchButtonsEnabled = false;
 	}
 	else
 	{
 		_touchButtonsEnabled = !_touchButtonsEnabled;
-		Options::oxceBattleTouchButtonsEnabled = _touchButtonsEnabled; // backup
+		options1.setoxceBattleTouchButtonsEnabled(_touchButtonsEnabled); // backup
 	}
 
 	_btnCtrl->setVisible(_touchButtonsEnabled);

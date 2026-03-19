@@ -560,7 +560,7 @@ void Soldier::setCraftAndMoveEquipment(Craft* craft, Base* base, bool isNewBattl
 {
 	bool notTheSameCraft = (_craft != craft);
 
-	if (Options::oxceAlternateCraftEquipmentManagement && !isNewBattle && notTheSameCraft && base)
+	if (options1.oxceAlternateCraftEquipmentManagement() && !isNewBattle && notTheSameCraft && base)
 	{
 		if (_craft)
 		{
@@ -570,7 +570,7 @@ void Soldier::setCraftAndMoveEquipment(Craft* craft, Base* base, bool isNewBattl
 
 	setCraft(craft, resetCustomDeployment);
 
-	if (Options::oxceAlternateCraftEquipmentManagement && !isNewBattle && notTheSameCraft && base)
+	if (options1.oxceAlternateCraftEquipmentManagement() && !isNewBattle && notTheSameCraft && base)
 	{
 		if (craft)
 		{
@@ -1116,7 +1116,7 @@ bool Soldier::hasFullHealth() const
 bool Soldier::canDefendBase() const
 {
 	int currentHealthPercentage = std::max(0, _currentStats.health - getWoundRecoveryInt() - getHealthMissing()) * 100 / _currentStats.health;
-	return currentHealthPercentage >= Options::oxceWoundedDefendBaseIf;
+	return currentHealthPercentage >= options1.oxceWoundedDefendBaseIf();
 }
 
 

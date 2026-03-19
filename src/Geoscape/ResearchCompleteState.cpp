@@ -73,7 +73,7 @@ ResearchCompleteState::ResearchCompleteState(const RuleResearch *newResearch, co
 
 	_txtBase->setAlign(ALIGN_CENTER);
 	_txtBase->setText(base->getName());
-	_txtBase->setVisible(Options::oxceShowBaseNameInPopups);
+	_txtBase->setVisible(options1.oxceShowBaseNameInPopups());
 
 	_txtTitle->setBig();
 	_txtTitle->setAlign(ALIGN_CENTER);

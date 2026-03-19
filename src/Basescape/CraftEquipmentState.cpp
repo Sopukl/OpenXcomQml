@@ -221,7 +221,7 @@ CraftEquipmentState::CraftEquipmentState(Base *base, size_t craft) :
 
 	_btnQuickSearch->setText(""); // redraw
 	_btnQuickSearch->onEnter((ActionHandler)&CraftEquipmentState::btnQuickSearchApply);
-	_btnQuickSearch->setVisible(Options::oxceQuickSearchButton);
+	_btnQuickSearch->setVisible(options1.oxceQuickSearchButton());
 
 	_btnOk->onKeyboardRelease((ActionHandler)&CraftEquipmentState::btnQuickSearchToggle, options1.keyToggleQuickSearch());
 
@@ -264,7 +264,7 @@ void CraftEquipmentState::init()
 	// don't reload after closing error popups
 	if (_reload)
 	{
-		if (Options::oxceAlternateCraftEquipmentManagement && !_isNewBattle)
+		if (options1.oxceAlternateCraftEquipmentManagement() && !_isNewBattle)
 		{
 			// skip when returning from craft equipment template load/save
 			if (!_returningFromGlobalTemplates)
@@ -367,7 +367,7 @@ void CraftEquipmentState::initList()
 
 		int bQty = _base->getStorageItems()->getItem(rule);
 		int reserved = 0;
-		if (Options::oxceAlternateCraftEquipmentManagement && !_isNewBattle)
+		if (options1.oxceAlternateCraftEquipmentManagement() && !_isNewBattle)
 		{
 			reserved = c->getSoldierItems()->getItem(rule);
 		}
@@ -438,7 +438,7 @@ void CraftEquipmentState::initList()
 
 			_items.push_back(itemType);
 			std::ostringstream ss, ss2;
-			if (Options::oxceAlternateCraftEquipmentManagement && !_isNewBattle)
+			if (options1.oxceAlternateCraftEquipmentManagement() && !_isNewBattle)
 			{
 				// doing this once (on opening the screen) is enough
 				// and just to make sure, we must skip this when returning from craft equipment template load/save
@@ -672,7 +672,7 @@ void CraftEquipmentState::updateQuantity()
 	{
 		ss << "-";
 	}
-	if (Options::oxceAlternateCraftEquipmentManagement && !_isNewBattle)
+	if (options1.oxceAlternateCraftEquipmentManagement() && !_isNewBattle)
 	{
 		int reserved = c->getSoldierItems()->getItem(item);
 		if (item->getVehicleUnit())
@@ -735,7 +735,7 @@ void CraftEquipmentState::moveLeftByValue(int change)
 	if (item->getVehicleUnit()) cQty = c->getVehicleCount(_items[_sel]);
 	else cQty = c->getItems()->getItem(item);
 	if (change <= 0 || cQty <= 0) return;
-	if (Options::oxceAlternateCraftEquipmentManagement && !_isNewBattle)
+	if (options1.oxceAlternateCraftEquipmentManagement() && !_isNewBattle)
 	{
 		int reserved = c->getSoldierItems()->getItem(item);
 		if (cQty - reserved > 0)
@@ -964,7 +964,7 @@ void CraftEquipmentState::btnInventoryClick(Action *)
 	Craft *craft = _base->getCrafts()->at(_craft);
 	if (craft->getNumTotalSoldiers() > 0)
 	{
-		if (Options::oxceAlternateCraftEquipmentManagement && !_isNewBattle)
+		if (options1.oxceAlternateCraftEquipmentManagement() && !_isNewBattle)
 		{
 			// This is a bit tricky... here's what we're doing:
 			// * Remember the extra craft items (i.e. items that are on the craft, but not equipped by soldiers)
@@ -1048,8 +1048,8 @@ void CraftEquipmentState::saveGlobalLoadout(int index)
 void CraftEquipmentState::loadGlobalLoadout(int index, bool onlyAddItems)
 {
 	// temporarily turn off alternate craft equipment management to allow removing all items from the craft
-	bool backup = Options::oxceAlternateCraftEquipmentManagement;
-	Options::oxceAlternateCraftEquipmentManagement = false;
+	bool backup = options1.oxceAlternateCraftEquipmentManagement();
+	options1.setoxceAlternateCraftEquipmentManagement(false);
 
 	// reset filters and reload the full equipment list
 	_btnQuickSearch->setText("");
@@ -1141,7 +1141,7 @@ void CraftEquipmentState::loadGlobalLoadout(int index, bool onlyAddItems)
 	}
 
 	// turn back the original setting
-	Options::oxceAlternateCraftEquipmentManagement = backup;
+	options1.setoxceAlternateCraftEquipmentManagement(backup);
 }
 
 /**

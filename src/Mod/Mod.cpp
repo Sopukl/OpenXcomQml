@@ -4459,7 +4459,7 @@ int Mod::getReactionFireThreshold(UnitFaction faction) const
 	switch (faction)
 	{
 	case FACTION_PLAYER:
-		return Options::oxceReactionFireThreshold;
+		return options1.oxceReactionFireThreshold();
 	case FACTION_HOSTILE:
 		return _aiReactionFireThreshold;
 	case FACTION_NEUTRAL:

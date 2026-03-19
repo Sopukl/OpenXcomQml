@@ -362,7 +362,7 @@ void Projectile::applyAccuracy(Position origin, Position *target, double accurac
 	int zDist = abs(origin.z - target->z);
 	int xyShift, zShift;
 
-	if (Options::oxceUniformShootingSpread) // Uniform shooting spread
+	if (options1.oxceUniformShootingSpread()) // Uniform shooting spread
 	{
 		if (xDist <= yDist)
 			xyShift = xDist / 4 + yDist;
@@ -420,7 +420,7 @@ void Projectile::applyAccuracy(Position origin, Position *target, double accurac
 
 	deviation = std::max(1, zShift * deviation / 200);	//range ratio
 
-	if (Options::oxceUniformShootingSpread)
+	if (options1.oxceUniformShootingSpread())
 	{
 		// First, new target point is rolled as usual. Then, if it lies outside of outer circle (in square's corner)
 		// it's rerolled inside inner circle

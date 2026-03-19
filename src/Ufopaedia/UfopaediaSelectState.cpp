@@ -66,7 +66,7 @@ namespace OpenXcom
 		add(_cbxFilter, "button2", "ufopaedia");
 
 		_colorNormal = _lstSelection->getColor();
-		_colorNew = Options::oxceHighlightNewTopics ? _lstSelection->getSecondaryColor() : _colorNormal;
+		_colorNew = options1.oxceHighlightNewTopics() ? _lstSelection->getSecondaryColor() : _colorNormal;
 		_colorHidden = _game->getMod()->getInterface("ufopaedia")->getElement("listExtended")->color;
 
 		centerAllSurfaces();
@@ -99,7 +99,7 @@ namespace OpenXcom
 
 		_btnQuickSearch->setText(""); // redraw
 		_btnQuickSearch->onEnter((ActionHandler)&UfopaediaSelectState::btnQuickSearchApply);
-		_btnQuickSearch->setVisible(Options::oxceQuickSearchButton);
+		_btnQuickSearch->setVisible(options1.oxceQuickSearchButton());
 
 		_btnOk->onKeyboardRelease((ActionHandler)&UfopaediaSelectState::btnQuickSearchToggle, options1.keyToggleQuickSearch());
 	}
@@ -145,7 +145,7 @@ namespace OpenXcom
 		const std::string rule = _filtered_article_list[_lstSelection->getSelectedRow()]->id;
 		int oldState = _game->getSavedGame()->getUfopediaRuleStatus(rule);
 		int newState = (oldState + 1) % ArticleDefinition::PEDIA_STATUSES;
-		if (!Options::oxceHighlightNewTopics)
+		if (!options1.oxceHighlightNewTopics())
 		{
 			// only switch between hidden and not hidden
 			newState = (oldState == ArticleDefinition::PEDIA_STATUS_HIDDEN) ? ArticleDefinition::PEDIA_STATUS_NORMAL : ArticleDefinition::PEDIA_STATUS_HIDDEN;

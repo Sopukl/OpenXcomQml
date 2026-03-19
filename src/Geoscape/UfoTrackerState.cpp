@@ -54,7 +54,7 @@ UfoTrackerState::UfoTrackerState(GeoscapeState *state, Globe *globe) : _state(st
 	const int WIDTH_SPEED = 32;
 	_screen = false;
 
-	int extraRows = Clamp(Options::oxceInterceptTableSize, 8, 80) - 8;
+	int extraRows = Clamp(options1.oxceInterceptTableSize(), 8, 80) - 8;
 	int extraHeight = 8 * extraRows;
 	int offset = extraHeight / 2;
 

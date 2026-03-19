@@ -80,7 +80,7 @@ InventoryState::InventoryState(bool tu, BattlescapeState *parent, Base *base, bo
 {
 	_battleGame = _game->getSavedGame()->getSavedBattle();
 
-	if (Options::oxceAlternateCraftEquipmentManagement && !_tu && _base && _noCraft)
+	if (options1.oxceAlternateCraftEquipmentManagement() && !_tu && _base && _noCraft)
 	{
 		// deassign all soldiers
 		for (auto* soldier : *_base->getSoldiers())
@@ -194,7 +194,7 @@ InventoryState::InventoryState(bool tu, BattlescapeState *parent, Base *base, bo
 	_txtName->onChange((ActionHandler)&InventoryState::edtSoldierChange);
 	_txtName->onMousePress((ActionHandler)&InventoryState::edtSoldierPress);
 
-	if (Options::oxceLinksDisableTextEdit)
+	if (options1.oxceLinksDisableTextEdit())
 	{
 		_txtName->setVisible(false);
 	}
@@ -301,13 +301,13 @@ InventoryState::InventoryState(bool tu, BattlescapeState *parent, Base *base, bo
 	_btnQuickSearch->setHighContrast(true);
 	_btnQuickSearch->setText(""); // redraw
 	_btnQuickSearch->onEnter((ActionHandler)&InventoryState::btnQuickSearchApply);
-	_btnQuickSearch->setVisible(Options::oxceQuickSearchButton);
+	_btnQuickSearch->setVisible(options1.oxceQuickSearchButton());
 
 	_btnOk->onKeyboardRelease((ActionHandler)&InventoryState::btnQuickSearchToggle, options1.keyToggleQuickSearch());
 
 	_game->getMod()->getSurface("oxceLinksInv")->blitNShade(_btnLinks, 0, 0);
 	_btnLinks->initSurfaces();
-	_btnLinks->setVisible(Options::oxceLinks);
+	_btnLinks->setVisible(options1.oxceLinks());
 
 	// only use copy/paste buttons in setup (i.e. non-tu) mode
 	if (_tu)
@@ -462,7 +462,7 @@ void InventoryState::init()
 	_txtName->setBig();
 	_txtName->setText(unit->getName(_game->getLanguage()));
 
-	_btnLinks->setVisible(Options::oxceLinks);
+	_btnLinks->setVisible(options1.oxceLinks());
 
 	bool resetGroundOffset = _tu;
 	if (unit->isSummonedPlayerUnit())
@@ -476,7 +476,7 @@ void InventoryState::init()
 		// reload necessary after the change of armor
 		if (_reloadUnit)
 		{
-			if (Options::oxceAlternateCraftEquipmentManagement && s->getArmor() && unit->getArmor() && s->getArmor()->getSize() > unit->getArmor()->getSize())
+			if (options1.oxceAlternateCraftEquipmentManagement() && s->getArmor() && unit->getArmor() && s->getArmor()->getSize() > unit->getArmor()->getSize())
 			{
 				_resetCustomDeploymentBackup = true;
 			}
@@ -1012,7 +1012,7 @@ bool InventoryState::tryArmorChange(const std::string& armorName)
 				_base->getStorageItems()->removeItem(next->getStoreItem());
 			}
 		}
-		if (Options::oxceAlternateCraftEquipmentManagement && next->getSize() > prev->getSize())
+		if (options1.oxceAlternateCraftEquipmentManagement() && next->getSize() > prev->getSize())
 		{
 			_resetCustomDeploymentBackup = true;
 		}
@@ -1149,11 +1149,11 @@ void InventoryState::btnOkClick(Action *)
 	_game->popState();
 	if (!_tu)
 	{
-		if (_base || !Options::oxceAlternateCraftEquipmentManagement)
+		if (_base || !options1.oxceAlternateCraftEquipmentManagement())
 		{
 			saveEquipmentLayout();
 		}
-		if (Options::oxceAlternateCraftEquipmentManagement && !_tu && _base && _noCraft)
+		if (options1.oxceAlternateCraftEquipmentManagement() && !_tu && _base && _noCraft)
 		{
 			// assign all soldiers back, if possible
 			for (auto* soldier : *_base->getSoldiers())
@@ -1400,7 +1400,7 @@ void InventoryState::btnCreatePersonalTemplateClick(Action *)
 		_createInventoryTemplate(personalTemplate);
 
 		// optionally save armor info too
-		if (Options::oxcePersonalLayoutIncludingArmor)
+		if (options1.oxcePersonalLayoutIncludingArmor())
 		{
 			unit->getGeoscapeSoldier()->setPersonalEquipmentArmor(_battleGame->getSelectedUnit()->getArmor());
 		}
@@ -1654,7 +1654,7 @@ void InventoryState::btnApplyPersonalTemplateClick(Action *)
 	if (unit && unit->getGeoscapeSoldier())
 	{
 		// optionally load armor too
-		if (Options::oxcePersonalLayoutIncludingArmor)
+		if (options1.oxcePersonalLayoutIncludingArmor())
 		{
 			auto* newArmor = unit->getGeoscapeSoldier()->getPersonalEquipmentArmor();
 			if (newArmor && newArmor != unit->getArmor())

@@ -325,7 +325,7 @@ void ProjectileFlyBState::init()
 			{
 				bool foundLoF = _parent->getTileEngine()->canTargetUnit(&originVoxel, targetTile, &_targetVoxel, _unit, isPlayer);
 
-				if (!foundLoF && Options::oxceEnableOffCentreShooting)
+				if (!foundLoF && options1.oxceEnableOffCentreShooting())
 				{
 					// If we can't target from the standard shooting position, try a bit left and right from the centre.
 					for (auto& rel_pos : { BattleActionOrigin::LEFT, BattleActionOrigin::RIGHT })

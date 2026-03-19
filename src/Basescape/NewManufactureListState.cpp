@@ -83,7 +83,7 @@ NewManufactureListState::NewManufactureListState(Base *base) : _base(base), _sho
 	touchComponentsAdd("button2", "selectNewManufacture", _window);
 
 	_colorNormal = _lstManufacture->getColor();
-	_colorNew = Options::oxceHighlightNewTopics ? _lstManufacture->getSecondaryColor() : _colorNormal;
+	_colorNew = options1.oxceHighlightNewTopics() ? _lstManufacture->getSecondaryColor() : _colorNormal;
 	_colorHidden = _game->getMod()->getInterface("selectNewManufacture")->getElement("listExtended")->color;
 	_colorFacilityRequired = _game->getMod()->getInterface("selectNewManufacture")->getElement("listExtended")->color2;
 
@@ -125,7 +125,7 @@ NewManufactureListState::NewManufactureListState(Base *base) : _base(base), _sho
 	filterOptions.push_back("STR_FILTER_FACILITY_REQUIRED");
 	filterOptions.push_back("STR_FILTER_HIDDEN");
 	_cbxFilter->setOptions(filterOptions, true);
-	if (Options::oxceManufactureFilterSuppliesOK)
+	if (options1.oxceManufactureFilterSuppliesOK())
 	{
 		_cbxFilter->setSelected(MANU_FILTER_DEFAULT_SUPPLIES_OK);
 	}
@@ -136,7 +136,7 @@ NewManufactureListState::NewManufactureListState(Base *base) : _base(base), _sho
 
 	_btnQuickSearch->setText(""); // redraw
 	_btnQuickSearch->onEnter((ActionHandler)&NewManufactureListState::btnQuickSearchApply);
-	_btnQuickSearch->setVisible(Options::oxceQuickSearchButton);
+	_btnQuickSearch->setVisible(options1.oxceQuickSearchButton());
 
 	_btnOk->onKeyboardRelease((ActionHandler)&NewManufactureListState::btnQuickSearchToggle, options1.keyToggleQuickSearch());
 }
@@ -253,7 +253,7 @@ void NewManufactureListState::lstProdClickRight(Action *)
 		const std::string rule = _displayedStrings[_lstManufacture->getSelectedRow()];
 		int oldState = _game->getSavedGame()->getManufactureRuleStatus(rule);
 		int newState = (oldState + 1) % RuleManufacture::MANU_STATUSES;
-		if (!Options::oxceHighlightNewTopics)
+		if (!options1.oxceHighlightNewTopics())
 		{
 			// only switch between hidden and not hidden
 			newState = (oldState == RuleManufacture::MANU_STATUS_HIDDEN) ? RuleManufacture::MANU_STATUS_NORMAL : RuleManufacture::MANU_STATUS_HIDDEN;

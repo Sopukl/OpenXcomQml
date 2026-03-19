@@ -795,7 +795,7 @@ void SoldierInfoState::btnFlagClick(Action *action)
  */
 void SoldierInfoState::btnRankClick(Action *)
 {
-	if (Options::oxceManualPromotions)
+	if (options1.oxceManualPromotions())
 	{
 		_game->pushState(new SoldierRankState(_base, _soldierId));
 	}
