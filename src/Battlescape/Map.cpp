@@ -2412,7 +2412,7 @@ void Map::scrollKey()
  */
 void Map::fadeShade()
 {
-	bool hold = SDL_GetKeyState(NULL)[Options::keyNightVisionHold];
+	bool hold = SDL_GetKeyState(NULL)[options1.keyNightVisionHold()];
 	if ((_nightVisionOn && !hold) || (!_nightVisionOn && hold))
 	{
 		_nvColor = Options::oxceNightVisionColor;

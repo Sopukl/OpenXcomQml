@@ -114,7 +114,7 @@ SoldierTransformState::SoldierTransformState(Base* base, size_t soldier) : _base
 	_btnQuickSearch->onEnter((ActionHandler)&SoldierTransformState::btnQuickSearchApply);
 	_btnQuickSearch->setVisible(Options::oxceQuickSearchButton);
 
-	_btnCancel->onKeyboardRelease((ActionHandler)&SoldierTransformState::btnQuickSearchToggle, Options::keyToggleQuickSearch);
+	_btnCancel->onKeyboardRelease((ActionHandler)&SoldierTransformState::btnQuickSearchToggle, options1.keyToggleQuickSearch());
 
 	_transformationOrder = TRANSFORM_SORT_NONE;
 	sortList();

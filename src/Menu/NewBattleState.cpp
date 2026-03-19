@@ -337,7 +337,7 @@ NewBattleState::NewBattleState() :
 	_btnQuickSearch->onEnter((ActionHandler)&NewBattleState::btnQuickSearchApply);
 	_btnQuickSearch->setVisible(false);
 
-	_btnCancel->onKeyboardRelease((ActionHandler)&NewBattleState::btnQuickSearchToggle, Options::keyToggleQuickSearch);
+	_btnCancel->onKeyboardRelease((ActionHandler)&NewBattleState::btnQuickSearchToggle, options1.keyToggleQuickSearch());
 }
 
 /**

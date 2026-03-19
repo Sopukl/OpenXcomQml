@@ -80,7 +80,7 @@ namespace OpenXcom
 		_btnOk->setText(tr("STR_OK"));
 		_btnOk->onMouseClick((ActionHandler)&UfopaediaSelectState::btnOkClick);
 		_btnOk->onKeyboardPress((ActionHandler)&UfopaediaSelectState::btnOkClick,options1.keyCancel());
-		_btnOk->onKeyboardPress((ActionHandler)&UfopaediaSelectState::btnMarkAllAsSeenClick, Options::keyMarkAllAsSeen);
+		_btnOk->onKeyboardPress((ActionHandler)&UfopaediaSelectState::btnMarkAllAsSeenClick, options1.keyMarkAllAsSeen());
 
 		_lstSelection->setColumns(1, 206);
 		_lstSelection->setSelectable(true);
@@ -101,7 +101,7 @@ namespace OpenXcom
 		_btnQuickSearch->onEnter((ActionHandler)&UfopaediaSelectState::btnQuickSearchApply);
 		_btnQuickSearch->setVisible(Options::oxceQuickSearchButton);
 
-		_btnOk->onKeyboardRelease((ActionHandler)&UfopaediaSelectState::btnQuickSearchToggle, Options::keyToggleQuickSearch);
+		_btnOk->onKeyboardRelease((ActionHandler)&UfopaediaSelectState::btnQuickSearchToggle, options1.keyToggleQuickSearch());
 	}
 
 	UfopaediaSelectState::~UfopaediaSelectState()

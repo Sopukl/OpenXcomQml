@@ -224,14 +224,14 @@ InventoryState::InventoryState(bool tu, BattlescapeState *parent, Base *base, bo
 	_btnOk->onKeyboardPress((ActionHandler)&InventoryState::btnOkClick, options1.keyCancel());
 	_btnOk->onKeyboardPress((ActionHandler)&InventoryState::btnOkClick, options1.keyBattleInventory());
 	_btnOk->onKeyboardPress((ActionHandler)&InventoryState::btnUfopaediaClick, options1.keyGeoUfopedia());
-	_btnOk->onKeyboardPress((ActionHandler)&InventoryState::btnArmorClick, Options::keyInventoryArmor);
-	_btnOk->onKeyboardPress((ActionHandler)&InventoryState::btnArmorClickRight, Options::keyInventoryAvatar);
-	_btnOk->onKeyboardPress((ActionHandler)&InventoryState::btnInventoryLoadClick, Options::keyInventoryLoad);
-	_btnOk->onKeyboardPress((ActionHandler)&InventoryState::btnInventorySaveClick, Options::keyInventorySave);
-	_btnOk->onKeyboardPress((ActionHandler)&InventoryState::btnCreatePersonalTemplateClick, Options::keyInvSavePersonalEquipment);
-	_btnOk->onKeyboardPress((ActionHandler)&InventoryState::btnApplyPersonalTemplateClick, Options::keyInvLoadPersonalEquipment);
-	_btnOk->onKeyboardPress((ActionHandler)&InventoryState::btnShowPersonalTemplateClick, Options::keyInvShowPersonalEquipment);
-	_btnOk->onKeyboardPress((ActionHandler)&InventoryState::btnDiaryLightClick, Options::keyInventoryDiaryLight);
+	_btnOk->onKeyboardPress((ActionHandler)&InventoryState::btnArmorClick, options1.keyInventoryArmor());
+	_btnOk->onKeyboardPress((ActionHandler)&InventoryState::btnArmorClickRight, options1.keyInventoryAvatar());
+	_btnOk->onKeyboardPress((ActionHandler)&InventoryState::btnInventoryLoadClick, options1.keyInventoryLoad());
+	_btnOk->onKeyboardPress((ActionHandler)&InventoryState::btnInventorySaveClick, options1.keyInventorySave());
+	_btnOk->onKeyboardPress((ActionHandler)&InventoryState::btnCreatePersonalTemplateClick, options1.keyInvSavePersonalEquipment());
+	_btnOk->onKeyboardPress((ActionHandler)&InventoryState::btnApplyPersonalTemplateClick, options1.keyInvLoadPersonalEquipment());
+	_btnOk->onKeyboardPress((ActionHandler)&InventoryState::btnShowPersonalTemplateClick, options1.keyInvShowPersonalEquipment());
+	_btnOk->onKeyboardPress((ActionHandler)&InventoryState::btnDiaryLightClick, options1.keyInventoryDiaryLight());
 	_btnOk->setTooltip("STR_OK");
 	_btnOk->onMouseIn((ActionHandler)&InventoryState::txtTooltipInExtraOK);
 	_btnOk->onMouseOut((ActionHandler)&InventoryState::txtTooltipOut);
@@ -303,7 +303,7 @@ InventoryState::InventoryState(bool tu, BattlescapeState *parent, Base *base, bo
 	_btnQuickSearch->onEnter((ActionHandler)&InventoryState::btnQuickSearchApply);
 	_btnQuickSearch->setVisible(Options::oxceQuickSearchButton);
 
-	_btnOk->onKeyboardRelease((ActionHandler)&InventoryState::btnQuickSearchToggle, Options::keyToggleQuickSearch);
+	_btnOk->onKeyboardRelease((ActionHandler)&InventoryState::btnQuickSearchToggle, options1.keyToggleQuickSearch());
 
 	_game->getMod()->getSurface("oxceLinksInv")->blitNShade(_btnLinks, 0, 0);
 	_btnLinks->initSurfaces();

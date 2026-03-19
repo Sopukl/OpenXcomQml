@@ -435,13 +435,13 @@ BattlescapeState::BattlescapeState() :
 	_icons->onMouseOut((ActionHandler)&BattlescapeState::mouseOutIcons);
 
 	_btnUnitUp->onMouseClick((ActionHandler)&BattlescapeState::btnUnitUpClick);
-	_btnUnitUp->onKeyboardPress((ActionHandler)&BattlescapeState::btnUnitUpClick, Options::keyBattleUnitUp);
+	_btnUnitUp->onKeyboardPress((ActionHandler)&BattlescapeState::btnUnitUpClick, options1.keyBattleUnitUp());
 	_btnUnitUp->setTooltip("STR_UNIT_LEVEL_ABOVE");
 	_btnUnitUp->onMouseIn((ActionHandler)&BattlescapeState::txtTooltipIn);
 	_btnUnitUp->onMouseOut((ActionHandler)&BattlescapeState::txtTooltipOut);
 
 	_btnUnitDown->onMouseClick((ActionHandler)&BattlescapeState::btnUnitDownClick);
-	_btnUnitDown->onKeyboardPress((ActionHandler)&BattlescapeState::btnUnitDownClick, Options::keyBattleUnitDown);
+	_btnUnitDown->onKeyboardPress((ActionHandler)&BattlescapeState::btnUnitDownClick, options1.keyBattleUnitDown());
 	_btnUnitDown->setTooltip("STR_UNIT_LEVEL_BELOW");
 	_btnUnitDown->onMouseIn((ActionHandler)&BattlescapeState::txtTooltipIn);
 	_btnUnitDown->onMouseOut((ActionHandler)&BattlescapeState::txtTooltipOut);
@@ -513,7 +513,7 @@ BattlescapeState::BattlescapeState() :
 	_btnShowLayers->setTooltip(Options::oxceLinks ? "STR_EXTENDED_LINKS" : "STR_MULTI_LEVEL_VIEW");
 	_btnShowLayers->onMouseIn((ActionHandler)&BattlescapeState::txtTooltipIn);
 	_btnShowLayers->onMouseOut((ActionHandler)&BattlescapeState::txtTooltipOut);
-	_btnShowLayers->onKeyboardPress((ActionHandler)&BattlescapeState::btnShowLayersClickOrig, Options::keyBattleShowLayers);
+	_btnShowLayers->onKeyboardPress((ActionHandler)&BattlescapeState::btnShowLayersClickOrig, options1.keyBattleShowLayers());
 	_btnShowLayers->onKeyboardPress((ActionHandler)&BattlescapeState::btnUfopaediaClick, options1.keyGeoUfopedia());
 
 	_btnHelp->onMouseClick((ActionHandler)&BattlescapeState::btnHelpClick);
@@ -604,9 +604,9 @@ BattlescapeState::BattlescapeState() :
 
 	// shortcuts without a specific button
 	_btnStats->onKeyboardPress((ActionHandler)&BattlescapeState::btnReloadClick, options1.keyBattleReload());
-	_btnStats->onKeyboardPress((ActionHandler)&BattlescapeState::btnSelectMusicTrackClick, Options::keySelectMusicTrack);
+	_btnStats->onKeyboardPress((ActionHandler)&BattlescapeState::btnSelectMusicTrackClick, options1.keySelectMusicTrack());
 	_btnStats->onKeyboardPress((ActionHandler)&BattlescapeState::btnPersonalLightingClick, options1.keyBattlePersonalLighting());
-	_btnStats->onKeyboardPress((ActionHandler)&BattlescapeState::btnNightVisionClick, Options::keyNightVisionToggle);
+	_btnStats->onKeyboardPress((ActionHandler)&BattlescapeState::btnNightVisionClick, options1.keyNightVisionToggle());
 	//_btnStats->onKeyboardPress((ActionHandler)&BattlescapeState::btnTouchButtonsClick, SDLK_t); // for debugging only
 
 	// automatic night vision
@@ -656,13 +656,13 @@ BattlescapeState::BattlescapeState() :
 
 	_btnSpecial->onMouseClick((ActionHandler)&BattlescapeState::btnSpecialClick);
 	_btnSpecial->onMouseClick((ActionHandler)&BattlescapeState::btnSpecialClick, SDL_BUTTON_MIDDLE);
-	_btnSpecial->onKeyboardPress((ActionHandler)&BattlescapeState::btnSpecialClick, Options::keyBattleUseSpecial);
+	_btnSpecial->onKeyboardPress((ActionHandler)&BattlescapeState::btnSpecialClick, options1.keyBattleUseSpecial());
 	_btnSpecial->setTooltip("STR_USE_SPECIAL_ITEM");
 	_btnSpecial->onMouseIn((ActionHandler)&BattlescapeState::txtTooltipInExtraSpecial);
 	_btnSpecial->onMouseOut((ActionHandler)&BattlescapeState::txtTooltipOut);
 
 	_btnSkills->onMouseClick((ActionHandler)&BattlescapeState::btnSkillsClick);
-	_btnSkills->onKeyboardPress((ActionHandler)&BattlescapeState::btnSkillsClick, Options::keyBattleUseSpecial);
+	_btnSkills->onKeyboardPress((ActionHandler)&BattlescapeState::btnSkillsClick, options1.keyBattleUseSpecial());
 
 	_btnCtrl->onMouseClick((ActionHandler)&BattlescapeState::btnCtrlClick);
 	_btnAlt->onMouseClick((ActionHandler)&BattlescapeState::btnAltClick);
@@ -3135,7 +3135,7 @@ inline void BattlescapeState::handle(Action *action)
 					{
 						_game->pushState(new SaveGameState(OPT_BATTLESCAPE, SAVE_QUICK, _palette));
 					}
-					else if (key == Options::keyInstaSave)
+					else if (key == options1.keyInstaSave())
 					{
 						_game->pushState(new SaveGameState(OPT_BATTLESCAPE, SAVE_INSTA, _palette));
 					}

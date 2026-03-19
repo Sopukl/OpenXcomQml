@@ -344,15 +344,15 @@ void SellState::delayedInit()
 
 	_cbxCategory->setOptions(_cats, true);
 	_cbxCategory->onChange((ActionHandler)&SellState::cbxCategoryChange);
-	_cbxCategory->onKeyboardPress((ActionHandler)&SellState::btnSellAllClick, Options::keySellAll);
-	_cbxCategory->onKeyboardPress((ActionHandler)&SellState::btnSellAllButOneClick, Options::keySellAllButOne);
+	_cbxCategory->onKeyboardPress((ActionHandler)&SellState::btnSellAllClick, options1.keySellAll());
+	_cbxCategory->onKeyboardPress((ActionHandler)&SellState::btnSellAllButOneClick, options1.keySellAllButOne());
 
 	_btnQuickSearch->setText(""); // redraw
 	_btnQuickSearch->onEnter((ActionHandler)&SellState::btnQuickSearchApply);
 	_btnQuickSearch->setVisible(Options::oxceQuickSearchButton);
 
 	// OK button is not always visible, so bind it here
-	_cbxCategory->onKeyboardRelease((ActionHandler)&SellState::btnQuickSearchToggle, Options::keyToggleQuickSearch);
+	_cbxCategory->onKeyboardRelease((ActionHandler)&SellState::btnQuickSearchToggle, options1.keyToggleQuickSearch());
 
 	updateList();
 }

@@ -347,7 +347,7 @@ PurchaseState::PurchaseState(Base *base, CannotReequipState *parent) : _base(bas
 	_btnQuickSearch->onEnter((ActionHandler)&PurchaseState::btnQuickSearchApply);
 	_btnQuickSearch->setVisible(Options::oxceQuickSearchButton);
 
-	_btnOk->onKeyboardRelease((ActionHandler)&PurchaseState::btnQuickSearchToggle, Options::keyToggleQuickSearch);
+	_btnOk->onKeyboardRelease((ActionHandler)&PurchaseState::btnQuickSearchToggle, options1.keyToggleQuickSearch());
 
 	updateList();
 

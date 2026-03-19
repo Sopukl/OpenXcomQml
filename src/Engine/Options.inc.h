@@ -1,25 +1,6 @@
 // Don't worry about Intellisense errors here, as this file is only used in conjunction with Options.h/Options.cpp
 // To add a new option, add a new variable entry and a corresponding OptionInfo in Options.cpp
 
-// Extra hotkeys (OXCE)
-OPT SDLKey keyGeoDailyPilotExperience, keyGeoUfoTracker, keyGeoTechTreeViewer, keyGeoGlobalResearch, keyGeoGlobalProduction, keyGeoGlobalAlienContainment,
-	keyGraphsZoomIn, keyGraphsZoomOut,
-	keyToggleQuickSearch, keyInstaSave,
-	keyCraftLoadoutSave, keyCraftLoadoutLoad,
-	keyMarkAllAsSeen,
-	keySellAll, keySellAllButOne,
-	keyTransferAll,
-	keyRemoveSoldiersFromCraft, keyRemoveSoldiersFromAllCrafts,
-	keyRemoveEquipmentFromCraft,
-	keyRemoveArmorFromCraft, keyRemoveArmorFromAllCrafts,
-	keyRemoveSoldiersFromTraining, keyAddSoldiersToTraining,
-	keyInventoryArmor, keyInventoryAvatar, keyInventoryDiaryLight, keyInventorySave, keyInventoryLoad,
-	keyInvSavePersonalEquipment, keyInvLoadPersonalEquipment, keyInvShowPersonalEquipment,
-	keyBattleUnitUp, keyBattleUnitDown,
-	keyBattleShowLayers,
-	keyBattleUseSpecial,
-	keyBattleActionItem1, keyBattleActionItem2, keyBattleActionItem3, keyBattleActionItem4, keyBattleActionItem5,
-	keyNightVisionToggle, keyNightVisionHold, keySelectMusicTrack;
 OPT SDLKey keyBasescapeBuildNewBase, keyBasescapeBaseInfo, keyBasescapeSoldiers, keyBasescapeCrafts,
 	keyBasescapeFacilities, keyBasescapeResearch, keyBasescapeManufacture, keyBasescapeTransfer,
 	keyBasescapePurchase, keyBasescapeSell;

@@ -113,7 +113,7 @@ NewManufactureListState::NewManufactureListState(Base *base) : _base(base), _sho
 	_btnOk->setText(tr("STR_OK"));
 	_btnOk->onMouseClick((ActionHandler)&NewManufactureListState::btnOkClick);
 	_btnOk->onKeyboardPress((ActionHandler)&NewManufactureListState::btnOkClick, options1.keyCancel());
-	_btnOk->onKeyboardPress((ActionHandler)&NewManufactureListState::btnMarkAllAsSeenClick, Options::keyMarkAllAsSeen);
+	_btnOk->onKeyboardPress((ActionHandler)&NewManufactureListState::btnMarkAllAsSeenClick, options1.keyMarkAllAsSeen());
 
 	_btnShowOnlyNew->setText(tr("STR_SHOW_ONLY_NEW"));
 	_btnShowOnlyNew->onMouseClick((ActionHandler)&NewManufactureListState::btnShowOnlyNewClick);
@@ -138,7 +138,7 @@ NewManufactureListState::NewManufactureListState(Base *base) : _base(base), _sho
 	_btnQuickSearch->onEnter((ActionHandler)&NewManufactureListState::btnQuickSearchApply);
 	_btnQuickSearch->setVisible(Options::oxceQuickSearchButton);
 
-	_btnOk->onKeyboardRelease((ActionHandler)&NewManufactureListState::btnQuickSearchToggle, Options::keyToggleQuickSearch);
+	_btnOk->onKeyboardRelease((ActionHandler)&NewManufactureListState::btnQuickSearchToggle, options1.keyToggleQuickSearch());
 }
 
 /**

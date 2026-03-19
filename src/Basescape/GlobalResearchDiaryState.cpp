@@ -131,7 +131,7 @@ GlobalResearchDiaryState::GlobalResearchDiaryState() : _doNotReset(false)
 	_btnQuickSearch->onEnter((ActionHandler)&GlobalResearchDiaryState::btnQuickSearchApply);
 	_btnQuickSearch->setVisible(Options::oxceQuickSearchButton);
 
-	_btnOk->onKeyboardRelease((ActionHandler)&GlobalResearchDiaryState::btnQuickSearchToggle, Options::keyToggleQuickSearch);
+	_btnOk->onKeyboardRelease((ActionHandler)&GlobalResearchDiaryState::btnQuickSearchToggle, options1.keyToggleQuickSearch());
 
 	// translate only once
 	auto& vec = _game->getSavedGame()->getResearchDiary();

@@ -90,7 +90,7 @@ NewResearchListState::NewResearchListState(Base *base, bool sortByCost) : _base(
 	_btnOK->setText(tr("STR_OK"));
 	_btnOK->onMouseClick((ActionHandler)&NewResearchListState::btnOKClick);
 	_btnOK->onKeyboardPress((ActionHandler)&NewResearchListState::btnOKClick, options1.keyCancel());
-	_btnOK->onKeyboardPress((ActionHandler)&NewResearchListState::btnMarkAllAsSeenClick, Options::keyMarkAllAsSeen);
+	_btnOK->onKeyboardPress((ActionHandler)&NewResearchListState::btnMarkAllAsSeenClick, options1.keyMarkAllAsSeen());
 
 	_isSortingEnabled = _game->getMod()->getEnableNewResearchSorting();
 	if (_isSortingEnabled)
@@ -132,7 +132,7 @@ NewResearchListState::NewResearchListState(Base *base, bool sortByCost) : _base(
 	_btnQuickSearch->onEnter((ActionHandler)&NewResearchListState::btnQuickSearchApply);
 	_btnQuickSearch->setVisible(Options::oxceQuickSearchButton);
 
-	_btnOK->onKeyboardRelease((ActionHandler)&NewResearchListState::btnQuickSearchToggle, Options::keyToggleQuickSearch);
+	_btnOK->onKeyboardRelease((ActionHandler)&NewResearchListState::btnQuickSearchToggle, options1.keyToggleQuickSearch());
 }
 
 /**

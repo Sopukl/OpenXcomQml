@@ -135,7 +135,7 @@ TechTreeViewerState::TechTreeViewerState(const RuleResearch *r, const RuleManufa
 
 	_btnNew->setText(tr("STR_SELECT_TOPIC"));
 	_btnNew->onMouseClick((ActionHandler)&TechTreeViewerState::btnNewClick);
-	_btnNew->onKeyboardPress((ActionHandler)&TechTreeViewerState::btnNewClick, Options::keyToggleQuickSearch);
+	_btnNew->onKeyboardPress((ActionHandler)&TechTreeViewerState::btnNewClick, options1.keyToggleQuickSearch());
 
 	_btnOk->setText(tr("STR_OK"));
 	_btnOk->onMouseClick((ActionHandler)&TechTreeViewerState::btnOkClick);

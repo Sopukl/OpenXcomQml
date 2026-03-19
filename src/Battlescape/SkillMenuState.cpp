@@ -67,11 +67,11 @@ SkillMenuState::SkillMenuState(BattleAction *action, int x, int y) : ActionMenuS
 	int id = 0;
 
 	std::vector<SDLKey> hotkeys = {
-		Options::keyBattleActionItem5,
-		Options::keyBattleActionItem4,
-		Options::keyBattleActionItem3,
-		Options::keyBattleActionItem2,
-		Options::keyBattleActionItem1
+		options1.keyBattleActionItem5(),
+		options1.keyBattleActionItem4(),
+		options1.keyBattleActionItem3(),
+		options1.keyBattleActionItem2(),
+		options1.keyBattleActionItem1()
 	};
 	auto* soldier = _action->actor->getGeoscapeSoldier();
 	for (auto* skill : soldier->getRules()->getSkills())

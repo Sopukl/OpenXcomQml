@@ -78,7 +78,7 @@ ActionMenuState::ActionMenuState(BattleAction *action, int x, int y) : _action(a
 	// throwing (if not a fixed weapon)
 	if (!weapon->isFixed() && weapon->getCostThrow().Time > 0)
 	{
-		addItem(BA_THROW, "STR_THROW", &id, Options::keyBattleActionItem5);
+		addItem(BA_THROW, "STR_THROW", &id, options1.keyBattleActionItem5());
 	}
 
 	if (weapon->isPsiRequired() && _action->actor->getBaseStats()->psiSkill <= 0)
@@ -102,14 +102,14 @@ ActionMenuState::ActionMenuState(BattleAction *action, int x, int y) : _action(a
 		{
 			if (weapon->getCostPrime().Time > 0)
 			{
-				addItem(BA_PRIME, weapon->getPrimeActionName(), &id, normalWeapon ? SDLK_UNKNOWN : Options::keyBattleActionItem1);
+				addItem(BA_PRIME, weapon->getPrimeActionName(), &id, normalWeapon ? SDLK_UNKNOWN : options1.keyBattleActionItem1());
 			}
 		}
 		else
 		{
 			if (weapon->getCostUnprime().Time > 0 && !weapon->getUnprimeActionName().empty())
 			{
-				addItem(BA_UNPRIME, weapon->getUnprimeActionName(), &id, normalWeapon ? SDLK_UNKNOWN : Options::keyBattleActionItem2);
+				addItem(BA_UNPRIME, weapon->getUnprimeActionName(), &id, normalWeapon ? SDLK_UNKNOWN : options1.keyBattleActionItem2());
 			}
 		}
 	}
@@ -123,21 +123,21 @@ ActionMenuState::ActionMenuState(BattleAction *action, int x, int y) : _action(a
 
 		if ((!isLauncher || slotLauncher != slotAuto) && weapon->getCostAuto().Time > 0)
 		{
-			addItem(BA_AUTOSHOT, weapon->getConfigAuto()->name, &id, Options::keyBattleActionItem3);
+			addItem(BA_AUTOSHOT, weapon->getConfigAuto()->name, &id, options1.keyBattleActionItem3());
 		}
 
 		if ((!isLauncher || slotLauncher != slotSnap) && weapon->getCostSnap().Time > 0)
 		{
-			addItem(BA_SNAPSHOT,  weapon->getConfigSnap()->name, &id, Options::keyBattleActionItem2);
+			addItem(BA_SNAPSHOT,  weapon->getConfigSnap()->name, &id, options1.keyBattleActionItem2());
 		}
 
 		if (isLauncher)
 		{
-			addItem(BA_LAUNCH, "STR_LAUNCH_MISSILE", &id, Options::keyBattleActionItem1);
+			addItem(BA_LAUNCH, "STR_LAUNCH_MISSILE", &id, options1.keyBattleActionItem1());
 		}
 		else if (weapon->getCostAimed().Time > 0)
 		{
-			addItem(BA_AIMEDSHOT,  weapon->getConfigAimed()->name, &id, Options::keyBattleActionItem1);
+			addItem(BA_AIMEDSHOT,  weapon->getConfigAimed()->name, &id, options1.keyBattleActionItem1());
 		}
 	}
 
@@ -157,36 +157,36 @@ ActionMenuState::ActionMenuState(BattleAction *action, int x, int y) : _action(a
 				name = "STR_HIT_MELEE";
 			}
 		}
-		addItem(BA_HIT, name, &id, Options::keyBattleActionItem4);
+		addItem(BA_HIT, name, &id, options1.keyBattleActionItem4());
 	}
 
 	// special items
 	if (weapon->getBattleType() == BT_MEDIKIT)
 	{
-		addItem(BA_USE, weapon->getMedikitActionName(), &id, Options::keyBattleActionItem1);
+		addItem(BA_USE, weapon->getMedikitActionName(), &id, options1.keyBattleActionItem1());
 	}
 	else if (weapon->getBattleType() == BT_SCANNER)
 	{
-		addItem(BA_USE, weapon->getPsiAttackName().empty() ? "STR_USE_SCANNER" : weapon->getPsiAttackName(), &id, Options::keyBattleActionItem1);
+		addItem(BA_USE, weapon->getPsiAttackName().empty() ? "STR_USE_SCANNER" : weapon->getPsiAttackName(), &id, options1.keyBattleActionItem1());
 	}
 	else if (weapon->getBattleType() == BT_PSIAMP)
 	{
 		if (weapon->getCostMind().Time > 0)
 		{
-			addItem(BA_MINDCONTROL, "STR_MIND_CONTROL", &id, Options::keyBattleActionItem3);
+			addItem(BA_MINDCONTROL, "STR_MIND_CONTROL", &id, options1.keyBattleActionItem3());
 		}
 		if (weapon->getCostPanic().Time > 0)
 		{
-			addItem(BA_PANIC, "STR_PANIC_UNIT", &id, Options::keyBattleActionItem2);
+			addItem(BA_PANIC, "STR_PANIC_UNIT", &id, options1.keyBattleActionItem2());
 		}
 		if (weapon->getCostUse().Time > 0)
 		{
-			addItem(BA_USE, weapon->getPsiAttackName(), &id, Options::keyBattleActionItem1);
+			addItem(BA_USE, weapon->getPsiAttackName(), &id, options1.keyBattleActionItem1());
 		}
 	}
 	else if (weapon->getBattleType() == BT_MINDPROBE)
 	{
-		addItem(BA_USE, weapon->getPsiAttackName().empty() ? "STR_USE_MIND_PROBE" : weapon->getPsiAttackName(), &id, Options::keyBattleActionItem1);
+		addItem(BA_USE, weapon->getPsiAttackName().empty() ? "STR_USE_MIND_PROBE" : weapon->getPsiAttackName(), &id, options1.keyBattleActionItem1());
 	}
 
 }
@@ -251,11 +251,11 @@ void ActionMenuState::handle(Action *action)
 		auto key = action->getDetails()->key.keysym.sym;
 		if (key == options1.keyCancel() || key == options1.keyBattleUseLeftHand() || key == options1.keyBattleUseRightHand())
 		{
-			if (key != Options::keyBattleActionItem1 &&
-				key != Options::keyBattleActionItem2 &&
-				key != Options::keyBattleActionItem3 &&
-				key != Options::keyBattleActionItem4 &&
-				key != Options::keyBattleActionItem5)
+			if (key != options1.keyBattleActionItem1() &&
+				key != options1.keyBattleActionItem2() &&
+				key != options1.keyBattleActionItem3() &&
+				key != options1.keyBattleActionItem4() &&
+				key != options1.keyBattleActionItem5())
 			{
 				_game->popState();
 			}

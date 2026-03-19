@@ -108,8 +108,8 @@ CraftSoldiersState::CraftSoldiersState(Base *base, size_t craft)
 	_btnOk->setText(tr("STR_OK"));
 	_btnOk->onMouseClick((ActionHandler)&CraftSoldiersState::btnOkClick);
 	_btnOk->onKeyboardPress((ActionHandler)&CraftSoldiersState::btnOkClick, options1.keyCancel());
-	_btnOk->onKeyboardPress((ActionHandler)&CraftSoldiersState::btnDeassignAllSoldiersClick, Options::keyRemoveSoldiersFromAllCrafts);
-	_btnOk->onKeyboardPress((ActionHandler)&CraftSoldiersState::btnDeassignCraftSoldiersClick, Options::keyRemoveSoldiersFromCraft);
+	_btnOk->onKeyboardPress((ActionHandler)&CraftSoldiersState::btnDeassignAllSoldiersClick, options1.keyRemoveSoldiersFromAllCrafts());
+	_btnOk->onKeyboardPress((ActionHandler)&CraftSoldiersState::btnDeassignCraftSoldiersClick, options1.keyRemoveSoldiersFromCraft());
 
 	_btnPreview->setText(tr("STR_CRAFT_DEPLOYMENT_PREVIEW"));
 	_btnPreview->setVisible(!hidePreview);

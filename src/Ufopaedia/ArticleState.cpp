@@ -232,7 +232,7 @@ namespace OpenXcom
 		_btnOk->onMouseClick((ActionHandler)&ArticleState::btnOkClick);
 		_btnOk->onKeyboardPress((ActionHandler)&ArticleState::btnOkClick,options1.keyOk());
 		_btnOk->onKeyboardPress((ActionHandler)&ArticleState::btnOkClick,options1.keyCancel());
-		_btnOk->onKeyboardPress((ActionHandler)&ArticleState::btnResetMusicClick, Options::keySelectMusicTrack);
+		_btnOk->onKeyboardPress((ActionHandler)&ArticleState::btnResetMusicClick, options1.keySelectMusicTrack());
 		_btnPrev->setText("<<");
 		_btnPrev->onMouseClick((ActionHandler)&ArticleState::btnPrevClick);
 		_btnPrev->onKeyboardPress((ActionHandler)&ArticleState::btnPrevClick, options1.keyGeoLeft());

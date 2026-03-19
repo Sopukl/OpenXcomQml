@@ -77,7 +77,7 @@ GlobalResearchState::GlobalResearchState(bool openedFromBasescape) : _openedFrom
 
 	_btnDiary->setText(tr("STR_RESEARCH_DIARY"));
 	_btnDiary->onMouseClick((ActionHandler)&GlobalResearchState::btnDiaryClick);
-	_btnDiary->onKeyboardPress((ActionHandler)&GlobalResearchState::btnDiaryClick, Options::keyGeoGlobalResearch);
+	_btnDiary->onKeyboardPress((ActionHandler)&GlobalResearchState::btnDiaryClick, options1.keyGeoGlobalResearch());
 
 	_btnOk->setText(tr("STR_OK"));
 	_btnOk->onMouseClick((ActionHandler)&GlobalResearchState::btnOkClick);

@@ -84,7 +84,7 @@ TechTreeSelectState::TechTreeSelectState(TechTreeViewerState *parent) : _parent(
 	_btnQuickSearch->setVisible(true);
 	_btnQuickSearch->setFocus(true);
 
-	_btnOk->onKeyboardRelease((ActionHandler)&TechTreeSelectState::btnQuickSearchToggle, Options::keyToggleQuickSearch);
+	_btnOk->onKeyboardRelease((ActionHandler)&TechTreeSelectState::btnQuickSearchToggle, options1.keyToggleQuickSearch());
 }
 
 TechTreeSelectState::~TechTreeSelectState()

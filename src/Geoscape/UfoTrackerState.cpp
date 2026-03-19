@@ -95,7 +95,7 @@ UfoTrackerState::UfoTrackerState(GeoscapeState *state, Globe *globe) : _state(st
 	_btnCancel->setText(tr("STR_CANCEL"));
 	_btnCancel->onMouseClick((ActionHandler)&UfoTrackerState::btnCancelClick);
 	_btnCancel->onKeyboardPress((ActionHandler)&UfoTrackerState::btnCancelClick, options1.keyCancel());
-	_btnCancel->onKeyboardPress((ActionHandler)&UfoTrackerState::btnCancelClick, Options::keyGeoUfoTracker);
+	_btnCancel->onKeyboardPress((ActionHandler)&UfoTrackerState::btnCancelClick, options1.keyGeoUfoTracker());
 
 	_txtTitle->setAlign(ALIGN_CENTER);
 	_txtTitle->setBig();

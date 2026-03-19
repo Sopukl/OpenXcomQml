@@ -121,9 +121,9 @@ CraftEquipmentState::CraftEquipmentState(Base *base, size_t craft) :
 	_btnOk->setText(tr("STR_OK"));
 	_btnOk->onMouseClick((ActionHandler)&CraftEquipmentState::btnOkClick);
 	_btnOk->onKeyboardPress((ActionHandler)&CraftEquipmentState::btnOkClick, options1.keyCancel());
-	_btnOk->onKeyboardPress((ActionHandler)&CraftEquipmentState::btnClearClick, Options::keyRemoveEquipmentFromCraft);
-	_btnOk->onKeyboardPress((ActionHandler)&CraftEquipmentState::btnLoadClick, Options::keyCraftLoadoutLoad);
-	_btnOk->onKeyboardPress((ActionHandler)&CraftEquipmentState::btnSaveClick, Options::keyCraftLoadoutSave);
+	_btnOk->onKeyboardPress((ActionHandler)&CraftEquipmentState::btnClearClick, options1.keyRemoveEquipmentFromCraft());
+	_btnOk->onKeyboardPress((ActionHandler)&CraftEquipmentState::btnLoadClick, options1.keyCraftLoadoutLoad());
+	_btnOk->onKeyboardPress((ActionHandler)&CraftEquipmentState::btnSaveClick, options1.keyCraftLoadoutSave());
 
 	_btnClear->setText(tr("STR_UNLOAD_CRAFT"));
 	_btnClear->onMouseClick((ActionHandler)&CraftEquipmentState::btnClearClick);
@@ -223,7 +223,7 @@ CraftEquipmentState::CraftEquipmentState(Base *base, size_t craft) :
 	_btnQuickSearch->onEnter((ActionHandler)&CraftEquipmentState::btnQuickSearchApply);
 	_btnQuickSearch->setVisible(Options::oxceQuickSearchButton);
 
-	_btnOk->onKeyboardRelease((ActionHandler)&CraftEquipmentState::btnQuickSearchToggle, Options::keyToggleQuickSearch);
+	_btnOk->onKeyboardRelease((ActionHandler)&CraftEquipmentState::btnQuickSearchToggle, options1.keyToggleQuickSearch());
 
 	_timerLeft = new Timer(250);
 	_timerLeft->onTimer((StateHandler)&CraftEquipmentState::moveLeft);
