@@ -142,7 +142,7 @@ TechTreeViewerState::TechTreeViewerState(const RuleResearch *r, const RuleManufa
 	_btnOk->onKeyboardPress((ActionHandler)&TechTreeViewerState::btnOkClick, options1.keyCancel());
 	_btnOk->onKeyboardPress((ActionHandler)&TechTreeViewerState::btnBackClick, SDLK_BACKSPACE);
 
-	if (Options::oxceDisableTechTreeViewer)
+	if (options1.oxceDisableTechTreeViewer())
 	{
 		_txtTitle->setHeight(_txtTitle->getHeight() * 9);
 		_txtTitle->setWordWrap(true);
@@ -249,7 +249,7 @@ void TechTreeViewerState::init()
 {
 	State::init();
 
-	if (!Options::oxceDisableTechTreeViewer)
+	if (!options1.oxceDisableTechTreeViewer())
 	{
 		initLists();
 	}

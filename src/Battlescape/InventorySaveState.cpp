@@ -97,7 +97,7 @@ InventorySaveState::InventorySaveState(InventoryState *parent) : _parent(parent)
 	_edtSave->setVisible(false);
 	_edtSave->onKeyboardPress((ActionHandler)&InventorySaveState::edtSaveKeyPress);
 
-	for (int i = 0; i < Options::oxceMaxEquipmentLayoutTemplates; ++i)
+	for (int i = 0; i < options1.oxceMaxEquipmentLayoutTemplates(); ++i)
 	{
 		std::vector<EquipmentLayoutItem*> *item = _game->getSavedGame()->getGlobalEquipmentLayout(i);
 		std::ostringstream ss;
@@ -228,7 +228,7 @@ void InventorySaveState::edtSaveKeyPress(Action *action)
 */
 void InventorySaveState::saveTemplate(bool includingArmor)
 {
-	if (_selectedRow >= 0 && _selectedRow < Options::oxceMaxEquipmentLayoutTemplates)
+	if (_selectedRow >= 0 && _selectedRow < options1.oxceMaxEquipmentLayoutTemplates())
 	{
 		_game->getSavedGame()->setGlobalEquipmentLayoutName(_selectedRow, _edtSave->getText());
 		_parent->saveGlobalLayout(_selectedRow, includingArmor);

@@ -801,7 +801,7 @@ void GeoscapeState::timeDisplay()
 {
 	if (options1.showFundsOnGeoscape())
 	{
-		if (Options::oxceGeoShowScoreInsteadOfFunds)
+		if (options1.oxceGeoShowScoreInsteadOfFunds())
 		{
 			// it's a cheat (you're not supposed to see this info in real time), for debugging only
 			_txtFunds->setText(std::to_string(_game->getSavedGame()->getCurrentScore(_game->getSavedGame()->getMonthsPassed() + 1)));
@@ -852,7 +852,7 @@ void GeoscapeState::timeAdvance()
 	int timeSpan = 0;
 	if (_timeSpeed == _btn5Secs)
 	{
-		if (Options::oxceGeoSlowdownFactor > 1)
+		if (options1.oxceGeoSlowdownFactor() > 1)
 		{
 			_slowdownCounter--;
 			if (_slowdownCounter > 0)
@@ -863,7 +863,7 @@ void GeoscapeState::timeAdvance()
 			}
 			else
 			{
-				_slowdownCounter = Clamp(Options::oxceGeoSlowdownFactor, 2, 100);
+				_slowdownCounter = Clamp(options1.oxceGeoSlowdownFactor(), 2, 100);
 			}
 		}
 		timeSpan = 1;
@@ -1258,7 +1258,7 @@ void GeoscapeState::time5Seconds()
 
 			if (!ufoIsAttacking && xcraft->reachedDestination())
 			{
-				bool suppressLanding = Options::oxceGeoSuppressLandingWithoutEquipment && xcraft->getItems()->empty();
+				bool suppressLanding = options1.oxceGeoSuppressLandingWithoutEquipment() && xcraft->getItems()->empty();
 				Ufo* u = dynamic_cast<Ufo*>(xcraft->getDestination());
 				Waypoint *w = dynamic_cast<Waypoint*>(xcraft->getDestination());
 				MissionSite* m = dynamic_cast<MissionSite*>(xcraft->getDestination());
@@ -1675,7 +1675,7 @@ void GeoscapeState::ufoHuntingAndEscorting()
 					{
 						_game->getMod()->getSound("GEO.CAT", ufo->getRules()->getHuntAlertSound())->play();
 					}
-					if (Options::oxceGeoSuppressRedundantHKAlert && newTarget->getDestination() == ufo)
+					if (options1.oxceGeoSuppressRedundantHKAlert() && newTarget->getDestination() == ufo)
 					{
 						// Empty by design
 						// If the player sent an interceptor after the HK, the alert is redundant
@@ -3102,7 +3102,7 @@ void GeoscapeState::btnBasesClick(Action *)
 	timerReset();
 	if (!_game->getSavedGame()->getBases()->empty())
 	{
-		if (Options::oxceGeoGoToNearestBase)
+		if (options1.oxceGeoGoToNearestBase())
 		{
 			std::vector< std::pair<size_t, double> > xbaseSorting;
 			size_t baseIdx = 0;
@@ -4007,7 +4007,7 @@ void GeoscapeState::determineAlienMissions(bool isNewMonth, const RuleEvent* eve
 		if (process)
 		{
 			bool rngret = RNG::percent(command->getExecutionOdds());
-			if (options1.verboseLogging() && Options::oxceGeoscapeDebugLogMaxEntries > 0)
+			if (options1.verboseLogging() && options1.oxceGeoscapeDebugLogMaxEntries() > 0)
 			{
 				std::ostringstream ss;
 				ss << "month: " << month;
@@ -4245,7 +4245,7 @@ void GeoscapeState::determineAlienMissions(bool isNewMonth, const RuleEvent* eve
 					alienBase->setAlienRace(upgradeRace->getId());
 					ss << " new race: " << alienBase->getAlienRace();
 				}
-				if (Options::oxceGeoscapeDebugLogMaxEntries > 0)
+				if (options1.oxceGeoscapeDebugLogMaxEntries() > 0)
 				{
 					save->getGeoscapeDebugLog().push_back(ss.str());
 				}
@@ -4276,7 +4276,7 @@ void GeoscapeState::determineAlienMissions(bool isNewMonth, const RuleEvent* eve
 					}
 				}
 				ss << " end.";
-				if (Options::oxceGeoscapeDebugLogMaxEntries > 0)
+				if (options1.oxceGeoscapeDebugLogMaxEntries() > 0)
 				{
 					save->getGeoscapeDebugLog().push_back(ss.str());
 				}
@@ -4696,7 +4696,7 @@ bool GeoscapeState::processCommand(RuleMissionScript *command)
 		strategy.removeMission(targetRegion, missionType);
 	}
 
-	if (Options::oxceGeoscapeDebugLogMaxEntries > 0)
+	if (options1.oxceGeoscapeDebugLogMaxEntries() > 0)
 	{
 		std::ostringstream ss;
 		ss << "month: " << month;
@@ -4814,7 +4814,7 @@ bool GeoscapeState::buttonsDisabled()
 
 void GeoscapeState::updateSlackingIndicator()
 {
-	if (Options::oxceGeoEnableTrainingIndicator)
+	if (options1.oxceGeoEnableTrainingIndicator())
 	{
 		int freeGym = 0;
 		int freePsi = 0;

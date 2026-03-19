@@ -905,7 +905,7 @@ TileEngine::TileEngine(SavedBattleGame *save, Mod *mod) :
 	_lightPropagationTempNeedUpdate.resize(save->getMapSizeXYZ());
 	_cacheTilePos = invalid;
 
-	if (Options::oxceTogglePersonalLightType == 2)
+	if (options1.oxceTogglePersonalLightType() == 2)
 	{
 		// persisted per campaign
 		SavedGame* geosave = _save->getGeoscapeSave();
@@ -914,7 +914,7 @@ TileEngine::TileEngine(SavedBattleGame *save, Mod *mod) :
 			_personalLighting = geosave->getTogglePersonalLight();
 		}
 	}
-	else if (Options::oxceTogglePersonalLightType == 1)
+	else if (options1.oxceTogglePersonalLightType() == 1)
 	{
 		// persisted per battle
 		_personalLighting = _save->getTogglePersonalLight();
@@ -4641,7 +4641,7 @@ void TileEngine::togglePersonalLighting()
 {
 	_personalLighting = !_personalLighting;
 
-	if (Options::oxceTogglePersonalLightType == 2)
+	if (options1.oxceTogglePersonalLightType() == 2)
 	{
 		// persisted per campaign
 		SavedGame* geosave = _save->getGeoscapeSave();
@@ -4650,7 +4650,7 @@ void TileEngine::togglePersonalLighting()
 			geosave->setTogglePersonalLight(_personalLighting);
 		}
 	}
-	else if (Options::oxceTogglePersonalLightType == 1)
+	else if (options1.oxceTogglePersonalLightType() == 1)
 	{
 		// persisted per battle
 		_save->setTogglePersonalLight(_personalLighting);

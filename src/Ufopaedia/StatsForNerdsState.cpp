@@ -284,7 +284,7 @@ void StatsForNerdsState::buildUI(bool debug, bool ids, bool defaults)
 	_btnNext->onMouseClick((ActionHandler)&StatsForNerdsState::btnNextClick);
 	_btnNext->onKeyboardPress((ActionHandler)&StatsForNerdsState::btnNextClick, options1.keyGeoRight());
 
-	if (Options::oxceDisableStatsForNerds)
+	if (options1.oxceDisableStatsForNerds())
 	{
 		_txtTitle->setHeight(_txtTitle->getHeight() * 9);
 		_txtTitle->setWordWrap(true);
@@ -327,7 +327,7 @@ void StatsForNerdsState::init()
 {
 	State::init();
 
-	if (!Options::oxceDisableStatsForNerds)
+	if (!options1.oxceDisableStatsForNerds())
 	{
 		initLists();
 

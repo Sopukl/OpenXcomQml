@@ -469,7 +469,7 @@ Ufo *AlienMission::spawnUfo(SavedGame &game, const Mod &mod, const Globe &globe,
 {
 	auto logUfo = [](Ufo* u, SavedGame& g, AlienMission* a)
 	{
-		if (Options::oxceGeoscapeDebugLogMaxEntries > 0)
+		if (options1.oxceGeoscapeDebugLogMaxEntries() > 0)
 		{
 			std::ostringstream ss;
 			ss << "gameTime: " << g.getTime()->getFullString();
@@ -1170,7 +1170,7 @@ AlienBase *AlienMission::spawnAlienBase(Country *pactCountry, Game &engine, std:
 	game.getAlienBases()->push_back(ab);
 	addScore(ab->getLongitude(), ab->getLatitude(), game);
 
-	if (Options::oxceGeoscapeDebugLogMaxEntries > 0)
+	if (options1.oxceGeoscapeDebugLogMaxEntries() > 0)
 	{
 		std::ostringstream ss;
 		ss << "gameTime: " << game.getTime()->getFullString();
@@ -1464,7 +1464,7 @@ MissionSite *AlienMission::spawnMissionSite(SavedGame &game, const Mod &mod, con
 		missionSite->setCity(area.name);
 		game.getMissionSites()->push_back(missionSite);
 
-		if (Options::oxceGeoscapeDebugLogMaxEntries > 0)
+		if (options1.oxceGeoscapeDebugLogMaxEntries() > 0)
 		{
 			std::ostringstream ss;
 			ss << "gameTime: " << game.getTime()->getFullString();

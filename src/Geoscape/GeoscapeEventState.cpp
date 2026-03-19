@@ -508,7 +508,7 @@ void GeoscapeEventState::eventLogic()
 	// 3. handle events spawned by research
 	save->handlePrimaryResearchSideEffects(topicsToCheck, mod, hq);
 
-	if (Options::oxceGeoscapeDebugLogMaxEntries > 0)
+	if (options1.oxceGeoscapeDebugLogMaxEntries() > 0)
 	{
 		std::ostringstream ss;
 		ss << "gameTime: " << save->getTime()->getFullString();

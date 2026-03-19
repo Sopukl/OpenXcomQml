@@ -73,7 +73,7 @@ InventoryLoadState::InventoryLoadState(InventoryState *parent) : _parent(parent)
 	_btnCancel->onMouseClick((ActionHandler)&InventoryLoadState::btnCancelClick);
 	_btnCancel->onKeyboardPress((ActionHandler)&InventoryLoadState::btnCancelClick, options1.keyCancel());
 
-	for (int i = 0; i < Options::oxceMaxEquipmentLayoutTemplates; ++i)
+	for (int i = 0; i < options1.oxceMaxEquipmentLayoutTemplates(); ++i)
 	{
 		std::vector<EquipmentLayoutItem*> *item = _game->getSavedGame()->getGlobalEquipmentLayout(i);
 		std::ostringstream ss;

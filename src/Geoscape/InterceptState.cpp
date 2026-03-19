@@ -184,7 +184,7 @@ InterceptState::InterceptState(Globe *globe, bool useCustomSound, Base *base, Ta
 			craftList.push_back(std::make_tuple(xcraft, xdistance, xbase));
 		}
 	}
-	if (_target && Options::oxceGeoSortCraftByDistanceToTarget)
+	if (_target && options1.oxceGeoSortCraftByDistanceToTarget())
 	{
 		std::stable_sort(craftList.begin(), craftList.end(),
 			[](const std::tuple<Craft*, double, Base*>& a, const std::tuple<Craft*, double, Base*>& b)

@@ -3286,7 +3286,7 @@ void BattlescapeGame::playUnitResponseSound(BattleUnit *unit, int type)
 	if (!getMod()->getEnableUnitResponseSounds())
 		return;
 
-	if (!Options::oxceEnableUnitResponseSounds)
+	if (!options1.oxceEnableUnitResponseSounds())
 		return;
 
 	if (!unit)

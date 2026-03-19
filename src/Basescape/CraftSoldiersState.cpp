@@ -116,7 +116,7 @@ CraftSoldiersState::CraftSoldiersState(Base *base, size_t craft)
 	_btnPreview->onMouseClick((ActionHandler)&CraftSoldiersState::btnPreviewClick);
 
 	_txtTitle->setBig();
-	if (Options::oxceBaseTouchButtons)
+	if (options1.oxceBaseTouchButtons())
 	{
 		_txtTitle->setAlign(ALIGN_CENTER);
 		_txtTitle->setText(c->getName(_game->getLanguage()));

@@ -698,7 +698,7 @@ void UnitInfoState::handle(Action *action)
 			exitClick(action);
 			return;
 		}
-		if (Options::oxceThumbButtons)
+		if (options1.oxceThumbButtons())
 		{
 			if (action->getDetails()->button.button == SDL_BUTTON_X1)
 			{

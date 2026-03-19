@@ -617,7 +617,7 @@ void SoldierInfoState::handle(Action* action)
 {
 	State::handle(action);
 
-	if (Options::oxceThumbButtons && action->getDetails()->type == SDL_MOUSEBUTTONDOWN)
+	if (options1.oxceThumbButtons() && action->getDetails()->type == SDL_MOUSEBUTTONDOWN)
 	{
 		if (action->getDetails()->button.button == SDL_BUTTON_X1)
 		{

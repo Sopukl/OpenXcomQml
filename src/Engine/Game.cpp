@@ -220,14 +220,14 @@ void Game::processEvents()
 			}
 			break;
 		case SDL_MOUSEMOTION:
-			if (Options::oxceThrottleMouseMoveEvent > 0)
+			if (options1.oxceThrottleMouseMoveEvent() > 0)
 			{
 				Uint32 last = SDL_GetTicks();
 				if (0 == lastMouseMoveEvent)
 				{
 					lastMouseMoveEvent = last;
 				}
-				if (last - lastMouseMoveEvent < (Uint32)Options::oxceThrottleMouseMoveEvent)
+				if (last - lastMouseMoveEvent < (Uint32)options1.oxceThrottleMouseMoveEvent())
 				{
 					xrel += _event.motion.xrel;
 					yrel += _event.motion.yrel;

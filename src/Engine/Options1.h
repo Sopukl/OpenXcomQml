@@ -4,6 +4,7 @@
 #include <SDL_keysym.h>
 #include <SDL_video.h>
 #include <string>
+#include "Logger.h"
 
 //OPTION, get/set/notify/save to file
 #define OPTION(type, name) \
@@ -356,6 +357,62 @@ namespace OpenXcom
 		OPTION(bool, oxceEnableOffCentreShooting)
 		OPTION(bool, oxceUniformShootingSpread)
 		OPTION(qint32, oxceCrashedOrLanded)
+		OPTION(qint32, oxceModValidationLevel)
+		OPTION(bool, oxceRawScreenShots)
+		OPTION(bool, oxceFirstPersonViewFisheyeProjection)
+		OPTION(bool, oxceThumbButtons)
+		OPTION(qint32, oxceThrottleMouseMoveEvent)
+		OPTION(bool, oxceDisableThinkingProgressBar)
+
+		OPTION(bool, oxceEmbeddedOnly)
+		OPTION(bool, oxceListVFSContents)
+		OPTION(bool, oxceEnablePaletteFlickerFix)
+		OPTION(bool, oxceRecommendedOptionsWereSet)
+		OPTION(QString, password)
+
+		OPTION(qint32, oxceStartUpTextMode)
+
+		OPTION(qint32, oxceGeoscapeDebugLogMaxEntries)
+		OPTION(qint32, oxceGeoSlowdownFactor)
+		OPTION(bool, oxceGeoShowScoreInsteadOfFunds)
+		OPTION(bool, oxceGeoEnableTrainingIndicator)
+		OPTION(bool, oxceGeoSuppressRedundantHKAlert)
+		OPTION(bool, oxceGeoSuppressLandingWithoutEquipment)
+		OPTION(bool, oxceGeoGoToNearestBase)
+		OPTION(bool, oxceGeoSortCraftByDistanceToTarget)
+
+		OPTION(qint32, oxceBaseInfoDefenseScaleMultiplier)
+		OPTION(bool, oxceBaseSoldierTransformationShowOnlyEligible)
+		OPTION(bool, oxceBaseFilterResearchable)
+		OPTION(bool, oxceBaseResearchReorder)
+		OPTION(bool, oxceBaseManufactureFallbackButton)
+		OPTION(bool, oxceBaseManufactureInfinityButton)
+		OPTION(bool, oxceBaseTouchButtons)
+
+		OPTION(bool, oxceDisableAlienInventory)
+		OPTION(bool, oxceDisableHitLog)
+		OPTION(bool, oxceDisableInventoryTuCost)
+		OPTION(bool, oxceDisableProductionDependencyTree)
+		OPTION(bool, oxceDisableStatsForNerds)
+		OPTION(bool, oxceDisableTechTreeViewer)
+
+		OPTION(qint32, oxceTogglePersonalLightType)
+		OPTION(qint32, oxceToggleNightVisionType)
+		OPTION(qint32, oxceToggleBrightnessType)
+
+		OPTION(bool, oxceShowBurningAsWounded)
+		OPTION(bool, oxceDisableInfoOnThrowCursor)
+		OPTION(bool, oxceSwapDontReselectActions)
+		OPTION(bool, oxceEnableUnitResponseSounds)
+		OPTION(qint32, oxceHiddenMovementBackgroundChangeFrequency)
+		OPTION(bool, oxceInventoryShowUnitSlot)
+		OPTION(bool, oxceReplaceNotesLink)
+
+		OPTION(bool, oxceInventorySplitScrollButton)
+		OPTION(bool, oxceInventoryDropItemOverPaperdoll)
+		OPTION(bool, oxceInventoryUnloadFixedWeapons)
+
+		OPTION(qint32, oxceMaxEquipmentLayoutTemplates)
 		//video
 		OPTION(qint32, displayWidth)
 		OPTION(qint32, displayHeight)

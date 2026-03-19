@@ -182,24 +182,24 @@ Map::Map(Game *game, int width, int height, int x, int y, int visibleMapHeight) 
 	_cacheHasLOS = -1;
 
 	_nightVisionOn = false;
-	if (Options::oxceToggleNightVisionType == 2)
+	if (options1.oxceToggleNightVisionType() == 2)
 	{
 		// persisted per campaign
 		_nightVisionOn = _game->getSavedGame()->getToggleNightVision();
 	}
-	else if (Options::oxceToggleNightVisionType == 1)
+	else if (options1.oxceToggleNightVisionType() == 1)
 	{
 		// persisted per battle
 		_nightVisionOn = _save->getToggleNightVision();
 	}
 
 	_debugVisionMode = 0;
-	if (Options::oxceToggleBrightnessType == 2)
+	if (options1.oxceToggleBrightnessType() == 2)
 	{
 		// persisted per campaign
 		_debugVisionMode = _game->getSavedGame()->getToggleBrightness();
 	}
-	else if (Options::oxceToggleBrightnessType == 1)
+	else if (options1.oxceToggleBrightnessType() == 1)
 	{
 		// persisted per battle
 		_debugVisionMode = _save->getToggleBrightness();
@@ -1339,7 +1339,7 @@ void Map::drawTerrain(Surface *surface)
 							Surface::blitRaw(surface, tmpSurface, screenPosition.x, screenPosition.y, 0);
 
 							// UFO extender accuracy: display adjusted accuracy value on crosshair in real-time.
-							if (_cursorType >= CT_AIM && _showInfoOnCursor && (_cursorType != CT_THROW || !Options::oxceDisableInfoOnThrowCursor))
+							if (_cursorType >= CT_AIM && _showInfoOnCursor && (_cursorType != CT_THROW || !options1.oxceDisableInfoOnThrowCursor()))
 							{
 								BattleAction *action = _save->getBattleGame()->getCurrentAction();
 								const RuleItem *weapon = action->weapon->getRules();
@@ -1896,23 +1896,23 @@ void Map::toggleDebugVisionMode()
 
 void Map::persistToggles()
 {
-	if (Options::oxceToggleNightVisionType == 2)
+	if (options1.oxceToggleNightVisionType() == 2)
 	{
 		// persisted per campaign
 		_game->getSavedGame()->setToggleNightVision(_nightVisionOn);
 	}
-	else if (Options::oxceToggleNightVisionType == 1)
+	else if (options1.oxceToggleNightVisionType() == 1)
 	{
 		// persisted per battle
 		_save->setToggleNightVision(_nightVisionOn);
 	}
 
-	if (Options::oxceToggleBrightnessType == 2)
+	if (options1.oxceToggleBrightnessType() == 2)
 	{
 		// persisted per campaign
 		_game->getSavedGame()->setToggleBrightness(_debugVisionMode);
 	}
-	else if (Options::oxceToggleBrightnessType == 1)
+	else if (options1.oxceToggleBrightnessType() == 1)
 	{
 		// persisted per battle
 		_save->setToggleBrightness(_debugVisionMode);

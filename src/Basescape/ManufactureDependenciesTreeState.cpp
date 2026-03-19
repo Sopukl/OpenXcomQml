@@ -78,7 +78,7 @@ ManufactureDependenciesTreeState::ManufactureDependenciesTreeState(const std::st
 	_lstTopics->setMargin(0);
 	_lstTopics->setAlign(ALIGN_CENTER);
 
-	if (Options::oxceDisableProductionDependencyTree)
+	if (options1.oxceDisableProductionDependencyTree())
 	{
 		_txtTitle->setHeight(_txtTitle->getHeight() * 11);
 		_txtTitle->setWordWrap(true);
@@ -100,7 +100,7 @@ void ManufactureDependenciesTreeState::init()
 {
 	State::init();
 
-	if (!Options::oxceDisableProductionDependencyTree)
+	if (!options1.oxceDisableProductionDependencyTree())
 	{
 		initList();
 	}

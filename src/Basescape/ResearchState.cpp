@@ -100,7 +100,7 @@ ResearchState::ResearchState(Base *base) : _base(base)
 
 	_txtProgress->setText(tr("STR_PROGRESS"));
 
-	if (Options::oxceBaseResearchReorder)
+	if (options1.oxceBaseResearchReorder())
 	{
 		_lstResearch->setArrowColumn(192, ARROW_VERTICAL);
 	}
@@ -109,7 +109,7 @@ ResearchState::ResearchState(Base *base) : _base(base)
 	_lstResearch->setBackground(_window);
 	_lstResearch->setMargin(2);
 	_lstResearch->setWordWrap(true);
-	if (Options::oxceBaseResearchReorder)
+	if (options1.oxceBaseResearchReorder())
 	{
 		_lstResearch->onLeftArrowClick((ActionHandler)&ResearchState::lstResearchLeftArrowClick);
 		_lstResearch->onRightArrowClick((ActionHandler)&ResearchState::lstResearchRightArrowClick);

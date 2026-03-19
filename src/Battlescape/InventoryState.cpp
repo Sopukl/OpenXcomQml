@@ -433,7 +433,7 @@ void InventoryState::init()
 	_soldier->clear();
 	_btnRank->clear();
 
-	if (Options::oxceInventoryShowUnitSlot)
+	if (options1.oxceInventoryShowUnitSlot())
 	{
 		int unitSlot = 1;
 		int totalSlots = 99;
@@ -782,7 +782,7 @@ void InventoryState::btnArmorClick(Action *action)
 	if (_inv->getSelectedItem() != 0)
 	{
 		// but we can reuse this for quickly dropping an item (as a Ctrl+L-click alternative)
-		if (Options::oxceInventoryDropItemOverPaperdoll)
+		if (options1.oxceInventoryDropItemOverPaperdoll())
 		{
 			if (_inv->quickDrop())
 			{
@@ -1059,7 +1059,7 @@ void InventoryState::btnGlobalEquipmentLayoutClick(Action *action)
 
 	const int index = 10 * _key_repeats + layout_no - 1;
 
-	if (index < 0 || index >= Options::oxceMaxEquipmentLayoutTemplates)
+	if (index < 0 || index >= options1.oxceMaxEquipmentLayoutTemplates())
 	{
 		// do nothing if the layout index is out of bounds
 		return;
@@ -1270,7 +1270,7 @@ void InventoryState::btnQuickSearchApply(Action *)
 void InventoryState::btnGroundClickForward(Action *action)
 {
 	bool scrollBackwards = _game->isShiftPressed();
-	if (Options::oxceInventorySplitScrollButton)
+	if (options1.oxceInventorySplitScrollButton())
 	{
 		double mx = action->getAbsoluteXMouse();
 		if (mx <= _btnGround->getX() + (_btnGround->getWidth() / 2.0))
@@ -2143,7 +2143,7 @@ void InventoryState::handle(Action *action)
 	}
 
 #ifndef __MORPHOS__
-	if (Options::oxceThumbButtons && action->getDetails()->type == SDL_MOUSEBUTTONDOWN)
+	if (options1.oxceThumbButtons() && action->getDetails()->type == SDL_MOUSEBUTTONDOWN)
 	{
 		if (action->getDetails()->button.button == SDL_BUTTON_X1)
 		{

@@ -125,7 +125,7 @@ ExtendedBattlescapeLinksState::ExtendedBattlescapeLinksState(BattlescapeState* p
 	_btnBriefing->setText(tr("STR_BRIEFING"));
 	_btnBriefing->onMouseClick((ActionHandler)&ExtendedBattlescapeLinksState::btnBriefingClick);
 
-	_btnNotes->setText(Options::oxceReplaceNotesLink ? tr("STR_NO_EXPERIENCE_YET") : tr("STR_NOTES"));
+	_btnNotes->setText(options1.oxceReplaceNotesLink() ? tr("STR_NO_EXPERIENCE_YET") : tr("STR_NOTES"));
 	_btnNotes->onMouseClick((ActionHandler)&ExtendedBattlescapeLinksState::btnNotesClick);
 
 	_btnMusic->setText(tr("STR_SELECT_MUSIC_TRACK"));
@@ -171,7 +171,7 @@ void ExtendedBattlescapeLinksState::btnBrightnessClick(Action *)
 void ExtendedBattlescapeLinksState::btnTurnDiaryClick(Action *)
 {
 	_game->popState();
-	if (Options::oxceDisableHitLog)
+	if (options1.oxceDisableHitLog())
 	{
 		_game->pushState(new InfoboxState(tr("STR_THIS_FEATURE_IS_DISABLED_4")));
 	}
@@ -192,7 +192,7 @@ void ExtendedBattlescapeLinksState::btnNotesClick(Action *)
 {
 	_game->popState();
 
-	if (Options::oxceReplaceNotesLink)
+	if (options1.oxceReplaceNotesLink())
 		_game->pushState(new NoExperienceState());
 	else
 		_game->pushState(new NotesState(OPT_BATTLESCAPE));

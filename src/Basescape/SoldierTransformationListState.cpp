@@ -88,7 +88,7 @@ SoldierTransformationListState::SoldierTransformationListState(Base *base, Combo
 	setWindowBackground(_window, "transformationList");
 
 	_btnOnlyEligible->setText(tr("STR_SHOW_ONLY_ELIGIBLE"));
-	_btnOnlyEligible->setPressed(Options::oxceBaseSoldierTransformationShowOnlyEligible);
+	_btnOnlyEligible->setPressed(options1.oxceBaseSoldierTransformationShowOnlyEligible());
 	_btnOnlyEligible->onMouseClick((ActionHandler)&SoldierTransformationListState::btnOnlyEligibleClick);
 
 	_btnOK->setText(tr("STR_OK"));
@@ -337,7 +337,7 @@ void SoldierTransformationListState::cbxSoldierStatusChange(Action *)
  */
 void SoldierTransformationListState::btnOnlyEligibleClick(Action *)
 {
-	Options::oxceBaseSoldierTransformationShowOnlyEligible = _btnOnlyEligible->getPressed();
+	options1.setoxceBaseSoldierTransformationShowOnlyEligible(_btnOnlyEligible->getPressed());
 
 	initList();
 }

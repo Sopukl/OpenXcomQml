@@ -592,7 +592,7 @@ void Inventory::setSelectedItem(BattleItem *item)
 	drawItems();
 	if (_tu)
 	{
-		drawGridLabels(!Options::oxceDisableInventoryTuCost);
+		drawGridLabels(!options1.oxceDisableInventoryTuCost());
 	}
 }
 
@@ -1228,7 +1228,7 @@ bool Inventory::unload(bool quickUnload)
 	if (_selItem == 0)
 	{
 		// mobile support: https://openxcom.org/forum/index.php?topic=12880.0
-		if (Options::oxceInventoryUnloadFixedWeapons)
+		if (options1.oxceInventoryUnloadFixedWeapons())
 		{
 			if (!_selUnit) return false;
 			auto weapons = { _selUnit->getRightHandWeapon(), _selUnit->getLeftHandWeapon()};
@@ -1698,7 +1698,7 @@ void Inventory::arrangeGround(int alterOffset)
 		}
 	}
 	drawItems();
-	drawGridLabels(!Options::oxceDisableInventoryTuCost);
+	drawGridLabels(!options1.oxceDisableInventoryTuCost());
 }
 
 /**

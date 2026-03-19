@@ -491,7 +491,7 @@ BattlescapeState::BattlescapeState() :
 	_btnNextSoldier->onMouseIn((ActionHandler)&BattlescapeState::txtTooltipIn);
 	_btnNextSoldier->onMouseOut((ActionHandler)&BattlescapeState::txtTooltipOut);
 
-	if (Options::oxceSwapDontReselectActions)
+	if (options1.oxceSwapDontReselectActions())
 	{
 		_btnNextStop->onMouseClick((ActionHandler)&BattlescapeState::btnNextStopMClick, SDL_BUTTON_LEFT);
 		_btnNextStop->onMouseClick((ActionHandler)&BattlescapeState::btnNextStopRClick, SDL_BUTTON_RIGHT);
@@ -2341,7 +2341,7 @@ void BattlescapeState::updateSoldierInfo(bool checkFOV)
 			if (j >= VISIBLE_MAX) break; // loop finished
 			if (bu->getFaction() == FACTION_PLAYER && bu->getStatus() != STATUS_DEAD && !bu->isIgnored() && bu->indicatorsAreEnabled())
 			{
-				if (bu->getFatalWounds() > 0 || (Options::oxceShowBurningAsWounded && bu->getFire() > 0))
+				if (bu->getFatalWounds() > 0 || (options1.oxceShowBurningAsWounded() && bu->getFire() > 0))
 				{
 					_btnVisibleUnit[j]->setTooltip(_txtVisibleUnitTooltip[VISIBLE_MAX]);
 					_btnVisibleUnit[j]->setVisible(true);
@@ -2705,7 +2705,7 @@ inline void BattlescapeState::handle(Action *action)
 				_map->setSelectorPosition((_cursorPosition.x - _game->getScreen()->getCursorLeftBlackBand()) / action->getXScale(), (_cursorPosition.y - _game->getScreen()->getCursorTopBlackBand()) / action->getYScale());
 			}
 
-			if (Options::oxceThumbButtons && action->getDetails()->type == SDL_MOUSEBUTTONDOWN)
+			if (options1.oxceThumbButtons() && action->getDetails()->type == SDL_MOUSEBUTTONDOWN)
 			{
 				if (action->getDetails()->button.button == SDL_BUTTON_X1)
 				{
@@ -2794,7 +2794,7 @@ inline void BattlescapeState::handle(Action *action)
 				{
 					if (_save->getSide() == FACTION_PLAYER)
 					{
-						if (Options::oxceDisableHitLog)
+						if (options1.oxceDisableHitLog())
 						{
 							_game->pushState(new InfoboxState(tr("STR_THIS_FEATURE_IS_DISABLED_4")));
 						}
@@ -2874,7 +2874,7 @@ inline void BattlescapeState::handle(Action *action)
 				{
 					if (_game->getMod()->getEnableUnitResponseSounds())
 					{
-						Options::oxceEnableUnitResponseSounds = !Options::oxceEnableUnitResponseSounds;
+						options1.setoxceEnableUnitResponseSounds(!options1.oxceEnableUnitResponseSounds());
 					}
 				}
 				// "ctrl-e" - experience log
@@ -3313,7 +3313,7 @@ void BattlescapeState::saveVoxelView()
 		ang_y = (((double)y) / 640 * M_PI + M_PI / 2);
 		for (int x = -256; x < 256; ++x)
 		{
-			if (Options::oxceFirstPersonViewFisheyeProjection)
+			if (options1.oxceFirstPersonViewFisheyeProjection())
 			{
 				ang_x = ((double)x / 1024) * M_PI + dir;
 				targetVoxel.x = originVoxel.x + (int)(-sin(ang_x) * 1024 * sin(ang_y));

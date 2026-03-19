@@ -70,9 +70,9 @@ NextTurnState::NextTurnState(SavedBattleGame *battleGame, BattlescapeState *stat
 	if (_battleGame->getSide() == FACTION_PLAYER)
 	{
 		bool change = false;
-		if (Options::oxceHiddenMovementBackgroundChangeFrequency > 0)
+		if (options1.oxceHiddenMovementBackgroundChangeFrequency() > 0)
 		{
-			if (_battleGame->getTurn() % Options::oxceHiddenMovementBackgroundChangeFrequency == 0)
+			if (_battleGame->getTurn() % options1.oxceHiddenMovementBackgroundChangeFrequency() == 0)
 			{
 				change = true;
 			}

@@ -177,7 +177,7 @@ SavedGame::~SavedGame()
 	{
 		delete soldier;
 	}
-	for (int j = 0; j < Options::oxceMaxEquipmentLayoutTemplates; ++j)
+	for (int j = 0; j < options1.oxceMaxEquipmentLayoutTemplates(); ++j)
 	{
 		for (auto* entry : _globalEquipmentLayout[j])
 		{
@@ -700,7 +700,7 @@ void SavedGame::load(const std::string &filename, Mod *mod, Language *lang)
 
 void SavedGame::loadTemplates(const YAML::YamlNodeReader& reader, const Mod* mod)
 {
-	for (int j = 0; j < Options::oxceMaxEquipmentLayoutTemplates; ++j)
+	for (int j = 0; j < options1.oxceMaxEquipmentLayoutTemplates(); ++j)
 	{
 		for (const auto& layout : reader[ryml::to_csubstr("globalEquipmentLayout" + std::to_string(j))].children())
 		{
@@ -796,11 +796,11 @@ void SavedGame::save(const std::string &filename, Mod *mod) const
 	writer.write("funds", _funds);
 	writer.write("maintenance", _maintenance);
 	writer.write("userNotes", _userNotes);
-	if (Options::oxceGeoscapeDebugLogMaxEntries > 0 && _geoscapeDebugLog.size() > 0)
+	if (options1.oxceGeoscapeDebugLogMaxEntries() > 0 && _geoscapeDebugLog.size() > 0)
 	{
 		auto geoDebugLog = writer["geoscapeDebugLog"];
 		geoDebugLog.setAsSeq();
-		size_t lastEntriesToWrite = std::min(_geoscapeDebugLog.size(), (size_t)Options::oxceGeoscapeDebugLogMaxEntries);
+		size_t lastEntriesToWrite = std::min(_geoscapeDebugLog.size(), (size_t)options1.oxceGeoscapeDebugLogMaxEntries());
 		for (size_t j = _geoscapeDebugLog.size() - lastEntriesToWrite; j < _geoscapeDebugLog.size(); ++j)
 			geoDebugLog.write(_geoscapeDebugLog[j]);
 	}
@@ -857,7 +857,7 @@ void SavedGame::save(const std::string &filename, Mod *mod) const
 	_alienStrategy->save(writer["alienStrategy"]);
 
 	saveVector(writer, _deadSoldiers, "deadSoldiers", mod->getScriptGlobal());
-	for (int j = 0; j < Options::oxceMaxEquipmentLayoutTemplates; ++j)
+	for (int j = 0; j < options1.oxceMaxEquipmentLayoutTemplates(); ++j)
 	{
 		if (!_globalEquipmentLayout[j].empty())
 			saveVector(writer, _globalEquipmentLayout[j], writer.saveString("globalEquipmentLayout" + std::to_string(j)));
@@ -3260,7 +3260,7 @@ bool SavedGame::spawnEvent(const RuleEvent* eventRules)
 	// remember that it has been generated
 	addGeneratedEvent(eventRules);
 
-	if (Options::oxceGeoscapeDebugLogMaxEntries > 0)
+	if (options1.oxceGeoscapeDebugLogMaxEntries() > 0)
 	{
 		std::ostringstream ss;
 		ss << "gameTime: " << _time->getFullString();

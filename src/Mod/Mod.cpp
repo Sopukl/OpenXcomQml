@@ -1134,7 +1134,7 @@ bool Mod::checkForSoftError(bool check, const std::string& parent, const YAML::Y
 	if (check)
 	{
 		auto ex = LoadRuleException(parent, reader, error);
-		if (Options::oxceModValidationLevel < level && level != LOG_FATAL)
+		if (options1.oxceModValidationLevel() < level && level != LOG_FATAL)
 		{
 			Log(level) << _scriptGlobal->getCurrentFile() << ": Suppressed " << ex.what();
 			return true;
@@ -1155,7 +1155,7 @@ bool Mod::checkForSoftError(bool check, const std::string &parent, const std::st
 	if (check)
 	{
 		auto ex = LoadRuleException(parent, error);
-		if (Options::oxceModValidationLevel < level && level != LOG_FATAL)
+		if (options1.oxceModValidationLevel() < level && level != LOG_FATAL)
 		{
 			Log(level) << _scriptGlobal->getCurrentFile() << ": Suppressed " << ex.what();
 			return true;
@@ -2174,11 +2174,11 @@ void Mod::loadAll()
 	const auto& mods = FileMap::getRulesets();
 
 	Log(LOG_INFO) << "Loading begins...";
-	if (Options::oxceModValidationLevel < LOG_ERROR)
+	if (options1.oxceModValidationLevel() < LOG_ERROR)
 	{
 		Log(LOG_ERROR) << "Validation of mod data disabled, game can crash when run";
 	}
-	else if (Options::oxceModValidationLevel < LOG_WARNING)
+	else if (options1.oxceModValidationLevel() < LOG_WARNING)
 	{
 		Log(LOG_WARNING) << "Validation of mod data reduced, game can behave incorrectly";
 	}
@@ -2420,7 +2420,7 @@ void Mod::loadAll()
 	}
 
 	// recommended user options
-	if (!_recommendedUserOptions.empty() && !Options::oxceRecommendedOptionsWereSet)
+	if (!_recommendedUserOptions.empty() && !options1.oxceRecommendedOptionsWereSet())
 	{
 		_recommendedUserOptions.erase("maximizeInfoScreens"); // FIXME: make proper categorisations in the next release
 		_recommendedUserOptions.erase("oxceModValidationLevel");
@@ -2433,7 +2433,7 @@ void Mod::loadAll()
 			}
 		}
 
-		Options::oxceRecommendedOptionsWereSet = true;
+		options1.setoxceRecommendedOptionsWereSet(true);
 		Options::save();
 	}
 
@@ -2459,11 +2459,11 @@ void Mod::loadAll()
 
 	// additional validation of options not visible in the GUI
 	{
-		if (Options::oxceMaxEquipmentLayoutTemplates < 10 ||
-			Options::oxceMaxEquipmentLayoutTemplates > SavedGame::MAX_EQUIPMENT_LAYOUT_TEMPLATES ||
-			Options::oxceMaxEquipmentLayoutTemplates % 10 != 0)
+		if (options1.oxceMaxEquipmentLayoutTemplates() < 10 ||
+			options1.oxceMaxEquipmentLayoutTemplates() > SavedGame::MAX_EQUIPMENT_LAYOUT_TEMPLATES ||
+			options1.oxceMaxEquipmentLayoutTemplates() % 10 != 0)
 		{
-			Options::oxceMaxEquipmentLayoutTemplates = 20;
+			options1.setoxceMaxEquipmentLayoutTemplates(20);
 		}
 	}
 

@@ -403,9 +403,9 @@ void BaseInfoState::init()
 
 	_barDefense->setMax(_base->getDefenseValue());
 	_barDefense->setValue(_base->getDefenseValue());
-	if (Options::oxceBaseInfoDefenseScaleMultiplier != 100)
+	if (options1.oxceBaseInfoDefenseScaleMultiplier() != 100)
 	{
-		_barDefense->setScale(0.125 * Options::oxceBaseInfoDefenseScaleMultiplier / 100.0);
+		_barDefense->setScale(0.125 * options1.oxceBaseInfoDefenseScaleMultiplier() / 100.0);
 	}
 
 	std::ostringstream ss10;

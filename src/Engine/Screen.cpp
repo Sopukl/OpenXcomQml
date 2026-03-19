@@ -116,7 +116,7 @@ void Screen::makeVideoFlags()
  */
 Screen::Screen() : _baseWidth(ORIGINAL_WIDTH), _baseHeight(ORIGINAL_HEIGHT), _scaleX(1.0), _scaleY(1.0), _flags(0), _numColors(0), _firstColor(0), _pushPalette(false), _flickerFix(false)
 {
-	_flickerFix = Options::oxceEnablePaletteFlickerFix;
+	_flickerFix = options1.oxceEnablePaletteFlickerFix();
 
 	resetDisplay();
 	memset(deferredPalette, 0, 256*sizeof(SDL_Color));
@@ -566,7 +566,7 @@ void Screen::screenshot(const std::string &filename) const
 		SDL_BlitSurface(_screen, 0, screenshot, 0);
 	}
 	std::vector<unsigned char> out;
-	if (_screen->format->BitsPerPixel == 8 && Options::oxceRawScreenShots)
+	if (_screen->format->BitsPerPixel == 8 && options1.oxceRawScreenShots())
 	{
 		SDL_Color *palette = getPalette();
 		lodepng::State state;

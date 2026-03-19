@@ -75,7 +75,7 @@ CraftEquipmentState::CraftEquipmentState(Base *base, size_t craft) :
 
 	// Create objects
 	_window = new Window(this, 320, 200, 0, 0);
-	_btnQuickSearch = new TextEdit(this, 48, 9, Options::oxceBaseTouchButtons ? 10 : 264, Options::oxceBaseTouchButtons ? 13 : 12);
+	_btnQuickSearch = new TextEdit(this, 48, 9, options1.oxceBaseTouchButtons() ? 10 : 264, options1.oxceBaseTouchButtons() ? 13 : 12);
 	_btnOk = new TextButton((craftHasACrew || _isNewBattle)?30:140, 16, (craftHasACrew || _isNewBattle)?274:164, 176);
 	_btnClear = new TextButton(102, 16, 164, 176);
 	_btnInventory = new TextButton(102, 16, 164, 176);
@@ -135,7 +135,7 @@ CraftEquipmentState::CraftEquipmentState(Base *base, size_t craft) :
 	_btnInventory->onKeyboardPress((ActionHandler)&CraftEquipmentState::btnInventoryClick, options1.keyBattleInventory());
 
 	_txtTitle->setBig();
-	if (Options::oxceBaseTouchButtons)
+	if (options1.oxceBaseTouchButtons())
 	{
 		_txtTitle->setAlign(ALIGN_CENTER);
 		_txtTitle->setText(c->getName(_game->getLanguage()));

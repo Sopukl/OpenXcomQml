@@ -141,7 +141,7 @@ TransferItemsState::TransferItemsState(Base *baseFrom, Base *baseTo, DebriefingS
 
 	_cats.push_back("STR_ALL_ITEMS");
 	_cats.push_back("STR_ITEMS_AT_DESTINATION");
-	if (Options::oxceBaseFilterResearchable)
+	if (options1.oxceBaseFilterResearchable())
 	{
 		_cats.push_back("STR_FILTER_RESEARCHED");
 		_cats.push_back("STR_FILTER_RESEARCHABLE");
@@ -246,7 +246,7 @@ TransferItemsState::TransferItemsState(Base *baseFrom, Base *baseTo, DebriefingS
 			_cats.clear();
 			_cats.push_back("STR_ALL_ITEMS");
 			_cats.push_back("STR_ITEMS_AT_DESTINATION");
-			if (Options::oxceBaseFilterResearchable)
+			if (options1.oxceBaseFilterResearchable())
 			{
 				_cats.push_back("STR_FILTER_RESEARCHED");
 				_cats.push_back("STR_FILTER_RESEARCHABLE");

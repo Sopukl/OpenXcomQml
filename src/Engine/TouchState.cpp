@@ -33,7 +33,7 @@ void TouchState::touchComponentsCreate(Text* txtTitlePtr, bool hideGroup100, int
 	// Reset touch flags
 	_game->resetTouchButtonFlags();
 
-	if (!Options::oxceBaseTouchButtons)
+	if (!options1.oxceBaseTouchButtons())
 		return;
 
 	_hideGroup100 = hideGroup100;
@@ -58,7 +58,7 @@ void TouchState::touchComponentsCreate(Text* txtTitlePtr, bool hideGroup100, int
 
 void TouchState::touchComponentsAdd(const std::string& id, const std::string& category, Surface* parent)
 {
-	if (!Options::oxceBaseTouchButtons)
+	if (!options1.oxceBaseTouchButtons())
 		return;
 
 	add(_btnTouch, "touchButton", category, parent);
@@ -78,7 +78,7 @@ void TouchState::touchComponentsAdd(const std::string& id, const std::string& ca
 
 void TouchState::touchComponentsConfigure()
 {
-	if (!Options::oxceBaseTouchButtons)
+	if (!options1.oxceBaseTouchButtons())
 		return;
 
 	_btn1->setText(tr("STR_BUTTON_1"));
@@ -116,7 +116,7 @@ void TouchState::touchComponentsConfigure()
 	_btnShift->setVisible(false);
 
 	_btnTouch->setText(tr("STR_BUTTON_TOUCH"));
-	_btnTouch->setVisible(Options::oxceBaseTouchButtons);
+	_btnTouch->setVisible(options1.oxceBaseTouchButtons());
 	_btnTouch->onMouseClick((ActionHandler)&TouchState::btnTouchClick);
 
 	_btnCtrl->onMouseClick((ActionHandler)&TouchState::btnCtrlClick);
@@ -126,7 +126,7 @@ void TouchState::touchComponentsConfigure()
 
 void TouchState::touchComponentsRefresh()
 {
-	if (!Options::oxceBaseTouchButtons)
+	if (!options1.oxceBaseTouchButtons())
 		return;
 
 	_owner100 = _game->getScrollStep() == 100 ? _btn100 : (_game->getScrollStep() == 10 ? _btn10 : _btn1);

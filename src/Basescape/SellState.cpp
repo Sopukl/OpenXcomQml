@@ -187,7 +187,7 @@ void SellState::delayedInit()
 
 	_cats.push_back("STR_ALL_ITEMS");
 	_cats.push_back("STR_FILTER_HIDDEN");
-	if (Options::oxceBaseFilterResearchable)
+	if (options1.oxceBaseFilterResearchable())
 	{
 		_cats.push_back("STR_FILTER_RESEARCHED");
 		_cats.push_back("STR_FILTER_RESEARCHABLE");
@@ -320,7 +320,7 @@ void SellState::delayedInit()
 			_cats.clear();
 			_cats.push_back("STR_ALL_ITEMS");
 			_cats.push_back("STR_FILTER_HIDDEN");
-			if (Options::oxceBaseFilterResearchable)
+			if (options1.oxceBaseFilterResearchable())
 			{
 				_cats.push_back("STR_FILTER_RESEARCHED");
 				_cats.push_back("STR_FILTER_RESEARCHABLE");

@@ -55,7 +55,7 @@ BattlescapeMessage::BattlescapeMessage(int width, int height, int x, int y) : Su
 
 	_progressBar = new ProgressBar(102, 5, HORIZONTAL_OFFSET, VERTICAL_OFFSET);
 
-	if (Options::oxceDisableThinkingProgressBar)
+	if (options1.oxceDisableThinkingProgressBar())
 	{
 		_txtThinking->setVisible(false);
 		_progressBar->setVisible(false);

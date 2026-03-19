@@ -216,9 +216,9 @@ void ManufactureInfoState::buildUi()
 
 	_btnFallback->setText(tr("STR_FALLBACK_PRODUCTION"));
 	_btnFallback->setPressed(_production->isFallback());
-	_btnFallback->setVisible(Options::oxceBaseManufactureFallbackButton);
+	_btnFallback->setVisible(options1.oxceBaseManufactureFallbackButton());
 
-	if (Options::oxceBaseManufactureInfinityButton)
+	if (options1.oxceBaseManufactureInfinityButton())
 	{
 		if (_production->getRules()->getProducedCraft())
 		{

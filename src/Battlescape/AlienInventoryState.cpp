@@ -92,7 +92,7 @@ AlienInventoryState::AlienInventoryState(BattleUnit *unit)
 	_txtName->setHighContrast(true);
 	_txtName->setAlign(ALIGN_CENTER);
 
-	if (Options::oxceDisableAlienInventory)
+	if (options1.oxceDisableAlienInventory())
 	{
 		_txtName->setHeight(_txtName->getHeight() * 9);
 		_txtName->setWordWrap(true);
