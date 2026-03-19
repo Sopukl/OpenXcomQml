@@ -87,10 +87,10 @@ NextTurnState::NextTurnState(SavedBattleGame *battleGame, BattlescapeState *stat
 	// reset alien/civilian quick mode
 	if (_battleGame->getSide() == FACTION_PLAYER)
 	{
-		if (Options::battleAlienSpeedOrig != -1)
+		if (options1.battleAlienSpeedOrig != -1)
 		{
-			options1.setbattleAlienSpeed(Options::battleAlienSpeedOrig);
-			Options::battleAlienSpeedOrig = -1;
+			options1.setbattleAlienSpeed(options1.battleAlienSpeedOrig);
+			options1.battleAlienSpeedOrig = -1;
 		}
 	}
 

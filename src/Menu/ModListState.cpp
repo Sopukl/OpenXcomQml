@@ -201,7 +201,7 @@ void ModListState::changeMasterMod()
 			pair.second = false;
 		}
 	}
-	Options::reload = true;
+	options1.reload = true;
 
 	_curMasterIdx = _cbxMasters->getSelected();
 	_curMasterId = masterId;
@@ -294,7 +294,7 @@ void ModListState::toggleMod()
 
 		break;
 	}
-	Options::reload = true;
+	options1.reload = true;
 }
 
 void ModListState::lstModsLeftArrowClick(Action *action)
@@ -372,7 +372,7 @@ void ModListState::moveModUp(Action *action, unsigned int row, bool max)
 		_moveAbove(_mods.at(row), _mods.at(row - 1));
 		lstModsRefresh(_lstMods->getScroll());
 	}
-	Options::reload = true;
+	options1.reload = true;
 }
 
 void ModListState::lstModsRightArrowClick(Action *action)
@@ -456,7 +456,7 @@ void ModListState::moveModDown(Action *action, unsigned int row, bool max)
 		_moveBelow(_mods.at(row), _mods.at(row + 1));
 		lstModsRefresh(_lstMods->getScroll());
 	}
-	Options::reload = true;
+	options1.reload = true;
 }
 
 void ModListState::lstModsMousePress(Action *action)
@@ -492,7 +492,7 @@ void ModListState::lstModsMousePress(Action *action)
 void ModListState::btnOkClick(Action *)
 {
 	Options::save();
-	if (Options::reload)
+	if (options1.reload)
 	{
 		_game->setState(new StartState);
 	}
@@ -518,7 +518,7 @@ void ModListState::btnOpenFolderClick(Action *)
  */
 void ModListState::btnCancelClick(Action *)
 {
-	Options::reload = false;
+	options1.reload = false;
 	Options::load();
 	_game->popState();
 }

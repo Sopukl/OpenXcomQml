@@ -51,8 +51,8 @@ std::string StartState::error;
 StartState::StartState() : _anim(0)
 {
 	//updateScale() uses newDisplayWidth/Height and needs to be set ahead of time
-	Options::newDisplayWidth = options1.displayWidth();
-	Options::newDisplayHeight = options1.displayHeight();
+	options1.newDisplayWidth = options1.displayWidth();
+	options1.newDisplayHeight = options1.displayHeight();
 	Screen::updateScale(options1.geoscapeScale(), options1.baseXGeoscape, options1.baseYGeoscape, false);
 	Screen::updateScale(options1.battlescapeScale(), options1.baseXBattlescape, options1.baseYBattlescape, false);
 	options1.baseXResolution = options1.displayWidth();
@@ -94,7 +94,7 @@ StartState::StartState() : _anim(0)
 	_game->getCursor()->setVisible(false);
 	_game->getFpsCounter()->setVisible(false);
 
-	if (Options::reload)
+	if (options1.reload)
 	{
 		if (options1.oxceStartUpTextMode() < 2)
 		{
@@ -135,7 +135,7 @@ void StartState::init()
 	// Silence!
 	Sound::stop();
 	Music::stop();
-	if (!Options::mute && Options::reload)
+	if (!options1.mute && options1.reload)
 	{
 		Mix_CloseAudio();
 		_game->initAudio();
@@ -179,9 +179,9 @@ void StartState::think()
 		{
 			_game->pushState(new CutsceneState("intro"));
 		}
-		if (Options::reload)
+		if (options1.reload)
 		{
-			Options::reload = false;
+			options1.reload = false;
 		}
 		_game->getCursor()->setVisible(true);
 		_game->getFpsCounter()->setVisible(options1.fpsCounter());
@@ -220,7 +220,7 @@ void StartState::animate()
 	{
 		std::ostringstream ss;
 		ss << "Loading OpenXcom " << OPENXCOM_VERSION_SHORT << OPENXCOM_VERSION_GIT << "...";
-		if (Options::reload)
+		if (options1.reload)
 		{
 			if (options1.oxceStartUpTextMode() < 2)
 			{
@@ -250,7 +250,7 @@ void StartState::animate()
 				if (options1.oxceStartUpTextMode() < 1)
 				{
 					addLine("");
-					if (Options::mute)
+					if (options1.mute)
 					{
 						addLine("No Sound Detected");
 					}

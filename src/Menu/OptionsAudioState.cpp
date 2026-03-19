@@ -164,7 +164,7 @@ OptionsAudioState::OptionsAudioState(OptionsOrigin origin) : OptionsBaseState(or
 	_cbxSoundFormat->onMouseIn((ActionHandler)&OptionsAudioState::txtTooltipIn);
 	_cbxSoundFormat->onMouseOut((ActionHandler)&OptionsAudioState::txtTooltipOut);
 
-	std::string curSound = sndFormats[Options::currentSound];
+	std::string curSound = sndFormats[options1.currentSound];
 	_txtCurrentSound->setText(tr("STR_CURRENT_FORMAT").arg(curSound));
 
 	_txtVideoFormat->setText(tr("STR_PREFERRED_VIDEO_FORMAT"));
@@ -268,7 +268,7 @@ void OptionsAudioState::cbxVideoFormatChange(Action *)
 void OptionsAudioState::cbxMusicFormatChange(Action *)
 {
 	options1.setpreferredMusic((MusicFormat)_cbxMusicFormat->getSelected());
-	Options::reload = true;
+	options1.reload = true;
 }
 
 /**
@@ -278,7 +278,7 @@ void OptionsAudioState::cbxMusicFormatChange(Action *)
 void OptionsAudioState::cbxSoundFormatChange(Action *)
 {
 	options1.setpreferredSound((SoundFormat)_cbxSoundFormat->getSelected());
-	Options::reload = true;
+	options1.reload = true;
 }
 
 /**

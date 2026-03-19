@@ -915,7 +915,7 @@ SurfaceSet *Mod::getSurfaceSet(const std::string &name, bool error)
  */
 Music *Mod::getMusic(const std::string &name, bool error) const
 {
-	if (Options::mute)
+	if (options1.mute)
 	{
 		return _muteMusic;
 	}
@@ -942,7 +942,7 @@ const std::map<std::string, Music*> &Mod::getMusicTrackList() const
  */
 Music *Mod::getRandomMusic(const std::string &name) const
 {
-	if (Options::mute)
+	if (options1.mute)
 	{
 		return _muteMusic;
 	}
@@ -974,7 +974,7 @@ Music *Mod::getRandomMusic(const std::string &name) const
  */
 void Mod::playMusic(const std::string &name, int id)
 {
-	if (!Options::mute && _playingMusic != name)
+	if (!options1.mute && _playingMusic != name)
 	{
 		int loop = -1;
 		// hacks
@@ -1029,7 +1029,7 @@ SoundSet *Mod::getSoundSet(const std::string &name, bool error) const
  */
 Sound *Mod::getSound(const std::string &set, int sound) const
 {
-	if (Options::mute)
+	if (options1.mute)
 	{
 		return _muteSound;
 	}
@@ -1236,7 +1236,7 @@ void Mod::verifySpriteOffset(const std::string &parent, const std::vector<int>& 
  */
 void Mod::verifySoundOffset(const std::string &parent, const int& sound, const std::string &set) const
 {
-	if (Options::mute)
+	if (options1.mute)
 	{
 		// when mute is set not sound data is loaded and we can't check for correct data
 		return;
@@ -1257,7 +1257,7 @@ void Mod::verifySoundOffset(const std::string &parent, const int& sound, const s
  */
 void Mod::verifySoundOffset(const std::string &parent, const std::vector<int>& sounds, const std::string &set) const
 {
-	if (Options::mute)
+	if (options1.mute)
 	{
 		// when mute is set not sound data is loaded and we can't check for correct data
 		return;
@@ -5533,7 +5533,7 @@ void Mod::loadVanillaResources()
 	_sounds["SAMPLE3.CAT"] = new SoundSet();
 	_sounds["INTRO.CAT"] = new SoundSet();
 
-	if (!Options::mute) // TBD: ain't it wrong? can Options::mute be reset without a reload?
+	if (!options1.mute) // TBD: ain't it wrong? can options1.mute be reset without a reload?
 	{
 		// Load sounds
 		const auto& contents = FileMap::getVFolderContents("SOUND");
@@ -5551,7 +5551,7 @@ void Mod::loadVanillaResources()
 			else if (options1.preferredSound() == SOUND_10)
 				cats[0] = catsDos;
 
-			Options::currentSound = SOUND_AUTO;
+			options1.currentSound = SOUND_AUTO;
 			for (size_t i = 0; i < ARRAYLEN(catsId); ++i)
 			{
 				SoundSet *sound = _sounds[catsId[i]];
@@ -5568,7 +5568,7 @@ void Mod::loadVanillaResources()
 						Log(LOG_VERBOSE) << catsId[i] << ": loading sound "<<fname;
 						CatFile catfile(fname);
 						sound->loadCat(catfile);
-						Options::currentSound = (wav) ? SOUND_14 : SOUND_10;
+						options1.currentSound = (wav) ? SOUND_14 : SOUND_10;
 						break;
 					} else {
 						Log(LOG_VERBOSE) << catsId[i] << ": sound file not found: "<<fname;
@@ -6009,7 +6009,7 @@ void Mod::loadExtraResources()
 
 #ifndef __NO_MUSIC
 	// Load musics
-	if (!Options::mute)
+	if (!options1.mute)
 	{
 		const auto& soundFiles = FileMap::getVFolderContents("SOUND");
 
@@ -6068,7 +6068,7 @@ void Mod::loadExtraResources()
 		}
 	}
 
-	if (!Options::mute)
+	if (!options1.mute)
 	{
 		for (const auto& pair : _extraSounds)
 		{

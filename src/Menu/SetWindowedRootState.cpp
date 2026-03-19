@@ -75,8 +75,8 @@ SetWindowedRootState::SetWindowedRootState(OptionsOrigin origin, OptionsVideoSta
 
 	std::ostringstream wss, wss2;
 
-	wss << Options::newWindowedModePositionX;
-	wss2 << Options::newWindowedModePositionY;
+	wss << options1.newWindowedModePositionX;
+	wss2 << options1.newWindowedModePositionY;
 
 	_edtWindowedModePositionX->setText(wss.str());
 	_edtWindowedModePositionX->setConstraint(TEC_NUMERIC);
@@ -125,9 +125,9 @@ void SetWindowedRootState::btnOkClick(Action *)
 	convStreamX >> newWindowedModePositionX;
 	convStreamY >> newWindowedModePositionY;
 
-	Options::newRootWindowedMode = true;
-	Options::newWindowedModePositionX = newWindowedModePositionX;
-	Options::newWindowedModePositionY = newWindowedModePositionY;
+	options1.newRootWindowedMode = true;
+	options1.newWindowedModePositionX = newWindowedModePositionX;
+	options1.newWindowedModePositionY = newWindowedModePositionY;
 
 	_game->popState();
 }

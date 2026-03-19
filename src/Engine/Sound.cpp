@@ -75,7 +75,7 @@ void Sound::load(SDL_RWops *rw) {
  */
 void Sound::play(int channel, int angle, int distance) const
  {
-	if (!Options::mute && _sound)
+	if (!options1.mute && _sound)
  	{
 		int chan = Mix_PlayChannel(channel, _sound.get(), 0);
 		if (chan == -1)
@@ -97,7 +97,7 @@ void Sound::play(int channel, int angle, int distance) const
  */
 void Sound::stop()
 {
-	if (!Options::mute)
+	if (!options1.mute)
 	{
 		Mix_HaltChannel(-1);
 	}
@@ -108,7 +108,7 @@ void Sound::stop()
  */
 void Sound::loop()
 {
-	if (!Options::mute && _sound && Mix_Playing(3) == 0)
+	if (!options1.mute && _sound && Mix_Playing(3) == 0)
 	{
 		int chan = Mix_PlayChannel(3, _sound.get(), -1);
 		if (chan == -1)
@@ -123,7 +123,7 @@ void Sound::loop()
  */
 void Sound::stopLoop()
 {
-	if (!Options::mute)
+	if (!options1.mute)
 	{
 		Mix_HaltChannel(3);
 	}

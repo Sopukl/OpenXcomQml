@@ -338,7 +338,7 @@ void OptionsAdvancedState::lstOptionsClick(Action *action)
 		settingText = *b ? tr("STR_YES") : tr("STR_NO");
 		// if (b == &options1.lazyLoadResources() && !*b)
 		// {
-		// 	Options::reload = true; // reload when turning lazy loading off
+		// 	options1.reload = true; // reload when turning lazy loading off
 		// }
 	}
 	else if (setting->type() == OPTION_INT) // integer variables will need special handling

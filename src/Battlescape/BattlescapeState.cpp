@@ -2840,30 +2840,30 @@ inline void BattlescapeState::handle(Action *action)
 				{
 					if (_save->getSide() == FACTION_PLAYER)
 					{
-						if (Options::battleXcomSpeedOrig >= 1 && Options::battleXcomSpeedOrig <= 40)
+						if (options1.battleXcomSpeedOrig >= 1 && options1.battleXcomSpeedOrig <= 40)
 						{
-							options1.setbattleXcomSpeed(Options::battleXcomSpeedOrig);
-							Options::battleXcomSpeedOrig = -1;
+							options1.setbattleXcomSpeed(options1.battleXcomSpeedOrig);
+							options1.battleXcomSpeedOrig = -1;
 							warning("STR_QUICK_MODE_DEACTIVATED");
 						}
 						else
 						{
-							Options::battleXcomSpeedOrig = options1.battleXcomSpeed();
+							options1.battleXcomSpeedOrig = options1.battleXcomSpeed();
 							options1.setbattleXcomSpeed(1);
 							warningLongRaw(tr("STR_QUICK_MODE_ACTIVATED"));
 						}
 					}
 					else
 					{
-						if (Options::battleAlienSpeedOrig >= 1 && Options::battleAlienSpeedOrig <= 40)
+						if (options1.battleAlienSpeedOrig >= 1 && options1.battleAlienSpeedOrig <= 40)
 						{
-							options1.setbattleAlienSpeed(Options::battleAlienSpeedOrig);
-							Options::battleAlienSpeedOrig = -1;
+							options1.setbattleAlienSpeed(options1.battleAlienSpeedOrig);
+							options1.battleAlienSpeedOrig = -1;
 							warning("STR_QUICK_MODE_DEACTIVATED");
 						}
 						else
 						{
-							Options::battleAlienSpeedOrig = options1.battleAlienSpeed();
+							options1.battleAlienSpeedOrig = options1.battleAlienSpeed();
 							options1.setbattleAlienSpeed(1);
 							warning("STR_QUICK_MODE_ACTIVATED");
 						}

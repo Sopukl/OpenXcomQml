@@ -431,8 +431,8 @@ void OptionsVideoState::updateDisplayResolution()
 	_txtDisplayWidth->setText(ssW.str());
 	_txtDisplayHeight->setText(ssH.str());
 
-	Options::newDisplayWidth = _res[_resCurrent]->w;
-	Options::newDisplayHeight = _res[_resCurrent]->h;
+	options1.newDisplayWidth = _res[_resCurrent]->w;
+	options1.newDisplayHeight = _res[_resCurrent]->h;
 }
 
 /**
@@ -445,7 +445,7 @@ void OptionsVideoState::txtDisplayWidthChange(Action *)
 	int width = 0;
 	ss << std::dec << _txtDisplayWidth->getText();
 	ss >> std::dec >> width;
-	Options::newDisplayWidth = width;
+	options1.newDisplayWidth = width;
 	// Update resolution mode
 	if (_res != (SDL_Rect**)-1 && _res != (SDL_Rect**)0)
 	{
@@ -454,7 +454,7 @@ void OptionsVideoState::txtDisplayWidthChange(Action *)
 		for (i = 0; _res[i]; ++i)
 		{
 			if (_resCurrent == -1 &&
-				((_res[i]->w == Options::newDisplayWidth && _res[i]->h <= Options::newDisplayHeight) || _res[i]->w < Options::newDisplayWidth))
+				((_res[i]->w == options1.newDisplayWidth && _res[i]->h <= options1.newDisplayHeight) || _res[i]->w < options1.newDisplayWidth))
 			{
 				_resCurrent = i;
 			}
@@ -472,7 +472,7 @@ void OptionsVideoState::txtDisplayHeightChange(Action *)
 	int height = 0;
 	ss << std::dec << _txtDisplayHeight->getText();
 	ss >> std::dec >> height;
-	Options::newDisplayHeight = height;
+	options1.newDisplayHeight = height;
 	// Update resolution mode
 	if (_res != (SDL_Rect**)-1 && _res != (SDL_Rect**)0)
 	{
@@ -481,7 +481,7 @@ void OptionsVideoState::txtDisplayHeightChange(Action *)
 		for (i = 0; _res[i]; ++i)
 		{
 			if (_resCurrent == -1 &&
-				((_res[i]->w == Options::newDisplayWidth && _res[i]->h <= Options::newDisplayHeight) || _res[i]->w < Options::newDisplayWidth))
+				((_res[i]->w == options1.newDisplayWidth && _res[i]->h <= options1.newDisplayHeight) || _res[i]->w < options1.newDisplayWidth))
 			{
 				_resCurrent = i;
 			}
@@ -507,35 +507,35 @@ void OptionsVideoState::cbxFilterChange(Action *)
 	switch (_cbxFilter->getSelected())
 	{
 	case 0:
-		Options::newOpenGL = false;
-		Options::newScaleFilter = false;
-		Options::newHQXFilter = false;
-		Options::newXBRZFilter = false;
+		options1.newOpenGL = false;
+		options1.newScaleFilter = false;
+		options1.newHQXFilter = false;
+		options1.newXBRZFilter = false;
 		break;
 	case 1:
-		Options::newOpenGL = false;
-		Options::newScaleFilter = true;
-		Options::newHQXFilter = false;
-		Options::newXBRZFilter = false;
+		options1.newOpenGL = false;
+		options1.newScaleFilter = true;
+		options1.newHQXFilter = false;
+		options1.newXBRZFilter = false;
 		break;
 	case 2:
-		Options::newOpenGL = false;
-		Options::newScaleFilter = false;
-		Options::newHQXFilter = true;
-		Options::newXBRZFilter = false;
+		options1.newOpenGL = false;
+		options1.newScaleFilter = false;
+		options1.newHQXFilter = true;
+		options1.newXBRZFilter = false;
 		break;
 	case 3:
-		Options::newOpenGL = false;
-		Options::newScaleFilter = false;
-		Options::newHQXFilter = false;
-		Options::newXBRZFilter = true;
+		options1.newOpenGL = false;
+		options1.newScaleFilter = false;
+		options1.newHQXFilter = false;
+		options1.newXBRZFilter = true;
 		break;
 	default:
-		Options::newOpenGL = true;
-		Options::newScaleFilter = false;
-		Options::newHQXFilter = false;
-		Options::newXBRZFilter = false;
-		Options::newOpenGLShader = _filters[_cbxFilter->getSelected()];
+		options1.newOpenGL = true;
+		options1.newScaleFilter = false;
+		options1.newHQXFilter = false;
+		options1.newXBRZFilter = false;
+		options1.newOpenGLShader = QString::fromStdString(_filters[_cbxFilter->getSelected()]);
 		break;
 	}
 }
@@ -549,24 +549,24 @@ void OptionsVideoState::updateDisplayMode(Action *)
 	switch(_cbxDisplayMode->getSelected())
 	{
 	case 0:
-		Options::newFullscreen = false;
-		Options::newBorderless = false;
-		Options::newAllowResize = false;
+		options1.newFullscreen = false;
+		options1.newBorderless = false;
+		options1.newAllowResize = false;
 		break;
 	case 1:
-		Options::newFullscreen = true;
-		Options::newBorderless = false;
-		Options::newAllowResize = false;
+		options1.newFullscreen = true;
+		options1.newBorderless = false;
+		options1.newAllowResize = false;
 		break;
 	case 2:
-		Options::newFullscreen = false;
-		Options::newBorderless = true;
-		Options::newAllowResize = false;
+		options1.newFullscreen = false;
+		options1.newBorderless = true;
+		options1.newAllowResize = false;
 		break;
 	case 3:
-		Options::newFullscreen = false;
-		Options::newBorderless = false;
-		Options::newAllowResize = true;
+		options1.newFullscreen = false;
+		options1.newBorderless = false;
+		options1.newAllowResize = true;
 		break;
 	default:
 		break;
@@ -604,7 +604,7 @@ void OptionsVideoState::btnRootWindowedModeClick(Action *)
 	}
 	else
 	{
-		Options::newRootWindowedMode = false;
+		options1.newRootWindowedMode = false;
 	}
 }
 
@@ -614,7 +614,7 @@ void OptionsVideoState::btnRootWindowedModeClick(Action *)
  */
 void OptionsVideoState::updateGeoscapeScale(Action *)
 {
-	Options::newGeoscapeScale = _reverseScales[_cbxGeoScale->getSelected()];
+    options1.newGeoscapeScale = _reverseScales[_cbxGeoScale->getSelected()];
 }
 
 /**
@@ -623,7 +623,7 @@ void OptionsVideoState::updateGeoscapeScale(Action *)
  */
 void OptionsVideoState::updateBattlescapeScale(Action *)
 {
-	Options::newBattlescapeScale = _reverseScales[_cbxBattleScale->getSelected()];
+    options1.newBattlescapeScale = _reverseScales[_cbxBattleScale->getSelected()];
 }
 
 /**

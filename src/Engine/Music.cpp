@@ -84,7 +84,7 @@ void Music::load(SDL_RWops *rwops)
 void Music::play(int loop) const
 {
 #ifndef __NO_MUSIC
-	if (!Options::mute)
+	if (!options1.mute)
 	{
 		if (_music != 0)
 		{
@@ -104,7 +104,7 @@ void Music::play(int loop) const
 void Music::stop()
 {
 #ifndef __NO_MUSIC
-	if (!Options::mute)
+	if (!options1.mute)
 	{
 		func_mute();
 		Mix_HookMusic(NULL, NULL);
@@ -119,7 +119,7 @@ void Music::stop()
 void Music::pause()
 {
 #ifndef __NO_MUSIC
-	if (!Options::mute)
+	if (!options1.mute)
 	{
 		Mix_PauseMusic();
 		if (Mix_GetMusicType(0) == MUS_NONE)
@@ -134,7 +134,7 @@ void Music::pause()
 void Music::resume()
 {
 #ifndef __NO_MUSIC
-	if (!Options::mute)
+	if (!options1.mute)
 	{
 		Mix_ResumeMusic();
 		if (Mix_GetMusicType(0) == MUS_NONE)
@@ -149,7 +149,7 @@ void Music::resume()
 bool Music::isPlaying()
 {
 #ifndef __NO_MUSIC
-	if (!Options::mute)
+	if (!options1.mute)
 	{
 		return Mix_Playing(-1) != 0;
 	}

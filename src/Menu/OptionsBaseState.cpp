@@ -217,19 +217,19 @@ void OptionsBaseState::btnOkClick(Action *)
 	_game->getScreen()->resetDisplay();
 	SDL_WM_GrabInput(SDL_GrabMode(options1.captureMouse()));
 	_game->setVolume(options1.soundVolume(), options1.musicVolume(), options1.uiVolume());
-	if (Options::reload && _origin == OPT_MENU)
+	if (options1.reload && _origin == OPT_MENU)
 	{
 		_game->setState(new StartState);
 	}
 	else
 	{
 		// Confirm any video options changes
-		if (options1.displayWidth() != Options::newDisplayWidth ||
-			options1.displayHeight() != Options::newDisplayHeight ||
-			options1.useOpenGL() != Options::newOpenGL ||
-			options1.useScaleFilter() != Options::newScaleFilter ||
-			options1.useHQXFilter() != Options::newHQXFilter ||
-			options1.useOpenGLShader().toStdString() != Options::newOpenGLShader)
+		if (options1.displayWidth() != options1.newDisplayWidth ||
+			options1.displayHeight() != options1.newDisplayHeight ||
+			options1.useOpenGL() != options1.newOpenGL ||
+			options1.useScaleFilter() != options1.newScaleFilter ||
+			options1.useHQXFilter() != options1.newHQXFilter ||
+			options1.useOpenGLShader() != options1.newOpenGLShader)
 		{
 			_game->pushState(new OptionsConfirmState(_origin));
 		}
@@ -246,7 +246,7 @@ void OptionsBaseState::btnOkClick(Action *)
  */
 void OptionsBaseState::btnCancelClick(Action *)
 {
-	Options::reload = false;
+	options1.reload = false;
 	Options::load();
 	SDL_WM_GrabInput(SDL_GrabMode(options1.captureMouse()));
 	Screen::updateScale(options1.battlescapeScale(), options1.baseXBattlescape, options1.baseYBattlescape, _origin == OPT_BATTLESCAPE);
@@ -276,7 +276,7 @@ void OptionsBaseState::btnGroupPress(Action *action)
 		}
 		else if (sender == _btnAudio)
 		{
-			if (!Options::mute)
+			if (!options1.mute)
 			{
 				_game->pushState(new OptionsAudioState(_origin));
 			}
@@ -337,8 +337,8 @@ void OptionsBaseState::txtTooltipOut(Action *action)
  */
 void OptionsBaseState::resize(int &dX, int &dY)
 {
-	Options::newDisplayWidth = options1.displayWidth();
-	Options::newDisplayHeight = options1.displayHeight();
+	options1.newDisplayWidth = options1.displayWidth();
+	options1.newDisplayHeight = options1.displayHeight();
 	State::resize(dX, dY);
 }
 

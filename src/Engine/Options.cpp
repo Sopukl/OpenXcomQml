@@ -141,8 +141,8 @@ void createOptionsOXC()
 	//# _info.push_back(OptionInfo(OPTION_OXC, "dragScrollPixelTolerance", &dragScrollPixelTolerance, 10)); // count of pixels
 	//#_info.push_back(OptionInfo(OPTION_OXC, "battleFireSpeed", &battleFireSpeed, 6));
 	//#_info.push_back(OptionInfo(OPTION_OXC, "battleXcomSpeed", &battleXcomSpeed, 30));
-	battleXcomSpeedOrig = -1;
-	battleAlienSpeedOrig = -1;
+	options1.battleXcomSpeedOrig = -1;
+	options1.battleAlienSpeedOrig = -1;
 	//#_info.push_back(OptionInfo(OPTION_OXC, "battleAlienSpeed", &battleAlienSpeed, 30));
 #ifdef __MOBILE__
 	_info.push_back(OptionInfo(OPTION_OXC, "battleNewPreviewPath", (int*)&battleNewPreviewPath, PATH_FULL)); // for android, set full preview by default
@@ -872,7 +872,7 @@ bool init()
 // called from the dos screen state (StartState)
 void refreshMods()
 {
-	if (Options::reload)
+	if (options1.reload)
 	{
 		_masterMod = "";
 	}
@@ -1440,21 +1440,21 @@ std::vector<const ModInfo *> getActiveMods()
  */
 void backupDisplay()
 {
-	Options::newDisplayWidth = options1.displayWidth();
-	Options::newDisplayHeight = options1.displayHeight();
-	Options::newBattlescapeScale = options1.battlescapeScale();
-	Options::newGeoscapeScale = options1.geoscapeScale();
-	Options::newOpenGL = options1.useOpenGL();
-	Options::newScaleFilter = options1.useScaleFilter();
-	Options::newHQXFilter = options1.useHQXFilter();
-	Options::newOpenGLShader = options1.useOpenGLShader().toStdString();
-	Options::newXBRZFilter = options1.useXBRZFilter();
-	Options::newRootWindowedMode = options1.rootWindowedMode();
-	Options::newWindowedModePositionX = options1.windowedModePositionX();
-	Options::newWindowedModePositionY = options1.windowedModePositionY();
-	Options::newFullscreen = options1.fullscreen();
-	Options::newAllowResize = options1.allowResize();
-	Options::newBorderless = options1.borderless();
+	options1.newDisplayWidth = options1.displayWidth();
+	options1.newDisplayHeight = options1.displayHeight();
+	options1.newBattlescapeScale = options1.battlescapeScale();
+	options1.newGeoscapeScale = options1.geoscapeScale();
+	options1.newOpenGL = options1.useOpenGL();
+	options1.newScaleFilter = options1.useScaleFilter();
+	options1.newHQXFilter = options1.useHQXFilter();
+	options1.newOpenGLShader = options1.useOpenGLShader();
+	options1.newXBRZFilter = options1.useXBRZFilter();
+	options1.newRootWindowedMode = options1.rootWindowedMode();
+	options1.newWindowedModePositionX = options1.windowedModePositionX();
+	options1.newWindowedModePositionY = options1.windowedModePositionY();
+	options1.newFullscreen = options1.fullscreen();
+	options1.newAllowResize = options1.allowResize();
+	options1.newBorderless = options1.borderless();
 }
 
 /**
@@ -1465,65 +1465,65 @@ void switchDisplay()
 {
 	qint32 tmp;
 	tmp = options1.displayWidth();
-	options1.setdisplayWidth(newDisplayWidth);
-	newDisplayWidth = tmp;
+	options1.setdisplayWidth(options1.newDisplayWidth);
+	options1.newDisplayWidth = tmp;
 
 	tmp = options1.displayHeight();
-	options1.setdisplayHeight(newDisplayHeight);
-	newDisplayHeight = tmp;
+	options1.setdisplayHeight(options1.newDisplayHeight);
+	options1.newDisplayHeight = tmp;
 
 	bool btmp;
 	btmp = options1.useOpenGL();
-	options1.setuseOpenGL(newOpenGL);
-	newOpenGL = btmp;
+	options1.setuseOpenGL(options1.newOpenGL);
+	options1.newOpenGL = btmp;
 
 	btmp = options1.useScaleFilter();
-	options1.setuseScaleFilter(newScaleFilter);
-	newScaleFilter = btmp;
+	options1.setuseScaleFilter(options1.newScaleFilter);
+	options1.newScaleFilter = btmp;
 
 	btmp = options1.useHQXFilter();
-	options1.setuseHQXFilter(newHQXFilter);
-	newHQXFilter = btmp;
+	options1.setuseHQXFilter(options1.newHQXFilter);
+	options1.newHQXFilter = btmp;
 
 	btmp = options1.fullscreen();
-	options1.setfullscreen(newFullscreen);
-	newFullscreen = btmp;
+	options1.setfullscreen(options1.newFullscreen);
+	options1.newFullscreen = btmp;
 
 	btmp = options1.useXBRZFilter();
-	options1.setuseXBRZFilter(newXBRZFilter);
-	newXBRZFilter = btmp;
+	options1.setuseXBRZFilter(options1.newXBRZFilter);
+	options1.newXBRZFilter = btmp;
 
 	tmp = options1.battlescapeScale();
-	options1.setbattlescapeScale(newBattlescapeScale);
-	newBattlescapeScale = tmp;
+	options1.setbattlescapeScale(options1.newBattlescapeScale);
+	options1.newBattlescapeScale = tmp;
 	tmp = options1.geoscapeScale();
-	options1.setgeoscapeScale(newGeoscapeScale);
-	newGeoscapeScale = tmp;
+	options1.setgeoscapeScale(options1.newGeoscapeScale);
+	options1.newGeoscapeScale = tmp;
 
-	std::string stmp;
-	stmp = options1.useOpenGLShader().toStdString();
-	options1.setuseOpenGLShader(QString::fromStdString(newOpenGLShader));
-	newOpenGLShader = stmp;
+	QString stmp;
+	stmp = options1.useOpenGLShader();
+	options1.setuseOpenGLShader(options1.newOpenGLShader);
+	options1.newOpenGLShader = stmp;
 
 	btmp = options1.rootWindowedMode();
-	options1.setrootWindowedMode(newRootWindowedMode);
-	newRootWindowedMode = btmp;
+	options1.setrootWindowedMode(options1.newRootWindowedMode);
+	options1.newRootWindowedMode = btmp;
 
 	tmp = options1.windowedModePositionX();
-	options1.setwindowedModePositionX(newWindowedModePositionX);
-	newWindowedModePositionX = tmp;
+	options1.setwindowedModePositionX(options1.newWindowedModePositionX);
+	options1.newWindowedModePositionX = tmp;
 
 	tmp = options1.windowedModePositionY();
-	options1.setwindowedModePositionY(newWindowedModePositionY);
-	newWindowedModePositionY = tmp;
+	options1.setwindowedModePositionY(options1.newWindowedModePositionY);
+	options1.newWindowedModePositionY = tmp;
 
 	btmp = options1.allowResize();
-	options1.setallowResize(newAllowResize);
-	newAllowResize = btmp;
+	options1.setallowResize(options1.newAllowResize);
+	options1.newAllowResize = btmp;
 
 	btmp = options1.borderless();
-	options1.setborderless(newBorderless);
-	newBorderless = btmp;
+	options1.setborderless(options1.newBorderless);
+	options1.newBorderless = btmp;
 }
 
 }

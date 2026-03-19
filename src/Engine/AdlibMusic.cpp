@@ -110,7 +110,7 @@ void AdlibMusic::load(SDL_RWops *rwops)
 void AdlibMusic::play(int) const
 {
 #ifndef __NO_MUSIC
-	if (!Options::mute)
+	if (!options1.mute)
 	{
 		stop();
 		func_setup_music((unsigned char*)_data, _size);
@@ -164,7 +164,7 @@ void AdlibMusic::player(void *udata, Uint8 *stream, int len)
 bool AdlibMusic::isPlaying()
 {
 #ifndef __NO_MUSIC
-	if (!Options::mute)
+	if (!options1.mute)
 	{
 		return func_is_music_playing();
 	}

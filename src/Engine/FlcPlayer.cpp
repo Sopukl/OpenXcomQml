@@ -242,10 +242,10 @@ void FlcPlayer::SDLPolling()
 		case SDL_VIDEORESIZE:
 			if (options1.allowResize())
 			{
-				Options::newDisplayWidth = std::max(Screen::ORIGINAL_WIDTH, event.resize.w);
-				Options::newDisplayHeight = std::max(Screen::ORIGINAL_HEIGHT, event.resize.h);
-				options1.setdisplayWidth(Options::newDisplayWidth);
-				options1.setdisplayHeight(Options::newDisplayHeight);
+				options1.newDisplayWidth = std::max(Screen::ORIGINAL_WIDTH, event.resize.w);
+				options1.newDisplayHeight = std::max(Screen::ORIGINAL_HEIGHT, event.resize.h);
+				options1.setdisplayWidth(options1.newDisplayWidth);
+				options1.setdisplayHeight(options1.newDisplayHeight);
 				if (_mainScreen != _realScreen->getSurface())
 				{
 					_realScreen->resetDisplay();
@@ -810,13 +810,13 @@ void FlcPlayer::initAudio(Uint16 format, Uint8 channels)
 	_videoDelay = 1000 / (_audioData.sampleRate / _audioFrameSize );
 	if (_useInternalAudio)
 	{
-		if (!Options::mute)
+		if (!options1.mute)
 		{
 			if (Mix_OpenAudio(_audioData.sampleRate, format, channels, _audioFrameSize * 2) != 0)
 			{
 				Log(LOG_ERROR) << Mix_GetError();
 				Log(LOG_WARNING) << "Failed to init cutscene audio";
-				Options::mute = true;
+				options1.mute = true;
 			}
 		}
 
@@ -835,7 +835,7 @@ void FlcPlayer::initAudio(Uint16 format, Uint8 channels)
 		_audioData.playingBuffer->samples = (Sint16 *)malloc(_audioFrameSize * 2);
 		_audioData.playingBuffer->sampleBufSize = _audioFrameSize * 2;
 
-		if (!Options::mute)
+		if (!options1.mute)
 		{
 			Mix_HookMusic(FlcPlayer::audioCallback, &_audioData);
 		}
@@ -846,7 +846,7 @@ void FlcPlayer::deInitAudio()
 {
 	if (_game)
 	{
-		if (!Options::mute)
+		if (!options1.mute)
 		{
 			Mix_HookMusic(NULL, NULL);
 			Mix_CloseAudio();

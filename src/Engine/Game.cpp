@@ -70,8 +70,8 @@ Game::Game(QWidget*_wnd) : QObject(_wnd), wnd(_wnd), _screen(0), _cursor(0), _la
 	title << "OpenXcom " << OPENXCOM_VERSION_SHORT << OPENXCOM_VERSION_GIT;
 
 
-	Options::reload = false;
-	Options::mute = false;
+	options1.reload = false;
+	options1.mute = false;
 
 	// // Initialize SDL
 
@@ -199,10 +199,10 @@ void Game::processEvents()
 			{
 				if (!startupEvent)
 				{
-					Options::newDisplayWidth = std::max(Screen::ORIGINAL_WIDTH, _event.resize.w);
-					Options::newDisplayHeight = std::max(Screen::ORIGINAL_HEIGHT, _event.resize.h);
-					options1.setdisplayWidth(Options::newDisplayWidth);
-					options1.setdisplayHeight(Options::newDisplayHeight);
+					options1.newDisplayWidth = std::max(Screen::ORIGINAL_WIDTH, _event.resize.w);
+					options1.newDisplayHeight = std::max(Screen::ORIGINAL_HEIGHT, _event.resize.h);
+					options1.setdisplayWidth(options1.newDisplayWidth);
+					options1.setdisplayHeight(options1.newDisplayHeight);
 
 					int dX = 0, dY = 0;
 					Screen::updateScale(options1.battlescapeScale(), options1.baseXBattlescape, options1.baseYBattlescape, false);
@@ -433,7 +433,7 @@ void Game::quit()
  */
 void Game::setVolume(int sound, int music, int ui)
 {
-	if (!Options::mute)
+	if (!options1.mute)
 	{
 		if (sound >= 0)
 		{
@@ -711,7 +711,7 @@ void Game::initAudio()
 	{
 		Log(LOG_ERROR) << SDL_GetError();
 		Log(LOG_WARNING) << "No sound device detected, audio disabled.";
-		Options::mute = true;
+		options1.mute = true;
 		return;
 	}
 
@@ -731,7 +731,7 @@ void Game::initAudio()
 	{
 		Log(LOG_ERROR) << Mix_GetError();
 		Log(LOG_WARNING) << "Sound device failed, audio disabled.";
-		Options::mute = true;
+		options1.mute = true;
 	}
 	else
 	{
