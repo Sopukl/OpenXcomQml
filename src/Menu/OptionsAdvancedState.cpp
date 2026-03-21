@@ -51,7 +51,7 @@ OptionsAdvancedState::OptionsAdvancedState(OptionsOrigin origin) : OptionsBaseSt
 	_owner = _btnOXC;
 
 	_isTFTD = false;
-	for (const auto& pair : Options::mods)
+	for (const auto& pair : options1.mods)
 	{
 		if (pair.second)
 		{

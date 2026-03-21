@@ -2143,12 +2143,12 @@ static void throwModOnErrorHelper(const std::string& modId, const std::string& e
 	if (!options1.debug())
 	{
 		Log(LOG_WARNING) << "disabling mod with invalid ruleset: " << modId;
-		auto it = std::find(Options::mods.begin(), Options::mods.end(), std::pair<std::string, bool>(modId, true));
-		if (it == Options::mods.end())
+		auto it = std::find(options1.mods.begin(), options1.mods.end(), std::pair<std::string, bool>(modId, true));
+		if (it == options1.mods.end())
 		{
 			Log(LOG_ERROR) << "cannot find broken mod in mods list: " << modId;
 			Log(LOG_ERROR) << "clearing mods list";
-			Options::mods.clear();
+			options1.mods.clear();
 		}
 		else
 		{

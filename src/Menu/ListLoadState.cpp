@@ -91,7 +91,7 @@ void ListLoadState::loadSave(size_t list_idx)
 	for (const auto& modName : saveInfo.mods)
 	{
 		std::string name = SavedGame::sanitizeModName(modName);
-		if (std::find(Options::mods.begin(), Options::mods.end(), std::make_pair(name, true)) == Options::mods.end())
+		if (std::find(options1.mods.begin(), options1.mods.end(), std::make_pair(name, true)) == options1.mods.end())
 		{
 			confirm = true;
 			break;

@@ -111,7 +111,7 @@ Map::Map(Game *game, int width, int height, int x, int y, int visibleMapHeight) 
 	_unitDying(false), _smoothingEngaged(false), _flashScreen(false), _bgColor(15), _projectileSet(0), _showObstacles(false), _showInfoOnCursor(false)
 {
 	// TODO: extract to a better place later
-	for (const auto& pair : Options::mods)
+	for (const auto& pair : options1.mods)
 	{
 		if (pair.second)
 		{

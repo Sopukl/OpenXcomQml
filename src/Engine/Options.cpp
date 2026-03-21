@@ -607,12 +607,12 @@ static void _setDefaultMods()
 	bool haveUfo = _ufoIsInstalled();
 	if (haveUfo)
 	{
-		mods.push_back(std::pair<std::string, bool>("xcom1", true));
+		options1.mods.emplace_back("xcom1", true);
 	}
 
 	if (_tftdIsInstalled())
 	{
-		mods.push_back(std::pair<std::string, bool>("xcom2", !haveUfo));
+		options1.mods.emplace_back("xcom2", !haveUfo);
 	}
 }
 
@@ -630,7 +630,7 @@ void resetDefault(bool includeMods)
 
 	if (includeMods)
 	{
-		mods.clear();
+		options1.mods.clear();
 		if (!_dataList.empty())
 		{
 			_setDefaultMods();
@@ -914,13 +914,13 @@ void refreshMods()
 	// remove mods from list that no longer exist
 	bool nonMasterModFound = false;
 	std::map<std::string, bool> corruptedMasters;
-	for (auto i = mods.begin(); i != mods.end();)
+	for (auto i = options1.mods.begin(); i != options1.mods.end();)
 	{
 		auto modIt = _modInfos.find(i->first);
 		if (_modInfos.end() == modIt)
 		{
 			Log(LOG_VERBOSE) << "removing references to missing mod: " << i->first;
-			i = mods.erase(i);
+			i = options1.mods.erase(i);
 			continue;
 		}
 		else
@@ -931,7 +931,7 @@ void refreshMods()
 				{
 					Log(LOG_ERROR) << "Removing master mod '" << i->first << "' from the list, because it is on a wrong position. It will be re-added automatically.";
 					corruptedMasters[i->first] = i->second;
-					i = mods.erase(i);
+					i = options1.mods.erase(i);
 					continue;
 				}
 			}
@@ -946,7 +946,7 @@ void refreshMods()
 	for (const auto& pair : corruptedMasters)
 	{
 		std::pair<std::string, bool> newMod(pair.first, pair.second);
-		mods.insert(mods.begin(), newMod);
+		options1.mods.insert(options1.mods.begin(), newMod);
 	}
 
 	// add in any new mods picked up from the scan and ensure there is but a single
@@ -956,7 +956,7 @@ void refreshMods()
 	for (auto i = _modInfos.cbegin(); i != _modInfos.cend(); ++i)
 	{
 		bool found = false;
-		for (auto j = mods.begin(); j != mods.end(); ++j)
+		for (auto j = options1.mods.begin(); j != options1.mods.end(); ++j)
 		{
 			if (i->first == j->first)
 			{
@@ -1004,7 +1004,7 @@ void refreshMods()
 		{
 			// it doesn't matter what order the masters are in since
 			// only one can be active at a time anyway
-			mods.insert(mods.begin(), newMod);
+			options1.mods.insert(options1.mods.begin(), newMod);
 
 			if (inactiveMaster.empty())
 			{
@@ -1013,7 +1013,7 @@ void refreshMods()
 		}
 		else
 		{
-			mods.push_back(newMod);
+			options1.mods.push_back(newMod);
 		}
 	}
 
@@ -1027,7 +1027,7 @@ void refreshMods()
 		else
 		{
 			Log(LOG_INFO) << "no master already active; activating " << inactiveMaster;
-			std::find(mods.begin(), mods.end(), std::pair<std::string, bool>(inactiveMaster, false))->second = true;
+			std::find(options1.mods.begin(), options1.mods.end(), std::pair<std::string, bool>(inactiveMaster, false))->second = true;
 			_masterMod = inactiveMaster;
 		}
 	}
@@ -1266,14 +1266,14 @@ bool load(const std::string &filename)
 			optionInfo.load(reader["options"]);
 		}
 
-		mods.clear();
+		options1.mods.clear();
 		for (const auto& mod : reader["mods"].children())
 		{
 			std::string id = mod["id"].readVal<std::string>();
 			bool active = mod["active"].readVal(false);
-			mods.push_back(std::pair<std::string, bool>(id, active));
+			options1.mods.push_back(std::pair<std::string, bool>(id, active));
 		}
-		if (mods.empty())
+		if (options1.mods.empty())
 		{
 			_setDefaultMods();
 		}
@@ -1301,7 +1301,7 @@ bool save(bool reset, const std::string& filename)
 		writer.setAsMap();
 		auto modsWriter = writer["mods"];
 		modsWriter.setAsSeq();
-		for (const auto& pair : mods)
+		for (const auto& pair : options1.mods)
 		{
 			auto modWriter = modsWriter.write();
 			modWriter.setAsMap();
@@ -1420,7 +1420,7 @@ const std::vector<OptionInfo> &getOptionInfo()
 std::vector<const ModInfo *> getActiveMods()
 {
 	std::vector<const ModInfo*> activeMods;
-	for (const auto& pair : mods)
+	for (const auto& pair : options1.mods)
 	{
 		if (pair.second)
 		{
