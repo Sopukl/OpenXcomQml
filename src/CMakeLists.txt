@@ -2,7 +2,7 @@ set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOUIC ON)
 
-find_package(Qt5 REQUIRED COMPONENTS
+find_package(Qt6 REQUIRED COMPONENTS
     Core
     Quick
     Widgets
@@ -621,9 +621,9 @@ endif ()
 add_executable ( openxcom  ${application_type} ${openxcom_src} ${openxcom_icon})
 
 target_link_libraries(openxcom
-    Qt5::Core
-    Qt5::Quick
-    Qt5::Widgets
+    Qt6::Core
+    Qt6::Quick
+    Qt6::Widgets
 )
 
 

@@ -382,7 +382,6 @@ namespace OpenXcom
 					QImage::Format_ARGB32 : QImage::Format_Indexed8
 				);
 
-			// Если это 8-битный формат, нужно установить палитру
 			if (screen->format->BitsPerPixel == 8) {
 				QVector<QRgb> colorTable(256);
 				SDL_Palette* pal = screen->format->palette;
@@ -394,10 +393,8 @@ namespace OpenXcom
 				image.setColorTable(colorTable);
 			}
 
-			// Масштабируем под размер виджета
 			QImage scaled = image.scaled(size(), Qt::KeepAspectRatio);
 
-			// Рисуем с центрированием
 			int x = (width() - scaled.width()) / 2;
 			int y = (height() - scaled.height()) / 2;
 			painter.drawImage(x, y, scaled);
