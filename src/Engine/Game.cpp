@@ -63,7 +63,7 @@ Sint16 yrel = 0;
  * creates the display screen and sets up the cursor.
  * @param title Title of the game window.
  */
-Game::Game(QWidget*_wnd) : QObject(_wnd), wnd(_wnd), _screen(0), _cursor(0), _lang(0), _save(0), _mod(0), _quit(false), _init(false), _update(false),  _mouseActive(true), _timeUntilNextFrame(0),
+Game::Game(QQuickItem*_wnd) : QObject(_wnd), wnd(_wnd), _screen(0), _cursor(0), _lang(0), _save(0), _mod(0), _quit(false), _init(false), _update(false),  _mouseActive(true), _timeUntilNextFrame(0),
 	_ctrl(false), _alt(false), _shift(false), _rmb(false), _mmb(false), _scrollStep(1)
 {
 	std::ostringstream title;
@@ -340,6 +340,38 @@ void Game::processLogic()
 		_fpsCounter->blit(_screen->getSurface());
 		_cursor->blit(_screen->getSurface());
 		_screen->flip();
+
+		// {
+		// 	SDL_Surface* screen = _screen->getSurface();
+		// 	SDL_LockSurface(screen);
+		// 	QImage image(
+		// 		(const uchar*)screen->pixels,
+		// 		screen->w,
+		// 		screen->h,
+		// 		screen->pitch,
+		// 		screen->format->BitsPerPixel == 32 ?
+		// 			QImage::Format_ARGB32 : QImage::Format_Indexed8
+		// 		);
+
+		// 	if (screen->format->BitsPerPixel == 8) {
+		// 		QVector<QRgb> colorTable(256);
+		// 		SDL_Palette* pal = screen->format->palette;
+		// 		for (int i = 0; i < pal->ncolors; i++) {
+		// 			colorTable[i] = qRgb(pal->colors[i].r,
+		// 								 pal->colors[i].g,
+		// 								 pal->colors[i].b);
+		// 		}
+		// 		image.setColorTable(colorTable);
+		// 	}
+
+		// 	mutex.lock();
+		// 	gameImage = image.convertToFormat(QImage::Format_RGBA8888);
+		// 	if(gameImage.isNull())
+		// 		qDebug() << "!!!!!!!!";
+		// 	mutex.unlock();
+		// 	SDL_UnlockSurface(screen);
+		// }
+
 	}
 }
 

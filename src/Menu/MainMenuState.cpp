@@ -98,7 +98,7 @@ MainMenuState::MainMenuState(bool updateCheck)
 	setWindowBackground(_window, "mainMenu");
 
 	_btnNewGame->setText(tr("STR_NEW_GAME"));
-	_btnNewGame->onMouseClick((ActionHandler)&MainMenuState::btnNewGameClick);
+	_btnNewGame->onMousePress((ActionHandler)&MainMenuState::btnNewGameClick);
 
 	_btnNewBattle->setText(tr("STR_NEW_BATTLE"));
 	_btnNewBattle->onMouseClick((ActionHandler)&MainMenuState::btnNewBattleClick);
@@ -266,7 +266,7 @@ MainMenuState::~MainMenuState()
  * Opens the New Game window.
  * @param action Pointer to an action.
  */
-void MainMenuState::btnNewGameClick(Action *)
+void MainMenuState::btnNewGameClick(Action *act)
 {
 	_game->pushState(new NewGameState);
 }

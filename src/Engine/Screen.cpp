@@ -377,7 +377,6 @@ void Screen::resetDisplay(bool resetVideo, bool noShaders)
 #endif
 		//_screen = SDL_SetVideoMode(width, height, _bpp, _flags);
 		_screen = SDL_CreateRGBSurface(SDL_SWSURFACE, width, height, _bpp, 0,0,0,0);
-		qDebug() << "screen created " << width << height;
 		if (_screen == 0)
 		{
 			Log(LOG_ERROR) << SDL_GetError();

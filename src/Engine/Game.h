@@ -20,9 +20,9 @@
 #include <list>
 #include <string>
 #include <SDL.h>
-#include <QObject>
-
-class QWidget;
+#include <QQuickItem>
+#include <QMutex>
+#include <QImage>
 
 namespace OpenXcom
 {
@@ -47,12 +47,13 @@ class GeoscapeState;
 class Game: public QObject
 {
 	Q_OBJECT
+	friend class GameRenderer;
 private:
 	enum ApplicationState { RUNNING = 0, SLOWED = 1, PAUSED = 2 } runningState = RUNNING;
 	ApplicationState kbFocusRun[4] = { RUNNING, RUNNING, SLOWED, PAUSED };
 	ApplicationState stateRun[4] = { SLOWED, PAUSED, PAUSED, PAUSED };
 
-	QWidget *wnd;
+	QQuickItem *wnd;
 	SDL_Event _event;
 	Screen *_screen;
 	Cursor *_cursor;
@@ -72,8 +73,10 @@ private:
 	void processEvents();
 	void processLogic();
 public:
+	QImage gameImage;
+	QMutex mutex;
 	/// Creates a new game and initializes SDL.
-	Game(QWidget*);
+	Game(QQuickItem*);
 	/// Cleans up all the game's resources and shuts down SDL.
 	~Game();
 	/// Starts the game's state machine.

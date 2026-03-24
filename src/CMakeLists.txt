@@ -6,6 +6,7 @@ find_package(Qt6 REQUIRED COMPONENTS
     Core
     Quick
     Widgets
+    Qml
 )
 add_definitions(-DQT_NO_EMIT)
 
@@ -618,12 +619,15 @@ if (( APPLE AND CREATE_BUNDLE ) OR CPACK_GENERATOR STREQUAL "7Z" )
   set ( CMAKE_INSTALL_BINDIR "." )
 endif ()
 
-add_executable ( openxcom  ${application_type} ${openxcom_src} ${openxcom_icon})
+add_executable ( openxcom  ${application_type} ${openxcom_src} ${openxcom_icon}
+    GameRenderer.h GameRenderer.cpp
+    XCom.qrc)
 
 target_link_libraries(openxcom
     Qt6::Core
     Qt6::Quick
     Qt6::Widgets
+    Qt6::Qml
 )
 
 

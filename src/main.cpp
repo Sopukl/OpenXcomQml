@@ -26,8 +26,11 @@
 #include "Engine/Options.h"
 #include "Engine/FileMap.h"
 #include "Menu/StartState.h"
-#include <QApplication>
+#include <QGuiApplication>
 #include "GameWindow.h"
+#include "GameRenderer.h"
+#include <QQuickWindow>
+#include <QQmlApplicationEngine>
 
 /** @mainpage
  * @author OpenXcom Developers
@@ -113,7 +116,10 @@ int main(int argc, char *argv[])
 // 	std::set_terminate(exceptionLogger);
 // #endif
 // #endif
-	QApplication app(argc, argv);
+	QQuickWindow::setGraphicsApi(QSGRendererInterface::OpenGL);
+	QGuiApplication app(argc, argv);
+	qmlRegisterType<OpenXcom::GameRenderer>("OpenXcom", 1, 0, "GameRenderer");
+	QQmlApplicationEngine engine;
 	YAML::setGlobalErrorHandler();
 	CrossPlatform::getErrorDialog();
 	CrossPlatform::processArgs(argc, argv);
@@ -122,8 +128,9 @@ int main(int argc, char *argv[])
 	options1.baseXResolution = options1.displayWidth();
 	options1.baseYResolution = options1.displayHeight();
 
-	GameWindow mainWindow;
-	mainWindow.show();
+	engine.load(QUrl("qrc:/main.qml"));
+	// GameWindow mainWindow;
+	// mainWindow.show();
 
 	return app.exec();
 }
