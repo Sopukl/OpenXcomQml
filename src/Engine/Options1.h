@@ -5,6 +5,7 @@
 #include <SDL_video.h>
 #include <string>
 #include "Logger.h"
+#include <qqmlintegration.h>
 
 //OPTION, get/set/notify/save to file
 #define OPTION(type, name) \
@@ -67,7 +68,7 @@ namespace OpenXcom
 		SCALE_SCREEN_DIV_10
 	};
 
-	class Options1 final: public QSettings
+	class Options1: public QSettings
 	{
 		Q_OBJECT
 

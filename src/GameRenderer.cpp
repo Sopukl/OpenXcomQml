@@ -6,12 +6,10 @@
 #include <QDebug>
 #include <QMouseEvent>
 #include "Engine/Options.h"
-#ifdef Q_OS_WIN
+
 #include <windows.h>
 #include <dinput.h>
-#endif
 
-#ifdef Q_OS_WIN
 SDLKey convertScanCodeToSDLKey(quint32 scanCode)
 {
 	scanCode &= 0x7F;
@@ -110,7 +108,6 @@ SDLKey convertScanCodeToSDLKey(quint32 scanCode)
 	default: return SDLK_UNKNOWN;
 	}
 }
-#endif
 
 namespace OpenXcom
 {

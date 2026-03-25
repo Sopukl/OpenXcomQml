@@ -22,7 +22,6 @@ endif()
 set ( root_src
   lodepng.cpp
   main.cpp
-  GameWindow.cpp
   md5.cpp
 )
 set ( basescape_src
@@ -621,7 +620,8 @@ endif ()
 
 add_executable ( openxcom  ${application_type} ${openxcom_src} ${openxcom_icon}
     GameRenderer.h GameRenderer.cpp
-    XCom.qrc)
+
+    Qml/XCom.qrc)
 
 target_link_libraries(openxcom
     Qt6::Core

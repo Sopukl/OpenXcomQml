@@ -27,7 +27,6 @@
 #include "Engine/FileMap.h"
 #include "Menu/StartState.h"
 #include <QGuiApplication>
-#include "GameWindow.h"
 #include "GameRenderer.h"
 #include <QQuickWindow>
 #include <QQmlApplicationEngine>
@@ -118,7 +117,16 @@ int main(int argc, char *argv[])
 // #endif
 	QQuickWindow::setGraphicsApi(QSGRendererInterface::OpenGL);
 	QGuiApplication app(argc, argv);
+
 	qmlRegisterType<OpenXcom::GameRenderer>("OpenXcom", 1, 0, "GameRenderer");
+	qmlRegisterType<OpenXcom::Options1>("OpenXcom", 1, 0, "Options1");
+	qmlRegisterSingletonType<Options1>("OpenXcom", 1, 0, "Options1",
+		[](QQmlEngine *engine, QJSEngine *scriptEngine) -> QObject* {
+			Q_UNUSED(engine)
+			Q_UNUSED(scriptEngine)
+			QQmlEngine::setObjectOwnership(&options1, QQmlEngine::CppOwnership);
+		   return &options1;
+	});
 	QQmlApplicationEngine engine;
 	YAML::setGlobalErrorHandler();
 	CrossPlatform::getErrorDialog();
@@ -129,8 +137,6 @@ int main(int argc, char *argv[])
 	options1.baseYResolution = options1.displayHeight();
 
 	engine.load(QUrl("qrc:/main.qml"));
-	// GameWindow mainWindow;
-	// mainWindow.show();
 
 	return app.exec();
 }
