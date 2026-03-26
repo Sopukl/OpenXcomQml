@@ -2,7 +2,7 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Window
 import OpenXcom
-import MainMenu as Main
+import OpenXcom.MainMenu 1.0 as Main
 
 Window {
     minimumWidth: Options1.displayWidth

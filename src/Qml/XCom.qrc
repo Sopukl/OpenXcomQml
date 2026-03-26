@@ -1,7 +1,8 @@
 <RCC>
     <qresource prefix="/">
         <file>main.qml</file>
-        <file>MainMenu/Menu.qml</file>
-        <file>MainMenu/qmldir</file>
+        <file>OpenXcom/MainMenu/Menu.qml</file>
+        <file>OpenXcom/MainMenu/qmldir</file>
+        <file>OpenXcom/qmldir</file>
     </qresource>
 </RCC>
