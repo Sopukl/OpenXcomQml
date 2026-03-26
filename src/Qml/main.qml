@@ -2,7 +2,7 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Window
 import OpenXcom
-import "./MainMenu" as MM
+import MainMenu as Main
 
 Window {
     minimumWidth: Options1.displayWidth
@@ -19,7 +19,7 @@ Window {
         activeFocusOnTab: true
     }
 
-    MM.Menu {
+    Main.Menu {
         id: mainMenu
         anchors.centerIn: parent
     }

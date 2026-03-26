@@ -128,6 +128,8 @@ int main(int argc, char *argv[])
 		   return &options1;
 	});
 	QQmlApplicationEngine engine;
+	engine.addImportPath("qrc:/");
+	engine.addImportPath("qrc:/MainMenu");
 	YAML::setGlobalErrorHandler();
 	CrossPlatform::getErrorDialog();
 	CrossPlatform::processArgs(argc, argv);

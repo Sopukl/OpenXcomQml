@@ -19,6 +19,8 @@ if (MSVC)
     add_compile_options(/wd5030)  # attribute [[gnu::always_inline]] is not recognized
 endif()
 
+set(QML_IMPORT_PATH ${CMAKE_SOURCE_DIR}/src/Qml ${CMAKE_BINARY_DIR}/imports CACHE STRING "" FORCE)
+
 set ( root_src
   lodepng.cpp
   main.cpp
@@ -620,7 +622,6 @@ endif ()
 
 add_executable ( openxcom  ${application_type} ${openxcom_src} ${openxcom_icon}
     GameRenderer.h GameRenderer.cpp
-
     Qml/XCom.qrc)
 
 target_link_libraries(openxcom
