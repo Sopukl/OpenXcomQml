@@ -20,8 +20,8 @@ namespace OpenXcom
 		void keyPressEvent(QKeyEvent* event) override;
 		void keyReleaseEvent(QKeyEvent* event) override;
 		void timerEvent(QTimerEvent*) override;
-		void focusInEvent(QFocusEvent*);
-		void focusOutEvent(QFocusEvent*);
+		void focusInEvent(QFocusEvent*) override;
+		void focusOutEvent(QFocusEvent*) override;
 	  public:
 		explicit GameRenderer(QQuickItem *parent = nullptr);
 

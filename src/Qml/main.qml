@@ -16,7 +16,6 @@ Window {
         id: gameWindow
         anchors.fill: parent
         focus: true
-        activeFocusOnTab: true
     }
 
     Main.Menu {

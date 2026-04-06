@@ -7,8 +7,8 @@
 #include <QMouseEvent>
 #include "Engine/Options.h"
 
-#include <windows.h>
-#include <dinput.h>
+// #include <windows.h>
+// #include <dinput.h>
 
 SDLKey convertScanCodeToSDLKey(quint32 scanCode)
 {
