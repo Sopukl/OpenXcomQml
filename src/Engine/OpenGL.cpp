@@ -11,7 +11,7 @@
 #ifndef __NO_OPENGL
 
 #include "OpenGL.h"
-#include <SDL.h>
+#include <SDL/SDL.h>
 #include "../Engine/Yaml.h"
 
 #include "Logger.h"

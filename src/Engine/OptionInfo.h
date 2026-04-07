@@ -20,7 +20,7 @@
 #include "../Engine/Yaml.h"
 #include <string>
 #include <map>
-#include <SDL.h>
+#include <SDL/SDL.h>
 
 namespace OpenXcom
 {

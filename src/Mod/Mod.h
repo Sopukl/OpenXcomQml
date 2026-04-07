@@ -23,7 +23,7 @@
 #include <string>
 #include <bitset>
 #include <array>
-#include <SDL.h>
+#include <SDL/SDL.h>
 #include "../Engine/Yaml.h"
 #include "../Engine/Options.h"
 #include "../Engine/FileMap.h"

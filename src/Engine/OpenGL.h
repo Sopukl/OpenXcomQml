@@ -15,7 +15,7 @@
 #define GL_SILENCE_DEPRECATION
 #endif
 
-#include <SDL_opengl.h>
+#include <SDL/SDL_opengl.h>
 #include <string>
 
 #include "Surface.h"

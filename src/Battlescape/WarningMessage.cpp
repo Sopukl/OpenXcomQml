@@ -17,7 +17,7 @@
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "WarningMessage.h"
-#include <SDL.h>
+#include <SDL/SDL.h>
 #include <string>
 #include "../fmath.h"
 #include "../Engine/Timer.h"

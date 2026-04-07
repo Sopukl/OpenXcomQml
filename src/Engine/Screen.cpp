@@ -35,7 +35,7 @@
 #include "FileMap.h"
 #include "Zoom.h"
 #include "Timer.h"
-#include <SDL.h>
+#include <SDL/SDL.h>
 #include <algorithm>
 
 namespace OpenXcom

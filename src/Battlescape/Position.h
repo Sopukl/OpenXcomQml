@@ -18,7 +18,7 @@
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "../Engine/Yaml.h"
-#include <SDL_types.h>
+#include <SDL/SDL_types.h>
 #include <cmath>
 #include <ostream>
 

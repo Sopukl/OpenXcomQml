@@ -20,7 +20,7 @@
 #include <vector>
 #include <string>
 #include "../Engine/Yaml.h"
-#include <SDL_video.h>
+#include <SDL/SDL_video.h>
 #include "MapBlock.h"
 #include "../Engine/Logger.h"
 

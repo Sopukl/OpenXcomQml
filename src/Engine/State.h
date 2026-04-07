@@ -19,7 +19,7 @@
  */
 #include <vector>
 #include <string>
-#include <SDL.h>
+#include <SDL/SDL.h>
 #include "LocalizedText.h"
 
 namespace OpenXcom

@@ -18,7 +18,7 @@
  */
 #include "Cursor.h"
 #include <cmath>
-#include <SDL.h>
+#include <SDL/SDL.h>
 #include "../Engine/Action.h"
 
 namespace OpenXcom

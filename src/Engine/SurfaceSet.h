@@ -20,7 +20,7 @@
 
 #include <vector>
 #include <string>
-#include <SDL.h>
+#include <SDL/SDL.h>
 
 namespace OpenXcom
 {

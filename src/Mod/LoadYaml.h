@@ -19,7 +19,7 @@
  */
 #include <string>
 #include "../Engine/Yaml.h"
-#include <SDL_stdinc.h>
+#include <SDL/SDL_stdinc.h>
 
 namespace OpenXcom
 {

@@ -17,7 +17,7 @@
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "TextButton.h"
-#include <SDL.h>
+#include <SDL/SDL.h>
 #include <SDL_mixer.h>
 #include "Text.h"
 #include "../Engine/Sound.h"

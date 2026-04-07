@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU General Public License
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
-#include <SDL_types.h>
+#include <SDL/SDL_types.h>
 #include "Position.h"
 
 namespace OpenXcom
