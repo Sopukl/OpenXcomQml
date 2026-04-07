@@ -18,7 +18,7 @@
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <SDL/SDL_stdinc.h>
+#include <SDL_stdinc.h>
 #include <limits>
 
 

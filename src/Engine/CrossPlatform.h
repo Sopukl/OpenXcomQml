@@ -18,7 +18,7 @@
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include <istream>
-#include <SDL/SDL.h>
+#include <SDL.h>
 #include <string>
 #include <vector>
 #include <array>

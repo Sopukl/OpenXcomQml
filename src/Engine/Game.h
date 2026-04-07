@@ -19,7 +19,7 @@
  */
 #include <list>
 #include <string>
-#include <SDL/SDL.h>
+#include <SDL.h>
 #include <QQuickItem>
 #include <QMutex>
 #include <QImage>

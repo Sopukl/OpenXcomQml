@@ -18,7 +18,7 @@
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include <string>
-#include <SDL/SDL.h>
+#include <SDL.h>
 
 namespace OpenXcom
 {

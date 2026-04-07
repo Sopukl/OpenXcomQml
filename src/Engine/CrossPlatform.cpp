@@ -83,7 +83,7 @@
 #include <dirent.h>
 #include "Unicode.h"
 #endif		/* #ifdef _WIN32 */
-#include <SDL/SDL.h>
+#include <SDL.h>
 #include <SDL_syswm.h>
 #ifdef __HAIKU__
 #include <FindDirectory.h>

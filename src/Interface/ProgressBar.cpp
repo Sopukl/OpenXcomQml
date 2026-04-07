@@ -17,7 +17,7 @@
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "ProgressBar.h"
-#include <SDL/SDL.h>
+#include <SDL.h>
 
 namespace OpenXcom
 {

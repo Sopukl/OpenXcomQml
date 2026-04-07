@@ -26,7 +26,7 @@
 #include <unordered_set>
 #include "../Engine/Yaml.h"
 #include "../Engine/CrossPlatform.h"
-#include <SDL/SDL_rwops.h>
+#include <SDL_rwops.h>
 #include "ModInfo.h"
 
 namespace OpenXcom

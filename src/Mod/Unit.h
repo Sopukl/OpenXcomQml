@@ -20,7 +20,7 @@
 #include <string>
 #include <vector>
 #include "../Engine/Yaml.h"
-#include <SDL/SDL_types.h>
+#include <SDL_types.h>
 #include "../Engine/RNG.h"
 #include "../Savegame/WeightedOptions.h"
 

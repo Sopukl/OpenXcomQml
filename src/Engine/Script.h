@@ -24,7 +24,7 @@
 #include <string>
 #include <cstring>
 #include "../Engine/Yaml.h"
-#include <SDL/SDL_stdinc.h>
+#include <SDL_stdinc.h>
 #include <cassert>
 #include <unordered_set>
 

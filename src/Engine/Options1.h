@@ -1,8 +1,8 @@
 #pragma once
 #include <QSettings>
 #include "Language.h"
-#include <SDL/SDL_keysym.h>
-#include <SDL/SDL_video.h>
+#include <SDL_keysym.h>
+#include <SDL_video.h>
 #include <string>
 #include "Logger.h"
 #include <qqmlintegration.h>

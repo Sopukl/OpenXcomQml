@@ -77,9 +77,18 @@ set ( c_src
   ../libs/miniz/miniz.c
 )
 
+file(GLOB_RECURSE all_headers
+    "*.h"
+    "*.hpp"
+    "../libs/rapidyaml/**/*.h"
+)
+
 set ( openxcom_src ${c_src} ${cxx_src})
 
-add_executable ( openxcom  ${openxcom_src}
+add_executable (
+    openxcom
+    ${openxcom_src}
+    ${all_headers}
     Qml/XCom.qrc
 )
 

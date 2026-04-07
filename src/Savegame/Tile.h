@@ -23,7 +23,7 @@
 #include "../Battlescape/Position.h"
 #include "../Mod/MapData.h"
 
-#include <SDL/SDL_types.h> // for Uint8
+#include <SDL_types.h> // for Uint8
 
 namespace OpenXcom
 {
