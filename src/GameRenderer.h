@@ -8,7 +8,6 @@ namespace OpenXcom
 	{
 		Q_OBJECT
 		QML_ELEMENT
-		Game m_Game;
 		SDL_Event _sdlEvent;
 		bool _mousePressed[3]; // LMB, RMB, MMB
 		QPoint _lastMousePos;

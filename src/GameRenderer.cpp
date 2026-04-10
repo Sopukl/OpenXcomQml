@@ -143,8 +143,7 @@ namespace OpenXcom
 
 
 	GameRenderer::GameRenderer(QQuickItem *parent):
-		QQuickPaintedItem(parent),
-		m_Game(this)
+		QQuickPaintedItem(parent)
 	{
 		setAcceptHoverEvents(true);
 		setAcceptedMouseButtons(Qt::AllButtons);
@@ -218,9 +217,9 @@ namespace OpenXcom
 
 	void GameRenderer::timerEvent(QTimerEvent *)
 	{
-		m_Game.run();
+		game.run();
 		{
-			SDL_Surface* screen = m_Game._screen->getSurface();
+			SDL_Surface* screen = game._screen->getSurface();
 			SDL_LockSurface(screen);
 			QImage image(
 				(const uchar*)screen->pixels,
@@ -242,9 +241,9 @@ namespace OpenXcom
 				image.setColorTable(colorTable);
 			}
 
-			m_Game.mutex.lock();
-			m_Game.gameImage = image.convertToFormat(QImage::Format_RGBA8888);
-			m_Game.mutex.unlock();
+			game.mutex.lock();
+			game.gameImage = image.convertToFormat(QImage::Format_RGBA8888);
+			game.mutex.unlock();
 			SDL_UnlockSurface(screen);
 		}
 		update();
@@ -252,9 +251,9 @@ namespace OpenXcom
 
 	void GameRenderer::paint(QPainter *painter)
 	{
-		m_Game.mutex.lock();
-		QImage scaled = m_Game.gameImage.scaled(size().toSize(), Qt::KeepAspectRatio);
-		m_Game.mutex.unlock();
+		game.mutex.lock();
+		QImage scaled = game.gameImage.scaled(size().toSize(), Qt::KeepAspectRatio);
+		game.mutex.unlock();
 
 		int x = (width() - scaled.width()) / 2;
 		int y = (height() - scaled.height()) / 2;
