@@ -127,6 +127,13 @@ int main(int argc, char *argv[])
 			QQmlEngine::setObjectOwnership(&options1, QQmlEngine::CppOwnership);
 		   return &options1;
 	});
+	qmlRegisterSingletonType<Game>("OpenXcom", 1, 0, "game",
+		[](QQmlEngine *engine, QJSEngine *scriptEngine) -> QObject* {
+		   Q_UNUSED(engine)
+		   Q_UNUSED(scriptEngine)
+		   QQmlEngine::setObjectOwnership(&game, QQmlEngine::CppOwnership);
+		   return &game;
+	});
 	QQmlApplicationEngine engine;
 	engine.addImportPath("qrc:/");
 	engine.addImportPath("qrc:/MainMenu");
@@ -137,6 +144,7 @@ int main(int argc, char *argv[])
 		return EXIT_SUCCESS;
 	options1.baseXResolution = options1.displayWidth();
 	options1.baseYResolution = options1.displayHeight();
+	game.init();
 
 	engine.load(QUrl("qrc:/main.qml"));
 

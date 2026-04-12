@@ -63,63 +63,9 @@ Sint16 yrel = 0;
  * creates the display screen and sets up the cursor.
  * @param title Title of the game window.
  */
-Game::Game(QQuickItem*_wnd) : QObject(_wnd), wnd(_wnd), _screen(0), _cursor(0), _lang(0), _save(0), _mod(0), _quit(false), _init(false), _update(false),  _mouseActive(true), _timeUntilNextFrame(0),
+Game::Game() : _screen(0), _cursor(0), _lang(0), _save(0), _mod(0), _quit(false), _init(false), _update(false),  _mouseActive(true), _timeUntilNextFrame(0),
 	_ctrl(false), _alt(false), _shift(false), _rmb(false), _mmb(false), _scrollStep(1)
 {
-	std::ostringstream title;
-	title << "OpenXcom " << OPENXCOM_VERSION_SHORT << OPENXCOM_VERSION_GIT;
-
-
-	options1.reload = false;
-	options1.mute = false;
-
-	// // Initialize SDL
-
-	if (SDL_Init(SDL_INIT_VIDEO) < 0)
-	{
-		Log(LOG_ERROR) << SDL_GetError();
-		Log(LOG_WARNING) << "No video detected, quit.";
-		throw Exception(SDL_GetError());
-	}
-	Log(LOG_INFO) << "SDL initialized successfully.";
-
-	// Initialize SDL_mixer
-	initAudio();
-
-	// trap the mouse inside the window
-	SDL_WM_GrabInput(SDL_GrabMode(options1.captureMouse()));
-
-	// Set the window icon
-	CrossPlatform::setWindowIcon(IDI_ICON1, "openxcom.png");
-
-	// Set the window caption
-	SDL_WM_SetCaption(title.str().c_str(), 0);
-
-	// Set up unicode
-	SDL_EnableUNICODE(1);
-	Unicode::getUtf8Locale();
-
-	// Create display
-	_screen = new Screen();
-
-	// // Create cursor
-	_cursor = new Cursor(9, 13);
-
-	// // Create invisible hardware cursor to workaround bug with absolute positioning pointing devices
-	// // SDL_ShowCursor(SDL_ENABLE);
-	// // Uint8 cursor = 0;
-	// // SDL_SetCursor(SDL_CreateCursor(&cursor, &cursor, 1,1,0,0));
-
-	// // Create fps counter
-	_fpsCounter = new FpsCounter(15, 5, 0, 0);
-
-	// // Create blank language
-	_lang = new Language();
-
-	_timeOfLastFrame = 0;
-
-	State::setGamePtr(this);
-	setState(new StartState());
 }
 
 /**
@@ -149,6 +95,63 @@ Game::~Game()
 	SDL_Quit();
 }
 
+void Game::init()
+{
+	std::ostringstream title;
+	title << "OpenXcom " << OPENXCOM_VERSION_SHORT << OPENXCOM_VERSION_GIT;
+
+
+	options1.reload = false;
+	options1.mute = false;
+
+		   // // Initialize SDL
+
+	if (SDL_Init(SDL_INIT_VIDEO) < 0)
+	{
+		Log(LOG_ERROR) << SDL_GetError();
+		Log(LOG_WARNING) << "No video detected, quit.";
+		throw Exception(SDL_GetError());
+	}
+	Log(LOG_INFO) << "SDL initialized successfully.";
+
+		   // Initialize SDL_mixer
+	initAudio();
+
+		   // trap the mouse inside the window
+	SDL_WM_GrabInput(SDL_GrabMode(options1.captureMouse()));
+
+		   // Set the window icon
+	CrossPlatform::setWindowIcon(IDI_ICON1, "openxcom.png");
+
+		   // Set the window caption
+	SDL_WM_SetCaption(title.str().c_str(), 0);
+
+		   // Set up unicode
+	SDL_EnableUNICODE(1);
+	Unicode::getUtf8Locale();
+
+		   // Create display
+	_screen = new Screen();
+
+		   // // Create cursor
+	_cursor = new Cursor(9, 13);
+
+		   // // Create invisible hardware cursor to workaround bug with absolute positioning pointing devices
+		   // // SDL_ShowCursor(SDL_ENABLE);
+		   // // Uint8 cursor = 0;
+		   // // SDL_SetCursor(SDL_CreateCursor(&cursor, &cursor, 1,1,0,0));
+
+		   // // Create fps counter
+	_fpsCounter = new FpsCounter(15, 5, 0, 0);
+
+		   // // Create blank language
+	_lang = new Language();
+
+	_timeOfLastFrame = 0;
+
+	State::setGamePtr(this);
+	setState(new StartState());
+}
 void Game::processEvents()
 {
 	while (SDL_PollEvent(&_event))
