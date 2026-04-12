@@ -30,9 +30,16 @@ Window {
         anchors.centerIn: parent
         width: 320
         height: 240
+
+        Main.StartingFrame {
+            anchors.centerIn: parent
+            visible: Game.state === Game.STARTING
+        }
+
         Main.Menu {
             id: mainMenu
             anchors.centerIn: parent
+            visible: Game.state === Game.MENU
         }
 
         scale: eScale

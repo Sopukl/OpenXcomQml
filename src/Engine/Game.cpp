@@ -868,4 +868,17 @@ void Game::resetTouchButtonFlags()
 	_scrollStep = 1;
 }
 
+Game::GameState Game::state() const
+{
+	return m_state;
+}
+void Game::setGameState(GameState newState)
+{
+	if(m_state != newState)
+	{
+		m_state = newState;
+		Q_EMIT stateChanged();
+	}
+}
+
 }

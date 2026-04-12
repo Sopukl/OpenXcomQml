@@ -1,2 +1,3 @@
 module MainMenu
 Menu 1.0 Menu.qml
+StartingFrame 1.0 StartingFrame.qml

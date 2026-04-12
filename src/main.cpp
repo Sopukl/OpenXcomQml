@@ -127,7 +127,7 @@ int main(int argc, char *argv[])
 			QQmlEngine::setObjectOwnership(&options1, QQmlEngine::CppOwnership);
 		   return &options1;
 	});
-	qmlRegisterSingletonType<Game>("OpenXcom", 1, 0, "game",
+	qmlRegisterSingletonType<Game>("OpenXcom", 1, 0, "Game",
 		[](QQmlEngine *engine, QJSEngine *scriptEngine) -> QObject* {
 		   Q_UNUSED(engine)
 		   Q_UNUSED(scriptEngine)

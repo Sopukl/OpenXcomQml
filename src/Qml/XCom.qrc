@@ -4,5 +4,6 @@
         <file>OpenXcom/MainMenu/Menu.qml</file>
         <file>OpenXcom/MainMenu/qmldir</file>
         <file>OpenXcom/qmldir</file>
+        <file>OpenXcom/MainMenu/StartingFrame.qml</file>
     </qresource>
 </RCC>

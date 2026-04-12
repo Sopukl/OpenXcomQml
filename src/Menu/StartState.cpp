@@ -185,6 +185,7 @@ void StartState::think()
 		}
 		_game->getCursor()->setVisible(true);
 		_game->getFpsCounter()->setVisible(options1.fpsCounter());
+		_game->setGameState(Game::MENU);
 		break;
 	default:
 		break;

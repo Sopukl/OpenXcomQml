@@ -48,6 +48,15 @@ class GeoscapeState;
     {
         Q_OBJECT
         friend class GameRenderer;
+      public:
+        enum GameState {
+            STARTING,
+            MENU,
+            GAME
+        };
+        Q_ENUM(GameState)
+        Q_PROPERTY(GameState state READ state WRITE setGameState NOTIFY stateChanged FINAL)
+
     private:
         enum ApplicationState { RUNNING = 0, SLOWED = 1, PAUSED = 2 } runningState = RUNNING;
         ApplicationState kbFocusRun[4] = { RUNNING, RUNNING, SLOWED, PAUSED };
@@ -71,7 +80,9 @@ class GeoscapeState;
 
         void processEvents();
         void processLogic();
-    public:
+        GameState m_state = STARTING;
+
+      public:
         QImage gameImage;
         QMutex mutex;
         /// Creates a new game and initializes SDL.
@@ -182,8 +193,12 @@ class GeoscapeState;
 
         /// Gets the scroll step value.
         int getScrollStep() const { return _scrollStep; }
-      signals:
-        void aboutToQuit();
-    };
-    inline Game game;
+
+		GameState state() const;
+		void setGameState(GameState);
+	  signals:
+		void aboutToQuit();
+		void stateChanged();
+	};
+	inline Game game;
 }
