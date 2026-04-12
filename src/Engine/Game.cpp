@@ -34,6 +34,7 @@
 #include "../Interface/FpsCounter.h"
 #include "../Mod/Mod.h"
 #include "../Savegame/SavedGame.h"
+#include "../Savegame/Base.h"
 #include "../Savegame/SavedBattleGame.h"
 #include "Action.h"
 #include "Exception.h"
@@ -44,6 +45,10 @@
 #include "../Ufopaedia/UfopaediaStartState.h"
 #include "../Menu/NotesState.h"
 #include "../Geoscape/GeoscapeState.h"
+#include "../Geoscape/BaseNameState.h"
+#include "../Geoscape/BuildNewBaseState.h"
+#include "../Basescape/PlaceLiftState.h"
+#include "../Geoscape/Globe.h"
 #include "../Menu/TestState.h"
 #include "../Menu/StartState.h"
 #include <algorithm>
@@ -256,6 +261,7 @@ void Game::processEvents()
 			_fpsCounter->handle(&action);
 			if (action.getDetails()->type == SDL_KEYDOWN)
 			{
+				qDebug() << "keydown";
 				// "ctrl-g" grab input
 				if (action.getDetails()->key.keysym.sym == SDLK_g && isCtrlPressed())
 				{
@@ -878,6 +884,50 @@ void Game::setGameState(GameState newState)
 	{
 		m_state = newState;
 		Q_EMIT stateChanged();
+	}
+}
+
+void Game::newGame(int difficulty, bool ironMan)
+{
+	setGameState(GAME);
+	auto diff = GameDifficulty(difficulty);
+
+	// Reset touch flags
+	resetTouchButtonFlags();
+
+	auto save = getMod()->newSave(diff);
+	save->setDifficulty(diff);
+	save->setIronman(ironMan);
+	setSavedGame(save);
+
+	auto gs = new GeoscapeState;
+	setState(gs);
+	gs->init();
+
+	auto* base = getSavedGame()->getBases()->back();
+	if (base->getMarker() != -1)
+	{
+		// location known already
+		base->calculateServices(save);
+
+		// center and rotate 35 degrees down (to see the base location while typoing its name)
+		gs->getGlobe()->center(base->getLongitude(), base->getLatitude() + 0.61);
+
+		if (base->getName().empty())
+		{
+			// fixed location, custom name
+			pushState(new BaseNameState(base, gs->getGlobe(), true, true));
+		}
+		else if (options1.customInitialBase())
+		{
+			// fixed location, fixed name
+			pushState(new PlaceLiftState(base, gs->getGlobe(), true));
+		}
+	}
+	else
+	{
+		// custom location, custom name
+		pushState(new BuildNewBaseState(base, gs->getGlobe(), true));
 	}
 }
 

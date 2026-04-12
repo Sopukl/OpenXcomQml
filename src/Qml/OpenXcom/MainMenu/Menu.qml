@@ -2,6 +2,7 @@ import QtQuick
 import QtQuick.Controls
 
 Item {
+    id: ctrl
     width: 256
     height: 160
     anchors.centerIn: parent
@@ -32,6 +33,11 @@ Item {
         text: "New Game"
         x: 32
         y: 70
+        onClicked: {
+            Qt.createComponent("NewGame.qml")
+              .createObject(ctrl)
+              .open()
+        }
     }
     MenuButton {
         text: "New Battle"
@@ -68,4 +74,10 @@ Item {
         horizontalAlignment: Text.AlignHCenter
 
     }
+
+    // NewGame {
+    //     id: newGamePopup
+    //     visible: false
+    // }
 }
+

@@ -218,6 +218,7 @@ namespace OpenXcom
 	{
 		game.run();
 		{
+			static QVector<QRgb> colorTable(256);
 			SDL_Surface* screen = game._screen->getSurface();
 			SDL_LockSurface(screen);
 			QImage image(
@@ -230,7 +231,7 @@ namespace OpenXcom
 				);
 
 			if (screen->format->BitsPerPixel == 8) {
-				QVector<QRgb> colorTable(256);
+
 				SDL_Palette* pal = screen->format->palette;
 				for (int i = 0; i < pal->ncolors; i++) {
 					colorTable[i] = qRgb(pal->colors[i].r,

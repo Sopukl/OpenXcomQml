@@ -12,18 +12,24 @@ Window {
     maximumHeight: Options1.displayHeight
     visible: true
     title: "OpenXcom"
-    property real tScale: 1.0
     property real eScale: {
         let wScale = wnd.width/root.width
         let hScale = wnd.height/root.height
-        console.log(wScale+':'+hScale+':'+':'+Options1.geoscapeScale)
         return Math.min(wScale, Math.min(hScale, Options1.geoscapeScale))
     }
+
+    onEScaleChanged: Options1.interfaceScale = eScale
 
     GameRenderer {
         id: gameWindow
         anchors.fill: parent
         focus: true
+        Timer {
+            running: true
+            interval: 500
+            repeat: true
+            onTriggered: gameWindow.forceActiveFocus(true)
+        }
     }
 
     Loader {
@@ -39,7 +45,7 @@ Window {
                 return "GameFrame.qml"
             return ""
         }
-        scale: eScale
+        scale: Options1.interfaceScale
     }
 
     Button {

@@ -196,6 +196,8 @@ class GeoscapeState;
 
 		GameState state() const;
 		void setGameState(GameState);
+
+		Q_INVOKABLE void newGame(int difficulty, bool ironMan);
 	  signals:
 		void aboutToQuit();
 		void stateChanged();

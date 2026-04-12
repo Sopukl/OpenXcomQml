@@ -7,5 +7,6 @@
         <file>OpenXcom/MainMenu/StartingFrame.qml</file>
         <file>LoadingFrame.qml</file>
         <file>GameFrame.qml</file>
+        <file>OpenXcom/MainMenu/NewGame.qml</file>
     </qresource>
 </RCC>
