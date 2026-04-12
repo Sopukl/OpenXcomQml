@@ -5,6 +5,7 @@ Item {
     width: 256
     height: 160
     anchors.centerIn: parent
+    clip: true
 
     component MenuButton: Button {
         width: 92
@@ -12,10 +13,19 @@ Item {
         font.pixelSize: 12
     }
 
+    Image {
+        anchors.centerIn: parent
+        width: 320
+        height: 200
+        source: "image://xcom/mainMenu"
+    }
     Rectangle {
         anchors.fill: parent
-        color: "blue"
-        opacity: 0.5
+        color: "transparent"
+        border {
+            width: 2
+            color: "green"
+        }
     }
 
     MenuButton {

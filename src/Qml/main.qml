@@ -16,7 +16,8 @@ Window {
     property real eScale: {
         let wScale = wnd.width/root.width
         let hScale = wnd.height/root.height
-        return Math.min(wScale, Math.min(hScale, tScale))
+        console.log(wScale+':'+hScale+':'+':'+Options1.geoscapeScale)
+        return Math.min(wScale, Math.min(hScale, Options1.geoscapeScale))
     }
 
     GameRenderer {
@@ -25,23 +26,19 @@ Window {
         focus: true
     }
 
-    Item {
+    Loader {
         id: root
         anchors.centerIn: parent
         width: 320
         height: 240
 
-        Main.StartingFrame {
-            anchors.centerIn: parent
-            visible: Game.state === Game.STARTING
+        source: {
+            if(Game.state === Game.STARTING)
+                return "LoadingFrame.qml"
+            if(Game.state === Game.MENU)
+                return "GameFrame.qml"
+            return ""
         }
-
-        Main.Menu {
-            id: mainMenu
-            anchors.centerIn: parent
-            visible: Game.state === Game.MENU
-        }
-
         scale: eScale
     }
 
@@ -55,7 +52,7 @@ Window {
         width: 30
         height: 30
         onClicked: {
-            mainMenu.visible = !mainMenu.visible
+            root.visible = !root.visible
         }
     }
 

@@ -5,5 +5,7 @@
         <file>OpenXcom/MainMenu/qmldir</file>
         <file>OpenXcom/qmldir</file>
         <file>OpenXcom/MainMenu/StartingFrame.qml</file>
+        <file>LoadingFrame.qml</file>
+        <file>GameFrame.qml</file>
     </qresource>
 </RCC>

@@ -28,6 +28,7 @@
 #include "Menu/StartState.h"
 #include <QGuiApplication>
 #include "GameRenderer.h"
+#include "XcomImagesProvider.h"
 #include <QQuickWindow>
 #include <QQmlApplicationEngine>
 
@@ -135,8 +136,8 @@ int main(int argc, char *argv[])
 		   return &game;
 	});
 	QQmlApplicationEngine engine;
+	engine.addImageProvider("xcom", new XcomImagesProvider);
 	engine.addImportPath("qrc:/");
-	engine.addImportPath("qrc:/MainMenu");
 	YAML::setGlobalErrorHandler();
 	CrossPlatform::getErrorDialog();
 	CrossPlatform::processArgs(argc, argv);

@@ -28,6 +28,7 @@ set ( root_src
   main.cpp
   md5.cpp
   GameRenderer.cpp
+  XComImagesProvider.cpp
 )
 
 file(GLOB_RECURSE basescape_src "Basescape/*.cpp")
