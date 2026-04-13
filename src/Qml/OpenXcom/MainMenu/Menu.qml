@@ -35,19 +35,20 @@ Item {
         x: 32
         y: 70
         onClicked: {
-            let cmp = Qt.createComponent("NewGame.qml")
-            console.log(cmp.errorString())
-            let obj = cmp.createObject(ctrl)
-            obj.open()
-            // Qt.createComponent("NewGame.qml")
-            //   .createObject(ctrl)
-            //   .open()
+            Qt.createComponent("NewGame.qml")
+              .createObject(ctrl)
+              .open()
         }
     }
     MenuButton {
         text: "New Battle"
         x: 132
         y: 70
+        onClicked: {
+            Qt.createComponent("NewBattle.qml")
+              .createObject(ctrl)
+              .open()
+        }
     }
     MenuButton {
         text: "Load Game"
