@@ -28,6 +28,7 @@
 #include "Menu/StartState.h"
 #include <QGuiApplication>
 #include "GameRenderer.h"
+#include "XcomImagesProvider.h"
 #include <QQuickWindow>
 #include <QQmlApplicationEngine>
 
@@ -128,13 +129,15 @@ int main(int argc, char *argv[])
 		   return &options1;
 	});
 	qmlRegisterSingletonType<Game>("OpenXcom", 1, 0, "Game",
-   [](QQmlEngine */*engine*/, QJSEngine */*scriptEngine*/) -> QObject* {
-        QQmlEngine::setObjectOwnership(&options1, QQmlEngine::CppOwnership);
-        return &game;
-    });
-    QQmlApplicationEngine engine;
+		[](QQmlEngine *engine, QJSEngine *scriptEngine) -> QObject* {
+		   Q_UNUSED(engine)
+		   Q_UNUSED(scriptEngine)
+		   QQmlEngine::setObjectOwnership(&game, QQmlEngine::CppOwnership);
+		   return &game;
+	});
+	QQmlApplicationEngine engine;
+	engine.addImageProvider("xcom", new XcomImagesProvider);
 	engine.addImportPath("qrc:/");
-	engine.addImportPath("qrc:/MainMenu");
 	YAML::setGlobalErrorHandler();
 	CrossPlatform::getErrorDialog();
 	CrossPlatform::processArgs(argc, argv);

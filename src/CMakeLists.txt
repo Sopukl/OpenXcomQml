@@ -18,6 +18,7 @@ if (MSVC)
     add_compile_options(/wd4244)  # conversion from 'double' to 'float', possible loss of data
     add_compile_options(/wd4244)  # conversion from 'double' to 'float', possible loss of data
     add_compile_options(/wd5030)  # attribute [[gnu::always_inline]] is not recognized
+    add_compile_options(/bigobj)
 endif()
 
 set(QML_IMPORT_PATH ${CMAKE_SOURCE_DIR}/src/Qml ${CMAKE_BINARY_DIR}/imports CACHE STRING "")
@@ -27,6 +28,7 @@ set ( root_src
   main.cpp
   md5.cpp
   GameRenderer.cpp
+  XComImagesProvider.cpp
 )
 
 file(GLOB_RECURSE basescape_src "Basescape/*.cpp")
@@ -99,4 +101,25 @@ target_link_libraries(openxcom
     Qt6::Qml
 )
 
-target_link_libraries ( openxcom ${system_libs} ${PKG_DEPS_LDFLAGS} ${EXTRA_XCOM_LIBS} ${WIN32_LIBS} )
+if(NOT UNIX)
+    target_link_directories(openxcom PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../deps/lib/x64)
+
+    target_link_libraries(openxcom
+        ${system_libs}
+        ${EXTRA_XCOM_LIBS}
+        ${WIN32_LIBS}
+        SDLmain
+        ${SDL_LIBRARY}
+        ${SDLMIXER_LIBRARY}
+        ${SDLIMAGE_LIBRARY}
+        ${SDLGFX_LIBRARY}
+        opengl32
+    )
+else()
+    target_link_libraries(openxcom
+        ${system_libs}
+        ${PKG_DEPS_LDFLAGS}
+        ${EXTRA_XCOM_LIBS}
+        ${WIN32_LIBS}
+    )
+endif()

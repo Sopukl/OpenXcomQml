@@ -14,16 +14,14 @@ include_directories ( ${OPENGL_INCLUDE_DIR} )
 
 # Include rapidyaml lib
 include_directories(${CMAKE_SOURCE_DIR}/libs/rapidyaml)
-
-if(NOT UNIX AND IS_DIRECTORY ${DEPS_DIR})
-   include_directories ( ${DEPS_DIR}/include/SDL ${DEPS_DIR}/include )
-   if ( CMAKE_CL_64 )
-     link_directories ( ${DEPS_DIR}/lib/x64 )
-   endif()
+if(NOT UNIX)
+   include_directories ( deps/include/SDL deps/include )
    set( SDL_LIBRARY SDL )
    set ( SDLGFX_LIBRARY SDL_gfx )
    set ( SDLMIXER_LIBRARY SDL_mixer )
    set ( SDLIMAGE_LIBRARY SDL_image )
+
+   set(DEPS_LIB_DIR ${CMAKE_CURRENT_SOURCE_DIR}/deps/lib/x64)
 elseif(UNIX)
     include(FindPkgConfig)
     pkg_check_modules(PKG_SDL REQUIRED sdl)

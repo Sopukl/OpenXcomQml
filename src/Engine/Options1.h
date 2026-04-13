@@ -457,6 +457,9 @@ namespace OpenXcom
 		MEMBER(qint32, baseYGeoscape)
 		MEMBER(qint32, baseXBattlescape)
 		MEMBER(qint32, baseYBattlescape)
+
+		OPTION(qreal, interfaceScale)
+
 	  public:
 		std::vector< std::pair<std::string, bool> > mods; // ordered list of available mods (lowest priority to highest) and whether they are active
 		Options1();

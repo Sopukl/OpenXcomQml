@@ -5,22 +5,47 @@ import OpenXcom 1.0
 import OpenXcom.MainMenu 1.0 as Main
 
 Window {
+    id: wnd
     minimumWidth: Options1.displayWidth
     minimumHeight: Options1.displayHeight
     maximumWidth: Options1.displayWidth
     maximumHeight: Options1.displayHeight
     visible: true
     title: "OpenXcom"
+    property real eScale: {
+        let wScale = wnd.width/root.width
+        let hScale = wnd.height/root.height
+        return Math.min(wScale, Math.min(hScale, Options1.geoscapeScale))
+    }
+
+    onEScaleChanged: Options1.interfaceScale = eScale
 
     GameRenderer {
         id: gameWindow
         anchors.fill: parent
         focus: true
+        Timer {
+            running: true
+            interval: 500
+            repeat: true
+            onTriggered: gameWindow.forceActiveFocus(true)
+        }
     }
 
-    Main.Menu {
-        id: mainMenu
+    Loader {
+        id: root
         anchors.centerIn: parent
+        width: 320
+        height: 240
+
+        source: {
+            if(Game.state === Game.STARTING)
+                return "LoadingFrame.qml"
+            if(Game.state === Game.MENU)
+                return "GameFrame.qml"
+            return ""
+        }
+        scale: Options1.interfaceScale
     }
 
     Button {
@@ -32,6 +57,21 @@ Window {
         }
         width: 30
         height: 30
-        onClicked: mainMenu.visible = !mainMenu.visible
+        onClicked: {
+            root.visible = !root.visible
+        }
     }
+
+    // Slider {
+    //     anchors {
+    //         horizontalCenter: parent.horizontalCenter
+    //         bottom: parent.bottom
+    //         bottomMargin: 5
+    //     }
+    //     from: 0.5
+    //     to: 4.0
+    //     stepSize: 0.5
+    //     value: wnd.tScale
+    //     onValueChanged: wnd.tScale = value
+    // }
 }

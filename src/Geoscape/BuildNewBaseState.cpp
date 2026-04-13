@@ -89,7 +89,7 @@ BuildNewBaseState::BuildNewBaseState(Base *base, Globe *globe, bool first) : _ba
 	add(_txtTitle, "genericText", "geoscape");
 
 	// Set up objects
-	_globe->onMouseClick((ActionHandler)&BuildNewBaseState::globeClick);
+	_globe->onMousePress((ActionHandler)&BuildNewBaseState::globeClick);
 
 	_btnRotateLeft->onMousePress((ActionHandler)&BuildNewBaseState::btnRotateLeftPress);
 	_btnRotateLeft->onMouseRelease((ActionHandler)&BuildNewBaseState::btnRotateLeftRelease);
