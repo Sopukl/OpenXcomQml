@@ -156,6 +156,7 @@ namespace OpenXcom
 
 	void GameRenderer::mousePressEvent(QMouseEvent *event)
 	{
+		forceActiveFocus();
 		QPoint pos = event->pos();
 		Uint8 button = convertMouseButton(event->button());
 

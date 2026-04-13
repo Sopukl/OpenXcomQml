@@ -24,12 +24,6 @@ Window {
         id: gameWindow
         anchors.fill: parent
         focus: true
-        Timer {
-            running: true
-            interval: 500
-            repeat: true
-            onTriggered: gameWindow.forceActiveFocus(true)
-        }
     }
 
     Loader {

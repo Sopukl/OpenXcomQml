@@ -32,8 +32,9 @@ Popup {
             ListView {
                 id: diffList
                 orientation: ListView.Vertical
-                width: contentWidth
-                height: contentHeight
+                spacing: 2
+                width:  160
+                height: 100
                 currentIndex: 0
                 model: [{text:"Beginner",   value:0},
                         {text:"Experienced",value:1},
@@ -46,7 +47,6 @@ Popup {
                     height: 18
                     text: modelData.text
                     onClicked: diffList.currentIndex = index
-
                 }
                 highlight: Rectangle {
                     color: "green"

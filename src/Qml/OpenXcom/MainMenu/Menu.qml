@@ -35,9 +35,13 @@ Item {
         x: 32
         y: 70
         onClicked: {
-            Qt.createComponent("NewGame.qml")
-              .createObject(ctrl)
-              .open()
+            let cmp = Qt.createComponent("NewGame.qml")
+            console.log(cmp.errorString())
+            let obj = cmp.createObject(ctrl)
+            obj.open()
+            // Qt.createComponent("NewGame.qml")
+            //   .createObject(ctrl)
+            //   .open()
         }
     }
     MenuButton {
