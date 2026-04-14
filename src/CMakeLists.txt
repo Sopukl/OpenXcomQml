@@ -6,7 +6,6 @@ set(CMAKE_AUTOUIC ON)
 find_package(Qt6 REQUIRED COMPONENTS
     Core
     Quick
-    Widgets
     Qml
 )
 add_definitions(-DQT_NO_EMIT)
@@ -97,7 +96,6 @@ add_executable (
 target_link_libraries(openxcom
     Qt6::Core
     Qt6::Quick
-    Qt6::Widgets
     Qt6::Qml
 )
 

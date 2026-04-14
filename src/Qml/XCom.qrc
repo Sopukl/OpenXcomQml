@@ -9,5 +9,8 @@
         <file>OpenXcom/MainMenu/NewGame.qml</file>
         <file>OpenXcom/MainMenu/NewBattle.qml</file>
         <file>OpenXcom/MainMenu/Controls/ComboBox.qml</file>
+        <file>OpenXcom/MainMenu/Controls/Popup.qml</file>
+        <file>OpenXcom/MainMenu/Controls/Button.qml</file>
+        <file>OpenXcom/MainMenu/Controls/qmldir</file>
     </qresource>
 </RCC>

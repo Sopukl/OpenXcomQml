@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Controls
 import OpenXcom 1.0
+import OpenXcom.MainMenu.Controls 1.0 as XC
 
 Item {
     id: ctrl
@@ -9,7 +10,7 @@ Item {
     anchors.centerIn: parent
     clip: true
 
-    component MenuButton: Button {
+    component MenuButton: XC.Button {
         width: 92
         height: 20
         font.pixelSize: 12
@@ -45,6 +46,8 @@ Item {
         x: 132
         y: 70
         onClicked: {
+            let cmp = Qt.createComponent("NewBattle.qml")
+            console.log(cmp.errorString())
             Qt.createComponent("NewBattle.qml")
               .createObject(ctrl)
               .open()
@@ -80,10 +83,5 @@ Item {
         horizontalAlignment: Text.AlignHCenter
 
     }
-
-    // NewGame {
-    //     id: newGamePopup
-    //     visible: false
-    // }
 }
 

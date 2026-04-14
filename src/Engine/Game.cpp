@@ -21,7 +21,6 @@
 #include <algorithm>
 #include <cmath>
 #include <qguiapplication.h>
-#include <qwidget.h>
 #include <sstream>
 #include <SDL_mixer.h>
 #include "State.h"
