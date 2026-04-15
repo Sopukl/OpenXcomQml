@@ -1,1 +1,3 @@
 module OpenXcom
+
+singleton Xcom 1.0 Xcom.qml

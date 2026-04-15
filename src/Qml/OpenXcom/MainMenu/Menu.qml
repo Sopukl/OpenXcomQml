@@ -36,9 +36,8 @@ Item {
         x: 32
         y: 70
         onClicked: {
-            Qt.createComponent("NewGame.qml")
-              .createObject(ctrl)
-              .open()
+            Xcom.createWindow("MainMenu/NewGame.qml", ctrl)
+                .open()
         }
     }
     MenuButton {
@@ -46,11 +45,8 @@ Item {
         x: 132
         y: 70
         onClicked: {
-            let cmp = Qt.createComponent("NewBattle.qml")
-            console.log(cmp.errorString())
-            Qt.createComponent("NewBattle.qml")
-              .createObject(ctrl)
-              .open()
+            Xcom.createWindow("MainMenu/NewBattle.qml", ctrl)
+                .open()
         }
     }
     MenuButton {
@@ -62,6 +58,10 @@ Item {
         text: "Options"
         x: 132
         y: 98
+        onClicked: {
+            Xcom.createWindow("MainMenu/Options.qml", ctrl)
+                .open()
+        }
     }
     MenuButton {
         text: "Mods"

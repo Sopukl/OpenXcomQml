@@ -3,40 +3,34 @@ import QtQuick.Controls
 import OpenXcom 1.0
 Popup {
     id: popup
-    default property alias children : _content.children
     property alias bgImage: _bgImage
     anchors.centerIn: parent
     width: _content.width
     height: _content.height
     modal: true
+    padding: 0
     closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutside
+    scale: Options1.interfaceScale
+    clip: true
 
-    Item {
-        width: popup.width
-        height: popup.height
+    transformOrigin: Item.TopLeft
+    Image {
+        id: _bgImage
         anchors.centerIn: parent
-        scale: Options1.interfaceScale
-        clip: true
-        Image {
-            id: _bgImage
-            anchors.centerIn: parent
-            visible: source !== ""
-        }
-        Item {
-            id: _content
-            width: popup.width
-            height: popup.width
-            clip: true
-        }
+        visible: source !== ""
+        width: 320
+        height: 200
+        source: "image://xcom/mainMenu"
+    }
 
-        Rectangle {
-            anchors.fill: parent
-            color: "#00000000"
-            border {
-                width: 1
-                color: "green"
-            }
+    Rectangle {
+        anchors.fill: parent
+        color: "#00000000"
+        border {
+            width: 1
+            color: "green"
         }
+        z: 999
     }
     onClosed: destroy()
 }

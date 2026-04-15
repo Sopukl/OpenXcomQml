@@ -12,5 +12,10 @@
         <file>OpenXcom/MainMenu/Controls/Popup.qml</file>
         <file>OpenXcom/MainMenu/Controls/Button.qml</file>
         <file>OpenXcom/MainMenu/Controls/qmldir</file>
+        <file>OpenXcom/MainMenu/Options.qml</file>
+        <file>OpenXcom/Xcom.qml</file>
+        <file>OpenXcom/MainMenu/Options/Video.qml</file>
+        <file>OpenXcom/MainMenu/Controls/GroupBox.qml</file>
+        <file>OpenXcom/MainMenu/Options/Page.qml</file>
     </qresource>
 </RCC>

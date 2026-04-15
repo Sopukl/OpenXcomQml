@@ -8,11 +8,6 @@ XC.Popup {
     anchors.centerIn: parent
     width: 192
     height: 180
-    bgImage {
-        width: 320
-        height: 200
-        source: "image://xcom/mainMenu"
-    }
 
     Column {
         anchors.centerIn: parent
