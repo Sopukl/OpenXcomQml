@@ -4,6 +4,7 @@ import QtQuick.Controls as QC
 QC.GroupBox {
     id: control
     padding: 0
+    spacing: 0
     background: null
 
     label: QC.Label {

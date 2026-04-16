@@ -31,6 +31,7 @@
 #include "XcomImagesProvider.h"
 #include <QQuickWindow>
 #include <QQmlApplicationEngine>
+#include <QQuickStyle>
 
 /** @mainpage
  * @author OpenXcom Developers
@@ -118,6 +119,7 @@ int main(int argc, char *argv[])
 // #endif
 	QQuickWindow::setGraphicsApi(QSGRendererInterface::OpenGL);
 	QGuiApplication app(argc, argv);
+	QQuickStyle::setStyle("Universal");
 
 	qmlRegisterType<OpenXcom::GameRenderer>("OpenXcom", 1, 0, "GameRenderer");
 	qmlRegisterType<OpenXcom::Options1>("OpenXcom", 1, 0, "Options1");
