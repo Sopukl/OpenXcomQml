@@ -5,7 +5,6 @@ import OpenXcom.MainMenu.Controls 1.0 as XC
 import "." as This
 This.Page {
     title: "Video"
-    Component.onCompleted: console.log(Game.getLanguages())
     Column
     {
         x: 2
@@ -47,7 +46,13 @@ This.Page {
             width: 110
             XC.ComboBox {
                 width: parent.width
+                textRole: "text"
                 model: Game.getLanguages()
+                onModelChanged: {
+                    currentIndex = model.findIndex(
+                        e=>e.value === Options1.language)
+                }
+                onCurrentIndexChanged: Options1.language = model[currentIndex].value
             }
         }
         XC.GroupBox {

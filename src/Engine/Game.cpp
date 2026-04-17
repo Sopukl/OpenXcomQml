@@ -53,6 +53,7 @@
 #include <algorithm>
 #include "../fallthrough.h"
 #include "../version.h"
+#include <QJsonObject>
 namespace OpenXcom
 {
 
@@ -931,15 +932,21 @@ void Game::newGame(int difficulty, bool ironMan)
 	}
 }
 
-QVector<QString> Game::getLanguages() const
+QJsonArray Game::getLanguages() const
 {
 	std::vector<std::string> _langs;
 	std::vector<std::string> names;
 	Language::getList(_langs, names);
-	QVector<QString> res;
+	QJsonArray  res;
 
-	for(const auto& lang: names)
-		res.push_back(QString::fromStdString(lang));
+	for(size_t i=0; i<names.size(); i++)
+	{
+		QJsonObject o;
+		o.insert("text",  QString::fromStdString(names.at(i)));
+		o.insert("value", QString::fromStdString(_langs.at(i)));
+		res.append(o);
+	}
+
 	return res;
 }
 
