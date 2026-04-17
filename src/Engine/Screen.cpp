@@ -114,11 +114,27 @@ void Screen::makeVideoFlags()
  * Initializes a new display screen for the game to render contents to.
  * The screen is set up based on the current options.
  */
-Screen::Screen() : _baseWidth(ORIGINAL_WIDTH), _baseHeight(ORIGINAL_HEIGHT), _scaleX(1.0), _scaleY(1.0), _flags(0), _numColors(0), _firstColor(0), _pushPalette(false), _flickerFix(false)
+Screen::Screen(QObject *parent) :
+	QObject(parent),
+	_baseWidth(ORIGINAL_WIDTH),
+	_baseHeight(ORIGINAL_HEIGHT),
+	_scaleX(1.0), _scaleY(1.0),
+	_flags(0), _numColors(0),
+	_firstColor(0), _pushPalette(false),
+	_flickerFix(false)
 {
 	_flickerFix = options1.oxceEnablePaletteFlickerFix();
 
-	resetDisplay();
+	connect(&options1, &Options1::displayWidthChanged,
+			this, &Screen::updateDisplaySettings);
+	connect(&options1, &Options1::displayHeightChanged,
+			this, &Screen::updateDisplaySettings);
+	connect(&options1, &Options1::geoscapeScaleChanged,
+			this, &Screen::updateDisplaySettings);
+	connect(&options1, &Options1::battlescapeScaleChanged,
+			this, &Screen::updateDisplaySettings);
+
+	updateDisplaySettings();
 	memset(deferredPalette, 0, 256*sizeof(SDL_Color));
 }
 
@@ -737,6 +753,11 @@ void Screen::updateScale(int type, int &width, int &height, bool change)
 		options1.baseXResolution = width;
 		options1.baseYResolution = height;
 	}
+}
+
+void Screen::updateDisplaySettings()
+{
+	resetDisplay(true, true);
 }
 
 }

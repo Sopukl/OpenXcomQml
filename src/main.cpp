@@ -121,6 +121,7 @@ int main(int argc, char *argv[])
 	QGuiApplication app(argc, argv);
 	QQuickStyle::setStyle("Universal");
 
+	qRegisterMetaType<std::vector<std::string>>("std::vector<std::string>");
 	qmlRegisterType<OpenXcom::GameRenderer>("OpenXcom", 1, 0, "GameRenderer");
 	qmlRegisterType<OpenXcom::Options1>("OpenXcom", 1, 0, "Options1");
 	qmlRegisterSingletonType<Options1>("OpenXcom", 1, 0, "Options1",

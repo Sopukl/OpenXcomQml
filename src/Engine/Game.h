@@ -198,6 +198,7 @@ class GeoscapeState;
 		void setGameState(GameState);
 
 		Q_INVOKABLE void newGame(int difficulty, bool ironMan);
+		Q_INVOKABLE QVector<QString> getLanguages() const;
 	  signals:
 		void aboutToQuit();
 		void stateChanged();

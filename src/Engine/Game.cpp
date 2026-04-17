@@ -931,4 +931,16 @@ void Game::newGame(int difficulty, bool ironMan)
 	}
 }
 
+QVector<QString> Game::getLanguages() const
+{
+	std::vector<std::string> _langs;
+	std::vector<std::string> names;
+	Language::getList(_langs, names);
+	QVector<QString> res;
+
+	for(const auto& lang: names)
+		res.push_back(QString::fromStdString(lang));
+	return res;
+}
+
 }

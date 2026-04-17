@@ -18,6 +18,7 @@
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include <SDL.h>
+#include <QObject>
 #include <string>
 #include "OpenGL.h"
 #include "Surface.h"
@@ -36,8 +37,9 @@ class Action;
  * where all the contents are kept, so any filters or conversions
  * can be applied before rendering the screen.
  */
-class Screen
+class Screen: public QObject
 {
+	Q_OBJECT
 private:
 	SDL_Surface *_screen;
 	int _bpp;
@@ -59,7 +61,7 @@ public:
 	static const int ORIGINAL_HEIGHT;
 
 	/// Creates a new display screen.
-	Screen();
+	Screen(QObject *parent = nullptr);
 	/// Cleans up the display screen.
 	~Screen();
 	/// Get horizontal offset.
@@ -100,6 +102,9 @@ public:
 	static bool useOpenGL();
 	/// update the game scale as required.
 	static void updateScale(int type, int &width, int &height, bool change);
+
+  public slots:
+    void updateDisplaySettings();
 };
 
 }
