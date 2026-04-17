@@ -12,9 +12,33 @@ This.Page {
         XC.GroupBox {
             title: "Display resolution"
             width: 110
-            CheckBox {
-                text: qsTr("E-mail")
+            XC.ComboBox {
                 width: parent.width
+                model: [{text: "640x480",   value: Qt.size(640,480)},
+                        {text: "800x600",   value: Qt.size(800,600)},
+                        {text: "1024x768",  value: Qt.size(1024,768)},
+                        {text: "1280x1024", value: Qt.size(1280,1024)}]
+
+                textRole: "text"
+                Component.onCompleted: {
+                    let cur = Qt.size(Options1.displayWidth,
+                                      Options1.displayHeight);
+
+                    for(let idx in model)
+                        if(model[idx] === cur)
+                            currentIndex = idx;
+                }
+                onCurrentIndexChanged: {
+                    let oldVal = Qt.size(Options1.displayWidth,
+                                         Options1.displayHeight)
+                    let curVal = model[currentIndex].value
+
+                    if(curVal !== oldVal)
+                    {
+                        Options1.displayWidth  = curVal.width;
+                        Options1.displayHeight = curVal.height;
+                    }
+                }
             }
         }
         XC.GroupBox {

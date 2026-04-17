@@ -5,26 +5,28 @@ Popup {
     id: popup
     property alias bgImage: _bgImage
     anchors.centerIn: parent
-    width: _content.width
-    height: _content.height
     modal: true
     padding: 0
     closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutside
-    scale: Options1.interfaceScale
-    clip: true
-
-    transformOrigin: Item.TopLeft
-    Image {
+    onOpened: forceActiveFocus()
+    background: Image {
         id: _bgImage
         anchors.centerIn: parent
+        transformOrigin: Item.Center
+        scale: Options1.interfaceScale
         visible: source !== ""
         width: 320
         height: 200
         source: "image://xcom/mainMenu"
     }
 
+    contentItem {
+        transformOrigin: Item.Center
+        scale: Options1.interfaceScale
+    }
+
     Rectangle {
-        anchors.fill: parent
+        anchors.fill: contentItem
         color: "#00000000"
         border {
             width: 1

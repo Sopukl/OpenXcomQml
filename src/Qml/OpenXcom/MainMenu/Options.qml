@@ -65,7 +65,6 @@ XC.Popup {
             title: "Folders"
         }
     }
-
     Row {
         id: btns
         anchors{
@@ -87,7 +86,9 @@ XC.Popup {
             width: 104
         }
     }
-        //    _window = new Window(this, 320, 200, 0, 0);
+
+
+    //    _window = new Window(this, 320, 200, 0, 0);
 
     // _btnVideo = new TextButton(80, 16, 8, 8);
     // _btnAudio = new TextButton(80, 16, 8, 28);

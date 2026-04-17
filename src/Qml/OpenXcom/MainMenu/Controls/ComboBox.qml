@@ -47,12 +47,14 @@ ComboBox {
 
         width: ctrl.width
         height: ctrl.height
+        padding: 0
         contentItem: Text {
             text: delegate.model[ctrl.textRole]
             color: "#21be2b"
             font: ctrl.font
             elide: Text.ElideRight
             verticalAlignment: Text.AlignVCenter
+            horizontalAlignment: Text.AlignHCenter
         }
         highlighted: ctrl.highlightedIndex === index
     }
