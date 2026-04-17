@@ -20,6 +20,12 @@ Popup {
         source: "image://xcom/mainMenu"
     }
 
+    MouseArea {
+        anchors.fill: contentItem
+        acceptedButtons: Qt.AllButtons
+        focusPolicy: Qt.NoFocus
+    }
+
     contentItem {
         transformOrigin: Item.Center
         scale: Options1.interfaceScale
