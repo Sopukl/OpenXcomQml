@@ -9,6 +9,7 @@ ComboBox {
     currentIndex: 0
     editable: false
     font.pixelSize: 9
+    textRole: "text"
     anchors{
         verticalCenter: parent.verticalCenter
         right: parent.right
