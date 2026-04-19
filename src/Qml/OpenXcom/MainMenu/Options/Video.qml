@@ -23,9 +23,7 @@ This.Page {
                     let cur = Qt.size(Options1.displayWidth,
                                       Options1.displayHeight);
 
-                    for(let idx in model)
-                        if(model[idx] === cur)
-                            currentIndex = idx;
+                    currentIndex = model.findIndex(e=>e.value === cur)
                 }
                 onCurrentIndexChanged: {
                     let oldVal = Qt.size(Options1.displayWidth,

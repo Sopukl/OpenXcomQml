@@ -76,10 +76,15 @@ XC.Popup {
         XC.Button {
             text: "Ok"
             width: 104
+            onClicked: {
+                Options1.saveSettings();
+                close();
+            }
         }
         XC.Button {
             text: "Cancel"
             width: 104
+            onClicked: close();
         }
         XC.Button {
             text: "Restore defaults"

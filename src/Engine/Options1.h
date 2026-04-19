@@ -465,13 +465,12 @@ namespace OpenXcom
 		Options1();
 		~Options1();
 
-		void saveSettings();
+		Q_INVOKABLE void saveSettings();
 	};
 
 	inline Options1 options1;
 }
 
-Q_DECLARE_METATYPE(std::string)
 Q_DECLARE_METATYPE(SDLKey)
 Q_DECLARE_METATYPE(SDL_GrabMode)
 Q_DECLARE_METATYPE(OpenXcom::KeyboardType)
