@@ -19,14 +19,11 @@ This.Page {
                         {text: "1024x768",  value: Qt.size(1024,768)},
                         {text: "1280x1024", value: Qt.size(1280,1024)}]
 
-                textRole: "text"
                 Component.onCompleted: {
                     let cur = Qt.size(Options1.displayWidth,
                                       Options1.displayHeight);
 
-                    for(let idx in model)
-                        if(model[idx] === cur)
-                            currentIndex = idx;
+                    currentIndex = model.findIndex(e=>e.value === cur)
                 }
                 onCurrentIndexChanged: {
                     let oldVal = Qt.size(Options1.displayWidth,
@@ -60,6 +57,21 @@ This.Page {
             width: 110
             XC.ComboBox {
                 width: parent.width
+                model: [{text: "1x",  value: 1},
+                        {text: "2x",  value: 2},
+                        {text: "3x",  value: 3},
+                        {text: "4x",  value: 4},
+                        {text: "5x",  value: 5},
+                        {text: "6x",  value: 6},
+                        {text: "7x",  value: 7},
+                        {text: "8x",  value: 8},
+                        {text: "9x",  value: 9},
+                        {text: "10x", value: 10}]
+                Component.onCompleted: {
+                    currentIndex = model.findIndex(
+                        e=>e.value === Options1.geoscapeScale)
+                }
+                onCurrentIndexChanged: Options1.geoscapeScale = model[currentIndex].value
             }
         }
         XC.GroupBox {

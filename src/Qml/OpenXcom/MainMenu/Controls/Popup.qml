@@ -9,15 +9,22 @@ Popup {
     padding: 0
     closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutside
     onOpened: forceActiveFocus()
-    background: Image {
-        id: _bgImage
-        anchors.centerIn: parent
+    background: Item {
+        width: popup.width
+        height: popup.height
+        clip: true
         transformOrigin: Item.Center
         scale: Options1.interfaceScale
-        visible: source !== ""
-        width: 320
-        height: 200
-        source: "image://xcom/mainMenu"
+        Image {
+            id: _bgImage
+            anchors.centerIn: parent
+            transformOrigin: Item.Center
+            scale: Options1.interfaceScale
+            visible: source !== ""
+            width: 320
+            height: 200
+            source: "image://xcom/mainMenu"
+        }
     }
 
     MouseArea {

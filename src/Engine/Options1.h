@@ -471,7 +471,6 @@ namespace OpenXcom
 	inline Options1 options1;
 }
 
-//Q_DECLARE_METATYPE(std::string)
 Q_DECLARE_METATYPE(SDLKey)
 Q_DECLARE_METATYPE(SDL_GrabMode)
 Q_DECLARE_METATYPE(OpenXcom::KeyboardType)
