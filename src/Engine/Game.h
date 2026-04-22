@@ -18,12 +18,12 @@
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include <list>
-#include <string>
 #include <SDL.h>
 #include <QQuickItem>
 #include <QMutex>
 #include <QImage>
 #include <QJsonArray>
+#include <QJsonObject>
 
 namespace OpenXcom
 {
@@ -200,6 +200,7 @@ class GeoscapeState;
 
 		Q_INVOKABLE void newGame(int difficulty, bool ironMan);
 		Q_INVOKABLE QJsonArray getLanguages() const;
+		Q_INVOKABLE QJsonArray getModsInfo() const;
 	  signals:
 		void aboutToQuit();
 		void stateChanged();

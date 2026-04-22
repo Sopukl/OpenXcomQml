@@ -10,9 +10,9 @@ ComboBox {
     editable: false
     font.pixelSize: 9
     textRole: "text"
-    anchors{
-        verticalCenter: parent.verticalCenter
-        right: parent.right
+
+    function formatText(index) {
+        return model[index][textRole]
     }
 
     background: Rectangle {
@@ -50,7 +50,7 @@ ComboBox {
         height: ctrl.height
         padding: 0
         contentItem: Text {
-            text: delegate.model[ctrl.textRole]
+            text: ctrl.formatText(index)// delegate.model[ctrl.textRole]
             color: "#21be2b"
             font: ctrl.font
             elide: Text.ElideRight
@@ -66,7 +66,7 @@ ComboBox {
         padding: 0
         scale: Options1.interfaceScale
         transformOrigin: Item.TopLeft
-        property rect cbRect: ctrl.mapToItem(parent, ctrl.x, ctrl.y,
+        property rect cbRect: ctrl.mapToItem(ctrl.parent, 0, 0,
                                              ctrl.width, ctrl.height)
 
         y: cbRect.y + cbRect.height + 1

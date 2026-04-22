@@ -950,4 +950,26 @@ QJsonArray Game::getLanguages() const
 	return res;
 }
 
+QJsonArray Game::getModsInfo() const
+{
+	const auto &modInfos = Options::getModInfos();
+
+	QJsonArray mods;
+
+	for (const auto& [modId, modEnabled] : options1.mods)
+		if (const auto& it = modInfos.find(modId);
+						it != modInfos.end())
+		{
+			const auto& modInfo = it->second;
+			QJsonObject o;
+			o["name"] = QString::fromStdString(modInfo.getName());
+			o["id"] = QString::fromStdString(modId);
+			o["enabled"] = modEnabled;
+			o["isMaster"] = modInfo.isMaster();
+			o["masterId"] = QString::fromStdString(modInfo.getMaster());
+			mods.append(o);
+		}
+	return mods;
+}
+
 }

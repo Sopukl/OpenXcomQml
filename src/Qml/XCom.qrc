@@ -17,5 +17,6 @@
         <file>OpenXcom/MainMenu/Options/Video.qml</file>
         <file>OpenXcom/MainMenu/Controls/GroupBox.qml</file>
         <file>OpenXcom/MainMenu/Options/Page.qml</file>
+        <file>OpenXcom/MainMenu/Mods.qml</file>
     </qresource>
 </RCC>

@@ -67,6 +67,10 @@ Item {
         text: "Mods"
         x: 32
         y: 124
+        onClicked: {
+            Xcom.createWindow("MainMenu/Mods.qml", ctrl)
+                .open()
+        }
     }
     MenuButton {
         text: "Quit"

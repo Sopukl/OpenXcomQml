@@ -18,8 +18,8 @@ Popup {
         Image {
             id: _bgImage
             anchors.centerIn: parent
-            transformOrigin: Item.Center
-            scale: Options1.interfaceScale
+            // transformOrigin: Item.Center
+            // scale: Options1.interfaceScale
             visible: source !== ""
             width: 320
             height: 200
