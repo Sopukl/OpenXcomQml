@@ -8,22 +8,18 @@ XC.Popup {
     width: 320
     height: 200
     anchors.centerIn: parent
-    property var mods: [...Game.getModsInfo()]
+    property var mods: Game.getModsInfo()
 
     function moveUp(idx) {
         if(idx > 0)
         {
-            let cur = mods[idx];
-            mods.splice(idx, 1);
-            mods.splice(idx-1, 0, cur);
-            ctrl.modsChanged();
+            [mods[idx-1], mods[idx]] = [mods[idx], mods[idx-1]];
+            modsChanged();
         }
     }
-
-    onModsChanged: {
-        console.log("----");
-        for(let o of mods)
-            console.log(o.name)
+    function moveMod(idxFrom, idxTo) {
+        [mods[idxFrom], mods[idxTo]] = [mods[idxTo], mods[idxFrom]];
+        modsChanged();
     }
 
     // ========== ЗАГОЛОВОК "BASE GAME" ==========
@@ -52,13 +48,23 @@ XC.Popup {
             leftMargin: 8
         }
 
-        displayText: currentValue?.name??"undefined"
+        displayText: mods[currentValue]?.name??"undefined"
         function formatText(index) {
-            return model[index]?.name??"undefined"
+            return mods[model[index]].name??"undefined"
         }
 
-        model: mods.filter(mod=>mod.isMaster)
-        currentIndex: model.findIndex(mod=>mod.enabled)
+        model: {
+            let res = []
+            for(let idx in mods)
+                if(mods[idx].isMaster)
+                    res.push(idx)
+            return res
+        }
+        onModelChanged: currentIndex= model.findIndex(e=>mods[e].enabled)
+        onActivated: {
+            for(let idx in model)
+                model[idx].enabled = (idx === currentIndex)
+        }
     }
 
     // ========== ЗАГОЛОВКИ ТАБЛИЦЫ ==========
@@ -105,28 +111,33 @@ XC.Popup {
         clip: true
 
         model: {
-            let master = masterCombo.currentValue;
-            return master?mods.filter(mod=>mod.masterId === master.id):[]
+            let res = []
+            let masterMod = mods[masterCombo.currentValue]
+            for(let idx in mods)
+                if(!mods[idx].isMaster &&
+                   (mods[idx].masterId === masterMod.id))
+                    res.push(idx)
+            return res;
         }
 
         delegate: Item {
             id: delegateItem
             width: modsList.width
-            height: 18
-
+            height: 10
             Row {
+                id: rrow
                 width: parent.width
-                height: 16
+                height: parent.height
                 spacing: 2
 
                 // Название мода
                 Rectangle {
                     width: 200
-                    height: 16
+                    height: 10
                     color: "transparent"
 
                     Text {
-                        text: modelData.name
+                        text: mods[modelData].name
                         color: "white"
                         font.pixelSize: 8
                         anchors {
@@ -141,48 +152,56 @@ XC.Popup {
                 // Колонка со стрелками
                 Column {
                     width: 25
-                    height: 16
-                    spacing: 1
+                    height: 10
 
                     Rectangle {
                         width: 23
-                        height: 7
-                        color: index > 0 ? "#404040" : "#202020"
+                        height: 4
+                        enabled: index > 0
+                        color: enabled ? "#404040" : "#202020"
                         border.width: 1
                         border.color: "#606060"
 
                         Text {
                             text: "▲"
-                            color: index > 0 ? "white" : "#606060"
-                            font.pixelSize: 6
+                            color: enabled ? "white" : "#606060"
+                            font.pixelSize: 4
                             anchors.centerIn: parent
                         }
                         MouseArea {
                             anchors.fill: parent
-                            onClicked: ctrl.moveUp(index)
+                            onClicked: ctrl.moveMod(modsList.model[index],
+                                                    modsList.model[index-1])
                         }
                     }
 
                     Rectangle {
                         width: 23
-                        height: 7
-                        color: index < modsList.count - 1 ? "#404040" : "#202020"
+                        height: 4
+                        enabled: index < modsList.count - 1
+                        color: enabled ? "#404040" : "#202020"
                         border.width: 1
                         border.color: "#606060"
 
                         Text {
                             text: "▼"
-                            color: index < modsList.count - 1 ? "white" : "#606060"
-                            font.pixelSize: 6
+                            color: enabled ? "white" : "#606060"
+                            font.pixelSize: 4
                             anchors.centerIn: parent
                         }
+                        MouseArea {
+                            anchors.fill: parent
+                            onClicked: ctrl.moveMod(modsList.model[index],
+                                                    modsList.model[index+1])
+                        }
+
                     }
                 }
 
                 // Колонка Yes/No
                 Rectangle {
                     width: 60
-                    height: 16
+                    height: 10
                     color: modelData.enabled ? "#2a6b2a" : "#6b2a2a"
                     border.width: 1
                     border.color: "green"
