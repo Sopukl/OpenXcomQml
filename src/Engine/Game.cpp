@@ -972,4 +972,16 @@ QJsonArray Game::getModsInfo() const
 	return mods;
 }
 
+void Game::setModsInfo(QJsonArray mods)
+{
+	std::vector<std::pair<std::string, bool>> res;
+	res.reserve(mods.size());
+
+	for(const auto m : std::as_const(mods))
+		res.emplace_back(m[u"id"].toString().toStdString(),
+						 m[u"enabled"].toBool());
+	options1.mods = std::move(res);
+	options1.saveSettings();
+}
+
 }

@@ -62,8 +62,8 @@ XC.Popup {
         }
         onModelChanged: currentIndex= model.findIndex(e=>mods[e].enabled)
         onActivated: {
-            for(let idx in model)
-                model[idx].enabled = (idx === currentIndex)
+            model.forEach((modIdx, idx) =>
+                mods[modIdx].enabled = (idx === currentIndex))
         }
     }
 
@@ -113,10 +113,12 @@ XC.Popup {
         model: {
             let res = []
             let masterMod = mods[masterCombo.currentValue]
-            for(let idx in mods)
-                if(!mods[idx].isMaster &&
-                   (mods[idx].masterId === masterMod.id))
+            mods.forEach((mod, idx) =>
+            {
+                if(!mod.isMaster &&
+                   (mod.masterId === masterMod.id))
                     res.push(idx)
+            })
             return res;
         }
 
@@ -230,6 +232,10 @@ XC.Popup {
         XC.Button {
             width: 100
             text: "OK"
+            onClicked: {
+                Game.setModsInfo(ctrl.mods);
+                close();
+            }
         }
 
         XC.Button {
@@ -240,6 +246,7 @@ XC.Popup {
         XC.Button {
             width: 100
             text: "CANCEL"
+            onClicked: ctrl.close();
         }
     }
 
