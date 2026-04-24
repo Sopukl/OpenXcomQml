@@ -5546,12 +5546,12 @@ void Mod::loadVanillaResources()
 
 			// Try the preferred format first, otherwise use the default priority
 			std::string *cats[] = { 0, catsWin, catsDos };
-			if (options1.preferredSound() == SOUND_14)
+			if (options1.preferredSound() == Options1::SOUND_14)
 				cats[0] = catsWin;
-			else if (options1.preferredSound() == SOUND_10)
+			else if (options1.preferredSound() == Options1::SOUND_10)
 				cats[0] = catsDos;
 
-			options1.currentSound = SOUND_AUTO;
+			options1.currentSound = Options1::SOUND_AUTO;
 			for (size_t i = 0; i < ARRAYLEN(catsId); ++i)
 			{
 				SoundSet *sound = _sounds[catsId[i]];
@@ -5568,7 +5568,8 @@ void Mod::loadVanillaResources()
 						Log(LOG_VERBOSE) << catsId[i] << ": loading sound "<<fname;
 						CatFile catfile(fname);
 						sound->loadCat(catfile);
-						options1.currentSound = (wav) ? SOUND_14 : SOUND_10;
+						options1.currentSound = (wav) ? Options1::SOUND_14 :
+														Options1::SOUND_10;
 						break;
 					} else {
 						Log(LOG_VERBOSE) << catsId[i] << ": sound file not found: "<<fname;

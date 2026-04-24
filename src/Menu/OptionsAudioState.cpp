@@ -258,7 +258,7 @@ void OptionsAudioState::slrUiVolumeRelease(Action *)
  */
 void OptionsAudioState::cbxVideoFormatChange(Action *)
 {
-    options1.setpreferredVideo((VideoFormat)_cbxVideoFormat->getSelected());
+    options1.setpreferredVideo(Options1::VideoFormat(_cbxVideoFormat->getSelected()));
 }
 
 /**
@@ -277,7 +277,7 @@ void OptionsAudioState::cbxMusicFormatChange(Action *)
  */
 void OptionsAudioState::cbxSoundFormatChange(Action *)
 {
-	options1.setpreferredSound((SoundFormat)_cbxSoundFormat->getSelected());
+	options1.setpreferredSound(Options1::SoundFormat(_cbxSoundFormat->getSelected()));
 	options1.reload = true;
 }
 

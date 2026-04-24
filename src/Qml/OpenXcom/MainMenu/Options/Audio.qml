@@ -64,6 +64,13 @@ This.Page {
             width: 110
             XC.ComboBox {
                 width: parent.width
+                model: [{text: "ANIMATION", value: Options1.VIDEO_FMV},
+                        {text: "SLIDE",     value: Options1.VIDEO_SLIDE}]
+
+                currentIndex: model.findIndex(
+                        e=>e.value === Options1.preferredVideo)
+
+                onActivated: Options1.preferredVideo = model[currentIndex].value
             }
         }
         XC.GroupBox {
@@ -92,6 +99,14 @@ This.Page {
             width: 110
             XC.ComboBox {
                 width: parent.width
+                model: [{text: "AUTO", value: Options1.SOUND_AUTO},
+                        {text: "1.0", value: Options1.SOUND_10},
+                        {text: "1.4", value: Options1.SOUND_14}]
+
+                currentIndex: model.findIndex(
+                        e=>e.value === Options1.preferredSound)
+
+                onActivated: Options1.preferredSound = model[currentIndex].value
             }
         }
     }

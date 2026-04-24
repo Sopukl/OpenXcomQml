@@ -76,11 +76,11 @@ void CutsceneState::init()
 		slide = FileMap::fileExists(videoRule->getSlides()->front().imagePath);
 	}
 
-	if (fmv && (!slide || options1.preferredVideo() == VIDEO_FMV))
+	if (fmv && (!slide || options1.preferredVideo() == Options1::VIDEO_FMV))
 	{
 		_game->pushState(new VideoState(videoRule->getVideos(), videoRule->getAudioTracks(), videoRule->useUfoAudioSequence()));
 	}
-	else if (slide && (!fmv || options1.preferredVideo() == VIDEO_SLIDE))
+	else if (slide && (!fmv || options1.preferredVideo() == Options1::VIDEO_SLIDE))
 	{
 		_game->pushState(new SlideshowState(videoRule->getSlideshowHeader(), videoRule->getSlides()));
 	}

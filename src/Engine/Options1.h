@@ -35,12 +35,6 @@ namespace OpenXcom
 	enum KeyboardType { KEYBOARD_OFF, KEYBOARD_ON, KEYBOARD_VIRTUAL };
 	/// Savegame sorting modes.
 	enum SaveSort { SORT_NAME_ASC, SORT_NAME_DESC, SORT_DATE_ASC, SORT_DATE_DESC };
-	// /// Music format preferences.
-	// enum MusicFormat { MUSIC_AUTO, MUSIC_FLAC, MUSIC_OGG, MUSIC_MP3, MUSIC_MOD, MUSIC_WAV, MUSIC_ADLIB, MUSIC_GM, MUSIC_MIDI };
-	/// Sound format preferences.
-	enum SoundFormat { SOUND_AUTO, SOUND_14, SOUND_10 };
-	/// Video format preferences.
-	enum VideoFormat { VIDEO_FMV, VIDEO_SLIDE };
 	/// Path preview modes (can be OR'd together).
 	enum ScrollType { SCROLL_NONE, SCROLL_TRIGGER, SCROLL_AUTO };
 	enum PathPreview {
@@ -73,8 +67,16 @@ namespace OpenXcom
 		Q_OBJECT
 
 	  public:
+		/// Music format preferences.
 		enum MusicFormat { MUSIC_AUTO, MUSIC_FLAC, MUSIC_OGG, MUSIC_MP3, MUSIC_MOD, MUSIC_WAV, MUSIC_ADLIB, MUSIC_GM, MUSIC_MIDI };
 		Q_ENUM(MusicFormat);
+		/// Video format preferences.
+		enum VideoFormat { VIDEO_FMV, VIDEO_SLIDE };
+		Q_ENUM(VideoFormat);
+		/// Sound format preferences.
+		enum SoundFormat { SOUND_AUTO, SOUND_14, SOUND_10 };
+		Q_ENUM(SoundFormat);
+
 		//general
 		OPTION(qint32, pauseMode)
 		OPTION(qint32, changeValueByMouseWheel)
@@ -478,8 +480,6 @@ Q_DECLARE_METATYPE(SDLKey)
 Q_DECLARE_METATYPE(SDL_GrabMode)
 Q_DECLARE_METATYPE(OpenXcom::KeyboardType)
 Q_DECLARE_METATYPE(OpenXcom::SaveSort)
-Q_DECLARE_METATYPE(OpenXcom::SoundFormat)
-Q_DECLARE_METATYPE(OpenXcom::VideoFormat)
 Q_DECLARE_METATYPE(OpenXcom::ScrollType)
 Q_DECLARE_METATYPE(OpenXcom::PathPreview)
 Q_DECLARE_METATYPE	(OpenXcom::ScaleType)
