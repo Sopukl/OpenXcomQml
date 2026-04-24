@@ -1,7 +1,7 @@
 import QtQuick
-import QtQuick.Controls as QC
+import QtQuick.Controls
 
-QC.Slider {
+Slider {
     id: ctrl
     implicitWidth: 100
     implicitHeight: 18

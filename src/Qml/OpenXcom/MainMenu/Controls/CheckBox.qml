@@ -1,7 +1,7 @@
 import QtQuick
-import QtQuick.Controls as QC
+import QtQuick.Controls
 
-QC.CheckBox {
+CheckBox {
     id: ctrl
     implicitWidth: 100
     implicitHeight: 18
@@ -11,7 +11,7 @@ QC.CheckBox {
         height: ctrl.height
         border.color: "#21be2b"
 
-        QC.IconImage {
+        IconImage {
             anchors.centerIn: parent
             width: parent.width
             height: parent.height

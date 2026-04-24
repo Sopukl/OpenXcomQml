@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Controls
 import OpenXcom 1.0
+
 Popup {
     id: popup
     property alias bgImage: _bgImage
@@ -18,8 +19,6 @@ Popup {
         Image {
             id: _bgImage
             anchors.centerIn: parent
-            // transformOrigin: Item.Center
-            // scale: Options1.interfaceScale
             visible: source !== ""
             width: 320
             height: 200

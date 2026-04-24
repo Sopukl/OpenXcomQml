@@ -1,13 +1,13 @@
 import QtQuick
-import QtQuick.Controls as QC
+import QtQuick.Controls
 
-QC.GroupBox {
+GroupBox {
     id: control
     padding: 0
     spacing: 0
     background: null
 
-    label: QC.Label {
+    label: Label {
         width: control.availableWidth
         text: control.title
         font.pixelSize: 8
