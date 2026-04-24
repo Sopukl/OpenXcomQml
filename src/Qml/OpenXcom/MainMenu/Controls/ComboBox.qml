@@ -11,8 +11,11 @@ ComboBox {
     font.pixelSize: 9
     textRole: "text"
 
+    displayText: formatText(currentIndex)
     function formatText(index) {
-        return model[index][textRole]
+        if(model && model[index])
+            return model[index][textRole]
+        return ""
     }
 
     background: Rectangle {
@@ -50,7 +53,7 @@ ComboBox {
         height: ctrl.height
         padding: 0
         contentItem: Text {
-            text: ctrl.formatText(index)// delegate.model[ctrl.textRole]
+            text: ctrl.formatText(index)
             color: "#21be2b"
             font: ctrl.font
             elide: Text.ElideRight

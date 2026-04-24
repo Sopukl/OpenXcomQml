@@ -92,6 +92,7 @@ add_executable (
     ${openxcom_src}
     ${all_headers}
     Qml/XCom.qrc
+    Images.qrc
 )
 
 target_link_libraries(openxcom

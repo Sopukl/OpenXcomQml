@@ -6,12 +6,32 @@ import OpenXcom.MainMenu 1.0 as Main
 
 Window {
     id: wnd
-    minimumWidth: Options1.displayWidth
+    minimumWidth:  Options1.displayWidth
     minimumHeight: Options1.displayHeight
-    maximumWidth: Options1.displayWidth
-    maximumHeight: Options1.displayHeight
+
+    maximumWidth:  Options1.fullscreen?1000000:
+                                       Options1.displayWidth
+
+    maximumHeight: Options1.fullscreen?1000000:
+                                       Options1.displayHeight
+
+    visibility: Options1.fullscreen?Window.FullScreen:
+                                    Window.Windowed
+
+    flags: Options1.borderless?Qt.FramelessWindowHint:
+                               Qt.Window
+
+    onVisibilityChanged: {
+        if(visibility === Window.Windowed)
+        {
+            wnd.x = 50
+            wnd.y = 50
+        }
+    }
+
     visible: true
     title: "OpenXcom"
+    color: "#000000"
     property real eScale: {
         let wScale = wnd.width/root.width
         let hScale = wnd.height/root.height

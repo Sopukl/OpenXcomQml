@@ -14,21 +14,26 @@ This.Page {
             width: 110
             XC.ComboBox {
                 width: parent.width
-                model: [{text: "640x480",   value: Qt.size(640,480)},
-                        {text: "800x600",   value: Qt.size(800,600)},
-                        {text: "1024x768",  value: Qt.size(1024,768)},
-                        {text: "1280x1024", value: Qt.size(1280,1024)}]
+                model: [Qt.size(640,480),
+                        Qt.size(800,600),
+                        Qt.size(1024,768),
+                        Qt.size(1280,1024)]
+
+                function formatText(index) {
+                    return model[index].width+'x'+model[index].height;
+                }
 
                 Component.onCompleted: {
                     let cur = Qt.size(Options1.displayWidth,
                                       Options1.displayHeight);
 
-                    currentIndex = model.findIndex(e=>e.value === cur)
+                    currentIndex = model.findIndex(e=>e === cur)
                 }
-                onCurrentIndexChanged: {
+
+                onActivated: {
                     let oldVal = Qt.size(Options1.displayWidth,
                                          Options1.displayHeight)
-                    let curVal = model[currentIndex].value
+                    let curVal = model[currentIndex]
 
                     if(curVal !== oldVal)
                     {
@@ -57,21 +62,14 @@ This.Page {
             width: 110
             XC.ComboBox {
                 width: parent.width
-                model: [{text: "1x",  value: 1},
-                        {text: "2x",  value: 2},
-                        {text: "3x",  value: 3},
-                        {text: "4x",  value: 4},
-                        {text: "5x",  value: 5},
-                        {text: "6x",  value: 6},
-                        {text: "7x",  value: 7},
-                        {text: "8x",  value: 8},
-                        {text: "9x",  value: 9},
-                        {text: "10x", value: 10}]
-                Component.onCompleted: {
-                    currentIndex = model.findIndex(
-                        e=>e.value === Options1.geoscapeScale)
+                model: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+
+                function formatText(index) {
+                    return model[index]+'x'
                 }
-                onCurrentIndexChanged: Options1.geoscapeScale = model[currentIndex].value
+
+                currentIndex: model.findIndex(e=>e === Options1.geoscapeScale)
+                onActivated: Options1.geoscapeScale = model[currentIndex]
             }
         }
         XC.GroupBox {
@@ -79,6 +77,15 @@ This.Page {
             width: 110
             XC.ComboBox {
                 width: parent.width
+                model: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+
+                function formatText(index) {
+                    return model[index]+'x'
+                }
+
+                currentIndex: model.findIndex(e=>e === Options1.battlescapeScale)
+                onActivated: Options1.battlescapeScale = model[currentIndex]
+
             }
         }
     }
@@ -90,32 +97,23 @@ This.Page {
         }
         spacing: 2
         XC.GroupBox {
-            title: "Display resolution"
+            title: "Display mode"
             width: 110
-            CheckBox {
-                text: qsTr("E-mail")
+            XC.CheckBox {
+                text: "FullScreen"
                 width: parent.width
+                checked: Options1.fullscreen
+                onClicked: Options1.fullscreen = checked
             }
         }
         XC.GroupBox {
-            title: "Display language"
+            title: "Display mode"
             width: 110
-            XC.ComboBox {
+            XC.CheckBox {
+                text: "Borderless"
                 width: parent.width
-            }
-        }
-        XC.GroupBox {
-            title: "Geoscape scale"
-            width: 110
-            XC.ComboBox {
-                width: parent.width
-            }
-        }
-        XC.GroupBox {
-            title: "Battlescape scale"
-            width: 110
-            XC.ComboBox {
-                width: parent.width
+                checked: Options1.borderless
+                onClicked: Options1.borderless = checked
             }
         }
     }
