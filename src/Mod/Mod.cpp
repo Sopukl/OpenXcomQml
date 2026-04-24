@@ -6034,7 +6034,8 @@ void Mod::loadExtraResources()
 		}
 
 		// Try the preferred format first, otherwise use the default priority
-		MusicFormat priority[] = { MusicFormat(options1.preferredMusic()), MUSIC_FLAC, MUSIC_OGG, MUSIC_MP3, MUSIC_MOD, MUSIC_WAV, MUSIC_ADLIB, MUSIC_GM, MUSIC_MIDI };
+		Options1::MusicFormat priority[] = { options1.preferredMusic(), Options1::MUSIC_FLAC, Options1::MUSIC_OGG, Options1::MUSIC_MP3,
+								  Options1::MUSIC_MOD, Options1::MUSIC_WAV, Options1::MUSIC_ADLIB, Options1::MUSIC_GM, Options1::MUSIC_MIDI };
 		for (auto& pair : _musicDefs)
 		{
 			Music *music = 0;
@@ -6335,7 +6336,7 @@ void Mod::modResources()
  * @param gmcat Pointer to GM.CAT if available.
  * @return Pointer to the music file, or NULL if it couldn't be loaded.
  */
-Music* Mod::loadMusic(MusicFormat fmt, RuleMusic* rule, CatFile* adlibcat, CatFile* aintrocat, GMCatFile* gmcat) const
+Music* Mod::loadMusic(Options1::MusicFormat fmt, RuleMusic* rule, CatFile* adlibcat, CatFile* aintrocat, GMCatFile* gmcat) const
 {
 	/* MUSIC_AUTO, MUSIC_FLAC, MUSIC_OGG, MUSIC_MP3, MUSIC_MOD, MUSIC_WAV, MUSIC_ADLIB, MUSIC_GM, MUSIC_MIDI */
 	static const std::string exts[] = { "", ".flac", ".ogg", ".mp3", ".mod", ".wav", "", "", ".mid" };
@@ -6345,7 +6346,7 @@ Music* Mod::loadMusic(MusicFormat fmt, RuleMusic* rule, CatFile* adlibcat, CatFi
 	try
 	{
 		// Try Adlib music
-		if (fmt == MUSIC_ADLIB)
+		if (fmt == Options1::MUSIC_ADLIB)
 		{
 			if (adlibcat && options1.audioBitDepth() == 16)
 			{
@@ -6372,7 +6373,7 @@ Music* Mod::loadMusic(MusicFormat fmt, RuleMusic* rule, CatFile* adlibcat, CatFi
 			}
 		}
 		// Try MIDI music (from GM.CAT)
-		else if (fmt == MUSIC_GM)
+		else if (fmt == Options1::MUSIC_GM)
 		{
 			// DOS MIDI
 			if (gmcat && track < gmcat->size())

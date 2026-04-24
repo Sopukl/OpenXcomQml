@@ -276,14 +276,14 @@ void OptionsBaseState::btnGroupPress(Action *action)
 		}
 		else if (sender == _btnAudio)
 		{
-			if (!options1.mute)
-			{
+			// if (!options1.mute)
+			// {
 				_game->pushState(new OptionsAudioState(_origin));
-			}
-			else
-			{
-				_game->pushState(new OptionsNoAudioState(_origin));
-			}
+			// }
+			// else
+			// {
+				// _game->pushState(new OptionsNoAudioState(_origin));
+			// }
 		}
 		else if (sender == _btnControls)
 		{

@@ -1,5 +1,6 @@
 import QtQuick
 import QtQuick.Controls
+import QtQuick.Layouts
 import OpenXcom 1.0
 import OpenXcom.MainMenu.Controls 1.0 as XC
 import "." as This
@@ -99,21 +100,19 @@ This.Page {
         XC.GroupBox {
             title: "Display mode"
             width: 110
-            XC.CheckBox {
-                text: "FullScreen"
-                width: parent.width
-                checked: Options1.fullscreen
-                onClicked: Options1.fullscreen = checked
-            }
-        }
-        XC.GroupBox {
-            title: "Display mode"
-            width: 110
-            XC.CheckBox {
-                text: "Borderless"
-                width: parent.width
-                checked: Options1.borderless
-                onClicked: Options1.borderless = checked
+            ColumnLayout {
+                XC.CheckBox {
+                    text: "FullScreen"
+                    width: parent.width
+                    checked: Options1.fullscreen
+                    onClicked: Options1.fullscreen = checked
+                }
+                XC.CheckBox {
+                    text: "Borderless"
+                    width: parent.width
+                    checked: Options1.borderless
+                    onClicked: Options1.borderless = checked
+                }
             }
         }
     }

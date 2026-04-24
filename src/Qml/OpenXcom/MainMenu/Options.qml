@@ -46,8 +46,7 @@ XC.Popup {
         orientation: Qt.Vertical
         clip: true
         Pages.Video {}
-        Pages.Page {
-            title: "Audio"
+        Pages.Audio {
         }
         Pages.Page {
             title: "Controls"

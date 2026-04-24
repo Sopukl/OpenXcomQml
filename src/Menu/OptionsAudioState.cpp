@@ -267,7 +267,7 @@ void OptionsAudioState::cbxVideoFormatChange(Action *)
  */
 void OptionsAudioState::cbxMusicFormatChange(Action *)
 {
-	options1.setpreferredMusic((MusicFormat)_cbxMusicFormat->getSelected());
+	options1.setpreferredMusic(Options1::MusicFormat(_cbxMusicFormat->getSelected()));
 	options1.reload = true;
 }
 

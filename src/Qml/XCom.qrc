@@ -19,5 +19,7 @@
         <file>OpenXcom/MainMenu/Options/Page.qml</file>
         <file>OpenXcom/MainMenu/Mods.qml</file>
         <file>OpenXcom/MainMenu/Controls/CheckBox.qml</file>
+        <file>OpenXcom/MainMenu/Options/Audio.qml</file>
+        <file>OpenXcom/MainMenu/Controls/Slider.qml</file>
     </qresource>
 </RCC>
