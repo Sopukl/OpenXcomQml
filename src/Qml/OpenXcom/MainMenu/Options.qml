@@ -46,23 +46,12 @@ XC.Popup {
         orientation: Qt.Vertical
         clip: true
         Pages.Video {}
-        Pages.Audio {
-        }
-        Pages.Page {
-            title: "Controls"
-        }
-        Pages.Page {
-            title: "Geoscape"
-        }
-        Pages.Page {
-            title: "Battlescape"
-        }
-        Pages.Page {
-            title: "Advanced"
-        }
-        Pages.Page {
-            title: "Folders"
-        }
+        Pages.Audio {}
+        Pages.Controls {}
+        Pages.Geoscape {}
+        Pages.BattleScape {}
+        Pages.Advanced {}
+        Pages.Folders {}
     }
     Row {
         id: btns

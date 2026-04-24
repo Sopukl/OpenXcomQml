@@ -21,5 +21,10 @@
         <file>OpenXcom/MainMenu/Controls/CheckBox.qml</file>
         <file>OpenXcom/MainMenu/Options/Audio.qml</file>
         <file>OpenXcom/MainMenu/Controls/Slider.qml</file>
+        <file>OpenXcom/MainMenu/Options/Geoscape.qml</file>
+        <file>OpenXcom/MainMenu/Options/BattleScape.qml</file>
+        <file>OpenXcom/MainMenu/Options/Controls.qml</file>
+        <file>OpenXcom/MainMenu/Options/Advanced.qml</file>
+        <file>OpenXcom/MainMenu/Options/Folders.qml</file>
     </qresource>
 </RCC>
