@@ -21,13 +21,13 @@ Window {
     flags: Options1.borderless?Qt.FramelessWindowHint:
                                Qt.Window
 
-    onVisibilityChanged: {
-        if(visibility === Window.Windowed)
-        {
-            wnd.x = 50
-            wnd.y = 50
-        }
-    }
+    // onVisibilityChanged: {
+    //     if(visibility === Window.Windowed)
+    //     {
+    //         wnd.x = 50
+    //         wnd.y = 50
+    //     }
+    // }
 
     visible: true
     title: "OpenXcom"

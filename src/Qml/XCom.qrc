@@ -26,5 +26,6 @@
         <file>OpenXcom/MainMenu/Options/Controls.qml</file>
         <file>OpenXcom/MainMenu/Options/Advanced.qml</file>
         <file>OpenXcom/MainMenu/Options/Folders.qml</file>
+        <file>OpenXcom/MainMenu/LoadGame.qml</file>
     </qresource>
 </RCC>

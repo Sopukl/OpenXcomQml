@@ -53,6 +53,10 @@ Item {
         text: "Load Game"
         x: 32
         y: 98
+        onClicked: {
+            Xcom.createWindow("MainMenu/LoadGame.qml", ctrl)
+                .open()
+        }
     }
     MenuButton {
         text: "Options"

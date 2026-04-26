@@ -9,7 +9,9 @@ QtObject {
         let cmp = Qt.createComponent(url)
         let obj = null
         if (cmp.status === Component.Ready)
+        {
             obj = cmp.createObject(owner, params);
+        }
         else
             console.log(cmp.errorString())
 
