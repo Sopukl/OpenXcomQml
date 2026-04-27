@@ -1,7 +1,6 @@
 import QtQuick
 import QtQuick.Controls
-import QtQuick.Layouts
-import Qt.labs.qmlmodels
+import QtQuick.Controls.impl
 import OpenXcom 1.0
 import OpenXcom.MainMenu.Controls 1.0 as XC
 
@@ -10,201 +9,138 @@ XC.Popup {
     width: 320
     height: 200
 
-    property var descriptions: []
-    readonly property var headerTitles: ["Имя", "Дата", "Время", "Описание"]
-    readonly property var sortKeys: ["name", "date", "time", "description"]
-
-    property int sortColumn: -1
-    property bool sortAscending: true
-
-    function parseDateDMY(s) {
-        let p = String(s).split(".")
-        if (p.length !== 3)
-            return 0
-        return new Date(Number(p[2]), Number(p[1]) - 1, Number(p[0])).getTime()
-    }
-
-    function parseTimeHMS(s) {
-        let p = String(s).split(":")
-        if (p.length !== 3)
-            return 0
-        return ((Number(p[0]) * 60 + Number(p[1])) * 60) + Number(p[2])
-    }
-
-    function applyColumnSort(col) {
-        if (sortColumn === col)
-            sortAscending = !sortAscending
-        else {
-            sortColumn = col
-            sortAscending = true
+    Item {
+        anchors {
+            fill: parent
+            margins: 2
         }
-        let key = sortKeys[col]
-        let arr = []
-        for (let i = 0; i < gameTable.rowCount; i++)
-            arr.push(gameTable.getRow(i))
-        arr.sort((a, b) => {
-            let va = a[key]
-            let vb = b[key]
-            let cmp = 0
-            if (key === "date")
-                cmp = parseDateDMY(va) - parseDateDMY(vb)
-            else if (key === "time")
-                cmp = parseTimeHMS(va) - parseTimeHMS(vb)
-            else
-                cmp = String(va).localeCompare(String(vb), undefined, { numeric: true })
-            return sortAscending ? cmp : -cmp
-        })
-        gameTable.clear()
-        descriptions.length = 0
-        for (let i = 0; i < arr.length; i++) {
-            descriptions.push(arr[i].description)
-            gameTable.appendRow(arr[i])
-        }
-    }
-
-    TableModel {
-        id: gameTable
-        TableModelColumn { display: "checked" }
-        TableModelColumn { display: "amount" }
-        TableModelColumn { display: "fruitType" }
-        TableModelColumn { display: "fruitName" }
-        TableModelColumn { display: "fruitPrice" }
-
-        // Each row is one type of fruit that can be ordered
-        Component.onCompleted: {
-            appendRow(            {
-              // Each property is one cell/column.
-              checked: false,
-              amount: 1,
-              fruitType: "Apple",
-              fruitName: "Granny Smith",
-              fruitPrice: 1.50
-          })
-            appendRow(
-                {
-                    checked: true,
-                    amount: 4,
-                    fruitType: "Orange",
-                    fruitName: "Navel",
-                    fruitPrice: 2.50})
-            appendRow(
-                {
-                    checked: false,
-                    amount: 1,
-                    fruitType: "Banana",
-                    fruitName: "Cavendish",
-                    fruitPrice: 3.50})
-        }
-    }
-    ColumnLayout {
-        anchors.fill: parent
-        spacing: 4
-
         Text {
-            Layout.alignment: Qt.AlignHCenter
-            font.pixelSize: 10
+            id: caption
+            font.pixelSize: 8
             color: "white"
             text: "Select save game for loading"
+            height: contentHeight
+        }
+
+        ListView {
+            id: savesList
+            anchors {
+                top: caption.bottom
+                topMargin: 2
+                bottom: description.top
+                bottomMargin: 2
+                left: parent.left
+                right: parent.right
+            }
+            spacing: 1
+            model: Game.saves()
+
+            delegate: MouseArea {
+                height: 10
+                width: savesList.width
+                hoverEnabled: true
+
+                required property string fileName
+                required property string details
+                required property string displayName
+                required property string isoDate
+                required property string isoTime
+                required property int index
+
+                onContainsMouseChanged:
+                    descTxt.text = containsMouse?details:""
+                onClicked: savesList.currentIndex = index
+
+                onDoubleClicked: Game.loadGame(fileName)
+
+                Rectangle {
+                    anchors.fill: parent
+                    color: (index===savesList.currentIndex)?"#800000FF":
+                                                            "#80FF00FF"
+                }
+
+                Text {
+                    anchors{
+                        verticalCenter: parent.verticalCenter
+                        left: parent.left
+                    }
+                    text: displayName
+                    height: contentHeight
+                    width: contentWidth
+                    font.pixelSize: 8
+                    color: "#FFFFFF"
+                }
+                Text {
+                    anchors{
+                        verticalCenter: parent.verticalCenter
+                        right: delImg.left
+                        rightMargin: 2
+                    }
+                    text: isoDate+':' + isoTime
+                    height: contentHeight
+                    width: contentWidth
+                    font.pixelSize: 8
+                    color: "#FFFFFF"
+                }
+                ColorImage {
+                    id: delImg
+                    width: height
+                    anchors.right: parent.right
+                    height: parent.height
+                    source: "qrc:/Images/Delete.svg"
+                    color: "#FFFFFF"
+                }
+            }
         }
 
         Item {
-            Layout.fillWidth: true
-            Layout.fillHeight: true
-            clip: true
-
-            HorizontalHeaderView {
-                id: horizontalHeader
-                anchors.top: parent.top
-                anchors.left: parent.left
-                anchors.right: parent.right
-                height: 24
-                syncView: tableView
-                clip: true
-                z: 1
-
-                delegate: Rectangle {
-                    implicitHeight: 24
-                    color: "#2a5040"
-                    border.width: 1
-                    border.color: "#3a7060"
-
-                    required property int column
-
-                    Text {
-                        anchors.centerIn: parent
-                        font.pixelSize: 9
-                        color: "white"
-                        text: popup.headerTitles[column]
-                              + (popup.sortColumn === column ? (popup.sortAscending ? " ▲" : " ▼") : "")
-                    }
-
-                    TapHandler {
-                        onTapped: popup.applyColumnSort(column)
-                    }
-                }
+            id: description
+            height: childrenRect.height
+            anchors{
+                bottom: btns.top
+                left: parent.left
+                right: parent.right
             }
 
-            TableView {
-                id: tableView
-                anchors.top: horizontalHeader.bottom
-                anchors.left: parent.left
-                anchors.right: parent.right
-                anchors.bottom: parent.bottom
-                clip: true
-                //columnSpacing: 1
-                rowSpacing: 1
-                boundsBehavior: Flickable.StopAtBounds
-
-                model: gameTable
-
-                columnWidthProvider: function (col) {
-                    return (tableView.width - tableView.columnSpacing * 3) / 4
-                }
-
-                delegate:  Text {
-                             text: model.display
-
-                             Rectangle {
-                                 anchors.fill: parent
-                                 color: "#efefef"
-                                 z: -1
-                             }
-                         }
-            }
-        }
-
-        RowLayout {
-            Layout.fillWidth: true
-            spacing: 8
 
             Text {
-                font.pixelSize: 9
+                text: "Desc"
+                anchors.left: parent.left
+                font.pixelSize: 8
                 color: "white"
-                text: "подробно"
             }
 
             Text {
-                id: descriptionText
-                Layout.fillWidth: true
-                font.pixelSize: 9
-                color: "#a0dcc8"
-                wrapMode: Text.WordWrap
-                text: ""
+                id: descTxt
+                anchors.right: parent.right
+                font.pixelSize: 8
+                color: "white"
             }
         }
+        Item {
+            id: btns
+            height: childrenRect.height
+            anchors{
+                bottom: parent.bottom
+                left: parent.left
+                right: parent.right
+            }
 
-        RowLayout {
-            Layout.alignment: Qt.AlignHCenter
-            spacing: 8
 
             XC.Button {
                 text: "Загрузить"
-                onClicked: popup.close()
+                onClicked: {
+                    let curItem = savesList.currentItem
+                    if(curItem)
+                        Game.loadGame(curItem.fileName)
+                }
+                anchors.left: parent.left
             }
 
             XC.Button {
                 text: "Отмена"
                 onClicked: popup.close()
+                anchors.right: parent.right
             }
         }
     }

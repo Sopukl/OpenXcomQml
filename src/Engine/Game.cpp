@@ -47,9 +47,11 @@
 #include "../Geoscape/BaseNameState.h"
 #include "../Geoscape/BuildNewBaseState.h"
 #include "../Basescape/PlaceLiftState.h"
+#include "../Battlescape/BattlescapeState.h"
 #include "../Geoscape/Globe.h"
 #include "../Menu/TestState.h"
 #include "../Menu/StartState.h"
+#include "../Menu/StatisticsState.h"
 #include <algorithm>
 #include "../fallthrough.h"
 #include "../version.h"
@@ -888,6 +890,25 @@ void Game::setGameState(GameState newState)
 	}
 }
 
+QVector<SaveDesc> Game::saves() const
+{
+	auto _saves = SavedGame::getList(getLanguage(), true);
+	QVector<SaveDesc> result;
+
+	SaveDesc sd;
+	for(const auto& s: _saves)
+	{
+		sd.fileName    = QString::fromStdString(s.fileName);
+		sd.displayName = QString::fromStdString(s.displayName);
+		sd.isoDate     = QString::fromStdString(s.isoDate);
+		sd.isoTime     = QString::fromStdString(s.isoTime);
+		sd.details     = QString::fromStdString(s.details);
+		result.push_back(sd);
+	}
+
+	return result;
+}
+
 void Game::newGame(int difficulty, bool ironMan)
 {
 	setGameState(GAME);
@@ -930,6 +951,92 @@ void Game::newGame(int difficulty, bool ironMan)
 		// custom location, custom name
 		pushState(new BuildNewBaseState(base, gs->getGlobe(), true));
 	}
+}
+
+void Game::loadGame(QString fileName)
+{
+	auto error = [this](const std::string &msg, SavedGame *save)
+	{
+
+		Log(LOG_ERROR) << msg;
+		std::ostringstream error;
+		qDebug() << tr("STR_LOAD_UNSUCCESSFUL") << ' ' << msg;
+		// if (_origin != OPT_BATTLESCAPE)
+		// 	_game->pushState(new ErrorMessageState(error.str(), _palette, _game->getMod()->getInterface("errorMessages")->getElement("geoscapeColor")->color, "BACK01.SCR", _game->getMod()->getInterface("errorMessages")->getElement("geoscapePalette")->color));
+		// else
+		// 	_game->pushState(new ErrorMessageState(error.str(), _palette, _game->getMod()->getInterface("errorMessages")->getElement("battlescapeColor")->color, "TAC00.SCR", _game->getMod()->getInterface("errorMessages")->getElement("battlescapePalette")->color));
+
+		if (getSavedGame() == save)
+			setSavedGame(0);
+		else
+			delete save;
+	};
+
+
+	auto savedGame = getSavedGame();
+	auto savedBattle = savedGame?savedGame->getSavedBattle():
+								 nullptr;
+	auto origBattleState = savedBattle?savedBattle->getBattleState():
+									   nullptr;
+
+	// Reset touch flags
+	resetTouchButtonFlags();
+
+	// Load the game
+	auto s = new SavedGame();
+	try
+	{
+		s->load(fileName.toStdString(), getMod(), getLanguage());
+		setSavedGame(s);
+		if (getSavedGame()->getEnding() != END_NONE)
+		{
+			options1.baseXResolution = Screen::ORIGINAL_WIDTH;
+			options1.baseYResolution = Screen::ORIGINAL_HEIGHT;
+			getScreen()->resetDisplay(false);
+			setState(new StatisticsState);
+		}
+		else
+		{
+			options1.baseXResolution = options1.baseXGeoscape;
+			options1.baseYResolution = options1.baseYGeoscape;
+			getScreen()->resetDisplay(false);
+			if (origBattleState)
+			{
+				// We need to reset palettes here already, can't wait for the destructor
+				origBattleState->resetPalettes();
+			}
+			setState(new GeoscapeState);
+			if (getSavedGame()->getSavedBattle() != 0)
+			{
+				getSavedGame()->getSavedBattle()->loadMapResources(getMod());
+				options1.baseXResolution = options1.baseXBattlescape;
+				options1.baseYResolution = options1.baseYBattlescape;
+				getScreen()->resetDisplay(false);
+				auto bs = new BattlescapeState;
+				pushState(bs);
+				getSavedGame()->getSavedBattle()->setBattleState(bs);
+				// Try to reactivate the touch buttons
+				bs->toggleTouchButtons(false, true);
+			}
+		}
+
+			   // Clear the SDL event queue (i.e. ignore input from impatient users)
+		SDL_Event e;
+		while (SDL_PollEvent(&e))
+		{
+		  // do nothing
+		}
+	}
+	catch (Exception &e)
+	{
+		error(e.what(), s);
+	}
+	catch (YAML::Exception &e)
+	{
+		error(e.what(), s);
+	}
+	CrossPlatform::flashWindow();
+	setGameState(GAME);
 }
 
 QJsonArray Game::getLanguages() const

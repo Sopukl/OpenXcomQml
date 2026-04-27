@@ -258,6 +258,7 @@ std::vector<SaveInfo> SavedGame::getList(Language *lang, bool autoquick)
 {
 	std::vector<SaveInfo> info;
 	std::string curMaster = Options::getActiveMaster();
+	qDebug() << curMaster << Options::getMasterUserFolder();
 	auto saves = CrossPlatform::getFolderContents(Options::getMasterUserFolder(), "sav");
 
 	if (autoquick)

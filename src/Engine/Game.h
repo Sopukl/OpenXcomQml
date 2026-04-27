@@ -24,6 +24,7 @@
 #include <QImage>
 #include <QJsonArray>
 #include <QJsonObject>
+#include "SavesManager.h"
 
 namespace OpenXcom
 {
@@ -38,6 +39,24 @@ class ModInfo;
 class FpsCounter;
 class Action;
 class GeoscapeState;
+
+struct SaveDesc
+{
+	Q_GADGET
+	QML_UNCREATABLE("")
+
+	Q_PROPERTY(QString fileName MEMBER fileName)
+	Q_PROPERTY(QString displayName MEMBER displayName)
+	Q_PROPERTY(QString isoDate MEMBER isoDate)
+	Q_PROPERTY(QString isoTime MEMBER isoTime)
+	Q_PROPERTY(QString details MEMBER details)
+  public:
+
+	QString fileName;
+	QString displayName;
+	QString isoDate, isoTime;
+	QString details;
+};
 
 /**
  * The core of the game engine, manages the game's entire contents and structure.
@@ -198,10 +217,14 @@ class GeoscapeState;
 		GameState state() const;
 		void setGameState(GameState);
 
+		Q_INVOKABLE QVector<SaveDesc> saves() const;
+
 		Q_INVOKABLE void newGame(int difficulty, bool ironMan);
+		Q_INVOKABLE void loadGame(QString fileName);
 		Q_INVOKABLE QJsonArray getLanguages() const;
 		Q_INVOKABLE QJsonArray getModsInfo() const;
 		Q_INVOKABLE void setModsInfo(QJsonArray);
+
 	  signals:
 		void aboutToQuit();
 		void stateChanged();
