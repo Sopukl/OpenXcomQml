@@ -24,6 +24,8 @@
 #include <array>
 #include <memory>
 #include <utility>
+#include <QString>
+extern QString openXComFolder();
 
 namespace OpenXcom
 {

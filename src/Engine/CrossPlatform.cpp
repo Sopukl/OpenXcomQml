@@ -92,6 +92,13 @@
 #include "FileMap.h"
 #include "SDL2Helpers.h"
 #include "../version.h"
+#include <QStandardPaths>
+
+QString openXComFolder()
+{
+	QString pathToDocuments = QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation);
+	return pathToDocuments + "/ModernXcom";
+}
 
 namespace OpenXcom
 {
@@ -440,32 +447,24 @@ std::vector<std::string> findUserFolders()
  */
 std::string findConfigFolder()
 {
-#ifdef __MORPHOS__
-	return "PROGDIR:";
-#endif
-
-#if defined(_WIN32) || defined(__APPLE__)
-	return "";
-#elif defined (__HAIKU__)
-	char settings_path[B_PATH_NAME_LENGTH];
-	find_directory(B_USER_SETTINGS_DIRECTORY, 0, true, settings_path, sizeof(settings_path)-strlen("/OpenXcom/"));
-	strcat(settings_path,"/OpenXcom/");
-	return settings_path;
-#else
-	char const *home = getHome();
-	char path[MAXPATHLEN];
-	// Get config folders
-	if (char const *const xdg_config_home = getenv("XDG_CONFIG_HOME"))
-	{
-		snprintf(path, MAXPATHLEN, "%s/openxcom/", xdg_config_home);
-		return path;
-	}
-	else
-	{
-		snprintf(path, MAXPATHLEN, "%s/.config/openxcom/", home);
-		return path;
-	}
-#endif
+    return openXComFolder().toUtf8().toStdString();
+// #if defined(_WIN32) || defined(__APPLE__)
+// 	return "";
+// #else
+// 	char const *home = getHome();
+// 	char path[MAXPATHLEN];
+// 	// Get config folders
+// 	if (char const *const xdg_config_home = getenv("XDG_CONFIG_HOME"))
+// 	{
+// 		snprintf(path, MAXPATHLEN, "%s/openxcom/", xdg_config_home);
+// 		return path;
+// 	}
+// 	else
+// 	{
+// 		snprintf(path, MAXPATHLEN, "%s/.config/openxcom/", home);
+// 		return path;
+// 	}
+// #endif
 }
 
 std::string searchDataFile(const std::string &filename)

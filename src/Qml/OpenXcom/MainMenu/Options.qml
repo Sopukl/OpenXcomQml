@@ -44,6 +44,7 @@ XC.Popup {
         width: 234
         background: null
         orientation: Qt.Vertical
+        interactive: false
         clip: true
         Pages.Video {}
         Pages.Audio {}

@@ -27,5 +27,7 @@
         <file>OpenXcom/MainMenu/Options/Advanced.qml</file>
         <file>OpenXcom/MainMenu/Options/Folders.qml</file>
         <file>OpenXcom/MainMenu/LoadGame.qml</file>
+        <file>OpenXcom/MainMenu/Options/Advanced/OXC.qml</file>
+        <file>OpenXcom/MainMenu/Options/Advanced/OXCE.qml</file>
     </qresource>
 </RCC>

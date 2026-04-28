@@ -12,7 +12,7 @@ namespace OpenXcom
     QString openXComFolder()
     {
         QString pathToDocuments = QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation);
-        return pathToDocuments + "/OpenXCom";
+        return pathToDocuments + "/ModernXcom";
     }
     Options1::Options1():
         QSettings(openXComFolder()+"/Options1.cfg", IniFormat)
