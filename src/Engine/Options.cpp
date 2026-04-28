@@ -70,7 +70,6 @@ void create()
 	////////////////////////////////////////////////////////////
 
 	createOptionsOXC();
-	createAdvancedOptionsOXC();
 	createControlsOXC();
 
 	////////////////////////////////////////////////////////////
@@ -193,83 +192,6 @@ void createOptionsOXC()
 	//#_info.push_back(OptionInfo(OPTION_OXC, "rootWindowedMode", &rootWindowedMode, false));
 	//#_info.push_back(OptionInfo(OPTION_OXC, "backgroundMute", &backgroundMute, false));
 	//#_info.push_back(OptionInfo(OPTION_OXC, "soldierDiaries", &soldierDiaries, true));
-}
-
-void createAdvancedOptionsOXC()
-{
-	// advanced options
-	//#_info.push_back(OptionInfo(OPTION_OXC, "playIntro", &playIntro, true, "STR_PLAYINTRO", "STR_GENERAL"));
-	//#_info.push_back(OptionInfo(OPTION_OXC, "autosave", &autosave, true, "STR_AUTOSAVE", "STR_GENERAL"));
-	//# _info.push_back(OptionInfo(OPTION_OXC, "autosaveFrequency", &autosaveFrequency, 5, "STR_AUTOSAVE_FREQUENCY", "STR_GENERAL"));
-	//#_info.push_back(OptionInfo(OPTION_OXC, "newSeedOnLoad", &newSeedOnLoad, false, "STR_NEWSEEDONLOAD", "STR_GENERAL"));
-	//#_info.push_back(OptionInfo(OPTION_OXC, "lazyLoadResources", &lazyLoadResources, true, "STR_LAZY_LOADING", "STR_GENERAL")); // exposed in OXCE
-	//# _info.push_back(OptionInfo(OPTION_OXC, "mousewheelSpeed", &mousewheelSpeed, 3, "STR_MOUSEWHEEL_SPEED", "STR_GENERAL"));
-	//# _info.push_back(OptionInfo(OPTION_OXC, "changeValueByMouseWheel", &changeValueByMouseWheel, 0, "STR_CHANGEVALUEBYMOUSEWHEEL", "STR_GENERAL"));
-
-// this should probably be any small screen touch-device, i don't know the defines for all of them so i'll cover android and IOS as i imagine they're more common
-#ifdef __MOBILE__
-	_info.push_back(OptionInfo(OPTION_OXC, "maximizeInfoScreens", &maximizeInfoScreens, true, "STR_MAXIMIZE_INFO_SCREENS", "STR_GENERAL"));
-#elif __APPLE__
-	// todo: ask grussel how badly i messed this up.
-	#include "TargetConditionals.h"
-	#if TARGET_IPHONE_SIMULATOR || TARGET_OS_IPHONE
-		_info.push_back(OptionInfo(OPTION_OXC, "maximizeInfoScreens", &maximizeInfoScreens, true, "STR_MAXIMIZE_INFO_SCREENS", "STR_GENERAL"));
-	#else
-		_info.push_back(OptionInfo(OPTION_OXC, "maximizeInfoScreens", &maximizeInfoScreens, false, "STR_MAXIMIZE_INFO_SCREENS", "STR_GENERAL"));
-	#endif
-#else
-	//#_info.push_back(OptionInfo(OPTION_OXC, "maximizeInfoScreens", &maximizeInfoScreens, false, "STR_MAXIMIZE_INFO_SCREENS", "STR_GENERAL"));
-#endif
-
-#ifdef __MORPHOS__
-	_info.push_back(OptionInfo(OPTION_OXC, "FPS", &FPS, 15, "STR_FPS_LIMIT", "STR_GENERAL"));
-	_info.push_back(OptionInfo(OPTION_OXC, "FPSInactive", &FPSInactive, 15, "STR_FPS_INACTIVE_LIMIT", "STR_GENERAL"));
-#else
-	//# _info.push_back(OptionInfo(OPTION_OXC, "FPS", &FPS, 60, "STR_FPS_LIMIT", "STR_GENERAL"));
-	//# _info.push_back(OptionInfo(OPTION_OXC, "FPSInactive", &FPSInactive, 30, "STR_FPS_INACTIVE_LIMIT", "STR_GENERAL"));
-	//#_info.push_back(OptionInfo(OPTION_OXC, "vSyncForOpenGL", &vSyncForOpenGL, true, "STR_VSYNC_FOR_OPENGL", "STR_GENERAL")); // exposed in OXCE
-#endif
-
-	//#_info.push_back(OptionInfo(OPTION_OXC, "geoDragScrollInvert", &geoDragScrollInvert, false, "STR_DRAGSCROLLINVERT", "STR_GEOSCAPE")); // true drags away from the cursor, false drags towards (like a grab)
-	//#_info.push_back(OptionInfo(OPTION_OXC, "aggressiveRetaliation", &aggressiveRetaliation, false, "STR_AGGRESSIVERETALIATION", "STR_GEOSCAPE"));
-	//#_info.push_back(OptionInfo(OPTION_OXC, "customInitialBase", &customInitialBase, false, "STR_CUSTOMINITIALBASE", "STR_GEOSCAPE"));
-	//#_info.push_back(OptionInfo(OPTION_OXC, "allowBuildingQueue", &allowBuildingQueue, false, "STR_ALLOWBUILDINGQUEUE", "STR_GEOSCAPE"));
-	//#_info.push_back(OptionInfo(OPTION_OXC, "craftLaunchAlways", &craftLaunchAlways, false, "STR_CRAFTLAUNCHALWAYS", "STR_GEOSCAPE"));
-	//#_info.push_back(OptionInfo(OPTION_OXC, "storageLimitsEnforced", &storageLimitsEnforced, false, "STR_STORAGELIMITSENFORCED", "STR_GEOSCAPE"));
-	//#_info.push_back(OptionInfo(OPTION_OXC, "canSellLiveAliens", &canSellLiveAliens, false, "STR_CANSELLLIVEALIENS", "STR_GEOSCAPE"));
-	//#_info.push_back(OptionInfo(OPTION_OXC, "anytimePsiTraining", &anytimePsiTraining, false, "STR_ANYTIMEPSITRAINING", "STR_GEOSCAPE"));
-	//#_info.push_back(OptionInfo(OPTION_OXC, "globeSeasons", &globeSeasons, false, "STR_GLOBESEASONS", "STR_GEOSCAPE"));
-	//#_info.push_back(OptionInfo(OPTION_OXC, "globeSurfaceCache", &globeSurfaceCache, true)); //hidden for now
-	//#_info.push_back(OptionInfo(OPTION_OXC, "psiStrengthEval", &psiStrengthEval, false, "STR_PSISTRENGTHEVAL", "STR_GEOSCAPE"));
-	//#_info.push_back(OptionInfo(OPTION_OXC, "canTransferCraftsWhileAirborne", &canTransferCraftsWhileAirborne, false, "STR_CANTRANSFERCRAFTSWHILEAIRBORNE", "STR_GEOSCAPE")); // When the craft can reach the destination base with its fuel
-	//#_info.push_back(OptionInfo(OPTION_OXC, "retainCorpses", &retainCorpses, false, "STR_RETAINCORPSES", "STR_GEOSCAPE"));
-	//#_info.push_back(OptionInfo(OPTION_OXC, "fieldPromotions", &fieldPromotions, false, "STR_FIELDPROMOTIONS", "STR_GEOSCAPE"));
-	//_info.push_back(OptionInfo(OPTION_OXC, "meetingPoint", &meetingPoint, false, "STR_MEETINGPOINT", "STR_GEOSCAPE")); // intentionally disabled in OXCE
-
-	//# _info.push_back(OptionInfo(OPTION_OXC, "battleDragScrollInvert", &battleDragScrollInvert, false, "STR_DRAGSCROLLINVERT", "STR_BATTLESCAPE")); // true drags away from the cursor, false drags towards (like a grab)
-	//# _info.push_back(OptionInfo(OPTION_OXC, "sneakyAI", &sneakyAI, false, "STR_SNEAKYAI", "STR_BATTLESCAPE"));
-	//# _info.push_back(OptionInfo(OPTION_OXC, "battleUFOExtenderAccuracy", &battleUFOExtenderAccuracy, false, "STR_BATTLEUFOEXTENDERACCURACY", "STR_BATTLESCAPE"));
-	//# _info.push_back(OptionInfo(OPTION_OXC, "showMoreStatsInInventoryView", &showMoreStatsInInventoryView, false, "STR_SHOWMORESTATSININVENTORYVIEW", "STR_BATTLESCAPE"));
-	//# _info.push_back(OptionInfo(OPTION_OXC, "battleHairBleach", &battleHairBleach, true, "STR_BATTLEHAIRBLEACH", "STR_BATTLESCAPE"));
-	//# _info.push_back(OptionInfo(OPTION_OXC, "battleInstantGrenade", &battleInstantGrenade, false, "STR_BATTLEINSTANTGRENADE", "STR_BATTLESCAPE"));
-	//#_info.push_back(OptionInfo(OPTION_OXC, "includePrimeStateInSavedLayout", &includePrimeStateInSavedLayout, false, "STR_INCLUDE_PRIMESTATE_IN_SAVED_LAYOUT", "STR_BATTLESCAPE"));
-	//#_info.push_back(OptionInfo(OPTION_OXC, "battleExplosionHeight", &battleExplosionHeight, 0, "STR_BATTLEEXPLOSIONHEIGHT", "STR_BATTLESCAPE"));
-	//# _info.push_back(OptionInfo(OPTION_OXC, "battleAutoEnd", &battleAutoEnd, false, "STR_BATTLEAUTOEND", "STR_BATTLESCAPE"));
-	//# _info.push_back(OptionInfo(OPTION_OXC, "battleSmoothCamera", &battleSmoothCamera, false, "STR_BATTLESMOOTHCAMERA", "STR_BATTLESCAPE"));
-	//# _info.push_back(OptionInfo(OPTION_OXC, "disableAutoEquip", &disableAutoEquip, false, "STR_DISABLEAUTOEQUIP", "STR_BATTLESCAPE"));
-#ifdef __MOBILE__
-	_info.push_back(OptionInfo(OPTION_OXC, "battleConfirmFireMode", &battleConfirmFireMode, true, "STR_BATTLECONFIRMFIREMODE", "STR_BATTLESCAPE"));
-#else
-	//# _info.push_back(OptionInfo(OPTION_OXC, "battleConfirmFireMode", &battleConfirmFireMode, false, "STR_BATTLECONFIRMFIREMODE", "STR_BATTLESCAPE"));
-#endif
-	//#_info.push_back(OptionInfo(OPTION_OXC, "weaponSelfDestruction", &weaponSelfDestruction, false, "STR_WEAPONSELFDESTRUCTION", "STR_BATTLESCAPE"));
-	//# _info.push_back(OptionInfo(OPTION_OXC, "allowPsionicCapture", &allowPsionicCapture, false, "STR_ALLOWPSIONICCAPTURE", "STR_BATTLESCAPE"));
-	//#_info.push_back(OptionInfo(OPTION_OXC, "allowPsiStrengthImprovement", &allowPsiStrengthImprovement, false, "STR_ALLOWPSISTRENGTHIMPROVEMENT", "STR_BATTLESCAPE"));
-	//# _info.push_back(OptionInfo(OPTION_OXC, "strafe", &strafe, false, "STR_STRAFE", "STR_BATTLESCAPE"));
-	//# _info.push_back(OptionInfo(OPTION_OXC, "forceFire", &forceFire, true, "STR_FORCE_FIRE", "STR_BATTLESCAPE"));
-	//# _info.push_back(OptionInfo(OPTION_OXC, "skipNextTurnScreen", &skipNextTurnScreen, false, "STR_SKIPNEXTTURNSCREEN", "STR_BATTLESCAPE"));
-	//# _info.push_back(OptionInfo(OPTION_OXC, "noAlienPanicMessages", &noAlienPanicMessages, false, "STR_NOALIENPANICMESSAGES", "STR_BATTLESCAPE"));
-	//# _info.push_back(OptionInfo(OPTION_OXC, "alienBleeding", &alienBleeding, false, "STR_ALIENBLEEDING", "STR_BATTLESCAPE"));
 }
 
 void createControlsOXC()

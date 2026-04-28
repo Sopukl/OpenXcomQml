@@ -39,7 +39,6 @@ namespace Options
 	/// Creates the options info.
 	void create();
 	void createOptionsOXC();
-	void createAdvancedOptionsOXC();
 	void createControlsOXC();
 	void createOptionsOXCE();
 	void createAdvancedOptionsOXCE();

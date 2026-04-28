@@ -29,5 +29,7 @@
         <file>OpenXcom/MainMenu/LoadGame.qml</file>
         <file>OpenXcom/MainMenu/Options/Advanced/OXC.qml</file>
         <file>OpenXcom/MainMenu/Options/Advanced/OXCE.qml</file>
+        <file>OpenXcom/MainMenu/Options/Controls/BoolOption.qml</file>
+        <file>OpenXcom/MainMenu/Options/Controls/IntOption.qml</file>
     </qresource>
 </RCC>

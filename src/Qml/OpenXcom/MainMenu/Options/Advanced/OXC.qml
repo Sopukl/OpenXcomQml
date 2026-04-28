@@ -2,6 +2,7 @@ import QtQuick
 import QtQuick.Controls
 import OpenXcom 1.0
 import OpenXcom.MainMenu.Controls 1.0 as XC
+import "../Controls"
 
 Flickable {
     id: ctrl
@@ -13,20 +14,15 @@ Flickable {
     contentHeight: col.height
     clip: true
 
-    component BoolOption: XC.CheckBox {
-        width: col.width
-        required property string key
-        checked: Options1[key]
-        onClicked: Options1[key] = !Options1[key]
-    }
-
     Column {
         id: col
         width: ctrl.width - scroll.width
         spacing: 2
         XC.GroupBox {
             title: "General"
+            width: col.width
             Column {
+                width: col.width
                 spacing: 1
                 BoolOption {
                     text: "Play intro"
@@ -36,11 +32,12 @@ Flickable {
                     text: "Autosave"
                     key: "autosave"
                 }
-                XC.CheckBox {
+                IntOption {
                     width: col.width
                     text: "Autosave Frequency"
-                    // checked: Options1.autosave
-                    // onClicked: Options1.autosave = !Options1.autosave
+                    key: "autosaveFrequency"
+                    min: 1
+                    max: 5
                 }
                 BoolOption {
                     text: "Save scumming"
@@ -50,12 +47,45 @@ Flickable {
                     text: "Lazy loading"
                     key: "lazyLoadResources"
                 }
+                IntOption {
+                    width: col.width
+                    text: "Mouse wheel scroll speed"
+                    key: "mousewheelSpeed"
+                    min: 1
+                    max: 7
+                }
+                IntOption {
+                    width: col.width
+                    text: "Change values with mouse wheel"
+                    key: "changeValueByMouseWheel"
+                    min: 0
+                    max: 100
+                    step: 10
+                }
+                IntOption {
+                    width: col.width
+                    text: "Fps limit"
+                    key: "maxFPS"
+                    min: 0
+                    max: 120
+                    step: 10
+                }
+                IntOption {
+                    width: col.width
+                    text: "Fps limit background"
+                    key: "maxFPSInactive"
+                    min: 0
+                    max: 120
+                    step: 10
+                }
             }
         }
         XC.GroupBox {
             title: "Geoscape"
+            width: col.width
             Column {
                 spacing: 1
+                width: col.width
                 BoolOption {
                     text: "Invert drag scrolling"
                     key: "geoDragScrollInvert"
@@ -114,6 +144,7 @@ Flickable {
             title: "Battlescape"
             Column {
                 spacing: 1
+                width: col.width
                 BoolOption {
                     text: "Invert drag scrolling"
                     key: "battleDragScrollInvert"
@@ -141,6 +172,14 @@ Flickable {
                 BoolOption {
                     text: "Save pre-primed grenades"
                     key: "includePrimeStateInSavedLayout"
+                }
+                IntOption {
+                    width: col.width
+                    text: "Exposion height"
+                    key: "battleExplosionHeight"
+                    min: 0
+                    max: 3
+                    step: 1
                 }
                 BoolOption {
                     text: "Auto-end battle"
