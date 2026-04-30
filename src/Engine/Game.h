@@ -129,6 +129,8 @@ struct SaveDesc
         void setState(State *state);
         /// Pushes a new state into the state stack.
         void pushState(State *state);
+        /// Close the state from the state stack.
+        void closeState(State *state);
         /// Pops the last state from the state stack.
         void popState();
         /// Gets the currently loaded language.

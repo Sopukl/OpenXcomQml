@@ -139,16 +139,16 @@ void BaseNameState::btnOkClick(Action *)
 	if (!_edtName->getText().empty())
 	{
 		_base->setName(_edtName->getText());
-		_game->popState(); // pop BaseNameState
+		game.closeState(this);
 
-		if (!_fixedLocation)
-		{
-			_game->popState(); // pop ConfirmNewBaseState or BuildNewBaseState
-			if (!_first)
-			{
-				_game->popState(); // pop BuildNewBaseState
-			}
-		}
+		// if (!_fixedLocation)
+		// {
+		// 	_game->popState(); // pop ConfirmNewBaseState or BuildNewBaseState
+		// 	if (!_first)
+		// 	{
+		// 		_game->popState(); // pop BuildNewBaseState
+		// 	}
+		// }
 
 		if (!_first || options1.customInitialBase())
 		{

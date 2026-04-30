@@ -115,6 +115,7 @@ void ConfirmNewBaseState::btnOkClick(Action *)
 	{
 		_game->pushState(new ErrorMessageState(tr("STR_NOT_ENOUGH_MONEY"), _palette, _game->getMod()->getInterface("geoscape")->getElement("genericWindow")->color, "BACK01.SCR", _game->getMod()->getInterface("geoscape")->getElement("palette")->color));
 	}
+	_game->closeState(this);
 }
 
 /**
@@ -124,7 +125,7 @@ void ConfirmNewBaseState::btnOkClick(Action *)
 void ConfirmNewBaseState::btnCancelClick(Action *)
 {
 	_globe->onMouseOver(0);
-	_game->popState();
+	_game->closeState(this);
 }
 
 }

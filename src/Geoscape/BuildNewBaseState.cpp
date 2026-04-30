@@ -265,6 +265,7 @@ void BuildNewBaseState::globeClick(Action *action)
 					_game->pushState(new ConfirmNewBaseState(_base, _globe));
 				}
 			}
+			game.closeState(this);
 		}
 		else
 		{
@@ -388,7 +389,8 @@ void BuildNewBaseState::btnZoomOutRightClick(Action *)
 void BuildNewBaseState::btnCancelClick(Action *)
 {
 	delete _base;
-	_game->popState();
+	_game->closeState(this);
+	// _game->popState();
 }
 
 /**

@@ -541,6 +541,15 @@ void Game::pushState(State *state)
 	_init = false;
 }
 
+void Game::closeState(State *state)
+{
+	if (auto it = std::find(_states.begin(), _states.end(), state);
+			 it != _states.end())
+	{
+		_deleted.splice(_deleted.end(), _states, it);
+	}
+}
+
 /**
  * Pops the last state from the top of the stack. Since states
  * can't actually be deleted mid-cycle, it's moved into a separate queue
