@@ -7,16 +7,12 @@ import "../Controls"
 Flickable {
     id: ctrl
     flickableDirection: Flickable.VerticalFlick
-    ScrollBar.vertical: ScrollBar {
-        id: scroll
-        policy: ScrollBar.AlwaysOn
-    }
     contentHeight: col.height
     clip: true
 
     Column {
         id: col
-        width: ctrl.width - scroll.width
+        width: ctrl.width
         spacing: 2
         XC.GroupBox {
             title: "General"

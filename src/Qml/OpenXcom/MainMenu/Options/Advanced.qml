@@ -36,13 +36,33 @@ Page {
     }
     SwipeView {
         id: pages
+        clip: true
         anchors{
             top: tabs.bottom
             bottom: parent.bottom
             left: parent.left
-            right: parent.right
+            right: pagesScroll.left
         }
         Advanced.OXC{}
         Advanced.OXCE{}
+    }
+    ScrollBar {
+        id: pagesScroll
+        anchors{
+            top: tabs.bottom
+            bottom: parent.bottom
+            right: parent.right
+        }
+
+        property Flickable flickable: pages.currentItem
+        policy: ScrollBar.AlwaysOn
+        width: 10
+        height: parent.height
+        size: flickable.visibleArea.heightRatio
+        position: flickable.visibleArea.yPosition
+        onPositionChanged: {
+            if(pressed)
+                flickable.contentY = position * (flickable.contentHeight)
+        }
     }
 }

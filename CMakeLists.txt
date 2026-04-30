@@ -5,7 +5,7 @@ project ( OpenXcom )
 set ( CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake/modules" )
 include(BuildType)
 
-set (CMAKE_CXX_STANDARD 17)
+set (CMAKE_CXX_STANDARD 23)
 
 # Find OpenGL
 set (OpenGL_GL_PREFERENCE LEGACY)
