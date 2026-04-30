@@ -10,8 +10,6 @@ Button {
 
     background: Rectangle {
         color: control.palette.button
-        border.color: "red"
-        border.width: control.hovered ? 2 : 0
         radius: 0
     }
 
@@ -23,7 +21,7 @@ Button {
     }
 
     palette {
-        button: "#1C8064"
+        button: "#A01C8064"
         buttonText: "#64CCBC"
     }
 }

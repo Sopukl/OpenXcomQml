@@ -64,5 +64,15 @@ Page {
             if(pressed)
                 flickable.contentY = position * (flickable.contentHeight)
         }
+
+        background: Rectangle {
+            color: "#40FFFF00"
+        }
+        contentItem: Rectangle {
+            implicitWidth: 10
+            implicitHeight: 100
+            color: "#00000000"
+            border.color: "#21be2b"
+        }
     }
 }
