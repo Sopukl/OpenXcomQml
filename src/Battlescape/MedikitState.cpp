@@ -151,9 +151,9 @@ MedikitState::MedikitState (BattleUnit *targetUnit, BattleAction *action, TileEn
 	add(_bg);
 	add(_medikitView, "body", "medikit", _bg);
 	add(_endButton, "buttonEnd", "medikit", _bg);
-	add(new MedikitTitle (37, tr(_item->getRules()->getPainKillerActionName())), "textPK", "medikit", _bg);
-	add(new MedikitTitle (73, tr(_item->getRules()->getStimulantActionName())), "textStim", "medikit", _bg);
-	add(new MedikitTitle (109, tr(_item->getRules()->getHealActionName())), "textHeal", "medikit", _bg);
+	add(new MedikitTitle (37, ltr(_item->getRules()->getPainKillerActionName())), "textPK", "medikit", _bg);
+	add(new MedikitTitle (73, ltr(_item->getRules()->getStimulantActionName())), "textStim", "medikit", _bg);
+	add(new MedikitTitle (109, ltr(_item->getRules()->getHealActionName())), "textHeal", "medikit", _bg);
 	add(_healButton, "buttonHeal", "medikit", _bg);
 	add(_stimulantButton, "buttonStim", "medikit", _bg);
 	add(_pkButton, "buttonPK", "medikit", _bg);

@@ -53,7 +53,7 @@ UfoLostState::UfoLostState(const std::string &id) : _id(id)
 	// Set up objects
 	setWindowBackground(_window, "UFOLost");
 
-	_btnOk->setText(tr("STR_OK"));
+	_btnOk->setText(ltr("STR_OK"));
 	_btnOk->onMouseClick((ActionHandler)&UfoLostState::btnOkClick);
 	_btnOk->onKeyboardPress((ActionHandler)&UfoLostState::btnOkClick, options1.keyOk());
 	_btnOk->onKeyboardPress((ActionHandler)&UfoLostState::btnOkClick, options1.keyCancel());
@@ -62,7 +62,7 @@ UfoLostState::UfoLostState(const std::string &id) : _id(id)
 	_txtTitle->setAlign(ALIGN_CENTER);
 	std::string s = _id;
 	s += '\n';
-	s += tr("STR_TRACKING_LOST");
+	s += ltr("STR_TRACKING_LOST");
 	_txtTitle->setText(s);
 }
 

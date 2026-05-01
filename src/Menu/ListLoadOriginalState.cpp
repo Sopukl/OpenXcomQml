@@ -88,23 +88,23 @@ ListLoadOriginalState::ListLoadOriginalState(OptionsOrigin origin) : _origin(ori
 	// Set up objects
 	setWindowBackground(_window, "saveMenus");
 
-	_btnNew->setText(tr("STR_OPENXCOM").arg(Options::getActiveMasterInfo()->getVersionDisplay()));
+	_btnNew->setText(ltr("STR_OPENXCOM").arg(Options::getActiveMasterInfo()->getVersionDisplay()));
 	_btnNew->onMouseClick((ActionHandler)&ListLoadOriginalState::btnNewClick);
 	_btnNew->onKeyboardPress((ActionHandler)&ListLoadOriginalState::btnNewClick, options1.keyCancel());
 
-	_btnCancel->setText(tr("STR_CANCEL"));
+	_btnCancel->setText(ltr("STR_CANCEL"));
 	_btnCancel->onMouseClick((ActionHandler)&ListLoadOriginalState::btnCancelClick);
 	_btnCancel->onKeyboardPress((ActionHandler)&ListLoadOriginalState::btnCancelClick, options1.keyCancel());
 
 	_txtTitle->setBig();
 	_txtTitle->setAlign(ALIGN_CENTER);
-	_txtTitle->setText(tr("STR_SELECT_GAME_TO_LOAD"));
+	_txtTitle->setText(ltr("STR_SELECT_GAME_TO_LOAD"));
 
-	_txtName->setText(tr("STR_NAME"));
+	_txtName->setText(ltr("STR_NAME"));
 
-	_txtTime->setText(tr("STR_TIME"));
+	_txtTime->setText(ltr("STR_TIME"));
 
-	_txtDate->setText(tr("STR_DATE"));
+	_txtDate->setText(ltr("STR_DATE"));
 
 	std::string dots(80, '.');
 	SaveConverter::getList(_game->getLanguage(), _saves);
@@ -182,7 +182,7 @@ void ListLoadOriginalState::btnSlotClick(Action *action)
 		if (_saves[n].tactical)
 		{
 			std::ostringstream error;
-			error << tr("STR_LOAD_UNSUCCESSFUL") << Unicode::TOK_NL_SMALL << "Battlescape saves aren't supported.";
+			error << ltr("STR_LOAD_UNSUCCESSFUL") << Unicode::TOK_NL_SMALL << "Battlescape saves aren't supported.";
 			_game->pushState(new ErrorMessageState(error.str(), _palette, _game->getMod()->getInterface("errorMessages")->getElement("geoscapeColor")->color, "BACK01.SCR", _game->getMod()->getInterface("errorMessages")->getElement("geoscapePalette")->color));
 
 		}

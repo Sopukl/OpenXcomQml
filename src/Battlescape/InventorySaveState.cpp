@@ -68,7 +68,7 @@ InventorySaveState::InventorySaveState(InventoryState *parent) : _parent(parent)
 
 	_txtTitle->setHighContrast(true);
 	_txtTitle->setAlign(ALIGN_CENTER);
-	_txtTitle->setText(tr("STR_SAVE_EQUIPMENT_TEMPLATE"));
+	_txtTitle->setText(ltr("STR_SAVE_EQUIPMENT_TEMPLATE"));
 
 	_lstLayout->setHighContrast(true);
 	_lstLayout->setColumns(1, 192);
@@ -78,16 +78,16 @@ InventorySaveState::InventorySaveState(InventoryState *parent) : _parent(parent)
 	_lstLayout->onMousePress((ActionHandler)&InventorySaveState::lstLayoutPress);
 
 	_btnCancel->setHighContrast(true);
-	_btnCancel->setText(tr("STR_CANCEL_UC"));
+	_btnCancel->setText(ltr("STR_CANCEL_UC"));
 	_btnCancel->onMouseClick((ActionHandler)&InventorySaveState::btnCancelClick);
 	_btnCancel->onKeyboardPress((ActionHandler)&InventorySaveState::btnCancelClick, options1.keyCancel());
 
 	_btnSave->setHighContrast(true);
-	_btnSave->setText(tr("STR_SAVE_UC"));
+	_btnSave->setText(ltr("STR_SAVE_UC"));
 	_btnSave->onMouseClick((ActionHandler)&InventorySaveState::btnSaveClick);
 
 	_btnSaveWithArmor->setHighContrast(true);
-	std::string savePlus = tr("STR_SAVE_UC");
+	std::string savePlus = ltr("STR_SAVE_UC");
 	savePlus += "+";
 	_btnSaveWithArmor->setText(savePlus);
 	_btnSaveWithArmor->onMouseClick((ActionHandler)&InventorySaveState::btnSaveWithArmorClick);
@@ -104,17 +104,17 @@ InventorySaveState::InventorySaveState(InventoryState *parent) : _parent(parent)
 		const std::string& armorName = _game->getSavedGame()->getGlobalEquipmentLayoutArmor(i);
 		if (!armorName.empty())
 		{
-			ss << "[" << tr(armorName) << "] ";
+			ss << "[" << ltr(armorName) << "] ";
 		}
 		if (item->empty())
 		{
-			ss << tr("STR_EMPTY_SLOT_N").arg(i + 1);
+			ss << ltr("STR_EMPTY_SLOT_N").arg(i + 1);
 		}
 		else
 		{
 			const std::string &itemName = _game->getSavedGame()->getGlobalEquipmentLayoutName(i);
 			if (itemName.empty())
-				ss << tr("STR_UNNAMED_SLOT_N").arg(i + 1);
+				ss << ltr("STR_UNNAMED_SLOT_N").arg(i + 1);
 			else
 				ss << itemName;
 		}

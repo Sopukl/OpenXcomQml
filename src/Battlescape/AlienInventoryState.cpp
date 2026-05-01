@@ -96,7 +96,7 @@ AlienInventoryState::AlienInventoryState(BattleUnit *unit)
 	{
 		_txtName->setHeight(_txtName->getHeight() * 9);
 		_txtName->setWordWrap(true);
-		_txtName->setText(tr("STR_THIS_FEATURE_IS_DISABLED_5"));
+		_txtName->setText(ltr("STR_THIS_FEATURE_IS_DISABLED_5"));
 		_soldier->setVisible(false);
 		_txtLeftHand->setVisible(false);
 		_txtRightHand->setVisible(false);
@@ -107,7 +107,7 @@ AlienInventoryState::AlienInventoryState(BattleUnit *unit)
 
 	if (unit->getOriginalFaction() == FACTION_NEUTRAL)
 	{
-		_txtName->setText(tr(unit->getType()));
+		_txtName->setText(ltr(unit->getType()));
 	}
 	else
 	{
@@ -121,7 +121,7 @@ AlienInventoryState::AlienInventoryState(BattleUnit *unit)
 			else
 			{
 				// e.g. Sectoid
-				_txtName->setText(tr(unit->getUnitRules()->getRace()));
+				_txtName->setText(ltr(unit->getUnitRules()->getRace()));
 			}
 		}
 		else
@@ -340,7 +340,7 @@ void AlienInventoryState::calculateMeleeWeapon(BattleUnit* unit, BattleItem* wea
 		meleeDodgeTarget = _game->getSavedGame()->getSavedBattle()->selectUnit(tileToCheck);
 	}
 
-	ss << tr(weapon->getRules()->getType()) << " > ";
+	ss << ltr(weapon->getRules()->getType()) << " > ";
 	if (meleeDodgeTarget)
 	{
 		BattleActionAttack attack;
@@ -413,7 +413,7 @@ void AlienInventoryState::calculateRangedWeapon(BattleUnit* unit, BattleItem* we
 		}
 	}
 
-	ss << tr(weapon->getRules()->getType()) << " > ";
+	ss << ltr(weapon->getRules()->getType()) << " > ";
 	if (!closeQuartersTargetList.empty())
 	{
 		for (const auto* victim : closeQuartersTargetList)

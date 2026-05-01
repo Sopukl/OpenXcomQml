@@ -62,15 +62,15 @@ NewPossibleCraftState::NewPossibleCraftState(Base * base, const std::vector<Rule
 	// Set up objects
 	setWindowBackground(_window, "geoNewCraft");
 
-	_btnOk->setText(tr("STR_OK"));
+	_btnOk->setText(ltr("STR_OK"));
 	_btnOk->onMouseClick((ActionHandler)&NewPossibleCraftState::btnOkClick);
 	_btnOk->onKeyboardPress((ActionHandler)&NewPossibleCraftState::btnOkClick, options1.keyCancel());
-	_btnPurchase->setText(tr("STR_PURCHASE_HIRE_PERSONNEL"));
+	_btnPurchase->setText(ltr("STR_PURCHASE_HIRE_PERSONNEL"));
 	_btnPurchase->onMouseClick((ActionHandler)&NewPossibleCraftState::btnPurchaseClick);
 	_btnPurchase->onKeyboardPress((ActionHandler)&NewPossibleCraftState::btnPurchaseClick, options1.keyOk());
 	_txtTitle->setBig();
 	_txtTitle->setAlign(ALIGN_CENTER);
-	_txtTitle->setText(tr("STR_WE_CAN_NOW_RENT"));
+	_txtTitle->setText(ltr("STR_WE_CAN_NOW_RENT"));
 
 	// Caveat
 	{
@@ -85,13 +85,13 @@ NewPossibleCraftState::NewPossibleCraftState(Base * base, const std::vector<Rule
 		{
 			if (i > 0)
 				ss << ", ";
-			ss << tr(serviceName);
+			ss << ltr(serviceName);
 			i++;
 		}
 		std::string argument = ss.str();
 
 		_txtCaveat->setAlign(ALIGN_CENTER);
-		_txtCaveat->setText(tr("STR_REQUIRED_BASE_SERVICES").arg(argument));
+		_txtCaveat->setText(ltr("STR_REQUIRED_BASE_SERVICES").arg(argument));
 		_txtCaveat->setVisible(requiredServices.any());
 	}
 
@@ -101,7 +101,7 @@ NewPossibleCraftState::NewPossibleCraftState(Base * base, const std::vector<Rule
 	_lstPossibilities->setScrolling(true, 0);
 	for (const auto* ruleCraft : possibilities)
 	{
-		_lstPossibilities->addRow (1, tr(ruleCraft->getType()).c_str());
+		_lstPossibilities->addRow (1, ltr(ruleCraft->getType()).c_str());
 	}
 }
 

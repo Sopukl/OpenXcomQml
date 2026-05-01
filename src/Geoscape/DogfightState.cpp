@@ -518,9 +518,9 @@ DogfightState::DogfightState(GeoscapeState *state, Craft *craft, Ufo *ufo, bool 
 	updateOceanIndicator();
 
 	if (_ufoIsAttacking)
-		_txtStatus->setText(tr("STR_AGGRESSIVE_ATTACK"));
+		_txtStatus->setText(ltr("STR_AGGRESSIVE_ATTACK"));
 	else
-		_txtStatus->setText(tr("STR_STANDOFF"));
+		_txtStatus->setText(ltr("STR_STANDOFF"));
 
 	SurfaceSet *set = _game->getMod()->getSurfaceSet("INTICON.PCK");
 
@@ -1079,7 +1079,7 @@ void DogfightState::update()
 
 		if (_game->getMod()->getShowDogfightDistanceInKm())
 		{
-			_txtDistance->setText(tr("STR_KILOMETERS").arg(_currentDist / 8));
+			_txtDistance->setText(ltr("STR_KILOMETERS").arg(_currentDist / 8));
 		}
 		else
 		{
@@ -1976,7 +1976,7 @@ void DogfightState::aggressiveDistance()
  */
 void DogfightState::setStatus(const std::string &status)
 {
-	_txtStatus->setText(tr(status));
+	_txtStatus->setText(ltr(status));
 	_timeout = 50;
 }
 
@@ -2430,16 +2430,16 @@ void DogfightState::updateOceanIndicator()
 
 	if (oceanTexture)
 	{
-		_txtOceanIndicator->setText(tr("STR_OCEAN_INDICATOR")); // ! ufo lost
+		_txtOceanIndicator->setText(ltr("STR_OCEAN_INDICATOR")); // ! ufo lost
 	}
 	else if (fakeUnderwaterTexture)
 	{
 		if (survivalChance >= 100)
 			_txtOceanIndicator->setText("");
 		else if (survivalChance > 0)
-			_txtOceanIndicator->setText(tr("STR_OCEAN_INDICATOR_RNG")); // ? ufo maybe lost, maybe not
+			_txtOceanIndicator->setText(ltr("STR_OCEAN_INDICATOR_RNG")); // ? ufo maybe lost, maybe not
 		else
-			_txtOceanIndicator->setText(tr("STR_OCEAN_INDICATOR")); // ! ufo lost
+			_txtOceanIndicator->setText(ltr("STR_OCEAN_INDICATOR")); // ! ufo lost
 	}
 	else
 	{
@@ -2498,12 +2498,12 @@ void DogfightState::btnMinimizedIconClick(Action *)
 {
 	if (_craft->getRules()->isWaterOnly() && _ufo->getAltitudeInt() > _craft->getRules()->getMaxAltitude())
 	{
-		_state->popup(new DogfightErrorState(_craft, tr("STR_UNABLE_TO_ENGAGE_DEPTH")));
+		_state->popup(new DogfightErrorState(_craft, ltr("STR_UNABLE_TO_ENGAGE_DEPTH")));
 		setWaitForAltitude(true);
 	}
 	else if (_craft->getRules()->isWaterOnly() && !_state->getGlobe()->insideLand(_craft->getLongitude(), _craft->getLatitude()))
 	{
-		_state->popup(new DogfightErrorState(_craft, tr("STR_UNABLE_TO_ENGAGE_AIRBORNE")));
+		_state->popup(new DogfightErrorState(_craft, ltr("STR_UNABLE_TO_ENGAGE_AIRBORNE")));
 		setWaitForPoly(true);
 	}
 	else

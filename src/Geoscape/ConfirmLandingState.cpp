@@ -80,17 +80,17 @@ ConfirmLandingState::ConfirmLandingState(Craft *craft, Texture *missionTexture, 
 	// Set up objects
 	setWindowBackground(_window, "confirmLanding");
 
-	_btnYes->setText(tr("STR_YES"));
+	_btnYes->setText(ltr("STR_YES"));
 	_btnYes->onMouseClick((ActionHandler)&ConfirmLandingState::btnYesClick);
 	_btnYes->onKeyboardPress((ActionHandler)&ConfirmLandingState::btnYesClick, options1.keyOk());
 
 	if (_game->isCtrlPressed())
 	{
-		_btnNo->setText(tr("STR_PATROL"));
+		_btnNo->setText(ltr("STR_PATROL"));
 	}
 	else
 	{
-		_btnNo->setText(tr("STR_NO"));
+		_btnNo->setText(ltr("STR_NO"));
 	}
 	_btnNo->onMouseClick((ActionHandler)&ConfirmLandingState::btnNoClick);
 	_btnNo->onKeyboardPress((ActionHandler)&ConfirmLandingState::btnNoClick, options1.keyCancel());
@@ -102,14 +102,14 @@ ConfirmLandingState::ConfirmLandingState(Craft *craft, Texture *missionTexture, 
 	_txtMessage->setBig();
 	_txtMessage->setAlign(ALIGN_CENTER);
 	_txtMessage->setWordWrap(true);
-	_txtMessage->setText(tr("STR_CRAFT_READY_TO_LAND_NEAR_DESTINATION")
+	_txtMessage->setText(ltr("STR_CRAFT_READY_TO_LAND_NEAR_DESTINATION")
 						 .arg(_craft->getName(_game->getLanguage()))
 						 .arg(_craft->getDestination()->getName(_game->getLanguage())));
 
 	_txtBegin->setBig();
 	_txtBegin->setAlign(ALIGN_CENTER);
 	std::ostringstream ss;
-	ss << Unicode::TOK_COLOR_FLIP << tr("STR_BEGIN_MISSION");
+	ss << Unicode::TOK_COLOR_FLIP << ltr("STR_BEGIN_MISSION");
 	_txtBegin->setText(ss.str());
 
 	SurfaceSet *sprites = _game->getMod()->getSurfaceSet("DayNightIndicator", false);
@@ -159,7 +159,7 @@ std::string ConfirmLandingState::checkStartingCondition()
 {
 	if (_craft->areBannedArmorsOnboard())
 	{
-		return tr("STR_ARMOR_NOT_ALLOWED_ONBOARD");
+		return ltr("STR_ARMOR_NOT_ALLOWED_ONBOARD");
 	}
 
 	Ufo* u = dynamic_cast<Ufo*>(_craft->getDestination());
@@ -209,21 +209,21 @@ std::string ConfirmLandingState::checkStartingCondition()
 		{
 			if (!u || u->getStatus() == Ufo::LANDED || u->getStatus() == Ufo::CRASHED)
 			{
-				return tr("STR_STARTING_CONDITION_COMMANDER");
+				return ltr("STR_STARTING_CONDITION_COMMANDER");
 			}
 		}
 		if (!rule->isCraftPermitted(_craft->getRules()->getType()))
 		{
-			return tr("STR_STARTING_CONDITION_CRAFT"); // simple message without details/argument
+			return ltr("STR_STARTING_CONDITION_CRAFT"); // simple message without details/argument
 		}
 		if (!_craft->areOnlyPermittedSoldierTypesOnboard(rule))
 		{
-			return tr("STR_STARTING_CONDITION_SOLDIER_TYPE"); // simple message without details/argument
+			return ltr("STR_STARTING_CONDITION_SOLDIER_TYPE"); // simple message without details/argument
 		}
 
 		if (!_craft->areRequiredItemsOnboard(rule->getRequiredItems()))
 		{
-			return tr("STR_STARTING_CONDITION_ITEM"); // simple message without details/argument
+			return ltr("STR_STARTING_CONDITION_ITEM"); // simple message without details/argument
 		}
 		else
 		{
@@ -331,11 +331,11 @@ void ConfirmLandingState::togglePatrolButton(Action *)
 {
 	if (_game->isCtrlPressed())
 	{
-		_btnNo->setText(tr("STR_PATROL"));
+		_btnNo->setText(ltr("STR_PATROL"));
 	}
 	else
 	{
-		_btnNo->setText(tr("STR_NO"));
+		_btnNo->setText(ltr("STR_NO"));
 	}
 }
 

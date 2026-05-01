@@ -137,30 +137,30 @@ PurchaseState::PurchaseState(Base *base, CannotReequipState *parent) : _base(bas
 
 	touchComponentsConfigure();
 
-	_btnOk->setText(tr("STR_OK"));
+	_btnOk->setText(ltr("STR_OK"));
 	_btnOk->onMouseClick((ActionHandler)&PurchaseState::btnOkClick);
 	_btnOk->onKeyboardPress((ActionHandler)&PurchaseState::btnOkClick, options1.keyOk());
 
-	_btnCancel->setText(tr("STR_CANCEL"));
+	_btnCancel->setText(ltr("STR_CANCEL"));
 	_btnCancel->onMouseClick((ActionHandler)&PurchaseState::btnCancelClick);
 	_btnCancel->onKeyboardPress((ActionHandler)&PurchaseState::btnCancelClick, options1.keyCancel());
 
 	_txtTitle->setBig();
 	_txtTitle->setAlign(ALIGN_CENTER);
-	_txtTitle->setText(tr("STR_PURCHASE_HIRE_PERSONNEL"));
+	_txtTitle->setText(ltr("STR_PURCHASE_HIRE_PERSONNEL"));
 
-	_txtFunds->setText(tr("STR_CURRENT_FUNDS").arg(Unicode::formatFunding(_game->getSavedGame()->getFunds())));
+	_txtFunds->setText(ltr("STR_CURRENT_FUNDS").arg(Unicode::formatFunding(_game->getSavedGame()->getFunds())));
 
-	_txtPurchases->setText(tr("STR_COST_OF_PURCHASES").arg(Unicode::formatFunding(_total)));
+	_txtPurchases->setText(ltr("STR_COST_OF_PURCHASES").arg(Unicode::formatFunding(_total)));
 
 	_txtSpaceUsed->setVisible(options1.storageLimitsEnforced());
 	std::ostringstream ss;
 	ss << _base->getUsedStores() << ":" << _base->getAvailableStores();
-	_txtSpaceUsed->setText(tr("STR_SPACE_USED").arg(ss.str()));
+	_txtSpaceUsed->setText(ltr("STR_SPACE_USED").arg(ss.str()));
 
-	_txtCost->setText(tr("STR_COST_PER_UNIT_UC"));
+	_txtCost->setText(ltr("STR_COST_PER_UNIT_UC"));
 
-	_txtQuantity->setText(tr("STR_QUANTITY_UC"));
+	_txtQuantity->setText(ltr("STR_QUANTITY_UC"));
 
 	_lstItems->setArrowColumn(227, ARROW_VERTICAL);
 	_lstItems->setColumns(4, 150, 55, 50, 32);
@@ -225,7 +225,7 @@ PurchaseState::PurchaseState(Base *base, CannotReequipState *parent) : _base(bas
 		RuleSoldier *rule = _game->getMod()->getSoldier(soldierType);
 		if (craftAndSoldierFilter(rule))
 		{
-			TransferRow row = { TRANSFER_SOLDIER, rule, tr(rule->getType()), rule->getBuyCost(), _base->getSoldierCountAndSalary(rule->getType()).first, 0, 0, -4, 0, 0, 0 };
+			TransferRow row = { TRANSFER_SOLDIER, rule, ltr(rule->getType()), rule->getBuyCost(), _base->getSoldierCountAndSalary(rule->getType()).first, 0, 0, -4, 0, 0, 0 };
 			_items.push_back(row);
 			std::string cat = getCategory(_items.size() - 1);
 			if (std::find(_cats.begin(), _cats.end(), cat) == _cats.end())
@@ -237,7 +237,7 @@ PurchaseState::PurchaseState(Base *base, CannotReequipState *parent) : _base(bas
 	if ((_game->getMod()->getHireScientistsUnlockResearch().empty() || _game->getSavedGame()->isResearched(_game->getMod()->getHireScientistsUnlockResearch(), true))
 		&& (~providedBaseFunc & _game->getMod()->getHireScientistsRequiresBaseFunc()).none())
 	{
-		TransferRow row = { TRANSFER_SCIENTIST, 0, tr("STR_SCIENTIST"), _game->getMod()->getHireScientistCost(), _base->getTotalScientists(), 0, 0, -3, 0, 0, 0 };
+		TransferRow row = { TRANSFER_SCIENTIST, 0, ltr("STR_SCIENTIST"), _game->getMod()->getHireScientistCost(), _base->getTotalScientists(), 0, 0, -3, 0, 0, 0 };
 		_items.push_back(row);
 		std::string cat = getCategory(_items.size() - 1);
 		if (std::find(_cats.begin(), _cats.end(), cat) == _cats.end())
@@ -248,7 +248,7 @@ PurchaseState::PurchaseState(Base *base, CannotReequipState *parent) : _base(bas
 	if ((_game->getMod()->getHireEngineersUnlockResearch().empty() || _game->getSavedGame()->isResearched(_game->getMod()->getHireEngineersUnlockResearch(), true))
 		&& (~providedBaseFunc & _game->getMod()->getHireEngineersRequiresBaseFunc()).none())
 	{
-		TransferRow row = { TRANSFER_ENGINEER, 0, tr("STR_ENGINEER"), _game->getMod()->getHireEngineerCost(), _base->getTotalEngineers(), 0, 0, -2, 0, 0, 0 };
+		TransferRow row = { TRANSFER_ENGINEER, 0, ltr("STR_ENGINEER"), _game->getMod()->getHireEngineerCost(), _base->getTotalEngineers(), 0, 0, -2, 0, 0, 0 };
 		_items.push_back(row);
 		std::string cat = getCategory(_items.size() - 1);
 		if (std::find(_cats.begin(), _cats.end(), cat) == _cats.end())
@@ -261,7 +261,7 @@ PurchaseState::PurchaseState(Base *base, CannotReequipState *parent) : _base(bas
 		RuleCraft *rule = _game->getMod()->getCraft(craftType);
 		if (craftAndSoldierFilter(rule))
 		{
-			TransferRow row = { TRANSFER_CRAFT, rule, tr(rule->getType()), rule->getBuyCost(), _base->getCraftCount(rule), 0, 0, -1, 0, 0, 0 };
+			TransferRow row = { TRANSFER_CRAFT, rule, ltr(rule->getType()), rule->getBuyCost(), _base->getCraftCount(rule), 0, 0, -1, 0, 0, 0 };
 			_items.push_back(row);
 			std::string cat = getCategory(_items.size() - 1);
 			if (std::find(_cats.begin(), _cats.end(), cat) == _cats.end())
@@ -275,7 +275,7 @@ PurchaseState::PurchaseState(Base *base, CannotReequipState *parent) : _base(bas
 		RuleItem *rule = _game->getMod()->getItem(itemType);
 		if (itemFilter(rule))
 		{
-			TransferRow row = { TRANSFER_ITEM, rule, tr(rule->getType()), rule->getBuyCostAdjusted(_base, _game->getSavedGame()), _base->getStorageItems()->getItem(rule), 0, 0, rule->getListOrder(), 0, 0, 0 };
+			TransferRow row = { TRANSFER_ITEM, rule, ltr(rule->getType()), rule->getBuyCostAdjusted(_base, _game->getSavedGame()), _base->getStorageItems()->getItem(rule), 0, 0, rule->getListOrder(), 0, 0, 0 };
 			_items.push_back(row);
 			std::string cat = getCategory(_items.size() - 1);
 			if (std::find(_cats.begin(), _cats.end(), cat) == _cats.end())
@@ -354,7 +354,7 @@ PurchaseState::PurchaseState(Base *base, CannotReequipState *parent) : _base(bas
 	_autoBuyDone = true;
 	if (!_missingItemsMap.empty())
 	{
-		_txtPurchases->setText(tr("STR_COST_OF_PURCHASES").arg(Unicode::formatFunding(_total)));
+		_txtPurchases->setText(ltr("STR_COST_OF_PURCHASES").arg(Unicode::formatFunding(_total)));
 		std::ostringstream ss5;
 		ss5 << _base->getUsedStores();
 		if (std::abs(_iQty) > 0.05)
@@ -365,7 +365,7 @@ PurchaseState::PurchaseState(Base *base, CannotReequipState *parent) : _base(bas
 			ss5 << std::fixed << std::setprecision(1) << _iQty << ")";
 		}
 		ss5 << ":" << _base->getAvailableStores();
-		_txtSpaceUsed->setText(tr("STR_SPACE_USED").arg(ss5.str()));
+		_txtSpaceUsed->setText(ltr("STR_SPACE_USED").arg(ss5.str()));
 	}
 
 	_timerInc = new Timer(250);
@@ -762,11 +762,11 @@ void PurchaseState::btnOkClick(Action *)
 		std::string errorMessage;
 		if (_total > _game->getSavedGame()->getFunds())
 		{
-			errorMessage = tr("STR_NOT_ENOUGH_MONEY");
+			errorMessage = ltr("STR_NOT_ENOUGH_MONEY");
 		}
 		if (_base->storesOverfull(_iQty))
 		{
-			errorMessage = tr("STR_NOT_ENOUGH_STORE_SPACE");
+			errorMessage = ltr("STR_NOT_ENOUGH_STORE_SPACE");
 		}
 		if (!errorMessage.empty())
 		{
@@ -1075,7 +1075,7 @@ void PurchaseState::increaseByValue(int change)
 
 	if (_total + getRow().cost > _game->getSavedGame()->getFunds())
 	{
-		errorMessage = tr("STR_NOT_ENOUGH_MONEY");
+		errorMessage = ltr("STR_NOT_ENOUGH_MONEY");
 	}
 	else
 	{
@@ -1093,11 +1093,11 @@ void PurchaseState::increaseByValue(int change)
 				int maxByLimit = std::max(0, ruleS->getMonthlyBuyLimit() - alreadyBought - getRow().amount);
 				if (maxByLimit <= 0)
 				{
-					errorMessage = tr(!ruleS->getMonthlyBuyLimitMessage().empty() ? ruleS->getMonthlyBuyLimitMessage() : "STR_MONTHLY_SOLDIER_HIRING_LIMIT_EXCEEDED")
+					errorMessage = ltr(!ruleS->getMonthlyBuyLimitMessage().empty() ? ruleS->getMonthlyBuyLimitMessage() : "STR_MONTHLY_SOLDIER_HIRING_LIMIT_EXCEEDED")
 						.arg(ruleS->getMonthlyBuyLimit())                 // {0} limit
 						.arg(alreadyBought)                               // {1} already bought
 						.arg(ruleS->getMonthlyBuyLimit() - alreadyBought) // {2} remaining
-						.arg(tr(ruleS->getType()));                       // {3} soldier type
+						.arg(ltr(ruleS->getType()));                       // {3} soldier type
 				}
 			}
 			// fall-through
@@ -1105,14 +1105,14 @@ void PurchaseState::increaseByValue(int change)
 		case TRANSFER_ENGINEER:
 			if (_pQty + 1 > _base->getAvailableQuarters() - _base->getUsedQuarters())
 			{
-				errorMessage = tr("STR_NOT_ENOUGH_LIVING_SPACE");
+				errorMessage = ltr("STR_NOT_ENOUGH_LIVING_SPACE");
 			}
 			break;
 		case TRANSFER_CRAFT:
 			ruleC = (RuleCraft*)getRow().rule;
 			if (_cQty + 1 > _base->getAvailableHangars() - _base->getUsedHangars())
 			{
-				errorMessage = tr("STR_NO_FREE_HANGARS_FOR_PURCHASE");
+				errorMessage = ltr("STR_NO_FREE_HANGARS_FOR_PURCHASE");
 			}
 			else if (ruleC->getMonthlyBuyLimit() > 0)
 			{
@@ -1121,11 +1121,11 @@ void PurchaseState::increaseByValue(int change)
 				int maxByLimit = std::max(0, ruleC->getMonthlyBuyLimit() - alreadyBought - getRow().amount);
 				if (maxByLimit <= 0)
 				{
-					errorMessage = tr(!ruleC->getMonthlyBuyLimitMessage().empty() ? ruleC->getMonthlyBuyLimitMessage() : "STR_MONTHLY_CRAFT_PURCHASE_LIMIT_EXCEEDED")
+					errorMessage = ltr(!ruleC->getMonthlyBuyLimitMessage().empty() ? ruleC->getMonthlyBuyLimitMessage() : "STR_MONTHLY_CRAFT_PURCHASE_LIMIT_EXCEEDED")
 						.arg(ruleC->getMonthlyBuyLimit())                 // {0} limit
 						.arg(alreadyBought)                               // {1} already bought
 						.arg(ruleC->getMonthlyBuyLimit() - alreadyBought) // {2} remaining
-						.arg(tr(ruleC->getType()));                       // {3} craft type
+						.arg(ltr(ruleC->getType()));                       // {3} craft type
 				}
 			}
 			break;
@@ -1133,14 +1133,14 @@ void PurchaseState::increaseByValue(int change)
 			rule = (RuleItem*)getRow().rule;
 			if (_base->storesOverfull(_iQty + rule->getSize()))
 			{
-				errorMessage = tr("STR_NOT_ENOUGH_STORE_SPACE");
+				errorMessage = ltr("STR_NOT_ENOUGH_STORE_SPACE");
 			}
 			else if (rule->isAlien())
 			{
 				int p = rule->getPrisonType();
 				if (_iPrisonQty[p] + 1 > _base->getAvailableContainment(p) - _base->getUsedContainment(p))
 				{
-					errorMessage = trAlt("STR_NOT_ENOUGH_PRISON_SPACE", p);
+					errorMessage = ltrAlt("STR_NOT_ENOUGH_PRISON_SPACE", p);
 				}
 			}
 			else if (rule->getMonthlyBuyLimit() > 0)
@@ -1150,11 +1150,11 @@ void PurchaseState::increaseByValue(int change)
 				int maxByLimit = std::max(0, rule->getMonthlyBuyLimit() - alreadyBought - getRow().amount);
 				if (maxByLimit <= 0)
 				{
-					errorMessage = tr(!rule->getMonthlyBuyLimitMessage().empty() ? rule->getMonthlyBuyLimitMessage() : "STR_MONTHLY_ITEM_PURCHASE_LIMIT_EXCEEDED")
+					errorMessage = ltr(!rule->getMonthlyBuyLimitMessage().empty() ? rule->getMonthlyBuyLimitMessage() : "STR_MONTHLY_ITEM_PURCHASE_LIMIT_EXCEEDED")
 						.arg(rule->getMonthlyBuyLimit())                 // {0} limit
 						.arg(alreadyBought)                              // {1} already bought
 						.arg(rule->getMonthlyBuyLimit() - alreadyBought) // {2} remaining
-						.arg(tr(rule->getType()));                       // {3} item type
+						.arg(ltr(rule->getType()));                       // {3} item type
 				}
 			}
 			break;
@@ -1303,7 +1303,7 @@ void PurchaseState::decreaseByValue(int change)
  */
 void PurchaseState::updateItemStrings()
 {
-	_txtPurchases->setText(tr("STR_COST_OF_PURCHASES").arg(Unicode::formatFunding(_total)));
+	_txtPurchases->setText(ltr("STR_COST_OF_PURCHASES").arg(Unicode::formatFunding(_total)));
 	std::ostringstream ss, ss5;
 	ss << getRow().amount;
 	_lstItems->setCellText(_sel, 3, ss.str());
@@ -1332,7 +1332,7 @@ void PurchaseState::updateItemStrings()
 		ss5 << std::fixed << std::setprecision(1) << _iQty << ")";
 	}
 	ss5 << ":" << _base->getAvailableStores();
-	_txtSpaceUsed->setText(tr("STR_SPACE_USED").arg(ss5.str()));
+	_txtSpaceUsed->setText(ltr("STR_SPACE_USED").arg(ss5.str()));
 }
 
 /**

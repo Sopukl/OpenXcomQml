@@ -83,19 +83,19 @@ PauseState::PauseState(OptionsOrigin origin) : _origin(origin)
 	// Set up objects
 	setWindowBackground(_window, "pauseMenu");
 
-	_btnLoad->setText(tr("STR_LOAD_GAME"));
+	_btnLoad->setText(ltr("STR_LOAD_GAME"));
 	_btnLoad->onMouseClick((ActionHandler)&PauseState::btnLoadClick);
 
-	_btnSave->setText(tr("STR_SAVE_GAME"));
+	_btnSave->setText(ltr("STR_SAVE_GAME"));
 	_btnSave->onMouseClick((ActionHandler)&PauseState::btnSaveClick);
 
-	_btnAbandon->setText(tr("STR_ABANDON_GAME"));
+	_btnAbandon->setText(ltr("STR_ABANDON_GAME"));
 	_btnAbandon->onMouseClick((ActionHandler)&PauseState::btnAbandonClick);
 
-	_btnOptions->setText(tr("STR_GAME_OPTIONS"));
+	_btnOptions->setText(ltr("STR_GAME_OPTIONS"));
 	_btnOptions->onMouseClick((ActionHandler)&PauseState::btnOptionsClick);
 
-	_btnCancel->setText(tr("STR_CANCEL_UC"));
+	_btnCancel->setText(ltr("STR_CANCEL_UC"));
 	_btnCancel->onMouseClick((ActionHandler)&PauseState::btnCancelClick);
 	_btnCancel->onKeyboardPress((ActionHandler)&PauseState::btnCancelClick, options1.keyCancel());
 	if (origin == OPT_GEOSCAPE)
@@ -113,7 +113,7 @@ PauseState::PauseState(OptionsOrigin origin) : _origin(origin)
 
 	_txtTitle->setAlign(ALIGN_CENTER);
 	_txtTitle->setBig();
-	_txtTitle->setText(tr("STR_OPTIONS_UC"));
+	_txtTitle->setText(ltr("STR_OPTIONS_UC"));
 
 	std::ostringstream title;
 	title << "OpenXcom " << OPENXCOM_VERSION_SHORT;
@@ -129,7 +129,7 @@ PauseState::PauseState(OptionsOrigin origin) : _origin(origin)
 	{
 		_btnLoad->setVisible(false);
 		_btnSave->setVisible(false);
-		_btnAbandon->setText(tr("STR_SAVE_AND_ABANDON_GAME"));
+		_btnAbandon->setText(ltr("STR_SAVE_AND_ABANDON_GAME"));
 	}
 
 	// ENOUGH! No save corruption when trying to save/exit mid-action (e.g. during alien turn)

@@ -77,27 +77,27 @@ ProductionCompleteState::ProductionCompleteState(Base *base, const std::string &
 	// Set up objects
 	setWindowBackground(_window, "geoManufactureComplete");
 
-	_btnOk->setText(tr("STR_OK"));
+	_btnOk->setText(ltr("STR_OK"));
 	_btnOk->onMouseClick((ActionHandler)&ProductionCompleteState::btnOkClick);
 	_btnOk->onKeyboardPress((ActionHandler)&ProductionCompleteState::btnOkClick, options1.keyCancel());
 
 	if (_endType != PROGRESS_CONSTRUCTION)
 	{
-		_btnGotoBase->setText(tr("STR_ALLOCATE_MANUFACTURE"));
+		_btnGotoBase->setText(ltr("STR_ALLOCATE_MANUFACTURE"));
 	}
 	else
 	{
-		_btnGotoBase->setText(tr("STR_GO_TO_BASE"));
+		_btnGotoBase->setText(ltr("STR_GO_TO_BASE"));
 	}
 	_btnGotoBase->onMouseClick((ActionHandler)&ProductionCompleteState::btnGotoBaseClick);
 
-	_btnSummary->setText(tr("STR_RANDOM_PRODUCTION_SUMMARY"));
+	_btnSummary->setText(ltr("STR_RANDOM_PRODUCTION_SUMMARY"));
 	_btnSummary->onMouseClick((ActionHandler)&ProductionCompleteState::btnSummaryClick);
 
-	_txtItem->setText(tr("STR_ITEM"));
+	_txtItem->setText(ltr("STR_ITEM"));
 	_txtItem->setVisible(false);
 
-	_txtQuantity->setText(tr("STR_QUANTITY_UC"));
+	_txtQuantity->setText(ltr("STR_QUANTITY_UC"));
 	_txtQuantity->setVisible(false);
 
 	_lstSummary->setColumns(2, 162, 46);
@@ -116,7 +116,7 @@ ProductionCompleteState::ProductionCompleteState(Base *base, const std::string &
 		{
 			std::ostringstream ss;
 			ss << each.second;
-			_lstSummary->addRow(2, tr(each.first).c_str(), ss.str().c_str());
+			_lstSummary->addRow(2, ltr(each.first).c_str(), ss.str().c_str());
 			_index.push_back(each.first);
 		}
 	}
@@ -133,19 +133,19 @@ ProductionCompleteState::ProductionCompleteState(Base *base, const std::string &
 	switch(_endType)
 	{
 	case PROGRESS_CONSTRUCTION:
-		s = tr("STR_CONSTRUCTION_OF_FACILITY_AT_BASE_IS_COMPLETE").arg(item).arg(base->getName());
+		s = ltr("STR_CONSTRUCTION_OF_FACILITY_AT_BASE_IS_COMPLETE").arg(item).arg(base->getName());
 		break;
 	case PROGRESS_COMPLETE:
-		s = tr("STR_PRODUCTION_OF_ITEM_AT_BASE_IS_COMPLETE").arg(item).arg(base->getName());
+		s = ltr("STR_PRODUCTION_OF_ITEM_AT_BASE_IS_COMPLETE").arg(item).arg(base->getName());
 		break;
 	case PROGRESS_NOT_ENOUGH_MONEY:
-		s = tr("STR_NOT_ENOUGH_MONEY_TO_PRODUCE_ITEM_AT_BASE").arg(item).arg(base->getName());
+		s = ltr("STR_NOT_ENOUGH_MONEY_TO_PRODUCE_ITEM_AT_BASE").arg(item).arg(base->getName());
 		break;
 	case PROGRESS_NOT_ENOUGH_MATERIALS:
-		s = tr("STR_NOT_ENOUGH_SPECIAL_MATERIALS_TO_PRODUCE_ITEM_AT_BASE").arg(item).arg(base->getName());
+		s = ltr("STR_NOT_ENOUGH_SPECIAL_MATERIALS_TO_PRODUCE_ITEM_AT_BASE").arg(item).arg(base->getName());
 		break;
 	case PROGRESS_NOT_ENOUGH_LIVING_SPACE:
-		s = tr("STR_NOT_ENOUGH_LIVING_SPACE_AT_BASE").arg(item).arg(base->getName());
+		s = ltr("STR_NOT_ENOUGH_LIVING_SPACE_AT_BASE").arg(item).arg(base->getName());
 		break;
 	default:
 		assert(false);
@@ -246,7 +246,7 @@ void ProductionCompleteState::lstSummaryClick(Action *)
 	{
 		std::ostringstream ss;
 		ss << _randomProductionInfo[name];
-		_lstSummary->addRow(2, tr(name).c_str(), ss.str().c_str());
+		_lstSummary->addRow(2, ltr(name).c_str(), ss.str().c_str());
 	}
 	_lstSummary->scrollTo(scrollPos);
 }

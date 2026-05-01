@@ -224,9 +224,9 @@ void ActionMenuState::addItem(BattleActionType ba, const std::string &name, int 
 	int tu = _action->actor->getActionTUs(ba, _action->weapon).Time;
 
 	if (ba == BA_THROW || ba == BA_AIMEDSHOT || ba == BA_SNAPSHOT || ba == BA_AUTOSHOT || ba == BA_LAUNCH || ba == BA_HIT)
-		s1 = tr("STR_ACCURACY_SHORT").arg(Unicode::formatPercentage(acc));
-	s2 = tr("STR_TIME_UNITS_SHORT").arg(tu);
-	_actionMenu[*id]->setAction(ba, tr(name), s1, s2, tu);
+		s1 = ltr("STR_ACCURACY_SHORT").arg(Unicode::formatPercentage(acc));
+	s2 = ltr("STR_TIME_UNITS_SHORT").arg(tu);
+	_actionMenu[*id]->setAction(ba, ltr(name), s1, s2, tu);
 	_actionMenu[*id]->setVisible(true);
 	if (key != SDLK_UNKNOWN)
 	{
@@ -522,7 +522,7 @@ void ActionMenuState::handleAction()
 
 		if (newHitLog)
 		{
-			_game->getSavedGame()->getSavedBattle()->appendToHitLog(HITLOG_PLAYER_FIRING, FACTION_PLAYER, tr(weapon->getType()));
+			_game->getSavedGame()->getSavedBattle()->appendToHitLog(HITLOG_PLAYER_FIRING, FACTION_PLAYER, ltr(weapon->getType()));
 		}
 	}
 }

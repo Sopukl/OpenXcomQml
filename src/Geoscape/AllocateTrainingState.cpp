@@ -93,7 +93,7 @@ AllocateTrainingState::AllocateTrainingState(Base *base) : _sel(0), _base(base),
 	// Set up objects
 	setWindowBackground(_window, "allocateMartial");
 
-	_btnOk->setText(tr("STR_OK"));
+	_btnOk->setText(ltr("STR_OK"));
 	_btnOk->onMouseClick((ActionHandler)&AllocateTrainingState::btnOkClick);
 	_btnOk->onKeyboardPress((ActionHandler)&AllocateTrainingState::btnOkClick, options1.keyCancel());
 	_btnOk->onKeyboardPress((ActionHandler)& AllocateTrainingState::btnDeassignAllSoldiersClick, options1.keyRemoveSoldiersFromTraining());
@@ -113,29 +113,29 @@ AllocateTrainingState::AllocateTrainingState(Base *base) : _sel(0), _base(base),
 
 	_txtTitle->setBig();
 	_txtTitle->setAlign(ALIGN_CENTER);
-	_txtTitle->setText(tr("STR_PHYSICAL_TRAINING"));
+	_txtTitle->setText(ltr("STR_PHYSICAL_TRAINING"));
 
 	_space = base->getAvailableTraining() - base->getUsedTraining();
-	_txtRemaining->setText(tr("STR_REMAINING_TRAINING_FACILITY_CAPACITY").arg(_space));
+	_txtRemaining->setText(ltr("STR_REMAINING_TRAINING_FACILITY_CAPACITY").arg(_space));
 
-	_txtName->setText(tr("STR_NAME"));
-	_txtTu->setText(tr("STR_TIME_UNITS_ABBREVIATION"));
-	_txtStamina->setText(tr("STR_STAMINA_ABBREVIATION"));
-	_txtHealth->setText(tr("STR_HEALTH_ABBREVIATION"));
-	_txtFiring->setText(tr("STR_FIRING_ACCURACY_ABBREVIATION"));
-	_txtThrowing->setText(tr("STR_THROWING_ACCURACY_ABBREVIATION"));
-	_txtMelee->setText(tr("STR_MELEE_ACCURACY_ABBREVIATION"));
-	_txtStrength->setText(tr("STR_STRENGTH_ABBREVIATION"));
-	_txtTraining->setText(tr("STR_IN_TRAINING"));
+	_txtName->setText(ltr("STR_NAME"));
+	_txtTu->setText(ltr("STR_TIME_UNITS_ABBREVIATION"));
+	_txtStamina->setText(ltr("STR_STAMINA_ABBREVIATION"));
+	_txtHealth->setText(ltr("STR_HEALTH_ABBREVIATION"));
+	_txtFiring->setText(ltr("STR_FIRING_ACCURACY_ABBREVIATION"));
+	_txtThrowing->setText(ltr("STR_THROWING_ACCURACY_ABBREVIATION"));
+	_txtMelee->setText(ltr("STR_MELEE_ACCURACY_ABBREVIATION"));
+	_txtStrength->setText(ltr("STR_STRENGTH_ABBREVIATION"));
+	_txtTraining->setText(ltr("STR_IN_TRAINING"));
 
 	// populate sort options
 	std::vector<std::string> sortOptions;
-	sortOptions.push_back(tr("STR_ORIGINAL_ORDER"));
+	sortOptions.push_back(ltr("STR_ORIGINAL_ORDER"));
 	_sortFunctors.push_back(NULL);
 	_sortFunctorsPlus.push_back(NULL);
 
 #define PUSH_IN(strId, functor) \
-	sortOptions.push_back(tr(strId)); \
+	sortOptions.push_back(ltr(strId)); \
 	_sortFunctors.push_back(new SortFunctor(_game, functor)); \
 	_sortFunctorsPlus.push_back(new SortFunctor(_game, functor));
 
@@ -155,7 +155,7 @@ AllocateTrainingState::AllocateTrainingState(Base *base) : _sel(0), _base(base),
 #undef PUSH_IN
 
 #define PUSH_IN(strId, functor, functorPlus) \
-	sortOptions.push_back(tr(strId)); \
+	sortOptions.push_back(ltr(strId)); \
 	_sortFunctors.push_back(new SortFunctor(_game, functor)); \
 	_sortFunctorsPlus.push_back(new SortFunctor(_game, functorPlus));
 
@@ -181,7 +181,7 @@ AllocateTrainingState::AllocateTrainingState(Base *base) : _sel(0), _base(base),
 	_cbxSortBy->setOptions(sortOptions);
 	_cbxSortBy->setSelected(0);
 	_cbxSortBy->onChange((ActionHandler)&AllocateTrainingState::cbxSortByChange);
-	_cbxSortBy->setText(tr("STR_SORT_BY"));
+	_cbxSortBy->setText(ltr("STR_SORT_BY"));
 
 	_lstSoldiers->setArrowColumn(238, ARROW_VERTICAL);
 	_lstSoldiers->setColumns(9, 110, 18, 18, 18, 18, 18, 18, 42, 40);
@@ -339,15 +339,15 @@ void AllocateTrainingState::initList(size_t scrl)
 
 		std::string status;
 		if (isDone)
-			status = tr("STR_NO_DONE");
+			status = ltr("STR_NO_DONE");
 		else if (isQueued)
-			status = tr("STR_NO_QUEUED");
+			status = ltr("STR_NO_QUEUED");
 		else if (isWounded)
-			status = tr("STR_NO_WOUNDED");
+			status = ltr("STR_NO_WOUNDED");
 		else if (isTraining)
-			status = tr("STR_YES");
+			status = ltr("STR_YES");
 		else
-			status = tr("STR_NO");
+			status = ltr("STR_NO");
 
 		_lstSoldiers->addRow(9,
 			soldier->getName(true).c_str(),
@@ -385,7 +385,7 @@ void AllocateTrainingState::lstItemsLeftArrowClick(Action *action)
 			moveSoldierUp(action, row, true);
 		}
 	}
-	_cbxSortBy->setText(tr("STR_SORT_BY"));
+	_cbxSortBy->setText(ltr("STR_SORT_BY"));
 	_cbxSortBy->setSelected(-1);
 }
 
@@ -438,7 +438,7 @@ void AllocateTrainingState::lstItemsRightArrowClick(Action *action)
 			moveSoldierDown(action, row, true);
 		}
 	}
-	_cbxSortBy->setText(tr("STR_SORT_BY"));
+	_cbxSortBy->setText(ltr("STR_SORT_BY"));
 	_cbxSortBy->setSelected(-1);
 }
 
@@ -497,12 +497,12 @@ void AllocateTrainingState::lstSoldiersClick(Action *action)
 		{
 			if (soldier->getReturnToTrainingWhenHealed())
 			{
-				_lstSoldiers->setCellText(_sel, 8, tr("STR_NO_WOUNDED").c_str());
+				_lstSoldiers->setCellText(_sel, 8, ltr("STR_NO_WOUNDED").c_str());
 				soldier->setReturnToTrainingWhenHealed(false);
 			}
 			else
 			{
-				_lstSoldiers->setCellText(_sel, 8, tr("STR_NO_QUEUED").c_str());
+				_lstSoldiers->setCellText(_sel, 8, ltr("STR_NO_QUEUED").c_str());
 				soldier->setReturnToTrainingWhenHealed(true);
 			}
 			return;
@@ -513,20 +513,20 @@ void AllocateTrainingState::lstSoldiersClick(Action *action)
 		{
 			if (_base->getUsedTraining() < _base->getAvailableTraining())
 			{
-				_lstSoldiers->setCellText(_sel, 8, tr("STR_YES").c_str());
+				_lstSoldiers->setCellText(_sel, 8, ltr("STR_YES").c_str());
 				_lstSoldiers->setRowColor(_sel, _lstSoldiers->getSecondaryColor());
 				_space--;
-				_txtRemaining->setText(tr("STR_REMAINING_TRAINING_FACILITY_CAPACITY").arg(_space));
+				_txtRemaining->setText(ltr("STR_REMAINING_TRAINING_FACILITY_CAPACITY").arg(_space));
 				soldier->setTraining(true);
 				soldier->setReturnToTrainingWhenHealed(false);
 			}
 		}
 		else
 		{
-			_lstSoldiers->setCellText(_sel, 8, tr("STR_NO").c_str());
+			_lstSoldiers->setCellText(_sel, 8, ltr("STR_NO").c_str());
 			_lstSoldiers->setRowColor(_sel, _lstSoldiers->getColor());
 			_space++;
-			_txtRemaining->setText(tr("STR_REMAINING_TRAINING_FACILITY_CAPACITY").arg(_space));
+			_txtRemaining->setText(ltr("STR_REMAINING_TRAINING_FACILITY_CAPACITY").arg(_space));
 			soldier->setTraining(false);
 			soldier->setReturnToTrainingWhenHealed(false);
 		}
@@ -582,18 +582,18 @@ void AllocateTrainingState::btnDeassignAllSoldiersClick(Action* action)
 
 		std::string status;
 		if (soldier->isFullyTrained())
-			status = tr("STR_NO_DONE");
+			status = ltr("STR_NO_DONE");
 		else if (soldier->isWounded())
-			status = tr("STR_NO_WOUNDED");
+			status = ltr("STR_NO_WOUNDED");
 		else
-			status = tr("STR_NO");
+			status = ltr("STR_NO");
 
-		_lstSoldiers->setCellText(row, 8, tr(status).c_str());
+		_lstSoldiers->setCellText(row, 8, ltr(status).c_str());
 		_lstSoldiers->setRowColor(row, _lstSoldiers->getColor());
 		row++;
 	}
 	_space = _base->getAvailableTraining() - _base->getUsedTraining();
-	_txtRemaining->setText(tr("STR_REMAINING_TRAINING_FACILITY_CAPACITY").arg(_space));
+	_txtRemaining->setText(ltr("STR_REMAINING_TRAINING_FACILITY_CAPACITY").arg(_space));
 }
 
 /**
@@ -614,14 +614,14 @@ void AllocateTrainingState::btnAssignAllSoldiersClick(Action* action)
 			// wounded soldiers can be queued
 			if (!soldier->getReturnToTrainingWhenHealed())
 			{
-				_lstSoldiers->setCellText(row, 8, tr("STR_NO_QUEUED").c_str());
+				_lstSoldiers->setCellText(row, 8, ltr("STR_NO_QUEUED").c_str());
 				soldier->setReturnToTrainingWhenHealed(true);
 			}
 		}
 		else if (_space > 0 && !soldier->isInTraining())
 		{
 			// healthy soldiers can be assigned
-			_lstSoldiers->setCellText(row, 8, tr("STR_YES").c_str());
+			_lstSoldiers->setCellText(row, 8, ltr("STR_YES").c_str());
 			_lstSoldiers->setRowColor(row, _lstSoldiers->getSecondaryColor());
 			_space--;
 			soldier->setTraining(true);
@@ -629,7 +629,7 @@ void AllocateTrainingState::btnAssignAllSoldiersClick(Action* action)
 		}
 		row++;
 	}
-	_txtRemaining->setText(tr("STR_REMAINING_TRAINING_FACILITY_CAPACITY").arg(_space));
+	_txtRemaining->setText(ltr("STR_REMAINING_TRAINING_FACILITY_CAPACITY").arg(_space));
 }
 
 }

@@ -157,12 +157,12 @@ CraftInfoState::CraftInfoState(Base *base, size_t craftId) : _base(base), _craft
 	// Set up objects
 	setWindowBackground(_window, "craftInfo");
 
-	_btnOk->setText(tr("STR_OK"));
+	_btnOk->setText(ltr("STR_OK"));
 	_btnOk->onMouseClick((ActionHandler)&CraftInfoState::btnOkClick);
 	_btnOk->onKeyboardPress((ActionHandler)&CraftInfoState::btnOkClick, options1.keyCancel());
 	_btnOk->onKeyboardPress((ActionHandler)&CraftInfoState::btnUfopediaClick, options1.keyGeoUfopedia());
 
-	_btnNewBattle->setText(tr("STR_NEW_BATTLE"));
+	_btnNewBattle->setText(ltr("STR_NEW_BATTLE"));
 	_btnNewBattle->onMouseClick((ActionHandler)&CraftInfoState::btnNewBattleClick);
 	_btnNewBattle->setVisible(showNewBattle > 0);
 
@@ -177,16 +177,16 @@ CraftInfoState::CraftInfoState(Base *base, size_t craftId) : _base(base), _craft
 
 	_sprite->onMouseClick((ActionHandler)&CraftInfoState::btnCraftIconClick);
 
-	_btnCrew->setText(tr("STR_CREW"));
+	_btnCrew->setText(ltr("STR_CREW"));
 	_btnCrew->onMouseClick((ActionHandler)&CraftInfoState::btnCrewClick);
 
-	_btnEquip->setText(tr("STR_EQUIPMENT_UC"));
+	_btnEquip->setText(ltr("STR_EQUIPMENT_UC"));
 	_btnEquip->onMouseClick((ActionHandler)&CraftInfoState::btnEquipClick);
 
-	_btnArmor->setText(tr("STR_ARMOR"));
+	_btnArmor->setText(ltr("STR_ARMOR"));
 	_btnArmor->onMouseClick((ActionHandler)&CraftInfoState::btnArmorClick);
 
-	_btnPilots->setText(tr("STR_PILOTS"));
+	_btnPilots->setText(ltr("STR_PILOTS"));
 	_btnPilots->onMouseClick((ActionHandler)&CraftInfoState::btnPilotsClick);
 	_btnPilots->setVisible(pilots);
 
@@ -197,7 +197,7 @@ CraftInfoState::CraftInfoState(Base *base, size_t craftId) : _base(base), _craft
 	_txtSkin->setAlign(ALIGN_CENTER);
 	if (_craft->getRules()->getMaxSkinIndex() > 0)
 	{
-		_txtSkin->setText(tr("STR_CRAFT_SKIN_ID").arg(_craft->getSkinIndex()));
+		_txtSkin->setText(ltr("STR_CRAFT_SKIN_ID").arg(_craft->getSkinIndex()));
 	}
 
 	for (int i =0; i < _weaponNum; ++i)
@@ -229,7 +229,7 @@ void CraftInfoState::init()
 	texture->getFrame(_craft->getSkinSprite() + 33)->blitNShade(_sprite, 0, 0);
 
 	std::ostringstream firlsLine;
-	firlsLine << tr("STR_DAMAGE_UC_").arg(Unicode::formatPercentage(_craft->getDamagePercentage()));
+	firlsLine << ltr("STR_DAMAGE_UC_").arg(Unicode::formatPercentage(_craft->getDamagePercentage()));
 	if (_craft->getStatus() == "STR_REPAIRS" && _craft->getDamage() > 0)
 	{
 		int damageHours = (int)ceil((double)_craft->getDamage() / _craft->getRules()->getRepairRate());
@@ -238,7 +238,7 @@ void CraftInfoState::init()
 	_txtDamage->setText(firlsLine.str());
 
 	std::ostringstream secondLine;
-	secondLine << tr("STR_FUEL").arg(Unicode::formatPercentage(_craft->getFuelPercentage()));
+	secondLine << ltr("STR_FUEL").arg(Unicode::formatPercentage(_craft->getFuelPercentage()));
 	if (_craft->getStatus() == "STR_REFUELLING" && _craft->getFuelMax() - _craft->getFuel() > 0)
 	{
 		int fuelHours = (int)ceil((double)(_craft->getFuelMax() - _craft->getFuel()) / _craft->getRules()->getRefuelRate() / 2.0);
@@ -249,7 +249,7 @@ void CraftInfoState::init()
 	std::ostringstream thirdLine;
 	if (_craft->getShieldCapacity() != 0)
 	{
-		thirdLine << tr("STR_SHIELD").arg(Unicode::formatPercentage(_craft->getShieldPercentage()));
+		thirdLine << ltr("STR_SHIELD").arg(Unicode::formatPercentage(_craft->getShieldPercentage()));
 		if (_craft->getShield() < _craft->getShieldCapacity())
 		{
 			if (_craft->getRules()->getShieldRechargeAtBase() != 0)
@@ -417,12 +417,12 @@ void CraftInfoState::init()
 
 			std::ostringstream weaponLine;
 			if (w1->isDisabled()) weaponLine << "*";
-			weaponLine << Unicode::TOK_COLOR_FLIP << tr(w1->getRules()->getType());
+			weaponLine << Unicode::TOK_COLOR_FLIP << ltr(w1->getRules()->getType());
 			_txtWName[i]->setText(weaponLine.str());
 			weaponLine.str("");
 			if (!w1->getRules()->getTooltip().empty())
 			{
-				weaponLine << (tr(w1->getRules()->getTooltip())
+				weaponLine << (ltr(w1->getRules()->getTooltip())
 					.arg(w1->getAmmo())                                    // {0}
 					.arg(w1->getRules()->getAmmoMax())                     // {1}
 					.arg(w1->getRules()->getBonusStats().fuelMax)          // {2}
@@ -433,8 +433,8 @@ void CraftInfoState::init()
 			}
 			else if (w1->getRules()->getAmmoMax())
 			{
-				weaponLine << tr("STR_AMMO_").arg(w1->getAmmo()) << "\n" << Unicode::TOK_COLOR_FLIP;
-				weaponLine << tr("STR_MAX").arg(w1->getRules()->getAmmoMax());
+				weaponLine << ltr("STR_AMMO_").arg(w1->getAmmo()) << "\n" << Unicode::TOK_COLOR_FLIP;
+				weaponLine << ltr("STR_MAX").arg(w1->getRules()->getAmmoMax());
 				if (_craft->getStatus() == "STR_REARMING" && w1->getAmmo() < w1->getRules()->getAmmoMax() && !w1->isDisabled())
 				{
 					int rearmHours = (int)ceil((double)(w1->getRules()->getAmmoMax() - w1->getAmmo()) / w1->getRules()->getRearmRate());
@@ -469,11 +469,11 @@ std::string CraftInfoState::formatTime(int total)
 	ss << "\n(";
 	if (days > 0)
 	{
-		ss << tr("STR_DAY", days) << "/";
+		ss << ltr("STR_DAY", days) << "/";
 	}
 	if (hours > 0)
 	{
-		ss << tr("STR_HOUR", hours);
+		ss << ltr("STR_HOUR", hours);
 	}
 	ss << ")";
 	return ss.str();
@@ -668,7 +668,7 @@ void CraftInfoState::btnCraftIconClick(Action *action)
 		}
 		_craft->setSkinIndex(newIndex);
 
-		_txtSkin->setText(tr("STR_CRAFT_SKIN_ID").arg(_craft->getSkinIndex()));
+		_txtSkin->setText(ltr("STR_CRAFT_SKIN_ID").arg(_craft->getSkinIndex()));
 
 		_sprite->clear();
 		SurfaceSet* texture = _game->getMod()->getSurfaceSet("BASEBITS.PCK");

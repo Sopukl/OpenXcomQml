@@ -87,27 +87,27 @@ GeoscapeEventState::GeoscapeEventState(const RuleEvent& eventRule) : _eventRule(
 	_txtTitle->setAlign(ALIGN_CENTER);
 	_txtTitle->setBig();
 	_txtTitle->setWordWrap(true);
-	_txtTitle->setText(tr(_eventRule.getName()));
+	_txtTitle->setText(ltr(_eventRule.getName()));
 
 	_txtMessage->setVerticalAlign(ALIGN_TOP);
 	_txtMessage->setWordWrap(true);
-	_txtMessage->setText(tr(_eventRule.getDescription()));
+	_txtMessage->setText(ltr(_eventRule.getDescription()));
 	if (_eventRule.alignBottom())
 	{
 		_txtMessage->setVerticalAlign(ALIGN_BOTTOM);
 	}
 	_txtMessage->setScrollable(true);
 
-	_btnOk->setText(tr("STR_OK"));
+	_btnOk->setText(ltr("STR_OK"));
 	_btnOk->onMouseClick((ActionHandler)& GeoscapeEventState::btnOkClick);
 	_btnOk->onKeyboardPress((ActionHandler)&GeoscapeEventState::btnOkClick, options1.keyOk());
 	_btnOk->onKeyboardPress((ActionHandler)&GeoscapeEventState::btnOkClick, options1.keyCancel());
 
-	_btnItemsArriving->setText(tr("STR_ITEMS_ARRIVING"));
+	_btnItemsArriving->setText(ltr("STR_ITEMS_ARRIVING"));
 	_btnItemsArriving->onMouseClick((ActionHandler)&GeoscapeEventState::btnItemsArrivingClick);
 
-	_txtItem->setText(tr("STR_ITEM"));
-	_txtQuantity->setText(tr("STR_QUANTITY_UC"));
+	_txtItem->setText(ltr("STR_ITEM"));
+	_txtQuantity->setText(ltr("STR_QUANTITY_UC"));
 
 	_lstTransfers->setColumns(2, 155, 41);
 	_lstTransfers->setSelectable(true);
@@ -122,7 +122,7 @@ GeoscapeEventState::GeoscapeEventState(const RuleEvent& eventRule) : _eventRule(
 
 	if (_eventRule.getInvert())
 	{
-		_btnItemsArriving->setText(tr("STR_SUMMARY"));
+		_btnItemsArriving->setText(ltr("STR_SUMMARY"));
 	}
 	else if (_lstTransfers->getTexts() == 0 || !options1.oxceGeoscapeEventsInstantDelivery())
 	{
@@ -154,7 +154,7 @@ void GeoscapeEventState::eventLogic()
 		size_t pickRegion = RNG::generate(0, rule.getRegionList().size() - 1);
 		auto& regionName = rule.getRegionList().at(pickRegion);
 		regionRule = _game->getMod()->getRegion(regionName, true);
-		std::string place = tr(regionName);
+		std::string place = ltr(regionName);
 
 		if (rule.isCitySpecific())
 		{
@@ -167,10 +167,10 @@ void GeoscapeEventState::eventLogic()
 			}
 		}
 
-		std::string titlePlus = tr(rule.getName()).arg(place);
+		std::string titlePlus = ltr(rule.getName()).arg(place);
 		_txtTitle->setText(titlePlus);
 
-		std::string messagePlus = tr(rule.getDescription()).arg(place);
+		std::string messagePlus = ltr(rule.getDescription()).arg(place);
 		_txtMessage->setText(messagePlus);
 	}
 
@@ -238,7 +238,7 @@ void GeoscapeEventState::eventLogic()
 					s->load(reader, mod, save, mod->getScriptGlobal(), true); // load from soldier template
 					if (!rule.getSpawnedPersonName().empty())
 					{
-						s->setName(tr(rule.getSpawnedPersonName()));
+						s->setName(ltr(rule.getSpawnedPersonName()));
 					}
 					else
 					{
@@ -391,7 +391,7 @@ void GeoscapeEventState::eventLogic()
 
 			std::ostringstream ss;
 			ss << -removed;
-			_lstTransfers->addRow(2, tr(ti.first).c_str(), ss.str().c_str());
+			_lstTransfers->addRow(2, ltr(ti.first).c_str(), ss.str().c_str());
 		}
 		else if (options1.oxceGeoscapeEventsInstantDelivery())
 		{
@@ -399,7 +399,7 @@ void GeoscapeEventState::eventLogic()
 
 			std::ostringstream ss;
 			ss << ti.second;
-			_lstTransfers->addRow(2, tr(ti.first).c_str(), ss.str().c_str());
+			_lstTransfers->addRow(2, ltr(ti.first).c_str(), ss.str().c_str());
 		}
 		else
 		{
@@ -563,7 +563,7 @@ void GeoscapeEventState::btnOkClick(Action *)
 		if (_game->getSavedGame()->getMonthsPassed() > -1 && options1.storageLimitsEnforced() && base != 0 && base->storesOverfull())
 		{
 			_game->pushState(new SellState(base, 0));
-			_game->pushState(new ErrorMessageState(tr("STR_STORAGE_EXCEEDED").arg(base->getName()), _palette, _game->getMod()->getInterface("debriefing")->getElement("errorMessage")->color, "BACK01.SCR", _game->getMod()->getInterface("debriefing")->getElement("errorPalette")->color));
+			_game->pushState(new ErrorMessageState(ltr("STR_STORAGE_EXCEEDED").arg(base->getName()), _palette, _game->getMod()->getInterface("debriefing")->getElement("errorMessage")->color, "BACK01.SCR", _game->getMod()->getInterface("debriefing")->getElement("errorPalette")->color));
 		}
 	}
 

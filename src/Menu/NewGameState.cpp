@@ -95,37 +95,37 @@ NewGameState::NewGameState()
 	// Set up objects
 	setWindowBackground(_window, "newGameMenu");
 
-	_btnBeginner->setText(tr("STR_1_BEGINNER"));
+	_btnBeginner->setText(ltr("STR_1_BEGINNER"));
 	_btnBeginner->setGroup(&_difficulty);
 
-	_btnExperienced->setText(tr("STR_2_EXPERIENCED"));
+	_btnExperienced->setText(ltr("STR_2_EXPERIENCED"));
 	_btnExperienced->setGroup(&_difficulty);
 
-	_btnVeteran->setText(tr("STR_3_VETERAN"));
+	_btnVeteran->setText(ltr("STR_3_VETERAN"));
 	_btnVeteran->setGroup(&_difficulty);
 
-	_btnGenius->setText(tr("STR_4_GENIUS"));
+	_btnGenius->setText(ltr("STR_4_GENIUS"));
 	_btnGenius->setGroup(&_difficulty);
 
-	_btnSuperhuman->setText(tr("STR_5_SUPERHUMAN"));
+	_btnSuperhuman->setText(ltr("STR_5_SUPERHUMAN"));
 	_btnSuperhuman->setGroup(&_difficulty);
 
-	_btnIronman->setText(tr("STR_IRONMAN"));
+	_btnIronman->setText(ltr("STR_IRONMAN"));
 
-	_btnOk->setText(tr("STR_OK"));
+	_btnOk->setText(ltr("STR_OK"));
 	_btnOk->onMouseClick((ActionHandler)&NewGameState::btnOkClick);
 	_btnOk->onKeyboardPress((ActionHandler)&NewGameState::btnOkClick, options1.keyOk());
 
-	_btnCancel->setText(tr("STR_CANCEL"));
+	_btnCancel->setText(ltr("STR_CANCEL"));
 	_btnCancel->onMouseClick((ActionHandler)&NewGameState::btnCancelClick);
 	_btnCancel->onKeyboardPress((ActionHandler)&NewGameState::btnCancelClick, options1.keyCancel());
 
 	_txtTitle->setAlign(ALIGN_CENTER);
-	_txtTitle->setText(tr("STR_SELECT_DIFFICULTY_LEVEL"));
+	_txtTitle->setText(ltr("STR_SELECT_DIFFICULTY_LEVEL"));
 
 	_txtIronman->setWordWrap(true);
 	_txtIronman->setVerticalAlign(ALIGN_MIDDLE);
-	_txtIronman->setText(tr("STR_IRONMAN_DESC"));
+	_txtIronman->setText(ltr("STR_IRONMAN_DESC"));
 }
 
 /**

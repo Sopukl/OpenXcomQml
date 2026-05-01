@@ -94,7 +94,7 @@ OptionsAudioState::OptionsAudioState(OptionsOrigin origin) : OptionsBaseState(or
 	centerAllSurfaces();
 
 	// Set up object
-	_txtMusicVolume->setText(tr("STR_MUSIC_VOLUME"));
+	_txtMusicVolume->setText(ltr("STR_MUSIC_VOLUME"));
 
 	_slrMusicVolume->setRange(0, SDL_MIX_MAXVOLUME);
 	_slrMusicVolume->setValue(options1.musicVolume());
@@ -103,7 +103,7 @@ OptionsAudioState::OptionsAudioState(OptionsOrigin origin) : OptionsBaseState(or
 	_slrMusicVolume->onMouseIn((ActionHandler)&OptionsAudioState::txtTooltipIn);
 	_slrMusicVolume->onMouseOut((ActionHandler)&OptionsAudioState::txtTooltipOut);
 
-	_txtSoundVolume->setText(tr("STR_SFX_VOLUME"));
+	_txtSoundVolume->setText(ltr("STR_SFX_VOLUME"));
 
 	_slrSoundVolume->setRange(0, SDL_MIX_MAXVOLUME);
 	_slrSoundVolume->setValue(options1.soundVolume());
@@ -113,7 +113,7 @@ OptionsAudioState::OptionsAudioState(OptionsOrigin origin) : OptionsBaseState(or
 	_slrSoundVolume->onMouseIn((ActionHandler)&OptionsAudioState::txtTooltipIn);
 	_slrSoundVolume->onMouseOut((ActionHandler)&OptionsAudioState::txtTooltipOut);
 
-	_txtUiVolume->setText(tr("STR_UI_VOLUME"));
+	_txtUiVolume->setText(ltr("STR_UI_VOLUME"));
 
 	_slrUiVolume->setRange(0, SDL_MIX_MAXVOLUME);
 	_slrUiVolume->setValue(options1.uiVolume());
@@ -125,7 +125,7 @@ OptionsAudioState::OptionsAudioState(OptionsOrigin origin) : OptionsBaseState(or
 
 	std::vector<std::string> musicText, soundText, videoText;
 	/* MUSIC_AUTO, MUSIC_FLAC, MUSIC_OGG, MUSIC_MP3, MUSIC_MOD, MUSIC_WAV, MUSIC_ADLIB, MUSIC_GM, MUSIC_MIDI */
-	musicText.push_back(tr("STR_PREFERRED_FORMAT_AUTO"));
+	musicText.push_back(ltr("STR_PREFERRED_FORMAT_AUTO"));
 	musicText.push_back("FLAC");
 	musicText.push_back("OGG");
 	musicText.push_back("MP3");
@@ -135,14 +135,14 @@ OptionsAudioState::OptionsAudioState(OptionsOrigin origin) : OptionsBaseState(or
 	musicText.push_back("GM");
 	musicText.push_back("MIDI");
 
-	soundText.push_back(tr("STR_PREFERRED_FORMAT_AUTO"));
+	soundText.push_back(ltr("STR_PREFERRED_FORMAT_AUTO"));
 	soundText.push_back("1.4");
 	soundText.push_back("1.0");
 
-	videoText.push_back(tr("STR_PREFERRED_VIDEO_ANIMATION"));
-	videoText.push_back(tr("STR_PREFERRED_VIDEO_SLIDESHOW"));
+	videoText.push_back(ltr("STR_PREFERRED_VIDEO_ANIMATION"));
+	videoText.push_back(ltr("STR_PREFERRED_VIDEO_SLIDESHOW"));
 
-	_txtMusicFormat->setText(tr("STR_PREFERRED_MUSIC_FORMAT"));
+	_txtMusicFormat->setText(ltr("STR_PREFERRED_MUSIC_FORMAT"));
 
 	_cbxMusicFormat->setOptions(musicText);
 	_cbxMusicFormat->setSelected(options1.preferredMusic());
@@ -153,9 +153,9 @@ OptionsAudioState::OptionsAudioState(OptionsOrigin origin) : OptionsBaseState(or
 
 	std::string curMusic = musFormats[Mix_GetMusicType(0)]; // this is confusing
 	// since  both GM (GM.CAT) and MIDI (*.mid) are the same from SDL_mixer POV.
-	_txtCurrentMusic->setText(tr("STR_CURRENT_FORMAT").arg(curMusic));
+	_txtCurrentMusic->setText(ltr("STR_CURRENT_FORMAT").arg(curMusic));
 
-	_txtSoundFormat->setText(tr("STR_PREFERRED_SFX_FORMAT"));
+	_txtSoundFormat->setText(ltr("STR_PREFERRED_SFX_FORMAT"));
 
 	_cbxSoundFormat->setOptions(soundText);
 	_cbxSoundFormat->setSelected(options1.preferredSound());
@@ -165,9 +165,9 @@ OptionsAudioState::OptionsAudioState(OptionsOrigin origin) : OptionsBaseState(or
 	_cbxSoundFormat->onMouseOut((ActionHandler)&OptionsAudioState::txtTooltipOut);
 
 	std::string curSound = sndFormats[options1.currentSound];
-	_txtCurrentSound->setText(tr("STR_CURRENT_FORMAT").arg(curSound));
+	_txtCurrentSound->setText(ltr("STR_CURRENT_FORMAT").arg(curSound));
 
-	_txtVideoFormat->setText(tr("STR_PREFERRED_VIDEO_FORMAT"));
+	_txtVideoFormat->setText(ltr("STR_PREFERRED_VIDEO_FORMAT"));
 
 	_cbxVideoFormat->setOptions(videoText);
 	_cbxVideoFormat->setSelected(options1.preferredVideo());
@@ -186,9 +186,9 @@ OptionsAudioState::OptionsAudioState(OptionsOrigin origin) : OptionsBaseState(or
 	_cbxSoundFormat->setVisible(_origin == OPT_MENU && _game->getMod()->getSoundDefinitions()->empty());
 	_txtCurrentSound->setVisible(_origin == OPT_MENU && _game->getMod()->getSoundDefinitions()->empty());
 
-	_txtOptions->setText(tr("STR_SOUND_OPTIONS"));
+	_txtOptions->setText(ltr("STR_SOUND_OPTIONS"));
 
-	_btnBackgroundMute->setText(tr("STR_BACKGROUND_MUTE"));
+	_btnBackgroundMute->setText(ltr("STR_BACKGROUND_MUTE"));
 	_btnBackgroundMute->setPressed(options1.backgroundMute());
 	_btnBackgroundMute->onMouseClick((ActionHandler)&OptionsAudioState::btnBackgroundMuteClick);
 	_btnBackgroundMute->setTooltip("STR_BACKGROUND_MUTE_DESC");

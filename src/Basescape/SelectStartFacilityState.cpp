@@ -44,7 +44,7 @@ SelectStartFacilityState::SelectStartFacilityState(Base *base, State *state, Glo
 {
 	_facilities = _game->getMod()->getCustomBaseFacilities(_game->getSavedGame()->getDifficulty());
 
-	_btnOk->setText(tr("STR_RESET"));
+	_btnOk->setText(ltr("STR_RESET"));
 	_btnOk->onMouseClick((ActionHandler)&SelectStartFacilityState::btnOkClick);
 	_btnOk->onKeyboardPress(0, options1.keyCancel());
 
@@ -67,7 +67,7 @@ void SelectStartFacilityState::populateBuildList()
 	_lstFacilities->clearList();
 	for (const auto* rule : _facilities)
 	{
-		_lstFacilities->addRow(1, tr(rule->getType()).c_str());
+		_lstFacilities->addRow(1, ltr(rule->getType()).c_str());
 	}
 }
 

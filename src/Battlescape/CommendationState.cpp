@@ -59,12 +59,12 @@ CommendationState::CommendationState(std::vector<Soldier*> soldiersMedalled)
 	// Set up object
 	setWindowBackground(_window, "commendations");
 
-	_btnOk->setText(tr("STR_OK"));
+	_btnOk->setText(ltr("STR_OK"));
 	_btnOk->onMouseClick((ActionHandler)&CommendationState::btnOkClick);
 	_btnOk->onKeyboardPress((ActionHandler)&CommendationState::btnOkClick, options1.keyOk());
 	_btnOk->onKeyboardPress((ActionHandler)&CommendationState::btnOkClick, options1.keyCancel());
 
-	_txtTitle->setText(tr("STR_MEDALS"));
+	_txtTitle->setText(ltr("STR_MEDALS"));
 	_txtTitle->setAlign(ALIGN_CENTER);
 	_txtTitle->setBig();
 
@@ -140,7 +140,7 @@ CommendationState::CommendationState(std::vector<Soldier*> soldiersMedalled)
 						}
 						vectorIterator++;
 					}
-					_lstSoldiers->addRow(2, wssName.str().c_str(), tr(soldierComm->getDecorationLevelName(skipCounter)).c_str());
+					_lstSoldiers->addRow(2, wssName.str().c_str(), ltr(soldierComm->getDecorationLevelName(skipCounter)).c_str());
 					_commendationsNames.push_back("");
 					break;
 				}
@@ -151,11 +151,11 @@ CommendationState::CommendationState(std::vector<Soldier*> soldiersMedalled)
 			// Medal name
 			if (modularCommendation)
 			{
-				_lstSoldiers->setCellText(titleRow, 0, tr(commType).arg(tr(noun)));
+				_lstSoldiers->setCellText(titleRow, 0, ltr(commType).arg(ltr(noun)));
 			}
 			else
 			{
-				_lstSoldiers->setCellText(titleRow, 0, tr(commType));
+				_lstSoldiers->setCellText(titleRow, 0, ltr(commType));
 			}
 			_lstSoldiers->setRowColor(titleRow, _lstSoldiers->getSecondaryColor());
 			_commendationsNames[titleRow] = commType;

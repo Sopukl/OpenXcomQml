@@ -79,7 +79,7 @@ namespace OpenXcom
 		_txtTitle->setSecondaryColor(titleColor2);
 		_txtTitle->setBig();
 		_txtTitle->setWordWrap(true);
-		_txtTitle->setText(tr(defs->getTitleForPage(_state->current_page)));
+		_txtTitle->setText(ltr(defs->getTitleForPage(_state->current_page)));
 
 		_txtInfo = new Text(defs->rect_text.width, defs->rect_text.height, defs->rect_text.x, defs->rect_text.y);
 		add(_txtInfo);
@@ -88,7 +88,7 @@ namespace OpenXcom
 		_txtInfo->setSecondaryColor(textColor2);
 		_txtInfo->setWordWrap(true);
 		_txtInfo->setScrollable(true);
-		_txtInfo->setText(tr(defs->getTextForPage(_state->current_page)));
+		_txtInfo->setText(ltr(defs->getTextForPage(_state->current_page)));
 
 		int width = Clamp(defs->rect_stats.width, 80, 320);
 		_lstStats = new TextList(width, defs->rect_stats.height, defs->rect_stats.x, defs->rect_stats.y);
@@ -102,34 +102,34 @@ namespace OpenXcom
 		auto min = soldier->getMinStats();
 		auto max = soldier->getMaxStats();
 		auto cap = soldier->getStatCaps();
-		_lstStats->addRow(4, tr("STR_TIME_UNITS").c_str(), std::to_string(min.tu).c_str(), std::to_string(max.tu).c_str(), std::to_string(cap.tu).c_str());
-		_lstStats->addRow(4, tr("STR_STAMINA").c_str(), std::to_string(min.stamina).c_str(), std::to_string(max.stamina).c_str(), std::to_string(cap.stamina).c_str());
-		_lstStats->addRow(4, tr("STR_HEALTH").c_str(), std::to_string(min.health).c_str(), std::to_string(max.health).c_str(), std::to_string(cap.health).c_str());
-		_lstStats->addRow(4, tr("STR_BRAVERY").c_str(), std::to_string(min.bravery).c_str(), std::to_string(max.bravery).c_str(), std::to_string(cap.bravery).c_str());
-		_lstStats->addRow(4, tr("STR_REACTIONS").c_str(), std::to_string(min.reactions).c_str(), std::to_string(max.reactions).c_str(), std::to_string(cap.reactions).c_str());
-		_lstStats->addRow(4, tr("STR_FIRING_ACCURACY").c_str(), std::to_string(min.firing).c_str(), std::to_string(max.firing).c_str(), std::to_string(cap.firing).c_str());
-		_lstStats->addRow(4, tr("STR_THROWING_ACCURACY").c_str(), std::to_string(min.throwing).c_str(), std::to_string(max.throwing).c_str(), std::to_string(cap.throwing).c_str());
-		_lstStats->addRow(4, tr("STR_MELEE_ACCURACY").c_str(), std::to_string(min.melee).c_str(), std::to_string(max.melee).c_str(), std::to_string(cap.melee).c_str());
-		_lstStats->addRow(4, tr("STR_STRENGTH").c_str(), std::to_string(min.strength).c_str(), std::to_string(max.strength).c_str(), std::to_string(cap.strength).c_str());
+		_lstStats->addRow(4, ltr("STR_TIME_UNITS").c_str(), std::to_string(min.tu).c_str(), std::to_string(max.tu).c_str(), std::to_string(cap.tu).c_str());
+		_lstStats->addRow(4, ltr("STR_STAMINA").c_str(), std::to_string(min.stamina).c_str(), std::to_string(max.stamina).c_str(), std::to_string(cap.stamina).c_str());
+		_lstStats->addRow(4, ltr("STR_HEALTH").c_str(), std::to_string(min.health).c_str(), std::to_string(max.health).c_str(), std::to_string(cap.health).c_str());
+		_lstStats->addRow(4, ltr("STR_BRAVERY").c_str(), std::to_string(min.bravery).c_str(), std::to_string(max.bravery).c_str(), std::to_string(cap.bravery).c_str());
+		_lstStats->addRow(4, ltr("STR_REACTIONS").c_str(), std::to_string(min.reactions).c_str(), std::to_string(max.reactions).c_str(), std::to_string(cap.reactions).c_str());
+		_lstStats->addRow(4, ltr("STR_FIRING_ACCURACY").c_str(), std::to_string(min.firing).c_str(), std::to_string(max.firing).c_str(), std::to_string(cap.firing).c_str());
+		_lstStats->addRow(4, ltr("STR_THROWING_ACCURACY").c_str(), std::to_string(min.throwing).c_str(), std::to_string(max.throwing).c_str(), std::to_string(cap.throwing).c_str());
+		_lstStats->addRow(4, ltr("STR_MELEE_ACCURACY").c_str(), std::to_string(min.melee).c_str(), std::to_string(max.melee).c_str(), std::to_string(cap.melee).c_str());
+		_lstStats->addRow(4, ltr("STR_STRENGTH").c_str(), std::to_string(min.strength).c_str(), std::to_string(max.strength).c_str(), std::to_string(cap.strength).c_str());
 		if (_game->getMod()->isManaFeatureEnabled())
 		{
-			_lstStats->addRow(4, tr("STR_MANA_POOL").c_str(), std::to_string(min.mana).c_str(), std::to_string(max.mana).c_str(), std::to_string(cap.mana).c_str());
+			_lstStats->addRow(4, ltr("STR_MANA_POOL").c_str(), std::to_string(min.mana).c_str(), std::to_string(max.mana).c_str(), std::to_string(cap.mana).c_str());
 		}
-		_lstStats->addRow(4, tr("STR_PSIONIC_STRENGTH").c_str(), std::to_string(min.psiStrength).c_str(), std::to_string(max.psiStrength).c_str(), std::to_string(cap.psiStrength).c_str());
+		_lstStats->addRow(4, ltr("STR_PSIONIC_STRENGTH").c_str(), std::to_string(min.psiStrength).c_str(), std::to_string(max.psiStrength).c_str(), std::to_string(cap.psiStrength).c_str());
 		if (defs->psi_skill_mode == 0)
 		{
 			// not shown
-			_lstStats->addRow(4, tr("STR_PSIONIC_SKILL").c_str(), "", "", std::to_string(cap.psiSkill).c_str());
+			_lstStats->addRow(4, ltr("STR_PSIONIC_SKILL").c_str(), "", "", std::to_string(cap.psiSkill).c_str());
 		}
 		else if (defs->psi_skill_mode == 1)
 		{
 			// shown processed
-			_lstStats->addRow(4, tr("STR_PSIONIC_SKILL").c_str(), std::to_string(max.psiSkill).c_str(), std::to_string(max.psiSkill*3/2).c_str(), std::to_string(cap.psiSkill).c_str());
+			_lstStats->addRow(4, ltr("STR_PSIONIC_SKILL").c_str(), std::to_string(max.psiSkill).c_str(), std::to_string(max.psiSkill*3/2).c_str(), std::to_string(cap.psiSkill).c_str());
 		}
 		else
 		{
 			// shown raw
-			_lstStats->addRow(4, tr("STR_PSIONIC_SKILL").c_str(), std::to_string(min.psiSkill).c_str(), std::to_string(max.psiSkill).c_str(), std::to_string(cap.psiSkill).c_str());
+			_lstStats->addRow(4, ltr("STR_PSIONIC_SKILL").c_str(), std::to_string(min.psiSkill).c_str(), std::to_string(max.psiSkill).c_str(), std::to_string(cap.psiSkill).c_str());
 		}
 
 		centerAllSurfaces();

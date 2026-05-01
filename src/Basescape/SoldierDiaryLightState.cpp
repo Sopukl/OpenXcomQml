@@ -59,13 +59,13 @@ SoldierDiaryLightState::SoldierDiaryLightState(Soldier* soldier) : _soldier(sold
 	// Set up objects
 	setWindowBackground(_window, "soldierDiaryLight");
 
-	_btnOk->setText(tr("STR_OK"));
+	_btnOk->setText(ltr("STR_OK"));
 	_btnOk->onMouseClick((ActionHandler)&SoldierDiaryLightState::btnOkClick);
 	_btnOk->onKeyboardPress((ActionHandler)&SoldierDiaryLightState::btnOkClick, options1.keyOk());
 	_btnOk->onKeyboardPress((ActionHandler)&SoldierDiaryLightState::btnOkClick, options1.keyCancel());
 
 	_txtTitle->setAlign(ALIGN_CENTER);
-	_txtTitle->setText(tr("STR_NEUTRALIZATIONS_BY_WEAPON"));
+	_txtTitle->setText(ltr("STR_NEUTRALIZATIONS_BY_WEAPON"));
 
 	_lstStats->setColumns(2, 156, 20);
 	_lstStats->setBackground(_window);
@@ -75,7 +75,7 @@ SoldierDiaryLightState::SoldierDiaryLightState(Soldier* soldier) : _soldier(sold
 	{
 		std::ostringstream ss;
 		ss << mapItem.second;
-		_lstStats->addRow(2, tr(mapItem.first).c_str(), ss.str().c_str());
+		_lstStats->addRow(2, ltr(mapItem.first).c_str(), ss.str().c_str());
 	}
 
 	// switch to battlescape theme if called from inventory

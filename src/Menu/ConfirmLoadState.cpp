@@ -57,18 +57,18 @@ ConfirmLoadState::ConfirmLoadState(OptionsOrigin origin, const std::string &file
 	// Set up objects
 	setWindowBackground(_window, "saveMenus");
 
-	_btnYes->setText(tr("STR_YES"));
+	_btnYes->setText(ltr("STR_YES"));
 	_btnYes->onMouseClick((ActionHandler)&ConfirmLoadState::btnYesClick);
 	_btnYes->onKeyboardPress((ActionHandler)&ConfirmLoadState::btnYesClick, options1.keyOk());
 
-	_btnNo->setText(tr("STR_NO"));
+	_btnNo->setText(ltr("STR_NO"));
 	_btnNo->onMouseClick((ActionHandler)&ConfirmLoadState::btnNoClick);
 	_btnNo->onKeyboardPress((ActionHandler)&ConfirmLoadState::btnNoClick, options1.keyCancel());
 
 	_txtText->setAlign(ALIGN_CENTER);
 	_txtText->setBig();
 	_txtText->setWordWrap(true);
-	_txtText->setText(tr("STR_MISSING_CONTENT_PROMPT"));
+	_txtText->setText(ltr("STR_MISSING_CONTENT_PROMPT"));
 
 	if (_origin == OPT_BATTLESCAPE)
 	{

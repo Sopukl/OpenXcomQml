@@ -115,12 +115,12 @@ void ResearchInfoState::buildUi()
 
 	_txtTitle->setBig();
 
-	_txtTitle->setText(_rule ? tr(_rule->getName()) : tr(_project->getRules()->getName()));
+	_txtTitle->setText(_rule ? ltr(_rule->getName()) : ltr(_project->getRules()->getName()));
 
 	_txtAllocatedScientist->setBig();
 
-	_txtMore->setText(tr("STR_INCREASE"));
-	_txtLess->setText(tr("STR_DECREASE"));
+	_txtMore->setText(ltr("STR_INCREASE"));
+	_txtLess->setText(ltr("STR_DECREASE"));
 
 	_txtMore->setBig();
 	_txtLess->setBig();
@@ -150,14 +150,14 @@ void ResearchInfoState::buildUi()
 	_btnOk->onKeyboardPress((ActionHandler)&ResearchInfoState::btnOkClick, options1.keyOk());
 	if (_rule)
 	{
-		_btnOk->setText(tr("STR_START_PROJECT"));
-		_btnCancel->setText(tr("STR_CANCEL_UC"));
+		_btnOk->setText(ltr("STR_START_PROJECT"));
+		_btnCancel->setText(ltr("STR_CANCEL_UC"));
 		_btnCancel->onKeyboardPress((ActionHandler)&ResearchInfoState::btnCancelClick, options1.keyCancel());
 	}
 	else
 	{
-		_btnOk->setText(tr("STR_OK"));
-		_btnCancel->setText(tr("STR_CANCEL_PROJECT"));
+		_btnOk->setText(ltr("STR_OK"));
+		_btnCancel->setText(ltr("STR_CANCEL_PROJECT"));
 		_btnOk->onKeyboardPress((ActionHandler)&ResearchInfoState::btnOkClick, options1.keyCancel());
 	}
 	_btnCancel->onMouseClick((ActionHandler)&ResearchInfoState::btnCancelClick);
@@ -203,9 +203,9 @@ void ResearchInfoState::btnCancelClick(Action *)
  */
 void ResearchInfoState::setAssignedScientist()
 {
-	_txtAvailableScientist->setText(tr("STR_SCIENTISTS_AVAILABLE_UC").arg(_base->getAvailableScientists()));
-	_txtAvailableSpace->setText(tr("STR_LABORATORY_SPACE_AVAILABLE_UC").arg(_base->getFreeLaboratories()));
-	_txtAllocatedScientist->setText(tr("STR_SCIENTISTS_ALLOCATED").arg(_project->getAssigned()));
+	_txtAvailableScientist->setText(ltr("STR_SCIENTISTS_AVAILABLE_UC").arg(_base->getAvailableScientists()));
+	_txtAvailableSpace->setText(ltr("STR_LABORATORY_SPACE_AVAILABLE_UC").arg(_base->getFreeLaboratories()));
+	_txtAllocatedScientist->setText(ltr("STR_SCIENTISTS_ALLOCATED").arg(_project->getAssigned()));
 }
 
 /**

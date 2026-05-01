@@ -178,26 +178,26 @@ DebriefingState::DebriefingState() :
 	// Set up objects
 	setWindowBackground(_window, "debriefing");
 
-	_btnOk->setText(tr("STR_OK"));
+	_btnOk->setText(ltr("STR_OK"));
 	_btnOk->onMouseClick((ActionHandler)&DebriefingState::btnOkClick);
 	_btnOk->onKeyboardPress((ActionHandler)&DebriefingState::btnOkClick, options1.keyOk());
 	_btnOk->onKeyboardPress((ActionHandler)&DebriefingState::btnOkClick, options1.keyCancel());
 
 	_btnStats->onMouseClick((ActionHandler)&DebriefingState::btnStatsClick);
 
-	_btnSell->setText(tr("STR_SELL"));
+	_btnSell->setText(ltr("STR_SELL"));
 	_btnSell->onMouseClick((ActionHandler)&DebriefingState::btnSellClick);
-	_btnTransfer->setText(tr("STR_TRANSFER_UC"));
+	_btnTransfer->setText(ltr("STR_TRANSFER_UC"));
 	_btnTransfer->onMouseClick((ActionHandler)&DebriefingState::btnTransferClick);
 
 	_txtTitle->setBig();
 
-	_txtItem->setText(tr("STR_LIST_ITEM"));
+	_txtItem->setText(ltr("STR_LIST_ITEM"));
 
-	_txtQuantity->setText(tr("STR_QUANTITY_UC"));
+	_txtQuantity->setText(ltr("STR_QUANTITY_UC"));
 	_txtQuantity->setAlign(ALIGN_RIGHT);
 
-	_txtScore->setText(tr("STR_SCORE"));
+	_txtScore->setText(ltr("STR_SCORE"));
 
 	_lstStats->setColumns(3, 224, 30, 64);
 	_lstStats->setDot(true);
@@ -209,58 +209,58 @@ DebriefingState::DebriefingState() :
 	_lstTotal->setDot(true);
 
 	// Second page
-	_txtSoldier->setText(tr("STR_NAME_UC"));
+	_txtSoldier->setText(ltr("STR_NAME_UC"));
 
 	_txtTU->setAlign(ALIGN_CENTER);
-	_txtTU->setText(tr("STR_TIME_UNITS_ABBREVIATION"));
+	_txtTU->setText(ltr("STR_TIME_UNITS_ABBREVIATION"));
 	_txtTU->setTooltip("STR_TIME_UNITS");
 	_txtTU->onMouseIn((ActionHandler)&DebriefingState::txtTooltipIn);
 	_txtTU->onMouseOut((ActionHandler)&DebriefingState::txtTooltipOut);
 
 	_txtStamina->setAlign(ALIGN_CENTER);
-	_txtStamina->setText(tr("STR_STAMINA_ABBREVIATION"));
+	_txtStamina->setText(ltr("STR_STAMINA_ABBREVIATION"));
 	_txtStamina->setTooltip("STR_STAMINA");
 	_txtStamina->onMouseIn((ActionHandler)&DebriefingState::txtTooltipIn);
 	_txtStamina->onMouseOut((ActionHandler)&DebriefingState::txtTooltipOut);
 
 	_txtHealth->setAlign(ALIGN_CENTER);
-	_txtHealth->setText(tr("STR_HEALTH_ABBREVIATION"));
+	_txtHealth->setText(ltr("STR_HEALTH_ABBREVIATION"));
 	_txtHealth->setTooltip("STR_HEALTH");
 	_txtHealth->onMouseIn((ActionHandler)&DebriefingState::txtTooltipIn);
 	_txtHealth->onMouseOut((ActionHandler)&DebriefingState::txtTooltipOut);
 
 	_txtBravery->setAlign(ALIGN_CENTER);
-	_txtBravery->setText(tr("STR_BRAVERY_ABBREVIATION"));
+	_txtBravery->setText(ltr("STR_BRAVERY_ABBREVIATION"));
 	_txtBravery->setTooltip("STR_BRAVERY");
 	_txtBravery->onMouseIn((ActionHandler)&DebriefingState::txtTooltipIn);
 	_txtBravery->onMouseOut((ActionHandler)&DebriefingState::txtTooltipOut);
 
 	_txtReactions->setAlign(ALIGN_CENTER);
-	_txtReactions->setText(tr("STR_REACTIONS_ABBREVIATION"));
+	_txtReactions->setText(ltr("STR_REACTIONS_ABBREVIATION"));
 	_txtReactions->setTooltip("STR_REACTIONS");
 	_txtReactions->onMouseIn((ActionHandler)&DebriefingState::txtTooltipIn);
 	_txtReactions->onMouseOut((ActionHandler)&DebriefingState::txtTooltipOut);
 
 	_txtFiring->setAlign(ALIGN_CENTER);
-	_txtFiring->setText(tr("STR_FIRING_ACCURACY_ABBREVIATION"));
+	_txtFiring->setText(ltr("STR_FIRING_ACCURACY_ABBREVIATION"));
 	_txtFiring->setTooltip("STR_FIRING_ACCURACY");
 	_txtFiring->onMouseIn((ActionHandler)&DebriefingState::txtTooltipIn);
 	_txtFiring->onMouseOut((ActionHandler)&DebriefingState::txtTooltipOut);
 
 	_txtThrowing->setAlign(ALIGN_CENTER);
-	_txtThrowing->setText(tr("STR_THROWING_ACCURACY_ABBREVIATION"));
+	_txtThrowing->setText(ltr("STR_THROWING_ACCURACY_ABBREVIATION"));
 	_txtThrowing->setTooltip("STR_THROWING_ACCURACY");
 	_txtThrowing->onMouseIn((ActionHandler)&DebriefingState::txtTooltipIn);
 	_txtThrowing->onMouseOut((ActionHandler)&DebriefingState::txtTooltipOut);
 
 	_txtMelee->setAlign(ALIGN_CENTER);
-	_txtMelee->setText(tr("STR_MELEE_ACCURACY_ABBREVIATION"));
+	_txtMelee->setText(ltr("STR_MELEE_ACCURACY_ABBREVIATION"));
 	_txtMelee->setTooltip("STR_MELEE_ACCURACY");
 	_txtMelee->onMouseIn((ActionHandler)&DebriefingState::txtTooltipIn);
 	_txtMelee->onMouseOut((ActionHandler)&DebriefingState::txtTooltipOut);
 
 	_txtStrength->setAlign(ALIGN_CENTER);
-	_txtStrength->setText(tr("STR_STRENGTH_ABBREVIATION"));
+	_txtStrength->setText(ltr("STR_STRENGTH_ABBREVIATION"));
 	_txtStrength->setTooltip("STR_STRENGTH");
 	_txtStrength->onMouseIn((ActionHandler)&DebriefingState::txtTooltipIn);
 	_txtStrength->onMouseOut((ActionHandler)&DebriefingState::txtTooltipOut);
@@ -268,19 +268,19 @@ DebriefingState::DebriefingState() :
 	_txtPsiStrength->setAlign(ALIGN_CENTER);
 	if (_game->getMod()->isManaFeatureEnabled())
 	{
-		_txtPsiStrength->setText(tr("STR_MANA_ABBREVIATION"));
+		_txtPsiStrength->setText(ltr("STR_MANA_ABBREVIATION"));
 		_txtPsiStrength->setTooltip("STR_MANA_POOL");
 	}
 	else
 	{
-		_txtPsiStrength->setText(tr("STR_PSIONIC_STRENGTH_ABBREVIATION"));
+		_txtPsiStrength->setText(ltr("STR_PSIONIC_STRENGTH_ABBREVIATION"));
 		_txtPsiStrength->setTooltip("STR_PSIONIC_STRENGTH");
 	}
 	_txtPsiStrength->onMouseIn((ActionHandler)&DebriefingState::txtTooltipIn);
 	_txtPsiStrength->onMouseOut((ActionHandler)&DebriefingState::txtTooltipOut);
 
 	_txtPsiSkill->setAlign(ALIGN_CENTER);
-	_txtPsiSkill->setText(tr("STR_PSIONIC_SKILL_ABBREVIATION"));
+	_txtPsiSkill->setText(ltr("STR_PSIONIC_SKILL_ABBREVIATION"));
 	_txtPsiSkill->setTooltip("STR_PSIONIC_SKILL");
 	_txtPsiSkill->onMouseIn((ActionHandler)&DebriefingState::txtTooltipIn);
 	_txtPsiSkill->onMouseOut((ActionHandler)&DebriefingState::txtTooltipOut);
@@ -367,15 +367,15 @@ void DebriefingState::applyVisibility()
 	_btnTransfer->setVisible(showItems && _showSellButton && _game->getSavedGame()->getBases()->size() > 1);
 	if (showScore)
 	{
-		_btnStats->setText(tr("STR_STATS"));
+		_btnStats->setText(ltr("STR_STATS"));
 	}
 	else if (showStats)
 	{
-		_btnStats->setText(tr("STR_LOOT"));
+		_btnStats->setText(ltr("STR_LOOT"));
 	}
 	else if (showItems)
 	{
-		_btnStats->setText(tr("STR_SCORE"));
+		_btnStats->setText(ltr("STR_SCORE"));
 	}
 }
 
@@ -446,7 +446,7 @@ void DebriefingState::init()
 
 					std::ostringstream ss;
 					ss << Unicode::TOK_COLOR_FLIP << qty << Unicode::TOK_COLOR_FLIP;
-					std::string item = tr(itemType);
+					std::string item = ltr(itemType);
 					if (rule->getBattleType() == BT_AMMO || (rule->getBattleType() == BT_NONE && rule->getClipSize() > 0))
 					{
 						item.insert(0, "  ");
@@ -477,12 +477,12 @@ void DebriefingState::init()
 		total += ds->score;
 		if (ds->recovery)
 		{
-			_lstRecovery->addRow(3, tr(ds->item).c_str(), ss.str().c_str(), ss2.str().c_str());
+			_lstRecovery->addRow(3, ltr(ds->item).c_str(), ss.str().c_str(), ss2.str().c_str());
 			recoveryY += 8;
 		}
 		else
 		{
-			_lstStats->addRow(3, tr(ds->item).c_str(), ss.str().c_str(), ss2.str().c_str());
+			_lstStats->addRow(3, ltr(ds->item).c_str(), ss.str().c_str(), ss2.str().c_str());
 			statsY += 8;
 		}
 		if (ds->item == "STR_CIVILIANS_SAVED")
@@ -509,7 +509,7 @@ void DebriefingState::init()
 
 	std::ostringstream ss3;
 	ss3 << total;
-	_lstTotal->addRow(2, tr("STR_TOTAL_UC").c_str(), ss3.str().c_str());
+	_lstTotal->addRow(2, ltr("STR_TOTAL_UC").c_str(), ss3.str().c_str());
 
 	// add the points to our activity score
 	if (_region)
@@ -536,7 +536,7 @@ void DebriefingState::init()
 	{
 		if (_txtRecovery->getText().empty())
 		{
-			_txtRecovery->setText(tr("STR_BOUNTY"));
+			_txtRecovery->setText(ltr("STR_BOUNTY"));
 		}
 		_txtRecovery->setY(_lstStats->getY() + statsY + 5);
 		_lstRecovery->setY(_txtRecovery->getY() + 8);
@@ -587,7 +587,7 @@ void DebriefingState::init()
 
 	_missionStatistics->rating = rating;
 	_missionStatistics->score = total;
-	_txtRating->setText(tr("STR_RATING").arg(tr(rating)));
+	_txtRating->setText(ltr("STR_RATING").arg(ltr(rating)));
 
 	SavedGame *save = _game->getSavedGame();
 	SavedBattleGame *battle = save->getSavedBattle();
@@ -809,7 +809,7 @@ void DebriefingState::init()
 void DebriefingState::txtTooltipIn(Action *action)
 {
 	_currentTooltip = action->getSender()->getTooltip();
-	_txtTooltip->setText(tr(_currentTooltip));
+	_txtTooltip->setText(ltr(_currentTooltip));
 }
 
 /**
@@ -940,12 +940,12 @@ void DebriefingState::btnOkClick(Action *)
 				if (pair.second == 2)
 				{
 					_game->pushState(new ManageAlienContainmentState(_base, pair.first, OPT_BATTLESCAPE));
-					_game->pushState(new ErrorMessageState(trAlt("STR_CONTAINMENT_EXCEEDED", pair.first).arg(_base->getName()), _palette, _game->getMod()->getInterface("debriefing")->getElement("errorMessage")->color, "BACK01.SCR", _game->getMod()->getInterface("debriefing")->getElement("errorPalette")->color));
+					_game->pushState(new ErrorMessageState(ltrAlt("STR_CONTAINMENT_EXCEEDED", pair.first).arg(_base->getName()), _palette, _game->getMod()->getInterface("debriefing")->getElement("errorMessage")->color, "BACK01.SCR", _game->getMod()->getInterface("debriefing")->getElement("errorPalette")->color));
 				}
 				else if (pair.second == 1)
 				{
 					_game->pushState(new ErrorMessageState(
-						trAlt("STR_ALIEN_DIES_NO_ALIEN_CONTAINMENT_FACILITY", pair.first),
+						ltrAlt("STR_ALIEN_DIES_NO_ALIEN_CONTAINMENT_FACILITY", pair.first),
 						_palette,
 						_game->getMod()->getInterface("debriefing")->getElement("errorMessage")->color,
 						"BACK01.SCR",
@@ -956,7 +956,7 @@ void DebriefingState::btnOkClick(Action *)
 			if (options1.storageLimitsEnforced() && _base->storesOverfull())
 			{
 				_game->pushState(new SellState(_base, 0, OPT_BATTLESCAPE));
-				_game->pushState(new ErrorMessageState(tr("STR_STORAGE_EXCEEDED").arg(_base->getName()), _palette, _game->getMod()->getInterface("debriefing")->getElement("errorMessage")->color, "BACK01.SCR", _game->getMod()->getInterface("debriefing")->getElement("errorPalette")->color));
+				_game->pushState(new ErrorMessageState(ltr("STR_STORAGE_EXCEEDED").arg(_base->getName()), _palette, _game->getMod()->getInterface("debriefing")->getElement("errorMessage")->color, "BACK01.SCR", _game->getMod()->getInterface("debriefing")->getElement("errorPalette")->color));
 			}
 		}
 	}
@@ -1331,7 +1331,7 @@ void DebriefingState::prepareDebriefing()
 			{
 				_missionStatistics->alienRace = ufo->getAlienRace();
 			}
-			_txtRecovery->setText(tr("STR_UFO_RECOVERY"));
+			_txtRecovery->setText(ltr("STR_UFO_RECOVERY"));
 			ufo->setInBattlescape(false);
 			// if XCom failed to secure the landing zone, the UFO
 			// takes off immediately and proceeds according to its mission directive
@@ -1395,7 +1395,7 @@ void DebriefingState::prepareDebriefing()
 		AlienBase* ab = (*abIt);
 		if (ab->isInBattlescape())
 		{
-			_txtRecovery->setText(tr("STR_ALIEN_BASE_RECOVERY"));
+			_txtRecovery->setText(ltr("STR_ALIEN_BASE_RECOVERY"));
 			bool destroyAlienBase = true;
 
 			if (aborted || playersSurvived == 0)
@@ -1785,19 +1785,19 @@ void DebriefingState::prepareDebriefing()
 	{
 		if (target == "STR_BASE")
 		{
-			_txtTitle->setText(tr("STR_BASE_IS_SAVED"));
+			_txtTitle->setText(ltr("STR_BASE_IS_SAVED"));
 		}
 		else if (target == "STR_UFO")
 		{
-			_txtTitle->setText(tr("STR_UFO_IS_RECOVERED"));
+			_txtTitle->setText(ltr("STR_UFO_IS_RECOVERED"));
 		}
 		else if (target == "STR_ALIEN_BASE")
 		{
-			_txtTitle->setText(tr("STR_ALIEN_BASE_DESTROYED"));
+			_txtTitle->setText(ltr("STR_ALIEN_BASE_DESTROYED"));
 		}
 		else
 		{
-			_txtTitle->setText(tr("STR_ALIENS_DEFEATED"));
+			_txtTitle->setText(ltr("STR_ALIENS_DEFEATED"));
 			if (!aborted && !savedEnoughVIPs)
 			{
 				// Special case: mission was NOT aborted, all enemies were neutralized, but we couldn't save enough VIPs...
@@ -1837,16 +1837,16 @@ void DebriefingState::prepareDebriefing()
 			// Special case: mission was NOT aborted, all enemies were neutralized, but we couldn't save enough VIPs...
 			if (!missionFailedText.empty())
 			{
-				_txtTitle->setText(tr(missionFailedText));
+				_txtTitle->setText(ltr(missionFailedText));
 			}
 			else
 			{
-				_txtTitle->setText(tr("STR_TERROR_CONTINUES"));
+				_txtTitle->setText(ltr("STR_TERROR_CONTINUES"));
 			}
 		}
 		else if (!missionCompleteText.empty())
 		{
-			_txtTitle->setText(tr(missionCompleteText));
+			_txtTitle->setText(ltr(missionCompleteText));
 		}
 
 		if (!aborted)
@@ -1891,24 +1891,24 @@ void DebriefingState::prepareDebriefing()
 	{
 		if (lostCraft)
 		{
-			_txtTitle->setText(tr("STR_CRAFT_IS_LOST"));
+			_txtTitle->setText(ltr("STR_CRAFT_IS_LOST"));
 		}
 		else if (target == "STR_BASE")
 		{
-			_txtTitle->setText(tr("STR_BASE_IS_LOST"));
+			_txtTitle->setText(ltr("STR_BASE_IS_LOST"));
 			_destroyBase = true;
 		}
 		else if (target == "STR_UFO")
 		{
-			_txtTitle->setText(tr("STR_UFO_IS_NOT_RECOVERED"));
+			_txtTitle->setText(ltr("STR_UFO_IS_NOT_RECOVERED"));
 		}
 		else if (target == "STR_ALIEN_BASE")
 		{
-			_txtTitle->setText(tr("STR_ALIEN_BASE_STILL_INTACT"));
+			_txtTitle->setText(ltr("STR_ALIEN_BASE_STILL_INTACT"));
 		}
 		else
 		{
-			_txtTitle->setText(tr("STR_TERROR_CONTINUES"));
+			_txtTitle->setText(ltr("STR_TERROR_CONTINUES"));
 			if (!objectiveFailedText.empty())
 			{
 				addStat(objectiveFailedText, 1, objectiveFailedScore);
@@ -1916,7 +1916,7 @@ void DebriefingState::prepareDebriefing()
 		}
 		if (!missionFailedText.empty())
 		{
-			_txtTitle->setText(tr(missionFailedText));
+			_txtTitle->setText(ltr(missionFailedText));
 		}
 
 		if (playersSurvived > 0 && !_destroyBase)
@@ -2607,7 +2607,7 @@ void DebriefingState::recoverCivilian(BattleUnit *from, Base *base, Craft* craft
 			s->load(reader.toBase(), _game->getMod(), _game->getSavedGame(), _game->getMod()->getScriptGlobal(), true); // load from soldier template
 			if (!from->getUnitRules()->getSpawnedPersonName().empty())
 			{
-				s->setName(tr(from->getUnitRules()->getSpawnedPersonName()));
+				s->setName(ltr(from->getUnitRules()->getSpawnedPersonName()));
 			}
 			else
 			{

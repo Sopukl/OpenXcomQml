@@ -2599,7 +2599,7 @@ void BattlescapeState::bugHuntMessage()
 {
 	if (_save->getBughuntMode())
 	{
-		_txtDebug->setText(tr("STR_BUG_HUNT_ACTIVATED"));
+		_txtDebug->setText(ltr("STR_BUG_HUNT_ACTIVATED"));
 	}
 }
 
@@ -2609,7 +2609,7 @@ void BattlescapeState::bugHuntMessage()
  */
 void BattlescapeState::warning(const std::string &message)
 {
-	_warning->showMessage(tr(message));
+	_warning->showMessage(ltr(message));
 }
 
 /**
@@ -2671,7 +2671,7 @@ std::string BattlescapeState::getMeleeDamagePreview(BattleUnit *actor, BattleIte
 			dmgType = weapon->getRules()->getMeleeType();
 		}
 
-		ss << tr(weapon->getRules()->getType());
+		ss << ltr(weapon->getRules()->getType());
 		ss << "\n";
 		ss << dmgType->getRandomDamage(totalDamage, 1);
 		ss << "-";
@@ -2681,7 +2681,7 @@ std::string BattlescapeState::getMeleeDamagePreview(BattleUnit *actor, BattleIte
 	}
 	else
 	{
-		ss << tr(weapon->getRules()->getType());
+		ss << ltr(weapon->getRules()->getType());
 		ss << "\n?-?";
 	}
 
@@ -2762,7 +2762,7 @@ inline void BattlescapeState::handle(Action *action)
 					_map->getCamera()->toggleShowSingleLayer();
 
 					if (_map->getCamera()->getShowSingleLayer())
-						warningLongRaw(tr("STR_SINGLE_MAP_LAYER_ACTIVATED"));
+						warningLongRaw(ltr("STR_SINGLE_MAP_LAYER_ACTIVATED"));
 					else
 						warning("STR_SINGLE_MAP_LAYER_DEACTIVATED");
 				}
@@ -2775,7 +2775,7 @@ inline void BattlescapeState::handle(Action *action)
 						if (bu)
 						{
 							std::ostringstream ss;
-							ss << tr("STR_FATAL_WOUNDS");
+							ss << ltr("STR_FATAL_WOUNDS");
 							ss << "\n";
 							for (int i = 0; i < BODYPART_MAX; ++i)
 							{
@@ -2796,7 +2796,7 @@ inline void BattlescapeState::handle(Action *action)
 					{
 						if (options1.oxceDisableHitLog())
 						{
-							_game->pushState(new InfoboxState(tr("STR_THIS_FEATURE_IS_DISABLED_4")));
+							_game->pushState(new InfoboxState(ltr("STR_THIS_FEATURE_IS_DISABLED_4")));
 						}
 						else if (altPressed)
 						{
@@ -2850,7 +2850,7 @@ inline void BattlescapeState::handle(Action *action)
 						{
 							options1.battleXcomSpeedOrig = options1.battleXcomSpeed();
 							options1.setbattleXcomSpeed(1);
-							warningLongRaw(tr("STR_QUICK_MODE_ACTIVATED"));
+							warningLongRaw(ltr("STR_QUICK_MODE_ACTIVATED"));
 						}
 					}
 					else
@@ -2891,7 +2891,7 @@ inline void BattlescapeState::handle(Action *action)
 					else
 					{
 						std::ostringstream ss;
-						ss << tr("STR_NO_EXPERIENCE_YET");
+						ss << ltr("STR_NO_EXPERIENCE_YET");
 						ss << "\n\n";
 						bool first = true;
 						for (auto* bu : *_save->getUnits())
@@ -3785,7 +3785,7 @@ void BattlescapeState::txtTooltipInExtra(Action *action, bool leftHand, bool spe
 		if(!playableUnitSelected())
 		{
 			_currentTooltip = action->getSender()->getTooltip();
-			_txtTooltip->setText(tr(_currentTooltip));
+			_txtTooltip->setText(ltr(_currentTooltip));
 			return;
 		}
 
@@ -3809,7 +3809,7 @@ void BattlescapeState::txtTooltipInExtra(Action *action, bool leftHand, bool spe
 		if(!weapon)
 		{
 			_currentTooltip = action->getSender()->getTooltip();
-			_txtTooltip->setText(tr(_currentTooltip));
+			_txtTooltip->setText(ltr(_currentTooltip));
 			return;
 		}
 
@@ -3868,22 +3868,22 @@ void BattlescapeState::txtTooltipInExtra(Action *action, bool leftHand, bool spe
 
 			_currentTooltip = action->getSender()->getTooltip();
 			std::ostringstream tooltipExtra;
-			tooltipExtra << tr(_currentTooltip);
+			tooltipExtra << ltr(_currentTooltip);
 
 			// target unit found
 			if (targetUnit)
 			{
 				if (targetUnit->getOriginalFaction() == FACTION_HOSTILE) {
 					_txtTooltip->setColor(Palette::blockOffset(_medikitRed));
-					tooltipExtra << tr("STR_TARGET_ENEMY");
+					tooltipExtra << ltr("STR_TARGET_ENEMY");
 				} else if (targetUnit->getOriginalFaction() == FACTION_NEUTRAL) {
 					_txtTooltip->setColor(Palette::blockOffset(_medikitOrange));
-					tooltipExtra << tr("STR_TARGET_NEUTRAL");
+					tooltipExtra << ltr("STR_TARGET_NEUTRAL");
 				} else if (targetUnit->getOriginalFaction() == FACTION_PLAYER) {
 					_txtTooltip->setColor(Palette::blockOffset(_medikitGreen));
-					tooltipExtra << tr("STR_TARGET_FRIEND");
+					tooltipExtra << ltr("STR_TARGET_FRIEND");
 				}
-				if (onGround) tooltipExtra << tr("STR_TARGET_ON_THE_GROUND");
+				if (onGround) tooltipExtra << ltr("STR_TARGET_ON_THE_GROUND");
 				_txtTooltip->setText(tooltipExtra.str());
 			}
 			else
@@ -3893,15 +3893,15 @@ void BattlescapeState::txtTooltipInExtra(Action *action, bool leftHand, bool spe
 				{
 					targetUnit = selectedUnit;
 					_txtTooltip->setColor(Palette::blockOffset(_medikitBlue));
-					tooltipExtra << tr("STR_TARGET_YOURSELF");
-					if (onGround) tooltipExtra << tr("STR_TARGET_ON_THE_GROUND");
+					tooltipExtra << ltr("STR_TARGET_YOURSELF");
+					if (onGround) tooltipExtra << ltr("STR_TARGET_ON_THE_GROUND");
 					_txtTooltip->setText(tooltipExtra.str());
 				}
 				else
 				{
 					// cannot use the weapon (medikit) on anyone
 					_currentTooltip = action->getSender()->getTooltip();
-					_txtTooltip->setText(tr(_currentTooltip));
+					_txtTooltip->setText(ltr(_currentTooltip));
 				}
 			}
 		}
@@ -3909,7 +3909,7 @@ void BattlescapeState::txtTooltipInExtra(Action *action, bool leftHand, bool spe
 		{
 			// weapon is not of medikit battle type
 			_currentTooltip = action->getSender()->getTooltip();
-			_txtTooltip->setText(tr(_currentTooltip));
+			_txtTooltip->setText(ltr(_currentTooltip));
 		}
 	}
 }
@@ -3952,7 +3952,7 @@ void BattlescapeState::txtTooltipInEndTurn(Action *action)
 		_currentTooltip = action->getSender()->getTooltip();
 
 		std::ostringstream ss;
-		ss << tr(_currentTooltip);
+		ss << ltr(_currentTooltip);
 		ss << " ";
 		ss << _save->getTurn();
 		if (_save->getTurnLimit() > 0)
@@ -3973,7 +3973,7 @@ void BattlescapeState::txtTooltipIn(Action *action)
 	if (allowButtons() && options1.battleTooltips())
 	{
 		_currentTooltip = action->getSender()->getTooltip();
-		_txtTooltip->setText(tr(_currentTooltip));
+		_txtTooltip->setText(ltr(_currentTooltip));
 	}
 }
 

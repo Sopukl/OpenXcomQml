@@ -121,11 +121,11 @@ SelectDestinationState::SelectDestinationState(std::vector<Craft*> crafts, Globe
 
 	setWindowBackground(_window, "geoscape");
 
-	_btnCancel->setText(tr("STR_CANCEL_UC"));
+	_btnCancel->setText(ltr("STR_CANCEL_UC"));
 	_btnCancel->onMouseClick((ActionHandler)&SelectDestinationState::btnCancelClick);
 	_btnCancel->onKeyboardPress((ActionHandler)&SelectDestinationState::btnCancelClick, options1.keyCancel());
 
-	_txtTitle->setText(tr("STR_SELECT_DESTINATION"));
+	_txtTitle->setText(ltr("STR_SELECT_DESTINATION"));
 	_txtTitle->setVerticalAlign(ALIGN_MIDDLE);
 	_txtTitle->setWordWrap(true);
 
@@ -139,7 +139,7 @@ SelectDestinationState::SelectDestinationState(std::vector<Craft*> crafts, Globe
 	}
 	else
 	{
-		_btnCydonia->setText(tr("STR_CYDONIA"));
+		_btnCydonia->setText(ltr("STR_CYDONIA"));
 		_btnCydonia->onMouseClick((ActionHandler)&SelectDestinationState::btnCydoniaClick);
 
 		// one more check...

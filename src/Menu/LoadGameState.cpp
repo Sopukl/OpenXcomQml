@@ -120,7 +120,7 @@ void LoadGameState::buildUi(SDL_Color *palette)
 	// Set up objects
 	_txtStatus->setBig();
 	_txtStatus->setAlign(ALIGN_CENTER);
-	_txtStatus->setText(tr("STR_LOADING_GAME"));
+	_txtStatus->setText(ltr("STR_LOADING_GAME"));
 
 }
 
@@ -230,7 +230,7 @@ void LoadGameState::error(const std::string &msg, SavedGame *save)
 
 	Log(LOG_ERROR) << msg;
 	std::ostringstream error;
-	error << tr("STR_LOAD_UNSUCCESSFUL") << Unicode::TOK_NL_SMALL << msg;
+	error << ltr("STR_LOAD_UNSUCCESSFUL") << Unicode::TOK_NL_SMALL << msg;
 	if (_origin != OPT_BATTLESCAPE)
 		_game->pushState(new ErrorMessageState(error.str(), _palette, _game->getMod()->getInterface("errorMessages")->getElement("geoscapeColor")->color, "BACK01.SCR", _game->getMod()->getInterface("errorMessages")->getElement("geoscapePalette")->color));
 	else

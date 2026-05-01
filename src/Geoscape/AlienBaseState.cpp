@@ -61,7 +61,7 @@ AlienBaseState::AlienBaseState(AlienBase *base, GeoscapeState *state) : _state(s
 	// Set up objects
 	setWindowBackground(_window, "alienBase");
 
-	_btnOk->setText(tr("STR_OK"));
+	_btnOk->setText(ltr("STR_OK"));
 	_btnOk->onMouseClick((ActionHandler)&AlienBaseState::btnOkClick);
 	_btnOk->onKeyboardPress((ActionHandler)&AlienBaseState::btnOkClick, options1.keyOk());
 	_btnOk->onKeyboardPress((ActionHandler)&AlienBaseState::btnOkClick, options1.keyCancel());
@@ -76,7 +76,7 @@ AlienBaseState::AlienBaseState(AlienBase *base, GeoscapeState *state) : _state(s
 	{
 		if (country->getRules()->insideCountry(_base->getLongitude(), _base->getLatitude()))
 		{
-			countryName = tr(country->getRules()->getType());
+			countryName = ltr(country->getRules()->getType());
 			break;
 		}
 	}
@@ -84,14 +84,14 @@ AlienBaseState::AlienBaseState(AlienBase *base, GeoscapeState *state) : _state(s
 	{
 		if (region->getRules()->insideRegion(_base->getLongitude(), _base->getLatitude()))
 		{
-			regionName = tr(region->getRules()->getType());
+			regionName = ltr(region->getRules()->getType());
 			break;
 		}
 	}
 	std::string location;
 	if (!countryName.empty())
 	{
-		location = tr("STR_COUNTRIES_COMMA").arg(countryName).arg(regionName);
+		location = ltr("STR_COUNTRIES_COMMA").arg(countryName).arg(regionName);
 	}
 	else if (!regionName.empty())
 	{
@@ -99,9 +99,9 @@ AlienBaseState::AlienBaseState(AlienBase *base, GeoscapeState *state) : _state(s
 	}
 	else
 	{
-		location = tr("STR_UNKNOWN");
+		location = ltr("STR_UNKNOWN");
 	}
-	_txtTitle->setText(tr("STR_XCOM_AGENTS_HAVE_LOCATED_AN_ALIEN_BASE_IN_REGION").arg(location));
+	_txtTitle->setText(ltr("STR_XCOM_AGENTS_HAVE_LOCATED_AN_ALIEN_BASE_IN_REGION").arg(location));
 }
 
 /**

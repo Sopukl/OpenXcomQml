@@ -125,20 +125,20 @@ AbortMissionState::AbortMissionState(SavedBattleGame *battleGame, BattlescapeSta
 	_txtInEntrance->setHighContrast(true);
 	if (craft)
 	{
-		_txtInEntrance->setText(tr("STR_UNITS_IN_CRAFT", _inEntrance + tally.vipInEntrance));
+		_txtInEntrance->setText(ltr("STR_UNITS_IN_CRAFT", _inEntrance + tally.vipInEntrance));
 	}
 	else
 	{
-		_txtInEntrance->setText(tr("STR_UNITS_IN_ENTRANCE", _inEntrance + tally.vipInEntrance));
+		_txtInEntrance->setText(ltr("STR_UNITS_IN_ENTRANCE", _inEntrance + tally.vipInEntrance));
 	}
 
 	_txtInExit->setBig();
 	_txtInExit->setHighContrast(true);
-	_txtInExit->setText(tr("STR_UNITS_IN_EXIT", _inExit + tally.vipInExit));
+	_txtInExit->setText(ltr("STR_UNITS_IN_EXIT", _inExit + tally.vipInExit));
 
 	_txtOutside->setBig();
 	_txtOutside->setHighContrast(true);
-	_txtOutside->setText(tr("STR_UNITS_OUTSIDE", _outside + tally.vipInField));
+	_txtOutside->setText(ltr("STR_UNITS_OUTSIDE", _outside + tally.vipInField));
 
 
 	if (_battleGame->getMissionType() == "STR_BASE_DEFENSE")
@@ -157,14 +157,14 @@ AbortMissionState::AbortMissionState(SavedBattleGame *battleGame, BattlescapeSta
 	_txtAbort->setBig();
 	_txtAbort->setAlign(ALIGN_CENTER);
 	_txtAbort->setHighContrast(true);
-	_txtAbort->setText(tr("STR_ABORT_MISSION_QUESTION"));
+	_txtAbort->setText(ltr("STR_ABORT_MISSION_QUESTION"));
 	if (_battleGame->isPreview())
 	{
-		_txtAbort->setText(tr("STR_CRAFT_DEPLOYMENT_QUESTION"));
+		_txtAbort->setText(ltr("STR_CRAFT_DEPLOYMENT_QUESTION"));
 	}
 
 
-	_btnOk->setText(tr("STR_OK"));
+	_btnOk->setText(ltr("STR_OK"));
 	_btnOk->setHighContrast(true);
 	_btnOk->onMouseClick((ActionHandler)&AbortMissionState::btnOkClick);
 	_btnOk->onKeyboardPress((ActionHandler)&AbortMissionState::btnOkClick, options1.keyOk());
@@ -174,7 +174,7 @@ AbortMissionState::AbortMissionState(SavedBattleGame *battleGame, BattlescapeSta
 	}
 
 
-	_btnCancel->setText(tr("STR_CANCEL_UC"));
+	_btnCancel->setText(ltr("STR_CANCEL_UC"));
 	_btnCancel->setHighContrast(true);
 	_btnCancel->onMouseClick((ActionHandler)&AbortMissionState::btnCancelClick);
 	_btnCancel->onKeyboardPress((ActionHandler)&AbortMissionState::btnCancelClick, options1.keyCancel());

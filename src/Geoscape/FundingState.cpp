@@ -98,7 +98,7 @@ FundingState::FundingState()
 	// Set up objects
 	setWindowBackground(_window, "fundingWindow");
 
-	_btnOk->setText(tr("STR_OK"));
+	_btnOk->setText(ltr("STR_OK"));
 	_btnOk->onMouseClick((ActionHandler)&FundingState::btnOkClick);
 	_btnOk->onKeyboardPress((ActionHandler)&FundingState::btnOkClick, options1.keyOk());
 	_btnOk->onKeyboardPress((ActionHandler)&FundingState::btnOkClick, options1.keyCancel());
@@ -106,13 +106,13 @@ FundingState::FundingState()
 
 	_txtTitle->setAlign(ALIGN_CENTER);
 	_txtTitle->setBig();
-	_txtTitle->setText(tr("STR_INTERNATIONAL_RELATIONS"));
+	_txtTitle->setText(ltr("STR_INTERNATIONAL_RELATIONS"));
 
-	_txtCountry->setText(tr("STR_COUNTRY"));
+	_txtCountry->setText(ltr("STR_COUNTRY"));
 
-	_txtFunding->setText(tr("STR_FUNDING"));
+	_txtFunding->setText(ltr("STR_FUNDING"));
 
-	_txtChange->setText(tr("STR_CHANGE"));
+	_txtChange->setText(ltr("STR_CHANGE"));
 
 	_lstCountries->setColumns(3, 108, 100, 52);
 	_lstCountries->setDot(true);
@@ -131,7 +131,7 @@ FundingState::FundingState()
 	for (auto* country : *_game->getSavedGame()->getCountries())
 	{
 		_fundingCountryList.push_back(FundingCountry(
-			tr(country->getRules()->getType()),
+			ltr(country->getRules()->getType()),
 			country->getFunding().back(),
 			country->getFunding().size() > 1 ? country->getFunding().back() - country->getFunding().at(country->getFunding().size() - 2) : 0)
 		);
@@ -253,7 +253,7 @@ void FundingState::updateList()
 
 		_lstCountries->addRow(3, country.name.c_str(), ss.str().c_str(), ss2.str().c_str());
 	}
-	_lstCountries->addRow(2, tr("STR_TOTAL_UC").c_str(), Unicode::formatFunding(_game->getSavedGame()->getCountryFunding()).c_str());
+	_lstCountries->addRow(2, ltr("STR_TOTAL_UC").c_str(), Unicode::formatFunding(_game->getSavedGame()->getCountryFunding()).c_str());
 	_lstCountries->setRowColor(_game->getSavedGame()->getCountries()->size(), _txtCountry->getColor());
 }
 

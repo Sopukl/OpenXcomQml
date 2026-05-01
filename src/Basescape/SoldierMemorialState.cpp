@@ -77,22 +77,22 @@ SoldierMemorialState::SoldierMemorialState()
 	// Set up objects
 	setWindowBackground(_window, "soldierMemorial");
 
-	_btnOk->setText(tr("STR_OK"));
+	_btnOk->setText(ltr("STR_OK"));
 	_btnOk->onMouseClick((ActionHandler)&SoldierMemorialState::btnOkClick);
 	_btnOk->onKeyboardPress((ActionHandler)&SoldierMemorialState::btnOkClick, options1.keyCancel());
 
-	_btnStatistics->setText(tr("STR_STATISTICS"));
+	_btnStatistics->setText(ltr("STR_STATISTICS"));
 	_btnStatistics->onMouseClick((ActionHandler)&SoldierMemorialState::btnStatisticsClick);
 
 	_txtTitle->setBig();
 	_txtTitle->setAlign(ALIGN_CENTER);
-	_txtTitle->setText(tr("STR_MEMORIAL"));
+	_txtTitle->setText(ltr("STR_MEMORIAL"));
 
-	_txtName->setText(tr("STR_NAME_UC"));
+	_txtName->setText(ltr("STR_NAME_UC"));
 
-	_txtRank->setText(tr("STR_RANK"));
+	_txtRank->setText(ltr("STR_RANK"));
 
-	_txtDate->setText(tr("STR_DATE_UC"));
+	_txtDate->setText(ltr("STR_DATE_UC"));
 
 	size_t lost = _game->getSavedGame()->getDeadSoldiers()->size();
 	size_t recruited = lost;
@@ -101,9 +101,9 @@ SoldierMemorialState::SoldierMemorialState()
 		recruited += xbase->getTotalSoldiers();
 	}
 
-	_txtRecruited->setText(tr("STR_SOLDIERS_RECRUITED_UC").arg(recruited));
+	_txtRecruited->setText(ltr("STR_SOLDIERS_RECRUITED_UC").arg(recruited));
 
-	_txtLost->setText(tr("STR_SOLDIERS_LOST_UC").arg(lost));
+	_txtLost->setText(ltr("STR_SOLDIERS_LOST_UC").arg(lost));
 
 	_lstSoldiers->setColumns(5, 114, 88, 30, 25, 35);
 	_lstSoldiers->setSelectable(true);
@@ -224,9 +224,9 @@ void SoldierMemorialState::fillMemorialList()
 
 		std::ostringstream saveDay, saveMonth, saveYear;
 		saveDay << death->getTime()->getDayString(_game->getLanguage());
-		saveMonth << tr(death->getTime()->getMonthString());
+		saveMonth << ltr(death->getTime()->getMonthString());
 		saveYear << death->getTime()->getYear();
-		_lstSoldiers->addRow(5, deadSoldier->getName().c_str(), tr(deadSoldier->getRankString()).c_str(), saveDay.str().c_str(), saveMonth.str().c_str(), saveYear.str().c_str());
+		_lstSoldiers->addRow(5, deadSoldier->getName().c_str(), ltr(deadSoldier->getRankString()).c_str(), saveDay.str().c_str(), saveMonth.str().c_str(), saveYear.str().c_str());
 		_indices.push_back(index);
 	}
 }

@@ -103,7 +103,7 @@ PlaceLiftState::PlaceLiftState(Base *base, Globe *globe, bool first) : _base(bas
 
 	_txtHeader->setBig();
 	_txtHeader->setAlign(ALIGN_CENTER);
-	_txtHeader->setText(tr("STR_INSTALLATION"));
+	_txtHeader->setText(ltr("STR_INSTALLATION"));
 
 	_lstAccessLifts->setColumns(1, 104);
 	_lstAccessLifts->setSelectable(true);
@@ -116,7 +116,7 @@ PlaceLiftState::PlaceLiftState(Base *base, Globe *globe, bool first) : _base(bas
 
 	for (const auto* facRule : _accessLifts)
 	{
-		_lstAccessLifts->addRow(1, tr(facRule->getType()).c_str());
+		_lstAccessLifts->addRow(1, ltr(facRule->getType()).c_str());
 	}
 
 	if (_lift)
@@ -129,7 +129,7 @@ PlaceLiftState::PlaceLiftState(Base *base, Globe *globe, bool first) : _base(bas
 		_view->onMouseClick((ActionHandler)&PlaceLiftState::viewClick);
 	}
 
-	_txtTitle->setText(tr("STR_SELECT_POSITION_FOR_ACCESS_LIFT"));
+	_txtTitle->setText(ltr("STR_SELECT_POSITION_FOR_ACCESS_LIFT"));
 }
 
 /**

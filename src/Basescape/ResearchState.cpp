@@ -79,26 +79,26 @@ ResearchState::ResearchState(Base *base) : _base(base)
 	// Set up objects
 	setWindowBackground(_window, "researchMenu");
 
-	_btnNew->setText(tr("STR_NEW_PROJECT"));
+	_btnNew->setText(ltr("STR_NEW_PROJECT"));
 	_btnNew->onMouseClick((ActionHandler)&ResearchState::btnNewClick);
 	_btnNew->onKeyboardPress((ActionHandler)&ResearchState::btnNewClick, options1.keyToggleQuickSearch());
 	_btnNew->onKeyboardPress((ActionHandler)&ResearchState::onCurrentGlobalResearchClick, options1.keyGeoGlobalResearch());
 
-	_btnOk->setText(tr("STR_OK"));
+	_btnOk->setText(ltr("STR_OK"));
 	_btnOk->onMouseClick((ActionHandler)&ResearchState::btnOkClick);
 	_btnOk->onKeyboardPress((ActionHandler)&ResearchState::btnOkClick, options1.keyCancel());
 
 	_txtTitle->setBig();
 	_txtTitle->setAlign(ALIGN_CENTER);
-	_txtTitle->setText(tr("STR_CURRENT_RESEARCH"));
+	_txtTitle->setText(ltr("STR_CURRENT_RESEARCH"));
 
 	_txtProject->setWordWrap(true);
-	_txtProject->setText(tr("STR_RESEARCH_PROJECT"));
+	_txtProject->setText(ltr("STR_RESEARCH_PROJECT"));
 
 	_txtScientists->setWordWrap(true);
-	_txtScientists->setText(tr("STR_SCIENTISTS_ALLOCATED_UC"));
+	_txtScientists->setText(ltr("STR_SCIENTISTS_ALLOCATED_UC"));
 
-	_txtProgress->setText(tr("STR_PROGRESS"));
+	_txtProgress->setText(ltr("STR_PROGRESS"));
 
 	if (options1.oxceBaseResearchReorder())
 	{
@@ -258,12 +258,12 @@ void ResearchState::fillProjectList(size_t scrl)
 		sstr << proj->getAssigned();
 		const RuleResearch *r = proj->getRules();
 
-		std::string wstr = tr(r->getName());
-		_lstResearch->addRow(3, wstr.c_str(), sstr.str().c_str(), tr(proj->getResearchProgress()).c_str());
+		std::string wstr = ltr(r->getName());
+		_lstResearch->addRow(3, wstr.c_str(), sstr.str().c_str(), ltr(proj->getResearchProgress()).c_str());
 	}
-	_txtAvailable->setText(tr("STR_SCIENTISTS_AVAILABLE").arg(_base->getAvailableScientists()));
-	_txtAllocated->setText(tr("STR_SCIENTISTS_ALLOCATED").arg(_base->getAllocatedScientists()));
-	_txtSpace->setText(tr("STR_LABORATORY_SPACE_AVAILABLE").arg(_base->getFreeLaboratories()));
+	_txtAvailable->setText(ltr("STR_SCIENTISTS_AVAILABLE").arg(_base->getAvailableScientists()));
+	_txtAllocated->setText(ltr("STR_SCIENTISTS_ALLOCATED").arg(_base->getAllocatedScientists()));
+	_txtSpace->setText(ltr("STR_LABORATORY_SPACE_AVAILABLE").arg(_base->getFreeLaboratories()));
 
 	if (scrl)
 		_lstResearch->scrollTo(scrl);

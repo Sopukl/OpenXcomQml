@@ -127,23 +127,23 @@ StoresState::StoresState(Base *base) : _base(base)
 	// Set up objects
 	setWindowBackground(_window, "storesInfo");
 
-	_btnOk->setText(tr("STR_OK"));
+	_btnOk->setText(ltr("STR_OK"));
 	_btnOk->onMouseClick((ActionHandler)&StoresState::btnOkClick);
 	_btnOk->onKeyboardPress((ActionHandler)&StoresState::btnOkClick, options1.keyOk());
 	_btnOk->onKeyboardPress((ActionHandler)&StoresState::btnOkClick, options1.keyCancel());
 
-	_btnGrandTotal->setText(tr("STR_GRAND_TOTAL"));
+	_btnGrandTotal->setText(ltr("STR_GRAND_TOTAL"));
 	_btnGrandTotal->onMouseClick((ActionHandler)&StoresState::btnGrandTotalClick);
 
 	_txtTitle->setBig();
 	_txtTitle->setAlign(ALIGN_CENTER);
-	_txtTitle->setText(tr("STR_STORES"));
+	_txtTitle->setText(ltr("STR_STORES"));
 
-	_txtItem->setText(tr("STR_ITEM"));
+	_txtItem->setText(ltr("STR_ITEM"));
 
-	_txtQuantity->setText(tr("STR_QUANTITY_UC"));
-	_txtSize->setText(tr("STR_SIZE_UC"));
-	_txtSpaceUsed->setText(tr("STR_SPACE_USED_UC"));
+	_txtQuantity->setText(ltr("STR_QUANTITY_UC"));
+	_txtSize->setText(ltr("STR_SIZE_UC"));
+	_txtSpaceUsed->setText(ltr("STR_SPACE_USED_UC"));
 
 	_lstStores->setColumns(4, 162, 40, 50, 34);
 	_lstStores->setSelectable(true);
@@ -235,7 +235,7 @@ void StoresState::initList()
 		// quick search
 		if (!searchString.empty())
 		{
-			std::string projectName = tr(itemType);
+			std::string projectName = ltr(itemType);
 			Unicode::upperCase(projectName);
 			if (projectName.find(searchString) == std::string::npos)
 			{
@@ -324,7 +324,7 @@ void StoresState::initList()
 
 		if (qty > 0)
 		{
-			_itemList.push_back(StoredItem(rule, tr(itemType), qty, rule->getSize(), qty * rule->getSize()));
+			_itemList.push_back(StoredItem(rule, ltr(itemType), qty, rule->getSize(), qty * rule->getSize()));
 		}
 	}
 

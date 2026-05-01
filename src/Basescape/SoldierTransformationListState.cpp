@@ -87,11 +87,11 @@ SoldierTransformationListState::SoldierTransformationListState(Base *base, Combo
 	// Set up objects
 	setWindowBackground(_window, "transformationList");
 
-	_btnOnlyEligible->setText(tr("STR_SHOW_ONLY_ELIGIBLE"));
+	_btnOnlyEligible->setText(ltr("STR_SHOW_ONLY_ELIGIBLE"));
 	_btnOnlyEligible->setPressed(options1.oxceBaseSoldierTransformationShowOnlyEligible());
 	_btnOnlyEligible->onMouseClick((ActionHandler)&SoldierTransformationListState::btnOnlyEligibleClick);
 
-	_btnOK->setText(tr("STR_OK"));
+	_btnOK->setText(ltr("STR_OK"));
 	_btnOK->onMouseClick((ActionHandler)&SoldierTransformationListState::btnOkClick);
 	_btnOK->onKeyboardPress((ActionHandler)&SoldierTransformationListState::btnOkClick, options1.keyCancel());
 	_btnOK->onKeyboardPress((ActionHandler)&SoldierTransformationListState::btnOkClick, options1.keyOk());
@@ -119,18 +119,18 @@ SoldierTransformationListState::SoldierTransformationListState(Base *base, Combo
 
 	_txtTitle->setBig();
 	_txtTitle->setAlign(ALIGN_CENTER);
-	_txtTitle->setText(tr("STR_TRANSFORMATIONS_OVERVIEW"));
+	_txtTitle->setText(ltr("STR_TRANSFORMATIONS_OVERVIEW"));
 
 	_txtProject->setAlign(ALIGN_LEFT);
-	_txtProject->setText(tr("STR_PROJECT_NAME"));
+	_txtProject->setText(ltr("STR_PROJECT_NAME"));
 
 	_txtNumber->setAlign(ALIGN_CENTER);
 	_txtNumber->setWordWrap(true);
-	_txtNumber->setText(tr("STR_AVAILABLE_MATERIALS"));
+	_txtNumber->setText(ltr("STR_AVAILABLE_MATERIALS"));
 
 	_txtSoldierNumber->setAlign(ALIGN_CENTER);
 	_txtSoldierNumber->setWordWrap(true);
-	_txtSoldierNumber->setText(tr("STR_ELIGIBLE_SOLDIERS"));
+	_txtSoldierNumber->setText(ltr("STR_ELIGIBLE_SOLDIERS"));
 
 	_lstTransformations->setColumns(3, 178, 10, 78);
 	_lstTransformations->setAlign(ALIGN_RIGHT, 1);
@@ -178,7 +178,7 @@ void SoldierTransformationListState::initList()
 		// quick search
 		if (!searchString.empty())
 		{
-			std::string transformationName = tr(transformationRule->getName());
+			std::string transformationName = ltr(transformationRule->getName());
 			Unicode::upperCase(transformationName);
 			if (transformationName.find(searchString) == std::string::npos)
 			{
@@ -280,7 +280,7 @@ void SoldierTransformationListState::initList()
 			}
 		}
 
-		_lstTransformations->addRow(3, tr(transformationRule->getName()).c_str(), col1.str().c_str(), col2.str().c_str());
+		_lstTransformations->addRow(3, ltr(transformationRule->getName()).c_str(), col1.str().c_str(), col2.str().c_str());
 		_transformationIndices.push_back(currentIndex);
 	}
 }

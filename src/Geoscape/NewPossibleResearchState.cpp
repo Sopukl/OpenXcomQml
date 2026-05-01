@@ -63,10 +63,10 @@ NewPossibleResearchState::NewPossibleResearchState(Base * base, const std::vecto
 	// Set up objects
 	setWindowBackground(_window, "geoResearch");
 
-	_btnOk->setText(tr("STR_OK"));
+	_btnOk->setText(ltr("STR_OK"));
 	_btnOk->onMouseClick((ActionHandler)&NewPossibleResearchState::btnOkClick);
 	_btnOk->onKeyboardPress((ActionHandler)&NewPossibleResearchState::btnOkClick, options1.keyCancel());
-	_btnResearch->setText(tr("STR_ALLOCATE_RESEARCH"));
+	_btnResearch->setText(ltr("STR_ALLOCATE_RESEARCH"));
 	_btnResearch->onMouseClick((ActionHandler)&NewPossibleResearchState::btnResearchClick);
 	_btnResearch->onKeyboardPress((ActionHandler)&NewPossibleResearchState::btnResearchClick, options1.keyOk());
 	_txtTitle->setBig();
@@ -89,7 +89,7 @@ NewPossibleResearchState::NewPossibleResearchState(Base * base, const std::vecto
 			if (!_game->getSavedGame()->wasResearchPopped(rule) && !_game->getSavedGame()->isResearched(rule, false))
 			{
 				_game->getSavedGame()->addPoppedResearch(rule);
-				_lstPossibilities->addRow(1, tr(rule->getName()).c_str());
+				_lstPossibilities->addRow(1, ltr(rule->getName()).c_str());
 				foundNew = true;
 			}
 		}
@@ -97,7 +97,7 @@ NewPossibleResearchState::NewPossibleResearchState(Base * base, const std::vecto
 
 	if (foundNew)
 	{
-		_txtTitle->setText(tr("STR_WE_CAN_NOW_RESEARCH"));
+		_txtTitle->setText(ltr("STR_WE_CAN_NOW_RESEARCH"));
 	}
 }
 

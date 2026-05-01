@@ -96,17 +96,17 @@ SoldierArmorState::SoldierArmorState(Base *base, size_t soldier, SoldierArmorOri
 	// Set up objects
 	setWindowBackground(_window, "soldierArmor");
 
-	_btnCancel->setText(tr("STR_CANCEL_UC"));
+	_btnCancel->setText(ltr("STR_CANCEL_UC"));
 	_btnCancel->onMouseClick((ActionHandler)&SoldierArmorState::btnCancelClick);
 	_btnCancel->onKeyboardPress((ActionHandler)&SoldierArmorState::btnCancelClick, options1.keyCancel());
 
 	Soldier *s = _base->getSoldiers()->at(_soldier);
 	_txtTitle->setAlign(ALIGN_CENTER);
-	_txtTitle->setText(tr("STR_SELECT_ARMOR_FOR_SOLDIER").arg(s->getName()));
+	_txtTitle->setText(ltr("STR_SELECT_ARMOR_FOR_SOLDIER").arg(s->getName()));
 
-	_txtType->setText(tr("STR_TYPE"));
+	_txtType->setText(ltr("STR_TYPE"));
 
-	_txtQuantity->setText(tr("STR_QUANTITY_UC"));
+	_txtQuantity->setText(ltr("STR_QUANTITY_UC"));
 
 	_lstArmor->setColumns(2, 132, 21);
 	_lstArmor->setSelectable(true);
@@ -129,7 +129,7 @@ SoldierArmorState::SoldierArmorState(Base *base, size_t soldier, SoldierArmorOri
 			continue;
 		if (a->hasInfiniteSupply())
 		{
-			_armors.push_back(ArmorItem(a->getType(), tr(a->getType()), ""));
+			_armors.push_back(ArmorItem(a->getType(), ltr(a->getType()), ""));
 		}
 		else if (_base->getStorageItems()->getItem(a->getStoreItem()) > 0 || a->getStoreItem() == s->getArmor()->getStoreItem())
 		{
@@ -142,7 +142,7 @@ SoldierArmorState::SoldierArmorState(Base *base, size_t soldier, SoldierArmorOri
 			{
 				ss << "-";
 			}
-			_armors.push_back(ArmorItem(a->getType(), tr(a->getType()), ss.str()));
+			_armors.push_back(ArmorItem(a->getType(), ltr(a->getType()), ss.str()));
 		}
 	}
 
@@ -299,7 +299,7 @@ void SoldierArmorState::lstArmorClick(Action *)
 	{
 		if (!craft->validateArmorChange(prev->getSize(), next->getSize()))
 		{
-			_game->pushState(new ErrorMessageState(tr("STR_NOT_ENOUGH_CRAFT_SPACE"), _palette, _game->getMod()->getInterface("soldierInfo")->getElement("errorMessage")->color, "BACK01.SCR", _game->getMod()->getInterface("soldierInfo")->getElement("errorPalette")->color));
+			_game->pushState(new ErrorMessageState(ltr("STR_NOT_ENOUGH_CRAFT_SPACE"), _palette, _game->getMod()->getInterface("soldierInfo")->getElement("errorMessage")->color, "BACK01.SCR", _game->getMod()->getInterface("soldierInfo")->getElement("errorPalette")->color));
 			return;
 		}
 	}

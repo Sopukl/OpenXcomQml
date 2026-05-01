@@ -127,16 +127,16 @@ GeoscapeCraftState::GeoscapeCraftState(Craft *craft, Globe *globe, Waypoint *way
 	// Set up objects
 	setWindowBackground(_window, "geoCraft");
 
-	_btnBase->setText(tr("STR_RETURN_TO_BASE"));
+	_btnBase->setText(ltr("STR_RETURN_TO_BASE"));
 	_btnBase->onMouseClick((ActionHandler)&GeoscapeCraftState::btnBaseClick);
 
-	_btnTarget->setText(tr("STR_SELECT_NEW_TARGET"));
+	_btnTarget->setText(ltr("STR_SELECT_NEW_TARGET"));
 	_btnTarget->onMouseClick((ActionHandler)&GeoscapeCraftState::btnTargetClick);
 
-	_btnPatrol->setText(_craft->getRules()->canAutoPatrol() ? tr("STR_AUTO_PATROL") : tr("STR_PATROL"));
+	_btnPatrol->setText(_craft->getRules()->canAutoPatrol() ? ltr("STR_AUTO_PATROL") : ltr("STR_PATROL"));
 	_btnPatrol->onMouseClick((ActionHandler)&GeoscapeCraftState::btnPatrolClick);
 
-	_btnCancel->setText(tr("STR_CANCEL_UC"));
+	_btnCancel->setText(ltr("STR_CANCEL_UC"));
 	_btnCancel->onMouseClick((ActionHandler)&GeoscapeCraftState::btnCancelClick);
 	_btnCancel->onKeyboardPress((ActionHandler)&GeoscapeCraftState::btnCancelClick, options1.keyCancel());
 
@@ -147,23 +147,23 @@ GeoscapeCraftState::GeoscapeCraftState(Craft *craft, Globe *globe, Waypoint *way
 	std::string status;
 	if (_waypoint != 0)
 	{
-		status = tr("STR_INTERCEPTING_UFO").arg(_waypoint->getId());
+		status = ltr("STR_INTERCEPTING_UFO").arg(_waypoint->getId());
 	}
 	else if (_craft->getLowFuel())
 	{
-		status = tr("STR_LOW_FUEL_RETURNING_TO_BASE");
+		status = ltr("STR_LOW_FUEL_RETURNING_TO_BASE");
 	}
 	else if (_craft->getMissionComplete())
 	{
-		status = tr("STR_MISSION_COMPLETE_RETURNING_TO_BASE");
+		status = ltr("STR_MISSION_COMPLETE_RETURNING_TO_BASE");
 	}
 	else if (_craft->getDestination() == 0)
 	{
-		status = tr("STR_PATROLLING");
+		status = ltr("STR_PATROLLING");
 	}
 	else if (_craft->getDestination() == (Target*)_craft->getBase())
 	{
-		status = tr("STR_RETURNING_TO_BASE");
+		status = ltr("STR_RETURNING_TO_BASE");
 	}
 	else
 	{
@@ -172,25 +172,25 @@ GeoscapeCraftState::GeoscapeCraftState(Craft *craft, Globe *globe, Waypoint *way
 		{
 			if (_craft->isInDogfight())
 			{
-				status = tr("STR_TAILING_UFO");
+				status = ltr("STR_TAILING_UFO");
 			}
 			else if (u->getStatus() == Ufo::FLYING)
 			{
-				status = tr("STR_INTERCEPTING_UFO").arg(u->getId());
+				status = ltr("STR_INTERCEPTING_UFO").arg(u->getId());
 			}
 			else
 			{
-				status = tr("STR_DESTINATION_UC_").arg(u->getName(_game->getLanguage()));
+				status = ltr("STR_DESTINATION_UC_").arg(u->getName(_game->getLanguage()));
 			}
 		}
 		else
 		{
-			status = tr("STR_DESTINATION_UC_").arg(_craft->getDestination()->getName(_game->getLanguage()));
+			status = ltr("STR_DESTINATION_UC_").arg(_craft->getDestination()->getName(_game->getLanguage()));
 		}
 	}
-	_txtStatus->setText(tr("STR_STATUS_").arg(status));
+	_txtStatus->setText(ltr("STR_STATUS_").arg(status));
 
-	_txtBase->setText(tr("STR_BASE_UC").arg(_craft->getBase()->getName()));
+	_txtBase->setText(ltr("STR_BASE_UC").arg(_craft->getBase()->getName()));
 
 	{
 		int speed = _craft->getSpeed();
@@ -202,23 +202,23 @@ GeoscapeCraftState::GeoscapeCraftState(Craft *craft, Globe *globe, Waypoint *way
 				speed = ufo->getSpeed();
 			}
 		}
-		_txtSpeed->setText(tr("STR_SPEED_").arg(Unicode::formatNumber(speed)));
+		_txtSpeed->setText(ltr("STR_SPEED_").arg(Unicode::formatNumber(speed)));
 	}
 
-	_txtMaxSpeed->setText(tr("STR_MAXIMUM_SPEED_UC").arg(Unicode::formatNumber(_craft->getCraftStats().speedMax)));
+	_txtMaxSpeed->setText(ltr("STR_MAXIMUM_SPEED_UC").arg(Unicode::formatNumber(_craft->getCraftStats().speedMax)));
 
 	std::string altitude = _craft->getAltitude();
 	if (_craft->getRules()->isWaterOnly() && !_globe->insideLand(_craft->getLongitude(), _craft->getLatitude()))
 	{
 		altitude = "STR_AIRBORNE";
 	}
-	_txtAltitude->setText(tr("STR_ALTITUDE_").arg(tr(altitude)));
+	_txtAltitude->setText(ltr("STR_ALTITUDE_").arg(ltr(altitude)));
 
-	_txtFuel->setText(tr("STR_FUEL").arg(Unicode::formatPercentage(_craft->getFuelPercentage())));
+	_txtFuel->setText(ltr("STR_FUEL").arg(Unicode::formatPercentage(_craft->getFuelPercentage())));
 
-	_txtDamage->setText(tr("STR_DAMAGE_UC_").arg(Unicode::formatPercentage(_craft->getDamagePercentage())));
+	_txtDamage->setText(ltr("STR_DAMAGE_UC_").arg(Unicode::formatPercentage(_craft->getDamagePercentage())));
 
-	_txtShield->setText(tr("STR_SHIELD").arg(Unicode::formatPercentage(_craft->getShieldPercentage())));
+	_txtShield->setText(ltr("STR_SHIELD").arg(Unicode::formatPercentage(_craft->getShieldPercentage())));
 	_txtShield->setVisible(_craft->getShieldCapacity() != 0);
 
 	for (int i = 0; i < _weaponNum; ++i)
@@ -234,29 +234,29 @@ GeoscapeCraftState::GeoscapeCraftState(Craft *craft, Globe *globe, Waypoint *way
 		CraftWeapon *w1 = _craft->getWeapons()->at(i);
 		if (w1 != 0)
 		{
-			_txtWeaponName[i]->setText(tr(wName).arg(tr(w1->getRules()->getType())));
+			_txtWeaponName[i]->setText(ltr(wName).arg(ltr(w1->getRules()->getType())));
 			if (w1->getRules()->getAmmoMax())
-				_txtWeaponAmmo[i]->setText(tr("STR_ROUNDS_").arg(w1->getAmmo()));
+				_txtWeaponAmmo[i]->setText(ltr("STR_ROUNDS_").arg(w1->getAmmo()));
 			else
 				_txtWeaponAmmo[i]->setVisible(false);
 		}
 		else
 		{
-			_txtWeaponName[i]->setText(tr(wName).arg(tr("STR_NONE_UC")));
+			_txtWeaponName[i]->setText(ltr(wName).arg(ltr("STR_NONE_UC")));
 			_txtWeaponAmmo[i]->setVisible(false);
 		}
 	}
 
 	_txtRedirect->setBig();
 	_txtRedirect->setAlign(ALIGN_CENTER);
-	_txtRedirect->setText(tr("STR_REDIRECT_CRAFT"));
+	_txtRedirect->setText(ltr("STR_REDIRECT_CRAFT"));
 
 	std::ostringstream ss11;
-	ss11 << tr("STR_SOLDIERS_UC") << ">" << Unicode::TOK_COLOR_FLIP << _craft->getNumTotalSoldiers();
+	ss11 << ltr("STR_SOLDIERS_UC") << ">" << Unicode::TOK_COLOR_FLIP << _craft->getNumTotalSoldiers();
 	_txtSoldier->setText(ss11.str());
 
 	std::ostringstream ss12;
-	ss12 << tr("STR_HWPS") << ">" << Unicode::TOK_COLOR_FLIP << _craft->getNumTotalVehicles();
+	ss12 << ltr("STR_HWPS") << ">" << Unicode::TOK_COLOR_FLIP << _craft->getNumTotalVehicles();
 	_txtHWP->setText(ss12.str());
 
 	if (_waypoint == 0)
@@ -279,20 +279,20 @@ GeoscapeCraftState::GeoscapeCraftState(Craft *craft, Globe *globe, Waypoint *way
 				int days = etaInHoursHelper / 24;
 				int hours = etaInHoursHelper % 24;
 				std::ostringstream ssStatus;
-				if (days > 0) ssStatus << tr("STR_DAY_SHORT").arg(days);
+				if (days > 0) ssStatus << ltr("STR_DAY_SHORT").arg(days);
 				if (hours > 0 || days == 0)
 				{
 					if (days > 0) ssStatus << "/";
-					ssStatus << tr("STR_HOUR_SHORT").arg(hours);
+					ssStatus << ltr("STR_HOUR_SHORT").arg(hours);
 				}
 				_txtETA->setAlign(ALIGN_CENTER);
-				_txtETA->setText(tr("STR_ETA").arg(ssStatus.str()));
+				_txtETA->setText(ltr("STR_ETA").arg(ssStatus.str()));
 			}
 		}
 	}
 	else
 	{
-		_btnCancel->setText(tr("STR_GO_TO_LAST_KNOWN_UFO_POSITION"));
+		_btnCancel->setText(ltr("STR_GO_TO_LAST_KNOWN_UFO_POSITION"));
 	}
 
 	if (_craft->getLowFuel() || _craft->getMissionComplete())

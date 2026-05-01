@@ -62,7 +62,7 @@ CraftEquipmentLoadState::CraftEquipmentLoadState(CraftEquipmentState *parent) : 
 	setWindowBackground(_window, "craftEquipmentLoad");
 
 	_txtTitle->setAlign(ALIGN_CENTER);
-	_txtTitle->setText(tr("STR_LOAD_CRAFT_LOADOUT_TEMPLATE"));
+	_txtTitle->setText(ltr("STR_LOAD_CRAFT_LOADOUT_TEMPLATE"));
 
 	_lstLoadout->setColumns(1, 192);
 	_lstLoadout->setSelectable(true);
@@ -70,9 +70,9 @@ CraftEquipmentLoadState::CraftEquipmentLoadState(CraftEquipmentState *parent) : 
 	_lstLoadout->setMargin(8);
 	_lstLoadout->onMouseClick((ActionHandler)&CraftEquipmentLoadState::lstLoadoutClick);
 
-	_btnOnlyAdd->setText(tr("STR_ADD_ON_TOP"));
+	_btnOnlyAdd->setText(ltr("STR_ADD_ON_TOP"));
 
-	_btnCancel->setText(tr("STR_CANCEL_UC"));
+	_btnCancel->setText(ltr("STR_CANCEL_UC"));
 	_btnCancel->onMouseClick((ActionHandler)&CraftEquipmentLoadState::btnCancelClick);
 	_btnCancel->onKeyboardPress((ActionHandler)&CraftEquipmentLoadState::btnCancelClick, options1.keyCancel());
 
@@ -81,14 +81,14 @@ CraftEquipmentLoadState::CraftEquipmentLoadState(CraftEquipmentState *parent) : 
 		ItemContainer *item = _game->getSavedGame()->getGlobalCraftLoadout(i);
 		if (item->getContents()->empty())
 		{
-			_lstLoadout->addRow(1, tr("STR_EMPTY_SLOT_N").arg(i + 1).c_str());
+			_lstLoadout->addRow(1, ltr("STR_EMPTY_SLOT_N").arg(i + 1).c_str());
 		}
 		else
 		{
 			const std::string &itemName = _game->getSavedGame()->getGlobalCraftLoadoutName(i);
 			if (itemName.empty())
 			{
-				_lstLoadout->addRow(1, tr("STR_UNNAMED_SLOT_N").arg(i + 1).c_str());
+				_lstLoadout->addRow(1, ltr("STR_UNNAMED_SLOT_N").arg(i + 1).c_str());
 			}
 			else
 			{

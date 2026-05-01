@@ -138,11 +138,11 @@ void ManufactureInfoState::buildUi()
 
 	setWindowBackground(_window, "manufactureInfo");
 
-	_txtTitle->setText(tr(_item ? _item->getName() : _production->getRules()->getName()));
+	_txtTitle->setText(ltr(_item ? _item->getName() : _production->getRules()->getName()));
 	_txtTitle->setBig();
 	_txtTitle->setAlign(ALIGN_CENTER);
 
-	_txtAllocatedEngineer->setText(tr("STR_ENGINEERS__ALLOCATED"));
+	_txtAllocatedEngineer->setText(ltr("STR_ENGINEERS__ALLOCATED"));
 	_txtAllocatedEngineer->setBig();
 	_txtAllocatedEngineer->setWordWrap(true);
 	_txtAllocatedEngineer->setVerticalAlign(ALIGN_BOTTOM);
@@ -151,14 +151,14 @@ void ManufactureInfoState::buildUi()
 
 	_txtTodo->setBig();
 
-	_txtUnitToProduce->setText(tr("STR_UNITS_TO_PRODUCE"));
+	_txtUnitToProduce->setText(ltr("STR_UNITS_TO_PRODUCE"));
 	_txtUnitToProduce->setBig();
 	_txtUnitToProduce->setWordWrap(true);
 	_txtUnitToProduce->setVerticalAlign(ALIGN_BOTTOM);
 
-	_txtEngineerUp->setText(tr("STR_INCREASE_UC"));
+	_txtEngineerUp->setText(ltr("STR_INCREASE_UC"));
 
-	_txtEngineerDown->setText(tr("STR_DECREASE_UC"));
+	_txtEngineerDown->setText(ltr("STR_DECREASE_UC"));
 
 	_btnEngineerUp->onMousePress((ActionHandler)&ManufactureInfoState::moreEngineerPress);
 	_btnEngineerUp->onMouseRelease((ActionHandler)&ManufactureInfoState::moreEngineerRelease);
@@ -176,14 +176,14 @@ void ManufactureInfoState::buildUi()
 	_btnUnitDown->onMouseRelease((ActionHandler)&ManufactureInfoState::lessUnitRelease);
 	_btnUnitDown->onMouseClick((ActionHandler)&ManufactureInfoState::lessUnitClick, 0);
 
-	_txtUnitUp->setText(tr("STR_INCREASE_UC"));
+	_txtUnitUp->setText(ltr("STR_INCREASE_UC"));
 
-	_txtUnitDown->setText(tr("STR_DECREASE_UC"));
+	_txtUnitDown->setText(ltr("STR_DECREASE_UC"));
 
-	_btnSell->setText(tr("STR_SELL_PRODUCTION"));
+	_btnSell->setText(ltr("STR_SELL_PRODUCTION"));
 	_btnSell->onMouseClick((ActionHandler)&ManufactureInfoState::btnSellClick, 0);
 
-	_btnOk->setText(tr("STR_OK"));
+	_btnOk->setText(ltr("STR_OK"));
 	_btnOk->onMouseClick((ActionHandler)&ManufactureInfoState::btnOkClick);
 	_btnOk->onKeyboardPress((ActionHandler)&ManufactureInfoState::btnOkClick, options1.keyOk());
 	_btnOk->onKeyboardPress((ActionHandler)&ManufactureInfoState::btnOkClick, options1.keyCancel());
@@ -192,16 +192,16 @@ void ManufactureInfoState::buildUi()
 	{
 		if (_production->getRules()->getRefund())
 		{
-			_btnStop->setText(tr("STR_REFUND_PRODUCTION"));
+			_btnStop->setText(ltr("STR_REFUND_PRODUCTION"));
 		}
 		else
 		{
-			_btnStop->setText(tr("STR_STOP_PRODUCTION"));
+			_btnStop->setText(ltr("STR_STOP_PRODUCTION"));
 		}
 	}
 	else
 	{
-		_btnStop->setText(tr("STR_CANCEL_UC"));
+		_btnStop->setText(ltr("STR_CANCEL_UC"));
 	}
 	_btnStop->onMouseClick((ActionHandler)&ManufactureInfoState::btnStopClick);
 	if (!_production)
@@ -214,7 +214,7 @@ void ManufactureInfoState::buildUi()
 	initProfitInfo();
 	setAssignedEngineer();
 
-	_btnFallback->setText(tr("STR_FALLBACK_PRODUCTION"));
+	_btnFallback->setText(ltr("STR_FALLBACK_PRODUCTION"));
 	_btnFallback->setPressed(_production->isFallback());
 	_btnFallback->setVisible(options1.oxceBaseManufactureFallbackButton());
 
@@ -237,7 +237,7 @@ void ManufactureInfoState::buildUi()
 		_btnUnitMinimum->setVisible(false);
 	}
 
-	_txtHoursPerUnit->setText(tr("STR_HOURS_PER_UNIT").arg(_production->getRules()->getManufactureTime()));
+	_txtHoursPerUnit->setText(ltr("STR_HOURS_PER_UNIT").arg(_production->getRules()->getManufactureTime()));
 
 	_timerMoreEngineer = new Timer(250);
 	_timerLessEngineer = new Timer(250);
@@ -369,8 +369,8 @@ void ManufactureInfoState::exitState()
  */
 void ManufactureInfoState::setAssignedEngineer()
 {
-	_txtAvailableEngineer->setText(tr("STR_ENGINEERS_AVAILABLE_UC").arg(_base->getAvailableEngineers()));
-	_txtAvailableSpace->setText(tr("STR_WORKSHOP_SPACE_AVAILABLE_UC").arg(_base->getFreeWorkshops()));
+	_txtAvailableEngineer->setText(ltr("STR_ENGINEERS_AVAILABLE_UC").arg(_base->getAvailableEngineers()));
+	_txtAvailableSpace->setText(ltr("STR_WORKSHOP_SPACE_AVAILABLE_UC").arg(_base->getFreeWorkshops()));
 	std::ostringstream s3;
 	s3 << ">" << Unicode::TOK_COLOR_FLIP << _production->getAssignedEngineers();
 	_txtAllocated->setText(s3.str());
@@ -379,7 +379,7 @@ void ManufactureInfoState::setAssignedEngineer()
 	if (_production->getInfiniteAmount()) s4 << "∞";
 	else s4 << _production->getAmountTotal();
 	_txtTodo->setText(s4.str());
-	_txtMonthlyProfit->setText(tr("STR_MONTHLY_PROFIT").arg(Unicode::formatFunding(getMonthlyNetFunds()).c_str()));
+	_txtMonthlyProfit->setText(ltr("STR_MONTHLY_PROFIT").arg(Unicode::formatFunding(getMonthlyNetFunds()).c_str()));
 }
 
 /**
@@ -407,7 +407,7 @@ void ManufactureInfoState::moreEngineer(int change)
 	{
 		_timerMoreEngineer->stop();
 		_game->pushState(new ErrorMessageState(
-			tr("STR_NOT_ENOUGH_WORK_SPACE"),
+			ltr("STR_NOT_ENOUGH_WORK_SPACE"),
 			_palette,
 			_game->getMod()->getInterface("basescape")->getElement("errorMessage")->color,
 			"BACK17.SCR",
@@ -507,7 +507,7 @@ void ManufactureInfoState::moreUnit(int change)
 	if (_production->getRules()->getProducedCraft() && _base->getAvailableHangars() - _base->getUsedHangars() <= 0)
 	{
 		_timerMoreUnit->stop();
-		_game->pushState(new ErrorMessageState(tr("STR_NO_FREE_HANGARS_FOR_CRAFT_PRODUCTION"), _palette, _game->getMod()->getInterface("basescape")->getElement("errorMessage")->color, "BACK17.SCR", _game->getMod()->getInterface("basescape")->getElement("errorPalette")->color));
+		_game->pushState(new ErrorMessageState(ltr("STR_NO_FREE_HANGARS_FOR_CRAFT_PRODUCTION"), _palette, _game->getMod()->getInterface("basescape")->getElement("errorMessage")->color, "BACK17.SCR", _game->getMod()->getInterface("basescape")->getElement("errorPalette")->color));
 	}
 	else
 	{

@@ -228,7 +228,7 @@ namespace OpenXcom
 		add(_btnNext);
 		add(_btnInfo);
 
-		_btnOk->setText(tr("STR_OK"));
+		_btnOk->setText(ltr("STR_OK"));
 		_btnOk->onMouseClick((ActionHandler)&ArticleState::btnOkClick);
 		_btnOk->onKeyboardPress((ActionHandler)&ArticleState::btnOkClick,options1.keyOk());
 		_btnOk->onKeyboardPress((ActionHandler)&ArticleState::btnOkClick,options1.keyCancel());
@@ -239,7 +239,7 @@ namespace OpenXcom
 		_btnNext->setText(">>");
 		_btnNext->onMouseClick((ActionHandler)&ArticleState::btnNextClick);
 		_btnNext->onKeyboardPress((ActionHandler)&ArticleState::btnNextClick, options1.keyGeoRight());
-		_btnInfo->setText(tr("STR_INFO_UFOPEDIA"));
+		_btnInfo->setText(ltr("STR_INFO_UFOPEDIA"));
 		_btnInfo->onMouseClick((ActionHandler)&ArticleState::btnInfoClick);
 		_btnInfo->onKeyboardPress((ActionHandler)&ArticleState::btnInfoClick, options1.keyGeoUfopedia());
 		_btnInfo->setVisible(false);

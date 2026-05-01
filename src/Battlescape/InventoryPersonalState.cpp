@@ -62,7 +62,7 @@ InventoryPersonalState::InventoryPersonalState(Soldier* soldier)
 
 	_txtTitle->setHighContrast(true);
 	_txtTitle->setAlign(ALIGN_CENTER);
-	_txtTitle->setText(tr("STR_PERSONAL_EQUIPMENT"));
+	_txtTitle->setText(ltr("STR_PERSONAL_EQUIPMENT"));
 
 	_lstLayout->setHighContrast(true);
 	_lstLayout->setColumns(2, 136, 12);
@@ -71,7 +71,7 @@ InventoryPersonalState::InventoryPersonalState(Soldier* soldier)
 	_lstLayout->setMargin(8);
 
 	_btnCancel->setHighContrast(true);
-	_btnCancel->setText(tr("STR_CANCEL_UC"));
+	_btnCancel->setText(ltr("STR_CANCEL_UC"));
 	_btnCancel->onMouseClick((ActionHandler)&InventoryPersonalState::btnCancelClick);
 	_btnCancel->onKeyboardPress((ActionHandler)&InventoryPersonalState::btnCancelClick, options1.keyCancel());
 
@@ -113,7 +113,7 @@ InventoryPersonalState::InventoryPersonalState(Soldier* soldier)
 		auto* armor = soldier->getPersonalEquipmentArmor();
 		if (armor)
 		{
-			ss1 << tr(armor->getType());
+			ss1 << ltr(armor->getType());
 		}
 		_lstLayout->addRow(2, ss1.str().c_str(), ss2.str().c_str());
 	}
@@ -126,7 +126,7 @@ InventoryPersonalState::InventoryPersonalState(Soldier* soldier)
 		{
 			ss1 << "  ";
 		}
-		ss1 << tr(ruleItem->getType());
+		ss1 << ltr(ruleItem->getType());
 		ss2 << summary[ruleItem];
 		_lstLayout->addRow(2, ss1.str().c_str(), ss2.str().c_str());
 	}

@@ -73,20 +73,20 @@ BriefingLightState::BriefingLightState(AlienDeployment *deployment)
 	centerAllSurfaces();
 
 	// Set up objects
-	_btnOk->setText(tr("STR_OK"));
+	_btnOk->setText(ltr("STR_OK"));
 	_btnOk->onMouseClick((ActionHandler)&BriefingLightState::btnOkClick);
 	_btnOk->onKeyboardPress((ActionHandler)&BriefingLightState::btnOkClick, options1.keyOk());
 	_btnOk->onKeyboardPress((ActionHandler)&BriefingLightState::btnOkClick, options1.keyCancel());
 
-	_btnArmors->setText(tr("STR_WHAT_CAN_I_WEAR"));
+	_btnArmors->setText(ltr("STR_WHAT_CAN_I_WEAR"));
 	_btnArmors->onMouseClick((ActionHandler)&BriefingLightState::btnArmorsClick);
 	_btnArmors->setVisible(false);
 
 	_txtTitle->setBig();
-	_txtTitle->setText(tr(title));
+	_txtTitle->setText(ltr(title));
 
 	_txtBriefing->setWordWrap(true);
-	_txtBriefing->setText(tr(desc));
+	_txtBriefing->setText(ltr(desc));
 
 	_txtArmors->setWordWrap(true);
 	_txtArmors->setVisible(false);
@@ -114,7 +114,7 @@ void BriefingLightState::checkStartingCondition(AlienDeployment *deployment)
 		const std::string messageCode = startingCondition->getForbiddenArmors().empty() ? "STR_STARTING_CONDITION_ARMORS_ALLOWED" : "STR_STARTING_CONDITION_ARMORS_FORBIDDEN";
 		if (!list.empty())
 		{
-			_txtArmors->setText(tr(messageCode).arg("")); // passing empty argument, because it is obsolete since a list display was introduced
+			_txtArmors->setText(ltr(messageCode).arg("")); // passing empty argument, because it is obsolete since a list display was introduced
 			_btnArmors->setVisible(true);
 
 			for (auto& armorType : list)
@@ -123,14 +123,14 @@ void BriefingLightState::checkStartingCondition(AlienDeployment *deployment)
 				ArticleDefinition* article = _game->getMod()->getUfopaediaArticle(armor ? armor->getUfopediaType() : armorType, false);
 				if (article && Ufopaedia::isArticleAvailable(_game->getSavedGame(), article))
 				{
-					std::string translation = tr(armorType);
+					std::string translation = ltr(armorType);
 					_armorNameList.push_back(std::make_pair(armorType, translation));
 				}
 			}
 			if (_armorNameList.empty())
 			{
 				// no suitable armor yet
-				std::string translation = tr("STR_UNKNOWN");
+				std::string translation = ltr("STR_UNKNOWN");
 				_armorNameList.push_back(std::make_pair("STR_UNKNOWN", translation));
 			}
 			std::sort(_armorNameList.begin(), _armorNameList.end(), [&](std::pair<std::string, std::string>& a, std::pair<std::string, std::string>& b) { return Unicode::naturalCompare(a.second, b.second); });

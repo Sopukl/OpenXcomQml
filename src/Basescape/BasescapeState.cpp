@@ -145,47 +145,47 @@ BasescapeState::BasescapeState(Base *base, Globe *globe) : _base(base), _globe(g
 	_edtBase->setBig();
 	_edtBase->onChange((ActionHandler)&BasescapeState::edtBaseChange);
 
-	_btnNewBase->setText(tr("STR_BUILD_NEW_BASE_UC"));
+	_btnNewBase->setText(ltr("STR_BUILD_NEW_BASE_UC"));
 	_btnNewBase->onMouseClick((ActionHandler)&BasescapeState::btnNewBaseClick);
 	_btnNewBase->onKeyboardPress((ActionHandler)&BasescapeState::btnNewBaseClick, options1.keyBasescapeBuildNewBase());
 
-	_btnBaseInfo->setText(tr("STR_BASE_INFORMATION"));
+	_btnBaseInfo->setText(ltr("STR_BASE_INFORMATION"));
 	_btnBaseInfo->onMouseClick((ActionHandler)&BasescapeState::btnBaseInfoClick);
 	_btnBaseInfo->onKeyboardPress((ActionHandler)&BasescapeState::btnBaseInfoClick, options1.keyBasescapeBaseInfo());
 
-	_btnSoldiers->setText(tr("STR_SOLDIERS_UC"));
+	_btnSoldiers->setText(ltr("STR_SOLDIERS_UC"));
 	_btnSoldiers->onMouseClick((ActionHandler)&BasescapeState::btnSoldiersClick);
 	_btnSoldiers->onKeyboardPress((ActionHandler)&BasescapeState::btnSoldiersClick, options1.keyBasescapeSoldiers());
 
-	_btnCrafts->setText(tr("STR_EQUIP_CRAFT"));
+	_btnCrafts->setText(ltr("STR_EQUIP_CRAFT"));
 	_btnCrafts->onMouseClick((ActionHandler)&BasescapeState::btnCraftsClick);
 	_btnCrafts->onKeyboardPress((ActionHandler)&BasescapeState::btnCraftsClick, options1.keyBasescapeCrafts());
 
-	_btnFacilities->setText(tr("STR_BUILD_FACILITIES"));
+	_btnFacilities->setText(ltr("STR_BUILD_FACILITIES"));
 	_btnFacilities->onMouseClick((ActionHandler)&BasescapeState::btnFacilitiesClick);
 	_btnFacilities->onKeyboardPress((ActionHandler)&BasescapeState::btnFacilitiesClick, options1.keyBasescapeFacilities());
 
-	_btnResearch->setText(tr("STR_RESEARCH"));
+	_btnResearch->setText(ltr("STR_RESEARCH"));
 	_btnResearch->onMouseClick((ActionHandler)&BasescapeState::btnResearchClick);
 	_btnResearch->onKeyboardPress((ActionHandler)&BasescapeState::btnResearchClick, options1.keyBasescapeResearch());
 
-	_btnManufacture->setText(tr("STR_MANUFACTURE"));
+	_btnManufacture->setText(ltr("STR_MANUFACTURE"));
 	_btnManufacture->onMouseClick((ActionHandler)&BasescapeState::btnManufactureClick);
 	_btnManufacture->onKeyboardPress((ActionHandler)&BasescapeState::btnManufactureClick, options1.keyBasescapeManufacture());
 
-	_btnTransfer->setText(tr("STR_TRANSFER_UC"));
+	_btnTransfer->setText(ltr("STR_TRANSFER_UC"));
 	_btnTransfer->onMouseClick((ActionHandler)&BasescapeState::btnTransferClick);
 	_btnTransfer->onKeyboardPress((ActionHandler)&BasescapeState::btnTransferClick, options1.keyBasescapeTransfer());
 
-	_btnPurchase->setText(tr("STR_PURCHASE_RECRUIT"));
+	_btnPurchase->setText(ltr("STR_PURCHASE_RECRUIT"));
 	_btnPurchase->onMouseClick((ActionHandler)&BasescapeState::btnPurchaseClick);
 	_btnPurchase->onKeyboardPress((ActionHandler)&BasescapeState::btnPurchaseClick, options1.keyBasescapePurchase());
 
-	_btnSell->setText(tr("STR_SELL_SACK_UC"));
+	_btnSell->setText(ltr("STR_SELL_SACK_UC"));
 	_btnSell->onMouseClick((ActionHandler)&BasescapeState::btnSellClick);
 	_btnSell->onKeyboardPress((ActionHandler)&BasescapeState::btnSellClick, options1.keyBasescapeSell());
 
-	_btnGeoscape->setText(tr("STR_GEOSCAPE_UC"));
+	_btnGeoscape->setText(ltr("STR_GEOSCAPE_UC"));
 	_btnGeoscape->onMouseClick((ActionHandler)&BasescapeState::btnGeoscapeClick);
 	_btnGeoscape->onKeyboardPress((ActionHandler)&BasescapeState::btnGeoscapeClick, options1.keyCancel());
 }
@@ -229,12 +229,12 @@ void BasescapeState::init()
 	{
 		if (region->getRules()->insideRegion(_base->getLongitude(), _base->getLatitude()))
 		{
-			_txtLocation->setText(tr(region->getRules()->getType()));
+			_txtLocation->setText(ltr(region->getRules()->getType()));
 			break;
 		}
 	}
 
-	_txtFunds->setText(tr("STR_FUNDS").arg(Unicode::formatFunding(_game->getSavedGame()->getFunds())));
+	_txtFunds->setText(ltr("STR_FUNDS").arg(Unicode::formatFunding(_game->getSavedGame()->getFunds())));
 
 	_btnNewBase->setVisible(_game->getSavedGame()->getBases()->size() < MiniBaseView::MAX_BASES);
 
@@ -432,42 +432,42 @@ void BasescapeState::viewLeftClick(Action *)
 				switch (placementErrorCode)
 				{
 				case BPE_Used_Stores:
-					_game->pushState(new ErrorMessageState(tr("STR_FACILITY_IN_USE_STORAGE"), _palette, errorColor1, "BACK13.SCR", errorColor2));
+					_game->pushState(new ErrorMessageState(ltr("STR_FACILITY_IN_USE_STORAGE"), _palette, errorColor1, "BACK13.SCR", errorColor2));
 					break;
 				case BPE_Used_Quarters:
-					_game->pushState(new ErrorMessageState(tr("STR_FACILITY_IN_USE_QUARTERS"), _palette, errorColor1, "BACK13.SCR", errorColor2));
+					_game->pushState(new ErrorMessageState(ltr("STR_FACILITY_IN_USE_QUARTERS"), _palette, errorColor1, "BACK13.SCR", errorColor2));
 					break;
 				case BPE_Used_Laboratories:
-					_game->pushState(new ErrorMessageState(tr("STR_FACILITY_IN_USE_LABORATORIES"), _palette, errorColor1, "BACK13.SCR", errorColor2));
+					_game->pushState(new ErrorMessageState(ltr("STR_FACILITY_IN_USE_LABORATORIES"), _palette, errorColor1, "BACK13.SCR", errorColor2));
 					break;
 				case BPE_Used_Workshops:
-					_game->pushState(new ErrorMessageState(tr("STR_FACILITY_IN_USE_WORKSHOPS"), _palette, errorColor1, "BACK13.SCR", errorColor2));
+					_game->pushState(new ErrorMessageState(ltr("STR_FACILITY_IN_USE_WORKSHOPS"), _palette, errorColor1, "BACK13.SCR", errorColor2));
 					break;
 				case BPE_Used_Hangars:
-					_game->pushState(new ErrorMessageState(tr("STR_FACILITY_IN_USE_HANGARS"), _palette, errorColor1, "BACK13.SCR", errorColor2));
+					_game->pushState(new ErrorMessageState(ltr("STR_FACILITY_IN_USE_HANGARS"), _palette, errorColor1, "BACK13.SCR", errorColor2));
 					break;
 				case BPE_Used_PsiLabs:
-					_game->pushState(new ErrorMessageState(tr("STR_FACILITY_IN_USE_PSI_LABS"), _palette, errorColor1, "BACK13.SCR", errorColor2));
+					_game->pushState(new ErrorMessageState(ltr("STR_FACILITY_IN_USE_PSI_LABS"), _palette, errorColor1, "BACK13.SCR", errorColor2));
 					break;
 				case BPE_Used_Gyms:
-					_game->pushState(new ErrorMessageState(tr("STR_FACILITY_IN_USE_GYMS"), _palette, errorColor1, "BACK13.SCR", errorColor2));
+					_game->pushState(new ErrorMessageState(ltr("STR_FACILITY_IN_USE_GYMS"), _palette, errorColor1, "BACK13.SCR", errorColor2));
 					break;
 				case BPE_Used_AlienContainment:
-					_game->pushState(new ErrorMessageState(tr("STR_FACILITY_IN_USE_PRISONS"), _palette, errorColor1, "BACK13.SCR", errorColor2));
+					_game->pushState(new ErrorMessageState(ltr("STR_FACILITY_IN_USE_PRISONS"), _palette, errorColor1, "BACK13.SCR", errorColor2));
 					break;
 				default:
-					_game->pushState(new ErrorMessageState(tr("STR_FACILITY_IN_USE"), _palette, errorColor1, "BACK13.SCR", errorColor2));
+					_game->pushState(new ErrorMessageState(ltr("STR_FACILITY_IN_USE"), _palette, errorColor1, "BACK13.SCR", errorColor2));
 				}
 			}
 			// Would base become disconnected?
 			else if (!_base->getDisconnectedFacilities(fac).empty() && fac->getRules()->getLeavesBehindOnSell().size() == 0)
 			{
-				_game->pushState(new ErrorMessageState(tr("STR_CANNOT_DISMANTLE_FACILITY"), _palette, errorColor1, "BACK13.SCR", errorColor2));
+				_game->pushState(new ErrorMessageState(ltr("STR_CANNOT_DISMANTLE_FACILITY"), _palette, errorColor1, "BACK13.SCR", errorColor2));
 			}
 			// Is this facility being built from a dismantled one or building over a previous building?
 			else if (fac->getBuildTime() > 0 && fac->getIfHadPreviousFacility())
 			{
-				_game->pushState(new ErrorMessageState(tr("STR_CANNOT_DISMANTLE_FACILITY_UPGRADING"), _palette, errorColor1, "BACK13.SCR", errorColor2));
+				_game->pushState(new ErrorMessageState(ltr("STR_CANNOT_DISMANTLE_FACILITY_UPGRADING"), _palette, errorColor1, "BACK13.SCR", errorColor2));
 			}
 			else
 			{
@@ -587,14 +587,14 @@ void BasescapeState::viewMouseOver(Action *)
 	{
 		if (f->getRules()->getCrafts() == 0 || f->getBuildTime() > 0)
 		{
-			ss << tr(f->getRules()->getType());
+			ss << ltr(f->getRules()->getType());
 		}
 		else
 		{
-			ss << tr(f->getRules()->getType());
+			ss << ltr(f->getRules()->getType());
 			if (f->getCraftForDrawing() != 0)
 			{
-				ss << " " << tr("STR_CRAFT_").arg(f->getCraftForDrawing()->getName(_game->getLanguage()));
+				ss << " " << ltr("STR_CRAFT_").arg(f->getCraftForDrawing()->getName(_game->getLanguage()));
 			}
 		}
 	}

@@ -89,7 +89,7 @@ CraftPilotsState::CraftPilotsState(Base *base, size_t craft) : _base(base), _cra
 	// Set up objects
 	setWindowBackground(_window, "craftPilots");
 
-	_btnOk->setText(tr("STR_OK"));
+	_btnOk->setText(ltr("STR_OK"));
 	_btnOk->onMouseClick((ActionHandler)&CraftPilotsState::btnOkClick);
 	_btnOk->onKeyboardPress((ActionHandler)&CraftPilotsState::btnOkClick, options1.keyOk());
 	_btnOk->onKeyboardPress((ActionHandler)&CraftPilotsState::btnOkClick, options1.keyCancel());
@@ -98,34 +98,34 @@ CraftPilotsState::CraftPilotsState(Base *base, size_t craft) : _base(base), _cra
 
 	_txtTitle->setBig();
 	_txtTitle->setAlign(ALIGN_CENTER);
-	_txtTitle->setText(tr("STR_PILOTS_FOR_CRAFT").arg(c->getName(_game->getLanguage())));
+	_txtTitle->setText(ltr("STR_PILOTS_FOR_CRAFT").arg(c->getName(_game->getLanguage())));
 
-	_txtFiringAcc->setText(tr("STR_FIRING_ACCURACY"));
+	_txtFiringAcc->setText(ltr("STR_FIRING_ACCURACY"));
 	_txtFiringAcc->setAlign(ALIGN_RIGHT);
 
-	_txtReactions->setText(tr("STR_REACTIONS"));
+	_txtReactions->setText(ltr("STR_REACTIONS"));
 	_txtReactions->setAlign(ALIGN_RIGHT);
 
-	_txtBravery->setText(tr("STR_BRAVERY"));
+	_txtBravery->setText(ltr("STR_BRAVERY"));
 	_txtBravery->setAlign(ALIGN_RIGHT);
 
-	_txtPilots->setText(tr("STR_PILOTS"));
+	_txtPilots->setText(ltr("STR_PILOTS"));
 
 	_lstPilots->setColumns(5, 114, 58, 58, 58, 0);
 	_lstPilots->setAlign(ALIGN_RIGHT);
 	_lstPilots->setAlign(ALIGN_LEFT, 0);
 	_lstPilots->setDot(true);
 
-	_txtRequired->setText(tr("STR_PILOTS_REQUIRED").arg(c->getRules()->getPilots()));
+	_txtRequired->setText(ltr("STR_PILOTS_REQUIRED").arg(c->getRules()->getPilots()));
 
-	_btnAdd->setText(tr("STR_ADD_PILOT"));
+	_btnAdd->setText(ltr("STR_ADD_PILOT"));
 	_btnAdd->onMouseClick((ActionHandler)&CraftPilotsState::btnAddClick);
-	_btnRemoveAll->setText(tr("STR_REMOVE_ALL_PILOTS"));
+	_btnRemoveAll->setText(ltr("STR_REMOVE_ALL_PILOTS"));
 	_btnRemoveAll->onMouseClick((ActionHandler)&CraftPilotsState::btnRemoveAllClick);
 
-	_txtAccuracyBonus->setText(tr("STR_ACCURACY_BONUS"));
-	_txtDodgeBonus->setText(tr("STR_DODGE_BONUS"));
-	_txtApproachSpeed->setText(tr("STR_APPROACH_SPEED"));
+	_txtAccuracyBonus->setText(ltr("STR_ACCURACY_BONUS"));
+	_txtDodgeBonus->setText(ltr("STR_DODGE_BONUS"));
+	_txtApproachSpeed->setText(ltr("STR_APPROACH_SPEED"));
 
 	for (auto* soldier : *_base->getSoldiers())
 	{
@@ -189,19 +189,19 @@ void CraftPilotsState::updateUI()
 	switch (approachSpeed)
 	{
 	case 1:
-		ss3 << tr("STR_COWARDLY");
+		ss3 << ltr("STR_COWARDLY");
 		break;
 	case 2:
-		ss3 << tr("STR_NORMAL");
+		ss3 << ltr("STR_NORMAL");
 		break;
 	case 3:
-		ss3 << tr("STR_BOLD");
+		ss3 << ltr("STR_BOLD");
 		break;
 	case 4:
-		ss3 << tr("STR_VERY_BOLD");
+		ss3 << ltr("STR_VERY_BOLD");
 		break;
 	default:
-		ss3 << tr("STR_UNKNOWN");
+		ss3 << ltr("STR_UNKNOWN");
 		break;
 	}
 	_txtApproachSpeedValue->setText(ss3.str().c_str());

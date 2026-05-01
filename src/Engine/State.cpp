@@ -419,7 +419,7 @@ void State::resetAll()
  * @param id The dictionary key to search for.
  * @return The localized text.
  */
-LocalizedText State::tr(const std::string &id) const
+LocalizedText State::ltr(const std::string &id) const
 {
 	return _game->getLanguage()->getString(id);
 }
@@ -431,7 +431,7 @@ LocalizedText State::tr(const std::string &id) const
 * @param alt Used to construct the (suffix of) dictionary key to search for.
 * @return The localized text.
 */
-LocalizedText State::trAlt(const std::string &id, int alt) const
+LocalizedText State::ltrAlt(const std::string &id, int alt) const
 {
 	std::ostringstream ss;
 	ss << id;
@@ -450,7 +450,7 @@ LocalizedText State::trAlt(const std::string &id, int alt) const
  * @param n The number to use for the proper version.
  * @return The localized text.
  */
-LocalizedText State::tr(const std::string &id, unsigned n) const
+LocalizedText State::ltr(const std::string &id, unsigned n) const
 {
 	return _game->getLanguage()->getString(id, n);
 }
@@ -462,7 +462,7 @@ LocalizedText State::tr(const std::string &id, unsigned n) const
  * @param gender Current soldier gender.
  * @return The localized text.
  */
-LocalizedText State::tr(const std::string &id, SoldierGender gender) const
+LocalizedText State::ltr(const std::string &id, SoldierGender gender) const
 {
 	return _game->getLanguage()->getString(id, gender);
 }

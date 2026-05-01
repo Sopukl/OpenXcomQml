@@ -139,7 +139,7 @@ BriefingState::BriefingState(Craft *craft, Base *base, bool infoOnly, BriefingDa
 	centerAllSurfaces();
 
 	// Set up objects
-	_btnOk->setText(tr("STR_OK"));
+	_btnOk->setText(ltr("STR_OK"));
 	_btnOk->onMouseClick((ActionHandler)&BriefingState::btnOkClick);
 	_btnOk->onKeyboardPress((ActionHandler)&BriefingState::btnOkClick, options1.keyOk());
 	_btnOk->onKeyboardPress((ActionHandler)&BriefingState::btnOkClick, options1.keyCancel());
@@ -159,12 +159,12 @@ BriefingState::BriefingState(Craft *craft, Base *base, bool infoOnly, BriefingDa
 				battleSave->setMissionTarget(s);
 			}
 
-			s = tr("STR_CRAFT_").arg(craft->getName(_game->getLanguage()));
+			s = ltr("STR_CRAFT_").arg(craft->getName(_game->getLanguage()));
 			battleSave->setMissionCraftOrBase(s);
 		}
 		else if (base)
 		{
-			s = tr("STR_BASE_UC_").arg(base->getName());
+			s = ltr("STR_BASE_UC_").arg(base->getName());
 			battleSave->setMissionCraftOrBase(s);
 		}
 
@@ -188,13 +188,13 @@ BriefingState::BriefingState(Craft *craft, Base *base, bool infoOnly, BriefingDa
 	}
 
 	if (!_game->getMod()->getOperationNamesFirst().empty())
-		_txtTarget->setText(tr("STR_OPERATION_UC").arg(battleSave->getMissionTarget()));
+		_txtTarget->setText(ltr("STR_OPERATION_UC").arg(battleSave->getMissionTarget()));
 	else
 		_txtTarget->setText(battleSave->getMissionTarget());
 
 	_txtCraft->setText(battleSave->getMissionCraftOrBase());
 
-	_txtTitle->setText(tr(title));
+	_txtTitle->setText(ltr(title));
 
 	bool isPreview = battleSave->isPreview();
 	if (isPreview)
@@ -215,7 +215,7 @@ BriefingState::BriefingState(Craft *craft, Base *base, bool infoOnly, BriefingDa
 		}
 	}
 	_txtBriefing->setWordWrap(true);
-	_txtBriefing->setText(tr(desc));
+	_txtBriefing->setText(ltr(desc));
 
 	if (_infoOnly) return;
 

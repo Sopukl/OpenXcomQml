@@ -92,25 +92,25 @@ UfoTrackerState::UfoTrackerState(GeoscapeState *state, Globe *globe) : _state(st
 	// Set up objects
 	setWindowBackground(_window, "ufoTracker");
 
-	_btnCancel->setText(tr("STR_CANCEL"));
+	_btnCancel->setText(ltr("STR_CANCEL"));
 	_btnCancel->onMouseClick((ActionHandler)&UfoTrackerState::btnCancelClick);
 	_btnCancel->onKeyboardPress((ActionHandler)&UfoTrackerState::btnCancelClick, options1.keyCancel());
 	_btnCancel->onKeyboardPress((ActionHandler)&UfoTrackerState::btnCancelClick, options1.keyGeoUfoTracker());
 
 	_txtTitle->setAlign(ALIGN_CENTER);
 	_txtTitle->setBig();
-	_txtTitle->setText(tr("STR_UFO_TRACKER"));
+	_txtTitle->setText(ltr("STR_UFO_TRACKER"));
 
-	_txtObject->setText(tr("STR_NAME_UC"));
+	_txtObject->setText(ltr("STR_NAME_UC"));
 
-	_txtSize->setText(tr("STR_SIZE_UC"));
+	_txtSize->setText(ltr("STR_SIZE_UC"));
 
-	_txtAltitude->setText(tr("STR_ALTITUDE"));
+	_txtAltitude->setText(ltr("STR_ALTITUDE"));
 
-	_txtHeading->setText(tr("STR_HEADING"));
+	_txtHeading->setText(ltr("STR_HEADING"));
 
 	_txtSpeed->setAlign(ALIGN_RIGHT);
-	_txtSpeed->setText(tr("STR_SPEED"));
+	_txtSpeed->setText(ltr("STR_SPEED"));
 
 	_lstObjects->setColumns(5, WIDTH_OBJECT, WIDTH_SIZE, WIDTH_ALTITUDE, WIDTH_HEADING, WIDTH_SPEED);
 	_lstObjects->setAlign(ALIGN_RIGHT, 4);
@@ -139,15 +139,15 @@ UfoTrackerState::UfoTrackerState(GeoscapeState *state, Globe *globe) : _state(st
 			continue;
 
 		std::ostringstream ss1;
-		ss1 << tr(ufo->getRules()->getSize());
+		ss1 << ltr(ufo->getRules()->getSize());
 
 		std::ostringstream ss2;
 		std::string altitude = ufo->getAltitude() == "STR_GROUND" ? "STR_GROUNDED" : ufo->getAltitude();
-		ss2 << tr(altitude);
+		ss2 << ltr(altitude);
 
 		std::ostringstream ss3;
 		std::string heading = ufo->getStatus() != Ufo::FLYING ? "STR_NONE_UC" : ufo->getDirection();
-		ss3 << tr(heading);
+		ss3 << ltr(heading);
 
 		std::ostringstream ss4;
 		ss4 << Unicode::formatNumber(ufo->getSpeed());

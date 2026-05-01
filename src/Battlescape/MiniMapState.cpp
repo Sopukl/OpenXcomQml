@@ -81,7 +81,7 @@ MiniMapState::MiniMapState (Camera * camera, SavedBattleGame * battleGame)
 	_btnOk->onKeyboardPress((ActionHandler)&MiniMapState::btnOkClick, options1.keyBattleMap());
 	_txtLevel->setBig();
 	_txtLevel->setHighContrast(true);
-	_txtLevel->setText(tr("STR_LEVEL_SHORT").arg(camera->getViewLevel()));
+	_txtLevel->setText(ltr("STR_LEVEL_SHORT").arg(camera->getViewLevel()));
 	_timerAnimate = new Timer(125);
 	_timerAnimate->onTimer((StateHandler)&MiniMapState::animate);
 	_timerAnimate->start();
@@ -136,7 +136,7 @@ void MiniMapState::btnOkClick(Action *)
  */
 void MiniMapState::btnLevelUpClick(Action *)
 {
-	_txtLevel->setText(tr("STR_LEVEL_SHORT").arg(_miniMapView->up()));
+	_txtLevel->setText(ltr("STR_LEVEL_SHORT").arg(_miniMapView->up()));
 }
 
 /**
@@ -145,7 +145,7 @@ void MiniMapState::btnLevelUpClick(Action *)
  */
 void MiniMapState::btnLevelDownClick(Action *)
 {
-	_txtLevel->setText(tr("STR_LEVEL_SHORT").arg(_miniMapView->down()));
+	_txtLevel->setText(ltr("STR_LEVEL_SHORT").arg(_miniMapView->down()));
 }
 
 /**

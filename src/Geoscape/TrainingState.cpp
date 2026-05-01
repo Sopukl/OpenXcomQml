@@ -57,13 +57,13 @@ TrainingState::TrainingState()
 	// Set up objects
 	setWindowBackground(_window, "martialTraining");
 
-	_btnOk->setText(tr("STR_OK"));
+	_btnOk->setText(ltr("STR_OK"));
 	_btnOk->onMouseClick((ActionHandler)&TrainingState::btnOkClick);
 	_btnOk->onKeyboardPress((ActionHandler)&TrainingState::btnOkClick, options1.keyCancel());
 
 	_txtTitle->setBig();
 	_txtTitle->setAlign(ALIGN_CENTER);
-	_txtTitle->setText(tr("STR_PHYSICAL_TRAINING"));
+	_txtTitle->setText(ltr("STR_PHYSICAL_TRAINING"));
 
 	int buttons = 0;
 	for (auto* xbase : *_game->getSavedGame()->getBases())

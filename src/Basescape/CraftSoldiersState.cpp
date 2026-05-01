@@ -105,13 +105,13 @@ CraftSoldiersState::CraftSoldiersState(Base *base, size_t craft)
 
 	touchComponentsConfigure();
 
-	_btnOk->setText(tr("STR_OK"));
+	_btnOk->setText(ltr("STR_OK"));
 	_btnOk->onMouseClick((ActionHandler)&CraftSoldiersState::btnOkClick);
 	_btnOk->onKeyboardPress((ActionHandler)&CraftSoldiersState::btnOkClick, options1.keyCancel());
 	_btnOk->onKeyboardPress((ActionHandler)&CraftSoldiersState::btnDeassignAllSoldiersClick, options1.keyRemoveSoldiersFromAllCrafts());
 	_btnOk->onKeyboardPress((ActionHandler)&CraftSoldiersState::btnDeassignCraftSoldiersClick, options1.keyRemoveSoldiersFromCraft());
 
-	_btnPreview->setText(tr("STR_CRAFT_DEPLOYMENT_PREVIEW"));
+	_btnPreview->setText(ltr("STR_CRAFT_DEPLOYMENT_PREVIEW"));
 	_btnPreview->setVisible(!hidePreview);
 	_btnPreview->onMouseClick((ActionHandler)&CraftSoldiersState::btnPreviewClick);
 
@@ -124,22 +124,22 @@ CraftSoldiersState::CraftSoldiersState(Base *base, size_t craft)
 	else
 	{
 		_txtTitle->setAlign(ALIGN_LEFT);
-		_txtTitle->setText(tr("STR_SELECT_SQUAD_FOR_CRAFT").arg(c->getName(_game->getLanguage())));
+		_txtTitle->setText(ltr("STR_SELECT_SQUAD_FOR_CRAFT").arg(c->getName(_game->getLanguage())));
 	}
 
-	_txtName->setText(tr("STR_NAME_UC"));
+	_txtName->setText(ltr("STR_NAME_UC"));
 
-	_txtRank->setText(tr("STR_RANK"));
+	_txtRank->setText(ltr("STR_RANK"));
 
-	_txtCraft->setText(tr("STR_CRAFT"));
+	_txtCraft->setText(ltr("STR_CRAFT"));
 
 	// populate sort options
 	std::vector<std::string> sortOptions;
-	sortOptions.push_back(tr("STR_ORIGINAL_ORDER"));
+	sortOptions.push_back(ltr("STR_ORIGINAL_ORDER"));
 	_sortFunctors.push_back(NULL);
 
 #define PUSH_IN(strId, functor) \
-	sortOptions.push_back(tr(strId)); \
+	sortOptions.push_back(ltr(strId)); \
 	_sortFunctors.push_back(new SortFunctor(_game, functor));
 
 	PUSH_IN("STR_ID", idStat);
@@ -177,7 +177,7 @@ CraftSoldiersState::CraftSoldiersState(Base *base, size_t craft)
 	_cbxSortBy->setOptions(sortOptions);
 	_cbxSortBy->setSelected(0);
 	_cbxSortBy->onChange((ActionHandler)&CraftSoldiersState::cbxSortByChange);
-	_cbxSortBy->setText(tr("STR_SORT_BY"));
+	_cbxSortBy->setText(ltr("STR_SORT_BY"));
 
 	_lstSoldiers->setArrowColumn(188, ARROW_VERTICAL);
 	_lstSoldiers->setColumns(3, 106, 98, 76);
@@ -358,11 +358,11 @@ void CraftSoldiersState::initList(size_t scrl)
 			int dynStat = (*_dynGetter)(_game, soldier);
 			std::ostringstream ss;
 			ss << dynStat;
-			_lstSoldiers->addRow(4, soldier->getName(true, 19).c_str(), tr(soldier->getRankString()).c_str(), soldier->getCraftString(_game->getLanguage(), recovery).c_str(), ss.str().c_str());
+			_lstSoldiers->addRow(4, soldier->getName(true, 19).c_str(), ltr(soldier->getRankString()).c_str(), soldier->getCraftString(_game->getLanguage(), recovery).c_str(), ss.str().c_str());
 		}
 		else
 		{
-			_lstSoldiers->addRow(3, soldier->getName(true, 19).c_str(), tr(soldier->getRankString()).c_str(), soldier->getCraftString(_game->getLanguage(), recovery).c_str());
+			_lstSoldiers->addRow(3, soldier->getName(true, 19).c_str(), ltr(soldier->getRankString()).c_str(), soldier->getCraftString(_game->getLanguage(), recovery).c_str());
 		}
 
 		Uint8 color;
@@ -385,8 +385,8 @@ void CraftSoldiersState::initList(size_t scrl)
 		_lstSoldiers->scrollTo(scrl);
 	_lstSoldiers->draw();
 
-	_txtAvailable->setText(tr("STR_SPACE_AVAILABLE").arg(c->getSpaceAvailable()));
-	_txtUsed->setText(tr("STR_SPACE_USED").arg(c->getSpaceUsed()));
+	_txtAvailable->setText(ltr("STR_SPACE_AVAILABLE").arg(c->getSpaceAvailable()));
+	_txtUsed->setText(ltr("STR_SPACE_USED").arg(c->getSpaceUsed()));
 }
 
 /**
@@ -401,9 +401,9 @@ void CraftSoldiersState::init()
 	// update the label to indicate presence of a saved craft deployment
 	Craft* c = _base->getCrafts()->at(_craft);
 	if (c->hasCustomDeployment())
-		_btnPreview->setText(tr("STR_CRAFT_DEPLOYMENT_PREVIEW_SAVED"));
+		_btnPreview->setText(ltr("STR_CRAFT_DEPLOYMENT_PREVIEW_SAVED"));
 	else
-		_btnPreview->setText(tr("STR_CRAFT_DEPLOYMENT_PREVIEW"));
+		_btnPreview->setText(ltr("STR_CRAFT_DEPLOYMENT_PREVIEW"));
 
 	touchComponentsRefresh();
 }
@@ -426,7 +426,7 @@ void CraftSoldiersState::lstItemsLeftArrowClick(Action *action)
 			moveSoldierUp(action, row, true);
 		}
 	}
-	_cbxSortBy->setText(tr("STR_SORT_BY"));
+	_cbxSortBy->setText(ltr("STR_SORT_BY"));
 	_cbxSortBy->setSelected(-1);
 }
 
@@ -479,7 +479,7 @@ void CraftSoldiersState::lstItemsRightArrowClick(Action *action)
 			moveSoldierDown(action, row, true);
 		}
 	}
-	_cbxSortBy->setText(tr("STR_SORT_BY"));
+	_cbxSortBy->setText(ltr("STR_SORT_BY"));
 	_cbxSortBy->setSelected(-1);
 }
 
@@ -532,7 +532,7 @@ void CraftSoldiersState::lstSoldiersClick(Action *action)
 		if (s->getCraft() == c)
 		{
 			s->setCraftAndMoveEquipment(0, _base, _game->getSavedGame()->getMonthsPassed() == -1);
-			_lstSoldiers->setCellText(row, 2, tr("STR_NONE_UC"));
+			_lstSoldiers->setCellText(row, 2, ltr("STR_NONE_UC"));
 			_lstSoldiers->setRowColor(row, _lstSoldiers->getColor());
 		}
 		else if (s->getCraft() && s->getCraft()->getStatus() == "STR_OUT")
@@ -550,28 +550,28 @@ void CraftSoldiersState::lstSoldiersClick(Action *action)
 				_lstSoldiers->setRowColor(row, _lstSoldiers->getSecondaryColor());
 
 				// update the label to indicate absence of a saved craft deployment
-				_btnPreview->setText(tr("STR_CRAFT_DEPLOYMENT_PREVIEW"));
+				_btnPreview->setText(ltr("STR_CRAFT_DEPLOYMENT_PREVIEW"));
 			}
 			else if (err == CPE_SoldierGroupNotAllowed)
 			{
-				_game->pushState(new ErrorMessageState(tr("STR_SOLDIER_GROUP_NOT_ALLOWED"), _palette, _game->getMod()->getInterface("soldierInfo")->getElement("errorMessage")->color, "BACK01.SCR", _game->getMod()->getInterface("soldierInfo")->getElement("errorPalette")->color));
+				_game->pushState(new ErrorMessageState(ltr("STR_SOLDIER_GROUP_NOT_ALLOWED"), _palette, _game->getMod()->getInterface("soldierInfo")->getElement("errorMessage")->color, "BACK01.SCR", _game->getMod()->getInterface("soldierInfo")->getElement("errorPalette")->color));
 			}
 			else if (err == CPE_SoldierGroupNotSame)
 			{
-				_game->pushState(new ErrorMessageState(tr("STR_SOLDIER_GROUP_NOT_SAME"), _palette, _game->getMod()->getInterface("soldierInfo")->getElement("errorMessage")->color, "BACK01.SCR", _game->getMod()->getInterface("soldierInfo")->getElement("errorPalette")->color));
+				_game->pushState(new ErrorMessageState(ltr("STR_SOLDIER_GROUP_NOT_SAME"), _palette, _game->getMod()->getInterface("soldierInfo")->getElement("errorMessage")->color, "BACK01.SCR", _game->getMod()->getInterface("soldierInfo")->getElement("errorPalette")->color));
 			}
 			else if (err == CPE_ArmorGroupNotAllowed)
 			{
-				_game->pushState(new ErrorMessageState(tr("STR_ARMOR_GROUP_NOT_ALLOWED"), _palette, _game->getMod()->getInterface("soldierInfo")->getElement("errorMessage")->color, "BACK01.SCR", _game->getMod()->getInterface("soldierInfo")->getElement("errorPalette")->color));
+				_game->pushState(new ErrorMessageState(ltr("STR_ARMOR_GROUP_NOT_ALLOWED"), _palette, _game->getMod()->getInterface("soldierInfo")->getElement("errorMessage")->color, "BACK01.SCR", _game->getMod()->getInterface("soldierInfo")->getElement("errorPalette")->color));
 			}
 			else if (space > 0)
 			{
-				_game->pushState(new ErrorMessageState(tr("STR_NOT_ENOUGH_CRAFT_SPACE"), _palette, _game->getMod()->getInterface("soldierInfo")->getElement("errorMessage")->color, "BACK01.SCR", _game->getMod()->getInterface("soldierInfo")->getElement("errorPalette")->color));
+				_game->pushState(new ErrorMessageState(ltr("STR_NOT_ENOUGH_CRAFT_SPACE"), _palette, _game->getMod()->getInterface("soldierInfo")->getElement("errorMessage")->color, "BACK01.SCR", _game->getMod()->getInterface("soldierInfo")->getElement("errorPalette")->color));
 			}
 		}
 
-		_txtAvailable->setText(tr("STR_SPACE_AVAILABLE").arg(c->getSpaceAvailable()));
-		_txtUsed->setText(tr("STR_SPACE_USED").arg(c->getSpaceUsed()));
+		_txtAvailable->setText(ltr("STR_SPACE_AVAILABLE").arg(c->getSpaceAvailable()));
+		_txtUsed->setText(ltr("STR_SPACE_USED").arg(c->getSpaceUsed()));
 	}
 	else if (_game->isRightClick(action, true))
 	{
@@ -621,15 +621,15 @@ void CraftSoldiersState::btnDeassignAllSoldiersClick(Action *action)
 		if (soldier->getCraft() && soldier->getCraft()->getStatus() != "STR_OUT")
 		{
 			soldier->setCraftAndMoveEquipment(0, _base, _game->getSavedGame()->getMonthsPassed() == -1);
-			_lstSoldiers->setCellText(row, 2, tr("STR_NONE_UC"));
+			_lstSoldiers->setCellText(row, 2, ltr("STR_NONE_UC"));
 			_lstSoldiers->setRowColor(row, _lstSoldiers->getColor());
 		}
 		row++;
 	}
 
 	Craft *c = _base->getCrafts()->at(_craft);
-	_txtAvailable->setText(tr("STR_SPACE_AVAILABLE").arg(c->getSpaceAvailable()));
-	_txtUsed->setText(tr("STR_SPACE_USED").arg(c->getSpaceUsed()));
+	_txtAvailable->setText(ltr("STR_SPACE_AVAILABLE").arg(c->getSpaceAvailable()));
+	_txtUsed->setText(ltr("STR_SPACE_USED").arg(c->getSpaceUsed()));
 }
 
 /**
@@ -645,14 +645,14 @@ void CraftSoldiersState::btnDeassignCraftSoldiersClick(Action *action)
 		if (soldier->getCraft() == c)
 		{
 			soldier->setCraftAndMoveEquipment(0, _base, _game->getSavedGame()->getMonthsPassed() == -1);
-			_lstSoldiers->setCellText(row, 2, tr("STR_NONE_UC"));
+			_lstSoldiers->setCellText(row, 2, ltr("STR_NONE_UC"));
 			_lstSoldiers->setRowColor(row, _lstSoldiers->getColor());
 		}
 		row++;
 	}
 
-	_txtAvailable->setText(tr("STR_SPACE_AVAILABLE").arg(c->getSpaceAvailable()));
-	_txtUsed->setText(tr("STR_SPACE_USED").arg(c->getSpaceUsed()));
+	_txtAvailable->setText(ltr("STR_SPACE_AVAILABLE").arg(c->getSpaceAvailable()));
+	_txtUsed->setText(ltr("STR_SPACE_USED").arg(c->getSpaceUsed()));
 }
 
 }

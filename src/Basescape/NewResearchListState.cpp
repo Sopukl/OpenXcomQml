@@ -87,7 +87,7 @@ NewResearchListState::NewResearchListState(Base *base, bool sortByCost) : _base(
 
 	touchComponentsConfigure();
 
-	_btnOK->setText(tr("STR_OK"));
+	_btnOK->setText(ltr("STR_OK"));
 	_btnOK->onMouseClick((ActionHandler)&NewResearchListState::btnOKClick);
 	_btnOK->onKeyboardPress((ActionHandler)&NewResearchListState::btnOKClick, options1.keyCancel());
 	_btnOK->onKeyboardPress((ActionHandler)&NewResearchListState::btnMarkAllAsSeenClick, options1.keyMarkAllAsSeen());
@@ -112,12 +112,12 @@ NewResearchListState::NewResearchListState(Base *base, bool sortByCost) : _base(
 	else
 	{
 		_cbxSort->setVisible(false);
-		_btnShowOnlyNew->setText(tr("STR_SHOW_ONLY_NEW"));
+		_btnShowOnlyNew->setText(ltr("STR_SHOW_ONLY_NEW"));
 		_btnShowOnlyNew->onMouseClick((ActionHandler)&NewResearchListState::btnShowOnlyNewClick);
 	}
 
 	_txtTitle->setAlign(ALIGN_CENTER);
-	_txtTitle->setText(tr("STR_NEW_RESEARCH_PROJECTS"));
+	_txtTitle->setText(ltr("STR_NEW_RESEARCH_PROJECTS"));
 
 	_lstResearch->setColumns(1, 190);
 	_lstResearch->setSelectable(true);
@@ -311,7 +311,7 @@ void NewResearchListState::fillProjectList(bool markAllAsSeen)
 	}
 	else if (selectedSort == 2)
 	{
-		std::sort(_projects.begin(), _projects.end(), [&](RuleResearch* a, RuleResearch* b) { return Unicode::naturalCompare(tr(a->getName()), tr(b->getName())); });
+		std::sort(_projects.begin(), _projects.end(), [&](RuleResearch* a, RuleResearch* b) { return Unicode::naturalCompare(ltr(a->getName()), ltr(b->getName())); });
 	}
 	else
 	{
@@ -357,7 +357,7 @@ void NewResearchListState::fillProjectList(bool markAllAsSeen)
 		// quick search
 		if (!searchString.empty())
 		{
-			std::string projectName = tr(rule->getName());
+			std::string projectName = ltr(rule->getName());
 			Unicode::upperCase(projectName);
 			if (projectName.find(searchString) == std::string::npos)
 			{
@@ -382,7 +382,7 @@ void NewResearchListState::fillProjectList(bool markAllAsSeen)
 		//  - for now, handling "requires" via zero-cost helpers (e.g. STR_LEADER_PLUS)... is enough
 		if (rule->getRequirements().empty())
 		{
-			_lstResearch->addRow(1, tr(rule->getName()).c_str());
+			_lstResearch->addRow(1, ltr(rule->getName()).c_str());
 			if (markAllAsSeen)
 			{
 				// mark all (filtered) research items as normal
@@ -409,7 +409,7 @@ void NewResearchListState::fillProjectList(bool markAllAsSeen)
 		}
 	}
 
-	std::string label = tr("STR_SHOW_ONLY_NEW");
+	std::string label = ltr("STR_SHOW_ONLY_NEW");
 	_btnShowOnlyNew->setText((hasUnseen ? "* " : "") + label);
 	if (_lstScroll > 0)
 	{

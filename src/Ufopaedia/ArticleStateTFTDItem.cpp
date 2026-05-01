@@ -56,19 +56,19 @@ namespace OpenXcom
 			add(_txtShotType);
 			_txtShotType->setColor(_textColor);
 			_txtShotType->setWordWrap(true);
-			_txtShotType->setText(tr("STR_SHOT_TYPE"));
+			_txtShotType->setText(ltr("STR_SHOT_TYPE"));
 
 			_txtAccuracy = new Text(57, 17, 61, 157);
 			add(_txtAccuracy);
 			_txtAccuracy->setColor(_textColor);
 			_txtAccuracy->setWordWrap(true);
-			_txtAccuracy->setText(tr("STR_ACCURACY_UC"));
+			_txtAccuracy->setText(ltr("STR_ACCURACY_UC"));
 
 			_txtTuCost = new Text(56, 17, 118, 157);
 			add(_txtTuCost);
 			_txtTuCost->setColor(_textColor);
 			_txtTuCost->setWordWrap(true);
-			_txtTuCost->setText(tr("STR_TIME_UNIT_COST"));
+			_txtTuCost->setText(ltr("STR_TIME_UNIT_COST"));
 
 			_lstInfo = new TextList(140, 55, 8, 170);
 			add(_lstInfo);
@@ -87,7 +87,7 @@ namespace OpenXcom
 						tu.erase(tu.end() - 1);
 					}
 					int range = std::min(config->range, weapon->getMaxRange());
-					std::string label = config->shortName.empty() ? tr(name).arg(config->shots).arg(range) : tr(config->shortName).arg(config->shots).arg(range);
+					std::string label = config->shortName.empty() ? ltr(name).arg(config->shots).arg(range) : ltr(config->shortName).arg(config->shots).arg(range);
 					_lstInfo->addRow(3,
 						label.c_str(),
 						Unicode::formatPercentage(config->accuracy).c_str(),
@@ -126,7 +126,7 @@ namespace OpenXcom
 
 		auto addAmmoDamagePower = [&](int pos, const RuleItem *rule, const RuleItem* weaponRule)
 		{
-			_txtAmmoType[pos]->setText(tr(getDamageTypeText(rule->getDamageType()->ResistType)));
+			_txtAmmoType[pos]->setText(ltr(getDamageTypeText(rule->getDamageType()->ResistType)));
 
 			ss.str("");ss.clear();
 			if (weaponRule->getIgnoreAmmoPower())

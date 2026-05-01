@@ -66,25 +66,25 @@ DogfightExperienceState::DogfightExperienceState()
 	// Set up objects
 	setWindowBackground(_window, "dogfightExperience");
 
-	_btnOk->setText(tr("STR_OK"));
+	_btnOk->setText(ltr("STR_OK"));
 	_btnOk->onMouseClick((ActionHandler)&DogfightExperienceState::btnOkClick);
 	_btnOk->onKeyboardPress((ActionHandler)&DogfightExperienceState::btnOkClick, options1.keyOk());
 	_btnOk->onKeyboardPress((ActionHandler)&DogfightExperienceState::btnOkClick, options1.keyCancel());
 
 	_txtTitle->setBig();
 	_txtTitle->setAlign(ALIGN_CENTER);
-	_txtTitle->setText(tr("STR_DAILY_PILOT_EXPERIENCE"));
+	_txtTitle->setText(ltr("STR_DAILY_PILOT_EXPERIENCE"));
 
-	_txtFiringAcc->setText(tr("STR_FIRING_ACCURACY"));
+	_txtFiringAcc->setText(ltr("STR_FIRING_ACCURACY"));
 	_txtFiringAcc->setAlign(ALIGN_RIGHT);
 
-	_txtReactions->setText(tr("STR_REACTIONS"));
+	_txtReactions->setText(ltr("STR_REACTIONS"));
 	_txtReactions->setAlign(ALIGN_RIGHT);
 
-	_txtBravery->setText(tr("STR_BRAVERY"));
+	_txtBravery->setText(ltr("STR_BRAVERY"));
 	_txtBravery->setAlign(ALIGN_RIGHT);
 
-	_txtPilots->setText(tr("STR_NAME"));
+	_txtPilots->setText(ltr("STR_NAME"));
 
 	_lstPilots->setColumns(5, 114, 58, 58, 58, 0);
 	_lstPilots->setAlign(ALIGN_RIGHT);

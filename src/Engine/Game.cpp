@@ -958,6 +958,7 @@ void Game::newGame(int difficulty, bool ironMan)
 	else
 	{
 		// custom location, custom name
+		Q_EMIT createNewBase(gs);
 		pushState(new BuildNewBaseState(base, gs->getGlobe(), true));
 	}
 }

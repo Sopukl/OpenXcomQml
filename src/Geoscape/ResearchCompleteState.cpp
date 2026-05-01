@@ -63,11 +63,11 @@ ResearchCompleteState::ResearchCompleteState(const RuleResearch *newResearch, co
 	// Set up objects
 	setWindowBackground(_window, "geoResearchComplete");
 
-	_btnOk->setText(tr("STR_OK"));
+	_btnOk->setText(ltr("STR_OK"));
 	_btnOk->onMouseClick((ActionHandler)&ResearchCompleteState::btnOkClick);
 	_btnOk->onKeyboardPress((ActionHandler)&ResearchCompleteState::btnOkClick, options1.keyCancel());
 
-	_btnReport->setText(tr("STR_VIEW_REPORTS"));
+	_btnReport->setText(ltr("STR_VIEW_REPORTS"));
 	_btnReport->onMouseClick((ActionHandler)&ResearchCompleteState::btnReportClick);
 	_btnReport->onKeyboardPress((ActionHandler)&ResearchCompleteState::btnReportClick, options1.keyOk());
 
@@ -77,14 +77,14 @@ ResearchCompleteState::ResearchCompleteState(const RuleResearch *newResearch, co
 
 	_txtTitle->setBig();
 	_txtTitle->setAlign(ALIGN_CENTER);
-	_txtTitle->setText(tr("STR_RESEARCH_COMPLETED"));
+	_txtTitle->setText(ltr("STR_RESEARCH_COMPLETED"));
 
 	_txtResearch->setAlign(ALIGN_CENTER);
 	_txtResearch->setBig();
 	_txtResearch->setWordWrap(true);
 	if (research)
 	{
-		_txtResearch->setText(tr(research->getName()));
+		_txtResearch->setText(ltr(research->getName()));
 	}
 }
 

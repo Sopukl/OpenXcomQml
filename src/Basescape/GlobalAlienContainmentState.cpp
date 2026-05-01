@@ -73,21 +73,21 @@ GlobalAlienContainmentState::GlobalAlienContainmentState(bool openedFromBasescap
 	// Set up objects
 	setWindowBackground(_window, "globalContainmentMenu");
 
-	_btnOk->setText(tr("STR_OK"));
+	_btnOk->setText(ltr("STR_OK"));
 	_btnOk->onMouseClick((ActionHandler)&GlobalAlienContainmentState::btnOkClick);
 	_btnOk->onKeyboardPress((ActionHandler)&GlobalAlienContainmentState::btnOkClick, options1.keyCancel());
 
 	_txtTitle->setBig();
 	_txtTitle->setAlign(ALIGN_CENTER);
-	_txtTitle->setText(tr("STR_PRISONER_OVERVIEW"));
+	_txtTitle->setText(ltr("STR_PRISONER_OVERVIEW"));
 
-	_txtPrisoner->setText(tr("STR_PRISONER"));
+	_txtPrisoner->setText(ltr("STR_PRISONER"));
 
 	_txtPrisonerAmount->setAlign(ALIGN_CENTER);
-	_txtPrisonerAmount->setText(tr("STR_PRISONER_AMOUNT"));
+	_txtPrisonerAmount->setText(ltr("STR_PRISONER_AMOUNT"));
 
 	_txtPrisonersInterrogated->setAlign(ALIGN_CENTER);
-	_txtPrisonersInterrogated->setText(tr("STR_PRISONER_INTERROGATED"));
+	_txtPrisonersInterrogated->setText(ltr("STR_PRISONER_INTERROGATED"));
 
 
 	_lstPrisoners->setColumns(3, 146, 60, 80);
@@ -185,7 +185,7 @@ void GlobalAlienContainmentState::fillPrisonerList()
 			std::string baseNameAndPrisonType = xbase->getName(_game->getLanguage());
 			if (!noTypes)
 			{
-				baseNameAndPrisonType = baseNameAndPrisonType + " - " + std::string(trAlt("STR_PRISON_TYPE", prisonType));
+				baseNameAndPrisonType = baseNameAndPrisonType + " - " + std::string(ltrAlt("STR_PRISON_TYPE", prisonType));
 			}
 			_lstPrisoners->addRow(3, baseNameAndPrisonType.c_str(), "", "");
 			_lstPrisoners->setRowColor(_lstPrisoners->getLastRowIndex(), _lstPrisoners->getSecondaryColor());
@@ -215,7 +215,7 @@ void GlobalAlienContainmentState::fillPrisonerList()
 							rqty = "0";
 						}
 
-						_lstPrisoners->addRow(3, tr(itemType).c_str(), ss.str().c_str(), rqty.c_str());
+						_lstPrisoners->addRow(3, ltr(itemType).c_str(), ss.str().c_str(), rqty.c_str());
 						_topics.push_back(std::make_tuple(itemType, xbase, prisonType));
 					}
 				}
@@ -223,7 +223,7 @@ void GlobalAlienContainmentState::fillPrisonerList()
 
 			for (const auto& researchName : researchList)
 			{
-				_lstPrisoners->addRow(3, tr(researchName).c_str(), "0", "1");
+				_lstPrisoners->addRow(3, ltr(researchName).c_str(), "0", "1");
 				_topics.push_back(std::make_tuple(researchName, xbase, prisonType));
 				totalInterrogated++;
 			}
@@ -235,13 +235,13 @@ void GlobalAlienContainmentState::fillPrisonerList()
 			_lstPrisoners->setRowColor(_lstPrisoners->getLastRowIndex(), _lstPrisoners->getSecondaryColor());
 			_topics.push_back(std::make_tuple("", nullptr, 0));
 
-			_lstPrisoners->addRow(3, tr("STR_NONE").c_str(), "", "");
+			_lstPrisoners->addRow(3, ltr("STR_NONE").c_str(), "", "");
 			_topics.push_back(std::make_tuple("", xbase, 0));
 		}
 	}
 
-	_txtTotalUsed->setText(tr("STR_TOTAL_IN_PRISON").arg(totalUsed));
-	_txtTotalInterrogated->setText(tr("STR_TOTAL_INTERROGATED").arg(totalInterrogated));
+	_txtTotalUsed->setText(ltr("STR_TOTAL_IN_PRISON").arg(totalUsed));
+	_txtTotalInterrogated->setText(ltr("STR_TOTAL_INTERROGATED").arg(totalInterrogated));
 }
 
 /**

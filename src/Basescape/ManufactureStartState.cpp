@@ -86,17 +86,17 @@ ManufactureStartState::ManufactureStartState(Base *base, RuleManufacture *item) 
 
 	setWindowBackground(_window, "allocateManufacture");
 
-	_txtTitle->setText(tr(_item->getName()));
+	_txtTitle->setText(ltr(_item->getName()));
 	_txtTitle->setBig();
 	_txtTitle->setAlign(ALIGN_CENTER);
 
-	_txtManHour->setText(tr("STR_ENGINEER_HOURS_TO_PRODUCE_ONE_UNIT").arg(_item->getManufactureTime()));
+	_txtManHour->setText(ltr("STR_ENGINEER_HOURS_TO_PRODUCE_ONE_UNIT").arg(_item->getManufactureTime()));
 
-	_txtCost->setText(tr("STR_COST_PER_UNIT_").arg(Unicode::formatFunding(_item->getManufactureCost())));
+	_txtCost->setText(ltr("STR_COST_PER_UNIT_").arg(Unicode::formatFunding(_item->getManufactureCost())));
 
-	_txtWorkSpace->setText(tr("STR_WORK_SPACE_REQUIRED").arg(_item->getRequiredSpace()));
+	_txtWorkSpace->setText(ltr("STR_WORK_SPACE_REQUIRED").arg(_item->getRequiredSpace()));
 
-	_btnCancel->setText(tr("STR_CANCEL_UC"));
+	_btnCancel->setText(ltr("STR_CANCEL_UC"));
 	_btnCancel->onMouseClick((ActionHandler)&ManufactureStartState::btnCancelClick);
 	_btnCancel->onKeyboardPress((ActionHandler)&ManufactureStartState::btnCancelClick, options1.keyCancel());
 
@@ -105,16 +105,16 @@ ManufactureStartState::ManufactureStartState(Base *base, RuleManufacture *item) 
 	//int availableWorkSpace = _base->getFreeWorkshops();
 	//productionPossible &= (availableWorkSpace > 0);
 
-	_txtRequiredItemsTitle->setText(tr("STR_SPECIAL_MATERIALS_REQUIRED"));
+	_txtRequiredItemsTitle->setText(ltr("STR_SPECIAL_MATERIALS_REQUIRED"));
 	_txtRequiredItemsTitle->setAlign(ALIGN_CENTER);
 
-	_txtItemNameColumn->setText(tr("STR_ITEM_REQUIRED"));
+	_txtItemNameColumn->setText(ltr("STR_ITEM_REQUIRED"));
 	_txtItemNameColumn->setWordWrap(true);
 
-	_txtUnitRequiredColumn->setText(tr("STR_UNITS_REQUIRED"));
+	_txtUnitRequiredColumn->setText(ltr("STR_UNITS_REQUIRED"));
 	_txtUnitRequiredColumn->setWordWrap(true);
 
-	_txtUnitAvailableColumn->setText(tr("STR_UNITS_AVAILABLE"));
+	_txtUnitAvailableColumn->setText(ltr("STR_UNITS_AVAILABLE"));
 	_txtUnitAvailableColumn->setWordWrap(true);
 
 	_lstRequiredItems->setColumns(3, 140, 75, 55);
@@ -130,7 +130,7 @@ ManufactureStartState::ManufactureStartState(Base *base, RuleManufacture *item) 
 		s1 << iter.second;
 		s2 << count;
 		productionPossible &= (count >= iter.second);
-		_lstRequiredItems->addRow(3, tr(iter.first->getType()).c_str(), s1.str().c_str(), s2.str().c_str());
+		_lstRequiredItems->addRow(3, ltr(iter.first->getType()).c_str(), s1.str().c_str(), s2.str().c_str());
 		_lstRequiredItems->setCellColor(row, 1, _lstRequiredItems->getSecondaryColor());
 		_lstRequiredItems->setCellColor(row, 2, _lstRequiredItems->getSecondaryColor());
 		row++;
@@ -143,7 +143,7 @@ ManufactureStartState::ManufactureStartState(Base *base, RuleManufacture *item) 
 		s1 << iter.second;
 		s2 << count;
 		productionPossible &= (count >= iter.second);
-		_lstRequiredItems->addRow(3, tr(iter.first->getType()).c_str(), s1.str().c_str(), s2.str().c_str());
+		_lstRequiredItems->addRow(3, ltr(iter.first->getType()).c_str(), s1.str().c_str(), s2.str().c_str());
 		_lstRequiredItems->setCellColor(row, 1, _lstRequiredItems->getSecondaryColor());
 		_lstRequiredItems->setCellColor(row, 2, _lstRequiredItems->getSecondaryColor());
 		row++;
@@ -156,20 +156,20 @@ ManufactureStartState::ManufactureStartState(Base *base, RuleManufacture *item) 
 		}
 
 		// separator line
-		_lstRequiredItems->addRow(1, tr("STR_PERSON_JOINING").c_str());
+		_lstRequiredItems->addRow(1, ltr("STR_PERSON_JOINING").c_str());
 		_lstRequiredItems->setCellColor(row, 0, _lstRequiredItems->getSecondaryColor());
 		row++;
 
 		// person joining
 		std::ostringstream s1;
 		s1 << Unicode::TOK_COLOR_FLIP << 1;
-		_lstRequiredItems->addRow(2, tr(_item->getSpawnedPersonName() != "" ? _item->getSpawnedPersonName() : _item->getSpawnedPersonType()).c_str(), s1.str().c_str());
+		_lstRequiredItems->addRow(2, ltr(_item->getSpawnedPersonName() != "" ? _item->getSpawnedPersonName() : _item->getSpawnedPersonType()).c_str(), s1.str().c_str());
 		row++;
 	}
 	if (!_item->getRandomProducedItems().empty())
 	{
 		// separator line
-		_lstRequiredItems->addRow(1, tr("STR_RANDOM_PRODUCTION_DISCLAIMER").c_str());
+		_lstRequiredItems->addRow(1, ltr("STR_RANDOM_PRODUCTION_DISCLAIMER").c_str());
 		_lstRequiredItems->setCellColor(row, 0, _lstRequiredItems->getSecondaryColor());
 		row++;
 	}
@@ -189,7 +189,7 @@ ManufactureStartState::ManufactureStartState(Base *base, RuleManufacture *item) 
 	if (!hasVanillaOutput && !_item->getProducedItems().empty())
 	{
 		// separator line
-		_lstRequiredItems->addRow(1, tr("STR_UNITS_PRODUCED").c_str());
+		_lstRequiredItems->addRow(1, ltr("STR_UNITS_PRODUCED").c_str());
 		_lstRequiredItems->setCellColor(row, 0, _lstRequiredItems->getSecondaryColor());
 		row++;
 
@@ -198,7 +198,7 @@ ManufactureStartState::ManufactureStartState(Base *base, RuleManufacture *item) 
 		{
 			std::ostringstream s1;
 			s1 << Unicode::TOK_COLOR_FLIP << iter.second;
-			_lstRequiredItems->addRow(2, tr(iter.first->getType()).c_str(), s1.str().c_str());
+			_lstRequiredItems->addRow(2, ltr(iter.first->getType()).c_str(), s1.str().c_str());
 			row++;
 		}
 	}
@@ -209,7 +209,7 @@ ManufactureStartState::ManufactureStartState(Base *base, RuleManufacture *item) 
 	_txtUnitAvailableColumn->setVisible(hasRequirements);
 	_lstRequiredItems->setVisible(row);
 
-	_btnStart->setText(tr("STR_START_PRODUCTION"));
+	_btnStart->setText(ltr("STR_START_PRODUCTION"));
 	_btnStart->onMouseClick((ActionHandler)&ManufactureStartState::btnStartClick);
 	_btnStart->onKeyboardPress((ActionHandler)&ManufactureStartState::btnStartClick, options1.keyOk());
 	_btnStart->setVisible(productionPossible);
@@ -241,7 +241,7 @@ void ManufactureStartState::btnStartClick(Action *)
 {
 	if (_item->getProducedCraft() && _base->getAvailableHangars() - _base->getUsedHangars() <= 0)
 	{
-		_game->pushState(new ErrorMessageState(tr("STR_NO_FREE_HANGARS_FOR_CRAFT_PRODUCTION"), _palette, _game->getMod()->getInterface("basescape")->getElement("errorMessage")->color, "BACK17.SCR", _game->getMod()->getInterface("basescape")->getElement("errorPalette")->color));
+		_game->pushState(new ErrorMessageState(ltr("STR_NO_FREE_HANGARS_FOR_CRAFT_PRODUCTION"), _palette, _game->getMod()->getInterface("basescape")->getElement("errorMessage")->color, "BACK17.SCR", _game->getMod()->getInterface("basescape")->getElement("errorPalette")->color));
 	}
 	//else if (_item->getRequiredSpace() > _base->getFreeWorkshops())
 	//{

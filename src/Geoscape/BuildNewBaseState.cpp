@@ -127,11 +127,11 @@ BuildNewBaseState::BuildNewBaseState(Base *base, Globe *globe, bool first) : _ba
 
 	setWindowBackground(_window, "geoscape");
 
-	_btnCancel->setText(tr("STR_CANCEL_UC"));
+	_btnCancel->setText(ltr("STR_CANCEL_UC"));
 	_btnCancel->onMouseClick((ActionHandler)&BuildNewBaseState::btnCancelClick);
 	_btnCancel->onKeyboardPress((ActionHandler)&BuildNewBaseState::btnCancelClick, options1.keyCancel());
 
-	_txtTitle->setText(tr("STR_SELECT_SITE_FOR_NEW_BASE"));
+	_txtTitle->setText(ltr("STR_SELECT_SITE_FOR_NEW_BASE"));
 	_txtTitle->setVerticalAlign(ALIGN_MIDDLE);
 	_txtTitle->setWordWrap(true);
 
@@ -243,7 +243,7 @@ void BuildNewBaseState::globeClick(Action *action)
 			if ((_first || !fakeUnderwaterBasesUnlocked) && fakeUnderwaterTexture)
 			{
 				// first (starting) base can't be fake underwater base
-				_game->pushState(new ErrorMessageState(tr("STR_XCOM_BASE_CANNOT_BE_BUILT"), _palette, _game->getMod()->getInterface("geoscape")->getElement("genericWindow")->color, "BACK01.SCR", _game->getMod()->getInterface("geoscape")->getElement("palette")->color));
+				_game->pushState(new ErrorMessageState(ltr("STR_XCOM_BASE_CANNOT_BE_BUILT"), _palette, _game->getMod()->getInterface("geoscape")->getElement("genericWindow")->color, "BACK01.SCR", _game->getMod()->getInterface("geoscape")->getElement("palette")->color));
 			}
 			else
 			{
@@ -269,7 +269,7 @@ void BuildNewBaseState::globeClick(Action *action)
 		}
 		else
 		{
-			_game->pushState(new ErrorMessageState(tr("STR_XCOM_BASE_CANNOT_BE_BUILT"), _palette, _game->getMod()->getInterface("geoscape")->getElement("genericWindow")->color, "BACK01.SCR", _game->getMod()->getInterface("geoscape")->getElement("palette")->color));
+			_game->pushState(new ErrorMessageState(ltr("STR_XCOM_BASE_CANNOT_BE_BUILT"), _palette, _game->getMod()->getInterface("geoscape")->getElement("genericWindow")->color, "BACK01.SCR", _game->getMod()->getInterface("geoscape")->getElement("palette")->color));
 		}
 	}
 }

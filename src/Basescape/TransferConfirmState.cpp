@@ -65,20 +65,20 @@ TransferConfirmState::TransferConfirmState(Base *base, TransferItemsState *state
 	// Set up objects
 	setWindowBackground(_window, "transferConfirm");
 
-	_btnCancel->setText(tr("STR_CANCEL_UC"));
+	_btnCancel->setText(ltr("STR_CANCEL_UC"));
 	_btnCancel->onMouseClick((ActionHandler)&TransferConfirmState::btnCancelClick);
 	_btnCancel->onKeyboardPress((ActionHandler)&TransferConfirmState::btnCancelClick, options1.keyCancel());
 
-	_btnOk->setText(tr("STR_OK"));
+	_btnOk->setText(ltr("STR_OK"));
 	_btnOk->onMouseClick((ActionHandler)&TransferConfirmState::btnOkClick);
 	_btnOk->onKeyboardPress((ActionHandler)&TransferConfirmState::btnOkClick, options1.keyOk());
 
 	_txtTitle->setBig();
 	_txtTitle->setAlign(ALIGN_CENTER);
-	_txtTitle->setText(tr("STR_TRANSFER_ITEMS_TO").arg(_base->getName()));
+	_txtTitle->setText(ltr("STR_TRANSFER_ITEMS_TO").arg(_base->getName()));
 
 	_txtCost->setBig();
-	_txtCost->setText(tr("STR_COST"));
+	_txtCost->setText(ltr("STR_COST"));
 
 	std::ostringstream ss;
 	ss << Unicode::TOK_COLOR_FLIP << Unicode::formatFunding(_state->getTotal());

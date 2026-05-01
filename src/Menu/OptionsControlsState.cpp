@@ -60,15 +60,15 @@ OptionsControlsState::OptionsControlsState(OptionsOrigin origin) : OptionsBaseSt
 
 	centerAllSurfaces();
 
-	_btnOXC->setText(tr("STR_ENGINE_OXC"));
+	_btnOXC->setText(ltr("STR_ENGINE_OXC"));
 	_btnOXC->setGroup(&_owner);
 	_btnOXC->onMousePress((ActionHandler)&OptionsControlsState::btnGroupPress, SDL_BUTTON_LEFT);
 
-	_btnOXCE->setText(tr("STR_ENGINE_OXCE"));
+	_btnOXCE->setText(ltr("STR_ENGINE_OXCE"));
 	_btnOXCE->setGroup(&_owner);
 	_btnOXCE->onMousePress((ActionHandler)&OptionsControlsState::btnGroupPress, SDL_BUTTON_LEFT);
 
-	_btnOTHER->setText(tr("STR_ENGINE_OTHER")); // rename in your fork
+	_btnOTHER->setText(ltr("STR_ENGINE_OTHER")); // rename in your fork
 	_btnOTHER->setGroup(&_owner);
 	_btnOTHER->onMousePress((ActionHandler)&OptionsControlsState::btnGroupPress, SDL_BUTTON_LEFT);
 	_btnOTHER->setVisible(false); // enable in your fork
@@ -152,7 +152,7 @@ void OptionsControlsState::updateList()
 
 	if (_controlsGeneral[idx].size() > 0)
 	{
-		_lstControls->addRow(2, tr("STR_GENERAL").c_str(), "");
+		_lstControls->addRow(2, ltr("STR_GENERAL").c_str(), "");
 		row++;
 		_offsetGeneralMin = row;
 		_lstControls->setCellColor(_offsetGeneralMin, 0, _colorGroup);
@@ -163,7 +163,7 @@ void OptionsControlsState::updateList()
 	if (_controlsGeo[idx].size() > 0)
 	{
 		if (row > -1) { _lstControls->addRow(2, "", ""); row++; }
-		_lstControls->addRow(2, tr("STR_GEOSCAPE").c_str(), "");
+		_lstControls->addRow(2, ltr("STR_GEOSCAPE").c_str(), "");
 		row++;
 		_offsetGeoMin = row;
 		_lstControls->setCellColor(_offsetGeoMin, 0, _colorGroup);
@@ -174,7 +174,7 @@ void OptionsControlsState::updateList()
 	if (_controlsBase[idx].size() > 0)
 	{
 		if (row > -1) { _lstControls->addRow(2, "", ""); row++; }
-		_lstControls->addRow(2, tr("STR_BASESCAPE").c_str(), "");
+		_lstControls->addRow(2, ltr("STR_BASESCAPE").c_str(), "");
 		row++;
 		_offsetBaseMin = row;
 		_lstControls->setCellColor(_offsetBaseMin, 0, _colorGroup);
@@ -185,7 +185,7 @@ void OptionsControlsState::updateList()
 	if (_controlsBattle[idx].size() > 0)
 	{
 		if (row > -1) { _lstControls->addRow(2, "", ""); row++; }
-		_lstControls->addRow(2, tr("STR_BATTLESCAPE").c_str(), "");
+		_lstControls->addRow(2, ltr("STR_BATTLESCAPE").c_str(), "");
 		row++;
 		_offsetBattleMin = row;
 		_lstControls->setCellColor(_offsetBattleMin, 0, _colorGroup);
@@ -224,7 +224,7 @@ void OptionsControlsState::addControls(const std::vector<OptionInfo> &keys)
 {
 	for (const auto& optionInfo : keys)
 	{
-		std::string name = tr(optionInfo.description());
+		std::string name = ltr(optionInfo.description());
 		SDLKey *key = optionInfo.asKey();
 		std::string keyName = ucWords(SDL_GetKeyName(*key));
 		if (*key == SDLK_UNKNOWN)

@@ -100,11 +100,11 @@ SoldierTransformationState::SoldierTransformationState(RuleSoldierTransformation
 	// Set up objects
 	setWindowBackground(_window, "soldierTransformation");
 
-	_btnCancel->setText(tr("STR_CANCEL_UC"));
+	_btnCancel->setText(ltr("STR_CANCEL_UC"));
 	_btnCancel->onMouseClick((ActionHandler)&SoldierTransformationState::btnCancelClick);
 	_btnCancel->onKeyboardPress((ActionHandler)&SoldierTransformationState::btnCancelClick, options1.keyCancel());
 
-	_btnStart->setText(tr(_transformationRule->getName()));
+	_btnStart->setText(ltr(_transformationRule->getName()));
 	_btnStart->onMouseClick((ActionHandler)&SoldierTransformationState::btnStartClick);
 	_btnStart->onKeyboardPress((ActionHandler)&SoldierTransformationState::btnStartClick, options1.keyOk());
 
@@ -127,16 +127,16 @@ SoldierTransformationState::SoldierTransformationState(RuleSoldierTransformation
 	_edtSoldier->setBig();
 	_edtSoldier->setAlign(ALIGN_CENTER);
 
-	_txtRequiredItems->setText(tr("STR_SPECIAL_MATERIALS_REQUIRED"));
+	_txtRequiredItems->setText(ltr("STR_SPECIAL_MATERIALS_REQUIRED"));
 	_txtRequiredItems->setAlign(ALIGN_CENTER);
 
-	_txtItemNameColumn->setText(tr("STR_ITEM_REQUIRED"));
+	_txtItemNameColumn->setText(ltr("STR_ITEM_REQUIRED"));
 	_txtItemNameColumn->setWordWrap(true);
 
-	_txtUnitRequiredColumn->setText(tr("STR_UNITS_REQUIRED"));
+	_txtUnitRequiredColumn->setText(ltr("STR_UNITS_REQUIRED"));
 	_txtUnitRequiredColumn->setWordWrap(true);
 
-	_txtUnitAvailableColumn->setText(tr("STR_UNITS_AVAILABLE"));
+	_txtUnitAvailableColumn->setText(ltr("STR_UNITS_AVAILABLE"));
 	_txtUnitAvailableColumn->setWordWrap(true);
 
 	_lstRequiredItems->setColumns(3, 140, 75, 55);
@@ -197,7 +197,7 @@ void SoldierTransformationState::initTransformationData()
 		transformationPossible = false;
 	}
 
-	_txtCost->setText(tr("STR_COST_").arg(Unicode::formatFunding(_transformationRule->getCost())));
+	_txtCost->setText(ltr("STR_COST_").arg(Unicode::formatFunding(_transformationRule->getCost())));
 
 	int transferTime = 0;
 	if (!Mod::isEmptyRuleName(_transformationRule->getProducedItem()))
@@ -208,8 +208,8 @@ void SoldierTransformationState::initTransformationData()
 	{
 		transferTime = _transformationRule->getTransferTime() > 0 ? _transformationRule->getTransferTime() : 24;
 	}
-	_txtTransferTime->setText(tr("STR_TRANSFER_TIME").arg(tr("STR_HOUR", transferTime)));
-	_txtRecoveryTime->setText(tr("STR_RECOVERY_TIME").arg(tr("STR_DAY", _transformationRule->getRecoveryTime())));
+	_txtTransferTime->setText(ltr("STR_TRANSFER_TIME").arg(ltr("STR_HOUR", transferTime)));
+	_txtRecoveryTime->setText(ltr("STR_RECOVERY_TIME").arg(ltr("STR_DAY", _transformationRule->getRecoveryTime())));
 
 	int row = 0;
 	for (auto& requiredItem : _transformationRule->getRequiredItems())
@@ -223,7 +223,7 @@ void SoldierTransformationState::initTransformationData()
 			transformationPossible &= (_base->getStorageItems()->getItem(rule) >= requiredItem.second);
 		}
 
-		_lstRequiredItems->addRow(3, tr(requiredItem.first).c_str(), s1.str().c_str(), s2.str().c_str());
+		_lstRequiredItems->addRow(3, ltr(requiredItem.first).c_str(), s1.str().c_str(), s2.str().c_str());
 		_lstRequiredItems->setCellColor(row, 1, _lstRequiredItems->getSecondaryColor());
 		_lstRequiredItems->setCellColor(row, 2, _lstRequiredItems->getSecondaryColor());
 		row++;
@@ -268,20 +268,20 @@ void SoldierTransformationState::initTransformationData()
 		bool showMana = _game->getSavedGame()->isManaUnlocked(_game->getMod());
 
 		_lstStatChanges->addRow(14, "",
-			tr("STR_TIME_UNITS_ABBREVIATION").c_str(),
-			tr("STR_STAMINA_ABBREVIATION").c_str(),
-			tr("STR_HEALTH_ABBREVIATION").c_str(),
-			tr("STR_BRAVERY_ABBREVIATION").c_str(),
-			tr("STR_REACTIONS_ABBREVIATION").c_str(),
-			tr("STR_FIRING_ACCURACY_ABBREVIATION").c_str(),
-			tr("STR_THROWING_ACCURACY_ABBREVIATION").c_str(),
-			tr("STR_MELEE_ACCURACY_ABBREVIATION").c_str(),
-			tr("STR_STRENGTH_ABBREVIATION").c_str(),
-			tr("STR_MANA_ABBREVIATION").c_str(),
-			tr("STR_PSIONIC_STRENGTH_ABBREVIATION").c_str(),
-			tr("STR_PSIONIC_SKILL_ABBREVIATION").c_str(),
+			ltr("STR_TIME_UNITS_ABBREVIATION").c_str(),
+			ltr("STR_STAMINA_ABBREVIATION").c_str(),
+			ltr("STR_HEALTH_ABBREVIATION").c_str(),
+			ltr("STR_BRAVERY_ABBREVIATION").c_str(),
+			ltr("STR_REACTIONS_ABBREVIATION").c_str(),
+			ltr("STR_FIRING_ACCURACY_ABBREVIATION").c_str(),
+			ltr("STR_THROWING_ACCURACY_ABBREVIATION").c_str(),
+			ltr("STR_MELEE_ACCURACY_ABBREVIATION").c_str(),
+			ltr("STR_STRENGTH_ABBREVIATION").c_str(),
+			ltr("STR_MANA_ABBREVIATION").c_str(),
+			ltr("STR_PSIONIC_STRENGTH_ABBREVIATION").c_str(),
+			ltr("STR_PSIONIC_SKILL_ABBREVIATION").c_str(),
 			"");
-		_lstStatChanges->addRow(14, tr("STR_CURRENT_STATS").c_str(),
+		_lstStatChanges->addRow(14, ltr("STR_CURRENT_STATS").c_str(),
 			formatStat(currentStats.tu, false, false).c_str(),
 			formatStat(currentStats.stamina, false, false).c_str(),
 			formatStat(currentStats.health, false, false).c_str(),
@@ -295,7 +295,7 @@ void SoldierTransformationState::initTransformationData()
 			formatStat(currentStats.psiStrength, false, !showPsiStrength).c_str(),
 			formatStat(currentStats.psiSkill, false, !showPsiSkill).c_str(),
 			"");
-		_lstStatChanges->addRow(14, tr(twoRows ? "STR_CHANGES_MIN" : "STR_CHANGES").c_str(),
+		_lstStatChanges->addRow(14, ltr(twoRows ? "STR_CHANGES_MIN" : "STR_CHANGES").c_str(),
 			formatStat(changedStatsMin.tu, true, rerollFlags.tu || randomFlags.tu).c_str(),
 			formatStat(changedStatsMin.stamina, true, rerollFlags.stamina || randomFlags.stamina).c_str(),
 			formatStat(changedStatsMin.health, true, rerollFlags.health || randomFlags.health).c_str(),
@@ -311,7 +311,7 @@ void SoldierTransformationState::initTransformationData()
 			"");
 		if (twoRows)
 		{
-			_lstStatChanges->addRow(14, tr("STR_CHANGES_MAX").c_str(),
+			_lstStatChanges->addRow(14, ltr("STR_CHANGES_MAX").c_str(),
 				formatStat(changedStatsMax.tu, true, rerollFlags.tu).c_str(),
 				formatStat(changedStatsMax.stamina, true, rerollFlags.stamina).c_str(),
 				formatStat(changedStatsMax.health, true, rerollFlags.health).c_str(),
@@ -328,7 +328,7 @@ void SoldierTransformationState::initTransformationData()
 		}
 		if (bonusRule)
 		{
-			_lstStatChanges->addRow(14, tr("STR_BONUS_STATS").c_str(),
+			_lstStatChanges->addRow(14, ltr("STR_BONUS_STATS").c_str(),
 				formatStat(bonusStats.tu, true, false).c_str(),
 				formatStat(bonusStats.stamina, true, false).c_str(),
 				formatStat(bonusStats.health, true, false).c_str(),
@@ -347,19 +347,19 @@ void SoldierTransformationState::initTransformationData()
 	else
 	{
 		_lstStatChanges->addRow(13, "",
-			tr("STR_TIME_UNITS_ABBREVIATION").c_str(),
-			tr("STR_STAMINA_ABBREVIATION").c_str(),
-			tr("STR_HEALTH_ABBREVIATION").c_str(),
-			tr("STR_BRAVERY_ABBREVIATION").c_str(),
-			tr("STR_REACTIONS_ABBREVIATION").c_str(),
-			tr("STR_FIRING_ACCURACY_ABBREVIATION").c_str(),
-			tr("STR_THROWING_ACCURACY_ABBREVIATION").c_str(),
-			tr("STR_MELEE_ACCURACY_ABBREVIATION").c_str(),
-			tr("STR_STRENGTH_ABBREVIATION").c_str(),
-			tr("STR_PSIONIC_STRENGTH_ABBREVIATION").c_str(),
-			tr("STR_PSIONIC_SKILL_ABBREVIATION").c_str(),
+			ltr("STR_TIME_UNITS_ABBREVIATION").c_str(),
+			ltr("STR_STAMINA_ABBREVIATION").c_str(),
+			ltr("STR_HEALTH_ABBREVIATION").c_str(),
+			ltr("STR_BRAVERY_ABBREVIATION").c_str(),
+			ltr("STR_REACTIONS_ABBREVIATION").c_str(),
+			ltr("STR_FIRING_ACCURACY_ABBREVIATION").c_str(),
+			ltr("STR_THROWING_ACCURACY_ABBREVIATION").c_str(),
+			ltr("STR_MELEE_ACCURACY_ABBREVIATION").c_str(),
+			ltr("STR_STRENGTH_ABBREVIATION").c_str(),
+			ltr("STR_PSIONIC_STRENGTH_ABBREVIATION").c_str(),
+			ltr("STR_PSIONIC_SKILL_ABBREVIATION").c_str(),
 			"");
-		_lstStatChanges->addRow(13, tr("STR_CURRENT_STATS").c_str(),
+		_lstStatChanges->addRow(13, ltr("STR_CURRENT_STATS").c_str(),
 			formatStat(currentStats.tu, false, false).c_str(),
 			formatStat(currentStats.stamina, false, false).c_str(),
 			formatStat(currentStats.health, false, false).c_str(),
@@ -372,7 +372,7 @@ void SoldierTransformationState::initTransformationData()
 			formatStat(currentStats.psiStrength, false, !showPsiStrength).c_str(),
 			formatStat(currentStats.psiSkill, false, !showPsiSkill).c_str(),
 			"");
-		_lstStatChanges->addRow(13, tr(twoRows ? "STR_CHANGES_MIN" : "STR_CHANGES").c_str(),
+		_lstStatChanges->addRow(13, ltr(twoRows ? "STR_CHANGES_MIN" : "STR_CHANGES").c_str(),
 			formatStat(changedStatsMin.tu, true, rerollFlags.tu || randomFlags.tu).c_str(),
 			formatStat(changedStatsMin.stamina, true, rerollFlags.stamina || randomFlags.stamina).c_str(),
 			formatStat(changedStatsMin.health, true, rerollFlags.health || randomFlags.health).c_str(),
@@ -387,7 +387,7 @@ void SoldierTransformationState::initTransformationData()
 			"");
 		if (twoRows)
 		{
-			_lstStatChanges->addRow(13, tr("STR_CHANGES").c_str(),
+			_lstStatChanges->addRow(13, ltr("STR_CHANGES").c_str(),
 				formatStat(changedStatsMax.tu, true, rerollFlags.tu).c_str(),
 				formatStat(changedStatsMax.stamina, true, rerollFlags.stamina).c_str(),
 				formatStat(changedStatsMax.health, true, rerollFlags.health).c_str(),
@@ -403,7 +403,7 @@ void SoldierTransformationState::initTransformationData()
 		}
 		if (bonusRule)
 		{
-			_lstStatChanges->addRow(13, tr("STR_BONUS_STATS").c_str(),
+			_lstStatChanges->addRow(13, ltr("STR_BONUS_STATS").c_str(),
 				formatStat(bonusStats.tu, true, false).c_str(),
 				formatStat(bonusStats.stamina, true, false).c_str(),
 				formatStat(bonusStats.health, true, false).c_str(),

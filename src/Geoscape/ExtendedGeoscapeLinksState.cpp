@@ -95,53 +95,53 @@ ExtendedGeoscapeLinksState::ExtendedGeoscapeLinksState(GeoscapeState* parent) : 
 
 	_txtTitle->setBig();
 	_txtTitle->setAlign(ALIGN_CENTER);
-	_txtTitle->setText(tr("STR_EXTENDED_LINKS"));
+	_txtTitle->setText(ltr("STR_EXTENDED_LINKS"));
 
-	_btnOk->setText(tr("STR_OK"));
+	_btnOk->setText(ltr("STR_OK"));
 	_btnOk->onMouseClick((ActionHandler)&ExtendedGeoscapeLinksState::btnOkClick);
 	_btnOk->onKeyboardPress((ActionHandler)&ExtendedGeoscapeLinksState::btnOkClick, options1.keyCancel());
 
-	_btnFunding->setText(tr("STR_FUNDING_UC"));
+	_btnFunding->setText(ltr("STR_FUNDING_UC"));
 	_btnFunding->onMouseClick((ActionHandler)&ExtendedGeoscapeLinksState::btnFundingClick);
 
-	std::string tmp = tr("STR_TECH_TREE_VIEWER");
+	std::string tmp = ltr("STR_TECH_TREE_VIEWER");
 	Unicode::upperCase(tmp);
 	_btnTechTree->setText(tmp);
 	_btnTechTree->onMouseClick((ActionHandler)&ExtendedGeoscapeLinksState::btnTechTreeClick);
 
-	_btnGlobalResearch->setText(tr("STR_RESEARCH_OVERVIEW"));
+	_btnGlobalResearch->setText(ltr("STR_RESEARCH_OVERVIEW"));
 	_btnGlobalResearch->onMouseClick((ActionHandler)&ExtendedGeoscapeLinksState::btnGlobalResearchClick);
 
-	_btnGlobalProduction->setText(tr("STR_PRODUCTION_OVERVIEW"));
+	_btnGlobalProduction->setText(ltr("STR_PRODUCTION_OVERVIEW"));
 	_btnGlobalProduction->onMouseClick((ActionHandler)&ExtendedGeoscapeLinksState::btnGlobalProductionClick);
 
-	tmp = tr("STR_UFO_TRACKER");
+	tmp = ltr("STR_UFO_TRACKER");
 	Unicode::upperCase(tmp);
 	_btnUfoTracker->setText(tmp);
 	_btnUfoTracker->onMouseClick((ActionHandler)&ExtendedGeoscapeLinksState::btnUfoTrackerClick);
 
-	tmp = tr("STR_DAILY_PILOT_EXPERIENCE");
+	tmp = ltr("STR_DAILY_PILOT_EXPERIENCE");
 	Unicode::upperCase(tmp);
 	_btnPilotExp->setText(tmp);
 	_btnPilotExp->onMouseClick((ActionHandler)&ExtendedGeoscapeLinksState::btnPilotExpClick);
 
-	tmp = tr("STR_NOTES");
+	tmp = ltr("STR_NOTES");
 	Unicode::upperCase(tmp);
 	_btnNotes->setText(tmp);
 	_btnNotes->onMouseClick((ActionHandler)&ExtendedGeoscapeLinksState::btnNotesClick);
 
-	tmp = tr("STR_SELECT_MUSIC_TRACK");
+	tmp = ltr("STR_SELECT_MUSIC_TRACK");
 	Unicode::upperCase(tmp);
 	_btnMusic->setText(tmp);
 	_btnMusic->onMouseClick((ActionHandler)&ExtendedGeoscapeLinksState::btnMusicClick);
 
 	if (options1.debug())
 	{
-		_btnTest->setText(tr("STR_TOGGLE_DEBUG_MODE"));
+		_btnTest->setText(ltr("STR_TOGGLE_DEBUG_MODE"));
 	}
 	else
 	{
-		_btnTest->setText(tr("STR_TEST_SCREEN"));
+		_btnTest->setText(ltr("STR_TEST_SCREEN"));
 	}
 	_btnTest->onMouseClick((ActionHandler)&ExtendedGeoscapeLinksState::btnTestClick);
 }

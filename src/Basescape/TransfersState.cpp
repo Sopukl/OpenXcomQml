@@ -65,20 +65,20 @@ TransfersState::TransfersState(Base *base) : _base(base)
 	// Set up objects
 	setWindowBackground(_window, "transferInfo");
 
-	_btnOk->setText(tr("STR_OK"));
+	_btnOk->setText(ltr("STR_OK"));
 	_btnOk->onMouseClick((ActionHandler)&TransfersState::btnOkClick);
 	_btnOk->onKeyboardPress((ActionHandler)&TransfersState::btnOkClick, options1.keyOk());
 	_btnOk->onKeyboardPress((ActionHandler)&TransfersState::btnOkClick, options1.keyCancel());
 
 	_txtTitle->setBig();
 	_txtTitle->setAlign(ALIGN_CENTER);
-	_txtTitle->setText(tr("STR_TRANSFERS"));
+	_txtTitle->setText(ltr("STR_TRANSFERS"));
 
-	_txtItem->setText(tr("STR_ITEM"));
+	_txtItem->setText(ltr("STR_ITEM"));
 
-	_txtQuantity->setText(tr("STR_QUANTITY_UC"));
+	_txtQuantity->setText(ltr("STR_QUANTITY_UC"));
 
-	_txtArrivalTime->setText(tr("STR_ARRIVAL_TIME_HOURS"));
+	_txtArrivalTime->setText(ltr("STR_ARRIVAL_TIME_HOURS"));
 
 	_lstTransfers->setColumns(3, 155, 75, 46);
 	_lstTransfers->setSelectable(true);

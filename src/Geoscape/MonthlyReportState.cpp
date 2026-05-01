@@ -88,25 +88,25 @@ MonthlyReportState::MonthlyReportState(Globe *globe) : _gameOver(0), _ratingTota
 	// Set up objects
 	setWindowBackground(_window, "monthlyReport");
 
-	_btnOk->setText(tr("STR_OK"));
+	_btnOk->setText(ltr("STR_OK"));
 	_btnOk->onMouseClick((ActionHandler)&MonthlyReportState::btnOkClick);
 	_btnOk->onKeyboardPress((ActionHandler)&MonthlyReportState::btnOkClick, options1.keyOk());
 	_btnOk->onKeyboardPress((ActionHandler)&MonthlyReportState::btnOkClick, options1.keyCancel());
 
-	_btnBigOk->setText(tr("STR_OK"));
+	_btnBigOk->setText(ltr("STR_OK"));
 	_btnBigOk->onMouseClick((ActionHandler)&MonthlyReportState::btnOkClick);
 	_btnBigOk->onKeyboardPress((ActionHandler)&MonthlyReportState::btnOkClick, options1.keyOk());
 	_btnBigOk->onKeyboardPress((ActionHandler)&MonthlyReportState::btnOkClick, options1.keyCancel());
 	_btnBigOk->setVisible(false);
 
 	_txtTitle->setBig();
-	_txtTitle->setText(tr("STR_XCOM_PROJECT_MONTHLY_REPORT"));
+	_txtTitle->setText(ltr("STR_XCOM_PROJECT_MONTHLY_REPORT"));
 
 	_txtFailure->setBig();
 	_txtFailure->setAlign(ALIGN_CENTER);
 	_txtFailure->setVerticalAlign(ALIGN_MIDDLE);
 	_txtFailure->setWordWrap(true);
-	_txtFailure->setText(tr("STR_YOU_HAVE_FAILED"));
+	_txtFailure->setText(ltr("STR_YOU_HAVE_FAILED"));
 	_txtFailure->setVisible(false);
 
 	calculateChanges();
@@ -134,7 +134,7 @@ MonthlyReportState::MonthlyReportState(Globe *globe) : _gameOver(0), _ratingTota
 	case 12: m = "STR_DEC"; break;
 	default: m = "";
 	}
-	_txtMonth->setText(tr("STR_MONTH").arg(tr(m)).arg(year));
+	_txtMonth->setText(ltr("STR_MONTH").arg(ltr(m)).arg(year));
 
 	// Calculate rating
 	int difficulty_threshold = _game->getMod()->getDefeatScore() + 100 * _game->getSavedGame()->getDifficultyCoefficient();
@@ -150,22 +150,22 @@ MonthlyReportState::MonthlyReportState(Globe *globe) : _gameOver(0), _ratingTota
 			}
 		}
 	}
-	std::string rating = tr("STR_RATING_TERRIBLE");
+	std::string rating = ltr("STR_RATING_TERRIBLE");
 	if (_ratingTotal > difficulty_threshold - 300)
 	{
-		rating = tr("STR_RATING_POOR");
+		rating = ltr("STR_RATING_POOR");
 	}
 	if (_ratingTotal > difficulty_threshold)
 	{
-		rating = tr("STR_RATING_OK");
+		rating = ltr("STR_RATING_OK");
 	}
 	if (_ratingTotal > 0)
 	{
-		rating = tr("STR_RATING_GOOD");
+		rating = ltr("STR_RATING_GOOD");
 	}
 	if (_ratingTotal > 500)
 	{
-		rating = tr("STR_RATING_EXCELLENT");
+		rating = ltr("STR_RATING_EXCELLENT");
 	}
 
 	if (!_game->getMod()->getMonthlyRatings()->empty())
@@ -177,15 +177,15 @@ MonthlyReportState::MonthlyReportState(Globe *globe) : _gameOver(0), _ratingTota
 			if (pair.first > temp && pair.first <= _ratingTotal)
 			{
 				temp = pair.first;
-				rating = tr(pair.second);
+				rating = ltr(pair.second);
 			}
 		}
 	}
 
-	_txtRating->setText(tr("STR_MONTHLY_RATING").arg(_ratingTotal).arg(rating));
+	_txtRating->setText(ltr("STR_MONTHLY_RATING").arg(_ratingTotal).arg(rating));
 
 	std::ostringstream ss;
-	ss << tr("STR_INCOME") << "> " << Unicode::TOK_COLOR_FLIP << Unicode::formatFunding(_game->getSavedGame()->getCountryFunding());
+	ss << ltr("STR_INCOME") << "> " << Unicode::TOK_COLOR_FLIP << Unicode::formatFunding(_game->getSavedGame()->getCountryFunding());
 	ss << " (";
 	if (_fundingDiff > 0)
 		ss << '+';
@@ -193,7 +193,7 @@ MonthlyReportState::MonthlyReportState(Globe *globe) : _gameOver(0), _ratingTota
 	_txtIncome->setText(ss.str());
 
 	std::ostringstream ss2;
-	ss2 << tr("STR_MAINTENANCE") << "> " << Unicode::TOK_COLOR_FLIP << Unicode::formatFunding(_game->getSavedGame()->getBaseMaintenance());
+	ss2 << ltr("STR_MAINTENANCE") << "> " << Unicode::TOK_COLOR_FLIP << Unicode::formatFunding(_game->getSavedGame()->getBaseMaintenance());
 	_txtMaintenance->setText(ss2.str());
 
 	int performanceBonus = _game->getMod()->getPerformanceBonus(_ratingTotal);
@@ -203,7 +203,7 @@ MonthlyReportState::MonthlyReportState(Globe *globe) : _gameOver(0), _ratingTota
 		_game->getSavedGame()->setFunds(_game->getSavedGame()->getFunds() + performanceBonus);
 		// display
 		std::ostringstream ss4;
-		ss4 << tr("STR_PERFORMANCE_BONUS") << "> " << Unicode::TOK_COLOR_FLIP << Unicode::formatFunding(performanceBonus);
+		ss4 << ltr("STR_PERFORMANCE_BONUS") << "> " << Unicode::TOK_COLOR_FLIP << Unicode::formatFunding(performanceBonus);
 		_txtBonus->setText(ss4.str());
 		// shuffle the fields a bit for better overview
 		int upper = _txtMaintenance->getY();
@@ -220,7 +220,7 @@ MonthlyReportState::MonthlyReportState(Globe *globe) : _gameOver(0), _ratingTota
 	}
 
 	std::ostringstream ss3;
-	ss3 << tr("STR_BALANCE") << "> " << Unicode::TOK_COLOR_FLIP << Unicode::formatFunding(_game->getSavedGame()->getFunds());
+	ss3 << ltr("STR_BALANCE") << "> " << Unicode::TOK_COLOR_FLIP << Unicode::formatFunding(_game->getSavedGame()->getFunds());
 	_txtBalance->setText(ss3.str());
 
 	_txtDesc->setWordWrap(true);
@@ -228,19 +228,19 @@ MonthlyReportState::MonthlyReportState(Globe *globe) : _gameOver(0), _ratingTota
 
 	// calculate satisfaction
 	std::ostringstream ss5;
-	std::string satisFactionString = tr("STR_COUNCIL_IS_DISSATISFIED");
+	std::string satisFactionString = ltr("STR_COUNCIL_IS_DISSATISFIED");
 	bool resetWarning = true;
 	if (_ratingTotal > difficulty_threshold)
 	{
-		satisFactionString = tr("STR_COUNCIL_IS_GENERALLY_SATISFIED");
+		satisFactionString = ltr("STR_COUNCIL_IS_GENERALLY_SATISFIED");
 	}
 	if (_ratingTotal > 500)
 	{
-		satisFactionString = tr("STR_COUNCIL_IS_VERY_PLEASED");
+		satisFactionString = ltr("STR_COUNCIL_IS_VERY_PLEASED");
 	}
 	if (_lastMonthsRating <= difficulty_threshold && _ratingTotal <= difficulty_threshold)
 	{
-		satisFactionString = tr("STR_YOU_HAVE_NOT_SUCCEEDED");
+		satisFactionString = ltr("STR_YOU_HAVE_NOT_SUCCEEDED");
 		_pactList.erase(_pactList.begin(), _pactList.end());
 		_cancelPactList.erase(_cancelPactList.begin(), _cancelPactList.end());
 		_happyList.erase(_happyList.begin(), _happyList.end());
@@ -257,7 +257,7 @@ MonthlyReportState::MonthlyReportState(Globe *globe) : _gameOver(0), _ratingTota
 			if (_game->getSavedGame()->getWarned())
 			{
 				ss5.str("");
-				ss5 << tr("STR_YOU_HAVE_NOT_SUCCEEDED");
+				ss5 << ltr("STR_YOU_HAVE_NOT_SUCCEEDED");
 				_pactList.erase(_pactList.begin(), _pactList.end());
 				_cancelPactList.erase(_cancelPactList.begin(), _cancelPactList.end());
 				_happyList.erase(_happyList.begin(), _happyList.end());
@@ -266,7 +266,7 @@ MonthlyReportState::MonthlyReportState(Globe *globe) : _gameOver(0), _ratingTota
 			}
 			else
 			{
-				ss5 << "\n\n" << tr("STR_COUNCIL_REDUCE_DEBTS");
+				ss5 << "\n\n" << ltr("STR_COUNCIL_REDUCE_DEBTS");
 				_game->getSavedGame()->setWarned(true);
 				resetWarning = false;
 			}
@@ -502,18 +502,18 @@ std::string MonthlyReportState::countryList(const std::vector<std::string> &coun
 		ss << "\n\n";
 		if (countries.size() == 1)
 		{
-			ss << tr(singular).arg(tr(countries.front()));
+			ss << ltr(singular).arg(ltr(countries.front()));
 		}
 		else
 		{
-			LocalizedText list = tr(countries.front());
+			LocalizedText list = ltr(countries.front());
 			std::vector<std::string>::const_iterator i;
 			for (i = countries.begin() + 1; i < countries.end() - 1; ++i)
 			{
-				list = tr("STR_COUNTRIES_COMMA").arg(list).arg(tr(*i));
+				list = ltr("STR_COUNTRIES_COMMA").arg(list).arg(ltr(*i));
 			}
-			list = tr("STR_COUNTRIES_AND").arg(list).arg(tr(*i));
-			ss << tr(plural).arg(list);
+			list = ltr("STR_COUNTRIES_AND").arg(list).arg(ltr(*i));
+			ss << ltr(plural).arg(list);
 		}
 	}
 	return ss.str();

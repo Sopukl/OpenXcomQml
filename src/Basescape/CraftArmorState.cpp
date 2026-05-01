@@ -86,28 +86,28 @@ CraftArmorState::CraftArmorState(Base *base, size_t craft) : _base(base), _craft
 
 	touchComponentsConfigure();
 
-	_btnOk->setText(tr("STR_OK"));
+	_btnOk->setText(ltr("STR_OK"));
 	_btnOk->onMouseClick((ActionHandler)&CraftArmorState::btnOkClick);
 	_btnOk->onKeyboardPress((ActionHandler)&CraftArmorState::btnOkClick, options1.keyCancel());
 	_btnOk->onKeyboardPress((ActionHandler)&CraftArmorState::btnDeequipAllArmorClick, options1.keyRemoveArmorFromAllCrafts());
 	_btnOk->onKeyboardPress((ActionHandler)&CraftArmorState::btnDeequipCraftArmorClick, options1.keyRemoveArmorFromCraft());
 
 	_txtTitle->setBig();
-	_txtTitle->setText(tr("STR_SELECT_ARMOR"));
+	_txtTitle->setText(ltr("STR_SELECT_ARMOR"));
 
-	_txtName->setText(tr("STR_NAME_UC"));
+	_txtName->setText(ltr("STR_NAME_UC"));
 
-	_txtCraft->setText(tr("STR_CRAFT"));
+	_txtCraft->setText(ltr("STR_CRAFT"));
 
-	_txtArmor->setText(tr("STR_ARMOR"));
+	_txtArmor->setText(ltr("STR_ARMOR"));
 
 	// populate sort options
 	std::vector<std::string> sortOptions;
-	sortOptions.push_back(tr("STR_ORIGINAL_ORDER"));
+	sortOptions.push_back(ltr("STR_ORIGINAL_ORDER"));
 	_sortFunctors.push_back(NULL);
 
 #define PUSH_IN(strId, functor) \
-	sortOptions.push_back(tr(strId)); \
+	sortOptions.push_back(ltr(strId)); \
 	_sortFunctors.push_back(new SortFunctor(_game, functor));
 
 	PUSH_IN("STR_ID", idStat);
@@ -145,7 +145,7 @@ CraftArmorState::CraftArmorState(Base *base, size_t craft) : _base(base), _craft
 	_cbxSortBy->setOptions(sortOptions);
 	_cbxSortBy->setSelected(0);
 	_cbxSortBy->onChange((ActionHandler)&CraftArmorState::cbxSortByChange);
-	_cbxSortBy->setText(tr("STR_SORT_BY"));
+	_cbxSortBy->setText(ltr("STR_SORT_BY"));
 
 	_lstSoldiers->setColumns(3, 106, 70, 104);
 	_lstSoldiers->setAlign(ALIGN_RIGHT, 3);
@@ -272,7 +272,7 @@ void CraftArmorState::init()
 	int row = 0;
 	for (const auto* soldier : *_base->getSoldiers())
 	{
-		_lstSoldiers->setCellText(row, 2, tr(soldier->getArmor()->getType()));
+		_lstSoldiers->setCellText(row, 2, ltr(soldier->getArmor()->getType()));
 		row++;
 	}
 
@@ -309,11 +309,11 @@ void CraftArmorState::initList(size_t scrl)
 			int dynStat = (*_dynGetter)(_game, soldier);
 			std::ostringstream ss;
 			ss << dynStat;
-			_lstSoldiers->addRow(4, soldier->getName(true).c_str(), soldier->getCraftString(_game->getLanguage(), recovery).c_str(), tr(soldier->getArmor()->getType()).c_str(), ss.str().c_str());
+			_lstSoldiers->addRow(4, soldier->getName(true).c_str(), soldier->getCraftString(_game->getLanguage(), recovery).c_str(), ltr(soldier->getArmor()->getType()).c_str(), ss.str().c_str());
 		}
 		else
 		{
-			_lstSoldiers->addRow(3, soldier->getName(true).c_str(), soldier->getCraftString(_game->getLanguage(), recovery).c_str(), tr(soldier->getArmor()->getType()).c_str());
+			_lstSoldiers->addRow(3, soldier->getName(true).c_str(), soldier->getCraftString(_game->getLanguage(), recovery).c_str(), ltr(soldier->getArmor()->getType()).c_str());
 		}
 
 		Uint8 color;
@@ -355,7 +355,7 @@ void CraftArmorState::lstItemsLeftArrowClick(Action *action)
 			moveSoldierUp(action, row, true);
 		}
 	}
-	_cbxSortBy->setText(tr("STR_SORT_BY"));
+	_cbxSortBy->setText(ltr("STR_SORT_BY"));
 	_cbxSortBy->setSelected(-1);
 }
 
@@ -408,7 +408,7 @@ void CraftArmorState::lstItemsRightArrowClick(Action *action)
 			moveSoldierDown(action, row, true);
 		}
 	}
-	_cbxSortBy->setText(tr("STR_SORT_BY"));
+	_cbxSortBy->setText(ltr("STR_SORT_BY"));
 	_cbxSortBy->setSelected(-1);
 }
 
@@ -474,7 +474,7 @@ void CraftArmorState::lstSoldiersClick(Action *action)
 				if (s->getCraft() == c)
 				{
 					s->setCraftAndMoveEquipment(0, _base, _game->getSavedGame()->getMonthsPassed() == -1);
-					_lstSoldiers->setCellText(_lstSoldiers->getSelectedRow(), 1, tr("STR_NONE_UC"));
+					_lstSoldiers->setCellText(_lstSoldiers->getSelectedRow(), 1, ltr("STR_NONE_UC"));
 					_lstSoldiers->setRowColor(_lstSoldiers->getSelectedRow(), _lstSoldiers->getColor());
 				}
 				else if (s->hasFullHealth())
@@ -489,19 +489,19 @@ void CraftArmorState::lstSoldiersClick(Action *action)
 					}
 					else if (err == CPE_SoldierGroupNotAllowed)
 					{
-						_game->pushState(new ErrorMessageState(tr("STR_SOLDIER_GROUP_NOT_ALLOWED"), _palette, _game->getMod()->getInterface("soldierInfo")->getElement("errorMessage")->color, "BACK01.SCR", _game->getMod()->getInterface("soldierInfo")->getElement("errorPalette")->color));
+						_game->pushState(new ErrorMessageState(ltr("STR_SOLDIER_GROUP_NOT_ALLOWED"), _palette, _game->getMod()->getInterface("soldierInfo")->getElement("errorMessage")->color, "BACK01.SCR", _game->getMod()->getInterface("soldierInfo")->getElement("errorPalette")->color));
 					}
 					else if (err == CPE_SoldierGroupNotSame)
 					{
-						_game->pushState(new ErrorMessageState(tr("STR_SOLDIER_GROUP_NOT_SAME"), _palette, _game->getMod()->getInterface("soldierInfo")->getElement("errorMessage")->color, "BACK01.SCR", _game->getMod()->getInterface("soldierInfo")->getElement("errorPalette")->color));
+						_game->pushState(new ErrorMessageState(ltr("STR_SOLDIER_GROUP_NOT_SAME"), _palette, _game->getMod()->getInterface("soldierInfo")->getElement("errorMessage")->color, "BACK01.SCR", _game->getMod()->getInterface("soldierInfo")->getElement("errorPalette")->color));
 					}
 					else if (err == CPE_ArmorGroupNotAllowed)
 					{
-						_game->pushState(new ErrorMessageState(tr("STR_ARMOR_GROUP_NOT_ALLOWED"), _palette, _game->getMod()->getInterface("soldierInfo")->getElement("errorMessage")->color, "BACK01.SCR", _game->getMod()->getInterface("soldierInfo")->getElement("errorPalette")->color));
+						_game->pushState(new ErrorMessageState(ltr("STR_ARMOR_GROUP_NOT_ALLOWED"), _palette, _game->getMod()->getInterface("soldierInfo")->getElement("errorMessage")->color, "BACK01.SCR", _game->getMod()->getInterface("soldierInfo")->getElement("errorPalette")->color));
 					}
 					else if (space > 0)
 					{
-						_game->pushState(new ErrorMessageState(tr("STR_NOT_ENOUGH_CRAFT_SPACE"), _palette, _game->getMod()->getInterface("soldierInfo")->getElement("errorMessage")->color, "BACK01.SCR", _game->getMod()->getInterface("soldierInfo")->getElement("errorPalette")->color));
+						_game->pushState(new ErrorMessageState(ltr("STR_NOT_ENOUGH_CRAFT_SPACE"), _palette, _game->getMod()->getInterface("soldierInfo")->getElement("errorMessage")->color, "BACK01.SCR", _game->getMod()->getInterface("soldierInfo")->getElement("errorPalette")->color));
 					}
 				}
 			}
@@ -527,7 +527,7 @@ void CraftArmorState::lstSoldiersClick(Action *action)
 				if (craft && !craft->validateArmorChange(s->getArmor()->getSize(), a->getSize()))
 				{
 					armorUnlocked = false; // armor not valid due to craft constraints
-					_game->pushState(new ErrorMessageState(tr("STR_NOT_ENOUGH_CRAFT_SPACE"), _palette, _game->getMod()->getInterface("soldierInfo")->getElement("errorMessage")->color, "BACK01.SCR", _game->getMod()->getInterface("soldierInfo")->getElement("errorPalette")->color));
+					_game->pushState(new ErrorMessageState(ltr("STR_NOT_ENOUGH_CRAFT_SPACE"), _palette, _game->getMod()->getInterface("soldierInfo")->getElement("errorMessage")->color, "BACK01.SCR", _game->getMod()->getInterface("soldierInfo")->getElement("errorPalette")->color));
 				}
 			}
 			//if (armorUnlocked && a && a->getRequiredBonus())
@@ -554,14 +554,14 @@ void CraftArmorState::lstSoldiersClick(Action *action)
 
 						s->setArmor(a, true);
 						s->prepareStatsWithBonuses(_game->getMod()); // refresh stats for sorting
-						_lstSoldiers->setCellText(_lstSoldiers->getSelectedRow(), 2, tr(a->getType()));
+						_lstSoldiers->setCellText(_lstSoldiers->getSelectedRow(), 2, ltr(a->getType()));
 					}
 				}
 				else
 				{
 					s->setArmor(a, true);
 					s->prepareStatsWithBonuses(_game->getMod()); // refresh stats for sorting
-					_lstSoldiers->setCellText(_lstSoldiers->getSelectedRow(), 2, tr(a->getType()));
+					_lstSoldiers->setCellText(_lstSoldiers->getSelectedRow(), 2, ltr(a->getType()));
 				}
 			}
 		}
@@ -635,7 +635,7 @@ void CraftArmorState::btnDeequipAllArmorClick(Action *action)
 
 				soldier->setArmor(a, true);
 				soldier->prepareStatsWithBonuses(_game->getMod()); // refresh stats for sorting
-				_lstSoldiers->setCellText(row, 2, tr(a->getType()));
+				_lstSoldiers->setCellText(row, 2, ltr(a->getType()));
 			}
 		}
 		row++;
@@ -675,7 +675,7 @@ void CraftArmorState::btnDeequipCraftArmorClick(Action *action)
 
 				s->setArmor(a, true);
 				s->prepareStatsWithBonuses(_game->getMod()); // refresh stats for sorting
-				_lstSoldiers->setCellText(row, 2, tr(a->getType()));
+				_lstSoldiers->setCellText(row, 2, ltr(a->getType()));
 			}
 		}
 		row++;

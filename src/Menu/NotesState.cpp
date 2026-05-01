@@ -70,7 +70,7 @@ NotesState::NotesState(OptionsOrigin origin) : _origin(origin), _previousSelecte
 
 	_txtTitle->setBig();
 	_txtTitle->setAlign(ALIGN_CENTER);
-	_txtTitle->setText(tr("STR_NOTES"));
+	_txtTitle->setText(ltr("STR_NOTES"));
 
 #ifdef __MOBILE__
 	_txtDelete->setVisible(false);
@@ -78,7 +78,7 @@ NotesState::NotesState(OptionsOrigin origin) : _origin(origin), _previousSelecte
 #else
 	_btnDelete->setVisible(false);
 	_txtDelete->setAlign(ALIGN_CENTER);
-	_txtDelete->setText(tr("STR_RIGHT_CLICK_TO_DELETE"));
+	_txtDelete->setText(ltr("STR_RIGHT_CLICK_TO_DELETE"));
 #endif
 
 	_lstNotes->setColumns(1, 288);
@@ -92,11 +92,11 @@ NotesState::NotesState(OptionsOrigin origin) : _origin(origin), _previousSelecte
 	_edtNote->setVisible(false);
 	_edtNote->onKeyboardPress((ActionHandler)&NotesState::edtNoteKeyPress);
 
-	_btnSave->setText(tr("STR_SAVE_UC"));
+	_btnSave->setText(ltr("STR_SAVE_UC"));
 	_btnSave->onMouseClick((ActionHandler)&NotesState::btnSaveClick);
 	//_btnSave->onKeyboardPress((ActionHandler)&NotesState::btnSaveClick, options1.keyOk());
 
-	_btnCancel->setText(tr("STR_CANCEL_UC"));
+	_btnCancel->setText(ltr("STR_CANCEL_UC"));
 	_btnCancel->onMouseClick((ActionHandler)&NotesState::btnCancelClick);
 	_btnCancel->onKeyboardPress((ActionHandler)&NotesState::btnCancelClick, options1.keyCancel());
 }
@@ -140,7 +140,7 @@ void NotesState::updateList()
 		row++;
 	}
 
-	_lstNotes->addRow(1, tr("STR_NEW_NOTE").c_str());
+	_lstNotes->addRow(1, ltr("STR_NEW_NOTE").c_str());
 	if (_origin != OPT_BATTLESCAPE)
 	{
 		_lstNotes->setRowColor(_lstNotes->getLastRowIndex(), color);
@@ -248,7 +248,7 @@ void NotesState::edtNoteKeyPress(Action* action)
 			_lstNotes->setRowColor(_lstNotes->getLastRowIndex(), _lstNotes->getColor());
 
 			// add a new empty note
-			_lstNotes->addRow(1, tr("STR_NEW_NOTE").c_str());
+			_lstNotes->addRow(1, ltr("STR_NEW_NOTE").c_str());
 			if (_origin != OPT_BATTLESCAPE)
 			{
 				_lstNotes->setRowColor(_lstNotes->getLastRowIndex(), _lstNotes->getSecondaryColor());

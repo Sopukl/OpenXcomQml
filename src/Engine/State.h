@@ -17,6 +17,7 @@
  * You should have received a copy of the GNU General Public License
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
+#include <QObject>
 #include <vector>
 #include <string>
 #include <SDL.h>
@@ -44,10 +45,10 @@ enum SoldierGender : char;
  * information from/to the user, and are linked to the core game
  * engine which manages them.
  */
-class State
+class State: public QObject
 {
 	friend class Timer;
-
+	Q_OBJECT
 protected:
 	static Game *_game;
 	std::vector<Surface*> _surfaces;
@@ -105,13 +106,13 @@ public:
 	/// Resets all the state surfaces.
 	void resetAll();
 	/// Get the localized text.
-	LocalizedText tr(const std::string &id) const;
+	LocalizedText ltr(const std::string &id) const;
 	/// Get the localized text.
-	LocalizedText trAlt(const std::string &id, int alt) const;
+	LocalizedText ltrAlt(const std::string &id, int alt) const;
 	/// Get the localized text.
-	LocalizedText tr(const std::string &id, unsigned n) const;
+	LocalizedText ltr(const std::string &id, unsigned n) const;
 	/// Get the localized text.
-	LocalizedText tr(const std::string &id, SoldierGender gender) const;
+	LocalizedText ltr(const std::string &id, SoldierGender gender) const;
 	/// redraw all the text-type surfaces.
 	void redrawText();
 	/// does the state only have one text list (to scroll)?

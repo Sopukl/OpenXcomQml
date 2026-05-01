@@ -62,18 +62,18 @@ DeleteGameState::DeleteGameState(OptionsOrigin origin, const std::string &save) 
 	// Set up objects
 	setWindowBackground(_window, "saveMenus");
 
-	_btnYes->setText(tr("STR_YES"));
+	_btnYes->setText(ltr("STR_YES"));
 	_btnYes->onMouseClick((ActionHandler)&DeleteGameState::btnYesClick);
 	_btnYes->onKeyboardPress((ActionHandler)&DeleteGameState::btnYesClick, options1.keyOk());
 
-	_btnNo->setText(tr("STR_NO"));
+	_btnNo->setText(ltr("STR_NO"));
 	_btnNo->onMouseClick((ActionHandler)&DeleteGameState::btnNoClick);
 	_btnNo->onKeyboardPress((ActionHandler)&DeleteGameState::btnNoClick, options1.keyCancel());
 
 	_txtMessage->setAlign(ALIGN_CENTER);
 	_txtMessage->setBig();
 	_txtMessage->setWordWrap(true);
-	_txtMessage->setText(tr("STR_IS_IT_OK_TO_DELETE_THE_SAVED_GAME"));
+	_txtMessage->setText(ltr("STR_IS_IT_OK_TO_DELETE_THE_SAVED_GAME"));
 
 	if (_origin == OPT_BATTLESCAPE)
 	{
@@ -99,7 +99,7 @@ void DeleteGameState::btnYesClick(Action *)
 	_game->popState();
 	if (!CrossPlatform::deleteFile(_filename))
 	{
-		std::string error = tr("STR_DELETE_UNSUCCESSFUL");
+		std::string error = ltr("STR_DELETE_UNSUCCESSFUL");
 		if (_origin != OPT_BATTLESCAPE)
 			_game->pushState(new ErrorMessageState(error, _palette, _game->getMod()->getInterface("errorMessages")->getElement("geoscapeColor")->color, "BACK01.SCR", _game->getMod()->getInterface("errorMessages")->getElement("geoscapePalette")->color));
 		else

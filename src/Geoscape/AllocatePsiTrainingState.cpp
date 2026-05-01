@@ -83,7 +83,7 @@ AllocatePsiTrainingState::AllocatePsiTrainingState(Base *base) : _sel(0), _base(
 	// Set up objects
 	setWindowBackground(_window, "allocatePsi");
 
-	_btnOk->setText(tr("STR_OK"));
+	_btnOk->setText(ltr("STR_OK"));
 	_btnOk->onMouseClick((ActionHandler)&AllocatePsiTrainingState::btnOkClick);
 	_btnOk->onKeyboardPress((ActionHandler)&AllocatePsiTrainingState::btnOkClick, options1.keyCancel());
 	_btnOk->onKeyboardPress((ActionHandler)&AllocatePsiTrainingState::btnDeassignAllSoldiersClick, options1.keyRemoveSoldiersFromTraining());
@@ -103,27 +103,27 @@ AllocatePsiTrainingState::AllocatePsiTrainingState(Base *base) : _sel(0), _base(
 
 	_txtTitle->setBig();
 	_txtTitle->setAlign(ALIGN_CENTER);
-	_txtTitle->setText(tr("STR_PSIONIC_TRAINING"));
+	_txtTitle->setText(ltr("STR_PSIONIC_TRAINING"));
 
 	_labSpace = base->getAvailablePsiLabs() - base->getUsedPsiLabs();
-	_txtRemaining->setText(tr("STR_REMAINING_PSI_LAB_CAPACITY").arg(_labSpace));
+	_txtRemaining->setText(ltr("STR_REMAINING_PSI_LAB_CAPACITY").arg(_labSpace));
 
-	_txtName->setText(tr("STR_NAME"));
+	_txtName->setText(ltr("STR_NAME"));
 
-	_txtPsiStrength->setText(tr("STR_PSIONIC__STRENGTH"));
+	_txtPsiStrength->setText(ltr("STR_PSIONIC__STRENGTH"));
 
-	_txtPsiSkill->setText(tr("STR_PSIONIC_SKILL_IMPROVEMENT"));
+	_txtPsiSkill->setText(ltr("STR_PSIONIC_SKILL_IMPROVEMENT"));
 
-	_txtTraining->setText(tr("STR_IN_TRAINING"));
+	_txtTraining->setText(ltr("STR_IN_TRAINING"));
 
 	// populate sort options
 	std::vector<std::string> sortOptions;
-	sortOptions.push_back(tr("STR_ORIGINAL_ORDER"));
+	sortOptions.push_back(ltr("STR_ORIGINAL_ORDER"));
 	_sortFunctors.push_back(NULL);
 	_sortFunctorsPlus.push_back(NULL);
 
 #define PUSH_IN(strId, functor) \
-	sortOptions.push_back(tr(strId)); \
+	sortOptions.push_back(ltr(strId)); \
 	_sortFunctors.push_back(new SortFunctor(_game, functor)); \
 	_sortFunctorsPlus.push_back(new SortFunctor(_game, functor));
 
@@ -143,7 +143,7 @@ AllocatePsiTrainingState::AllocatePsiTrainingState(Base *base) : _sel(0), _base(
 #undef PUSH_IN
 
 #define PUSH_IN(strId, functor, functorPlus) \
-	sortOptions.push_back(tr(strId)); \
+	sortOptions.push_back(ltr(strId)); \
 	_sortFunctors.push_back(new SortFunctor(_game, functor)); \
 	_sortFunctorsPlus.push_back(new SortFunctor(_game, functorPlus));
 
@@ -169,7 +169,7 @@ AllocatePsiTrainingState::AllocatePsiTrainingState(Base *base) : _sel(0), _base(
 	_cbxSortBy->setOptions(sortOptions);
 	_cbxSortBy->setSelected(0);
 	_cbxSortBy->onChange((ActionHandler)&AllocatePsiTrainingState::cbxSortByChange);
-	_cbxSortBy->setText(tr("STR_SORT_BY"));
+	_cbxSortBy->setText(ltr("STR_SORT_BY"));
 
 	_lstSoldiers->setArrowColumn(238, ARROW_VERTICAL);
 	_lstSoldiers->setColumns(4, 114, 80, 66, 40);
@@ -319,7 +319,7 @@ void AllocatePsiTrainingState::initList(size_t scrl)
 		}
 		else
 		{
-			ssStr << tr("STR_UNKNOWN");
+			ssStr << ltr("STR_UNKNOWN");
 		}
 		if (soldier->getCurrentStats()->psiSkill > 0)
 		{
@@ -331,7 +331,7 @@ void AllocatePsiTrainingState::initList(size_t scrl)
 		}
 		if (soldier->getRules()->getTrainingStatCaps().psiSkill <= 0)
 		{
-			_lstSoldiers->addRow(4, soldier->getName(true).c_str(), ssStr.str().c_str(), ssSkl.str().c_str(), tr("STR_NO_WOUNDED").c_str());
+			_lstSoldiers->addRow(4, soldier->getName(true).c_str(), ssStr.str().c_str(), ssSkl.str().c_str(), ltr("STR_NO_WOUNDED").c_str());
 			_lstSoldiers->setRowColor(row, _lstSoldiers->getColor());
 			if (soldier->isInPsiTraining())
 			{
@@ -341,7 +341,7 @@ void AllocatePsiTrainingState::initList(size_t scrl)
 		}
 		else if (soldier->isFullyPsiTrained())
 		{
-			_lstSoldiers->addRow(4, soldier->getName(true).c_str(), ssStr.str().c_str(), ssSkl.str().c_str(), tr("STR_NO_DONE").c_str());
+			_lstSoldiers->addRow(4, soldier->getName(true).c_str(), ssStr.str().c_str(), ssSkl.str().c_str(), ltr("STR_NO_DONE").c_str());
 			_lstSoldiers->setRowColor(row, _lstSoldiers->getColor());
 			if (soldier->isInPsiTraining())
 			{
@@ -351,17 +351,17 @@ void AllocatePsiTrainingState::initList(size_t scrl)
 		}
 		else if (soldier->isInPsiTraining())
 		{
-			_lstSoldiers->addRow(4, soldier->getName(true).c_str(), ssStr.str().c_str(), ssSkl.str().c_str(), tr("STR_YES").c_str());
+			_lstSoldiers->addRow(4, soldier->getName(true).c_str(), ssStr.str().c_str(), ssSkl.str().c_str(), ltr("STR_YES").c_str());
 			_lstSoldiers->setRowColor(row, _lstSoldiers->getSecondaryColor());
 		}
 		else
 		{
-			_lstSoldiers->addRow(4, soldier->getName(true).c_str(), ssStr.str().c_str(), ssSkl.str().c_str(), tr("STR_NO").c_str());
+			_lstSoldiers->addRow(4, soldier->getName(true).c_str(), ssStr.str().c_str(), ssSkl.str().c_str(), ltr("STR_NO").c_str());
 			_lstSoldiers->setRowColor(row, _lstSoldiers->getColor());
 		}
 		row++;
 	}
-	_txtRemaining->setText(tr("STR_REMAINING_PSI_LAB_CAPACITY").arg(_labSpace));
+	_txtRemaining->setText(ltr("STR_REMAINING_PSI_LAB_CAPACITY").arg(_labSpace));
 	if (scrl)
 		_lstSoldiers->scrollTo(scrl);
 	_lstSoldiers->draw();
@@ -386,7 +386,7 @@ void AllocatePsiTrainingState::lstItemsLeftArrowClick(Action *action)
 			moveSoldierUp(action, row, true);
 		}
 	}
-	_cbxSortBy->setText(tr("STR_SORT_BY"));
+	_cbxSortBy->setText(ltr("STR_SORT_BY"));
 	_cbxSortBy->setSelected(-1);
 }
 
@@ -439,7 +439,7 @@ void AllocatePsiTrainingState::lstItemsRightArrowClick(Action *action)
 			moveSoldierDown(action, row, true);
 		}
 	}
-	_cbxSortBy->setText(tr("STR_SORT_BY"));
+	_cbxSortBy->setText(ltr("STR_SORT_BY"));
 	_cbxSortBy->setSelected(-1);
 }
 
@@ -501,19 +501,19 @@ void AllocatePsiTrainingState::lstSoldiersClick(Action *action)
 		{
 			if (_base->getUsedPsiLabs() < _base->getAvailablePsiLabs())
 			{
-				_lstSoldiers->setCellText(_sel, 3, tr("STR_YES"));
+				_lstSoldiers->setCellText(_sel, 3, ltr("STR_YES"));
 				_lstSoldiers->setRowColor(_sel, _lstSoldiers->getSecondaryColor());
 				_labSpace--;
-				_txtRemaining->setText(tr("STR_REMAINING_PSI_LAB_CAPACITY").arg(_labSpace));
+				_txtRemaining->setText(ltr("STR_REMAINING_PSI_LAB_CAPACITY").arg(_labSpace));
 				s->setPsiTraining(true);
 			}
 		}
 		else
 		{
-			_lstSoldiers->setCellText(_sel, 3, tr("STR_NO"));
+			_lstSoldiers->setCellText(_sel, 3, ltr("STR_NO"));
 			_lstSoldiers->setRowColor(_sel, _lstSoldiers->getColor());
 			_labSpace++;
-			_txtRemaining->setText(tr("STR_REMAINING_PSI_LAB_CAPACITY").arg(_labSpace));
+			_txtRemaining->setText(ltr("STR_REMAINING_PSI_LAB_CAPACITY").arg(_labSpace));
 			s->setPsiTraining(false);
 		}
 	}
@@ -566,21 +566,21 @@ void AllocatePsiTrainingState::btnDeassignAllSoldiersClick(Action* action)
 		s->setPsiTraining(false);
 		if (s->getRules()->getTrainingStatCaps().psiSkill <= 0)
 		{
-			_lstSoldiers->setCellText(row, 3, tr("STR_NO_WOUNDED"));
+			_lstSoldiers->setCellText(row, 3, ltr("STR_NO_WOUNDED"));
 		}
 		else if (s->isFullyPsiTrained())
 		{
-			_lstSoldiers->setCellText(row, 3, tr("STR_NO_DONE"));
+			_lstSoldiers->setCellText(row, 3, ltr("STR_NO_DONE"));
 		}
 		else
 		{
-			_lstSoldiers->setCellText(row, 3, tr("STR_NO"));
+			_lstSoldiers->setCellText(row, 3, ltr("STR_NO"));
 		}
 		_lstSoldiers->setRowColor(row, _lstSoldiers->getColor());
 		row++;
 	}
 	_labSpace = _base->getAvailablePsiLabs() - _base->getUsedPsiLabs();
-	_txtRemaining->setText(tr("STR_REMAINING_PSI_LAB_CAPACITY").arg(_labSpace));
+	_txtRemaining->setText(ltr("STR_REMAINING_PSI_LAB_CAPACITY").arg(_labSpace));
 }
 
 /**
@@ -602,14 +602,14 @@ void AllocatePsiTrainingState::btnAssignAllSoldiersClick(Action* action)
 		}
 		else if (_labSpace > 0 && !s->isInPsiTraining())
 		{
-			_lstSoldiers->setCellText(row, 3, tr("STR_YES"));
+			_lstSoldiers->setCellText(row, 3, ltr("STR_YES"));
 			_lstSoldiers->setRowColor(row, _lstSoldiers->getSecondaryColor());
 			_labSpace--;
 			s->setPsiTraining(true);
 		}
 		row++;
 	}
-	_txtRemaining->setText(tr("STR_REMAINING_PSI_LAB_CAPACITY").arg(_labSpace));
+	_txtRemaining->setText(ltr("STR_REMAINING_PSI_LAB_CAPACITY").arg(_labSpace));
 }
 
 }

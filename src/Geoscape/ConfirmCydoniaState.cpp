@@ -55,18 +55,18 @@ ConfirmCydoniaState::ConfirmCydoniaState(Craft *craft) : _craft(craft)
 	// Set up objects
 	setWindowBackground(_window, "confirmCydonia");
 
-	_btnYes->setText(tr("STR_YES"));
+	_btnYes->setText(ltr("STR_YES"));
 	_btnYes->onMouseClick((ActionHandler)&ConfirmCydoniaState::btnYesClick);
 	_btnYes->onKeyboardPress((ActionHandler)&ConfirmCydoniaState::btnYesClick, options1.keyOk());
 
-	_btnNo->setText(tr("STR_NO"));
+	_btnNo->setText(ltr("STR_NO"));
 	_btnNo->onMouseClick((ActionHandler)&ConfirmCydoniaState::btnNoClick);
 	_btnNo->onKeyboardPress((ActionHandler)&ConfirmCydoniaState::btnNoClick, options1.keyCancel());
 
 	_txtMessage->setAlign(ALIGN_CENTER);
 	_txtMessage->setBig();
 	_txtMessage->setWordWrap(true);
-	_txtMessage->setText(tr("STR_ARE_YOU_SURE_CYDONIA"));
+	_txtMessage->setText(ltr("STR_ARE_YOU_SURE_CYDONIA"));
 }
 
 /**

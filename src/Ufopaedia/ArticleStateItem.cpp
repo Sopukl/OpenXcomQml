@@ -104,7 +104,7 @@ namespace OpenXcom
 							if (powerBonus != otherPowerBonus)
 							{
 								allSame = false;
-								powerBonus = tr("STR_MULTIPLE_DIFFERENT_BONUSES");
+								powerBonus = ltr("STR_MULTIPLE_DIFFERENT_BONUSES");
 							}
 						}
 						if (!allSame) break;
@@ -173,7 +173,7 @@ namespace OpenXcom
 		_txtTitle->setColor(_textColor);
 		_txtTitle->setBig();
 		_txtTitle->setWordWrap(true);
-		_txtTitle->setText(tr(defs->getTitleForPage(_state->current_page)));
+		_txtTitle->setText(ltr(defs->getTitleForPage(_state->current_page)));
 
 		_txtWeight->setColor(_textColor);
 		_txtWeight->setAlign(ALIGN_RIGHT);
@@ -198,12 +198,12 @@ namespace OpenXcom
 		const std::vector<const RuleItem*> *ammo_data = ammoSlot != RuleItem::AmmoSlotSelfUse ? item->getCompatibleAmmoForSlot(ammoSlot) : &dummy;
 
 		int weight = item->getWeight();
-		std::string weightLabel = tr("STR_WEIGHT_PEDIA1").arg(weight);
+		std::string weightLabel = ltr("STR_WEIGHT_PEDIA1").arg(weight);
 		if (!ammo_data->empty())
 		{
 			// Note: weight including primary ammo only!
 			const RuleItem *ammo_rule = (*ammo_data)[0];
-			weightLabel = tr("STR_WEIGHT_PEDIA2").arg(weight).arg(weight + ammo_rule->getWeight());
+			weightLabel = ltr("STR_WEIGHT_PEDIA2").arg(weight).arg(weight + ammo_rule->getWeight());
 		}
 		_txtWeight->setText(weight != 0 ? weightLabel : "");
 
@@ -214,19 +214,19 @@ namespace OpenXcom
 			add(_txtShotType);
 			_txtShotType->setColor(_textColor);
 			_txtShotType->setWordWrap(true);
-			_txtShotType->setText(tr("STR_SHOT_TYPE"));
+			_txtShotType->setText(ltr("STR_SHOT_TYPE"));
 
 			_txtAccuracy = new Text(50, 17, 104, 66);
 			add(_txtAccuracy);
 			_txtAccuracy->setColor(_textColor);
 			_txtAccuracy->setWordWrap(true);
-			_txtAccuracy->setText(tr("STR_ACCURACY_UC"));
+			_txtAccuracy->setText(ltr("STR_ACCURACY_UC"));
 
 			_txtTuCost = new Text(60, 17, 158, 66);
 			add(_txtTuCost);
 			_txtTuCost->setColor(_textColor);
 			_txtTuCost->setWordWrap(true);
-			_txtTuCost->setText(tr("STR_TIME_UNIT_COST"));
+			_txtTuCost->setText(ltr("STR_TIME_UNIT_COST"));
 
 			_lstInfo = new TextList(204, 55, 8, 82);
 			add(_lstInfo);
@@ -246,7 +246,7 @@ namespace OpenXcom
 					tu.erase(tu.end() - 1);
 				}
 				int range = std::min(config->range, weapon->getMaxRange());
-				std::string label = config->shortName.empty() ? tr(name).arg(config->shots).arg(range) : tr(config->shortName).arg(config->shots).arg(range);
+				std::string label = config->shortName.empty() ? ltr(name).arg(config->shots).arg(range) : ltr(config->shortName).arg(config->shots).arg(range);
 				_lstInfo->addRow(3,
 					label.c_str(),
 					Unicode::formatPercentage(config->accuracy).c_str(),
@@ -298,7 +298,7 @@ namespace OpenXcom
 		_txtInfo->setSecondaryColor(_textColor2);
 		_txtInfo->setWordWrap(true);
 		_txtInfo->setScrollable(true);
-		_txtInfo->setText(tr(defs->getTextForPage(_state->current_page)));
+		_txtInfo->setText(ltr(defs->getTextForPage(_state->current_page)));
 
 		// STATS FOR NERDS extract
 		_txtAccuracyModifier = new Text(300, 9, 8, 174);
@@ -310,13 +310,13 @@ namespace OpenXcom
 		_txtAccuracyModifier->setColor(_textColor);
 		_txtAccuracyModifier->setSecondaryColor(_listColor2);
 		_txtAccuracyModifier->setWordWrap(false);
-		_txtAccuracyModifier->setText(tr("STR_ACCURACY_MODIFIER").arg(accuracyModifier));
+		_txtAccuracyModifier->setText(ltr("STR_ACCURACY_MODIFIER").arg(accuracyModifier));
 		_txtAccuracyModifier->setVisible(bottomOffset >= 20);
 
 		_txtPowerBonus->setColor(_textColor);
 		_txtPowerBonus->setSecondaryColor(_listColor2);
 		_txtPowerBonus->setWordWrap(true);
-		_txtPowerBonus->setText(tr("STR_POWER_BONUS").arg(powerBonus));
+		_txtPowerBonus->setText(ltr("STR_POWER_BONUS").arg(powerBonus));
 		_txtPowerBonus->setVisible(bottomOffset > 0);
 
 		// AMMO column
@@ -348,7 +348,7 @@ namespace OpenXcom
 
 		auto addAmmoDamagePower = [&](int pos, const RuleItem *rule, const RuleItem* weaponRule)
 		{
-			_txtAmmoType[pos]->setText(tr(getDamageTypeText(rule->getDamageType()->ResistType)));
+			_txtAmmoType[pos]->setText(ltr(getDamageTypeText(rule->getDamageType()->ResistType)));
 
 			ss.str("");ss.clear();
 			if (weaponRule->getIgnoreAmmoPower())
@@ -375,13 +375,13 @@ namespace OpenXcom
 				add(_txtDamage);
 				_txtDamage->setColor(_textColor);
 				_txtDamage->setAlign(ALIGN_CENTER);
-				_txtDamage->setText(tr("STR_DAMAGE_UC"));
+				_txtDamage->setText(ltr("STR_DAMAGE_UC"));
 
 				_txtAmmo = new Text(50, 10, 268, 7);
 				add(_txtAmmo);
 				_txtAmmo->setColor(_textColor);
 				_txtAmmo->setAlign(ALIGN_CENTER);
-				_txtAmmo->setText(tr("STR_AMMO"));
+				_txtAmmo->setText(ltr("STR_AMMO"));
 
 				if (ammo_data->empty())
 				{
@@ -427,7 +427,7 @@ namespace OpenXcom
 				add(_txtDamage);
 				_txtDamage->setColor(_textColor);
 				_txtDamage->setAlign(ALIGN_CENTER);
-				_txtDamage->setText(tr("STR_DAMAGE_UC"));
+				_txtDamage->setText(ltr("STR_DAMAGE_UC"));
 
 				addAmmoDamagePower(0, item, item);
 				break;
@@ -492,11 +492,11 @@ namespace OpenXcom
 
 						if (_game->getMod()->getExtraNerdyPediaInfoType() > 1)
 						{
-							ss << tr(StatsForNerdsState::shortTranslationMap.at(item.first));
+							ss << ltr(StatsForNerdsState::shortTranslationMap.at(item.first));
 						}
 						else
 						{
-							ss << tr(StatsForNerdsState::translationMap.at(item.first));
+							ss << ltr(StatsForNerdsState::translationMap.at(item.first));
 						}
 						if (power > 1)
 						{

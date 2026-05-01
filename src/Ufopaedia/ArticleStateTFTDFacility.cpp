@@ -54,26 +54,26 @@ namespace OpenXcom
 			_txtInfo->setHeight(_txtInfo->getHeight() - 16);
 			ss.str("");ss.clear();
 			ss << facility->getDefenseValue();
-			_lstInfo->addRow(2, tr("STR_DEFENSE_VALUE").c_str(), ss.str().c_str());
+			_lstInfo->addRow(2, ltr("STR_DEFENSE_VALUE").c_str(), ss.str().c_str());
 			_lstInfo->setCellColor(row++, 1, _listColor2);
 
 			ss.str("");ss.clear();
 			ss << Unicode::formatPercentage(facility->getHitRatio());
-			_lstInfo->addRow(2, tr("STR_HIT_RATIO").c_str(), ss.str().c_str());
+			_lstInfo->addRow(2, ltr("STR_HIT_RATIO").c_str(), ss.str().c_str());
 			_lstInfo->setCellColor(row++, 1, _listColor2);
 		}
 
 		ss.str("");ss.clear();
-		_lstInfo->addRow(2, tr("STR_CONSTRUCTION_TIME").c_str(), tr("STR_DAY", facility->getBuildTime()).c_str());
+		_lstInfo->addRow(2, ltr("STR_CONSTRUCTION_TIME").c_str(), ltr("STR_DAY", facility->getBuildTime()).c_str());
 		_lstInfo->setCellColor(row++, 1, _listColor2);
 
 		ss << Unicode::formatFunding(facility->getBuildCost());
-		_lstInfo->addRow(2, tr("STR_CONSTRUCTION_COST").c_str(), ss.str().c_str());
+		_lstInfo->addRow(2, ltr("STR_CONSTRUCTION_COST").c_str(), ss.str().c_str());
 		_lstInfo->setCellColor(row++, 1, _listColor2);
 
 		ss.str("");ss.clear();
 		ss << Unicode::formatFunding(facility->getMonthlyCost());
-		_lstInfo->addRow(2, tr("STR_MAINTENANCE_COST").c_str(), ss.str().c_str());
+		_lstInfo->addRow(2, ltr("STR_MAINTENANCE_COST").c_str(), ss.str().c_str());
 		_lstInfo->setCellColor(row++, 1, _listColor2);
 
 		centerAllSurfaces();

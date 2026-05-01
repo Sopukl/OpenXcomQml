@@ -87,31 +87,31 @@ ManufactureState::ManufactureState(Base *base) : _base(base)
 	// Set up objects
 	setWindowBackground(_window, "manufactureMenu");
 
-	_btnNew->setText(tr("STR_NEW_PRODUCTION"));
+	_btnNew->setText(ltr("STR_NEW_PRODUCTION"));
 	_btnNew->onMouseClick((ActionHandler)&ManufactureState::btnNewProductionClick);
 	_btnNew->onKeyboardPress((ActionHandler)&ManufactureState::btnNewProductionClick, options1.keyToggleQuickSearch());
 	_btnNew->onKeyboardPress((ActionHandler)&ManufactureState::onCurrentGlobalProductionClick, options1.keyGeoGlobalProduction());
 
-	_btnOk->setText(tr("STR_OK"));
+	_btnOk->setText(ltr("STR_OK"));
 	_btnOk->onMouseClick((ActionHandler)&ManufactureState::btnOkClick);
 	_btnOk->onKeyboardPress((ActionHandler)&ManufactureState::btnOkClick, options1.keyCancel());
 
 	_txtTitle->setBig();
 	_txtTitle->setAlign(ALIGN_CENTER);
-	_txtTitle->setText(tr("STR_CURRENT_PRODUCTION"));
+	_txtTitle->setText(ltr("STR_CURRENT_PRODUCTION"));
 
-	_txtItem->setText(tr("STR_ITEM"));
+	_txtItem->setText(ltr("STR_ITEM"));
 
-	_txtEngineers->setText(tr("STR_ENGINEERS__ALLOCATED"));
+	_txtEngineers->setText(ltr("STR_ENGINEERS__ALLOCATED"));
 	_txtEngineers->setWordWrap(true);
 
-	_txtProduced->setText(tr("STR_UNITS_PRODUCED"));
+	_txtProduced->setText(ltr("STR_UNITS_PRODUCED"));
 	_txtProduced->setWordWrap(true);
 
-	_txtCost->setText(tr("STR_COST__PER__UNIT"));
+	_txtCost->setText(ltr("STR_COST__PER__UNIT"));
 	_txtCost->setWordWrap(true);
 
-	_txtTimeLeft->setText(tr("STR_DAYS_HOURS_LEFT"));
+	_txtTimeLeft->setText(ltr("STR_DAYS_HOURS_LEFT"));
 	_txtTimeLeft->setWordWrap(true);
 
 	_lstManufacture->setColumns(5, 114, 16, 52, 56, 48);
@@ -218,12 +218,12 @@ void ManufactureState::fillProductionList(size_t scrl)
 
 			s4 << "-";
 		}
-		_lstManufacture->addRow(5, tr(prod->getRules()->getName()).c_str(), s1.str().c_str(), s2.str().c_str(), s3.str().c_str(), s4.str().c_str());
+		_lstManufacture->addRow(5, ltr(prod->getRules()->getName()).c_str(), s1.str().c_str(), s2.str().c_str(), s3.str().c_str(), s4.str().c_str());
 	}
-	_txtAvailable->setText(tr("STR_ENGINEERS_AVAILABLE").arg(_base->getAvailableEngineers()));
-	_txtAllocated->setText(tr("STR_ENGINEERS_ALLOCATED").arg(_base->getAllocatedEngineers()));
-	_txtSpace->setText(tr("STR_WORKSHOP_SPACE_AVAILABLE").arg(_base->getFreeWorkshops()));
-	_txtFunds->setText(tr("STR_CURRENT_FUNDS").arg(Unicode::formatFunding(_game->getSavedGame()->getFunds())));
+	_txtAvailable->setText(ltr("STR_ENGINEERS_AVAILABLE").arg(_base->getAvailableEngineers()));
+	_txtAllocated->setText(ltr("STR_ENGINEERS_ALLOCATED").arg(_base->getAllocatedEngineers()));
+	_txtSpace->setText(ltr("STR_WORKSHOP_SPACE_AVAILABLE").arg(_base->getFreeWorkshops()));
+	_txtFunds->setText(ltr("STR_CURRENT_FUNDS").arg(Unicode::formatFunding(_game->getSavedGame()->getFunds())));
 
 	if (scrl)
 		_lstManufacture->scrollTo(scrl);

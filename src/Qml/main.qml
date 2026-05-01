@@ -21,14 +21,6 @@ Window {
     flags: Options1.borderless?Qt.FramelessWindowHint:
                                Qt.Window
 
-    // onVisibilityChanged: {
-    //     if(visibility === Window.Windowed)
-    //     {
-    //         wnd.x = 50
-    //         wnd.y = 50
-    //     }
-    // }
-
     visible: true
     title: "OpenXcom"
     color: "#000000"
@@ -44,6 +36,12 @@ Window {
         id: gameWindow
         anchors.fill: parent
         focus: true
+        Connections {
+            target: Game
+            function onCreateNewBase(geoscape) {
+                console.log(geoscape)
+            }
+        }
     }
 
     Loader {

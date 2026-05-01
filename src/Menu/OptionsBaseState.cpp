@@ -92,36 +92,36 @@ OptionsBaseState::OptionsBaseState(OptionsOrigin origin) : _origin(origin), _gro
 	// Set up objects
 	setWindowBackground(_window, "optionsMenu");
 
-	_btnVideo->setText(tr("STR_VIDEO"));
+	_btnVideo->setText(ltr("STR_VIDEO"));
 	_btnVideo->onMousePress((ActionHandler)&OptionsBaseState::btnGroupPress, SDL_BUTTON_LEFT);
 
-	_btnAudio->setText(tr("STR_AUDIO"));
+	_btnAudio->setText(ltr("STR_AUDIO"));
 	_btnAudio->onMousePress((ActionHandler)&OptionsBaseState::btnGroupPress, SDL_BUTTON_LEFT);
 
-	_btnControls->setText(tr("STR_CONTROLS"));
+	_btnControls->setText(ltr("STR_CONTROLS"));
 	_btnControls->onMousePress((ActionHandler)&OptionsBaseState::btnGroupPress, SDL_BUTTON_LEFT);
 
-	_btnGeoscape->setText(tr("STR_GEOSCAPE_UC"));
+	_btnGeoscape->setText(ltr("STR_GEOSCAPE_UC"));
 	_btnGeoscape->onMousePress((ActionHandler)&OptionsBaseState::btnGroupPress, SDL_BUTTON_LEFT);
 
-	_btnBattlescape->setText(tr("STR_BATTLESCAPE_UC"));
+	_btnBattlescape->setText(ltr("STR_BATTLESCAPE_UC"));
 	_btnBattlescape->onMousePress((ActionHandler)&OptionsBaseState::btnGroupPress, SDL_BUTTON_LEFT);
 
-	_btnAdvanced->setText(tr("STR_ADVANCED"));
+	_btnAdvanced->setText(ltr("STR_ADVANCED"));
 	_btnAdvanced->onMousePress((ActionHandler)&OptionsBaseState::btnGroupPress, SDL_BUTTON_LEFT);
 
-	_btnFolders->setText(tr("STR_FOLDERS"));
+	_btnFolders->setText(ltr("STR_FOLDERS"));
 	_btnFolders->onMousePress((ActionHandler)&OptionsBaseState::btnGroupPress, SDL_BUTTON_LEFT);
 
-	_btnOk->setText(tr("STR_OK"));
+	_btnOk->setText(ltr("STR_OK"));
 	_btnOk->onMouseClick((ActionHandler)&OptionsBaseState::btnOkClick);
 	_btnOk->onKeyboardPress((ActionHandler)&OptionsBaseState::btnOkClick, options1.keyOk());
 
-	_btnCancel->setText(tr("STR_CANCEL"));
+	_btnCancel->setText(ltr("STR_CANCEL"));
 	_btnCancel->onMouseClick((ActionHandler)&OptionsBaseState::btnCancelClick);
 	_btnCancel->onKeyboardPress((ActionHandler)&OptionsBaseState::btnCancelClick, options1.keyCancel());
 
-	_btnDefault->setText(tr("STR_RESTORE_DEFAULTS"));
+	_btnDefault->setText(ltr("STR_RESTORE_DEFAULTS"));
 	_btnDefault->onMouseClick((ActionHandler)&OptionsBaseState::btnDefaultClick);
 
 	_txtTooltip->setWordWrap(true);
@@ -315,7 +315,7 @@ void OptionsBaseState::btnGroupPress(Action *action)
 void OptionsBaseState::txtTooltipIn(Action *action)
 {
 	_currentTooltip = action->getSender()->getTooltip();
-	_txtTooltip->setText(tr(_currentTooltip));
+	_txtTooltip->setText(ltr(_currentTooltip));
 }
 
 /**

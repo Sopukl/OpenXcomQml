@@ -64,12 +64,12 @@ ItemLocationsState::ItemLocationsState(const RuleItem* selectedItem)
 	setWindowBackground(_window, "itemLocations");
 
 	_txtTitle->setAlign(ALIGN_CENTER);
-	_txtTitle->setText(tr("STR_TOPIC").arg(tr(selectedItem->getType())));
+	_txtTitle->setText(ltr("STR_TOPIC").arg(ltr(selectedItem->getType())));
 
-	_txtBase->setText(tr("STR_BASE"));
-	_txtQuantity->setText(tr("STR_QUANTITY_UC"));
+	_txtBase->setText(ltr("STR_BASE"));
+	_txtQuantity->setText(ltr("STR_QUANTITY_UC"));
 
-	_btnOk->setText(tr("STR_OK"));
+	_btnOk->setText(ltr("STR_OK"));
 	_btnOk->onMouseClick((ActionHandler)&ItemLocationsState::btnOkClick);
 	_btnOk->onKeyboardPress((ActionHandler)&ItemLocationsState::btnOkClick, options1.keyCancel());
 

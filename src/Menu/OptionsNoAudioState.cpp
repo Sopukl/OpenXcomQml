@@ -44,7 +44,7 @@ OptionsNoAudioState::OptionsNoAudioState(OptionsOrigin origin) : OptionsBaseStat
 	_txtError->setVerticalAlign(ALIGN_MIDDLE);
 	_txtError->setBig();
 	_txtError->setWordWrap(true);
-	_txtError->setText(tr("STR_NO_AUDIO_HARDWARE_DETECTED"));
+	_txtError->setText(ltr("STR_NO_AUDIO_HARDWARE_DETECTED"));
 }
 
 /**

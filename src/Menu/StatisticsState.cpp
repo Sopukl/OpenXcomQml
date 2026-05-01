@@ -70,7 +70,7 @@ StatisticsState::StatisticsState()
 	// Set up objects
 	setWindowBackground(_window, "endGameStatistics");
 
-	_btnOk->setText(tr("STR_OK"));
+	_btnOk->setText(ltr("STR_OK"));
 	_btnOk->onMouseClick((ActionHandler)&StatisticsState::btnOkClick);
 	_btnOk->onKeyboardPress((ActionHandler)&StatisticsState::btnOkClick, options1.keyOk());
 
@@ -110,17 +110,17 @@ void StatisticsState::listStats()
 	GameTime *time = save->getTime();
 	if (save->getEnding() == END_WIN)
 	{
-		ss << tr("STR_VICTORY");
+		ss << ltr("STR_VICTORY");
 	}
 	else if (save->getEnding() == END_LOSE)
 	{
-		ss << tr("STR_DEFEAT");
+		ss << ltr("STR_DEFEAT");
 	}
 	else
 	{
-		ss << tr("STR_STATISTICS");
+		ss << ltr("STR_STATISTICS");
 	}
-	ss << Unicode::TOK_NL_SMALL << time->getDayString(_game->getLanguage()) << " " << tr(time->getMonthString()) << " " << time->getYear();
+	ss << Unicode::TOK_NL_SMALL << time->getDayString(_game->getLanguage()) << " " << ltr(time->getMonthString()) << " " << time->getYear();
 	_txtTitle->setText(ss.str());
 
 	int totalScore = sumVector(save->getResearchScores());
@@ -288,51 +288,51 @@ void StatisticsState::listStats()
 
 	std::string difficulty[] = { "STR_1_BEGINNER", "STR_2_EXPERIENCED", "STR_3_VETERAN", "STR_4_GENIUS", "STR_5_SUPERHUMAN" };
 
-	_lstStats->addRow(2, tr("STR_DIFFICULTY").c_str(), tr(difficulty[save->getDifficulty()]).c_str());
-	_lstStats->addRow(2, tr("STR_AVERAGE_MONTHLY_RATING").c_str(), Unicode::formatNumber(monthlyScore).c_str());
-	_lstStats->addRow(2, tr("STR_TOTAL_INCOME").c_str(), Unicode::formatFunding(totalIncome).c_str());
-	_lstStats->addRow(2, tr("STR_TOTAL_EXPENDITURE").c_str(), Unicode::formatFunding(totalExpenses).c_str());
+	_lstStats->addRow(2, ltr("STR_DIFFICULTY").c_str(), ltr(difficulty[save->getDifficulty()]).c_str());
+	_lstStats->addRow(2, ltr("STR_AVERAGE_MONTHLY_RATING").c_str(), Unicode::formatNumber(monthlyScore).c_str());
+	_lstStats->addRow(2, ltr("STR_TOTAL_INCOME").c_str(), Unicode::formatFunding(totalIncome).c_str());
+	_lstStats->addRow(2, ltr("STR_TOTAL_EXPENDITURE").c_str(), Unicode::formatFunding(totalExpenses).c_str());
 	if (options1.soldierDiaries())
 	{
-		_lstStats->addRow(2, tr("STR_MISSIONS_WON").c_str(), Unicode::formatNumber(missionsWin).c_str());
-		_lstStats->addRow(2, tr("STR_MISSIONS_LOST").c_str(), Unicode::formatNumber(missionsLoss).c_str());
-		_lstStats->addRow(2, tr("STR_NIGHT_MISSIONS").c_str(), Unicode::formatNumber(nightMissions).c_str());
-		_lstStats->addRow(2, tr("STR_BEST_RATING").c_str(), Unicode::formatNumber(bestScore).c_str());
-		_lstStats->addRow(2, tr("STR_WORST_RATING").c_str(), Unicode::formatNumber(worstScore).c_str());
+		_lstStats->addRow(2, ltr("STR_MISSIONS_WON").c_str(), Unicode::formatNumber(missionsWin).c_str());
+		_lstStats->addRow(2, ltr("STR_MISSIONS_LOST").c_str(), Unicode::formatNumber(missionsLoss).c_str());
+		_lstStats->addRow(2, ltr("STR_NIGHT_MISSIONS").c_str(), Unicode::formatNumber(nightMissions).c_str());
+		_lstStats->addRow(2, ltr("STR_BEST_RATING").c_str(), Unicode::formatNumber(bestScore).c_str());
+		_lstStats->addRow(2, ltr("STR_WORST_RATING").c_str(), Unicode::formatNumber(worstScore).c_str());
 	}
-	_lstStats->addRow(2, tr("STR_SOLDIERS_RECRUITED").c_str(), Unicode::formatNumber(soldiersRecruited).c_str());
-	_lstStats->addRow(2, tr("STR_SOLDIERS_LOST").c_str(), Unicode::formatNumber(soldiersLost).c_str());
-	_lstStats->addRow(2, tr("STR_VEHICLES_LOST").c_str(), Unicode::formatNumber(vehiclesLost).c_str()); // "STR_TANKS_DESTROYED" from DebriefingState
+	_lstStats->addRow(2, ltr("STR_SOLDIERS_RECRUITED").c_str(), Unicode::formatNumber(soldiersRecruited).c_str());
+	_lstStats->addRow(2, ltr("STR_SOLDIERS_LOST").c_str(), Unicode::formatNumber(soldiersLost).c_str());
+	_lstStats->addRow(2, ltr("STR_VEHICLES_LOST").c_str(), Unicode::formatNumber(vehiclesLost).c_str()); // "STR_TANKS_DESTROYED" from DebriefingState
 	if (options1.soldierDiaries())
 	{
-		_lstStats->addRow(2, tr("STR_ALIEN_KILLS").c_str(), Unicode::formatNumber(aliensKilled).c_str());
-		_lstStats->addRow(2, tr("STR_ALIEN_CAPTURES").c_str(), Unicode::formatNumber(aliensCaptured).c_str());
-		_lstStats->addRow(2, tr("STR_FRIENDLY_KILLS").c_str(), Unicode::formatNumber(friendlyKills).c_str());
-		_lstStats->addRow(2, tr("STR_AVERAGE_ACCURACY").c_str(), Unicode::formatPercentage(accuracy).c_str());
-		_lstStats->addRow(2, tr("STR_WEAPON_MOST_KILLS").c_str(), tr(highestWeapon).c_str());
-		_lstStats->addRow(2, tr("STR_ALIEN_MOST_KILLS").c_str(), tr(highestAlien).c_str());
-		_lstStats->addRow(2, tr("STR_LONGEST_SERVICE").c_str(), Unicode::formatNumber(longestMonths).c_str());
-		_lstStats->addRow(2, tr("STR_TOTAL_DAYS_WOUNDED").c_str(), Unicode::formatNumber(daysWounded).c_str());
+		_lstStats->addRow(2, ltr("STR_ALIEN_KILLS").c_str(), Unicode::formatNumber(aliensKilled).c_str());
+		_lstStats->addRow(2, ltr("STR_ALIEN_CAPTURES").c_str(), Unicode::formatNumber(aliensCaptured).c_str());
+		_lstStats->addRow(2, ltr("STR_FRIENDLY_KILLS").c_str(), Unicode::formatNumber(friendlyKills).c_str());
+		_lstStats->addRow(2, ltr("STR_AVERAGE_ACCURACY").c_str(), Unicode::formatPercentage(accuracy).c_str());
+		_lstStats->addRow(2, ltr("STR_WEAPON_MOST_KILLS").c_str(), ltr(highestWeapon).c_str());
+		_lstStats->addRow(2, ltr("STR_ALIEN_MOST_KILLS").c_str(), ltr(highestAlien).c_str());
+		_lstStats->addRow(2, ltr("STR_LONGEST_SERVICE").c_str(), Unicode::formatNumber(longestMonths).c_str());
+		_lstStats->addRow(2, ltr("STR_TOTAL_DAYS_WOUNDED").c_str(), Unicode::formatNumber(daysWounded).c_str());
 	}
-	_lstStats->addRow(2, tr("STR_TOTAL_UFOS").c_str(), Unicode::formatNumber(ufosDetected).c_str());
+	_lstStats->addRow(2, ltr("STR_TOTAL_UFOS").c_str(), Unicode::formatNumber(ufosDetected).c_str());
 	if (options1.soldierDiaries())
 	{
-		_lstStats->addRow(2, tr("STR_TOTAL_ALIEN_BASES").c_str(), Unicode::formatNumber(alienBases).c_str());
-		_lstStats->addRow(2, tr("STR_ALIEN_BASES_DESTROYED").c_str(), Unicode::formatNumber(alienBasesDestroyed).c_str());
+		_lstStats->addRow(2, ltr("STR_TOTAL_ALIEN_BASES").c_str(), Unicode::formatNumber(alienBases).c_str());
+		_lstStats->addRow(2, ltr("STR_ALIEN_BASES_DESTROYED").c_str(), Unicode::formatNumber(alienBasesDestroyed).c_str());
 	}
-	_lstStats->addRow(2, tr("STR_COUNTRIES_LOST").c_str(), Unicode::formatNumber(countriesLost).c_str());
-	_lstStats->addRow(2, tr("STR_TOTAL_TERROR_SITES").c_str(), Unicode::formatNumber(terrorSites).c_str());
+	_lstStats->addRow(2, ltr("STR_COUNTRIES_LOST").c_str(), Unicode::formatNumber(countriesLost).c_str());
+	_lstStats->addRow(2, ltr("STR_TOTAL_TERROR_SITES").c_str(), Unicode::formatNumber(terrorSites).c_str());
 	if (options1.soldierDiaries())
 	{
-		_lstStats->addRow(2, tr("STR_TOTAL_BASES").c_str(), Unicode::formatNumber(xcomBases).c_str());
-		_lstStats->addRow(2, tr("STR_XCOM_BASES_LOST").c_str(), Unicode::formatNumber(xcomBasesLost).c_str());
+		_lstStats->addRow(2, ltr("STR_TOTAL_BASES").c_str(), Unicode::formatNumber(xcomBases).c_str());
+		_lstStats->addRow(2, ltr("STR_XCOM_BASES_LOST").c_str(), Unicode::formatNumber(xcomBasesLost).c_str());
 	}
-	_lstStats->addRow(2, tr("STR_TOTAL_CRAFT").c_str(), Unicode::formatNumber(totalCrafts).c_str());
-	_lstStats->addRow(2, tr("STR_CRAFT_LOST_DOGFIGHT").c_str(), Unicode::formatNumber(craftLostDogfight).c_str());
-	_lstStats->addRow(2, tr("STR_CRAFT_LOST_MISSION").c_str(), Unicode::formatNumber(craftLostMission).c_str());
-	_lstStats->addRow(2, tr("STR_TOTAL_SCIENTISTS").c_str(), Unicode::formatNumber(currentScientists).c_str());
-	_lstStats->addRow(2, tr("STR_TOTAL_ENGINEERS").c_str(), Unicode::formatNumber(currentEngineers).c_str());
-	_lstStats->addRow(2, tr("STR_TOTAL_RESEARCH").c_str(), Unicode::formatNumber(researchDone).c_str());
+	_lstStats->addRow(2, ltr("STR_TOTAL_CRAFT").c_str(), Unicode::formatNumber(totalCrafts).c_str());
+	_lstStats->addRow(2, ltr("STR_CRAFT_LOST_DOGFIGHT").c_str(), Unicode::formatNumber(craftLostDogfight).c_str());
+	_lstStats->addRow(2, ltr("STR_CRAFT_LOST_MISSION").c_str(), Unicode::formatNumber(craftLostMission).c_str());
+	_lstStats->addRow(2, ltr("STR_TOTAL_SCIENTISTS").c_str(), Unicode::formatNumber(currentScientists).c_str());
+	_lstStats->addRow(2, ltr("STR_TOTAL_ENGINEERS").c_str(), Unicode::formatNumber(currentEngineers).c_str());
+	_lstStats->addRow(2, ltr("STR_TOTAL_RESEARCH").c_str(), Unicode::formatNumber(researchDone).c_str());
 }
 
 /**

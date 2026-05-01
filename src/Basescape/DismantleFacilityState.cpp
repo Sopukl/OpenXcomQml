@@ -69,19 +69,19 @@ DismantleFacilityState::DismantleFacilityState(Base *base, BaseView *view, BaseF
 	// Set up objects
 	setWindowBackground(_window, "dismantleFacility");
 
-	_btnOk->setText(tr("STR_OK"));
+	_btnOk->setText(ltr("STR_OK"));
 	_btnOk->onMouseClick((ActionHandler)&DismantleFacilityState::btnOkClick);
 	_btnOk->onKeyboardPress((ActionHandler)&DismantleFacilityState::btnOkClick, options1.keyOk());
 
-	_btnCancel->setText(tr("STR_CANCEL_UC"));
+	_btnCancel->setText(ltr("STR_CANCEL_UC"));
 	_btnCancel->onMouseClick((ActionHandler)&DismantleFacilityState::btnCancelClick);
 	_btnCancel->onKeyboardPress((ActionHandler)&DismantleFacilityState::btnCancelClick, options1.keyCancel());
 
 	_txtTitle->setAlign(ALIGN_CENTER);
-	_txtTitle->setText(tr("STR_DISMANTLE"));
+	_txtTitle->setText(ltr("STR_DISMANTLE"));
 
 	_txtFacility->setAlign(ALIGN_CENTER);
-	_txtFacility->setText(tr(_fac->getRules()->getType()));
+	_txtFacility->setText(ltr(_fac->getRules()->getType()));
 
 	int refundValue = 0;
 	if (_fac->getBuildTime() > _fac->getRules()->getBuildTime())
@@ -98,7 +98,7 @@ DismantleFacilityState::DismantleFacilityState(Base *base, BaseView *view, BaseF
 	_txtRefundValue->setAlign(ALIGN_CENTER);
 	if (refundValue < 0)
 	{
-		_txtRefundValue->setText(tr("STR_REFUND_VALUE_NEGATIVE").arg(Unicode::formatFunding(-refundValue)));
+		_txtRefundValue->setText(ltr("STR_REFUND_VALUE_NEGATIVE").arg(Unicode::formatFunding(-refundValue)));
 		if (_game->getSavedGame()->getFunds() < -refundValue)
 		{
 			// cannot afford dismantle, expenses too high
@@ -107,7 +107,7 @@ DismantleFacilityState::DismantleFacilityState(Base *base, BaseView *view, BaseF
 	}
 	else
 	{
-		_txtRefundValue->setText(tr("STR_REFUND_VALUE").arg(Unicode::formatFunding(refundValue)));
+		_txtRefundValue->setText(ltr("STR_REFUND_VALUE").arg(Unicode::formatFunding(refundValue)));
 	}
 	_txtRefundValue->setVisible(refundValue != 0);
 }

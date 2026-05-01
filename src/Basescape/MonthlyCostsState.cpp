@@ -81,31 +81,31 @@ MonthlyCostsState::MonthlyCostsState(Base *base) : _base(base)
 	// Set up objects
 	setWindowBackground(_window, "costsInfo");
 
-	_btnOk->setText(tr("STR_OK"));
+	_btnOk->setText(ltr("STR_OK"));
 	_btnOk->onMouseClick((ActionHandler)&MonthlyCostsState::btnOkClick);
 	_btnOk->onKeyboardPress((ActionHandler)&MonthlyCostsState::btnOkClick, options1.keyOk());
 	_btnOk->onKeyboardPress((ActionHandler)&MonthlyCostsState::btnOkClick, options1.keyCancel());
 
 	_txtTitle->setBig();
 	_txtTitle->setAlign(ALIGN_CENTER);
-	_txtTitle->setText(tr("STR_MONTHLY_COSTS"));
+	_txtTitle->setText(ltr("STR_MONTHLY_COSTS"));
 
-	_txtCost->setText(tr("STR_COST_PER_UNIT"));
+	_txtCost->setText(ltr("STR_COST_PER_UNIT"));
 
-	_txtQuantity->setText(tr("STR_QUANTITY"));
+	_txtQuantity->setText(ltr("STR_QUANTITY"));
 
-	_txtTotal->setText(tr("STR_TOTAL"));
+	_txtTotal->setText(ltr("STR_TOTAL"));
 
-	_txtRental->setText(tr("STR_CRAFT_RENTAL"));
+	_txtRental->setText(ltr("STR_CRAFT_RENTAL"));
 
-	_txtSalaries->setText(tr("STR_SALARIES"));
+	_txtSalaries->setText(ltr("STR_SALARIES"));
 
 	std::ostringstream ss;
-	ss << tr("STR_INCOME") << "=" << Unicode::formatFunding(_game->getSavedGame()->getCountryFunding());
+	ss << ltr("STR_INCOME") << "=" << Unicode::formatFunding(_game->getSavedGame()->getCountryFunding());
 	_txtIncome->setText(ss.str());
 
 	std::ostringstream ss2;
-	ss2 << tr("STR_MAINTENANCE") << "=" << Unicode::formatFunding(_game->getSavedGame()->getBaseMaintenance());
+	ss2 << ltr("STR_MAINTENANCE") << "=" << Unicode::formatFunding(_game->getSavedGame()->getBaseMaintenance());
 	_txtMaintenance->setText(ss2.str());
 
 	_lstCrafts->setColumns(4, 125, 70, 44, 50);
@@ -121,7 +121,7 @@ MonthlyCostsState::MonthlyCostsState(Base *base) : _base(base)
 			{
 				std::ostringstream ss3;
 				ss3 << count;
-				_lstCrafts->addRow(4, tr(craftType).c_str(), Unicode::formatFunding(craft->getRentCost()).c_str(), ss3.str().c_str(), Unicode::formatFunding(count * craft->getRentCost()).c_str());
+				_lstCrafts->addRow(4, ltr(craftType).c_str(), Unicode::formatFunding(craft->getRentCost()).c_str(), ss3.str().c_str(), Unicode::formatFunding(count * craft->getRentCost()).c_str());
 			}
 		}
 	}
@@ -160,7 +160,7 @@ MonthlyCostsState::MonthlyCostsState(Base *base) : _base(base)
 				std::string costPerUnit = Unicode::formatFunding(soldier->getSalaryCost(0)); // 0 = default rookie salary
 				if (info.first > 0 || soldierTypes.size() == 1)
 				{
-					_lstSalaries->addRow(4, tr(name).c_str(), costPerUnit.c_str(), ss4.str().c_str(), Unicode::formatFunding(info.second).c_str());
+					_lstSalaries->addRow(4, ltr(name).c_str(), costPerUnit.c_str(), ss4.str().c_str(), Unicode::formatFunding(info.second).c_str());
 				}
 			}
 		}
@@ -178,29 +178,29 @@ MonthlyCostsState::MonthlyCostsState(Base *base) : _base(base)
 			salary += info.second;
 		}
 		ss4 << count;
-		_lstSalaries->addRow(4, tr("STR_SOLDIERS").c_str(), "", ss4.str().c_str(), Unicode::formatFunding(salary).c_str());
+		_lstSalaries->addRow(4, ltr("STR_SOLDIERS").c_str(), "", ss4.str().c_str(), Unicode::formatFunding(salary).c_str());
 	}
 	std::ostringstream ss5;
 	ss5 << _base->getTotalEngineers();
-	_lstSalaries->addRow(4, tr("STR_ENGINEERS").c_str(), Unicode::formatFunding(_game->getMod()->getEngineerCost()).c_str(), ss5.str().c_str(), Unicode::formatFunding(_base->getTotalEngineers() * _game->getMod()->getEngineerCost()).c_str());
+	_lstSalaries->addRow(4, ltr("STR_ENGINEERS").c_str(), Unicode::formatFunding(_game->getMod()->getEngineerCost()).c_str(), ss5.str().c_str(), Unicode::formatFunding(_base->getTotalEngineers() * _game->getMod()->getEngineerCost()).c_str());
 	std::ostringstream ss6;
 	ss6 << _base->getTotalScientists();
-	_lstSalaries->addRow(4, tr("STR_SCIENTISTS").c_str(), Unicode::formatFunding(_game->getMod()->getScientistCost()).c_str(), ss6.str().c_str(), Unicode::formatFunding(_base->getTotalScientists() * _game->getMod()->getScientistCost()).c_str());
+	_lstSalaries->addRow(4, ltr("STR_SCIENTISTS").c_str(), Unicode::formatFunding(_game->getMod()->getScientistCost()).c_str(), ss6.str().c_str(), Unicode::formatFunding(_base->getTotalScientists() * _game->getMod()->getScientistCost()).c_str());
 	std::ostringstream ss6b;
 	int staffCount, inventoryCount;
 	int totalOtherCost = _base->getTotalOtherStaffAndInventoryCost(staffCount, inventoryCount);
 	ss6b << staffCount << "/" << inventoryCount;
-	_lstSalaries->addRow(4, tr("STR_OTHER_EMPLOYEES").c_str(), "", ss6b.str().c_str(), Unicode::formatFunding(totalOtherCost).c_str());
+	_lstSalaries->addRow(4, ltr("STR_OTHER_EMPLOYEES").c_str(), "", ss6b.str().c_str(), Unicode::formatFunding(totalOtherCost).c_str());
 
 	_lstMaintenance->setColumns(2, 239, 60);
 	_lstMaintenance->setDot(true);
 	std::ostringstream ss7;
 	ss7 << Unicode::TOK_COLOR_FLIP << Unicode::formatFunding(_base->getFacilityMaintenance());
-	_lstMaintenance->addRow(2, tr("STR_BASE_MAINTENANCE").c_str(), ss7.str().c_str());
+	_lstMaintenance->addRow(2, ltr("STR_BASE_MAINTENANCE").c_str(), ss7.str().c_str());
 
 	_lstTotal->setColumns(2, 44, 55);
 	_lstTotal->setDot(true);
-	_lstTotal->addRow(2, tr("STR_TOTAL").c_str(), Unicode::formatFunding(_base->getMonthlyMaintenace()).c_str());
+	_lstTotal->addRow(2, ltr("STR_TOTAL").c_str(), Unicode::formatFunding(_base->getMonthlyMaintenace()).c_str());
 }
 
 /**

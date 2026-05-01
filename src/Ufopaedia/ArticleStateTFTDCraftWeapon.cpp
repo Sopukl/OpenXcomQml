@@ -65,27 +65,27 @@ namespace OpenXcom
 
 		if (category == CWC_WEAPON)
 		{
-			_lstInfo->addRow(2, tr("STR_DAMAGE").c_str(), Unicode::formatNumber(weapon->getDamage()).c_str());
+			_lstInfo->addRow(2, ltr("STR_DAMAGE").c_str(), Unicode::formatNumber(weapon->getDamage()).c_str());
 			_lstInfo->setCellColor(0, 1, _listColor2);
 
-			_lstInfo->addRow(2, tr("STR_RANGE").c_str(), tr("STR_KILOMETERS").arg(weapon->getRange()).c_str());
+			_lstInfo->addRow(2, ltr("STR_RANGE").c_str(), ltr("STR_KILOMETERS").arg(weapon->getRange()).c_str());
 			_lstInfo->setCellColor(1, 1, _listColor2);
 
-			_lstInfo->addRow(2, tr("STR_ACCURACY").c_str(), Unicode::formatPercentage(weapon->getAccuracy()).c_str());
+			_lstInfo->addRow(2, ltr("STR_ACCURACY").c_str(), Unicode::formatPercentage(weapon->getAccuracy()).c_str());
 			_lstInfo->setCellColor(2, 1, _listColor2);
 
-			_lstInfo->addRow(2, tr("STR_RE_LOAD_TIME").c_str(), tr("STR_SECONDS").arg(weapon->getStandardReload()).c_str());
+			_lstInfo->addRow(2, ltr("STR_RE_LOAD_TIME").c_str(), ltr("STR_SECONDS").arg(weapon->getStandardReload()).c_str());
 			_lstInfo->setCellColor(3, 1, _listColor2);
 
-			_lstInfo->addRow(2, tr("STR_ROUNDS").c_str(), Unicode::formatNumber(weapon->getAmmoMax()).c_str());
+			_lstInfo->addRow(2, ltr("STR_ROUNDS").c_str(), Unicode::formatNumber(weapon->getAmmoMax()).c_str());
 			_lstInfo->setCellColor(4, 1, _listColor2);
 		}
 		else if (category == CWC_TRACTOR_BEAM)
 		{
-			_lstInfo->addRow(2, tr("STR_TRACTOR_BEAM_POWER").c_str(), Unicode::formatNumber(weapon->getTractorBeamPower()).c_str());
+			_lstInfo->addRow(2, ltr("STR_TRACTOR_BEAM_POWER").c_str(), Unicode::formatNumber(weapon->getTractorBeamPower()).c_str());
 			_lstInfo->setCellColor(0, 1, _listColor2);
 
-			_lstInfo->addRow(2, tr("STR_RANGE").c_str(), tr("STR_KILOMETERS").arg(weapon->getRange()).c_str());
+			_lstInfo->addRow(2, ltr("STR_RANGE").c_str(), ltr("STR_KILOMETERS").arg(weapon->getRange()).c_str());
 			_lstInfo->setCellColor(1, 1, _listColor2);
 		}
 

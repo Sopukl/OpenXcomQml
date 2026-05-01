@@ -79,19 +79,19 @@ CraftWeaponsState::CraftWeaponsState(Base *base, size_t craft, size_t weapon) : 
 	// Set up objects
 	setWindowBackground(_window, "craftWeapons");
 
-	_btnCancel->setText(tr("STR_CANCEL_UC"));
+	_btnCancel->setText(ltr("STR_CANCEL_UC"));
 	_btnCancel->onMouseClick((ActionHandler)&CraftWeaponsState::btnCancelClick);
 	_btnCancel->onKeyboardPress((ActionHandler)&CraftWeaponsState::btnCancelClick, options1.keyCancel());
 
 	_txtTitle->setBig();
 	_txtTitle->setAlign(ALIGN_CENTER);
-	_txtTitle->setText(tr("STR_SELECT_ARMAMENT"));
+	_txtTitle->setText(ltr("STR_SELECT_ARMAMENT"));
 
-	_txtArmament->setText(tr("STR_ARMAMENT"));
+	_txtArmament->setText(ltr("STR_ARMAMENT"));
 
-	_txtQuantity->setText(tr("STR_QUANTITY_UC"));
+	_txtQuantity->setText(ltr("STR_QUANTITY_UC"));
 
-	_txtAmmunition->setText(tr("STR_AMMUNITION_AVAILABLE"));
+	_txtAmmunition->setText(ltr("STR_AMMUNITION_AVAILABLE"));
 	_txtAmmunition->setWordWrap(true);
 	_txtAmmunition->setVerticalAlign(ALIGN_BOTTOM);
 
@@ -99,11 +99,11 @@ CraftWeaponsState::CraftWeaponsState(Base *base, size_t craft, size_t weapon) : 
 	CraftWeapon *current = _craft->getWeapons()->at(_weapon);
 	if (current != 0)
 	{
-		_txtCurrentWeapon->setText(tr(slotName).arg(tr(current->getRules()->getType())));
+		_txtCurrentWeapon->setText(ltr(slotName).arg(ltr(current->getRules()->getType())));
 	}
 	else
 	{
-		_txtCurrentWeapon->setText(tr(slotName).arg(tr("STR_NONE_UC")));
+		_txtCurrentWeapon->setText(ltr(slotName).arg(ltr("STR_NONE_UC")));
 	}
 
 	_lstWeapons->setColumns(3, 94, 50, 36);
@@ -111,7 +111,7 @@ CraftWeaponsState::CraftWeaponsState(Base *base, size_t craft, size_t weapon) : 
 	_lstWeapons->setBackground(_window);
 	_lstWeapons->setMargin(8);
 
-	_lstWeapons->addRow(1, tr("STR_NONE_UC").c_str());
+	_lstWeapons->addRow(1, ltr("STR_NONE_UC").c_str());
 	_weapons.push_back(0);
 
 	for (auto& craftWeaponType : _game->getMod()->getCraftWeaponsList())
@@ -134,9 +134,9 @@ CraftWeaponsState::CraftWeaponsState(Base *base, size_t craft, size_t weapon) : 
 			}
 			else
 			{
-				ss2 << tr("STR_NOT_AVAILABLE");
+				ss2 << ltr("STR_NOT_AVAILABLE");
 			}
-			_lstWeapons->addRow(3, tr(w->getType()).c_str(), ss.str().c_str(), ss2.str().c_str());
+			_lstWeapons->addRow(3, ltr(w->getType()).c_str(), ss.str().c_str(), ss2.str().c_str());
 		}
 	}
 	_lstWeapons->onMouseClick((ActionHandler)&CraftWeaponsState::lstWeaponsClick);
@@ -180,7 +180,7 @@ void CraftWeaponsState::lstWeaponsClick(Action *)
 			{
 				_game->popState();
 				_game->pushState(new ErrorMessageState(
-					tr("STR_NOT_ENOUGH_CARGO_SPACE"),
+					ltr("STR_NOT_ENOUGH_CARGO_SPACE"),
 					_palette,
 					_game->getMod()->getInterface("craftWeapons")->getElement("errorMessage")->color,
 					"BACK14.SCR",
@@ -200,7 +200,7 @@ void CraftWeaponsState::lstWeaponsClick(Action *)
 			{
 				_game->popState();
 				_game->pushState(new ErrorMessageState(
-					tr("STR_NOT_ENOUGH_HWP_CAPACITY"),
+					ltr("STR_NOT_ENOUGH_HWP_CAPACITY"),
 					_palette,
 					_game->getMod()->getInterface("craftWeapons")->getElement("errorMessage")->color,
 					"BACK14.SCR",
@@ -248,7 +248,7 @@ void CraftWeaponsState::lstWeaponsClick(Action *)
 			{
 				_game->popState();
 				_game->pushState(new ErrorMessageState(
-					tr("STR_NOT_ENOUGH_STORAGE_SPACE_1"),
+					ltr("STR_NOT_ENOUGH_STORAGE_SPACE_1"),
 					_palette,
 					_game->getMod()->getInterface("craftWeapons")->getElement("errorMessage")->color,
 					"BACK14.SCR",
@@ -263,7 +263,7 @@ void CraftWeaponsState::lstWeaponsClick(Action *)
 			{
 				_game->popState();
 				_game->pushState(new ErrorMessageState(
-					tr("STR_NOT_ENOUGH_STORAGE_SPACE_2"),
+					ltr("STR_NOT_ENOUGH_STORAGE_SPACE_2"),
 					_palette,
 					_game->getMod()->getInterface("craftWeapons")->getElement("errorMessage")->color,
 					"BACK14.SCR",

@@ -172,39 +172,39 @@ NewBattleState::NewBattleState() :
 
 	_txtTitle->setAlign(ALIGN_CENTER);
 	_txtTitle->setBig();
-	_txtTitle->setText(tr("STR_MISSION_GENERATOR"));
+	_txtTitle->setText(ltr("STR_MISSION_GENERATOR"));
 
-	_txtMapOptions->setText(tr("STR_MAP_OPTIONS"));
+	_txtMapOptions->setText(ltr("STR_MAP_OPTIONS"));
 
 	_frameLeft->setThickness(3);
 
-	_txtAlienOptions->setText(tr("STR_ALIEN_OPTIONS"));
+	_txtAlienOptions->setText(ltr("STR_ALIEN_OPTIONS"));
 
 	_frameRight->setThickness(3);
 
-	_btnUfoLanded->setText(tr("STR_LANDED"));
+	_btnUfoLanded->setText(ltr("STR_LANDED"));
 	_btnUfoLanded->setVisible(options1.oxceCrashedOrLanded() > 0);
 	_btnUfoLanded->setPressed(options1.oxceCrashedOrLanded() > 1);
 	_txtTitle->setAlign(_btnUfoLanded->getVisible() ? ALIGN_LEFT : ALIGN_CENTER);
 
-	_txtMission->setText(tr("STR_MISSION"));
+	_txtMission->setText(ltr("STR_MISSION"));
 
-	_txtCraft->setText(tr("STR_CRAFT"));
+	_txtCraft->setText(ltr("STR_CRAFT"));
 
-	_txtDarkness->setText(tr("STR_MAP_DARKNESS"));
+	_txtDarkness->setText(ltr("STR_MAP_DARKNESS"));
 
-	_txtDepth->setText(tr("STR_MAP_DEPTH"));
+	_txtDepth->setText(ltr("STR_MAP_DEPTH"));
 
-	_txtTerrain->setText(tr("STR_MAP_TERRAIN"));
+	_txtTerrain->setText(ltr("STR_MAP_TERRAIN"));
 
-	_txtGlobeTexture->setText(tr("STR_GLOBE_TEXTURE"));
+	_txtGlobeTexture->setText(ltr("STR_GLOBE_TEXTURE"));
 	_txtGlobeTexture->setVisible(false);
 
-	_txtDifficulty->setText(tr("STR_DIFFICULTY"));
+	_txtDifficulty->setText(ltr("STR_DIFFICULTY"));
 
-	_txtAlienRace->setText(tr("STR_ALIEN_RACE"));
+	_txtAlienRace->setText(ltr("STR_ALIEN_RACE"));
 
-	_txtAlienTech->setText(tr("STR_ALIEN_TECH_LEVEL"));
+	_txtAlienTech->setText(ltr("STR_ALIEN_TECH_LEVEL"));
 
 	if (options1.debug())
 	{
@@ -259,7 +259,7 @@ NewBattleState::NewBattleState() :
 		}
 	}
 
-	_btnGlobeTexture->setText(tr(_globeTextures[_selectedGlobeTexture]));
+	_btnGlobeTexture->setText(ltr(_globeTextures[_selectedGlobeTexture]));
 	_btnGlobeTexture->onMouseClick((ActionHandler)&NewBattleState::btnGlobeTextureChange);
 	_btnGlobeTexture->onMouseClick((ActionHandler)&NewBattleState::btnGlobeTextureChange, SDL_BUTTON_RIGHT);
 	_btnGlobeTexture->setVisible(false);
@@ -269,11 +269,11 @@ NewBattleState::NewBattleState() :
 	_btnGlobeTextureToggle->setVisible(false);
 
 	std::vector<std::string> difficulty;
-	difficulty.push_back(tr("STR_1_BEGINNER"));
-	difficulty.push_back(tr("STR_2_EXPERIENCED"));
-	difficulty.push_back(tr("STR_3_VETERAN"));
-	difficulty.push_back(tr("STR_4_GENIUS"));
-	difficulty.push_back(tr("STR_5_SUPERHUMAN"));
+	difficulty.push_back(ltr("STR_1_BEGINNER"));
+	difficulty.push_back(ltr("STR_2_EXPERIENCED"));
+	difficulty.push_back(ltr("STR_3_VETERAN"));
+	difficulty.push_back(ltr("STR_4_GENIUS"));
+	difficulty.push_back(ltr("STR_5_SUPERHUMAN"));
 	_cbxDifficulty->setOptions(difficulty);
 
 	_slrAlienTech->setRange(0, _game->getMod()->getAlienItemLevels().size()-1);
@@ -283,17 +283,17 @@ NewBattleState::NewBattleState() :
 		_txtAlienTech->setVisible(false);
 	}
 
-	_btnEquip->setText(tr("STR_EQUIP_CRAFT"));
+	_btnEquip->setText(ltr("STR_EQUIP_CRAFT"));
 	_btnEquip->onMouseClick((ActionHandler)&NewBattleState::btnEquipClick);
 
-	_btnRandom->setText(tr("STR_RANDOMIZE"));
+	_btnRandom->setText(ltr("STR_RANDOMIZE"));
 	_btnRandom->onMouseClick((ActionHandler)&NewBattleState::btnRandomClick);
 
-	_btnOk->setText(tr("STR_OK"));
+	_btnOk->setText(ltr("STR_OK"));
 	_btnOk->onMouseClick((ActionHandler)&NewBattleState::btnOkClick);
 	_btnOk->onKeyboardPress((ActionHandler)&NewBattleState::btnOkClick, options1.keyOk());
 
-	_btnCancel->setText(tr("STR_CANCEL"));
+	_btnCancel->setText(ltr("STR_CANCEL"));
 	_btnCancel->onMouseClick((ActionHandler)&NewBattleState::btnCancelClick);
 	_btnCancel->onKeyboardPress((ActionHandler)&NewBattleState::btnCancelClick, options1.keyCancel());
 
@@ -405,7 +405,7 @@ void NewBattleState::load(const std::string &filename)
 			cbxTerrainChange(0);
 			{
 				_selectedGlobeTexture = std::min(cfgReader["globeTexture"].readVal<size_t>(0), _globeTextures.size() - 1);
-				_btnGlobeTexture->setText(tr(_globeTextures[_selectedGlobeTexture]));
+				_btnGlobeTexture->setText(ltr(_globeTextures[_selectedGlobeTexture]));
 			}
 			_cbxAlienRace->setSelected(std::min(cfgReader["alienRace"].readVal<size_t>(0), _alienRaces.size() - 1));
 			_cbxDifficulty->setSelected(cfgReader["difficulty"].readVal<size_t>(0));
@@ -999,7 +999,7 @@ void NewBattleState::fillList(NewBattleSelectType selectType, bool isRightClick)
 			if (!searchString.empty())
 			{
 				std::string itemName;
-				if (_isRightClick) { itemName = m; } else { itemName = tr(prefix ? "MAP_" + m : m); }
+				if (_isRightClick) { itemName = m; } else { itemName = ltr(prefix ? "MAP_" + m : m); }
 				Unicode::upperCase(itemName);
 				if (itemName.find(searchString) == std::string::npos)
 				{
@@ -1009,7 +1009,7 @@ void NewBattleState::fillList(NewBattleSelectType selectType, bool isRightClick)
 			}
 			_filtered.push_back(counter);
 			counter++;
-			_lstSelect->addRow(1, _isRightClick ? m.c_str() : tr(prefix ? "MAP_" + m : m).c_str());
+			_lstSelect->addRow(1, _isRightClick ? m.c_str() : ltr(prefix ? "MAP_" + m : m).c_str());
 		}
 		if (firstRun && _lstSelect->isScrollbarVisible()) _lstSelect->scrollTo(scroll);
 	};
@@ -1053,7 +1053,7 @@ void NewBattleState::lstSelectClick(Action *action)
 		std::string s = list[_filtered[selected]];
 		if (_game->isMiddleClick(action))
 		{
-			s = tr((_selectType == NewBattleSelectType::TERRAIN) ? "MAP_" + s : s);
+			s = ltr((_selectType == NewBattleSelectType::TERRAIN) ? "MAP_" + s : s);
 		}
 		_lstSelect->setCellText(selected, 0, s.c_str());
 		return;
@@ -1076,7 +1076,7 @@ void NewBattleState::lstSelectClick(Action *action)
 	else if (_selectType == NewBattleSelectType::GLOBETEXTURE)
 	{
 		_selectedGlobeTexture = _filtered[selected];
-		_btnGlobeTexture->setText(tr(_globeTextures[_selectedGlobeTexture]));
+		_btnGlobeTexture->setText(ltr(_globeTextures[_selectedGlobeTexture]));
 	}
 	else if (_selectType == NewBattleSelectType::ALIENRACE)
 	{

@@ -66,17 +66,17 @@ SoldierRankState::SoldierRankState(Base* base, size_t soldierId) : _base(base), 
 	// Set up objects
 	setWindowBackground(_window, "soldierRank");
 
-	_btnCancel->setText(tr("STR_CANCEL_UC"));
+	_btnCancel->setText(ltr("STR_CANCEL_UC"));
 	_btnCancel->onMouseClick((ActionHandler)&SoldierRankState::btnCancelClick);
 	_btnCancel->onKeyboardPress((ActionHandler)&SoldierRankState::btnCancelClick, options1.keyCancel());
 
 	Soldier *soldier = _base->getSoldiers()->at(_soldierId);
 	_txtTitle->setAlign(ALIGN_CENTER);
-	_txtTitle->setText(tr("STR_PROMOTE_SOLDIER").arg(tr(soldier->getRankString())).arg(soldier->getName()));
+	_txtTitle->setText(ltr("STR_PROMOTE_SOLDIER").arg(ltr(soldier->getRankString())).arg(soldier->getName()));
 
-	_txtRank->setText(tr("STR_RANK_HEADER"));
+	_txtRank->setText(ltr("STR_RANK_HEADER"));
 
-	_txtOpening->setText(tr("STR_OPENINGS_HEADER"));
+	_txtOpening->setText(ltr("STR_OPENINGS_HEADER"));
 
 	_lstRanks->setColumns(2, 132, 21);
 	_lstRanks->setSelectable(true);
@@ -108,7 +108,7 @@ SoldierRankState::SoldierRankState(Base* base, size_t soldierId) : _base(base), 
 	{
 		const std::string quantityText = rankItem.openings >= 0 ? std::to_string(rankItem.openings) : "-";
 
-		_lstRanks->addRow(2, tr(rankItem.name).c_str(), quantityText.c_str());
+		_lstRanks->addRow(2, ltr(rankItem.name).c_str(), quantityText.c_str());
 
 		if (!rankItem.promotionAllowed)
 		{

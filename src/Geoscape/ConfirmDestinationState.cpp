@@ -97,19 +97,19 @@ ConfirmDestinationState::ConfirmDestinationState(std::vector<Craft*> crafts, Tar
 	// Set up objects
 	setWindowBackground(_window, "confirmDestination");
 
-	_btnOk->setText(tr("STR_OK"));
+	_btnOk->setText(ltr("STR_OK"));
 	_btnOk->onMouseClick((ActionHandler)&ConfirmDestinationState::btnOkClick);
 	_btnOk->onKeyboardPress((ActionHandler)&ConfirmDestinationState::btnOkClick, options1.keyOk());
 
-	_btnTransfer->setText(tr("STR_TRANSFER_UC"));
+	_btnTransfer->setText(ltr("STR_TRANSFER_UC"));
 	_btnTransfer->onMouseClick((ActionHandler)&ConfirmDestinationState::btnTransferClick);
 	_btnTransfer->setVisible(transferAvailable);
 
-	_btnCancel->setText(tr("STR_CANCEL_UC"));
+	_btnCancel->setText(ltr("STR_CANCEL_UC"));
 	_btnCancel->onMouseClick((ActionHandler)&ConfirmDestinationState::btnCancelClick);
 	_btnCancel->onKeyboardPress((ActionHandler)&ConfirmDestinationState::btnCancelClick, options1.keyCancel());
 
-	_btnFollowWingLeader->setText(tr("STR_FOLLOW_WING_LEADER_QUESTION"));
+	_btnFollowWingLeader->setText(ltr("STR_FOLLOW_WING_LEADER_QUESTION"));
 	_btnFollowWingLeader->setVisible(false);
 
 	if (_crafts.size() > 1)
@@ -133,11 +133,11 @@ ConfirmDestinationState::ConfirmDestinationState(std::vector<Craft*> crafts, Tar
 	_txtTarget->setWordWrap(true);
 	if (w != 0 && w->getId() == 0)
 	{
-		_txtTarget->setText(tr("STR_TARGET").arg(tr("STR_WAY_POINT")));
+		_txtTarget->setText(ltr("STR_TARGET").arg(ltr("STR_WAY_POINT")));
 	}
 	else
 	{
-		_txtTarget->setText(tr("STR_TARGET").arg(_target->getName(_game->getLanguage())));
+		_txtTarget->setText(ltr("STR_TARGET").arg(_target->getName(_game->getLanguage())));
 	}
 
 	// ETA display
@@ -156,14 +156,14 @@ ConfirmDestinationState::ConfirmDestinationState(std::vector<Craft*> crafts, Tar
 			int days = etaInHoursHelper / 24;
 			int hours = etaInHoursHelper % 24;
 			std::ostringstream ssStatus;
-			if (days > 0) ssStatus << tr("STR_DAY_SHORT").arg(days);
+			if (days > 0) ssStatus << ltr("STR_DAY_SHORT").arg(days);
 			if (hours > 0 || days == 0)
 			{
 				if (days > 0) ssStatus << "/";
-				ssStatus << tr("STR_HOUR_SHORT").arg(hours);
+				ssStatus << ltr("STR_HOUR_SHORT").arg(hours);
 			}
 			_txtETA->setAlign(ALIGN_CENTER);
-			_txtETA->setText(tr("STR_ETA").arg(ssStatus.str()));
+			_txtETA->setText(ltr("STR_ETA").arg(ssStatus.str()));
 		}
 	}
 }
@@ -186,7 +186,7 @@ std::string ConfirmDestinationState::checkStartingCondition()
 	{
 		if (xcraft->areBannedArmorsOnboard())
 		{
-			return tr("STR_ARMOR_NOT_ALLOWED_ONBOARD");
+			return ltr("STR_ARMOR_NOT_ALLOWED_ONBOARD");
 		}
 	}
 
@@ -231,7 +231,7 @@ std::string ConfirmDestinationState::checkStartingCondition()
 	{
 		if (!u || u->getStatus() == Ufo::LANDED || u->getStatus() == Ufo::CRASHED)
 		{
-			return tr("STR_STARTING_CONDITION_COMMANDER");
+			return ltr("STR_STARTING_CONDITION_COMMANDER");
 		}
 	}
 
@@ -250,11 +250,11 @@ std::string ConfirmDestinationState::checkStartingCondition()
 		{
 			if (i2 > 0)
 				ss2 << ", ";
-			ss2 << tr(pair.first) << ": " << pair.second;
+			ss2 << ltr(pair.first) << ": " << pair.second;
 			i2++;
 		}
 		std::string argument2 = ss2.str();
-		return tr("STR_STARTING_CONDITION_ITEM").arg(argument2);
+		return ltr("STR_STARTING_CONDITION_ITEM").arg(argument2);
 	}
 
 	// check permitted soldiers
@@ -272,7 +272,7 @@ std::string ConfirmDestinationState::checkStartingCondition()
 			{
 				if (i > 0)
 					ss << ", ";
-				ss << tr(soldierType);
+				ss << ltr(soldierType);
 				i++;
 			}
 		}
@@ -280,9 +280,9 @@ std::string ConfirmDestinationState::checkStartingCondition()
 		if (argument.empty())
 		{
 			// no suitable soldier type yet?
-			argument = tr("STR_UNKNOWN");
+			argument = ltr("STR_UNKNOWN");
 		}
-		return tr(messageCode).arg(argument);
+		return ltr(messageCode).arg(argument);
 	}
 
 	if (rule->isCraftPermitted(_crafts.front()->getRules()->getType()))
@@ -304,7 +304,7 @@ std::string ConfirmDestinationState::checkStartingCondition()
 		{
 			if (i > 0)
 				ss << ", ";
-			ss << tr(articleName);
+			ss << ltr(articleName);
 			i++;
 		}
 	}
@@ -312,9 +312,9 @@ std::string ConfirmDestinationState::checkStartingCondition()
 	if (argument.empty())
 	{
 		// no suitable craft yet
-		argument = tr("STR_UNKNOWN");
+		argument = ltr("STR_UNKNOWN");
 	}
-	return tr(messageCode).arg(argument);
+	return ltr(messageCode).arg(argument);
 }
 
 /**
@@ -338,7 +338,7 @@ void ConfirmDestinationState::btnOkClick(Action *)
 		{
 			_game->popState();
 			_game->popState();
-			std::string message2 = tr("STR_TOO_MANY_ITEMS_ONBOARD");
+			std::string message2 = ltr("STR_TOO_MANY_ITEMS_ONBOARD");
 			_game->pushState(new CraftErrorState(0, message2));
 			return;
 		}
@@ -419,19 +419,19 @@ void ConfirmDestinationState::btnTransferClick(Action *)
 	Base *targetBase = dynamic_cast<Base*>(_target);
 	if ((targetBase->getAvailableHangars() - targetBase->getUsedHangars()) <= 0) // don't know how you'd get less than 0 available hangars, but want to handle that just in case
 	{
-		errorMessage = tr("STR_NO_FREE_HANGARS_FOR_TRANSFER");
+		errorMessage = ltr("STR_NO_FREE_HANGARS_FOR_TRANSFER");
 	}
 	else if (_crafts.front()->getNumTotalSoldiers() > targetBase->getAvailableQuarters() - targetBase->getUsedQuarters())
 	{
-		errorMessage = tr("STR_NO_FREE_ACCOMODATION_CREW");
+		errorMessage = ltr("STR_NO_FREE_ACCOMODATION_CREW");
 	}
 	else if (options1.storageLimitsEnforced() && targetBase->storesOverfull(_crafts.front()->getTotalItemStorageSize()))
 	{
-		errorMessage = tr("STR_NOT_ENOUGH_STORE_SPACE_FOR_CRAFT");
+		errorMessage = ltr("STR_NOT_ENOUGH_STORE_SPACE_FOR_CRAFT");
 	}
 	else if (_crafts.front()->getFuel() < _crafts.front()->getFuelLimit(targetBase))
 	{
-		errorMessage = tr("STR_NOT_ENOUGH_FUEL_TO_REACH_TARGET");
+		errorMessage = ltr("STR_NOT_ENOUGH_FUEL_TO_REACH_TARGET");
 	}
 
 	// clicking transfer will start the craft moving or make us need to pick a new destination

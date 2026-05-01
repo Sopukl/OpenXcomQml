@@ -63,16 +63,16 @@ SackSoldierState::SackSoldierState(Base *base, size_t soldierId) : _base(base), 
 	// Set up objects
 	setWindowBackground(_window, "sackSoldier");
 
-	_btnOk->setText(tr("STR_OK"));
+	_btnOk->setText(ltr("STR_OK"));
 	_btnOk->onMouseClick((ActionHandler)&SackSoldierState::btnOkClick);
 	_btnOk->onKeyboardPress((ActionHandler)&SackSoldierState::btnOkClick, options1.keyOk());
 
-	_btnCancel->setText(tr("STR_CANCEL_UC"));
+	_btnCancel->setText(ltr("STR_CANCEL_UC"));
 	_btnCancel->onMouseClick((ActionHandler)&SackSoldierState::btnCancelClick);
 	_btnCancel->onKeyboardPress((ActionHandler)&SackSoldierState::btnCancelClick, options1.keyCancel());
 
 	_txtTitle->setAlign(ALIGN_CENTER);
-	_txtTitle->setText(tr("STR_SACK"));
+	_txtTitle->setText(ltr("STR_SACK"));
 
 	std::ostringstream ss;
 	ss << _base->getSoldiers()->at(_soldierId)->getName(true) << "?";

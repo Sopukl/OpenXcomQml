@@ -106,17 +106,17 @@ SoldierDiaryOverviewState::SoldierDiaryOverviewState(Base *base, size_t soldierI
 	// Set up objects
 	setWindowBackground(_window, "soldierDiary");
 
-	_btnOk->setText(tr("STR_OK"));
+	_btnOk->setText(ltr("STR_OK"));
 	_btnOk->onMouseClick((ActionHandler)&SoldierDiaryOverviewState::btnOkClick);
 	_btnOk->onKeyboardPress((ActionHandler)&SoldierDiaryOverviewState::btnOkClick, options1.keyCancel());
 
-	_btnKills->setText(tr("STR_COMBAT"));
+	_btnKills->setText(ltr("STR_COMBAT"));
 	_btnKills->onMouseClick((ActionHandler)&SoldierDiaryOverviewState::btnKillsClick);
 
-	_btnMissions->setText(tr("STR_PERFORMANCE"));
+	_btnMissions->setText(ltr("STR_PERFORMANCE"));
 	_btnMissions->onMouseClick((ActionHandler)&SoldierDiaryOverviewState::btnMissionsClick);
 
-	_btnCommendations->setText(tr("STR_AWARDS"));
+	_btnCommendations->setText(ltr("STR_AWARDS"));
 	_btnCommendations->onMouseClick((ActionHandler)&SoldierDiaryOverviewState::btnCommendationsClick);
 	_btnCommendations->setVisible(!_game->getMod()->getCommendationsList().empty());
 
@@ -148,11 +148,11 @@ SoldierDiaryOverviewState::SoldierDiaryOverviewState(Base *base, size_t soldierI
 	_txtTitle->setAlign(ALIGN_CENTER);
 	// Text is decided in init()
 
-	_txtMission->setText(tr("STR_MISSION"));
+	_txtMission->setText(ltr("STR_MISSION"));
 
-	_txtRating->setText(tr("STR_RATING_UC"));
+	_txtRating->setText(ltr("STR_RATING_UC"));
 
-	_txtDate->setText(tr("STR_DATE_UC"));
+	_txtDate->setText(ltr("STR_DATE_UC"));
 
 	_lstDiary->setColumns(5, 104, 98, 30, 25, 35);
 	_lstDiary->setSelectable(true);
@@ -203,9 +203,9 @@ void SoldierDiaryOverviewState::init()
 		if (cause)
 		{
 			deathTitleText = _game->getLanguage()->getString("STR_KILLED_IN_ACTION", _soldier->getGender());
-			deathInfoText = tr("STR_KILLER_AND_WEAPON")
+			deathInfoText = ltr("STR_KILLER_AND_WEAPON")
 				.arg(cause->getUnitName(_game->getLanguage()))
-				.arg(tr(cause->weapon));
+				.arg(ltr(cause->weapon));
 		}
 		else
 		{
@@ -249,7 +249,7 @@ void SoldierDiaryOverviewState::init()
 		_lstDiary->addRow(5, missionStats->getMissionName(_game->getLanguage()).c_str(),
 							 missionStats->getRatingString(_game->getLanguage()).c_str(),
 							 missionStats->time.getDayString(_game->getLanguage()).c_str(),
-							 tr(missionStats->time.getMonthString()).c_str(),
+							 ltr(missionStats->time.getMonthString()).c_str(),
 							 ss.str().c_str());
 		row++;
 	}

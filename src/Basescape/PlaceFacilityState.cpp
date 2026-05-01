@@ -95,13 +95,13 @@ PlaceFacilityState::PlaceFacilityState(Base *base, const RuleBaseFacility *rule,
 	_view->setSelectable(rule->getSizeX(), rule->getSizeY());
 	_view->onMouseClick((ActionHandler)&PlaceFacilityState::viewClick);
 
-	_btnCancel->setText(tr("STR_CANCEL"));
+	_btnCancel->setText(ltr("STR_CANCEL"));
 	_btnCancel->onMouseClick((ActionHandler)&PlaceFacilityState::btnCancelClick);
 	_btnCancel->onKeyboardPress((ActionHandler)&PlaceFacilityState::btnCancelClick, options1.keyCancel());
 
-	_txtFacility->setText(tr(_rule->getType()));
+	_txtFacility->setText(ltr(_rule->getType()));
 
-	_txtCost->setText(tr("STR_COST_UC"));
+	_txtCost->setText(ltr("STR_COST_UC"));
 
 	_numCost->setBig();
 	_numCost->setText(Unicode::formatFunding(_origFac != nullptr ? 0 : _rule->getBuildCost()));
@@ -118,7 +118,7 @@ PlaceFacilityState::PlaceFacilityState(Base *base, const RuleBaseFacility *rule,
 			size_t max = 19;
 			if (item.second.first > 9) --max;
 			if (item.second.first > 99) --max;
-			std::string name = tr(item.first);
+			std::string name = ltr(item.first);
 			if (Unicode::codePointLengthUTF8(name) > max)
 			{
 				name = Unicode::codePointSubstrUTF8(name, 0, max);
@@ -129,12 +129,12 @@ PlaceFacilityState::PlaceFacilityState(Base *base, const RuleBaseFacility *rule,
 		_numResources->setText(ss.str());
 	}
 
-	_txtTime->setText(tr("STR_CONSTRUCTION_TIME_UC"));
+	_txtTime->setText(ltr("STR_CONSTRUCTION_TIME_UC"));
 
 	_numTime->setBig();
-	_numTime->setText(tr("STR_DAY", _origFac != 0 ? 0 : _rule->getBuildTime()));
+	_numTime->setText(ltr("STR_DAY", _origFac != 0 ? 0 : _rule->getBuildTime()));
 
-	_txtMaintenance->setText(tr("STR_MAINTENANCE_UC"));
+	_txtMaintenance->setText(ltr("STR_MAINTENANCE_UC"));
 
 	_numMaintenance->setBig();
 	_numMaintenance->setText(Unicode::formatFunding(_rule->getMonthlyCost()));
@@ -173,7 +173,7 @@ void PlaceFacilityState::viewClick(Action *)
 		}
 		else if (_view->getPlacementError(_rule, _origFac))
 		{
-			_game->pushState(new ErrorMessageState(tr("STR_CANNOT_BUILD_HERE"), _palette, _game->getMod()->getInterface("placeFacility")->getElement("errorMessage")->color, "BACK01.SCR", _game->getMod()->getInterface("placeFacility")->getElement("errorPalette")->color));
+			_game->pushState(new ErrorMessageState(ltr("STR_CANNOT_BUILD_HERE"), _palette, _game->getMod()->getInterface("placeFacility")->getElement("errorMessage")->color, "BACK01.SCR", _game->getMod()->getInterface("placeFacility")->getElement("errorPalette")->color));
 		}
 		else
 		{
@@ -228,68 +228,68 @@ void PlaceFacilityState::viewClick(Action *)
 			switch (placementErrorCode)
 			{
 				case BPE_Used_Stores:
-					_game->pushState(new ErrorMessageState(tr("STR_FACILITY_IN_USE_STORAGE"), _palette, errorColor1, "BACK01.SCR", errorColor2));
+					_game->pushState(new ErrorMessageState(ltr("STR_FACILITY_IN_USE_STORAGE"), _palette, errorColor1, "BACK01.SCR", errorColor2));
 					break;
 				case BPE_Used_Quarters:
-					_game->pushState(new ErrorMessageState(tr("STR_FACILITY_IN_USE_QUARTERS"), _palette, errorColor1, "BACK01.SCR", errorColor2));
+					_game->pushState(new ErrorMessageState(ltr("STR_FACILITY_IN_USE_QUARTERS"), _palette, errorColor1, "BACK01.SCR", errorColor2));
 					break;
 				case BPE_Used_Laboratories:
-					_game->pushState(new ErrorMessageState(tr("STR_FACILITY_IN_USE_LABORATORIES"), _palette, errorColor1, "BACK01.SCR", errorColor2));
+					_game->pushState(new ErrorMessageState(ltr("STR_FACILITY_IN_USE_LABORATORIES"), _palette, errorColor1, "BACK01.SCR", errorColor2));
 					break;
 				case BPE_Used_Workshops:
-					_game->pushState(new ErrorMessageState(tr("STR_FACILITY_IN_USE_WORKSHOPS"), _palette, errorColor1, "BACK01.SCR", errorColor2));
+					_game->pushState(new ErrorMessageState(ltr("STR_FACILITY_IN_USE_WORKSHOPS"), _palette, errorColor1, "BACK01.SCR", errorColor2));
 					break;
 				case BPE_Used_Hangars:
-					_game->pushState(new ErrorMessageState(tr("STR_FACILITY_IN_USE_HANGARS"), _palette, errorColor1, "BACK01.SCR", errorColor2));
+					_game->pushState(new ErrorMessageState(ltr("STR_FACILITY_IN_USE_HANGARS"), _palette, errorColor1, "BACK01.SCR", errorColor2));
 					break;
 				case BPE_Used_PsiLabs:
-					_game->pushState(new ErrorMessageState(tr("STR_FACILITY_IN_USE_PSI_LABS"), _palette, errorColor1, "BACK01.SCR", errorColor2));
+					_game->pushState(new ErrorMessageState(ltr("STR_FACILITY_IN_USE_PSI_LABS"), _palette, errorColor1, "BACK01.SCR", errorColor2));
 					break;
 				case BPE_Used_Gyms:
-					_game->pushState(new ErrorMessageState(tr("STR_FACILITY_IN_USE_GYMS"), _palette, errorColor1, "BACK01.SCR", errorColor2));
+					_game->pushState(new ErrorMessageState(ltr("STR_FACILITY_IN_USE_GYMS"), _palette, errorColor1, "BACK01.SCR", errorColor2));
 					break;
 				case BPE_Used_AlienContainment:
-					_game->pushState(new ErrorMessageState(tr("STR_FACILITY_IN_USE_PRISONS"), _palette, errorColor1, "BACK01.SCR", errorColor2));
+					_game->pushState(new ErrorMessageState(ltr("STR_FACILITY_IN_USE_PRISONS"), _palette, errorColor1, "BACK01.SCR", errorColor2));
 					break;
 				case BPE_NotConnected:
-					_game->pushState(new ErrorMessageState(tr("STR_CANNOT_BUILD_HERE"), _palette, errorColor1, "BACK01.SCR", errorColor2));
+					_game->pushState(new ErrorMessageState(ltr("STR_CANNOT_BUILD_HERE"), _palette, errorColor1, "BACK01.SCR", errorColor2));
 					break;
 				case BPE_Used:
-					_game->pushState(new ErrorMessageState(tr("STR_FACILITY_IN_USE"), _palette, errorColor1, "BACK01.SCR", errorColor2));
+					_game->pushState(new ErrorMessageState(ltr("STR_FACILITY_IN_USE"), _palette, errorColor1, "BACK01.SCR", errorColor2));
 					break;
 				case BPE_Upgrading:
-					_game->pushState(new ErrorMessageState(tr("STR_CANNOT_UPGRADE_FACILITY_ALREADY_UPGRADING"), _palette, errorColor1, "BACK01.SCR", errorColor2));
+					_game->pushState(new ErrorMessageState(ltr("STR_CANNOT_UPGRADE_FACILITY_ALREADY_UPGRADING"), _palette, errorColor1, "BACK01.SCR", errorColor2));
 					break;
 				case BPE_UpgradeSizeMismatch:
-					_game->pushState(new ErrorMessageState(tr("STR_CANNOT_UPGRADE_FACILITY_WRONG_SIZE"), _palette, errorColor1, "BACK13.SCR", errorColor2));
+					_game->pushState(new ErrorMessageState(ltr("STR_CANNOT_UPGRADE_FACILITY_WRONG_SIZE"), _palette, errorColor1, "BACK13.SCR", errorColor2));
 					break;
 				case BPE_UpgradeRequireSpecific:
-					_game->pushState(new ErrorMessageState(tr("STR_CANNOT_UPGRADE_FACILITY_WRONG_TYPE"), _palette, errorColor1, "BACK13.SCR", errorColor2));
+					_game->pushState(new ErrorMessageState(ltr("STR_CANNOT_UPGRADE_FACILITY_WRONG_TYPE"), _palette, errorColor1, "BACK13.SCR", errorColor2));
 					break;
 				case BPE_UpgradeDisallowed:
-					_game->pushState(new ErrorMessageState(tr("STR_CANNOT_UPGRADE_FACILITY_DISALLOWED"), _palette, errorColor1, "BACK13.SCR", errorColor2));
+					_game->pushState(new ErrorMessageState(ltr("STR_CANNOT_UPGRADE_FACILITY_DISALLOWED"), _palette, errorColor1, "BACK13.SCR", errorColor2));
 					break;
 				case BPE_Queue:
-					_game->pushState(new ErrorMessageState(tr("STR_CANNOT_BUILD_QUEUE_OFF"), _palette, errorColor1, "BACK13.SCR", errorColor2));
+					_game->pushState(new ErrorMessageState(ltr("STR_CANNOT_BUILD_QUEUE_OFF"), _palette, errorColor1, "BACK13.SCR", errorColor2));
 					break;
 				case BPE_ForbiddenByOther:
-					_game->pushState(new ErrorMessageState(tr("STR_FACILITY_FORBIDDEN_BY_OTHER"), _palette, errorColor1, "BACK01.SCR", errorColor2));
+					_game->pushState(new ErrorMessageState(ltr("STR_FACILITY_FORBIDDEN_BY_OTHER"), _palette, errorColor1, "BACK01.SCR", errorColor2));
 					break;
 				case BPE_ForbiddenByThis:
-					_game->pushState(new ErrorMessageState(tr("STR_FACILITY_OTHER_FORBIDDEN_BY_THIS"), _palette, errorColor1, "BACK01.SCR", errorColor2));
+					_game->pushState(new ErrorMessageState(ltr("STR_FACILITY_OTHER_FORBIDDEN_BY_THIS"), _palette, errorColor1, "BACK01.SCR", errorColor2));
 					break;
 				case BPE_UpgradeOnly:
-					_game->pushState(new ErrorMessageState(tr("STR_CANNOT_BUILD_UPGRADE_ONLY"), _palette, errorColor1, "BACK13.SCR", errorColor2));
+					_game->pushState(new ErrorMessageState(ltr("STR_CANNOT_BUILD_UPGRADE_ONLY"), _palette, errorColor1, "BACK13.SCR", errorColor2));
 					break;
 				default:
-					_game->pushState(new ErrorMessageState(tr("STR_CANNOT_BUILD_HERE"), _palette, errorColor1, "BACK01.SCR", errorColor2));
+					_game->pushState(new ErrorMessageState(ltr("STR_CANNOT_BUILD_HERE"), _palette, errorColor1, "BACK01.SCR", errorColor2));
 					break;
 			}
 		}
 		else if (_game->getSavedGame()->getFunds() < (_rule->getBuildCost() - refundValueTemp))
 		{
 			_game->popState();
-			_game->pushState(new ErrorMessageState(tr("STR_NOT_ENOUGH_MONEY"), _palette, _game->getMod()->getInterface("placeFacility")->getElement("errorMessage")->color, "BACK01.SCR", _game->getMod()->getInterface("placeFacility")->getElement("errorPalette")->color));
+			_game->pushState(new ErrorMessageState(ltr("STR_NOT_ENOUGH_MONEY"), _palette, _game->getMod()->getInterface("placeFacility")->getElement("errorMessage")->color, "BACK01.SCR", _game->getMod()->getInterface("placeFacility")->getElement("errorPalette")->color));
 		}
 		else
 		{
@@ -299,7 +299,7 @@ void PlaceFacilityState::viewClick(Action *)
 				if (needed > 0)
 				{
 					_game->popState();
-					_game->pushState(new ErrorMessageState(tr("STR_NOT_ENOUGH_ITEMS").arg(tr(item.first)).arg(needed), _palette, _game->getMod()->getInterface("placeFacility")->getElement("errorMessage")->color, "BACK01.SCR", _game->getMod()->getInterface("placeFacility")->getElement("errorPalette")->color));
+					_game->pushState(new ErrorMessageState(ltr("STR_NOT_ENOUGH_ITEMS").arg(ltr(item.first)).arg(needed), _palette, _game->getMod()->getInterface("placeFacility")->getElement("errorMessage")->color, "BACK01.SCR", _game->getMod()->getInterface("placeFacility")->getElement("errorPalette")->color));
 					return;
 				}
 			}

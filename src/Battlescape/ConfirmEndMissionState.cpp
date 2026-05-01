@@ -62,23 +62,23 @@ ConfirmEndMissionState::ConfirmEndMissionState(SavedBattleGame *battleGame, int 
 
 	_txtTitle->setBig();
 	_txtTitle->setHighContrast(true);
-	_txtTitle->setText(tr("STR_MISSION_OVER"));		
+	_txtTitle->setText(ltr("STR_MISSION_OVER"));		
 
 	_txtWounded->setBig();
 	_txtWounded->setHighContrast(true);
-	_txtWounded->setText(tr("STR_UNITS_WITH_FATAL_WOUNDS", _wounded));
+	_txtWounded->setText(ltr("STR_UNITS_WITH_FATAL_WOUNDS", _wounded));
 
 	_txtConfirm->setBig();
 	_txtConfirm->setAlign(ALIGN_CENTER);
 	_txtConfirm->setHighContrast(true);
-	_txtConfirm->setText(tr("STR_END_MISSION_QUESTION"));
+	_txtConfirm->setText(ltr("STR_END_MISSION_QUESTION"));
 
-	_btnOk->setText(tr("STR_OK"));
+	_btnOk->setText(ltr("STR_OK"));
 	_btnOk->setHighContrast(true);
 	_btnOk->onMouseClick((ActionHandler)&ConfirmEndMissionState::btnOkClick);
 	_btnOk->onKeyboardPress((ActionHandler)&ConfirmEndMissionState::btnOkClick, options1.keyOk());
 
-	_btnCancel->setText(tr("STR_CANCEL_UC"));
+	_btnCancel->setText(ltr("STR_CANCEL_UC"));
 	_btnCancel->setHighContrast(true);
 	_btnCancel->onMouseClick((ActionHandler)&ConfirmEndMissionState::btnCancelClick);
 	_btnCancel->onKeyboardPress((ActionHandler)&ConfirmEndMissionState::btnCancelClick, options1.keyCancel());

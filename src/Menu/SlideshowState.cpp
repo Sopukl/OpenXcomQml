@@ -54,7 +54,7 @@ SlideshowState::SlideshowState(const SlideshowHeader &slideshowHeader, const std
 		// category/id definition
 		Text *caption = new Text(def.w, def.h, def.x, def.y);
 		caption->setColor(def.color);
-		caption->setText(tr(def.caption));
+		caption->setText(ltr(def.caption));
 		caption->setAlign(def.align);
 		caption->setVerticalAlign(def.valign);
 		caption->setWordWrap(true);

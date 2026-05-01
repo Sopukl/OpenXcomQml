@@ -57,7 +57,7 @@ ResearchRequiredState::ResearchRequiredState(RuleItem *item)
 	// Set up objects
 	setWindowBackground(_window, "geoResearchRequired");
 
-	_btnOk->setText(tr("STR_OK"));
+	_btnOk->setText(ltr("STR_OK"));
 	_btnOk->onMouseClick((ActionHandler)&ResearchRequiredState::btnOkClick);
 	_btnOk->onKeyboardPress((ActionHandler)&ResearchRequiredState::btnOkClick, options1.keyCancel());
 	_btnOk->onKeyboardPress((ActionHandler)&ResearchRequiredState::btnOkClick, options1.keyOk());
@@ -65,9 +65,9 @@ ResearchRequiredState::ResearchRequiredState(RuleItem *item)
 	_txtTitle->setBig();
 	_txtTitle->setAlign(ALIGN_CENTER);
 	_txtTitle->setVerticalAlign(ALIGN_MIDDLE);
-	_txtTitle->setText(tr("STR_YOU_NEED_TO_RESEARCH_ITEM_TO_PRODUCE_ITEM")
-					   .arg(tr(clip))
-					   .arg(tr(weapon)));
+	_txtTitle->setText(ltr("STR_YOU_NEED_TO_RESEARCH_ITEM_TO_PRODUCE_ITEM")
+					   .arg(ltr(clip))
+					   .arg(ltr(weapon)));
 }
 
 /**

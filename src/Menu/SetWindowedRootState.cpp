@@ -63,15 +63,15 @@ SetWindowedRootState::SetWindowedRootState(OptionsOrigin origin, OptionsVideoSta
 
 	_txtTitle->setAlign(ALIGN_CENTER);
 	_txtTitle->setWordWrap(true);
-	_txtTitle->setText(tr("STR_DISPLAY_SET_WINDOW_POSITION"));
+	_txtTitle->setText(ltr("STR_DISPLAY_SET_WINDOW_POSITION"));
 
 	_txtWindowedModePositionX->setAlign(ALIGN_RIGHT);
 	_txtWindowedModePositionX->setWordWrap(true);
-	_txtWindowedModePositionX->setText(tr("STR_DISPLAY_WINDOW_POSITION_NEW_X"));
+	_txtWindowedModePositionX->setText(ltr("STR_DISPLAY_WINDOW_POSITION_NEW_X"));
 
 	_txtWindowedModePositionY->setAlign(ALIGN_RIGHT);
 	_txtWindowedModePositionY->setWordWrap(true);
-	_txtWindowedModePositionY->setText(tr("STR_DISPLAY_WINDOW_POSITION_NEW_Y"));
+	_txtWindowedModePositionY->setText(ltr("STR_DISPLAY_WINDOW_POSITION_NEW_Y"));
 
 	std::ostringstream wss, wss2;
 
@@ -89,11 +89,11 @@ SetWindowedRootState::SetWindowedRootState(OptionsOrigin origin, OptionsVideoSta
 	// Set up object
 	setWindowBackground(_window, "optionsMenu");
 
-	_btnOk->setText(tr("STR_OK"));
+	_btnOk->setText(ltr("STR_OK"));
 	_btnOk->onMouseClick((ActionHandler)&SetWindowedRootState::btnOkClick);
 	_btnOk->onKeyboardPress((ActionHandler)&SetWindowedRootState::btnOkClick, options1.keyOk());
 
-	_btnCancel->setText(tr("STR_CANCEL"));
+	_btnCancel->setText(ltr("STR_CANCEL"));
 	_btnCancel->onMouseClick((ActionHandler)&SetWindowedRootState::btnCancelClick);
 	_btnCancel->onKeyboardPress((ActionHandler)&SetWindowedRootState::btnCancelClick, options1.keyCancel());
 

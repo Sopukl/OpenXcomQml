@@ -75,9 +75,9 @@ namespace OpenXcom
 
 		_txtTitle->setBig();
 		_txtTitle->setAlign(ALIGN_CENTER);
-		_txtTitle->setText(tr("STR_SELECT_ITEM"));
+		_txtTitle->setText(ltr("STR_SELECT_ITEM"));
 
-		_btnOk->setText(tr("STR_OK"));
+		_btnOk->setText(ltr("STR_OK"));
 		_btnOk->onMouseClick((ActionHandler)&UfopaediaSelectState::btnOkClick);
 		_btnOk->onKeyboardPress((ActionHandler)&UfopaediaSelectState::btnOkClick,options1.keyCancel());
 		_btnOk->onKeyboardPress((ActionHandler)&UfopaediaSelectState::btnMarkAllAsSeenClick, options1.keyMarkAllAsSeen());
@@ -266,7 +266,7 @@ namespace OpenXcom
 			// quick search
 			if (!searchString.empty())
 			{
-				std::string projectName = tr(articleDef->getMainTitle());
+				std::string projectName = ltr(articleDef->getMainTitle());
 				Unicode::upperCase(projectName);
 				if (projectName.find(searchString) == std::string::npos)
 				{
@@ -275,7 +275,7 @@ namespace OpenXcom
 			}
 
 			_filtered_article_list.push_back(articleDef);
-			_lstSelection->addRow(1, tr(articleDef->getMainTitle()).c_str());
+			_lstSelection->addRow(1, ltr(articleDef->getMainTitle()).c_str());
 
 			if (markAllAsSeen)
 			{
@@ -299,7 +299,7 @@ namespace OpenXcom
 
 		if (!_isCommendationsSection)
 		{
-			std::string label = tr("STR_OK");
+			std::string label = ltr("STR_OK");
 			_btnOk->setText((hasUnseen ? "* " : "") + label);
 		}
 		if (_lstScroll > 0)

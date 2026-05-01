@@ -62,24 +62,24 @@ CraftPatrolState::CraftPatrolState(Craft *craft, Globe *globe) : _craft(craft), 
 	// Set up objects
 	setWindowBackground(_window, "craftPatrol");
 
-	_btnOk->setText(tr("STR_OK"));
+	_btnOk->setText(ltr("STR_OK"));
 	_btnOk->onMouseClick((ActionHandler)&CraftPatrolState::btnOkClick);
 	_btnOk->onKeyboardPress((ActionHandler)&CraftPatrolState::btnOkClick, options1.keyCancel());
 
-	_btnRedirect->setText(tr("STR_REDIRECT_CRAFT"));
+	_btnRedirect->setText(ltr("STR_REDIRECT_CRAFT"));
 	_btnRedirect->onMouseClick((ActionHandler)&CraftPatrolState::btnRedirectClick);
 	_btnRedirect->onKeyboardPress((ActionHandler)&CraftPatrolState::btnRedirectClick, options1.keyOk());
 
 	_txtDestination->setBig();
 	_txtDestination->setAlign(ALIGN_CENTER);
 	_txtDestination->setWordWrap(true);
-	_txtDestination->setText(tr("STR_CRAFT_HAS_REACHED_DESTINATION")
+	_txtDestination->setText(ltr("STR_CRAFT_HAS_REACHED_DESTINATION")
 							 .arg(_craft->getName(_game->getLanguage()))
 							 .arg(_craft->getDestination()->getName(_game->getLanguage())));
 
 	_txtPatrolling->setBig();
 	_txtPatrolling->setAlign(ALIGN_CENTER);
-	_txtPatrolling->setText(tr("STR_NOW_PATROLLING"));
+	_txtPatrolling->setText(ltr("STR_NOW_PATROLLING"));
 }
 
 /**

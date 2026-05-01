@@ -82,7 +82,7 @@ SoldierDiaryMissionState::SoldierDiaryMissionState(Soldier *soldier, int rowEntr
 	// Set up object
 	setWindowBackground(_window, "soldierDiaryMission");
 
-	_btnOk->setText(tr("STR_OK"));
+	_btnOk->setText(ltr("STR_OK"));
 	_btnOk->onMouseClick((ActionHandler)&SoldierDiaryMissionState::btnOkClick);
 	_btnOk->onKeyboardPress((ActionHandler)&SoldierDiaryMissionState::btnOkClick, options1.keyCancel());
 
@@ -137,18 +137,18 @@ void SoldierDiaryMissionState::init()
 	}
 
 	_lstKills->clearList();
-	_txtTitle->setText(tr(ms->type));
+	_txtTitle->setText(ltr(ms->type));
 	if (ms->isUfoMission())
 	{
-		_txtUFO->setText(tr(ms->ufo));
+		_txtUFO->setText(ltr(ms->ufo));
 	}
 	_txtUFO->setVisible(ms->isUfoMission());
-	_txtScore->setText(tr("STR_SCORE_VALUE").arg(ms->score));
-	_txtLocation->setText(tr("STR_LOCATION").arg(tr(ms->getLocationString())));
-	_txtRace->setText(tr("STR_RACE_TYPE").arg(tr(ms->alienRace)));
+	_txtScore->setText(ltr("STR_SCORE_VALUE").arg(ms->score));
+	_txtLocation->setText(ltr("STR_LOCATION").arg(ltr(ms->getLocationString())));
+	_txtRace->setText(ltr("STR_RACE_TYPE").arg(ltr(ms->alienRace)));
 	_txtRace->setVisible(ms->alienRace != "STR_UNKNOWN");
-	_txtDaylight->setText(tr("STR_DAYLIGHT_TYPE").arg(tr(ms->getDaylightString(_game->getMod()))));
-	_txtDaysWounded->setText(tr("STR_DAYS_WOUNDED").arg(daysWounded));
+	_txtDaylight->setText(ltr("STR_DAYLIGHT_TYPE").arg(ltr(ms->getDaylightString(_game->getMod()))));
+	_txtDaysWounded->setText(ltr("STR_DAYS_WOUNDED").arg(daysWounded));
 	_txtDaysWounded->setVisible(daysWounded != 0);
 
 	int kills = 0;
@@ -171,16 +171,16 @@ void SoldierDiaryMissionState::init()
 			break;
 		}
 
-		_lstKills->addRow(3, tr(battleUnitKills->getKillStatusString()).c_str(),
+		_lstKills->addRow(3, ltr(battleUnitKills->getKillStatusString()).c_str(),
 							 battleUnitKills->getUnitName(_game->getLanguage()).c_str(),
-							 tr(battleUnitKills->weapon).c_str());
+							 ltr(battleUnitKills->weapon).c_str());
 	}
 
 	_txtNoRecord->setAlign(ALIGN_CENTER);
-	_txtNoRecord->setText(tr("STR_NO_RECORD"));
+	_txtNoRecord->setText(ltr("STR_NO_RECORD"));
 	_txtNoRecord->setVisible(!stunOrKill);
 
-	_txtKills->setText(tr("STR_KILLS").arg(kills));
+	_txtKills->setText(ltr("STR_KILLS").arg(kills));
 }
 
 /**

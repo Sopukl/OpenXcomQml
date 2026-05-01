@@ -63,7 +63,7 @@ namespace OpenXcom
 		_txtTitle->setColor(_titleColor);
 		_txtTitle->setBig();
 		_txtTitle->setWordWrap(true);
-		_txtTitle->setText(tr(defs->getTitleForPage(_state->current_page)));
+		_txtTitle->setText(ltr(defs->getTitleForPage(_state->current_page)));
 
 		int text_height = _txtTitle->getTextHeight();
 
@@ -85,7 +85,7 @@ namespace OpenXcom
 		{
 			_txtInfo->setVerticalAlign(ALIGN_BOTTOM);
 		}
-		_txtInfo->setText(tr(defs->getTextForPage(_state->current_page)));
+		_txtInfo->setText(ltr(defs->getTextForPage(_state->current_page)));
 
 		centerAllSurfaces();
 	}

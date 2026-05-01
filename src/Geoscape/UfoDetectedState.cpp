@@ -119,19 +119,19 @@ UfoDetectedState::UfoDetectedState(Ufo *ufo, GeoscapeState *state, bool detected
 
 	centerAllSurfaces();
 
-	_btnIntercept->setText(tr("STR_INTERCEPT"));
+	_btnIntercept->setText(ltr("STR_INTERCEPT"));
 	_btnIntercept->onMouseClick((ActionHandler)&UfoDetectedState::btnInterceptClick);
 
-	_btnCentre->setText(tr("STR_CENTER_ON_UFO_TIME_5_SECONDS"));
+	_btnCentre->setText(ltr("STR_CENTER_ON_UFO_TIME_5_SECONDS"));
 	_btnCentre->onMouseClick((ActionHandler)&UfoDetectedState::btnCentreClick);
 
 	if (_game->isCtrlPressed())
 	{
-		_btnCancel->setText(tr("STR_IGNORE_UC"));
+		_btnCancel->setText(ltr("STR_IGNORE_UC"));
 	}
 	else
 	{
-		_btnCancel->setText(tr("STR_CANCEL_UC"));
+		_btnCancel->setText(ltr("STR_CANCEL_UC"));
 	}
 	_btnCancel->onMouseClick((ActionHandler)&UfoDetectedState::btnCancelClick);
 	_btnCancel->onKeyboardPress((ActionHandler)&UfoDetectedState::btnCancelClick, options1.keyCancel());
@@ -142,7 +142,7 @@ UfoDetectedState::UfoDetectedState(Ufo *ufo, GeoscapeState *state, bool detected
 
 	if (detected)
 	{
-		_txtDetected->setText(tr("STR_DETECTED"));
+		_txtDetected->setText(ltr("STR_DETECTED"));
 	}
 	else
 	{
@@ -151,7 +151,7 @@ UfoDetectedState::UfoDetectedState(Ufo *ufo, GeoscapeState *state, bool detected
 
 	_txtHyperwave->setAlign(ALIGN_CENTER);
 	_txtHyperwave->setWordWrap(true);
-	_txtHyperwave->setText(tr("STR_HYPER_WAVE_TRANSMISSIONS_ARE_DECODED"));
+	_txtHyperwave->setText(ltr("STR_HYPER_WAVE_TRANSMISSIONS_ARE_DECODED"));
 
 	_txtUfo->setBig();
 	_txtUfo->setText(_ufo->getName(_game->getLanguage()));
@@ -160,8 +160,8 @@ UfoDetectedState::UfoDetectedState(Ufo *ufo, GeoscapeState *state, bool detected
 	_lstInfo->setDot(true);
 
 	std::ostringstream ss;
-	ss << Unicode::TOK_COLOR_FLIP << tr(_ufo->getRules()->getSize());
-	_lstInfo->addRow(2, tr("STR_SIZE_UC").c_str(), ss.str().c_str());
+	ss << Unicode::TOK_COLOR_FLIP << ltr(_ufo->getRules()->getSize());
+	_lstInfo->addRow(2, ltr("STR_SIZE_UC").c_str(), ss.str().c_str());
 	ss.str("");
 
 	std::string altitude = _ufo->getAltitude() == "STR_GROUND" ? "STR_GROUNDED" : _ufo->getAltitude();
@@ -179,8 +179,8 @@ UfoDetectedState::UfoDetectedState(Ufo *ufo, GeoscapeState *state, bool detected
 	{
 		altitude = "STR_AIRBORNE";
 	}
-	ss << Unicode::TOK_COLOR_FLIP << tr(altitude);
-	_lstInfo->addRow(2, tr("STR_ALTITUDE").c_str(), ss.str().c_str());
+	ss << Unicode::TOK_COLOR_FLIP << ltr(altitude);
+	_lstInfo->addRow(2, ltr("STR_ALTITUDE").c_str(), ss.str().c_str());
 
 	std::string heading = _ufo->getDirection();
 	if (_ufo->getStatus() != Ufo::FLYING)
@@ -188,31 +188,31 @@ UfoDetectedState::UfoDetectedState(Ufo *ufo, GeoscapeState *state, bool detected
 		heading = "STR_NONE_UC";
 	}
 	ss.str("");
-	ss << Unicode::TOK_COLOR_FLIP << tr(heading);
-	_lstInfo->addRow(2, tr("STR_HEADING").c_str(), ss.str().c_str());
+	ss << Unicode::TOK_COLOR_FLIP << ltr(heading);
+	_lstInfo->addRow(2, ltr("STR_HEADING").c_str(), ss.str().c_str());
 
 	ss.str("");
 	ss << Unicode::TOK_COLOR_FLIP << Unicode::formatNumber(_ufo->getSpeed());
-	_lstInfo->addRow(2, tr("STR_SPEED").c_str(), ss.str().c_str());
+	_lstInfo->addRow(2, ltr("STR_SPEED").c_str(), ss.str().c_str());
 
 	_lstInfo2->setColumns(2, 77, 140);
 	_lstInfo2->setDot(true);
 
 	ss.str("");
-	ss << Unicode::TOK_COLOR_FLIP << tr(_ufo->getRules()->getType());
-	_lstInfo2->addRow(2, tr("STR_CRAFT_TYPE").c_str(), ss.str().c_str());
+	ss << Unicode::TOK_COLOR_FLIP << ltr(_ufo->getRules()->getType());
+	_lstInfo2->addRow(2, ltr("STR_CRAFT_TYPE").c_str(), ss.str().c_str());
 
 	ss.str("");
-	ss << Unicode::TOK_COLOR_FLIP << tr(_ufo->getAlienRace());
-	_lstInfo2->addRow(2, tr("STR_RACE").c_str(), ss.str().c_str());
+	ss << Unicode::TOK_COLOR_FLIP << ltr(_ufo->getAlienRace());
+	_lstInfo2->addRow(2, ltr("STR_RACE").c_str(), ss.str().c_str());
 
 	ss.str("");
-	ss << Unicode::TOK_COLOR_FLIP << tr(_ufo->getMissionType());
-	_lstInfo2->addRow(2, tr("STR_MISSION").c_str(), ss.str().c_str());
+	ss << Unicode::TOK_COLOR_FLIP << ltr(_ufo->getMissionType());
+	_lstInfo2->addRow(2, ltr("STR_MISSION").c_str(), ss.str().c_str());
 
 	ss.str("");
-	ss << Unicode::TOK_COLOR_FLIP << tr(_ufo->getMission()->getRegion());
-	_lstInfo2->addRow(2, tr("STR_ZONE").c_str(), ss.str().c_str());
+	ss << Unicode::TOK_COLOR_FLIP << ltr(_ufo->getMission()->getRegion());
+	_lstInfo2->addRow(2, ltr("STR_ZONE").c_str(), ss.str().c_str());
 }
 
 /**
@@ -267,11 +267,11 @@ void UfoDetectedState::toggleCancel(Action *)
 {
 	if (_game->isCtrlPressed())
 	{
-		_btnCancel->setText(tr("STR_IGNORE_UC"));
+		_btnCancel->setText(ltr("STR_IGNORE_UC"));
 	}
 	else
 	{
-		_btnCancel->setText(tr("STR_CANCEL_UC"));
+		_btnCancel->setText(ltr("STR_CANCEL_UC"));
 	}
 }
 

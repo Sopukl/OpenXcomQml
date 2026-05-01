@@ -73,13 +73,13 @@ TargetInfoState::TargetInfoState(Target *target, Globe *globe) : _target(target)
 	// Set up objects
 	setWindowBackground(_window, "targetInfo");
 
-	_btnIntercept->setText(tr("STR_INTERCEPT"));
+	_btnIntercept->setText(ltr("STR_INTERCEPT"));
 	_btnIntercept->onMouseClick((ActionHandler)&TargetInfoState::btnInterceptClick);
 
-	_btnInfo->setText(tr("STR_INFO"));
+	_btnInfo->setText(ltr("STR_INFO"));
 	_btnInfo->onMouseClick((ActionHandler)&TargetInfoState::btnInfoClick);
 
-	_btnOk->setText(tr("STR_OK"));
+	_btnOk->setText(ltr("STR_OK"));
 	_btnOk->onMouseClick((ActionHandler)&TargetInfoState::btnOkClick);
 	_btnOk->onKeyboardPress((ActionHandler)&TargetInfoState::btnOkClick, options1.keyCancel());
 
@@ -91,7 +91,7 @@ TargetInfoState::TargetInfoState(Target *target, Globe *globe) : _target(target)
 	_edtTitle->onChange((ActionHandler)&TargetInfoState::edtTitleChange);
 
 	_txtTargetted->setAlign(ALIGN_CENTER);
-	_txtTargetted->setText(tr("STR_TARGETTED_BY"));
+	_txtTargetted->setText(ltr("STR_TARGETTED_BY"));
 	_txtFollowers->setAlign(ALIGN_CENTER);
 	std::ostringstream ss;
 	for (const auto* follower : *_target->getFollowers())
@@ -129,7 +129,7 @@ TargetInfoState::TargetInfoState(Target *target, Globe *globe) : _target(target)
 	if (_deploymentRule && _deploymentRule->getDespawnPenalty() != 0)
 	{
 		_txtPenalty->setAlign(ALIGN_CENTER);
-		_txtPenalty->setText(tr("STR_DESPAWN_PENALTY").arg(_deploymentRule->getDespawnPenalty()));
+		_txtPenalty->setText(ltr("STR_DESPAWN_PENALTY").arg(_deploymentRule->getDespawnPenalty()));
 	}
 }
 

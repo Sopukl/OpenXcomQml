@@ -60,7 +60,7 @@ CraftErrorState::CraftErrorState(GeoscapeState *state, const std::string &msg, b
 	// Set up objects
 	setWindowBackground(_window, "craftError");
 
-	_btnOk->setText(tr("STR_OK"));
+	_btnOk->setText(ltr("STR_OK"));
 	_btnOk->onMouseClick((ActionHandler)&CraftErrorState::btnOkClick);
 	if (enableHotkeys)
 	{
@@ -71,7 +71,7 @@ CraftErrorState::CraftErrorState(GeoscapeState *state, const std::string &msg, b
 		}
 	}
 
-	_btnOk5Secs->setText(tr("STR_OK_5_SECONDS"));
+	_btnOk5Secs->setText(ltr("STR_OK_5_SECONDS"));
 	_btnOk5Secs->onMouseClick((ActionHandler)&CraftErrorState::btnOk5SecsClick);
 	if (enableHotkeys && _state)
 	{

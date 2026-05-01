@@ -65,9 +65,9 @@ TechTreeSelectState::TechTreeSelectState(TechTreeViewerState *parent) : _parent(
 	setWindowBackground(_window, "techTreeSelect");
 
 	_txtTitle->setAlign(ALIGN_CENTER);
-	_txtTitle->setText(tr("STR_AVAILABLE_TOPICS"));
+	_txtTitle->setText(ltr("STR_AVAILABLE_TOPICS"));
 
-	_btnOk->setText(tr("STR_OK"));
+	_btnOk->setText(ltr("STR_OK"));
 	_btnOk->onMouseClick((ActionHandler)&TechTreeSelectState::btnOkClick);
 	_btnOk->onKeyboardPress((ActionHandler)&TechTreeSelectState::btnOkClick, options1.keyCancel());
 
@@ -155,8 +155,8 @@ void TechTreeSelectState::initLists()
 
 	if (searchString.length() < 3)
 	{
-		_lstTopics->addRow(1, tr("STR_QS_THREE_LETTERS_A").c_str());
-		_lstTopics->addRow(1, tr("STR_QS_THREE_LETTERS_B").c_str());
+		_lstTopics->addRow(1, ltr("STR_QS_THREE_LETTERS_A").c_str());
+		_lstTopics->addRow(1, ltr("STR_QS_THREE_LETTERS_B").c_str());
 		return;
 	}
 
@@ -209,7 +209,7 @@ void TechTreeSelectState::initLists()
 		for (auto& tmp : tmpList)
 		{
 			_availableTopics.push_back(tmp);
-			_lstTopics->addRow(1, tr(tmp).c_str());
+			_lstTopics->addRow(1, ltr(tmp).c_str());
 			_lstTopics->setRowColor(row, _parent->getResearchColor(tmp));
 			++row;
 		}
@@ -222,7 +222,7 @@ void TechTreeSelectState::initLists()
 
 	for (auto& res : _game->getMod()->getResearchList())
 	{
-		std::string projectName = tr(res);
+		std::string projectName = ltr(res);
 		Unicode::upperCase(projectName);
 		if (searchString == "SHAZAM")
 		{
@@ -237,7 +237,7 @@ void TechTreeSelectState::initLists()
 		}
 
 		_availableTopics.push_back(res);
-		_lstTopics->addRow(1, tr(res).c_str());
+		_lstTopics->addRow(1, ltr(res).c_str());
 		_lstTopics->setRowColor(row, _parent->getResearchColor(res));
 		++row;
 	}
@@ -246,7 +246,7 @@ void TechTreeSelectState::initLists()
 
 	for (auto& manuf : _game->getMod()->getManufactureList())
 	{
-		std::string projectName = tr(manuf);
+		std::string projectName = ltr(manuf);
 		Unicode::upperCase(projectName);
 		if (searchString == "SHAZAM")
 		{
@@ -262,8 +262,8 @@ void TechTreeSelectState::initLists()
 
 		_availableTopics.push_back(manuf);
 		std::ostringstream ss;
-		ss << tr(manuf);
-		ss << tr("STR_M_FLAG");
+		ss << ltr(manuf);
+		ss << ltr("STR_M_FLAG");
 		_lstTopics->addRow(1, ss.str().c_str());
 		if (!_parent->isDiscoveredManufacture(manuf))
 		{
@@ -276,7 +276,7 @@ void TechTreeSelectState::initLists()
 
 	for (auto& facType : _game->getMod()->getBaseFacilitiesList())
 	{
-		std::string facilityName = tr(facType);
+		std::string facilityName = ltr(facType);
 		Unicode::upperCase(facilityName);
 		if (searchString == "SHAZAM")
 		{
@@ -292,8 +292,8 @@ void TechTreeSelectState::initLists()
 
 		_availableTopics.push_back(facType);
 		std::ostringstream ss;
-		ss << tr(facType);
-		ss << tr("STR_F_FLAG");
+		ss << ltr(facType);
+		ss << ltr("STR_F_FLAG");
 		_lstTopics->addRow(1, ss.str().c_str());
 		if (!_parent->isDiscoveredFacility(facType))
 		{
@@ -311,7 +311,7 @@ void TechTreeSelectState::initLists()
 			// items that are not protected at all are irrelevant for the Tech Tree Viewer!
 			continue;
 		}
-		std::string itemName = tr(itemType);
+		std::string itemName = ltr(itemType);
 		Unicode::upperCase(itemName);
 		if (searchString == "SHAZAM")
 		{
@@ -327,8 +327,8 @@ void TechTreeSelectState::initLists()
 
 		_availableTopics.push_back(itemType);
 		std::ostringstream ss;
-		ss << tr(itemType);
-		ss << tr("STR_I_FLAG");
+		ss << ltr(itemType);
+		ss << ltr("STR_I_FLAG");
 		_lstTopics->addRow(1, ss.str().c_str());
 		if (!_parent->isProtectedAndDiscoveredItem(itemType))
 		{
@@ -341,7 +341,7 @@ void TechTreeSelectState::initLists()
 
 	for (auto& craftType : _game->getMod()->getCraftsList())
 	{
-		std::string craftName = tr(craftType);
+		std::string craftName = ltr(craftType);
 		Unicode::upperCase(craftName);
 		if (searchString == "SHAZAM")
 		{
@@ -357,8 +357,8 @@ void TechTreeSelectState::initLists()
 
 		_availableTopics.push_back(craftType);
 		std::ostringstream ss;
-		ss << tr(craftType);
-		ss << tr("STR_C_FLAG");
+		ss << ltr(craftType);
+		ss << ltr("STR_C_FLAG");
 		_lstTopics->addRow(1, ss.str().c_str());
 		if (!_parent->isDiscoveredCraft(craftType))
 		{

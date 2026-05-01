@@ -118,39 +118,39 @@ ManageAlienContainmentState::ManageAlienContainmentState(Base *base, int prisonT
 
 	touchComponentsConfigure();
 
-	_btnOk->setText(trAlt(_threeButtons ? "STR_KILL_SELECTED" : "STR_REMOVE_SELECTED", _prisonType));
+	_btnOk->setText(ltrAlt(_threeButtons ? "STR_KILL_SELECTED" : "STR_REMOVE_SELECTED", _prisonType));
 	_btnOk->onMouseClick((ActionHandler)&ManageAlienContainmentState::btnOkClick);
 	_btnOk->onKeyboardPress((ActionHandler)&ManageAlienContainmentState::btnOkClick, options1.keyOk());
 	_btnOk->onKeyboardPress((ActionHandler)&ManageAlienContainmentState::onGlobalAlienContainmentClick, options1.keyGeoGlobalAlienContainment());
 
-	_btnSell->setText(trAlt("STR_SELL_SELECTED", _prisonType));
+	_btnSell->setText(ltrAlt("STR_SELL_SELECTED", _prisonType));
 	_btnSell->onMouseClick((ActionHandler)&ManageAlienContainmentState::btnSellClick);
 
-	_btnCancel->setText(tr("STR_CANCEL"));
+	_btnCancel->setText(ltr("STR_CANCEL"));
 	_btnCancel->onMouseClick((ActionHandler)&ManageAlienContainmentState::btnCancelClick);
 	_btnCancel->onKeyboardPress((ActionHandler)&ManageAlienContainmentState::btnCancelClick, options1.keyCancel());
 
-	_btnTransfer->setText(tr("STR_GO_TO_TRANSFERS"));
+	_btnTransfer->setText(ltr("STR_GO_TO_TRANSFERS"));
 	_btnTransfer->onMouseClick((ActionHandler)&ManageAlienContainmentState::btnTransferClick);
 
-	_btnCleanup->setText(tr("STR_PRISON_CLEANUP"));
+	_btnCleanup->setText(ltr("STR_PRISON_CLEANUP"));
 	_btnCleanup->onMouseClick((ActionHandler)&ManageAlienContainmentState::btnCleanupClick);
 
 	_txtTitle->setBig();
 	_txtTitle->setAlign(ALIGN_CENTER);
-	_txtTitle->setText(trAlt("STR_MANAGE_CONTAINMENT", _prisonType));
+	_txtTitle->setText(ltrAlt("STR_MANAGE_CONTAINMENT", _prisonType));
 
-	_txtItem->setText(trAlt("STR_ALIEN", _prisonType));
+	_txtItem->setText(ltrAlt("STR_ALIEN", _prisonType));
 
-	_txtLiveAliens->setText(trAlt("STR_LIVE_ALIENS", _prisonType));
+	_txtLiveAliens->setText(ltrAlt("STR_LIVE_ALIENS", _prisonType));
 	_txtLiveAliens->setWordWrap(true);
 	_txtLiveAliens->setVerticalAlign(ALIGN_BOTTOM);
 
-	_txtDeadAliens->setText(trAlt("STR_DEAD_ALIENS", _prisonType));
+	_txtDeadAliens->setText(ltrAlt("STR_DEAD_ALIENS", _prisonType));
 	_txtDeadAliens->setWordWrap(true);
 	_txtDeadAliens->setVerticalAlign(ALIGN_BOTTOM);
 
-	_txtInterrogatedAliens->setText(trAlt("STR_UNDER_INTERROGATION", _prisonType));
+	_txtInterrogatedAliens->setText(ltrAlt("STR_UNDER_INTERROGATION", _prisonType));
 	_txtInterrogatedAliens->setWordWrap(true);
 	_txtInterrogatedAliens->setVerticalAlign(ALIGN_BOTTOM);
 
@@ -259,7 +259,7 @@ void ManageAlienContainmentState::resetListAndTotals()
 				formattedCost = Unicode::formatFunding(adjustedCost / 1000).append("K");
 			}
 
-			_lstAliens->addRow(5, tr(itemType).c_str(), formattedCost.c_str(), ss.str().c_str(), "0", rqty.c_str());
+			_lstAliens->addRow(5, ltr(itemType).c_str(), formattedCost.c_str(), ss.str().c_str(), "0", rqty.c_str());
 		}
 	}
 
@@ -267,7 +267,7 @@ void ManageAlienContainmentState::resetListAndTotals()
 	{
 		_aliens.push_back(researchName);
 		_qtys.push_back(0);
-		_lstAliens->addRow(5, tr(researchName).c_str(), options1.canSellLiveAliens() ? "-" : "", "0", "0", "1");
+		_lstAliens->addRow(5, ltr(researchName).c_str(), options1.canSellLiveAliens() ? "-" : "", "0", "0", "1");
 		_lstAliens->setRowColor(_qtys.size() -1, _lstAliens->getSecondaryColor());
 	}
 
@@ -276,13 +276,13 @@ void ManageAlienContainmentState::resetListAndTotals()
 	int usedContainment = _base->getUsedContainment(_prisonType);
 	int freeContainment = availableContainment - usedContainment;
 	{
-		_txtAvailable->setText(tr("STR_SPACE_AVAILABLE").arg(freeContainment));
+		_txtAvailable->setText(ltr("STR_SPACE_AVAILABLE").arg(freeContainment));
 
-		_txtUsed->setText(tr("STR_SPACE_USED").arg(usedContainment));
+		_txtUsed->setText(ltr("STR_SPACE_USED").arg(usedContainment));
 
 		if (options1.canSellLiveAliens())
 		{
-			_txtValueOfSales->setText(tr("STR_VALUE_OF_SALES").arg(Unicode::formatFunding(_total)));
+			_txtValueOfSales->setText(ltr("STR_VALUE_OF_SALES").arg(Unicode::formatFunding(_total)));
 		}
 	}
 
@@ -389,7 +389,7 @@ void ManageAlienContainmentState::dealWithSelectedAliens(bool sell)
 		else
 		{
 			_game->pushState(new SellState(_base, 0, _origin));
-			_game->pushState(new ErrorMessageState(tr("STR_STORAGE_EXCEEDED").arg(_base->getName()), _palette, _game->getMod()->getInterface("manageContainment")->getElement("errorMessage")->color, "BACK13.SCR", _game->getMod()->getInterface("manageContainment")->getElement("errorPalette")->color));
+			_game->pushState(new ErrorMessageState(ltr("STR_STORAGE_EXCEEDED").arg(_base->getName()), _palette, _game->getMod()->getInterface("manageContainment")->getElement("errorMessage")->color, "BACK13.SCR", _game->getMod()->getInterface("manageContainment")->getElement("errorPalette")->color));
 		}
  	}
 }
@@ -621,8 +621,8 @@ void ManageAlienContainmentState::updateStrings()
 		_btnOk->setVisible(spaces >= 0);
 		_btnSell->setVisible(spaces >= 0 && _threeButtons);
 	}
-	_txtAvailable->setText(tr("STR_SPACE_AVAILABLE").arg(spaces));
-	_txtUsed->setText(tr("STR_SPACE_USED").arg(aliens));
+	_txtAvailable->setText(ltr("STR_SPACE_AVAILABLE").arg(spaces));
+	_txtUsed->setText(ltr("STR_SPACE_USED").arg(aliens));
 
 	if (options1.canSellLiveAliens())
 	{
@@ -637,7 +637,7 @@ void ManageAlienContainmentState::updateStrings()
 				_total += adjustedCost;
 			}
 		}
-		_txtValueOfSales->setText(tr("STR_VALUE_OF_SALES").arg(Unicode::formatFunding(_total)));
+		_txtValueOfSales->setText(ltr("STR_VALUE_OF_SALES").arg(Unicode::formatFunding(_total)));
 	}
 }
 

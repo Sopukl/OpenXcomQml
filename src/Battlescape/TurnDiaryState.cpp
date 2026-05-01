@@ -62,9 +62,9 @@ TurnDiaryState::TurnDiaryState(const HitLog *hitLog)
 	_txtTitle->setAlign(ALIGN_CENTER);
 	_txtTitle->setBig();
 	_txtTitle->setHighContrast(true);
-	_txtTitle->setText(tr("STR_HIT_LOG"));
+	_txtTitle->setText(ltr("STR_HIT_LOG"));
 
-	_btnCancel->setText(tr("STR_CANCEL_UC"));
+	_btnCancel->setText(ltr("STR_CANCEL_UC"));
 	_btnCancel->setHighContrast(true);
 	_btnCancel->onMouseClick((ActionHandler)&TurnDiaryState::btnCancelClick);
 	_btnCancel->onKeyboardPress((ActionHandler)&TurnDiaryState::btnCancelClick, options1.keyCancel());

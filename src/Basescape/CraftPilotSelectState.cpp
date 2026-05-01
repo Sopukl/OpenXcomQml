@@ -70,20 +70,20 @@ CraftPilotSelectState::CraftPilotSelectState(Base *base, size_t craft) : _base(b
 	// Set up objects
 	setWindowBackground(_window, "craftPilotsSelect");
 
-	_btnCancel->setText(tr("STR_CANCEL_UC"));
+	_btnCancel->setText(ltr("STR_CANCEL_UC"));
 	_btnCancel->onMouseClick((ActionHandler)&CraftPilotSelectState::btnCancelClick);
 	_btnCancel->onKeyboardPress((ActionHandler)&CraftPilotSelectState::btnCancelClick, options1.keyCancel());
 
 	Craft *c = _base->getCrafts()->at(_craft);
 
 	_txtTitle->setAlign(ALIGN_CENTER);
-	_txtTitle->setText(tr("STR_SELECT_PILOT"));
+	_txtTitle->setText(ltr("STR_SELECT_PILOT"));
 
-	_txtName->setText(tr("STR_NAME"));
+	_txtName->setText(ltr("STR_NAME"));
 
-	_txtFiringAcc->setText(tr("STR_FIRING_ACCURACY_ABBREVIATION"));
-	_txtReactions->setText(tr("STR_REACTIONS_ABBREVIATION"));
-	_txtBravery->setText(tr("STR_BRAVERY_ABBREVIATION"));
+	_txtFiringAcc->setText(ltr("STR_FIRING_ACCURACY_ABBREVIATION"));
+	_txtReactions->setText(ltr("STR_REACTIONS_ABBREVIATION"));
+	_txtBravery->setText(ltr("STR_BRAVERY_ABBREVIATION"));
 
 	_lstPilot->setColumns(4, 124, 20, 20, 20);
 	_lstPilot->setAlign(ALIGN_RIGHT);

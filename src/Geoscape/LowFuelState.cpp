@@ -60,11 +60,11 @@ LowFuelState::LowFuelState(Craft *craft, GeoscapeState *state) : _craft(craft), 
 	// Set up objects
 	setWindowBackground(_window, "lowFuel");
 
-	_btnOk->setText(tr("STR_OK"));
+	_btnOk->setText(ltr("STR_OK"));
 	_btnOk->onMouseClick((ActionHandler)&LowFuelState::btnOkClick);
 	_btnOk->onKeyboardPress((ActionHandler)&LowFuelState::btnOkClick, options1.keyCancel());
 
-	_btnOk5Secs->setText(tr("STR_OK_5_SECONDS"));
+	_btnOk5Secs->setText(ltr("STR_OK_5_SECONDS"));
 	_btnOk5Secs->onMouseClick((ActionHandler)&LowFuelState::btnOk5SecsClick);
 	_btnOk5Secs->onKeyboardPress((ActionHandler)&LowFuelState::btnOk5SecsClick, options1.keyOk());
 
@@ -73,7 +73,7 @@ LowFuelState::LowFuelState(Craft *craft, GeoscapeState *state) : _craft(craft), 
 	_txtTitle->setText(_craft->getName(_game->getLanguage()));
 
 	_txtMessage->setAlign(ALIGN_CENTER);
-	_txtMessage->setText(tr("STR_IS_LOW_ON_FUEL_RETURNING_TO_BASE"));
+	_txtMessage->setText(ltr("STR_IS_LOW_ON_FUEL_RETURNING_TO_BASE"));
 
 
 }

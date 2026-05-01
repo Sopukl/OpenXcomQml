@@ -162,7 +162,7 @@ namespace OpenXcom
 			if (plus && stat > 0)
 				ss << "+";
 			ss << stat;
-			_lstInfo->addRow(2, tr(label).c_str(), ss.str().c_str());
+			_lstInfo->addRow(2, ltr(label).c_str(), ss.str().c_str());
 			_lstInfo->setCellColor(_row, 1, _listColor2);
 			++_row;
 		}
@@ -170,10 +170,10 @@ namespace OpenXcom
 
 	void ArticleStateTFTDArmor::addModifier(const std::string &label, const std::string &stat)
 	{
-		std::string translation = tr(label);
+		std::string translation = ltr(label);
 		if (translation.length() > 2) // filter out unused OXCE damage types
 		{
-			_lstInfo->addRow(2, tr(label).c_str(), stat.c_str());
+			_lstInfo->addRow(2, ltr(label).c_str(), stat.c_str());
 			_lstInfo->setCellColor(_row, 1, _listColor2);
 			++_row;
 		}

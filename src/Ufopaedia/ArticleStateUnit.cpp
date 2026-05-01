@@ -81,7 +81,7 @@ namespace OpenXcom
 		_txtTitle->setSecondaryColor(titleColor2);
 		_txtTitle->setBig();
 		_txtTitle->setWordWrap(true);
-		_txtTitle->setText(tr(defs->getTitleForPage(_state->current_page)));
+		_txtTitle->setText(ltr(defs->getTitleForPage(_state->current_page)));
 
 		_txtInfo = new Text(defs->rect_text.width, defs->rect_text.height, defs->rect_text.x, defs->rect_text.y);
 		add(_txtInfo);
@@ -90,7 +90,7 @@ namespace OpenXcom
 		_txtInfo->setSecondaryColor(textColor2);
 		_txtInfo->setWordWrap(true);
 		_txtInfo->setScrollable(true);
-		_txtInfo->setText(tr(defs->getTextForPage(_state->current_page)));
+		_txtInfo->setText(ltr(defs->getTextForPage(_state->current_page)));
 
 		int widthStats = Clamp(defs->rect_stats.width, 60, 320);
 		_lstStats = new TextList(widthStats, defs->rect_stats.height, defs->rect_stats.x, defs->rect_stats.y);
@@ -144,11 +144,11 @@ namespace OpenXcom
 				std::string diff;
 				switch (_game->getSavedGame()->getDifficulty())
 				{
-				case DIFF_SUPERHUMAN: diff = tr("STR_5_SUPERHUMAN"); break;
-				case DIFF_GENIUS: diff = tr("STR_4_GENIUS"); break;
-				case DIFF_VETERAN: diff = tr("STR_3_VETERAN"); break;
-				case DIFF_EXPERIENCED: diff = tr("STR_2_EXPERIENCED"); break;
-				default: diff = tr("STR_1_BEGINNER"); break;
+				case DIFF_SUPERHUMAN: diff = ltr("STR_5_SUPERHUMAN"); break;
+				case DIFF_GENIUS: diff = ltr("STR_4_GENIUS"); break;
+				case DIFF_VETERAN: diff = ltr("STR_3_VETERAN"); break;
+				case DIFF_EXPERIENCED: diff = ltr("STR_2_EXPERIENCED"); break;
+				default: diff = ltr("STR_1_BEGINNER"); break;
 				}
 				_txtDifficulty->setText(diff);
 			}
@@ -183,27 +183,27 @@ namespace OpenXcom
 			}
 		}
 
-		_lstStats->addRow(columns, tr("STR_TIME_UNITS").c_str(), std::to_string(civ.tu).c_str(), std::to_string(alien.tu).c_str());
-		_lstStats->addRow(columns, tr("STR_STAMINA").c_str(), std::to_string(civ.stamina).c_str(), std::to_string(alien.stamina).c_str());
-		_lstStats->addRow(columns, tr("STR_HEALTH").c_str(), std::to_string(civ.health).c_str(), std::to_string(alien.health).c_str());
-		_lstStats->addRow(columns, tr("STR_BRAVERY").c_str(), std::to_string(civ.bravery).c_str(), std::to_string(alien.bravery).c_str());
-		_lstStats->addRow(columns, tr("STR_REACTIONS").c_str(), std::to_string(civ.reactions).c_str(), std::to_string(alien.reactions).c_str());
-		_lstStats->addRow(columns, tr("STR_FIRING_ACCURACY").c_str(), std::to_string(civ.firing).c_str(), std::to_string(alien.firing).c_str());
-		_lstStats->addRow(columns, tr("STR_THROWING_ACCURACY").c_str(), std::to_string(civ.throwing).c_str(), std::to_string(alien.throwing).c_str());
-		_lstStats->addRow(columns, tr("STR_MELEE_ACCURACY").c_str(), std::to_string(civ.melee).c_str(), std::to_string(alien.melee).c_str());
-		_lstStats->addRow(columns, tr("STR_STRENGTH").c_str(), std::to_string(civ.strength).c_str(), std::to_string(alien.strength).c_str());
+		_lstStats->addRow(columns, ltr("STR_TIME_UNITS").c_str(), std::to_string(civ.tu).c_str(), std::to_string(alien.tu).c_str());
+		_lstStats->addRow(columns, ltr("STR_STAMINA").c_str(), std::to_string(civ.stamina).c_str(), std::to_string(alien.stamina).c_str());
+		_lstStats->addRow(columns, ltr("STR_HEALTH").c_str(), std::to_string(civ.health).c_str(), std::to_string(alien.health).c_str());
+		_lstStats->addRow(columns, ltr("STR_BRAVERY").c_str(), std::to_string(civ.bravery).c_str(), std::to_string(alien.bravery).c_str());
+		_lstStats->addRow(columns, ltr("STR_REACTIONS").c_str(), std::to_string(civ.reactions).c_str(), std::to_string(alien.reactions).c_str());
+		_lstStats->addRow(columns, ltr("STR_FIRING_ACCURACY").c_str(), std::to_string(civ.firing).c_str(), std::to_string(alien.firing).c_str());
+		_lstStats->addRow(columns, ltr("STR_THROWING_ACCURACY").c_str(), std::to_string(civ.throwing).c_str(), std::to_string(alien.throwing).c_str());
+		_lstStats->addRow(columns, ltr("STR_MELEE_ACCURACY").c_str(), std::to_string(civ.melee).c_str(), std::to_string(alien.melee).c_str());
+		_lstStats->addRow(columns, ltr("STR_STRENGTH").c_str(), std::to_string(civ.strength).c_str(), std::to_string(alien.strength).c_str());
 		if (_game->getMod()->isManaFeatureEnabled())
 		{
-			_lstStats->addRow(columns, tr("STR_MANA_POOL").c_str(), std::to_string(civ.mana).c_str(), std::to_string(alien.mana).c_str());
+			_lstStats->addRow(columns, ltr("STR_MANA_POOL").c_str(), std::to_string(civ.mana).c_str(), std::to_string(alien.mana).c_str());
 		}
-		_lstStats->addRow(columns, tr("STR_PSIONIC_STRENGTH").c_str(), std::to_string(civ.psiStrength).c_str(), std::to_string(alien.psiStrength).c_str());
-		_lstStats->addRow(columns, tr("STR_PSIONIC_SKILL").c_str(), std::to_string(civ.psiSkill).c_str(), std::to_string(alien.psiSkill).c_str());
+		_lstStats->addRow(columns, ltr("STR_PSIONIC_STRENGTH").c_str(), std::to_string(civ.psiStrength).c_str(), std::to_string(alien.psiStrength).c_str());
+		_lstStats->addRow(columns, ltr("STR_PSIONIC_SKILL").c_str(), std::to_string(civ.psiSkill).c_str(), std::to_string(alien.psiSkill).c_str());
 
-		_lstArmor->addRow(columns, tr("STR_FRONT_ARMOR").c_str(), std::to_string(civArmor[SIDE_FRONT]).c_str(), std::to_string(alienArmor[SIDE_FRONT]).c_str());
-		_lstArmor->addRow(columns, tr("STR_LEFT_ARMOR").c_str(), std::to_string(civArmor[SIDE_LEFT]).c_str(), std::to_string(alienArmor[SIDE_LEFT]).c_str());
-		_lstArmor->addRow(columns, tr("STR_RIGHT_ARMOR").c_str(), std::to_string(civArmor[SIDE_RIGHT]).c_str(), std::to_string(alienArmor[SIDE_RIGHT]).c_str());
-		_lstArmor->addRow(columns, tr("STR_REAR_ARMOR").c_str(), std::to_string(civArmor[SIDE_REAR]).c_str(), std::to_string(alienArmor[SIDE_REAR]).c_str());
-		_lstArmor->addRow(columns, tr("STR_UNDER_ARMOR").c_str(), std::to_string(civArmor[SIDE_UNDER]).c_str(), std::to_string(alienArmor[SIDE_UNDER]).c_str());
+		_lstArmor->addRow(columns, ltr("STR_FRONT_ARMOR").c_str(), std::to_string(civArmor[SIDE_FRONT]).c_str(), std::to_string(alienArmor[SIDE_FRONT]).c_str());
+		_lstArmor->addRow(columns, ltr("STR_LEFT_ARMOR").c_str(), std::to_string(civArmor[SIDE_LEFT]).c_str(), std::to_string(alienArmor[SIDE_LEFT]).c_str());
+		_lstArmor->addRow(columns, ltr("STR_RIGHT_ARMOR").c_str(), std::to_string(civArmor[SIDE_RIGHT]).c_str(), std::to_string(alienArmor[SIDE_RIGHT]).c_str());
+		_lstArmor->addRow(columns, ltr("STR_REAR_ARMOR").c_str(), std::to_string(civArmor[SIDE_REAR]).c_str(), std::to_string(alienArmor[SIDE_REAR]).c_str());
+		_lstArmor->addRow(columns, ltr("STR_UNDER_ARMOR").c_str(), std::to_string(civArmor[SIDE_UNDER]).c_str(), std::to_string(alienArmor[SIDE_UNDER]).c_str());
 
 		centerAllSurfaces();
 	}

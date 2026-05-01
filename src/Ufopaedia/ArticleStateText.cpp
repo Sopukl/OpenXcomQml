@@ -59,13 +59,13 @@ namespace OpenXcom
 
 		_txtTitle->setColor(_titleColor);
 		_txtTitle->setBig();
-		_txtTitle->setText(tr(defs->getTitleForPage(_state->current_page)));
+		_txtTitle->setText(ltr(defs->getTitleForPage(_state->current_page)));
 
 		_txtInfo->setColor(_textColor1);
 		_txtInfo->setSecondaryColor(_textColor2);
 		_txtInfo->setWordWrap(true);
 		_txtInfo->setScrollable(true);
-		_txtInfo->setText(tr(defs->getTextForPage(_state->current_page)));
+		_txtInfo->setText(ltr(defs->getTextForPage(_state->current_page)));
 	}
 
 	ArticleStateText::~ArticleStateText()

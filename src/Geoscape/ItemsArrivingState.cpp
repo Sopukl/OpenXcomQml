@@ -73,23 +73,23 @@ ItemsArrivingState::ItemsArrivingState(GeoscapeState *state) : _state(state), _b
 	// Set up objects
 	setWindowBackground(_window, "itemsArriving");
 
-	_btnOk->setText(tr("STR_OK"));
+	_btnOk->setText(ltr("STR_OK"));
 	_btnOk->onMouseClick((ActionHandler)&ItemsArrivingState::btnOkClick);
 	_btnOk->onKeyboardPress((ActionHandler)&ItemsArrivingState::btnOkClick, options1.keyCancel());
 
-	_btnGotoBase->setText(tr("STR_GO_TO_BASE"));
+	_btnGotoBase->setText(ltr("STR_GO_TO_BASE"));
 	_btnGotoBase->onMouseClick((ActionHandler)&ItemsArrivingState::btnGotoBaseClick);
 	_btnGotoBase->onKeyboardPress((ActionHandler)&ItemsArrivingState::btnGotoBaseClick, options1.keyOk());
 
 	_txtTitle->setBig();
 	_txtTitle->setAlign(ALIGN_CENTER);
-	_txtTitle->setText(tr("STR_ITEMS_ARRIVING"));
+	_txtTitle->setText(ltr("STR_ITEMS_ARRIVING"));
 
-	_txtItem->setText(tr("STR_ITEM"));
+	_txtItem->setText(ltr("STR_ITEM"));
 
-	_txtQuantity->setText(tr("STR_QUANTITY_UC"));
+	_txtQuantity->setText(ltr("STR_QUANTITY_UC"));
 
-	_txtDestination->setText(tr("STR_DESTINATION_UC"));
+	_txtDestination->setText(ltr("STR_DESTINATION_UC"));
 
 	_lstTransfers->setColumns(3, 155, 41, 98);
 	_lstTransfers->setSelectable(true);

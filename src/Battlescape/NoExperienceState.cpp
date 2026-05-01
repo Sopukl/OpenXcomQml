@@ -62,9 +62,9 @@ NoExperienceState::NoExperienceState()
 	_txtTitle->setAlign(ALIGN_CENTER);
 	_txtTitle->setBig();
 	_txtTitle->setHighContrast(true);
-	_txtTitle->setText(tr("STR_NO_EXPERIENCE_YET"));
+	_txtTitle->setText(ltr("STR_NO_EXPERIENCE_YET"));
 
-	_btnCancel->setText(tr("STR_CANCEL_UC"));
+	_btnCancel->setText(ltr("STR_CANCEL_UC"));
 	_btnCancel->setHighContrast(true);
 	_btnCancel->onMouseClick((ActionHandler)&NoExperienceState::btnCancelClick);
 	_btnCancel->onKeyboardPress((ActionHandler)&NoExperienceState::btnCancelClick, options1.keyCancel());

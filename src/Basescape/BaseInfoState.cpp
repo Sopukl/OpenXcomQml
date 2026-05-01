@@ -179,76 +179,76 @@ BaseInfoState::BaseInfoState(Base *base, BasescapeState *state) : _base(base), _
 	_mini->onMouseClick((ActionHandler)&BaseInfoState::miniClick);
 	_mini->onKeyboardPress((ActionHandler)&BaseInfoState::handleKeyPress);
 
-	_btnOk->setText(tr("STR_OK"));
+	_btnOk->setText(ltr("STR_OK"));
 	_btnOk->onMouseClick((ActionHandler)&BaseInfoState::btnOkClick);
 	_btnOk->onKeyboardPress((ActionHandler)&BaseInfoState::btnOkClick, options1.keyCancel());
 
-	_btnTransfers->setText(tr("STR_TRANSFERS_UC"));
+	_btnTransfers->setText(ltr("STR_TRANSFERS_UC"));
 	_btnTransfers->onMouseClick((ActionHandler)&BaseInfoState::btnTransfersClick);
 
-	_btnStores->setText(tr("STR_STORES_UC"));
+	_btnStores->setText(ltr("STR_STORES_UC"));
 	_btnStores->onMouseClick((ActionHandler)&BaseInfoState::btnStoresClick);
 
-	_btnMonthlyCosts->setText(tr("STR_MONTHLY_COSTS"));
+	_btnMonthlyCosts->setText(ltr("STR_MONTHLY_COSTS"));
 	_btnMonthlyCosts->onMouseClick((ActionHandler)&BaseInfoState::btnMonthlyCostsClick);
 
 	_edtBase->setBig();
 	_edtBase->onChange((ActionHandler)&BaseInfoState::edtBaseChange);
 
-	_txtPersonnel->setText(tr("STR_PERSONNEL_AVAILABLE_PERSONNEL_TOTAL"));
+	_txtPersonnel->setText(ltr("STR_PERSONNEL_AVAILABLE_PERSONNEL_TOTAL"));
 
-	_txtSoldiers->setText(tr("STR_SOLDIERS"));
+	_txtSoldiers->setText(ltr("STR_SOLDIERS"));
 
 	_barSoldiers->setScale(1.0);
 
-	_txtEngineers->setText(tr("STR_ENGINEERS"));
+	_txtEngineers->setText(ltr("STR_ENGINEERS"));
 
 	_barEngineers->setScale(1.0);
 
-	_txtScientists->setText(tr("STR_SCIENTISTS"));
+	_txtScientists->setText(ltr("STR_SCIENTISTS"));
 
 	_barScientists->setScale(1.0);
 
 
-	_txtSpace->setText(tr("STR_SPACE_USED_SPACE_AVAILABLE"));
+	_txtSpace->setText(ltr("STR_SPACE_USED_SPACE_AVAILABLE"));
 
-	_txtQuarters->setText(tr("STR_LIVING_QUARTERS_PLURAL"));
+	_txtQuarters->setText(ltr("STR_LIVING_QUARTERS_PLURAL"));
 
 	_barQuarters->setScale(0.5);
 
-	_txtStores->setText(tr("STR_STORES"));
+	_txtStores->setText(ltr("STR_STORES"));
 
 	_barStores->setScale(0.5);
 
-	_txtLaboratories->setText(tr("STR_LABORATORIES"));
+	_txtLaboratories->setText(ltr("STR_LABORATORIES"));
 
 	_barLaboratories->setScale(0.5);
 
-	_txtWorkshops->setText(tr("STR_WORK_SHOPS"));
+	_txtWorkshops->setText(ltr("STR_WORK_SHOPS"));
 
 	_barWorkshops->setScale(0.5);
 
 	if (options1.storageLimitsEnforced())
 	{
-		_txtContainment->setText(tr("STR_ALIEN_CONTAINMENT"));
+		_txtContainment->setText(ltr("STR_ALIEN_CONTAINMENT"));
 
 		_barContainment->setScale(0.5);
 	}
 
-	_txtHangars->setText(tr("STR_HANGARS"));
+	_txtHangars->setText(ltr("STR_HANGARS"));
 
 	_barHangars->setScale(18.0);
 
 
-	_txtDefense->setText(tr("STR_DEFENSE_STRENGTH"));
+	_txtDefense->setText(ltr("STR_DEFENSE_STRENGTH"));
 
 	_barDefense->setScale(0.125);
 
-	_txtShortRange->setText(tr("STR_SHORT_RANGE_DETECTION"));
+	_txtShortRange->setText(ltr("STR_SHORT_RANGE_DETECTION"));
 
 	_barShortRange->setScale(25.0);
 
-	_txtLongRange->setText(tr("STR_LONG_RANGE_DETECTION"));
+	_txtLongRange->setText(ltr("STR_LONG_RANGE_DETECTION"));
 
 	_barLongRange->setScale(25.0);
 }

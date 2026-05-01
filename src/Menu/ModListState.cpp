@@ -73,9 +73,9 @@ ModListState::ModListState() : _curMasterIdx(0)
 	// how much room do we need for YES/NO
 	Text text = Text(100, 9, 0, 0);
 	text.initText(_game->getMod()->getFont("FONT_BIG"), _game->getMod()->getFont("FONT_SMALL"), _game->getLanguage());
-	text.setText(tr("STR_YES"));
+	text.setText(ltr("STR_YES"));
 	int yes = text.getTextWidth();
-	text.setText(tr("STR_NO"));
+	text.setText(ltr("STR_NO"));
 	int no = text.getTextWidth();
 
 	int rightcol = std::max(yes, no) + 2;
@@ -85,7 +85,7 @@ ModListState::ModListState() : _curMasterIdx(0)
 	// Set up objects
 	setWindowBackground(_window, "modsMenu");
 
-	_txtMaster->setText(tr("STR_BASE_GAME"));
+	_txtMaster->setText(ltr("STR_BASE_GAME"));
 
 	// scan for masters
 	//Options::refreshMods(); // TODO: uncomment (and properly test!) after mod.io integration is merged
@@ -142,17 +142,17 @@ ModListState::ModListState() : _curMasterIdx(0)
 	_lstMods->onMouseOver((ActionHandler)&ModListState::lstModsHover);
 	lstModsRefresh(0);
 
-	_btnOk->setText(tr("STR_OK"));
+	_btnOk->setText(ltr("STR_OK"));
 	_btnOk->onMouseClick((ActionHandler)&ModListState::btnOkClick);
 	_btnOk->onKeyboardPress((ActionHandler)&ModListState::btnOkClick, options1.keyOk());
 
-	_btnOpenFolder->setText(tr("STR_OPEN_MODS_FOLDER"));
+	_btnOpenFolder->setText(ltr("STR_OPEN_MODS_FOLDER"));
 	_btnOpenFolder->onMouseClick((ActionHandler)&ModListState::btnOpenFolderClick);
 #ifdef __MOBILE__
 	_btnOpenFolder->setVisible(false);
 #endif
 
-	_btnCancel->setText(tr("STR_CANCEL"));
+	_btnCancel->setText(ltr("STR_CANCEL"));
 	_btnCancel->onMouseClick((ActionHandler)&ModListState::btnCancelClick);
 	_btnCancel->onKeyboardPress((ActionHandler)&ModListState::btnCancelClick, options1.keyCancel());
 
@@ -166,7 +166,7 @@ ModListState::~ModListState()
 
 std::string ModListState::makeTooltip(const ModInfo &modInfo)
 {
-	return tr("STR_MODS_TOOLTIP").arg(modInfo.getVersionDisplay()).arg(modInfo.getAuthor()).arg(modInfo.getDescription());
+	return ltr("STR_MODS_TOOLTIP").arg(modInfo.getVersionDisplay()).arg(modInfo.getAuthor()).arg(modInfo.getDescription());
 }
 
 void ModListState::cbxMasterHover(Action *)
@@ -233,7 +233,7 @@ void ModListState::lstModsRefresh(size_t scrollLoc)
 		}
 
 		std::string modName = modInfo.getName();
-		_lstMods->addRow(3, modName.c_str(), "", (pair.second ? tr("STR_YES").c_str() : tr("STR_NO").c_str()));
+		_lstMods->addRow(3, modName.c_str(), "", (pair.second ? ltr("STR_YES").c_str() : ltr("STR_NO").c_str()));
 		_mods.push_back(pair);
 	}
 
@@ -290,7 +290,7 @@ void ModListState::toggleMod()
 
 		mod.second = ! mod.second;
 		pair.second = mod.second;
-		_lstMods->setCellText(_lstMods->getSelectedRow(), 2, (mod.second ? tr("STR_YES") : tr("STR_NO")));
+		_lstMods->setCellText(_lstMods->getSelectedRow(), 2, (mod.second ? ltr("STR_YES") : ltr("STR_NO")));
 
 		break;
 	}
@@ -530,7 +530,7 @@ void ModListState::btnCancelClick(Action *)
 void ModListState::txtTooltipIn(Action *action)
 {
 	_currentTooltip = action->getSender()->getTooltip();
-	_txtTooltip->setText(tr(_currentTooltip));
+	_txtTooltip->setText(ltr(_currentTooltip));
 }
 
 /**

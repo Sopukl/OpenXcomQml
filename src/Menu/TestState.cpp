@@ -114,9 +114,9 @@ TestState::TestState()
 
 	_txtTitle->setBig();
 	_txtTitle->setAlign(ALIGN_CENTER);
-	_txtTitle->setText(tr("STR_TEST_SCREEN"));
+	_txtTitle->setText(ltr("STR_TEST_SCREEN"));
 
-	_txtPalette->setText(tr("STR_PALETTE"));
+	_txtPalette->setText(ltr("STR_PALETTE"));
 
 	for (auto& pal : _game->getMod()->getPalettes())
 	{
@@ -140,7 +140,7 @@ TestState::TestState()
 	_cbxPaletteAction->setOptions(_actionList, true);
 	_cbxPaletteAction->onChange((ActionHandler)&TestState::cbxPaletteAction);
 
-	_txtTestCase->setText(tr("STR_TEST_CASE"));
+	_txtTestCase->setText(ltr("STR_TEST_CASE"));
 
 	_testCases.push_back("STR_BAD_NODES");
 	_testCases.push_back("STR_MCD_CHECK");
@@ -158,10 +158,10 @@ TestState::TestState()
 	_lstOutput->setBackground(_window);
 	_lstOutput->setWordWrap(true);
 
-	_btnRun->setText(tr("STR_RUN"));
+	_btnRun->setText(ltr("STR_RUN"));
 	_btnRun->onMouseClick((ActionHandler)&TestState::btnRunClick);
 
-	_btnCancel->setText(tr("STR_CANCEL"));
+	_btnCancel->setText(ltr("STR_CANCEL"));
 	_btnCancel->onMouseClick((ActionHandler)&TestState::btnCancelClick);
 	_btnCancel->onKeyboardPress((ActionHandler)&TestState::btnCancelClick, options1.keyCancel());
 }
@@ -183,7 +183,7 @@ void TestState::cbxTestCaseChange(Action *)
 	_lstOutput->clearList();
 
 	size_t index = _cbxTestCase->getSelected();
-	_txtDescription->setText(tr(_testCases[index]+"_DESC"));
+	_txtDescription->setText(ltr(_testCases[index]+"_DESC"));
 }
 
 /**
@@ -231,7 +231,7 @@ void TestState::cbxPaletteAction(Action *action)
 
 void TestState::testCase4()
 {
-	_lstOutput->addRow(1, tr("STR_TESTS_STARTING").c_str());
+	_lstOutput->addRow(1, ltr("STR_TESTS_STARTING").c_str());
 
 	int total = 0;
 
@@ -397,19 +397,19 @@ void TestState::testCase4()
 
 	if (total > 0)
 	{
-		_lstOutput->addRow(1, tr("STR_TESTS_ERRORS_FOUND").arg(total).c_str());
-		_lstOutput->addRow(1, tr("STR_DETAILED_INFO_IN_LOG_FILE").c_str());
+		_lstOutput->addRow(1, ltr("STR_TESTS_ERRORS_FOUND").arg(total).c_str());
+		_lstOutput->addRow(1, ltr("STR_DETAILED_INFO_IN_LOG_FILE").c_str());
 	}
 	else
 	{
-		_lstOutput->addRow(1, tr("STR_TESTS_NO_ERRORS_FOUND").c_str());
+		_lstOutput->addRow(1, ltr("STR_TESTS_NO_ERRORS_FOUND").c_str());
 	}
-	_lstOutput->addRow(1, tr("STR_TESTS_FINISHED").c_str());
+	_lstOutput->addRow(1, ltr("STR_TESTS_FINISHED").c_str());
 }
 
 void TestState::testCase3()
 {
-	_lstOutput->addRow(1, tr("STR_TESTS_STARTING").c_str());
+	_lstOutput->addRow(1, ltr("STR_TESTS_STARTING").c_str());
 
 	std::map<const Armor *, std::map<std::string, int> > tagMatrix;
 	for (auto& armorName : _game->getMod()->getArmorsList())
@@ -467,12 +467,12 @@ void TestState::testCase3()
 	Log(LOG_INFO) << "End of export";
 	Log(LOG_INFO) << "----------------------------------------------";
 
-	_lstOutput->addRow(1, tr("STR_TESTS_FINISHED").c_str());
+	_lstOutput->addRow(1, ltr("STR_TESTS_FINISHED").c_str());
 }
 
 void TestState::testCase2()
 {
-	_lstOutput->addRow(1, tr("STR_TESTS_STARTING").c_str());
+	_lstOutput->addRow(1, ltr("STR_TESTS_STARTING").c_str());
 	if (_vanillaPalettes.empty())
 	{
 		for (auto& item : _paletteMetadataMap)
@@ -566,14 +566,14 @@ void TestState::testCase2()
 
 	if (total > 0)
 	{
-		_lstOutput->addRow(1, tr("STR_TESTS_ERRORS_FOUND").arg(total).c_str());
-		_lstOutput->addRow(1, tr("STR_DETAILED_INFO_IN_LOG_FILE").c_str());
+		_lstOutput->addRow(1, ltr("STR_TESTS_ERRORS_FOUND").arg(total).c_str());
+		_lstOutput->addRow(1, ltr("STR_DETAILED_INFO_IN_LOG_FILE").c_str());
 	}
 	else
 	{
-		_lstOutput->addRow(1, tr("STR_TESTS_NO_ERRORS_FOUND").c_str());
+		_lstOutput->addRow(1, ltr("STR_TESTS_NO_ERRORS_FOUND").c_str());
 	}
-	_lstOutput->addRow(1, tr("STR_TESTS_FINISHED").c_str());
+	_lstOutput->addRow(1, ltr("STR_TESTS_FINISHED").c_str());
 }
 
 int TestState::checkPalette(const std::string& fullPath, int width, int height)
@@ -659,8 +659,8 @@ int TestState::matchPalette(Surface *image, int index, Palette *test)
 
 void TestState::testCase1()
 {
-	_lstOutput->addRow(1, tr("STR_TESTS_STARTING").c_str());
-	_lstOutput->addRow(1, tr("STR_CHECKING_TERRAIN").c_str());
+	_lstOutput->addRow(1, ltr("STR_TESTS_STARTING").c_str());
+	_lstOutput->addRow(1, ltr("STR_CHECKING_TERRAIN").c_str());
 	int total = 0;
 	std::map<std::string, std::set<int>> uniqueResults;
 	for (auto& terrainName : _game->getMod()->getTerrainList())
@@ -668,7 +668,7 @@ void TestState::testCase1()
 		RuleTerrain *terrainRule = _game->getMod()->getTerrain(terrainName);
 		total += checkMCD(terrainRule, uniqueResults);
 	}
-	_lstOutput->addRow(1, tr("STR_CHECKING_UFOS").c_str());
+	_lstOutput->addRow(1, ltr("STR_CHECKING_UFOS").c_str());
 	for (auto& ufoName : _game->getMod()->getUfosList())
 	{
 		RuleUfo *ufoRule = _game->getMod()->getUfo(ufoName);
@@ -679,7 +679,7 @@ void TestState::testCase1()
 		}
 		total += checkMCD(terrainRule, uniqueResults);
 	}
-	_lstOutput->addRow(1, tr("STR_CHECKING_CRAFT").c_str());
+	_lstOutput->addRow(1, ltr("STR_CHECKING_CRAFT").c_str());
 	for (auto& craftName : _game->getMod()->getCraftsList())
 	{
 		RuleCraft *craftRule = _game->getMod()->getCraft(craftName);
@@ -696,12 +696,12 @@ void TestState::testCase1()
 	}
 	if (total > 0)
 	{
-		_lstOutput->addRow(1, tr("STR_TESTS_ERRORS_FOUND").arg(total).c_str());
-		_lstOutput->addRow(1, tr("STR_DETAILED_INFO_IN_LOG_FILE").c_str());
+		_lstOutput->addRow(1, ltr("STR_TESTS_ERRORS_FOUND").arg(total).c_str());
+		_lstOutput->addRow(1, ltr("STR_DETAILED_INFO_IN_LOG_FILE").c_str());
 	}
 	else
 	{
-		_lstOutput->addRow(1, tr("STR_TESTS_NO_ERRORS_FOUND").c_str());
+		_lstOutput->addRow(1, ltr("STR_TESTS_NO_ERRORS_FOUND").c_str());
 	}
 
 	// summary (unique)
@@ -731,7 +731,7 @@ void TestState::testCase1()
 			Log(LOG_INFO) << line;
 		}
 	}
-	_lstOutput->addRow(1, tr("STR_TESTS_FINISHED").c_str());
+	_lstOutput->addRow(1, ltr("STR_TESTS_FINISHED").c_str());
 }
 
 int TestState::checkMCD(RuleTerrain *terrainRule, std::map<std::string, std::set<int>> &uniqueResults)
@@ -840,8 +840,8 @@ int TestState::checkMCD(RuleTerrain *terrainRule, std::map<std::string, std::set
 
 void TestState::testCase0()
 {
-	_lstOutput->addRow(1, tr("STR_TESTS_STARTING").c_str());
-	_lstOutput->addRow(1, tr("STR_CHECKING_TERRAIN").c_str());
+	_lstOutput->addRow(1, ltr("STR_TESTS_STARTING").c_str());
+	_lstOutput->addRow(1, ltr("STR_CHECKING_TERRAIN").c_str());
 	int total = 0;
 	for (auto& terrainName : _game->getMod()->getTerrainList())
 	{
@@ -851,7 +851,7 @@ void TestState::testCase0()
 			total += checkRMP(mapblock);
 		}
 	}
-	_lstOutput->addRow(1, tr("STR_CHECKING_UFOS").c_str());
+	_lstOutput->addRow(1, ltr("STR_CHECKING_UFOS").c_str());
 	for (auto& ufoName : _game->getMod()->getUfosList())
 	{
 		RuleUfo *ufoRule = _game->getMod()->getUfo(ufoName);
@@ -863,7 +863,7 @@ void TestState::testCase0()
 			}
 		}
 	}
-	_lstOutput->addRow(1, tr("STR_CHECKING_CRAFT").c_str());
+	_lstOutput->addRow(1, ltr("STR_CHECKING_CRAFT").c_str());
 	for (auto& craftName : _game->getMod()->getCraftsList())
 	{
 		RuleCraft *craftRule = _game->getMod()->getCraft(craftName);
@@ -877,14 +877,14 @@ void TestState::testCase0()
 	}
 	if (total > 0)
 	{
-		_lstOutput->addRow(1, tr("STR_TESTS_ERRORS_FOUND").arg(total).c_str());
-		_lstOutput->addRow(1, tr("STR_DETAILED_INFO_IN_LOG_FILE").c_str());
+		_lstOutput->addRow(1, ltr("STR_TESTS_ERRORS_FOUND").arg(total).c_str());
+		_lstOutput->addRow(1, ltr("STR_DETAILED_INFO_IN_LOG_FILE").c_str());
 	}
 	else
 	{
-		_lstOutput->addRow(1, tr("STR_TESTS_NO_ERRORS_FOUND").c_str());
+		_lstOutput->addRow(1, ltr("STR_TESTS_NO_ERRORS_FOUND").c_str());
 	}
-	_lstOutput->addRow(1, tr("STR_TESTS_FINISHED").c_str());
+	_lstOutput->addRow(1, ltr("STR_TESTS_FINISHED").c_str());
 }
 
 int TestState::checkRMP(MapBlock *mapblock)

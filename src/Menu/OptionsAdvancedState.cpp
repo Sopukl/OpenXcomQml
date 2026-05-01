@@ -80,15 +80,15 @@ OptionsAdvancedState::OptionsAdvancedState(OptionsOrigin origin) : OptionsBaseSt
 
 	centerAllSurfaces();
 
-	_btnOXC->setText(tr("STR_ENGINE_OXC"));
+	_btnOXC->setText(ltr("STR_ENGINE_OXC"));
 	_btnOXC->setGroup(&_owner);
 	_btnOXC->onMousePress((ActionHandler)&OptionsAdvancedState::btnGroupPress, SDL_BUTTON_LEFT);
 
-	_btnOXCE->setText(tr("STR_ENGINE_OXCE"));
+	_btnOXCE->setText(ltr("STR_ENGINE_OXCE"));
 	_btnOXCE->setGroup(&_owner);
 	_btnOXCE->onMousePress((ActionHandler)&OptionsAdvancedState::btnGroupPress, SDL_BUTTON_LEFT);
 
-	_btnOTHER->setText(tr("STR_ENGINE_OTHER")); // rename in your fork
+	_btnOTHER->setText(ltr("STR_ENGINE_OTHER")); // rename in your fork
 	_btnOTHER->setGroup(&_owner);
 	_btnOTHER->onMousePress((ActionHandler)&OptionsAdvancedState::btnGroupPress, SDL_BUTTON_LEFT);
 	_btnOTHER->setVisible(false); // enable in your fork
@@ -96,9 +96,9 @@ OptionsAdvancedState::OptionsAdvancedState(OptionsOrigin origin) : OptionsBaseSt
 	// how much room do we need for YES/NO
 	Text text = Text(100, 9, 0, 0);
 	text.initText(_game->getMod()->getFont("FONT_BIG"), _game->getMod()->getFont("FONT_SMALL"), _game->getLanguage());
-	text.setText(tr("STR_YES"));
+	text.setText(ltr("STR_YES"));
 	int yes = text.getTextWidth();
-	text.setText(tr("STR_NO"));
+	text.setText(ltr("STR_NO"));
 	int no = text.getTextWidth();
 
 	int rightcol = std::max(yes, no) + 2;
@@ -186,7 +186,7 @@ void OptionsAdvancedState::updateList()
 
 	if (_settingsGeneral[idx].size() > 0)
 	{
-		_lstOptions->addRow(2, tr("STR_GENERAL").c_str(), "");
+		_lstOptions->addRow(2, ltr("STR_GENERAL").c_str(), "");
 		row++;
 		_offsetGeneralMin = row;
 		_lstOptions->setCellColor(_offsetGeneralMin, 0, _colorGroup);
@@ -197,7 +197,7 @@ void OptionsAdvancedState::updateList()
 	if (_settingsGeo[idx].size() > 0)
 	{
 		if (row > -1) { _lstOptions->addRow(2, "", ""); row++; }
-		_lstOptions->addRow(2, tr("STR_GEOSCAPE").c_str(), "");
+		_lstOptions->addRow(2, ltr("STR_GEOSCAPE").c_str(), "");
 		row++;
 		_offsetGeoMin = row;
 		_lstOptions->setCellColor(_offsetGeoMin, 0, _colorGroup);
@@ -208,7 +208,7 @@ void OptionsAdvancedState::updateList()
 	if (_settingsBase[idx].size() > 0)
 	{
 		if (row > -1) { _lstOptions->addRow(2, "", ""); row++; }
-		_lstOptions->addRow(2, tr("STR_BASESCAPE").c_str(), "");
+		_lstOptions->addRow(2, ltr("STR_BASESCAPE").c_str(), "");
 		row++;
 		_offsetBaseMin = row;
 		_lstOptions->setCellColor(_offsetBaseMin, 0, _colorGroup);
@@ -219,7 +219,7 @@ void OptionsAdvancedState::updateList()
 	if (_settingsBattle[idx].size() > 0)
 	{
 		if (row > -1) { _lstOptions->addRow(2, "", ""); row++; }
-		_lstOptions->addRow(2, tr("STR_BATTLESCAPE").c_str(), "");
+		_lstOptions->addRow(2, ltr("STR_BATTLESCAPE").c_str(), "");
 		row++;
 		_offsetBattleMin = row;
 		_lstOptions->setCellColor(_offsetBattleMin, 0, _colorGroup);
@@ -230,7 +230,7 @@ void OptionsAdvancedState::updateList()
 	if (_settingsAI[idx].size() > 0)
 	{
 		if (row > -1) { _lstOptions->addRow(2, "", ""); row++; }
-		_lstOptions->addRow(2, tr("STR_AI").c_str(), "");
+		_lstOptions->addRow(2, ltr("STR_AI").c_str(), "");
 		row++;
 		_offsetAIMin = row;
 		_lstOptions->setCellColor(_offsetAIMin, 0, _colorGroup);
@@ -249,11 +249,11 @@ void OptionsAdvancedState::addSettings(const std::vector<OptionInfo> &settings)
 	auto& fixeduserOptions = _game->getMod()->getFixedUserOptions();
 	for (const auto& optionInfo : settings)
 	{
-		std::string name = tr(optionInfo.description());
+		std::string name = ltr(optionInfo.description());
 		std::string value;
 		if (optionInfo.type() == OPTION_BOOL)
 		{
-			value = *optionInfo.asBool() ? tr("STR_YES") : tr("STR_NO");
+			value = *optionInfo.asBool() ? ltr("STR_YES") : ltr("STR_NO");
 		}
 		else if (optionInfo.type() == OPTION_INT)
 		{
@@ -335,7 +335,7 @@ void OptionsAdvancedState::lstOptionsClick(Action *action)
 	{
 		bool *b = setting->asBool();
 		*b = !*b;
-		settingText = *b ? tr("STR_YES") : tr("STR_NO");
+		settingText = *b ? ltr("STR_YES") : ltr("STR_NO");
 		// if (b == &options1.lazyLoadResources() && !*b)
 		// {
 		// 	options1.reload = true; // reload when turning lazy loading off
@@ -457,7 +457,7 @@ void OptionsAdvancedState::lstOptionsMouseOver(Action *)
 	std::string desc;
 	if (setting)
 	{
-		desc = tr(setting->description() + "_DESC");
+		desc = ltr(setting->description() + "_DESC");
 	}
 	_txtTooltip->setText(desc);
 }

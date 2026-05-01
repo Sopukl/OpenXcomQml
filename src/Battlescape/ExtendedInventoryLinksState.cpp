@@ -93,43 +93,43 @@ ExtendedInventoryLinksState::ExtendedInventoryLinksState(InventoryState* parent,
 
 	_txtTitle->setBig();
 	_txtTitle->setAlign(ALIGN_CENTER);
-	_txtTitle->setText(tr("STR_EXTENDED_LINKS"));
+	_txtTitle->setText(ltr("STR_EXTENDED_LINKS"));
 
-	_btnOk->setText(tr("STR_OK"));
+	_btnOk->setText(ltr("STR_OK"));
 	_btnOk->onMouseClick((ActionHandler)&ExtendedInventoryLinksState::btnOkClick);
 	_btnOk->onKeyboardPress((ActionHandler)&ExtendedInventoryLinksState::btnOkClick, options1.keyCancel());
 
-	_btnArmor->setText(tr("STR_INVENTORY_ARMOR"));
+	_btnArmor->setText(ltr("STR_INVENTORY_ARMOR"));
 	_btnArmor->onMouseClick((ActionHandler)&ExtendedInventoryLinksState::btnArmorClick);
 	_btnArmor->setVisible(inBase);
 
-	_btnAvatar->setText(tr("STR_INVENTORY_AVATAR"));
+	_btnAvatar->setText(ltr("STR_INVENTORY_AVATAR"));
 	_btnAvatar->onMouseClick((ActionHandler)&ExtendedInventoryLinksState::btnAvatarClick);
 	_btnAvatar->setVisible(inBase);
 
-	_btnEquipmentSave->setText(tr("STR_SAVE_EQUIPMENT_TEMPLATE"));
+	_btnEquipmentSave->setText(ltr("STR_SAVE_EQUIPMENT_TEMPLATE"));
 	_btnEquipmentSave->onMouseClick((ActionHandler)&ExtendedInventoryLinksState::btnEquipmentSaveClick);
 	_btnEquipmentSave->setVisible(beforeMission);
 
-	_btnEquipmentLoad->setText(tr("STR_LOAD_EQUIPMENT_TEMPLATE"));
+	_btnEquipmentLoad->setText(ltr("STR_LOAD_EQUIPMENT_TEMPLATE"));
 	_btnEquipmentLoad->onMouseClick((ActionHandler)&ExtendedInventoryLinksState::btnEquipmentLoadClick);
 	_btnEquipmentLoad->setVisible(beforeMission);
 
-	_btnPersonalSave->setText(tr("STR_SAVE_PERSONAL_EQUIPMENT"));
+	_btnPersonalSave->setText(ltr("STR_SAVE_PERSONAL_EQUIPMENT"));
 	_btnPersonalSave->onMouseClick((ActionHandler)&ExtendedInventoryLinksState::btnPersonalSaveClick);
 	_btnPersonalSave->setVisible(beforeMission);
 
-	_btnPersonalLoad->setText(tr("STR_LOAD_PERSONAL_EQUIPMENT"));
+	_btnPersonalLoad->setText(ltr("STR_LOAD_PERSONAL_EQUIPMENT"));
 	_btnPersonalLoad->onMouseClick((ActionHandler)&ExtendedInventoryLinksState::btnPersonalLoadClick);
 	_btnPersonalLoad->setVisible(beforeMission);
 
-	_btnNotes->setText(tr("STR_NOTES"));
+	_btnNotes->setText(ltr("STR_NOTES"));
 	_btnNotes->onMouseClick((ActionHandler)&ExtendedInventoryLinksState::btnNotesClick);
 
-	_btnUfopedia->setText(tr("STR_UFOPAEDIA"));
+	_btnUfopedia->setText(ltr("STR_UFOPAEDIA"));
 	_btnUfopedia->onMouseClick((ActionHandler)&ExtendedInventoryLinksState::btnUfopediaClick);
 
-	_btnAutoEquip->setText(tr("STR_AUTO_EQUIP"));
+	_btnAutoEquip->setText(ltr("STR_AUTO_EQUIP"));
 	_btnAutoEquip->onMouseClick((ActionHandler)&ExtendedInventoryLinksState::btnAutoEquipClick);
 	_btnAutoEquip->setVisible(beforeMission);
 

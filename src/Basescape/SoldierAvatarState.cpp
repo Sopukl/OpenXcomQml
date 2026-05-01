@@ -71,11 +71,11 @@ SoldierAvatarState::SoldierAvatarState(Base *base, size_t soldier) : _base(base)
 	// Set up objects
 	setWindowBackground(_window, "soldierAvatar");
 
-	_btnCancel->setText(tr("STR_CANCEL_UC"));
+	_btnCancel->setText(ltr("STR_CANCEL_UC"));
 	_btnCancel->onMouseClick((ActionHandler)&SoldierAvatarState::btnCancelClick);
 	_btnCancel->onKeyboardPress((ActionHandler)&SoldierAvatarState::btnCancelClick, options1.keyCancel());
 
-	_btnOk->setText(tr("STR_OK"));
+	_btnOk->setText(ltr("STR_OK"));
 	_btnOk->onMouseClick((ActionHandler)&SoldierAvatarState::btnOkClick);
 	_btnOk->onKeyboardPress((ActionHandler)&SoldierAvatarState::btnOkClick, options1.keyOk());
 
@@ -84,9 +84,9 @@ SoldierAvatarState::SoldierAvatarState(Base *base, size_t soldier) : _base(base)
 	initPreview(s);
 
 	_txtTitle->setAlign(ALIGN_CENTER);
-	_txtTitle->setText(tr("STR_SELECT_AVATAR_FOR").arg(s->getName()));
+	_txtTitle->setText(ltr("STR_SELECT_AVATAR_FOR").arg(s->getName()));
 
-	_txtType->setText(tr("STR_TYPE"));
+	_txtType->setText(ltr("STR_TYPE"));
 
 	_lstAvatar->setColumns(1, 125);
 	_lstAvatar->setSelectable(true);
@@ -114,7 +114,7 @@ SoldierAvatarState::SoldierAvatarState(Base *base, size_t soldier) : _base(base)
 
 	for (const auto& soldierAvatar : _avatars)
 	{
-		_lstAvatar->addRow(1, tr(soldierAvatar.getAvatarName()).c_str());
+		_lstAvatar->addRow(1, ltr(soldierAvatar.getAvatarName()).c_str());
 	}
 	_lstAvatar->onMouseClick((ActionHandler)&SoldierAvatarState::lstAvatarClick);
 

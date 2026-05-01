@@ -90,23 +90,23 @@ BaseDefenseState::BaseDefenseState(Base *base, Ufo *ufo, GeoscapeState *state, b
 	// Set up objects
 	setWindowBackground(_window, baseDefenseInterface);
 
-	_btnOk->setText(tr("STR_OK"));
+	_btnOk->setText(ltr("STR_OK"));
 	_btnOk->onMouseClick((ActionHandler)&BaseDefenseState::btnOkClick);
 	_btnOk->onKeyboardPress((ActionHandler)&BaseDefenseState::btnOkClick, options1.keyOk());
 	_btnOk->onKeyboardPress((ActionHandler)&BaseDefenseState::btnOkClick, options1.keyCancel());
 	_btnOk->setVisible(false);
 
-	_btnStart->setText(tr("STR_START_FIRING"));
+	_btnStart->setText(ltr("STR_START_FIRING"));
 	_btnStart->onMouseClick((ActionHandler)&BaseDefenseState::btnStartClick);
 
-	_btnAbort->setText(tr("STR_SKIP_FIRING"));
+	_btnAbort->setText(ltr("STR_SKIP_FIRING"));
 	_btnAbort->onMouseClick((ActionHandler)&BaseDefenseState::btnOkClick);
 
 	_txtTitle->setBig();
-	_txtTitle->setText(tr("STR_BASE_UNDER_ATTACK").arg(_base->getName()));
+	_txtTitle->setText(ltr("STR_BASE_UNDER_ATTACK").arg(_base->getName()));
 	_txtInit->setVisible(false);
 
-	_txtInit->setText(tr("STR_BASE_DEFENSES_INITIATED"));
+	_txtInit->setText(ltr("STR_BASE_DEFENSES_INITIATED"));
 
 	_lstDefenses->setColumns(3, 134, 70, 50);
 	_lstDefenses->setFlooding(true);
@@ -164,16 +164,16 @@ BaseDefenseState::BaseDefenseState(Base *base, Ufo *ufo, GeoscapeState *state, b
 		if (extraInfo)
 		{
 			std::ostringstream ss;
-			ss << Unicode::TOK_COLOR_FLIP << tr(_ufo->getRules()->getType());
-			_lstDefenses->addRow(3, tr("STR_CRAFT_TYPE").c_str(), ss.str().c_str(), "");
+			ss << Unicode::TOK_COLOR_FLIP << ltr(_ufo->getRules()->getType());
+			_lstDefenses->addRow(3, ltr("STR_CRAFT_TYPE").c_str(), ss.str().c_str(), "");
 
 			ss.str("");
-			ss << Unicode::TOK_COLOR_FLIP << tr(_ufo->getAlienRace());
-			_lstDefenses->addRow(3, tr("STR_RACE").c_str(), ss.str().c_str(), "");
+			ss << Unicode::TOK_COLOR_FLIP << ltr(_ufo->getAlienRace());
+			_lstDefenses->addRow(3, ltr("STR_RACE").c_str(), ss.str().c_str(), "");
 
 			ss.str("");
-			ss << Unicode::TOK_COLOR_FLIP << tr(_ufo->getMissionType());
-			_lstDefenses->addRow(3, tr("STR_MISSION").c_str(), ss.str().c_str(), "");
+			ss << Unicode::TOK_COLOR_FLIP << ltr(_ufo->getMissionType());
+			_lstDefenses->addRow(3, ltr("STR_MISSION").c_str(), ss.str().c_str(), "");
 
 		}
 	}
@@ -300,7 +300,7 @@ void BaseDefenseState::nextStep()
 		case BDA_DESTROY:
 			if (!_explosionCount)
 			{
-				_lstDefenses->addRow(2, tr("STR_UFO_DESTROYED").c_str()," "," ");
+				_lstDefenses->addRow(2, ltr("STR_UFO_DESTROYED").c_str()," "," ");
 				++_row;
 				if (_row > 14)
 				{
@@ -327,7 +327,7 @@ void BaseDefenseState::nextStep()
 		}
 		else if (_attacks == _defenses && _passes < _gravShields)
 		{
-			_lstDefenses->addRow(3, tr("STR_GRAV_SHIELD_REPELS_UFO").c_str()," "," ");
+			_lstDefenses->addRow(3, ltr("STR_GRAV_SHIELD_REPELS_UFO").c_str()," "," ");
 			if (_row > 14)
 			{
 				_lstDefenses->scrollDown(true);
@@ -352,7 +352,7 @@ void BaseDefenseState::nextStep()
 		switch (_action)
 		{
 		case  BDA_NONE:
-			_lstDefenses->addRow(3, tr((def)->getRules()->getType()).c_str()," "," ");
+			_lstDefenses->addRow(3, ltr((def)->getRules()->getType()).c_str()," "," ");
 			++_row;
 			_action = BDA_FIRE;
 			if (_row > 14)
@@ -363,15 +363,15 @@ void BaseDefenseState::nextStep()
 		case BDA_FIRE:
 			if (hasOwnAmmo && def->getAmmo() < ammoNeeded)
 			{
-				_lstDefenses->setCellText(_row, 1, tr("STR_NO_AMMO"));
+				_lstDefenses->setCellText(_row, 1, ltr("STR_NO_AMMO"));
 			}
 			else if (!hasOwnAmmo && ammo && _base->getStorageItems()->getItem(ammo) < ammoNeeded)
 			{
-				_lstDefenses->setCellText(_row, 1, tr("STR_NO_AMMO"));
+				_lstDefenses->setCellText(_row, 1, ltr("STR_NO_AMMO"));
 			}
 			else
 			{
-				_lstDefenses->setCellText(_row, 1, tr("STR_FIRING"));
+				_lstDefenses->setCellText(_row, 1, ltr("STR_FIRING"));
 				_game->getMod()->getSound("GEO.CAT", (def)->getRules()->getFireSound())->play();
 			}
 			_timer->setInterval(333);
@@ -389,19 +389,19 @@ void BaseDefenseState::nextStep()
 			else if (!RNG::percent(chanceToHit))
 			{
 				spendAmmo = true;
-				_lstDefenses->setCellText(_row, 2, tr("STR_MISSED"));
+				_lstDefenses->setCellText(_row, 2, ltr("STR_MISSED"));
 			}
 			else
 			{
 				spendAmmo = true;
-				_lstDefenses->setCellText(_row, 2, tr("STR_HIT"));
+				_lstDefenses->setCellText(_row, 2, ltr("STR_HIT"));
 				_game->getMod()->getSound("GEO.CAT", (def)->getRules()->getHitSound())->play();
 
 				bool shieldDown = applyDamage(def->getRules());
 
 				if (shieldDown)
 				{
-					_lstDefenses->addRow(3, tr("STR_UFO_SHIELD_DOWN").c_str(), " ", " ");
+					_lstDefenses->addRow(3, ltr("STR_UFO_SHIELD_DOWN").c_str(), " ", " ");
 					++_row;
 					if (_row > 14)
 					{

@@ -46,7 +46,7 @@ ListSaveState::ListSaveState(OptionsOrigin origin) : ListGamesState(origin, 1, f
 	add(_btnSaveGame, "button", "saveMenus");
 
 	// Set up objects
-	_txtTitle->setText(tr("STR_SELECT_SAVE_POSITION"));
+	_txtTitle->setText(ltr("STR_SELECT_SAVE_POSITION"));
 
 	if (_game->getSavedGame()->isIronman())
 	{
@@ -57,7 +57,7 @@ ListSaveState::ListSaveState(OptionsOrigin origin) : ListGamesState(origin, 1, f
 		_btnCancel->setX(180);
 	}
 
-	_btnSaveGame->setText(tr("STR_SAVE_GAME"));
+	_btnSaveGame->setText(ltr("STR_SAVE_GAME"));
 	_btnSaveGame->onMouseClick((ActionHandler)&ListSaveState::btnSaveGameClick);
 
 	_edtSave->setColor(_lstSaves->getSecondaryColor());
@@ -81,7 +81,7 @@ ListSaveState::~ListSaveState()
  */
 void ListSaveState::updateList()
 {
-	_lstSaves->addRow(1, tr("STR_NEW_SAVED_GAME_SLOT").c_str());
+	_lstSaves->addRow(1, ltr("STR_NEW_SAVED_GAME_SLOT").c_str());
 	if (_origin != OPT_BATTLESCAPE)
 		_lstSaves->setRowColor(0, _lstSaves->getSecondaryColor());
 	ListGamesState::updateList();
@@ -111,7 +111,7 @@ void ListSaveState::lstSavesPress(Action *action)
 			case -1:	// first click on the savegame list
 				break;
 			case 0:
-				_lstSaves->setCellText(_previousSelectedRow	, 0, tr("STR_NEW_SAVED_GAME_SLOT"));
+				_lstSaves->setCellText(_previousSelectedRow	, 0, ltr("STR_NEW_SAVED_GAME_SLOT"));
 				break;
 			default:
 				_lstSaves->setCellText(_previousSelectedRow	, 0, _selected);

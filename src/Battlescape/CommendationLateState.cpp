@@ -59,14 +59,14 @@ CommendationLateState::CommendationLateState(std::vector<Soldier*> soldiersMedal
 	// Set up object
 	setWindowBackground(_window, "commendationsLate");
 
-	_btnOk->setText(tr("STR_OK"));
+	_btnOk->setText(ltr("STR_OK"));
 	_btnOk->onMouseClick((ActionHandler)&CommendationLateState::btnOkClick);
 	_btnOk->onKeyboardPress((ActionHandler)&CommendationLateState::btnOkClick, options1.keyOk());
 	_btnOk->onKeyboardPress((ActionHandler)&CommendationLateState::btnOkClick, options1.keyCancel());
 
 	_txtTitle->setBig();
 	_txtTitle->setAlign(ALIGN_CENTER);
-	_txtTitle->setText(tr("STR_LOST_IN_SERVICE"));
+	_txtTitle->setText(ltr("STR_LOST_IN_SERVICE"));
 
 	_lstSoldiers->setColumns(3, 114, 90, 84);
 	_lstSoldiers->setSelectable(true);
@@ -99,8 +99,8 @@ CommendationLateState::CommendationLateState(std::vector<Soldier*> soldiersMedal
 	{
 		// Establish some base information
 		_lstSoldiers->addRow(3, soldier->getName().c_str(),
-								tr(soldier->getRankString()).c_str(),
-								tr("STR_KILLS").arg(soldier->getDiary()->getKillTotal()).c_str());
+								ltr(soldier->getRankString()).c_str(),
+								ltr("STR_KILLS").arg(soldier->getDiary()->getKillTotal()).c_str());
 		_lstSoldiers->setRowColor(row, _lstSoldiers->getSecondaryColor());
 		_commendationsNames.push_back("");
 		row++;
@@ -156,13 +156,13 @@ CommendationLateState::CommendationLateState(std::vector<Soldier*> soldiersMedal
 					wssCommendation << "   ";
 					if (modularCommendation)
 					{
-						wssCommendation << tr(commType).arg(tr(noun));
+						wssCommendation << ltr(commType).arg(ltr(noun));
 					}
 					else
 					{
-						wssCommendation << tr(commType);
+						wssCommendation << ltr(commType);
 					}
-					_lstSoldiers->addRow(3, wssCommendation.str().c_str(), "", tr(soldierComm->getDecorationLevelName(skipCounter)).c_str());
+					_lstSoldiers->addRow(3, wssCommendation.str().c_str(), "", ltr(soldierComm->getDecorationLevelName(skipCounter)).c_str());
 					_commendationsNames.push_back(commType);
 					row++;
 					break;

@@ -124,7 +124,7 @@ ListGamesState::ListGamesState(OptionsOrigin origin, int firstValidRow, bool aut
 	// Set up objects
 	setWindowBackground(_window, "saveMenus");
 
-	_btnCancel->setText(tr("STR_CANCEL"));
+	_btnCancel->setText(ltr("STR_CANCEL"));
 	_btnCancel->onMouseClick((ActionHandler)&ListGamesState::btnCancelClick);
 	_btnCancel->onKeyboardPress((ActionHandler)&ListGamesState::btnCancelClick, options1.keyCancel());
 
@@ -134,18 +134,18 @@ ListGamesState::ListGamesState(OptionsOrigin origin, int firstValidRow, bool aut
 	if (isMobile)
 	{
 		_txtDelete->setVisible(false);
-		_btnDelete->setText(tr("STR_RIGHT_CLICK_TO_DELETE"));
+		_btnDelete->setText(ltr("STR_RIGHT_CLICK_TO_DELETE"));
 	}
 	else
 	{
 		_btnDelete->setVisible(false);
 		_txtDelete->setAlign(ALIGN_CENTER);
-		_txtDelete->setText(tr("STR_RIGHT_CLICK_TO_DELETE"));
+		_txtDelete->setText(ltr("STR_RIGHT_CLICK_TO_DELETE"));
 	}
 
-	_txtName->setText(tr("STR_NAME"));
+	_txtName->setText(ltr("STR_NAME"));
 
-	_txtDate->setText(tr("STR_DATE"));
+	_txtDate->setText(ltr("STR_DATE"));
 
 	_lstSaves->setColumns(3, 188, 60, 40);
 	_lstSaves->setSelectable(true);
@@ -156,7 +156,7 @@ ListGamesState::ListGamesState(OptionsOrigin origin, int firstValidRow, bool aut
 	_lstSaves->onMousePress((ActionHandler)&ListGamesState::lstSavesPress);
 
 	_txtDetails->setWordWrap(true);
-	_txtDetails->setText(tr("STR_DETAILS").arg(""));
+	_txtDetails->setText(ltr("STR_DETAILS").arg(""));
 
 	_sortName->setX(_sortName->getX() + _txtName->getTextWidth() + 5);
 	_sortName->onMouseClick((ActionHandler)&ListGamesState::sortNameClick);
@@ -288,7 +288,7 @@ void ListGamesState::lstSavesMouseOver(Action *)
 	{
 		wstr = _saves[sel].details;
 	}
-	_txtDetails->setText(tr("STR_DETAILS").arg(wstr));
+	_txtDetails->setText(ltr("STR_DETAILS").arg(wstr));
 }
 
 /**
@@ -297,7 +297,7 @@ void ListGamesState::lstSavesMouseOver(Action *)
  */
 void ListGamesState::lstSavesMouseOut(Action *)
 {
-	_txtDetails->setText(tr("STR_DETAILS").arg(""));
+	_txtDetails->setText(ltr("STR_DETAILS").arg(""));
 }
 
 /**

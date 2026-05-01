@@ -245,34 +245,34 @@ void StatsForNerdsState::buildUI(bool debug, bool ids, bool defaults)
 
 	_txtTitle->setBig();
 	_txtTitle->setAlign(ALIGN_CENTER);
-	_txtTitle->setText(tr("STR_STATS_FOR_NERDS"));
+	_txtTitle->setText(ltr("STR_STATS_FOR_NERDS"));
 
-	_txtArticle->setText(tr("STR_ARTICLE").arg(tr(_topicId)));
+	_txtArticle->setText(ltr("STR_ARTICLE").arg(ltr(_topicId)));
 
 	_lstRawData->setColumns(2, 110, 177);
 	_lstRawData->setSelectable(true);
 	_lstRawData->setBackground(_window);
 	_lstRawData->setWordWrap(true);
 
-	_btnIncludeDebug->setText(tr("STR_INCLUDE_DEBUG"));
+	_btnIncludeDebug->setText(ltr("STR_INCLUDE_DEBUG"));
 	_btnIncludeDebug->setPressed(debug);
 	_btnIncludeDebug->onMouseClick((ActionHandler)&StatsForNerdsState::btnRefreshClick);
 
-	_btnIncludeIds->setText(tr("STR_INCLUDE_IDS"));
+	_btnIncludeIds->setText(ltr("STR_INCLUDE_IDS"));
 	_btnIncludeIds->setPressed(ids);
 	_btnIncludeIds->onMouseClick((ActionHandler)&StatsForNerdsState::btnRefreshClick);
 
-	_btnIncludeDefaults->setText(tr("STR_INCLUDE_DEFAULTS"));
+	_btnIncludeDefaults->setText(ltr("STR_INCLUDE_DEFAULTS"));
 	_btnIncludeDefaults->setPressed(defaults);
 	_btnIncludeDefaults->onMouseClick((ActionHandler)&StatsForNerdsState::btnRefreshClick);
 
-	_btnOk->setText(tr("STR_OK"));
+	_btnOk->setText(ltr("STR_OK"));
 	_btnOk->onMouseClick((ActionHandler)&StatsForNerdsState::btnOkClick);
 	_btnOk->onKeyboardPress((ActionHandler)&StatsForNerdsState::btnOkClick, options1.keyCancel());
 	_btnOk->onKeyboardPress((ActionHandler)&StatsForNerdsState::btnScrollUpClick, options1.keyGeoUp());
 	_btnOk->onKeyboardPress((ActionHandler)&StatsForNerdsState::btnScrollDownClick, options1.keyGeoDown());
 
-	_btnPreview->setText(tr("STR_CRAFT_DEPLOYMENT_PREVIEW"));
+	_btnPreview->setText(ltr("STR_CRAFT_DEPLOYMENT_PREVIEW"));
 	_btnPreview->onMouseClick((ActionHandler)&StatsForNerdsState::btnPreviewClick);
 	_btnPreview->setVisible(false);
 
@@ -288,7 +288,7 @@ void StatsForNerdsState::buildUI(bool debug, bool ids, bool defaults)
 	{
 		_txtTitle->setHeight(_txtTitle->getHeight() * 9);
 		_txtTitle->setWordWrap(true);
-		_txtTitle->setText(tr("STR_THIS_FEATURE_IS_DISABLED_2"));
+		_txtTitle->setText(ltr("STR_THIS_FEATURE_IS_DISABLED_2"));
 		_txtArticle->setVisible(false);
 		_lstRawData->setVisible(false);
 		_btnIncludeDebug->setVisible(false);
@@ -358,9 +358,9 @@ void StatsForNerdsState::init()
 
 				// update the label to indicate presence of a saved deployment
 				if (find != data.end())
-					_btnPreview->setText(tr("STR_CRAFT_DEPLOYMENT_PREVIEW_SAVED"));
+					_btnPreview->setText(ltr("STR_CRAFT_DEPLOYMENT_PREVIEW_SAVED"));
 				else
-					_btnPreview->setText(tr("STR_CRAFT_DEPLOYMENT_PREVIEW"));
+					_btnPreview->setText(ltr("STR_CRAFT_DEPLOYMENT_PREVIEW"));
 
 				_txtTitle->setAlign(ALIGN_LEFT);
 				_btnPreview->setVisible(true);
@@ -495,7 +495,7 @@ void StatsForNerdsState::btnPreviewClick(Action *)
 	RuleCraft* craftRule = mod->getCraft(_topicId);
 	Craft* c = new Craft(craftRule, base, RuleCraft::DUMMY_CRAFT_ID); // a negative integer
 	base->getCrafts()->push_back(c);
-	c->setName(tr(craftRule->getType()));
+	c->setName(ltr(craftRule->getType()));
 	int max = craftRule->getMaxUnitsLimit();
 	for (auto* soldier : *base->getSoldiers())
 	{
@@ -621,7 +621,7 @@ void StatsForNerdsState::resetStream(std::ostringstream &ss)
  */
 void StatsForNerdsState::addTranslation(std::ostringstream &ss, const std::string &id)
 {
-	ss << tr(id);
+	ss << ltr(id);
 	if (_showIds)
 	{
 		ss << " [" << id << "]";
@@ -651,12 +651,12 @@ std::string StatsForNerdsState::trp(const std::string &propertyName)
 		if (_indent)
 		{
 			std::string indentation = " ";
-			std::string translation = tr(propertyName);
+			std::string translation = ltr(propertyName);
 			return indentation + translation;
 		}
 		else
 		{
-			return tr(propertyName);
+			return ltr(propertyName);
 		}
 	}
 }
@@ -693,13 +693,13 @@ void StatsForNerdsState::addHeading(const std::string &propertyName, const std::
 			std::string diff;
 			switch (_game->getSavedGame()->getDifficulty())
 			{
-				case DIFF_SUPERHUMAN: diff = tr("STR_5_SUPERHUMAN"); break;
-				case DIFF_GENIUS: diff = tr("STR_4_GENIUS"); break;
-				case DIFF_VETERAN: diff = tr("STR_3_VETERAN"); break;
-				case DIFF_EXPERIENCED: diff = tr("STR_2_EXPERIENCED"); break;
-				default: diff = tr("STR_1_BEGINNER"); break;
+				case DIFF_SUPERHUMAN: diff = ltr("STR_5_SUPERHUMAN"); break;
+				case DIFF_GENIUS: diff = ltr("STR_4_GENIUS"); break;
+				case DIFF_VETERAN: diff = ltr("STR_3_VETERAN"); break;
+				case DIFF_EXPERIENCED: diff = ltr("STR_2_EXPERIENCED"); break;
+				default: diff = ltr("STR_1_BEGINNER"); break;
 			}
-			ss2 << tr(moreDetail).arg(diff);
+			ss2 << ltr(moreDetail).arg(diff);
 		}
 		else
 		{
@@ -885,7 +885,7 @@ void StatsForNerdsState::addIntegerScript(const std::string &propertyName, const
 
 void StatsForNerdsState::addTextScript(const std::string &propertyName, const std::string &value)
 {
-	std::string text = _showDebug ? value : std::string(tr(value));
+	std::string text = _showDebug ? value : std::string(ltr(value));
 	_lstRawData->addRow(2, trp(propertyName).c_str(), text.c_str());
 	_lstRawData->setCellColor(_lstRawData->getLastRowIndex(), 1, _pink);
 	++_counter;
@@ -893,7 +893,7 @@ void StatsForNerdsState::addTextScript(const std::string &propertyName, const st
 
 void StatsForNerdsState::addTextFormat1Script(const std::string &propertyName, const std::string &format, const int &value1)
 {
-	std::string text = tr(format).arg(value1);
+	std::string text = ltr(format).arg(value1);
 	_lstRawData->addRow(2, trp(propertyName).c_str(), text.c_str());
 	_lstRawData->setCellColor(_lstRawData->getLastRowIndex(), 1, _pink);
 	++_counter;
@@ -901,7 +901,7 @@ void StatsForNerdsState::addTextFormat1Script(const std::string &propertyName, c
 
 void StatsForNerdsState::addTextFormat2Script(const std::string &propertyName, const std::string &format, const int &value1, const int &value2)
 {
-	std::string text = tr(format).arg(value1).arg(value2);
+	std::string text = ltr(format).arg(value1).arg(value2);
 	_lstRawData->addRow(2, trp(propertyName).c_str(), text.c_str());
 	_lstRawData->setCellColor(_lstRawData->getLastRowIndex(), 1, _pink);
 	++_counter;
@@ -919,11 +919,11 @@ void StatsForNerdsState::addBoolean(std::ostringstream &ss, const bool &value, c
 	resetStream(ss);
 	if (value)
 	{
-		ss << tr("STR_TRUE");
+		ss << ltr("STR_TRUE");
 	}
 	else
 	{
-		ss << tr("STR_FALSE");
+		ss << ltr("STR_FALSE");
 	}
 	_lstRawData->addRow(2, trp(propertyName).c_str(), ss.str().c_str());
 	++_counter;
@@ -1006,7 +1006,7 @@ void StatsForNerdsState::addInteger(std::ostringstream &ss, const int &value, co
 	resetStream(ss);
 	if (value == specialvalue && !specialTranslation.empty())
 	{
-		ss << tr(specialTranslation);
+		ss << ltr(specialTranslation);
 		if (_showIds)
 		{
 			ss << " [" << specialvalue << "]";
@@ -1088,9 +1088,9 @@ void StatsForNerdsState::addIntegerNauticalMiles(std::ostringstream &ss, const i
 		return;
 	}
 	resetStream(ss);
-	ss << tr("STR_NAUTICAL_MILES").arg(value);
+	ss << ltr("STR_NAUTICAL_MILES").arg(value);
 	ss << " = ";
-	ss << tr("STR_KILOMETERS").arg(value * 1852 / 1000);
+	ss << ltr("STR_KILOMETERS").arg(value * 1852 / 1000);
 	_lstRawData->addRow(2, trp(propertyName).c_str(), ss.str().c_str());
 	++_counter;
 	if (value != defaultvalue)
@@ -1109,9 +1109,9 @@ void StatsForNerdsState::addIntegerKnots(std::ostringstream &ss, const int &valu
 		return;
 	}
 	resetStream(ss);
-	ss << tr("STR_KNOTS").arg(value);
+	ss << ltr("STR_KNOTS").arg(value);
 	ss << " = ";
-	ss << tr("STR_KILOMETERS_PER_HOUR").arg(value * 1852 / 1000);
+	ss << ltr("STR_KILOMETERS_PER_HOUR").arg(value * 1852 / 1000);
 	_lstRawData->addRow(2, trp(propertyName).c_str(), ss.str().c_str());
 	++_counter;
 	if (value != defaultvalue)
@@ -1130,7 +1130,7 @@ void StatsForNerdsState::addIntegerKm(std::ostringstream &ss, const int &value, 
 		return;
 	}
 	resetStream(ss);
-	ss << tr("STR_KILOMETERS").arg(value);
+	ss << ltr("STR_KILOMETERS").arg(value);
 	_lstRawData->addRow(2, trp(propertyName).c_str(), ss.str().c_str());
 	++_counter;
 	if (value != defaultvalue)
@@ -1151,7 +1151,7 @@ void StatsForNerdsState::addIntegerSeconds(std::ostringstream &ss, const int &va
 	resetStream(ss);
 	if (value2 == -1)
 	{
-		ss << tr("STR_SECONDS_LONG").arg(value);
+		ss << ltr("STR_SECONDS_LONG").arg(value);
 	}
 	else
 	{
@@ -1159,7 +1159,7 @@ void StatsForNerdsState::addIntegerSeconds(std::ostringstream &ss, const int &va
 		ss2 << value;
 		ss2 << "-";
 		ss2 << value2;
-		ss << tr("STR_SECONDS_LONG").arg(ss2.str());
+		ss << ltr("STR_SECONDS_LONG").arg(ss2.str());
 	}
 	_lstRawData->addRow(2, trp(propertyName).c_str(), ss.str().c_str());
 	++_counter;
@@ -1241,19 +1241,19 @@ void StatsForNerdsState::addBattleType(std::ostringstream &ss, const BattleType 
 	resetStream(ss);
 	switch (value)
 	{
-		case BT_NONE: ss << tr("BT_NONE"); break;
-		case BT_FIREARM: ss << tr("BT_FIREARM"); break;
-		case BT_AMMO: ss << tr("BT_AMMO"); break;
-		case BT_MELEE: ss << tr("BT_MELEE"); break;
-		case BT_GRENADE: ss << tr("BT_GRENADE"); break;
-		case BT_PROXIMITYGRENADE: ss << tr("BT_PROXIMITYGRENADE"); break;
-		case BT_MEDIKIT: ss << tr("BT_MEDIKIT"); break;
-		case BT_SCANNER: ss << tr("BT_SCANNER"); break;
-		case BT_MINDPROBE: ss << tr("BT_MINDPROBE"); break;
-		case BT_PSIAMP: ss << tr("BT_PSIAMP"); break;
-		case BT_FLARE: ss << tr("BT_FLARE"); break;
-		case BT_CORPSE: ss << tr("BT_CORPSE"); break;
-		default: ss << tr("STR_UNKNOWN"); break;
+		case BT_NONE: ss << ltr("BT_NONE"); break;
+		case BT_FIREARM: ss << ltr("BT_FIREARM"); break;
+		case BT_AMMO: ss << ltr("BT_AMMO"); break;
+		case BT_MELEE: ss << ltr("BT_MELEE"); break;
+		case BT_GRENADE: ss << ltr("BT_GRENADE"); break;
+		case BT_PROXIMITYGRENADE: ss << ltr("BT_PROXIMITYGRENADE"); break;
+		case BT_MEDIKIT: ss << ltr("BT_MEDIKIT"); break;
+		case BT_SCANNER: ss << ltr("BT_SCANNER"); break;
+		case BT_MINDPROBE: ss << ltr("BT_MINDPROBE"); break;
+		case BT_PSIAMP: ss << ltr("BT_PSIAMP"); break;
+		case BT_FLARE: ss << ltr("BT_FLARE"); break;
+		case BT_CORPSE: ss << ltr("BT_CORPSE"); break;
+		default: ss << ltr("STR_UNKNOWN"); break;
 	}
 	if (_showIds)
 	{
@@ -1279,27 +1279,27 @@ void StatsForNerdsState::addDamageType(std::ostringstream &ss, const ItemDamageT
 	resetStream(ss);
 	switch (value)
 	{
-		case DT_NONE: ss << tr( "STR_DAMAGE_NONE"); break;
-		case DT_AP: ss << tr("STR_DAMAGE_ARMOR_PIERCING"); break;
-		case DT_IN: ss << tr("STR_DAMAGE_INCENDIARY"); break;
-		case DT_HE: ss << tr("STR_DAMAGE_HIGH_EXPLOSIVE"); break;
-		case DT_LASER: ss << tr("STR_DAMAGE_LASER_BEAM"); break;
-		case DT_PLASMA: ss << tr("STR_DAMAGE_PLASMA_BEAM"); break;
-		case DT_STUN: ss << tr("STR_DAMAGE_STUN"); break;
-		case DT_MELEE: ss << tr("STR_DAMAGE_MELEE"); break;
-		case DT_ACID: ss << tr("STR_DAMAGE_ACID"); break;
-		case DT_SMOKE: ss << tr("STR_DAMAGE_SMOKE"); break;
-		case DT_10: ss << tr("STR_DAMAGE_10"); break;
-		case DT_11: ss << tr("STR_DAMAGE_11"); break;
-		case DT_12: ss << tr("STR_DAMAGE_12"); break;
-		case DT_13: ss << tr("STR_DAMAGE_13"); break;
-		case DT_14: ss << tr("STR_DAMAGE_14"); break;
-		case DT_15: ss << tr("STR_DAMAGE_15"); break;
-		case DT_16: ss << tr("STR_DAMAGE_16"); break;
-		case DT_17: ss << tr("STR_DAMAGE_17"); break;
-		case DT_18: ss << tr("STR_DAMAGE_18"); break;
-		case DT_19: ss << tr("STR_DAMAGE_19"); break;
-		default: ss << tr("STR_UNKNOWN"); break;
+		case DT_NONE: ss << ltr( "STR_DAMAGE_NONE"); break;
+		case DT_AP: ss << ltr("STR_DAMAGE_ARMOR_PIERCING"); break;
+		case DT_IN: ss << ltr("STR_DAMAGE_INCENDIARY"); break;
+		case DT_HE: ss << ltr("STR_DAMAGE_HIGH_EXPLOSIVE"); break;
+		case DT_LASER: ss << ltr("STR_DAMAGE_LASER_BEAM"); break;
+		case DT_PLASMA: ss << ltr("STR_DAMAGE_PLASMA_BEAM"); break;
+		case DT_STUN: ss << ltr("STR_DAMAGE_STUN"); break;
+		case DT_MELEE: ss << ltr("STR_DAMAGE_MELEE"); break;
+		case DT_ACID: ss << ltr("STR_DAMAGE_ACID"); break;
+		case DT_SMOKE: ss << ltr("STR_DAMAGE_SMOKE"); break;
+		case DT_10: ss << ltr("STR_DAMAGE_10"); break;
+		case DT_11: ss << ltr("STR_DAMAGE_11"); break;
+		case DT_12: ss << ltr("STR_DAMAGE_12"); break;
+		case DT_13: ss << ltr("STR_DAMAGE_13"); break;
+		case DT_14: ss << ltr("STR_DAMAGE_14"); break;
+		case DT_15: ss << ltr("STR_DAMAGE_15"); break;
+		case DT_16: ss << ltr("STR_DAMAGE_16"); break;
+		case DT_17: ss << ltr("STR_DAMAGE_17"); break;
+		case DT_18: ss << ltr("STR_DAMAGE_18"); break;
+		case DT_19: ss << ltr("STR_DAMAGE_19"); break;
+		default: ss << ltr("STR_UNKNOWN"); break;
 	}
 	if (_showIds)
 	{
@@ -1325,17 +1325,17 @@ void StatsForNerdsState::addDamageRandomType(std::ostringstream &ss, const ItemD
 	resetStream(ss);
 	switch (value)
 	{
-		case DRT_DEFAULT: ss << tr("DRT_DEFAULT"); break;
-		case DRT_UFO: ss << tr("DRT_UFO"); break;
-		case DRT_TFTD: ss << tr("DRT_TFTD"); break;
-		case DRT_FLAT: ss << tr("DRT_FLAT"); break;
-		case DRT_FIRE: ss << tr("DRT_FIRE"); break;
-		case DRT_NONE: ss << tr("DRT_NONE"); break;
-		case DRT_UFO_WITH_TWO_DICE: ss << tr("DRT_UFO_WITH_TWO_DICE"); break;
-		case DRT_EASY: ss << tr("DRT_EASY"); break;
-		case DRT_STANDARD: ss << tr("DRT_STANDARD"); break;
-		case DRT_EXPLOSION: ss << tr("DRT_EXPLOSION"); break;
-		default: ss << tr("STR_UNKNOWN"); break;
+		case DRT_DEFAULT: ss << ltr("DRT_DEFAULT"); break;
+		case DRT_UFO: ss << ltr("DRT_UFO"); break;
+		case DRT_TFTD: ss << ltr("DRT_TFTD"); break;
+		case DRT_FLAT: ss << ltr("DRT_FLAT"); break;
+		case DRT_FIRE: ss << ltr("DRT_FIRE"); break;
+		case DRT_NONE: ss << ltr("DRT_NONE"); break;
+		case DRT_UFO_WITH_TWO_DICE: ss << ltr("DRT_UFO_WITH_TWO_DICE"); break;
+		case DRT_EASY: ss << ltr("DRT_EASY"); break;
+		case DRT_STANDARD: ss << ltr("DRT_STANDARD"); break;
+		case DRT_EXPLOSION: ss << ltr("DRT_EXPLOSION"); break;
+		default: ss << ltr("STR_UNKNOWN"); break;
 	}
 	if (_showIds)
 	{
@@ -1361,18 +1361,18 @@ void StatsForNerdsState::addBattleFuseType(std::ostringstream &ss, const BattleF
 	resetStream(ss);
 	switch (value)
 	{
-		case BFT_NONE: ss << tr("BFT_NONE"); break;
-		case BFT_INSTANT: ss << tr("BFT_INSTANT"); break;
-		case BFT_SET: ss << tr("BFT_SET"); break;
+		case BFT_NONE: ss << ltr("BFT_NONE"); break;
+		case BFT_INSTANT: ss << ltr("BFT_INSTANT"); break;
+		case BFT_SET: ss << ltr("BFT_SET"); break;
 		default:
 		{
 			if (value >= BFT_FIX_MIN && value < BFT_FIX_MAX)
 			{
-				ss << tr("BFT_FIXED");
+				ss << ltr("BFT_FIXED");
 			}
 			else
 			{
-				ss << tr("STR_UNKNOWN");
+				ss << ltr("STR_UNKNOWN");
 			}
 			break;
 		}
@@ -1416,9 +1416,9 @@ void StatsForNerdsState::addBoolOrInteger(std::ostringstream &ss, const int &val
 	if (formatAsBoolean)
 	{
 		if (value == 1)
-			ss << tr("STR_TRUE");
+			ss << ltr("STR_TRUE");
 		else if (value == 0)
-			ss << tr("STR_FALSE");
+			ss << ltr("STR_FALSE");
 		else
 			ss << value;
 	}
@@ -1469,7 +1469,7 @@ void StatsForNerdsState::addRuleItemUseCostFull(std::ostringstream &ss, const Ru
 	// always show non-zero TUs, even if it's a default value
 	if (value.Time != 0 || _showDefaults)
 	{
-		ss << tr("STR_COST_TIME") << ": ";
+		ss << ltr("STR_COST_TIME") << ": ";
 		addBoolOrInteger(ss, value.Time, isFlatAttribute);
 		addPercentageSignOrNothing(ss, formatBy.Time, smartFormat);
 		isFirst = false;
@@ -1477,7 +1477,7 @@ void StatsForNerdsState::addRuleItemUseCostFull(std::ostringstream &ss, const Ru
 	if (value.Energy != defaultvalue.Energy || _showDefaults)
 	{
 		if (!isFirst) ss << ", ";
-		ss << tr("STR_COST_ENERGY") << ": ";
+		ss << ltr("STR_COST_ENERGY") << ": ";
 		addBoolOrInteger(ss, value.Energy, isFlatAttribute);
 		addPercentageSignOrNothing(ss, formatBy.Energy, smartFormat);
 		isFirst = false;
@@ -1485,7 +1485,7 @@ void StatsForNerdsState::addRuleItemUseCostFull(std::ostringstream &ss, const Ru
 	if (value.Morale != defaultvalue.Morale || _showDefaults)
 	{
 		if (!isFirst) ss << ", ";
-		ss << tr("STR_COST_MORALE") << ": ";
+		ss << ltr("STR_COST_MORALE") << ": ";
 		addBoolOrInteger(ss, value.Morale, isFlatAttribute);
 		addPercentageSignOrNothing(ss, formatBy.Morale, smartFormat);
 		isFirst = false;
@@ -1493,7 +1493,7 @@ void StatsForNerdsState::addRuleItemUseCostFull(std::ostringstream &ss, const Ru
 	if (value.Health != defaultvalue.Health || _showDefaults)
 	{
 		if (!isFirst) ss << ", ";
-		ss << tr("STR_COST_HEALTH") << ": ";
+		ss << ltr("STR_COST_HEALTH") << ": ";
 		addBoolOrInteger(ss, value.Health, isFlatAttribute);
 		addPercentageSignOrNothing(ss, formatBy.Health, smartFormat);
 		isFirst = false;
@@ -1501,7 +1501,7 @@ void StatsForNerdsState::addRuleItemUseCostFull(std::ostringstream &ss, const Ru
 	if (value.Stun != defaultvalue.Stun || _showDefaults)
 	{
 		if (!isFirst) ss << ", ";
-		ss << tr("STR_COST_STUN") << ": ";
+		ss << ltr("STR_COST_STUN") << ": ";
 		addBoolOrInteger(ss, value.Stun, isFlatAttribute);
 		addPercentageSignOrNothing(ss, formatBy.Stun, smartFormat);
 		isFirst = false;
@@ -1509,7 +1509,7 @@ void StatsForNerdsState::addRuleItemUseCostFull(std::ostringstream &ss, const Ru
 	if (value.Mana != defaultvalue.Mana || _showDefaults)
 	{
 		if (!isFirst) ss << ", ";
-		ss << tr("STR_COST_MANA") << ": ";
+		ss << ltr("STR_COST_MANA") << ": ";
 		addBoolOrInteger(ss, value.Mana, isFlatAttribute);
 		addPercentageSignOrNothing(ss, formatBy.Mana, smartFormat);
 		isFirst = false;
@@ -1534,11 +1534,11 @@ void StatsForNerdsState::addBattleMediKitType(std::ostringstream &ss, const Batt
 	resetStream(ss);
 	switch (value)
 	{
-		case BMT_NORMAL: ss << tr("BMT_NORMAL"); break;
-		case BMT_HEAL: ss << tr("BMT_HEAL"); break;
-		case BMT_STIMULANT: ss << tr("BMT_STIMULANT"); break;
-		case BMT_PAINKILLER: ss << tr("BMT_PAINKILLER"); break;
-		default: ss << tr("STR_UNKNOWN"); break;
+		case BMT_NORMAL: ss << ltr("BMT_NORMAL"); break;
+		case BMT_HEAL: ss << ltr("BMT_HEAL"); break;
+		case BMT_STIMULANT: ss << ltr("BMT_STIMULANT"); break;
+		case BMT_PAINKILLER: ss << ltr("BMT_PAINKILLER"); break;
+		default: ss << ltr("STR_UNKNOWN"); break;
 	}
 	if (_showIds)
 	{
@@ -1632,40 +1632,40 @@ void StatsForNerdsState::addExperienceTrainingMode(std::ostringstream &ss, const
 	resetStream(ss);
 	switch (value)
 	{
-		case ETM_DEFAULT: ss << tr("ETM_DEFAULT"); break;
-		case ETM_MELEE_100: ss << tr("ETM_MELEE_100"); break;
-		case ETM_MELEE_50: ss << tr("ETM_MELEE_50"); break;
-		case ETM_MELEE_33: ss << tr("ETM_MELEE_33"); break;
-		case ETM_FIRING_100: ss << tr("ETM_FIRING_100"); break;
-		case ETM_FIRING_50: ss << tr("ETM_FIRING_50"); break;
-		case ETM_FIRING_33: ss << tr("ETM_FIRING_33"); break;
-		case ETM_THROWING_100: ss << tr("ETM_THROWING_100"); break;
-		case ETM_THROWING_50: ss << tr("ETM_THROWING_50"); break;
-		case ETM_THROWING_33: ss << tr("ETM_THROWING_33"); break;
-		case ETM_FIRING_AND_THROWING: ss << tr("ETM_FIRING_AND_THROWING"); break;
-		case ETM_FIRING_OR_THROWING: ss << tr("ETM_FIRING_OR_THROWING"); break;
-		case ETM_REACTIONS: ss << tr("ETM_REACTIONS"); break;
-		case ETM_REACTIONS_AND_MELEE: ss << tr("ETM_REACTIONS_AND_MELEE"); break;
-		case ETM_REACTIONS_AND_FIRING: ss << tr("ETM_REACTIONS_AND_FIRING"); break;
-		case ETM_REACTIONS_AND_THROWING: ss << tr("ETM_REACTIONS_AND_THROWING"); break;
-		case ETM_REACTIONS_OR_MELEE: ss << tr("ETM_REACTIONS_OR_MELEE"); break;
-		case ETM_REACTIONS_OR_FIRING: ss << tr("ETM_REACTIONS_OR_FIRING"); break;
-		case ETM_REACTIONS_OR_THROWING: ss << tr("ETM_REACTIONS_OR_THROWING"); break;
-		case ETM_BRAVERY: ss << tr("ETM_BRAVERY"); break;
-		case ETM_BRAVERY_2X: ss << tr("ETM_BRAVERY_2X"); break;
-		case ETM_BRAVERY_AND_REACTIONS: ss << tr("ETM_BRAVERY_AND_REACTIONS"); break;
-		case ETM_BRAVERY_OR_REACTIONS: ss << tr("ETM_BRAVERY_OR_REACTIONS"); break;
-		case ETM_BRAVERY_OR_REACTIONS_2X: ss << tr("ETM_BRAVERY_OR_REACTIONS_2X"); break;
-		case ETM_PSI_STRENGTH: ss << tr("ETM_PSI_STRENGTH"); break;
-		case ETM_PSI_STRENGTH_2X: ss << tr("ETM_PSI_STRENGTH_2X"); break;
-		case ETM_PSI_SKILL: ss << tr("ETM_PSI_SKILL"); break;
-		case ETM_PSI_SKILL_2X: ss << tr("ETM_PSI_SKILL_2X"); break;
-		case ETM_PSI_STRENGTH_AND_SKILL: ss << tr("ETM_PSI_STRENGTH_AND_SKILL"); break;
-		case ETM_PSI_STRENGTH_AND_SKILL_2X: ss << tr("ETM_PSI_STRENGTH_AND_SKILL_2X"); break;
-		case ETM_PSI_STRENGTH_OR_SKILL: ss << tr("ETM_PSI_STRENGTH_OR_SKILL"); break;
-		case ETM_PSI_STRENGTH_OR_SKILL_2X: ss << tr("ETM_PSI_STRENGTH_OR_SKILL_2X"); break;
-		case ETM_NOTHING: ss << tr("ETM_NOTHING"); break;
-		default: ss << tr("STR_UNKNOWN"); break;
+		case ETM_DEFAULT: ss << ltr("ETM_DEFAULT"); break;
+		case ETM_MELEE_100: ss << ltr("ETM_MELEE_100"); break;
+		case ETM_MELEE_50: ss << ltr("ETM_MELEE_50"); break;
+		case ETM_MELEE_33: ss << ltr("ETM_MELEE_33"); break;
+		case ETM_FIRING_100: ss << ltr("ETM_FIRING_100"); break;
+		case ETM_FIRING_50: ss << ltr("ETM_FIRING_50"); break;
+		case ETM_FIRING_33: ss << ltr("ETM_FIRING_33"); break;
+		case ETM_THROWING_100: ss << ltr("ETM_THROWING_100"); break;
+		case ETM_THROWING_50: ss << ltr("ETM_THROWING_50"); break;
+		case ETM_THROWING_33: ss << ltr("ETM_THROWING_33"); break;
+		case ETM_FIRING_AND_THROWING: ss << ltr("ETM_FIRING_AND_THROWING"); break;
+		case ETM_FIRING_OR_THROWING: ss << ltr("ETM_FIRING_OR_THROWING"); break;
+		case ETM_REACTIONS: ss << ltr("ETM_REACTIONS"); break;
+		case ETM_REACTIONS_AND_MELEE: ss << ltr("ETM_REACTIONS_AND_MELEE"); break;
+		case ETM_REACTIONS_AND_FIRING: ss << ltr("ETM_REACTIONS_AND_FIRING"); break;
+		case ETM_REACTIONS_AND_THROWING: ss << ltr("ETM_REACTIONS_AND_THROWING"); break;
+		case ETM_REACTIONS_OR_MELEE: ss << ltr("ETM_REACTIONS_OR_MELEE"); break;
+		case ETM_REACTIONS_OR_FIRING: ss << ltr("ETM_REACTIONS_OR_FIRING"); break;
+		case ETM_REACTIONS_OR_THROWING: ss << ltr("ETM_REACTIONS_OR_THROWING"); break;
+		case ETM_BRAVERY: ss << ltr("ETM_BRAVERY"); break;
+		case ETM_BRAVERY_2X: ss << ltr("ETM_BRAVERY_2X"); break;
+		case ETM_BRAVERY_AND_REACTIONS: ss << ltr("ETM_BRAVERY_AND_REACTIONS"); break;
+		case ETM_BRAVERY_OR_REACTIONS: ss << ltr("ETM_BRAVERY_OR_REACTIONS"); break;
+		case ETM_BRAVERY_OR_REACTIONS_2X: ss << ltr("ETM_BRAVERY_OR_REACTIONS_2X"); break;
+		case ETM_PSI_STRENGTH: ss << ltr("ETM_PSI_STRENGTH"); break;
+		case ETM_PSI_STRENGTH_2X: ss << ltr("ETM_PSI_STRENGTH_2X"); break;
+		case ETM_PSI_SKILL: ss << ltr("ETM_PSI_SKILL"); break;
+		case ETM_PSI_SKILL_2X: ss << ltr("ETM_PSI_SKILL_2X"); break;
+		case ETM_PSI_STRENGTH_AND_SKILL: ss << ltr("ETM_PSI_STRENGTH_AND_SKILL"); break;
+		case ETM_PSI_STRENGTH_AND_SKILL_2X: ss << ltr("ETM_PSI_STRENGTH_AND_SKILL_2X"); break;
+		case ETM_PSI_STRENGTH_OR_SKILL: ss << ltr("ETM_PSI_STRENGTH_OR_SKILL"); break;
+		case ETM_PSI_STRENGTH_OR_SKILL_2X: ss << ltr("ETM_PSI_STRENGTH_OR_SKILL_2X"); break;
+		case ETM_NOTHING: ss << ltr("ETM_NOTHING"); break;
+		default: ss << ltr("STR_UNKNOWN"); break;
 	}
 	if (_showIds)
 	{
@@ -1754,13 +1754,13 @@ void StatsForNerdsState::addRuleArmorMoveCost(std::ostringstream &ss, const Armo
 	}
 	resetStream(ss);
 
-	ss << tr("STR_COST_TIME") << ": ";
+	ss << ltr("STR_COST_TIME") << ": ";
 	addBoolOrInteger(ss, value.TimePercent, false);
 	ss << "%";
 
 	ss << ", ";
 
-	ss << tr("STR_COST_ENERGY") << ": ";
+	ss << ltr("STR_COST_ENERGY") << ": ";
 	addBoolOrInteger(ss, value.EnergyPercent, false);
 	ss << "%";
 
@@ -1855,13 +1855,13 @@ void StatsForNerdsState::initItemList()
 	_lstRawData->setIgnoreSeparators(true);
 
 	std::ostringstream ssTopic;
-	ssTopic << tr(_topicId);
+	ssTopic << ltr(_topicId);
 	if (_showIds)
 	{
 		ssTopic << " [" << _topicId << "]";
 	}
 
-	_txtArticle->setText(tr("STR_ARTICLE").arg(ssTopic.str()));
+	_txtArticle->setText(ltr("STR_ARTICLE").arg(ssTopic.str()));
 
 	Mod *mod = _game->getMod();
 	RuleItem *itemRule = mod->getItem(_topicId);
@@ -2504,7 +2504,7 @@ void StatsForNerdsState::addUnitStatFormatted(std::ostringstream &ss, const int 
 	if (value != 0 || _showDefaults)
 	{
 		if (!isFirst) ss << ", ";
-		ss << tr(label) << ":" << value;
+		ss << ltr(label) << ":" << value;
 		isFirst = false;
 	}
 }
@@ -2574,27 +2574,27 @@ void StatsForNerdsState::addArmorDamageModifiers(std::ostringstream &ss, const s
 			}
 			switch (index)
 			{
-				case 0: ss << tr("STR_DAMAGE_NONE"); break;
-				case 1: ss << tr("STR_DAMAGE_ARMOR_PIERCING"); break;
-				case 2: ss << tr("STR_DAMAGE_INCENDIARY"); break;
-				case 3: ss << tr("STR_DAMAGE_HIGH_EXPLOSIVE"); break;
-				case 4: ss << tr("STR_DAMAGE_LASER_BEAM"); break;
-				case 5: ss << tr("STR_DAMAGE_PLASMA_BEAM"); break;
-				case 6: ss << tr("STR_DAMAGE_STUN"); break;
-				case 7: ss << tr("STR_DAMAGE_MELEE"); break;
-				case 8: ss << tr("STR_DAMAGE_ACID"); break;
-				case 9: ss << tr("STR_DAMAGE_SMOKE"); break;
-				case 10: ss << tr("STR_DAMAGE_10"); break;
-				case 11: ss << tr("STR_DAMAGE_11"); break;
-				case 12: ss << tr("STR_DAMAGE_12"); break;
-				case 13: ss << tr("STR_DAMAGE_13"); break;
-				case 14: ss << tr("STR_DAMAGE_14"); break;
-				case 15: ss << tr("STR_DAMAGE_15"); break;
-				case 16: ss << tr("STR_DAMAGE_16"); break;
-				case 17: ss << tr("STR_DAMAGE_17"); break;
-				case 18: ss << tr("STR_DAMAGE_18"); break;
-				case 19: ss << tr("STR_DAMAGE_19"); break;
-				default: ss << tr("STR_UNKNOWN"); break;
+				case 0: ss << ltr("STR_DAMAGE_NONE"); break;
+				case 1: ss << ltr("STR_DAMAGE_ARMOR_PIERCING"); break;
+				case 2: ss << ltr("STR_DAMAGE_INCENDIARY"); break;
+				case 3: ss << ltr("STR_DAMAGE_HIGH_EXPLOSIVE"); break;
+				case 4: ss << ltr("STR_DAMAGE_LASER_BEAM"); break;
+				case 5: ss << ltr("STR_DAMAGE_PLASMA_BEAM"); break;
+				case 6: ss << ltr("STR_DAMAGE_STUN"); break;
+				case 7: ss << ltr("STR_DAMAGE_MELEE"); break;
+				case 8: ss << ltr("STR_DAMAGE_ACID"); break;
+				case 9: ss << ltr("STR_DAMAGE_SMOKE"); break;
+				case 10: ss << ltr("STR_DAMAGE_10"); break;
+				case 11: ss << ltr("STR_DAMAGE_11"); break;
+				case 12: ss << ltr("STR_DAMAGE_12"); break;
+				case 13: ss << ltr("STR_DAMAGE_13"); break;
+				case 14: ss << ltr("STR_DAMAGE_14"); break;
+				case 15: ss << ltr("STR_DAMAGE_15"); break;
+				case 16: ss << ltr("STR_DAMAGE_16"); break;
+				case 17: ss << ltr("STR_DAMAGE_17"); break;
+				case 18: ss << ltr("STR_DAMAGE_18"); break;
+				case 19: ss << ltr("STR_DAMAGE_19"); break;
+				default: ss << ltr("STR_UNKNOWN"); break;
 			}
 			ss << ": " << item * 100 << "%";
 			isFirst = false;
@@ -2622,11 +2622,11 @@ void StatsForNerdsState::addSpecialAbility(std::ostringstream &ss, const Special
 	resetStream(ss);
 	switch (value)
 	{
-	case SPECAB_NONE: ss << tr("SPECAB_NONE"); break;
-	case SPECAB_EXPLODEONDEATH: ss << tr("SPECAB_EXPLODEONDEATH"); break;
-	case SPECAB_BURNFLOOR: ss << tr("SPECAB_BURNFLOOR"); break;
-	case SPECAB_BURN_AND_EXPLODE: ss << tr("SPECAB_BURN_AND_EXPLODE"); break;
-	default: ss << tr("STR_UNKNOWN"); break;
+	case SPECAB_NONE: ss << ltr("SPECAB_NONE"); break;
+	case SPECAB_EXPLODEONDEATH: ss << ltr("SPECAB_EXPLODEONDEATH"); break;
+	case SPECAB_BURNFLOOR: ss << ltr("SPECAB_BURNFLOOR"); break;
+	case SPECAB_BURN_AND_EXPLODE: ss << ltr("SPECAB_BURN_AND_EXPLODE"); break;
+	default: ss << ltr("STR_UNKNOWN"); break;
 	}
 	if (_showIds)
 	{
@@ -2652,12 +2652,12 @@ void StatsForNerdsState::addMovementType(std::ostringstream &ss, const MovementT
 	resetStream(ss);
 	switch (value)
 	{
-		case MT_WALK: ss << tr("MT_WALK"); break;
-		case MT_FLY: ss << tr("MT_FLY"); break;
-		case MT_SLIDE: ss << tr("MT_SLIDE"); break;
-		case MT_FLOAT: ss << tr("MT_FLOAT"); break;
-		case MT_SINK: ss << tr("MT_SINK"); break;
-		default: ss << tr("STR_UNKNOWN"); break;
+		case MT_WALK: ss << ltr("MT_WALK"); break;
+		case MT_FLY: ss << ltr("MT_FLY"); break;
+		case MT_SLIDE: ss << ltr("MT_SLIDE"); break;
+		case MT_FLOAT: ss << ltr("MT_FLOAT"); break;
+		case MT_SINK: ss << ltr("MT_SINK"); break;
+		default: ss << ltr("STR_UNKNOWN"); break;
 	}
 	if (_showIds)
 	{
@@ -2683,10 +2683,10 @@ void StatsForNerdsState::addForcedTorso(std::ostringstream &ss, const ForcedTors
 	resetStream(ss);
 	switch (value)
 	{
-		case TORSO_USE_GENDER: ss << tr("TORSO_USE_GENDER"); break;
-		case TORSO_ALWAYS_MALE: ss << tr("TORSO_ALWAYS_MALE"); break;
-		case TORSO_ALWAYS_FEMALE: ss << tr("TORSO_ALWAYS_FEMALE"); break;
-		default: ss << tr("STR_UNKNOWN"); break;
+		case TORSO_USE_GENDER: ss << ltr("TORSO_USE_GENDER"); break;
+		case TORSO_ALWAYS_MALE: ss << ltr("TORSO_ALWAYS_MALE"); break;
+		case TORSO_ALWAYS_FEMALE: ss << ltr("TORSO_ALWAYS_FEMALE"); break;
+		default: ss << ltr("STR_UNKNOWN"); break;
 	}
 	if (_showIds)
 	{
@@ -2712,30 +2712,30 @@ void StatsForNerdsState::addDrawingRoutine(std::ostringstream &ss, const int &va
 	resetStream(ss);
 	switch (value)
 	{
-		case 0: ss << tr("DRAWING_ROUTINE_SOLDIER_SECTOID"); break;
-		case 1: ss << tr("DRAWING_ROUTINE_FLOATER"); break;
-		case 2: ss << tr("DRAWING_ROUTINE_HWP"); break;
-		case 3: ss << tr("DRAWING_ROUTINE_CYBERDISC"); break;
-		case 4: ss << tr("DRAWING_ROUTINE_CIVILIAN_ETHEREAL"); break;
-		case 5: ss << tr("DRAWING_ROUTINE_SECTOPOD_REAPER"); break;
-		case 6: ss << tr("DRAWING_ROUTINE_SNAKEMAN"); break;
-		case 7: ss << tr("DRAWING_ROUTINE_CHRYSSALID"); break;
-		case 8: ss << tr("DRAWING_ROUTINE_SILACOID"); break;
-		case 9: ss << tr("DRAWING_ROUTINE_CELATID"); break;
-		case 10: ss << tr("DRAWING_ROUTINE_MUTON"); break;
-		case 11: ss << tr("DRAWING_ROUTINE_SWS"); break;
-		case 12: ss << tr("DRAWING_ROUTINE_HALLUCINOID"); break;
-		case 13: ss << tr("DRAWING_ROUTINE_AQUANAUTS"); break;
-		case 14: ss << tr("DRAWING_ROUTINE_CALCINITE_AND_MORE"); break;
-		case 15: ss << tr("DRAWING_ROUTINE_AQUATOID"); break;
-		case 16: ss << tr("DRAWING_ROUTINE_BIO_DRONE"); break;
-		case 17: ss << tr("DRAWING_ROUTINE_TFTD_CIVILIAN_A"); break;
-		case 18: ss << tr("DRAWING_ROUTINE_TFTD_CIVILIAN_B"); break;
-		case 19: ss << tr("DRAWING_ROUTINE_TENTACULAT"); break;
-		case 20: ss << tr("DRAWING_ROUTINE_TRISCENE"); break;
-		case 21: ss << tr("DRAWING_ROUTINE_XARQUID"); break;
-		case 22: ss << tr("DRAWING_ROUTINE_INVERTED_CYBERDISC"); break;
-		default: ss << tr("STR_UNKNOWN"); break;
+		case 0: ss << ltr("DRAWING_ROUTINE_SOLDIER_SECTOID"); break;
+		case 1: ss << ltr("DRAWING_ROUTINE_FLOATER"); break;
+		case 2: ss << ltr("DRAWING_ROUTINE_HWP"); break;
+		case 3: ss << ltr("DRAWING_ROUTINE_CYBERDISC"); break;
+		case 4: ss << ltr("DRAWING_ROUTINE_CIVILIAN_ETHEREAL"); break;
+		case 5: ss << ltr("DRAWING_ROUTINE_SECTOPOD_REAPER"); break;
+		case 6: ss << ltr("DRAWING_ROUTINE_SNAKEMAN"); break;
+		case 7: ss << ltr("DRAWING_ROUTINE_CHRYSSALID"); break;
+		case 8: ss << ltr("DRAWING_ROUTINE_SILACOID"); break;
+		case 9: ss << ltr("DRAWING_ROUTINE_CELATID"); break;
+		case 10: ss << ltr("DRAWING_ROUTINE_MUTON"); break;
+		case 11: ss << ltr("DRAWING_ROUTINE_SWS"); break;
+		case 12: ss << ltr("DRAWING_ROUTINE_HALLUCINOID"); break;
+		case 13: ss << ltr("DRAWING_ROUTINE_AQUANAUTS"); break;
+		case 14: ss << ltr("DRAWING_ROUTINE_CALCINITE_AND_MORE"); break;
+		case 15: ss << ltr("DRAWING_ROUTINE_AQUATOID"); break;
+		case 16: ss << ltr("DRAWING_ROUTINE_BIO_DRONE"); break;
+		case 17: ss << ltr("DRAWING_ROUTINE_TFTD_CIVILIAN_A"); break;
+		case 18: ss << ltr("DRAWING_ROUTINE_TFTD_CIVILIAN_B"); break;
+		case 19: ss << ltr("DRAWING_ROUTINE_TENTACULAT"); break;
+		case 20: ss << ltr("DRAWING_ROUTINE_TRISCENE"); break;
+		case 21: ss << ltr("DRAWING_ROUTINE_XARQUID"); break;
+		case 22: ss << ltr("DRAWING_ROUTINE_INVERTED_CYBERDISC"); break;
+		default: ss << ltr("STR_UNKNOWN"); break;
 	}
 	if (_showIds)
 	{
@@ -2758,13 +2758,13 @@ void StatsForNerdsState::initArmorList()
 	_lstRawData->setIgnoreSeparators(true);
 
 	std::ostringstream ssTopic;
-	ssTopic << tr(_topicId);
+	ssTopic << ltr(_topicId);
 	if (_showIds)
 	{
 		ssTopic << " [" << _topicId << "]";
 	}
 
-	_txtArticle->setText(tr("STR_ARTICLE").arg(ssTopic.str()));
+	_txtArticle->setText(ltr("STR_ARTICLE").arg(ssTopic.str()));
 
 	Mod *mod = _game->getMod();
 	Armor *armorRule = mod->getArmor(_topicId);
@@ -3017,13 +3017,13 @@ void StatsForNerdsState::initSoldierBonusList()
 	_lstRawData->setIgnoreSeparators(true);
 
 	std::ostringstream ssTopic;
-	ssTopic << tr(_topicId);
+	ssTopic << ltr(_topicId);
 	if (_showIds)
 	{
 		ssTopic << " [" << _topicId << "]";
 	}
 
-	_txtArticle->setText(tr("STR_ARTICLE").arg(ssTopic.str()));
+	_txtArticle->setText(ltr("STR_ARTICLE").arg(ssTopic.str()));
 
 	Mod *mod = _game->getMod();
 	RuleSoldierBonus *bonusRule = mod->getSoldierBonus(_topicId);
@@ -3114,9 +3114,9 @@ void StatsForNerdsState::addBuildCostItem(std::ostringstream &ss, const std::pai
 {
 	resetStream(ss);
 	addTranslation(ss, costItem.first);
-	ss << ": " << tr("STR_COST_BUILD") << ": ";
+	ss << ": " << ltr("STR_COST_BUILD") << ": ";
 	ss << costItem.second.first;
-	ss << ", " << tr("STR_COST_REFUND") << ": ";
+	ss << ", " << ltr("STR_COST_REFUND") << ": ";
 	ss << costItem.second.second;
 	_lstRawData->addRow(2, "", ss.str().c_str());
 	++_counter;
@@ -3135,15 +3135,15 @@ void StatsForNerdsState::addRightClickActionType(std::ostringstream &ss, const i
 	resetStream(ss);
 	switch (value)
 	{
-	case 0: ss << tr("BFRCT_DEFAULT"); break;
-	case 1: ss << tr("BFRCT_PRISON"); break;
-	case 2: ss << tr("BFRCT_ENGINEERING"); break;
-	case 3: ss << tr("BFRCT_RESEARCH"); break;
-	case 4: ss << tr("BFRCT_GYM"); break;
-	case 5: ss << tr("BFRCT_PSI_LABS"); break;
-	case 6: ss << tr("BFRCT_BARRACKS"); break;
-	case 7: ss << tr("BFRCT_GREY_MARKET"); break;
-	default: ss << tr("BFRCT_GEOSCAPE"); break;
+	case 0: ss << ltr("BFRCT_DEFAULT"); break;
+	case 1: ss << ltr("BFRCT_PRISON"); break;
+	case 2: ss << ltr("BFRCT_ENGINEERING"); break;
+	case 3: ss << ltr("BFRCT_RESEARCH"); break;
+	case 4: ss << ltr("BFRCT_GYM"); break;
+	case 5: ss << ltr("BFRCT_PSI_LABS"); break;
+	case 6: ss << ltr("BFRCT_BARRACKS"); break;
+	case 7: ss << ltr("BFRCT_GREY_MARKET"); break;
+	default: ss << ltr("BFRCT_GEOSCAPE"); break;
 	}
 	if (_showIds)
 	{
@@ -3166,13 +3166,13 @@ void StatsForNerdsState::initFacilityList()
 	_lstRawData->setIgnoreSeparators(true);
 
 	std::ostringstream ssTopic;
-	ssTopic << tr(_topicId);
+	ssTopic << ltr(_topicId);
 	if (_showIds)
 	{
 		ssTopic << " [" << _topicId << "]";
 	}
 
-	_txtArticle->setText(tr("STR_ARTICLE").arg(ssTopic.str()));
+	_txtArticle->setText(ltr("STR_ARTICLE").arg(ssTopic.str()));
 
 	Mod *mod = _game->getMod();
 	RuleBaseFacility *facilityRule = mod->getBaseFacility(_topicId);
@@ -3338,13 +3338,13 @@ void StatsForNerdsState::initCraftList()
 	_lstRawData->setIgnoreSeparators(true);
 
 	std::ostringstream ssTopic;
-	ssTopic << tr(_topicId);
+	ssTopic << ltr(_topicId);
 	if (_showIds)
 	{
 		ssTopic << " [" << _topicId << "]";
 	}
 
-	_txtArticle->setText(tr("STR_ARTICLE").arg(ssTopic.str()));
+	_txtArticle->setText(ltr("STR_ARTICLE").arg(ssTopic.str()));
 
 	Mod *mod = _game->getMod();
 	RuleCraft *craftRule = mod->getCraft(_topicId);
@@ -3610,10 +3610,10 @@ void StatsForNerdsState::addHuntMode(std::ostringstream &ss, const int &value, c
 	resetStream(ss);
 	switch (value)
 	{
-	case 0: ss << tr("HM_INTERCEPTORS"); break;
-	case 1: ss << tr("HM_TRANSPORTS"); break;
-	case 2: ss << tr("HM_RANDOM"); break;
-	default: ss << tr("STR_UNKNOWN"); break;
+	case 0: ss << ltr("HM_INTERCEPTORS"); break;
+	case 1: ss << ltr("HM_TRANSPORTS"); break;
+	case 2: ss << ltr("HM_RANDOM"); break;
+	default: ss << ltr("STR_UNKNOWN"); break;
 	}
 	if (_showIds)
 	{
@@ -3639,10 +3639,10 @@ void StatsForNerdsState::addHuntBehavior(std::ostringstream &ss, const int &valu
 	resetStream(ss);
 	switch (value)
 	{
-	case 0: ss << tr("HB_FLEE"); break;
-	case 1: ss << tr("HB_KAMIKAZE"); break;
-	case 2: ss << tr("HB_RANDOM"); break;
-	default: ss << tr("STR_UNKNOWN"); break;
+	case 0: ss << ltr("HB_FLEE"); break;
+	case 1: ss << ltr("HB_KAMIKAZE"); break;
+	case 2: ss << ltr("HB_RANDOM"); break;
+	default: ss << ltr("STR_UNKNOWN"); break;
 	}
 	if (_showIds)
 	{
@@ -3665,13 +3665,13 @@ void StatsForNerdsState::initUfoList()
 	_lstRawData->setIgnoreSeparators(true);
 
 	std::ostringstream ssTopic;
-	ssTopic << tr(_topicId);
+	ssTopic << ltr(_topicId);
 	if (_showIds)
 	{
 		ssTopic << " [" << _topicId << "]";
 	}
 
-	_txtArticle->setText(tr("STR_ARTICLE").arg(ssTopic.str()));
+	_txtArticle->setText(ltr("STR_ARTICLE").arg(ssTopic.str()));
 
 	Mod *mod = _game->getMod();
 	RuleUfo *ufoRule = mod->getUfo(_topicId);
@@ -3868,13 +3868,13 @@ void StatsForNerdsState::initCraftWeaponList()
 	_lstRawData->setIgnoreSeparators(true);
 
 	std::ostringstream ssTopic;
-	ssTopic << tr(_topicId);
+	ssTopic << ltr(_topicId);
 	if (_showIds)
 	{
 		ssTopic << " [" << _topicId << "]";
 	}
 
-	_txtArticle->setText(tr("STR_ARTICLE").arg(ssTopic.str()));
+	_txtArticle->setText(ltr("STR_ARTICLE").arg(ssTopic.str()));
 
 	Mod *mod = _game->getMod();
 	RuleCraftWeapon *craftWeaponRule = mod->getCraftWeapon(_topicId);
@@ -4006,13 +4006,13 @@ void StatsForNerdsState::initSoldierList()
 	_lstRawData->setIgnoreSeparators(true);
 
 	std::ostringstream ssTopic;
-	ssTopic << tr(_topicId);
+	ssTopic << ltr(_topicId);
 	if (_showIds)
 	{
 		ssTopic << " [" << _topicId << "]";
 	}
 
-	_txtArticle->setText(tr("STR_ARTICLE").arg(ssTopic.str()));
+	_txtArticle->setText(ltr("STR_ARTICLE").arg(ssTopic.str()));
 
 	Mod* mod = _game->getMod();
 	RuleSoldier* soldierRule = mod->getSoldier(_topicId);
@@ -4149,13 +4149,13 @@ void StatsForNerdsState::initUnitList()
 	_lstRawData->setIgnoreSeparators(true);
 
 	std::ostringstream ssTopic;
-	ssTopic << tr(_topicId);
+	ssTopic << ltr(_topicId);
 	if (_showIds)
 	{
 		ssTopic << " [" << _topicId << "]";
 	}
 
-	_txtArticle->setText(tr("STR_ARTICLE").arg(ssTopic.str()));
+	_txtArticle->setText(ltr("STR_ARTICLE").arg(ssTopic.str()));
 
 	Mod* mod = _game->getMod();
 	Unit* unitRule = mod->getUnit(_topicId);

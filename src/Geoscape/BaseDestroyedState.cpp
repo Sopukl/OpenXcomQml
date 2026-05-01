@@ -76,7 +76,7 @@ BaseDestroyedState::BaseDestroyedState(Base *base, const Ufo* ufo, bool missiles
 		setWindowBackgroundImage(_window, ufo->getRules()->getHitImage());
 	}
 
-	_btnOk->setText(tr("STR_OK"));
+	_btnOk->setText(ltr("STR_OK"));
 	_btnOk->onMouseClick((ActionHandler)&BaseDestroyedState::btnOkClick);
 	_btnOk->onKeyboardPress((ActionHandler)&BaseDestroyedState::btnOkClick, options1.keyOk());
 	_btnOk->onKeyboardPress((ActionHandler)&BaseDestroyedState::btnOkClick, options1.keyCancel());
@@ -85,16 +85,16 @@ BaseDestroyedState::BaseDestroyedState(Base *base, const Ufo* ufo, bool missiles
 	_txtMessage->setBig();
 	_txtMessage->setWordWrap(true);
 
-	_txtMessage->setText(tr("STR_THE_ALIENS_HAVE_DESTROYED_THE_UNDEFENDED_BASE").arg(_base->getName()));
+	_txtMessage->setText(ltr("STR_THE_ALIENS_HAVE_DESTROYED_THE_UNDEFENDED_BASE").arg(_base->getName()));
 	if (_missiles)
 	{
 		if (_partialDestruction)
 		{
-			_txtMessage->setText(tr("STR_ALIEN_MISSILES_HAVE_DAMAGED_OUR_BASE").arg(_base->getName()));
+			_txtMessage->setText(ltr("STR_ALIEN_MISSILES_HAVE_DAMAGED_OUR_BASE").arg(_base->getName()));
 		}
 		else
 		{
-			_txtMessage->setText(tr("STR_ALIEN_MISSILES_HAVE_DESTROYED_OUR_BASE").arg(_base->getName()));
+			_txtMessage->setText(ltr("STR_ALIEN_MISSILES_HAVE_DESTROYED_OUR_BASE").arg(_base->getName()));
 		}
 	}
 
@@ -110,7 +110,7 @@ BaseDestroyedState::BaseDestroyedState(Base *base, const Ufo* ufo, bool missiles
 		{
 			std::ostringstream ss;
 			ss << each.second;
-			_lstDestroyedFacilities->addRow(2, tr(each.first->getType()).c_str(), ss.str().c_str());
+			_lstDestroyedFacilities->addRow(2, ltr(each.first->getType()).c_str(), ss.str().c_str());
 		}
 		_lstDestroyedFacilities->setVisible(true);
 	}
@@ -159,7 +159,7 @@ void BaseDestroyedState::btnOkClick(Action *)
 		if (_game->getSavedGame()->getMonthsPassed() > -1 && options1.storageLimitsEnforced() && _base != 0 && _base->storesOverfull())
 		{
 			_game->pushState(new SellState(_base, 0, OPT_BATTLESCAPE));
-			_game->pushState(new ErrorMessageState(tr("STR_STORAGE_EXCEEDED").arg(_base->getName()), _palette, _game->getMod()->getInterface("debriefing")->getElement("errorMessage")->color, "BACK01.SCR", _game->getMod()->getInterface("debriefing")->getElement("errorPalette")->color));
+			_game->pushState(new ErrorMessageState(ltr("STR_STORAGE_EXCEEDED").arg(_base->getName()), _palette, _game->getMod()->getInterface("debriefing")->getElement("errorMessage")->color, "BACK01.SCR", _game->getMod()->getInterface("debriefing")->getElement("errorPalette")->color));
 		}
 
 		// the base was damaged, but survived

@@ -81,15 +81,15 @@ void TouchState::touchComponentsConfigure()
 	if (!options1.oxceBaseTouchButtons())
 		return;
 
-	_btn1->setText(tr("STR_BUTTON_1"));
-	_btn10->setText(tr("STR_BUTTON_10"));
-	_btn100->setText(tr("STR_BUTTON_100"));
-	_btnLMB->setText(tr("STR_BUTTON_LMB"));
-	_btnRMB->setText(tr("STR_BUTTON_RMB"));
-	_btnMMB->setText(tr("STR_BUTTON_MMB"));
-	_btnCtrl->setText(tr("STR_BUTTON_CTRL"));
-	_btnAlt->setText(tr("STR_BUTTON_ALT"));
-	_btnShift->setText(tr("STR_BUTTON_SHIFT"));
+	_btn1->setText(ltr("STR_BUTTON_1"));
+	_btn10->setText(ltr("STR_BUTTON_10"));
+	_btn100->setText(ltr("STR_BUTTON_100"));
+	_btnLMB->setText(ltr("STR_BUTTON_LMB"));
+	_btnRMB->setText(ltr("STR_BUTTON_RMB"));
+	_btnMMB->setText(ltr("STR_BUTTON_MMB"));
+	_btnCtrl->setText(ltr("STR_BUTTON_CTRL"));
+	_btnAlt->setText(ltr("STR_BUTTON_ALT"));
+	_btnShift->setText(ltr("STR_BUTTON_SHIFT"));
 
 	_btn1->setGroup(&_owner100);
 	_btn10->setGroup(&_owner100);
@@ -115,7 +115,7 @@ void TouchState::touchComponentsConfigure()
 	_btnAlt->setVisible(false);
 	_btnShift->setVisible(false);
 
-	_btnTouch->setText(tr("STR_BUTTON_TOUCH"));
+	_btnTouch->setText(ltr("STR_BUTTON_TOUCH"));
 	_btnTouch->setVisible(options1.oxceBaseTouchButtons());
 	_btnTouch->onMouseClick((ActionHandler)&TouchState::btnTouchClick);
 

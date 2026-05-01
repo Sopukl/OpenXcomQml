@@ -118,18 +118,18 @@ CraftEquipmentState::CraftEquipmentState(Base *base, size_t craft) :
 
 	touchComponentsConfigure();
 
-	_btnOk->setText(tr("STR_OK"));
+	_btnOk->setText(ltr("STR_OK"));
 	_btnOk->onMouseClick((ActionHandler)&CraftEquipmentState::btnOkClick);
 	_btnOk->onKeyboardPress((ActionHandler)&CraftEquipmentState::btnOkClick, options1.keyCancel());
 	_btnOk->onKeyboardPress((ActionHandler)&CraftEquipmentState::btnClearClick, options1.keyRemoveEquipmentFromCraft());
 	_btnOk->onKeyboardPress((ActionHandler)&CraftEquipmentState::btnLoadClick, options1.keyCraftLoadoutLoad());
 	_btnOk->onKeyboardPress((ActionHandler)&CraftEquipmentState::btnSaveClick, options1.keyCraftLoadoutSave());
 
-	_btnClear->setText(tr("STR_UNLOAD_CRAFT"));
+	_btnClear->setText(ltr("STR_UNLOAD_CRAFT"));
 	_btnClear->onMouseClick((ActionHandler)&CraftEquipmentState::btnClearClick);
 	_btnClear->setVisible(_isNewBattle);
 
-	_btnInventory->setText(tr("STR_INVENTORY"));
+	_btnInventory->setText(ltr("STR_INVENTORY"));
 	_btnInventory->onMouseClick((ActionHandler)&CraftEquipmentState::btnInventoryClick);
 	_btnInventory->setVisible(craftHasACrew && !_isNewBattle);
 	_btnInventory->onKeyboardPress((ActionHandler)&CraftEquipmentState::btnInventoryClick, options1.keyBattleInventory());
@@ -143,19 +143,19 @@ CraftEquipmentState::CraftEquipmentState(Base *base, size_t craft) :
 	else
 	{
 		_txtTitle->setAlign(ALIGN_LEFT);
-		_txtTitle->setText(tr("STR_EQUIPMENT_FOR_CRAFT").arg(c->getName(_game->getLanguage())));
+		_txtTitle->setText(ltr("STR_EQUIPMENT_FOR_CRAFT").arg(c->getName(_game->getLanguage())));
 	}
 
-	_txtItem->setText(tr("STR_ITEM"));
+	_txtItem->setText(ltr("STR_ITEM"));
 
-	_txtStores->setText(tr("STR_STORES"));
+	_txtStores->setText(ltr("STR_STORES"));
 
-	_txtAvailable->setText(tr("STR_SPACE_AVAILABLE").arg(c->getSpaceAvailable()));
+	_txtAvailable->setText(ltr("STR_SPACE_AVAILABLE").arg(c->getSpaceAvailable()));
 
-	_txtUsed->setText(tr("STR_SPACE_USED").arg(c->getSpaceUsed()));
+	_txtUsed->setText(ltr("STR_SPACE_USED").arg(c->getSpaceUsed()));
 
 	std::ostringstream ss3;
-	ss3 << tr("STR_SOLDIERS_UC") << ">" << Unicode::TOK_COLOR_FLIP << c->getNumTotalSoldiers();
+	ss3 << ltr("STR_SOLDIERS_UC") << ">" << Unicode::TOK_COLOR_FLIP << c->getNumTotalSoldiers();
 	_txtCrew->setText(ss3.str());
 
 	// populate sort options
@@ -428,7 +428,7 @@ void CraftEquipmentState::initList()
 			// quick search
 			if (!searchString.empty())
 			{
-				std::string projectName = tr(itemType);
+				std::string projectName = ltr(itemType);
 				Unicode::upperCase(projectName);
 				if (projectName.find(searchString) == std::string::npos)
 				{
@@ -478,7 +478,7 @@ void CraftEquipmentState::initList()
 				ss << "-";
 			}
 
-			std::string s = tr(itemType);
+			std::string s = ltr(itemType);
 			if (rule->getBattleType() == BT_AMMO)
 			{
 				s.insert(0, "  ");
@@ -709,8 +709,8 @@ void CraftEquipmentState::updateQuantity()
 	_lstEquipment->setCellText(_sel, 1, ss.str());
 	_lstEquipment->setCellText(_sel, 2, ss2.str());
 
-	_txtAvailable->setText(tr("STR_SPACE_AVAILABLE").arg(c->getSpaceAvailable()));
-	_txtUsed->setText(tr("STR_SPACE_USED").arg(c->getSpaceUsed()));
+	_txtAvailable->setText(ltr("STR_SPACE_AVAILABLE").arg(c->getSpaceAvailable()));
+	_txtUsed->setText(ltr("STR_SPACE_USED").arg(c->getSpaceUsed()));
 }
 
 /**
@@ -870,7 +870,7 @@ void CraftEquipmentState::moveRightByValue(int change, bool suppressErrors)
 					{
 						// So we haven't managed to increase the count of vehicles because of the ammo
 						_timerRight->stop();
-						LocalizedText msg(tr("STR_NOT_ENOUGH_AMMO_TO_ARM_HWP").arg(ammoPerVehicle).arg(tr(ammo->getType())));
+						LocalizedText msg(ltr("STR_NOT_ENOUGH_AMMO_TO_ARM_HWP").arg(ammoPerVehicle).arg(ltr(ammo->getType())));
 						_game->pushState(new ErrorMessageState(msg, _palette, _game->getMod()->getInterface("craftEquipment")->getElement("errorMessage")->color, "BACK04.SCR", _game->getMod()->getInterface("craftEquipment")->getElement("errorPalette")->color));
 						_reload = false;
 					}
@@ -895,7 +895,7 @@ void CraftEquipmentState::moveRightByValue(int change, bool suppressErrors)
 			if (!suppressErrors)
 			{
 				_timerRight->stop();
-				LocalizedText msg(tr("STR_NO_MORE_EQUIPMENT_ALLOWED", c->getMaxItemsClamped()));
+				LocalizedText msg(ltr("STR_NO_MORE_EQUIPMENT_ALLOWED", c->getMaxItemsClamped()));
 				_game->pushState(new ErrorMessageState(msg, _palette, _game->getMod()->getInterface("craftEquipment")->getElement("errorMessage")->color, "BACK04.SCR", _game->getMod()->getInterface("craftEquipment")->getElement("errorPalette")->color));
 				_reload = false;
 			}
@@ -920,7 +920,7 @@ void CraftEquipmentState::moveRightByValue(int change, bool suppressErrors)
 			if (!suppressErrors)
 			{
 				_timerRight->stop();
-				LocalizedText msg(tr("STR_NO_MORE_EQUIPMENT_ALLOWED_BY_SIZE").arg(c->getMaxStorageSpaceClamped()));
+				LocalizedText msg(ltr("STR_NO_MORE_EQUIPMENT_ALLOWED_BY_SIZE").arg(c->getMaxStorageSpaceClamped()));
 				_game->pushState(new ErrorMessageState(msg, _palette, _game->getMod()->getInterface("craftEquipment")->getElement("errorMessage")->color, "BACK04.SCR", _game->getMod()->getInterface("craftEquipment")->getElement("errorPalette")->color));
 				_reload = false;
 			}

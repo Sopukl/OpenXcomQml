@@ -83,7 +83,7 @@ void ErrorMessageState::create(const std::string &str, SDL_Color *palette, Uint8
 	_window->setBackground(_game->getMod()->getSurface(bg));
 
 	_btnOk->setColor(color);
-	_btnOk->setText(tr("STR_OK"));
+	_btnOk->setText(ltr("STR_OK"));
 	_btnOk->onMouseClick((ActionHandler)&ErrorMessageState::btnOkClick);
 	_btnOk->onKeyboardPress((ActionHandler)&ErrorMessageState::btnOkClick, options1.keyOk());
 	_btnOk->onKeyboardPress((ActionHandler)&ErrorMessageState::btnOkClick, options1.keyCancel());

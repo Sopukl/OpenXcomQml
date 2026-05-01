@@ -94,13 +94,13 @@ NewManufactureListState::NewManufactureListState(Base *base) : _base(base), _sho
 
 	touchComponentsConfigure();
 
-	_txtTitle->setText(tr("STR_PRODUCTION_ITEMS"));
+	_txtTitle->setText(ltr("STR_PRODUCTION_ITEMS"));
 	_txtTitle->setBig();
 	_txtTitle->setAlign(ALIGN_CENTER);
 
-	_txtItem->setText(tr("STR_ITEM"));
+	_txtItem->setText(ltr("STR_ITEM"));
 
-	_txtCategory->setText(tr("STR_CATEGORY"));
+	_txtCategory->setText(ltr("STR_CATEGORY"));
 
 	_lstManufacture->setColumns(3, 156, 120, 10);
 	_lstManufacture->setSelectable(true);
@@ -110,12 +110,12 @@ NewManufactureListState::NewManufactureListState(Base *base) : _base(base), _sho
 	_lstManufacture->onMouseClick((ActionHandler)&NewManufactureListState::lstProdClick, SDL_BUTTON_RIGHT);
 	_lstManufacture->onMouseClick((ActionHandler)&NewManufactureListState::lstProdClick, SDL_BUTTON_MIDDLE);
 
-	_btnOk->setText(tr("STR_OK"));
+	_btnOk->setText(ltr("STR_OK"));
 	_btnOk->onMouseClick((ActionHandler)&NewManufactureListState::btnOkClick);
 	_btnOk->onKeyboardPress((ActionHandler)&NewManufactureListState::btnOkClick, options1.keyCancel());
 	_btnOk->onKeyboardPress((ActionHandler)&NewManufactureListState::btnMarkAllAsSeenClick, options1.keyMarkAllAsSeen());
 
-	_btnShowOnlyNew->setText(tr("STR_SHOW_ONLY_NEW"));
+	_btnShowOnlyNew->setText(ltr("STR_SHOW_ONLY_NEW"));
 	_btnShowOnlyNew->onMouseClick((ActionHandler)&NewManufactureListState::btnShowOnlyNewClick);
 
 	std::vector<std::string> filterOptions;
@@ -235,14 +235,14 @@ void NewManufactureListState::lstProdClickRight(Action *)
 						{
 							ss << ", ";
 						}
-						ss << tr(name);
+						ss << ltr(name);
 						count++;
 					}
 					_lstManufacture->setCellText(row, 1, ss.str().c_str());
 				}
 				else
 				{
-					_lstManufacture->setCellText(row, 1, tr(info->getCategory()));
+					_lstManufacture->setCellText(row, 1, ltr(info->getCategory()));
 				}
 			}
 		}
@@ -424,7 +424,7 @@ void NewManufactureListState::fillProductionList(bool refreshCategories)
 			// quick search
 			if (!searchString.empty())
 			{
-				std::string projectName = tr(manuf->getName());
+				std::string projectName = ltr(manuf->getName());
 				Unicode::upperCase(projectName);
 				if (projectName.find(searchString) == std::string::npos)
 				{
@@ -468,7 +468,7 @@ void NewManufactureListState::fillProductionList(bool refreshCategories)
 				}
 			}
 
-			_lstManufacture->addRow(3, tr(manuf->getName()).c_str(), tr(manuf->getCategory()).c_str(), ss.str().c_str());
+			_lstManufacture->addRow(3, ltr(manuf->getName()).c_str(), ltr(manuf->getCategory()).c_str(), ss.str().c_str());
 			_displayedStrings.push_back(manuf->getName().c_str());
 
 			// colors
@@ -492,7 +492,7 @@ void NewManufactureListState::fillProductionList(bool refreshCategories)
 		}
 	}
 
-	std::string label = tr("STR_SHOW_ONLY_NEW");
+	std::string label = ltr("STR_SHOW_ONLY_NEW");
 	_btnShowOnlyNew->setText((hasUnseen ? "* " : "") + label);
 	if (_lstScroll > 0)
 	{

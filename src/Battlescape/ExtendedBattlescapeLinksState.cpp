@@ -101,43 +101,43 @@ ExtendedBattlescapeLinksState::ExtendedBattlescapeLinksState(BattlescapeState* p
 
 	_txtTitle->setBig();
 	_txtTitle->setAlign(ALIGN_CENTER);
-	_txtTitle->setText(tr("STR_EXTENDED_LINKS"));
+	_txtTitle->setText(ltr("STR_EXTENDED_LINKS"));
 
-	_btnOk->setText(tr("STR_OK"));
+	_btnOk->setText(ltr("STR_OK"));
 	_btnOk->onMouseClick((ActionHandler)&ExtendedBattlescapeLinksState::btnOkClick);
 	_btnOk->onKeyboardPress((ActionHandler)&ExtendedBattlescapeLinksState::btnOkClick, options1.keyCancel());
 
-	_btnTouch->setText(tr("STR_TOGGLE_TOUCH_BUTTONS"));
+	_btnTouch->setText(ltr("STR_TOGGLE_TOUCH_BUTTONS"));
 	_btnTouch->onMouseClick((ActionHandler)&ExtendedBattlescapeLinksState::btnTouchClick);
 
-	_btnNightVision->setText(tr("STR_TOGGLE_NIGHT_VISION"));
+	_btnNightVision->setText(ltr("STR_TOGGLE_NIGHT_VISION"));
 	_btnNightVision->onMouseClick((ActionHandler)&ExtendedBattlescapeLinksState::btnNightVisionClick);
 
-	_btnPersonalLights->setText(tr("STR_TOGGLE_PERSONAL_LIGHTING"));
+	_btnPersonalLights->setText(ltr("STR_TOGGLE_PERSONAL_LIGHTING"));
 	_btnPersonalLights->onMouseClick((ActionHandler)&ExtendedBattlescapeLinksState::btnPersonalLightsClick);
 
-	_btnBrightness->setText(tr("STR_TOGGLE_BRIGHTNESS"));
+	_btnBrightness->setText(ltr("STR_TOGGLE_BRIGHTNESS"));
 	_btnBrightness->onMouseClick((ActionHandler)&ExtendedBattlescapeLinksState::btnBrightnessClick);
 
-	_btnTurnDiary->setText(tr("STR_HIT_LOG"));
+	_btnTurnDiary->setText(ltr("STR_HIT_LOG"));
 	_btnTurnDiary->onMouseClick((ActionHandler)&ExtendedBattlescapeLinksState::btnTurnDiaryClick);
 
-	_btnBriefing->setText(tr("STR_BRIEFING"));
+	_btnBriefing->setText(ltr("STR_BRIEFING"));
 	_btnBriefing->onMouseClick((ActionHandler)&ExtendedBattlescapeLinksState::btnBriefingClick);
 
-	_btnNotes->setText(options1.oxceReplaceNotesLink() ? tr("STR_NO_EXPERIENCE_YET") : tr("STR_NOTES"));
+	_btnNotes->setText(options1.oxceReplaceNotesLink() ? ltr("STR_NO_EXPERIENCE_YET") : ltr("STR_NOTES"));
 	_btnNotes->onMouseClick((ActionHandler)&ExtendedBattlescapeLinksState::btnNotesClick);
 
-	_btnMusic->setText(tr("STR_SELECT_MUSIC_TRACK"));
+	_btnMusic->setText(ltr("STR_SELECT_MUSIC_TRACK"));
 	_btnMusic->onMouseClick((ActionHandler)&ExtendedBattlescapeLinksState::btnMusicClick);
 
 	if (options1.debug())
 	{
-		_btnKillAll->setText(_save->getDebugMode() ? tr("STR_DEBUG_KILL_ALL_ALIENS") : tr("STR_TOGGLE_DEBUG_MODE"));
+		_btnKillAll->setText(_save->getDebugMode() ? ltr("STR_DEBUG_KILL_ALL_ALIENS") : ltr("STR_TOGGLE_DEBUG_MODE"));
 	}
 	else
 	{
-		_btnKillAll->setText(tr("STR_MULTI_LEVEL_VIEW"));
+		_btnKillAll->setText(ltr("STR_MULTI_LEVEL_VIEW"));
 	}
 	_btnKillAll->onMouseClick((ActionHandler)&ExtendedBattlescapeLinksState::btnKillAllClick);
 
@@ -173,7 +173,7 @@ void ExtendedBattlescapeLinksState::btnTurnDiaryClick(Action *)
 	_game->popState();
 	if (options1.oxceDisableHitLog())
 	{
-		_game->pushState(new InfoboxState(tr("STR_THIS_FEATURE_IS_DISABLED_4")));
+		_game->pushState(new InfoboxState(ltr("STR_THIS_FEATURE_IS_DISABLED_4")));
 	}
 	else
 	{

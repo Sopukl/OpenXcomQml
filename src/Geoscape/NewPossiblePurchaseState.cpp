@@ -62,15 +62,15 @@ NewPossiblePurchaseState::NewPossiblePurchaseState(Base * base, const std::vecto
 	// Set up objects
 	setWindowBackground(_window, "geoNewItem");
 
-	_btnOk->setText(tr("STR_OK"));
+	_btnOk->setText(ltr("STR_OK"));
 	_btnOk->onMouseClick((ActionHandler)&NewPossiblePurchaseState::btnOkClick);
 	_btnOk->onKeyboardPress((ActionHandler)&NewPossiblePurchaseState::btnOkClick, options1.keyCancel());
-	_btnPurchase->setText(tr("STR_PURCHASE_HIRE_PERSONNEL"));
+	_btnPurchase->setText(ltr("STR_PURCHASE_HIRE_PERSONNEL"));
 	_btnPurchase->onMouseClick((ActionHandler)&NewPossiblePurchaseState::btnPurchaseClick);
 	_btnPurchase->onKeyboardPress((ActionHandler)&NewPossiblePurchaseState::btnPurchaseClick, options1.keyOk());
 	_txtTitle->setBig();
 	_txtTitle->setAlign(ALIGN_CENTER);
-	_txtTitle->setText(tr("STR_WE_CAN_NOW_PURCHASE"));
+	_txtTitle->setText(ltr("STR_WE_CAN_NOW_PURCHASE"));
 
 	// Caveat
 	{
@@ -85,13 +85,13 @@ NewPossiblePurchaseState::NewPossiblePurchaseState(Base * base, const std::vecto
 		{
 			if (i > 0)
 				ss << ", ";
-			ss << tr(serviceName);
+			ss << ltr(serviceName);
 			i++;
 		}
 		std::string argument = ss.str();
 
 		_txtCaveat->setAlign(ALIGN_CENTER);
-		_txtCaveat->setText(tr("STR_REQUIRED_BASE_SERVICES").arg(argument));
+		_txtCaveat->setText(ltr("STR_REQUIRED_BASE_SERVICES").arg(argument));
 		_txtCaveat->setVisible(requiredServices.any());
 	}
 
@@ -101,7 +101,7 @@ NewPossiblePurchaseState::NewPossiblePurchaseState(Base * base, const std::vecto
 	_lstPossibilities->setScrolling(true, 0);
 	for (const auto* ruleItem : possibilities)
 	{
-		_lstPossibilities->addRow (1, tr(ruleItem->getType()).c_str());
+		_lstPossibilities->addRow (1, ltr(ruleItem->getType()).c_str());
 	}
 }
 

@@ -64,20 +64,20 @@ OptionsConfirmState::OptionsConfirmState(OptionsOrigin origin) : _origin(origin)
 	// Set up objects
 	setWindowBackground(_window, "optionsMenu");
 
-	_btnYes->setText(tr("STR_YES"));
+	_btnYes->setText(ltr("STR_YES"));
 	_btnYes->onMouseClick((ActionHandler)&OptionsConfirmState::btnYesClick);
 
-	_btnNo->setText(tr("STR_NO"));
+	_btnNo->setText(ltr("STR_NO"));
 	_btnNo->onMouseClick((ActionHandler)&OptionsConfirmState::btnNoClick);
 	// no keyboard shortcuts to make sure users can see the message
 
 	_txtTitle->setAlign(ALIGN_CENTER);
 	_txtTitle->setWordWrap(true);
-	_txtTitle->setText(tr("STR_DISPLAY_OPTIONS_CONFIRM"));
+	_txtTitle->setText(ltr("STR_DISPLAY_OPTIONS_CONFIRM"));
 
 	_txtTimer->setAlign(ALIGN_CENTER);
 	_txtTimer->setWordWrap(true);
-	_txtTimer->setText(tr("STR_DISPLAY_OPTIONS_REVERT").arg(_countdown));
+	_txtTimer->setText(ltr("STR_DISPLAY_OPTIONS_REVERT").arg(_countdown));
 
 	if (_origin == OPT_BATTLESCAPE)
 	{
@@ -114,7 +114,7 @@ void OptionsConfirmState::countdown()
 	_countdown--;
 	std::ostringstream ss;
 	ss << std::setfill('0') << std::setw(2) << _countdown;
-	_txtTimer->setText(tr("STR_DISPLAY_OPTIONS_REVERT").arg(ss.str()));
+	_txtTimer->setText(ltr("STR_DISPLAY_OPTIONS_REVERT").arg(ss.str()));
 	if (_countdown == 0)
 	{
 		btnNoClick(0);

@@ -78,26 +78,26 @@ CraftsState::CraftsState(Base *base) : _base(base)
 	// Set up objects
 	setWindowBackground(_window, "craftSelect");
 
-	_btnOk->setText(tr("STR_OK"));
+	_btnOk->setText(ltr("STR_OK"));
 	_btnOk->onMouseClick((ActionHandler)&CraftsState::btnOkClick);
 	_btnOk->onKeyboardPress((ActionHandler)&CraftsState::btnOkClick, options1.keyCancel());
 
 	_txtTitle->setBig();
-	_txtTitle->setText(tr("STR_INTERCEPTION_CRAFT"));
+	_txtTitle->setText(ltr("STR_INTERCEPTION_CRAFT"));
 
 	_txtBase->setBig();
-	_txtBase->setText(tr("STR_BASE_").arg(_base->getName()));
+	_txtBase->setText(ltr("STR_BASE_").arg(_base->getName()));
 
-	_txtName->setText(tr("STR_NAME_UC"));
+	_txtName->setText(ltr("STR_NAME_UC"));
 
-	_txtStatus->setText(tr("STR_STATUS"));
+	_txtStatus->setText(ltr("STR_STATUS"));
 
-	_txtWeapon->setText(tr("STR_WEAPON_SYSTEMS"));
+	_txtWeapon->setText(ltr("STR_WEAPON_SYSTEMS"));
 	_txtWeapon->setWordWrap(true);
 
-	_txtCrew->setText(tr("STR_CREW"));
+	_txtCrew->setText(ltr("STR_CREW"));
 
-	_txtHwp->setText(tr("STR_HWPS"));
+	_txtHwp->setText(ltr("STR_HWPS"));
 	_lstCrafts->setColumns(5, 94, 68, 44, 46, 28);
 	_lstCrafts->setSelectable(true);
 	_lstCrafts->setBackground(_window);
@@ -138,7 +138,7 @@ void CraftsState::initList(size_t scrl)
 		ss << craft->getNumWeapons() << "/" << craft->getRules()->getWeapons();
 		ss2 << craft->getNumTotalSoldiers();
 		ss3 << craft->getNumTotalVehicles();
-		_lstCrafts->addRow(5, craft->getName(_game->getLanguage()).c_str(), tr(craft->getStatus()).c_str(), ss.str().c_str(), ss2.str().c_str(), ss3.str().c_str());
+		_lstCrafts->addRow(5, craft->getName(_game->getLanguage()).c_str(), ltr(craft->getStatus()).c_str(), ss.str().c_str(), ss2.str().c_str(), ss3.str().c_str());
 	}
 
 	if (scrl)
@@ -156,7 +156,7 @@ void CraftsState::btnOkClick(Action *)
 	if (_game->getSavedGame()->getMonthsPassed() > -1 && options1.storageLimitsEnforced() && _base->storesOverfull())
 	{
 		_game->pushState(new SellState(_base, 0));
-		_game->pushState(new ErrorMessageState(tr("STR_STORAGE_EXCEEDED").arg(_base->getName()), _palette, _game->getMod()->getInterface("craftSelect")->getElement("errorMessage")->color, "BACK01.SCR", _game->getMod()->getInterface("craftSelect")->getElement("errorPalette")->color));
+		_game->pushState(new ErrorMessageState(ltr("STR_STORAGE_EXCEEDED").arg(_base->getName()), _palette, _game->getMod()->getInterface("craftSelect")->getElement("errorMessage")->color, "BACK01.SCR", _game->getMod()->getInterface("craftSelect")->getElement("errorPalette")->color));
 	}
 }
 

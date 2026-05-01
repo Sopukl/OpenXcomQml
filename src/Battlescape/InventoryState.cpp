@@ -453,7 +453,7 @@ void InventoryState::init()
 			}
 			unitSlot += tmpUnit->getArmor()->getTotalSize();
 		}
-		_txtPosition->setText(tr("STR_SLOT").arg(unitSlot).arg(totalSlots));
+		_txtPosition->setText(ltr("STR_SLOT").arg(unitSlot).arg(totalSlots));
 	}
 
 	_txtNameStatic->setBig();
@@ -650,10 +650,10 @@ void InventoryState::updateStats()
 {
 	BattleUnit *unit = _battleGame->getSelectedUnit();
 
-	_txtTus->setText(tr("STR_TIME_UNITS_SHORT").arg(unit->getTimeUnits()));
+	_txtTus->setText(ltr("STR_TIME_UNITS_SHORT").arg(unit->getTimeUnits()));
 
 	int weight = unit->getCarriedWeight(_inv->getSelectedItem());
-	_txtWeight->setText(tr("STR_WEIGHT").arg(weight).arg(unit->getBaseStats()->strength));
+	_txtWeight->setText(ltr("STR_WEIGHT").arg(weight).arg(unit->getBaseStats()->strength));
 	if (weight > unit->getBaseStats()->strength)
 	{
 		_txtWeight->setSecondaryColor(_game->getMod()->getInterface("inventory")->getElement("weight")->color2);
@@ -678,36 +678,36 @@ void InventoryState::updateStats()
 			switch (element->custom)
 			{
 				case 1:
-					txtField->setText(tr("STR_ACCURACY_SHORT").arg(unit->getBaseStats()->firing));
+					txtField->setText(ltr("STR_ACCURACY_SHORT").arg(unit->getBaseStats()->firing));
 					break;
 				case 2:
-					txtField->setText(tr("STR_REACTIONS_SHORT").arg(unit->getBaseStats()->reactions));
+					txtField->setText(ltr("STR_REACTIONS_SHORT").arg(unit->getBaseStats()->reactions));
 					break;
 				case 3:
 					if (psiSkillWithoutAnyBonuses > 0)
-						txtField->setText(tr("STR_PSIONIC_SKILL_SHORT").arg(unit->getBaseStats()->psiSkill));
+						txtField->setText(ltr("STR_PSIONIC_SKILL_SHORT").arg(unit->getBaseStats()->psiSkill));
 					else
 						txtField->setText("");
 					break;
 				case 4:
 					if (showPsiStrength)
-						txtField->setText(tr("STR_PSIONIC_STRENGTH_SHORT").arg(unit->getBaseStats()->psiStrength));
+						txtField->setText(ltr("STR_PSIONIC_STRENGTH_SHORT").arg(unit->getBaseStats()->psiStrength));
 					else
 						txtField->setText("");
 					break;
 				case 11:
-					txtField->setText(tr("STR_FIRING_SHORT").arg(unit->getBaseStats()->firing));
+					txtField->setText(ltr("STR_FIRING_SHORT").arg(unit->getBaseStats()->firing));
 					break;
 				case 12:
-					txtField->setText(tr("STR_THROWING_SHORT").arg(unit->getBaseStats()->throwing));
+					txtField->setText(ltr("STR_THROWING_SHORT").arg(unit->getBaseStats()->throwing));
 					break;
 				case 13:
-					txtField->setText(tr("STR_MELEE_SHORT").arg(unit->getBaseStats()->melee));
+					txtField->setText(ltr("STR_MELEE_SHORT").arg(unit->getBaseStats()->melee));
 					break;
 				case 14:
 					if (showPsiStrength)
 					{
-						txtField->setText(tr("STR_PSI_SHORT")
+						txtField->setText(ltr("STR_PSI_SHORT")
 							.arg(unit->getBaseStats()->psiStrength)
 							.arg(unit->getBaseStats()->psiSkill > 0 ? unit->getBaseStats()->psiSkill : 0));
 					}
@@ -1410,7 +1410,7 @@ void InventoryState::btnCreatePersonalTemplateClick(Action *)
 		}
 
 		// give visual feedback
-		_inv->showWarning(tr("STR_PERSONAL_EQUIPMENT_SAVED"));
+		_inv->showWarning(ltr("STR_PERSONAL_EQUIPMENT_SAVED"));
 
 		// give audio feedback
 		_game->getMod()->getSoundByDepth(_battleGame->getDepth(), Mod::ITEM_DROP)->play();
@@ -1611,7 +1611,7 @@ void InventoryState::_applyInventoryTemplate(std::vector<EquipmentLayoutItem*> &
 
 	if (itemMissing)
 	{
-		_inv->showWarning(tr("STR_NOT_ENOUGH_ITEMS_FOR_TEMPLATE"));
+		_inv->showWarning(ltr("STR_NOT_ENOUGH_ITEMS_FOR_TEMPLATE"));
 	}
 }
 
@@ -1678,7 +1678,7 @@ void InventoryState::btnApplyPersonalTemplateClick(Action *)
 
 		if (personalTemplate.empty())
 		{
-			_inv->showWarning(tr("STR_PERSONAL_EQUIPMENT_NOT_DEFINED"));
+			_inv->showWarning(ltr("STR_PERSONAL_EQUIPMENT_NOT_DEFINED"));
 		}
 		else
 		{
@@ -1876,12 +1876,12 @@ void InventoryState::calculateCurrentDamageTooltip()
 			ss << rule->getDamageType()->getRandomDamage(totalDamage, 2);
 			if (rule->getDamageType()->RandomType == DRT_UFO_WITH_TWO_DICE)
 				ss << "*";
-			_currentDamageTooltip = tr("STR_DAMAGE_UC_").arg(ss.str());
+			_currentDamageTooltip = ltr("STR_DAMAGE_UC_").arg(ss.str());
 		}
 	}
 	else
 	{
-		_currentDamageTooltip = tr("STR_DAMAGE_UC_").arg(tr("STR_UNKNOWN"));
+		_currentDamageTooltip = ltr("STR_DAMAGE_UC_").arg(ltr("STR_UNKNOWN"));
 	}
 }
 /**
@@ -1930,7 +1930,7 @@ void InventoryState::invMouseOver(Action *)
 			auto* save = _game->getSavedGame();
 			if (save->isResearched(item->getRules()->getRequirements()))
 			{
-				std::string text = tr(item->getRules()->getName());
+				std::string text = ltr(item->getRules()->getName());
 				for (int slot = 0; slot < RuleItem::AmmoSlotMax; ++slot)
 				{
 					if (!item->needsAmmoForSlot(slot))
@@ -1948,7 +1948,7 @@ void InventoryState::invMouseOver(Action *)
 					if (!ammoName.empty())
 					{
 						text += " ";
-						text += tr(ammoName);
+						text += ltr(ammoName);
 					}
 				}
 				if (altPressed)
@@ -1966,7 +1966,7 @@ void InventoryState::invMouseOver(Action *)
 			}
 			else
 			{
-				itemName = tr("STR_ALIEN_ARTIFACT");
+				itemName = ltr("STR_ALIEN_ARTIFACT");
 			}
 		}
 
@@ -1998,11 +1998,11 @@ void InventoryState::invMouseOver(Action *)
 			std::string s;
 			if (item->getRules()->getBattleType() == BT_AMMO && (item->getAmmoQuantity() != 0 || item->getRules()->isAmmoRechargeable()))
 			{
-				s = tr("STR_AMMO_ROUNDS_LEFT").arg(item->getAmmoQuantity());
+				s = ltr("STR_AMMO_ROUNDS_LEFT").arg(item->getAmmoQuantity());
 			}
 			else if (item->getRules()->getBattleType() == BT_MEDIKIT)
 			{
-				s = tr("STR_MEDI_KIT_QUANTITIES_LEFT").arg(item->getPainKillerQuantity()).arg(item->getStimulantQuantity()).arg(item->getHealQuantity());
+				s = ltr("STR_MEDI_KIT_QUANTITIES_LEFT").arg(item->getPainKillerQuantity()).arg(item->getStimulantQuantity()).arg(item->getHealQuantity());
 			}
 			_txtAmmo->setText(s);
 		}
@@ -2200,7 +2200,7 @@ void InventoryState::think()
 		}
 		if (firstAmmo)
 		{
-			_txtAmmo->setText(tr("STR_AMMO_ROUNDS_LEFT").arg(firstAmmo->getAmmoQuantity()));
+			_txtAmmo->setText(ltr("STR_AMMO_ROUNDS_LEFT").arg(firstAmmo->getAmmoQuantity()));
 			SDL_Rect r;
 			r.x = 0;
 			r.y = 0;
@@ -2233,7 +2233,7 @@ void InventoryState::txtTooltipInExtraOK(Action *action)
 		_currentTooltip = action->getSender()->getTooltip();
 
 		std::ostringstream ss;
-		ss << tr(_currentTooltip);
+		ss << ltr(_currentTooltip);
 
 		if (!_tu && !_base)
 		{
@@ -2242,17 +2242,17 @@ void InventoryState::txtTooltipInExtraOK(Action *action)
 			if (_battleGame->getGlobalShade() <= 0)
 			{
 				// day (0)
-				ss << tr("STR_DAY");
+				ss << ltr("STR_DAY");
 			}
 			else if (_battleGame->getGlobalShade() > _game->getMod()->getMaxDarknessToSeeUnits())
 			{
 				// night (10-15); note: this is configurable in the ruleset (in OXCE only)
-				ss << tr("STR_NIGHT");
+				ss << ltr("STR_NIGHT");
 			}
 			else
 			{
 				// dusk/dawn (1-9)
-				ss << tr("STR_DAY");
+				ss << ltr("STR_DAY");
 				ss << "*";
 			}
 		}
@@ -2271,7 +2271,7 @@ void InventoryState::txtTooltipIn(Action *action)
 	if (_inv->getSelectedItem() == 0 && options1.battleTooltips())
 	{
 		_currentTooltip = action->getSender()->getTooltip();
-		_txtItem->setText(tr(_currentTooltip));
+		_txtItem->setText(ltr(_currentTooltip));
 	}
 }
 
@@ -2312,12 +2312,12 @@ void InventoryState::txtArmorTooltipIn(Action *action)
 					auto* soldierRules = unit->getGeoscapeSoldier()->getRules();
 					if (soldierRules->getShowTypeInInventory())
 					{
-						ss << tr(soldierRules->getType());
+						ss << ltr(soldierRules->getType());
 						ss << ": ";
 					}
 				}
 
-				ss << tr(_currentTooltip);
+				ss << ltr(_currentTooltip);
 				if (unit->getArmor()->getWeight() != 0)
 				{
 					ss << " [";

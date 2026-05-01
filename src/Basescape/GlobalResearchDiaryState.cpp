@@ -94,21 +94,21 @@ GlobalResearchDiaryState::GlobalResearchDiaryState() : _doNotReset(false)
 	// Set up objects
 	setWindowBackground(_window, "globalResearchDiary");
 
-	_btnOk->setText(tr("STR_OK"));
+	_btnOk->setText(ltr("STR_OK"));
 	_btnOk->onMouseClick((ActionHandler)&GlobalResearchDiaryState::btnOkClick);
 	_btnOk->onKeyboardPress((ActionHandler)&GlobalResearchDiaryState::btnOkClick, options1.keyOk());
 	_btnOk->onKeyboardPress((ActionHandler)&GlobalResearchDiaryState::btnOkClick, options1.keyCancel());
 
 	_txtTitle->setBig();
 	_txtTitle->setAlign(ALIGN_CENTER);
-	_txtTitle->setText(tr("STR_RESEARCH_DIARY"));
+	_txtTitle->setText(ltr("STR_RESEARCH_DIARY"));
 
-	_txtName->setText(tr("STR_NAME_UC"));
+	_txtName->setText(ltr("STR_NAME_UC"));
 
-	_txtType->setText(tr("STR_TYPE"));
+	_txtType->setText(ltr("STR_TYPE"));
 	_txtType->setAlign(ALIGN_CENTER);
 
-	_txtDate->setText(tr("STR_DATE_UC"));
+	_txtDate->setText(ltr("STR_DATE_UC"));
 
 	_lstItems->setColumns(3, 204, 28, 54);
 	_lstItems->setSelectable(true);
@@ -140,7 +140,7 @@ GlobalResearchDiaryState::GlobalResearchDiaryState() : _doNotReset(false)
 	{
 		auto* researchDiaryEntry = (*it);
 
-		std::string translation = tr(researchDiaryEntry->research->getName());
+		std::string translation = ltr(researchDiaryEntry->research->getName());
 		std::string upper = translation;
 		Unicode::upperCase(upper);
 
@@ -368,10 +368,10 @@ void GlobalResearchDiaryState::lstItemMouseOver(Action *)
 		auto item = _filteredItemList[sel];
 
 		std::string sourceNameTranslated;
-		if (item->diaryEntry->source.type != BASE) sourceNameTranslated = tr(item->diaryEntry->source.name);
+		if (item->diaryEntry->source.type != BASE) sourceNameTranslated = ltr(item->diaryEntry->source.name);
 
 		std::string descTemplate{ item->diaryEntry->source.getTypeString() };
-		std::string desc = tr(descTemplate).arg(item->diaryEntry->research->getName()).arg(item->diaryEntry->source.name).arg(sourceNameTranslated);
+		std::string desc = ltr(descTemplate).arg(item->diaryEntry->research->getName()).arg(item->diaryEntry->source.name).arg(sourceNameTranslated);
 
 		_txtTooltip->setText(desc);
 	}

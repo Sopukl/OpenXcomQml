@@ -109,17 +109,17 @@ SoldierDiaryPerformanceState::SoldierDiaryPerformanceState(Base *base, size_t so
 	// Set up objects
 	setWindowBackground(_window, "soldierDiaryPerformance");
 
-	_btnOk->setText(tr("STR_OK"));
+	_btnOk->setText(ltr("STR_OK"));
 	_btnOk->onMouseClick((ActionHandler)&SoldierDiaryPerformanceState::btnOkClick);
 	_btnOk->onKeyboardPress((ActionHandler)&SoldierDiaryPerformanceState::btnOkClick, options1.keyCancel());
 
-	_btnKills->setText(tr("STR_COMBAT"));
+	_btnKills->setText(ltr("STR_COMBAT"));
 	_btnKills->onMouseClick((ActionHandler)&SoldierDiaryPerformanceState::btnKillsToggle);
 
-	_btnMissions->setText(tr("STR_PERFORMANCE"));
+	_btnMissions->setText(ltr("STR_PERFORMANCE"));
 	_btnMissions->onMouseClick((ActionHandler)&SoldierDiaryPerformanceState::btnMissionsToggle);
 
-	_btnCommendations->setText(tr("STR_AWARDS"));
+	_btnCommendations->setText(ltr("STR_AWARDS"));
 	_btnCommendations->onMouseClick((ActionHandler)&SoldierDiaryPerformanceState::btnCommendationsToggle);
 
 	_btnPrev->setText("<<");
@@ -157,9 +157,9 @@ SoldierDiaryPerformanceState::SoldierDiaryPerformanceState(Base *base, size_t so
 
 	_lstMissionTotals->setColumns(4, 72, 72, 72, 86);
 
-	_txtMedalName->setText(tr("STR_MEDAL_NAME"));
+	_txtMedalName->setText(ltr("STR_MEDAL_NAME"));
 
-	_txtMedalLevel->setText(tr("STR_MEDAL_DECOR_LEVEL"));
+	_txtMedalLevel->setText(ltr("STR_MEDAL_DECOR_LEVEL"));
 
 	_txtMedalInfo->setWordWrap(true);
 
@@ -263,13 +263,13 @@ void SoldierDiaryPerformanceState::init()
 
 		for (int i = 0; i != 3; ++i)
 		{
-			_lstPerformance->addRow(1, tr(titleArray[i]).c_str());
+			_lstPerformance->addRow(1, ltr(titleArray[i]).c_str());
 			_lstPerformance->setRowColor(_lstPerformance->getLastRowIndex(), _lstPerformance->getSecondaryColor());
 			for (const auto& mapItem : mapArray[i])
 			{
 				std::ostringstream ss;
 				ss << mapItem.second;
-				_lstPerformance->addRow(2, tr(mapItem.first).c_str(), ss.str().c_str());
+				_lstPerformance->addRow(2, ltr(mapItem.first).c_str(), ss.str().c_str());
 			}
 			if (i != 2)
 			{
@@ -279,16 +279,16 @@ void SoldierDiaryPerformanceState::init()
 
 		if (_soldier->getCurrentStats()->psiSkill > 0 || (options1.psiStrengthEval() && _game->getSavedGame()->isResearched(_game->getMod()->getPsiRequirements())))
 		{
-			_lstKillTotals->addRow(4, tr("STR_KILLS").arg(_soldier->getDiary()->getKillTotal()).c_str(),
-										tr("STR_STUNS").arg(_soldier->getDiary()->getStunTotal()).c_str(),
-										tr("STR_DIARY_ACCURACY").arg(_soldier->getDiary()->getAccuracy()).c_str(),
-										tr("STR_MINDCONTROLS").arg(_soldier->getDiary()->getControlTotal()).c_str());
+			_lstKillTotals->addRow(4, ltr("STR_KILLS").arg(_soldier->getDiary()->getKillTotal()).c_str(),
+										ltr("STR_STUNS").arg(_soldier->getDiary()->getStunTotal()).c_str(),
+										ltr("STR_DIARY_ACCURACY").arg(_soldier->getDiary()->getAccuracy()).c_str(),
+										ltr("STR_MINDCONTROLS").arg(_soldier->getDiary()->getControlTotal()).c_str());
 		}
 		else
 		{
-			_lstKillTotals->addRow(3, tr("STR_KILLS").arg(_soldier->getDiary()->getKillTotal()).c_str(),
-										tr("STR_STUNS").arg(_soldier->getDiary()->getStunTotal()).c_str(),
-										tr("STR_DIARY_ACCURACY").arg(_soldier->getDiary()->getAccuracy()).c_str());
+			_lstKillTotals->addRow(3, ltr("STR_KILLS").arg(_soldier->getDiary()->getKillTotal()).c_str(),
+										ltr("STR_STUNS").arg(_soldier->getDiary()->getStunTotal()).c_str(),
+										ltr("STR_DIARY_ACCURACY").arg(_soldier->getDiary()->getAccuracy()).c_str());
 		}
 
 	}
@@ -303,14 +303,14 @@ void SoldierDiaryPerformanceState::init()
 
 		for (int i = 0; i != 3; ++i)
 		{
-			_lstPerformance->addRow(1, tr(titleArray[i]).c_str());
+			_lstPerformance->addRow(1, ltr(titleArray[i]).c_str());
 			_lstPerformance->setRowColor(_lstPerformance->getLastRowIndex(), _lstPerformance->getSecondaryColor());
 			for (const auto& mapItem : mapArray[i])
 			{
 				if (mapItem.first == "NO_UFO") continue;
 				std::ostringstream ss;
 				ss << mapItem.second;
-				_lstPerformance->addRow(2, tr(mapItem.first).c_str(), ss.str().c_str());
+				_lstPerformance->addRow(2, ltr(mapItem.first).c_str(), ss.str().c_str());
 			}
 			if (i != 2)
 			{
@@ -318,10 +318,10 @@ void SoldierDiaryPerformanceState::init()
 			}
 		}
 
-		_lstMissionTotals->addRow(4, tr("STR_MISSIONS").arg(_soldier->getDiary()->getMissionTotal()).c_str(),
-									tr("STR_WINS").arg(_soldier->getDiary()->getWinTotal(_game->getSavedGame()->getMissionStatistics())).c_str(),
-									tr("STR_SCORE_VALUE").arg(_soldier->getDiary()->getScoreTotal(_game->getSavedGame()->getMissionStatistics())).c_str(),
-									tr("STR_DAYS_WOUNDED").arg(_soldier->getDiary()->getDaysWoundedTotal()).c_str());
+		_lstMissionTotals->addRow(4, ltr("STR_MISSIONS").arg(_soldier->getDiary()->getMissionTotal()).c_str(),
+									ltr("STR_WINS").arg(_soldier->getDiary()->getWinTotal(_game->getSavedGame()->getMissionStatistics())).c_str(),
+									ltr("STR_SCORE_VALUE").arg(_soldier->getDiary()->getScoreTotal(_game->getSavedGame()->getMissionStatistics())).c_str(),
+									ltr("STR_DAYS_WOUNDED").arg(_soldier->getDiary()->getDaysWoundedTotal()).c_str());
 	}
 	else if (_display == DIARY_COMMENDATIONS && !_game->getMod()->getCommendationsList().empty())
 	{
@@ -330,12 +330,12 @@ void SoldierDiaryPerformanceState::init()
 		{
 			if (sc->getNoun() != "noNoun")
 			{
-				std::string tmp = tr(sc->getType()).arg(tr(sc->getNoun()));
+				std::string tmp = ltr(sc->getType()).arg(ltr(sc->getNoun()));
 				_sortedCommendations.push_back(std::make_pair(tmp, sc));
 			}
 			else
 			{
-				std::string tmp = tr(sc->getType());
+				std::string tmp = ltr(sc->getType());
 				_sortedCommendations.push_back(std::make_pair(tmp, sc));
 			}
 		}
@@ -352,13 +352,13 @@ void SoldierDiaryPerformanceState::init()
 			RuleCommendations* commendation = pair.second->getRule();
 			if (pair.second->getNoun() != "noNoun")
 			{
-				_lstCommendations->addRow(2, pair.first.c_str(), tr(pair.second->getDecorationDescription()).c_str());
-				_commendationsListEntry.push_back(tr(commendation->getDescription()).arg(tr(pair.second->getNoun())));
+				_lstCommendations->addRow(2, pair.first.c_str(), ltr(pair.second->getDecorationDescription()).c_str());
+				_commendationsListEntry.push_back(ltr(commendation->getDescription()).arg(ltr(pair.second->getNoun())));
 			}
 			else
 			{
-				_lstCommendations->addRow(2, pair.first.c_str(), tr(pair.second->getDecorationDescription()).c_str());
-				_commendationsListEntry.push_back(tr(commendation->getDescription()));
+				_lstCommendations->addRow(2, pair.first.c_str(), ltr(pair.second->getDecorationDescription()).c_str());
+				_commendationsListEntry.push_back(ltr(commendation->getDescription()));
 			}
 			_commendationsNames.push_back(pair.second->getType());
 		}

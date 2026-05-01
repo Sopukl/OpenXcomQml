@@ -79,28 +79,28 @@ GlobalManufactureState::GlobalManufactureState(bool openedFromBasescape) : _open
 	// Set up objects
 	setWindowBackground(_window, "globalManufactureMenu");
 
-	_btnOk->setText(tr("STR_OK"));
+	_btnOk->setText(ltr("STR_OK"));
 	_btnOk->onMouseClick((ActionHandler)&GlobalManufactureState::btnOkClick);
 	_btnOk->onKeyboardPress((ActionHandler)&GlobalManufactureState::btnOkClick, options1.keyCancel());
 
 	_txtTitle->setBig();
 	_txtTitle->setAlign(ALIGN_CENTER);
-	_txtTitle->setText(tr("STR_PRODUCTION_OVERVIEW"));
+	_txtTitle->setText(ltr("STR_PRODUCTION_OVERVIEW"));
 
-	_txtFunds->setText(tr("STR_CURRENT_FUNDS").arg(Unicode::formatFunding(_game->getSavedGame()->getFunds())));
+	_txtFunds->setText(ltr("STR_CURRENT_FUNDS").arg(Unicode::formatFunding(_game->getSavedGame()->getFunds())));
 
-	_txtItem->setText(tr("STR_ITEM"));
+	_txtItem->setText(ltr("STR_ITEM"));
 
-	_txtEngineers->setText(tr("STR_ENGINEERS__ALLOCATED"));
+	_txtEngineers->setText(ltr("STR_ENGINEERS__ALLOCATED"));
 	_txtEngineers->setWordWrap(true);
 
-	_txtProduced->setText(tr("STR_UNITS_PRODUCED"));
+	_txtProduced->setText(ltr("STR_UNITS_PRODUCED"));
 	_txtProduced->setWordWrap(true);
 
-	_txtCost->setText(tr("STR_COST__PER__UNIT"));
+	_txtCost->setText(ltr("STR_COST__PER__UNIT"));
 	_txtCost->setWordWrap(true);
 
-	_txtTimeLeft->setText(tr("STR_DAYS_HOURS_LEFT"));
+	_txtTimeLeft->setText(ltr("STR_DAYS_HOURS_LEFT"));
 	_txtTimeLeft->setWordWrap(true);
 
 	_lstManufacture->setColumns(5, 114, 16, 52, 56, 48);
@@ -244,14 +244,14 @@ void GlobalManufactureState::fillProductionList()
 
 				s4 << "-";
 			}
-			_lstManufacture->addRow(5, tr(prod->getRules()->getName()).c_str(), s1.str().c_str(), s2.str().c_str(), s3.str().c_str(), s4.str().c_str());
+			_lstManufacture->addRow(5, ltr(prod->getRules()->getName()).c_str(), s1.str().c_str(), s2.str().c_str(), s3.str().c_str(), s4.str().c_str());
 
 			_bases.push_back(xbase);
 			_topics.push_back(prod->getRules());
 		}
 		if (baseProductions.empty() && xbase->getEngineers() > 0)
 		{
-			_lstManufacture->addRow(5, tr("STR_NONE").c_str(), "", "", "", "");
+			_lstManufacture->addRow(5, ltr("STR_NONE").c_str(), "", "", "", "");
 
 			_bases.push_back(xbase);
 			_topics.push_back(0);
@@ -262,9 +262,9 @@ void GlobalManufactureState::fillProductionList()
 		freeWorkshops += xbase->getFreeWorkshops();
 	}
 
-	_txtAvailable->setText(tr("STR_ENGINEERS_AVAILABLE").arg(availableEngineers));
-	_txtAllocated->setText(tr("STR_ENGINEERS_ALLOCATED").arg(allocatedEngineers));
-	_txtSpace->setText(tr("STR_WORKSHOP_SPACE_AVAILABLE").arg(freeWorkshops));
+	_txtAvailable->setText(ltr("STR_ENGINEERS_AVAILABLE").arg(availableEngineers));
+	_txtAllocated->setText(ltr("STR_ENGINEERS_ALLOCATED").arg(allocatedEngineers));
+	_txtSpace->setText(ltr("STR_WORKSHOP_SPACE_AVAILABLE").arg(freeWorkshops));
 }
 
 }

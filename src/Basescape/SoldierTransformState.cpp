@@ -81,15 +81,15 @@ SoldierTransformState::SoldierTransformState(Base* base, size_t soldier) : _base
 	// Set up objects
 	setWindowBackground(_window, "soldierTransform");
 
-	_btnCancel->setText(tr("STR_CANCEL_UC"));
+	_btnCancel->setText(ltr("STR_CANCEL_UC"));
 	_btnCancel->onMouseClick((ActionHandler)&SoldierTransformState::btnCancelClick);
 	_btnCancel->onKeyboardPress((ActionHandler)&SoldierTransformState::btnCancelClick, options1.keyCancel());
 
 	Soldier *s = _base->getSoldiers()->at(_soldier);
 	_txtTitle->setAlign(ALIGN_CENTER);
-	_txtTitle->setText(tr("STR_SELECT_TRANSFORMATION_FOR").arg(s->getName()));
+	_txtTitle->setText(ltr("STR_SELECT_TRANSFORMATION_FOR").arg(s->getName()));
 
-	_txtType->setText(tr("STR_TYPE"));
+	_txtType->setText(ltr("STR_TYPE"));
 
 	_lstTransformations->setColumns(1, 153);
 	_lstTransformations->setSelectable(true);
@@ -107,7 +107,7 @@ SoldierTransformState::SoldierTransformState(Base* base, size_t soldier) : _base
 		if (!s->isEligibleForTransformation(trRule))
 			continue;
 
-		_transformations.push_back(TransformationItem(trRule->getName(), tr(trRule->getName())));
+		_transformations.push_back(TransformationItem(trRule->getName(), ltr(trRule->getName())));
 	}
 
 	_btnQuickSearch->setText(""); // redraw

@@ -71,17 +71,17 @@ AbandonGameState::AbandonGameState(OptionsOrigin origin) : _origin(origin)
 	// Set up objects
 	setWindowBackground(_window, "geoscape");
 
-	_btnYes->setText(tr("STR_YES"));
+	_btnYes->setText(ltr("STR_YES"));
 	_btnYes->onMouseClick((ActionHandler)&AbandonGameState::btnYesClick);
 	_btnYes->onKeyboardPress((ActionHandler)&AbandonGameState::btnYesClick, options1.keyOk());
 
-	_btnNo->setText(tr("STR_NO"));
+	_btnNo->setText(ltr("STR_NO"));
 	_btnNo->onMouseClick((ActionHandler)&AbandonGameState::btnNoClick);
 	_btnNo->onKeyboardPress((ActionHandler)&AbandonGameState::btnNoClick, options1.keyCancel());
 
 	_txtTitle->setAlign(ALIGN_CENTER);
 	_txtTitle->setBig();
-	_txtTitle->setText(tr("STR_ABANDON_GAME_QUESTION"));
+	_txtTitle->setText(ltr("STR_ABANDON_GAME_QUESTION"));
 
 	if (_origin == OPT_BATTLESCAPE)
 	{

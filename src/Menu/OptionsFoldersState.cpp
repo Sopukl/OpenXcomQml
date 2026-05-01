@@ -60,10 +60,10 @@ OptionsFoldersState::OptionsFoldersState(OptionsOrigin origin) : OptionsBaseStat
 	centerAllSurfaces();
 
 	// Set up object
-	_txtDataFolder->setText(tr("STR_DATA_FOLDER"));
-	_txtUserFolder->setText(tr("STR_USER_FOLDER"));
-	_txtSaveFolder->setText(tr("STR_SAVE_FOLDER"));
-	_txtConfigFolder->setText(tr("STR_CONFIG_FOLDER"));
+	_txtDataFolder->setText(ltr("STR_DATA_FOLDER"));
+	_txtUserFolder->setText(ltr("STR_USER_FOLDER"));
+	_txtSaveFolder->setText(ltr("STR_SAVE_FOLDER"));
+	_txtConfigFolder->setText(ltr("STR_CONFIG_FOLDER"));
 
 	std::string file1 = "GEODATA/BACKPALS.DAT";
 	std::string file2 = "openxcom.png";

@@ -287,7 +287,7 @@ UnitInfoState::UnitInfoState(BattleUnit *unit, BattlescapeState *parent, bool fr
 
 	_txtTimeUnits->setColor(color);
 	_txtTimeUnits->setHighContrast(true);
-	_txtTimeUnits->setText(tr("STR_TIME_UNITS"));
+	_txtTimeUnits->setText(ltr("STR_TIME_UNITS"));
 
 	_numTimeUnits->setColor(color2);
 	_numTimeUnits->setHighContrast(true);
@@ -296,7 +296,7 @@ UnitInfoState::UnitInfoState(BattleUnit *unit, BattlescapeState *parent, bool fr
 
 	_txtEnergy->setColor(color);
 	_txtEnergy->setHighContrast(true);
-	_txtEnergy->setText(tr("STR_ENERGY"));
+	_txtEnergy->setText(ltr("STR_ENERGY"));
 
 	_numEnergy->setColor(color2);
 	_numEnergy->setHighContrast(true);
@@ -305,7 +305,7 @@ UnitInfoState::UnitInfoState(BattleUnit *unit, BattlescapeState *parent, bool fr
 
 	_txtHealth->setColor(color);
 	_txtHealth->setHighContrast(true);
-	_txtHealth->setText(tr("STR_HEALTH"));
+	_txtHealth->setText(ltr("STR_HEALTH"));
 
 	_numHealth->setColor(color2);
 	_numHealth->setHighContrast(true);
@@ -317,7 +317,7 @@ UnitInfoState::UnitInfoState(BattleUnit *unit, BattlescapeState *parent, bool fr
 
 	_txtFatalWounds->setColor(color);
 	_txtFatalWounds->setHighContrast(true);
-	_txtFatalWounds->setText(tr("STR_FATAL_WOUNDS"));
+	_txtFatalWounds->setText(ltr("STR_FATAL_WOUNDS"));
 
 	_numFatalWounds->setColor(color2);
 	_numFatalWounds->setHighContrast(true);
@@ -326,7 +326,7 @@ UnitInfoState::UnitInfoState(BattleUnit *unit, BattlescapeState *parent, bool fr
 
 	_txtBravery->setColor(color);
 	_txtBravery->setHighContrast(true);
-	_txtBravery->setText(tr("STR_BRAVERY"));
+	_txtBravery->setText(ltr("STR_BRAVERY"));
 
 	_numBravery->setColor(color2);
 	_numBravery->setHighContrast(true);
@@ -335,7 +335,7 @@ UnitInfoState::UnitInfoState(BattleUnit *unit, BattlescapeState *parent, bool fr
 
 	_txtMorale->setColor(color);
 	_txtMorale->setHighContrast(true);
-	_txtMorale->setText(tr("STR_MORALE"));
+	_txtMorale->setText(ltr("STR_MORALE"));
 
 	_numMorale->setColor(color2);
 	_numMorale->setHighContrast(true);
@@ -344,7 +344,7 @@ UnitInfoState::UnitInfoState(BattleUnit *unit, BattlescapeState *parent, bool fr
 
 	_txtReactions->setColor(color);
 	_txtReactions->setHighContrast(true);
-	_txtReactions->setText(tr("STR_REACTIONS"));
+	_txtReactions->setText(ltr("STR_REACTIONS"));
 
 	_numReactions->setColor(color2);
 	_numReactions->setHighContrast(true);
@@ -353,7 +353,7 @@ UnitInfoState::UnitInfoState(BattleUnit *unit, BattlescapeState *parent, bool fr
 
 	_txtFiring->setColor(color);
 	_txtFiring->setHighContrast(true);
-	_txtFiring->setText(tr("STR_FIRING_ACCURACY"));
+	_txtFiring->setText(ltr("STR_FIRING_ACCURACY"));
 
 	_numFiring->setColor(color2);
 	_numFiring->setHighContrast(true);
@@ -362,7 +362,7 @@ UnitInfoState::UnitInfoState(BattleUnit *unit, BattlescapeState *parent, bool fr
 
 	_txtThrowing->setColor(color);
 	_txtThrowing->setHighContrast(true);
-	_txtThrowing->setText(tr("STR_THROWING_ACCURACY"));
+	_txtThrowing->setText(ltr("STR_THROWING_ACCURACY"));
 
 	_numThrowing->setColor(color2);
 	_numThrowing->setHighContrast(true);
@@ -371,7 +371,7 @@ UnitInfoState::UnitInfoState(BattleUnit *unit, BattlescapeState *parent, bool fr
 
 	_txtMelee->setColor(color);
 	_txtMelee->setHighContrast(true);
-	_txtMelee->setText(tr("STR_MELEE_ACCURACY"));
+	_txtMelee->setText(ltr("STR_MELEE_ACCURACY"));
 
 	_numMelee->setColor(color2);
 	_numMelee->setHighContrast(true);
@@ -380,7 +380,7 @@ UnitInfoState::UnitInfoState(BattleUnit *unit, BattlescapeState *parent, bool fr
 
 	_txtStrength->setColor(color);
 	_txtStrength->setHighContrast(true);
-	_txtStrength->setText(tr("STR_STRENGTH"));
+	_txtStrength->setText(ltr("STR_STRENGTH"));
 
 	_numStrength->setColor(color2);
 	_numStrength->setHighContrast(true);
@@ -391,7 +391,7 @@ UnitInfoState::UnitInfoState(BattleUnit *unit, BattlescapeState *parent, bool fr
 	{
 		_txtMana->setColor(color);
 		_txtMana->setHighContrast(true);
-		_txtMana->setText(tr("STR_MANA"));
+		_txtMana->setText(ltr("STR_MANA"));
 
 		_numMana->setColor(color2);
 		_numMana->setHighContrast(true);
@@ -401,7 +401,7 @@ UnitInfoState::UnitInfoState(BattleUnit *unit, BattlescapeState *parent, bool fr
 
 	_txtPsiStrength->setColor(color);
 	_txtPsiStrength->setHighContrast(true);
-	_txtPsiStrength->setText(tr("STR_PSIONIC_STRENGTH"));
+	_txtPsiStrength->setText(ltr("STR_PSIONIC_STRENGTH"));
 
 	_numPsiStrength->setColor(color2);
 	_numPsiStrength->setHighContrast(true);
@@ -410,7 +410,7 @@ UnitInfoState::UnitInfoState(BattleUnit *unit, BattlescapeState *parent, bool fr
 
 	_txtPsiSkill->setColor(color);
 	_txtPsiSkill->setHighContrast(true);
-	_txtPsiSkill->setText(tr("STR_PSIONIC_SKILL"));
+	_txtPsiSkill->setText(ltr("STR_PSIONIC_SKILL"));
 
 	_numPsiSkill->setColor(color2);
 	_numPsiSkill->setHighContrast(true);
@@ -419,7 +419,7 @@ UnitInfoState::UnitInfoState(BattleUnit *unit, BattlescapeState *parent, bool fr
 
 	_txtFrontArmor->setColor(color);
 	_txtFrontArmor->setHighContrast(true);
-	_txtFrontArmor->setText(tr("STR_FRONT_ARMOR_UC"));
+	_txtFrontArmor->setText(ltr("STR_FRONT_ARMOR_UC"));
 
 	_numFrontArmor->setColor(color2);
 	_numFrontArmor->setHighContrast(true);
@@ -428,7 +428,7 @@ UnitInfoState::UnitInfoState(BattleUnit *unit, BattlescapeState *parent, bool fr
 
 	_txtLeftArmor->setColor(color);
 	_txtLeftArmor->setHighContrast(true);
-	_txtLeftArmor->setText(tr("STR_LEFT_ARMOR_UC"));
+	_txtLeftArmor->setText(ltr("STR_LEFT_ARMOR_UC"));
 
 	_numLeftArmor->setColor(color2);
 	_numLeftArmor->setHighContrast(true);
@@ -437,7 +437,7 @@ UnitInfoState::UnitInfoState(BattleUnit *unit, BattlescapeState *parent, bool fr
 
 	_txtRightArmor->setColor(color);
 	_txtRightArmor->setHighContrast(true);
-	_txtRightArmor->setText(tr("STR_RIGHT_ARMOR_UC"));
+	_txtRightArmor->setText(ltr("STR_RIGHT_ARMOR_UC"));
 
 	_numRightArmor->setColor(color2);
 	_numRightArmor->setHighContrast(true);
@@ -446,7 +446,7 @@ UnitInfoState::UnitInfoState(BattleUnit *unit, BattlescapeState *parent, bool fr
 
 	_txtRearArmor->setColor(color);
 	_txtRearArmor->setHighContrast(true);
-	_txtRearArmor->setText(tr("STR_REAR_ARMOR_UC"));
+	_txtRearArmor->setText(ltr("STR_REAR_ARMOR_UC"));
 
 	_numRearArmor->setColor(color2);
 	_numRearArmor->setHighContrast(true);
@@ -455,7 +455,7 @@ UnitInfoState::UnitInfoState(BattleUnit *unit, BattlescapeState *parent, bool fr
 
 	_txtUnderArmor->setColor(color);
 	_txtUnderArmor->setHighContrast(true);
-	_txtUnderArmor->setText(tr("STR_UNDER_ARMOR_UC"));
+	_txtUnderArmor->setText(ltr("STR_UNDER_ARMOR_UC"));
 
 	_numUnderArmor->setColor(color2);
 	_numUnderArmor->setHighContrast(true);
@@ -499,7 +499,7 @@ void UnitInfoState::init()
 	// aliens have their rank in their "name", soldiers don't
 	if (_unit->getType() == "SOLDIER")
 	{
-		ss << tr(_unit->getRankString());
+		ss << ltr(_unit->getRankString());
 		ss << " ";
 	}
 	ss << _unit->getName(_game->getLanguage(), BattlescapeGame::_debugPlay);

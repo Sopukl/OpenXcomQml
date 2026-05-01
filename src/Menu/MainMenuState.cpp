@@ -97,31 +97,31 @@ MainMenuState::MainMenuState(bool updateCheck)
 	// Set up objects
 	setWindowBackground(_window, "mainMenu");
 
-	_btnNewGame->setText(tr("STR_NEW_GAME"));
+	_btnNewGame->setText(ltr("STR_NEW_GAME"));
 	_btnNewGame->onMousePress((ActionHandler)&MainMenuState::btnNewGameClick);
 
-	_btnNewBattle->setText(tr("STR_NEW_BATTLE"));
+	_btnNewBattle->setText(ltr("STR_NEW_BATTLE"));
 	_btnNewBattle->onMouseClick((ActionHandler)&MainMenuState::btnNewBattleClick);
 
-	_btnLoad->setText(tr("STR_LOAD_SAVED_GAME"));
+	_btnLoad->setText(ltr("STR_LOAD_SAVED_GAME"));
 	_btnLoad->onMouseClick((ActionHandler)&MainMenuState::btnLoadClick);
 
-	_btnOptions->setText(tr("STR_OPTIONS"));
+	_btnOptions->setText(ltr("STR_OPTIONS"));
 	_btnOptions->onMouseClick((ActionHandler)&MainMenuState::btnOptionsClick);
 
-	_btnMods->setText(tr("STR_MODS"));
+	_btnMods->setText(ltr("STR_MODS"));
 	_btnMods->onMouseClick((ActionHandler)&MainMenuState::btnModsClick);
 
-	_btnQuit->setText(tr("STR_QUIT"));
+	_btnQuit->setText(ltr("STR_QUIT"));
 	_btnQuit->onMouseClick((ActionHandler)&MainMenuState::btnQuitClick);
 
-	_btnUpdate->setText(tr("STR_UPDATE"));
+	_btnUpdate->setText(ltr("STR_UPDATE"));
 	_btnUpdate->onMouseClick((ActionHandler)& MainMenuState::btnUpdateClick);
 	_btnUpdate->setVisible(false);
 
 	_txtUpdateInfo->setAlign(ALIGN_CENTER);
 	_txtUpdateInfo->setWordWrap(true);
-	_txtUpdateInfo->setText(tr("STR_LATEST_VERSION_INFO"));
+	_txtUpdateInfo->setText(ltr("STR_LATEST_VERSION_INFO"));
 	_txtUpdateInfo->setVisible(false);
 
 #ifdef _WIN32
@@ -234,7 +234,7 @@ MainMenuState::MainMenuState(bool updateCheck)
 	_txtTitle->setAlign(ALIGN_CENTER);
 	_txtTitle->setBig();
 	std::ostringstream title;
-	title << tr("STR_OPENXCOM").arg(Options::getActiveMasterInfo()->getVersionDisplay()) << Unicode::TOK_NL_SMALL;
+	title << ltr("STR_OPENXCOM").arg(Options::getActiveMasterInfo()->getVersionDisplay()) << Unicode::TOK_NL_SMALL;
 	title << "OpenXcom " << OPENXCOM_VERSION_SHORT << OPENXCOM_VERSION_GIT;
 	_txtTitle->setText(title.str());
 }

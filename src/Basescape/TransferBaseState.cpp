@@ -69,20 +69,20 @@ TransferBaseState::TransferBaseState(Base *base, DebriefingState *debriefingStat
 	// Set up objects
 	setWindowBackground(_window, "transferBaseSelect");
 
-	_btnCancel->setText(tr("STR_CANCEL"));
+	_btnCancel->setText(ltr("STR_CANCEL"));
 	_btnCancel->onMouseClick((ActionHandler)&TransferBaseState::btnCancelClick);
 	_btnCancel->onKeyboardPress((ActionHandler)&TransferBaseState::btnCancelClick, options1.keyCancel());
 
 	_txtTitle->setBig();
 	_txtTitle->setAlign(ALIGN_CENTER);
-	_txtTitle->setText(tr("STR_SELECT_DESTINATION_BASE"));
+	_txtTitle->setText(ltr("STR_SELECT_DESTINATION_BASE"));
 
-	_txtFunds->setText(tr("STR_CURRENT_FUNDS").arg(Unicode::formatFunding(_game->getSavedGame()->getFunds())));
+	_txtFunds->setText(ltr("STR_CURRENT_FUNDS").arg(Unicode::formatFunding(_game->getSavedGame()->getFunds())));
 
-	_txtName->setText(tr("STR_NAME"));
+	_txtName->setText(ltr("STR_NAME"));
 	_txtName->setBig();
 
-	_txtArea->setText(tr("STR_AREA"));
+	_txtArea->setText(ltr("STR_AREA"));
 	_txtArea->setBig();
 
 	_lstBases->setColumns(2, 130, 116);
@@ -102,7 +102,7 @@ TransferBaseState::TransferBaseState(Base *base, DebriefingState *debriefingStat
 			{
 				if (region->getRules()->insideRegion(xbase->getLongitude(), xbase->getLatitude()))
 				{
-					area = tr(region->getRules()->getType());
+					area = ltr(region->getRules()->getType());
 					break;
 				}
 			}

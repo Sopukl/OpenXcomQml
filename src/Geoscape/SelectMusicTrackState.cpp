@@ -72,9 +72,9 @@ SelectMusicTrackState::SelectMusicTrackState(SelectMusicTrackOrigin origin) : _o
 
 	_txtTitle->setAlign(ALIGN_CENTER);
 	_txtTitle->setBig();
-	_txtTitle->setText(tr("STR_SELECT_MUSIC_TRACK"));
+	_txtTitle->setText(ltr("STR_SELECT_MUSIC_TRACK"));
 
-	_btnCancel->setText(tr("STR_CANCEL_UC"));
+	_btnCancel->setText(ltr("STR_CANCEL_UC"));
 	_btnCancel->onMouseClick((ActionHandler)&SelectMusicTrackState::btnCancelClick);
 	_btnCancel->onKeyboardPress((ActionHandler)&SelectMusicTrackState::btnCancelClick, options1.keyCancel());
 
@@ -92,7 +92,7 @@ SelectMusicTrackState::SelectMusicTrackState(SelectMusicTrackOrigin origin) : _o
 	{
 		if (pair.first == currentName || pair.first.find(search) != std::string::npos)
 		{
-			_lstTracks->addRow(1, tr(pair.first).c_str());
+			_lstTracks->addRow(1, ltr(pair.first).c_str());
 			_tracks.push_back(pair.second);
 			_trackNames.push_back(pair.first);
 			if (pair.first == currentName)

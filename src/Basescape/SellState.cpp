@@ -138,15 +138,15 @@ void SellState::delayedInit()
 
 	touchComponentsConfigure();
 
-	_btnOk->setText(tr("STR_SELL_SACK"));
+	_btnOk->setText(ltr("STR_SELL_SACK"));
 	_btnOk->onMouseClick((ActionHandler)&SellState::btnOkClick);
 	_btnOk->onKeyboardPress((ActionHandler)&SellState::btnOkClick, options1.keyOk());
 
-	_btnCancel->setText(tr("STR_CANCEL"));
+	_btnCancel->setText(ltr("STR_CANCEL"));
 	_btnCancel->onMouseClick((ActionHandler)&SellState::btnCancelClick);
 	_btnCancel->onKeyboardPress((ActionHandler)&SellState::btnCancelClick, options1.keyCancel());
 
-	_btnTransfer->setText(tr("STR_GO_TO_TRANSFERS"));
+	_btnTransfer->setText(ltr("STR_GO_TO_TRANSFERS"));
 	_btnTransfer->onMouseClick((ActionHandler)&SellState::btnTransferClick);
 
 	_btnCancel->setVisible(!overfull);
@@ -155,22 +155,22 @@ void SellState::delayedInit()
 
 	_txtTitle->setBig();
 	_txtTitle->setAlign(ALIGN_CENTER);
-	_txtTitle->setText(tr("STR_SELL_ITEMS_SACK_PERSONNEL"));
+	_txtTitle->setText(ltr("STR_SELL_ITEMS_SACK_PERSONNEL"));
 
-	_txtFunds->setText(tr("STR_FUNDS").arg(Unicode::formatFunding(_game->getSavedGame()->getFunds())));
+	_txtFunds->setText(ltr("STR_FUNDS").arg(Unicode::formatFunding(_game->getSavedGame()->getFunds())));
 
 	_txtSpaceUsed->setVisible(options1.storageLimitsEnforced());
 
 	std::ostringstream ss;
 	ss << _base->getUsedStores() << ":" << _base->getAvailableStores();
 	_txtSpaceUsed->setText(ss.str());
-	_txtSpaceUsed->setText(tr("STR_SPACE_USED").arg(ss.str()));
+	_txtSpaceUsed->setText(ltr("STR_SPACE_USED").arg(ss.str()));
 
-	_txtQuantity->setText(tr("STR_QUANTITY_UC"));
+	_txtQuantity->setText(ltr("STR_QUANTITY_UC"));
 
-	_txtSell->setText(tr("STR_SELL_SACK"));
+	_txtSell->setText(ltr("STR_SELL_SACK"));
 
-	_txtValue->setText(tr("STR_VALUE"));
+	_txtValue->setText(ltr("STR_VALUE"));
 
 	_lstItems->setArrowColumn(182, ARROW_VERTICAL);
 	_lstItems->setColumns(4, 156, 54, 24, 53);
@@ -223,7 +223,7 @@ void SellState::delayedInit()
 	}
 	if (_base->getAvailableScientists() > 0 && _debriefingState == 0)
 	{
-		TransferRow row = { TRANSFER_SCIENTIST, 0, tr("STR_SCIENTIST"), 0, _base->getAvailableScientists(), 0, 0, -2, 0, 0, 0 };
+		TransferRow row = { TRANSFER_SCIENTIST, 0, ltr("STR_SCIENTIST"), 0, _base->getAvailableScientists(), 0, 0, -2, 0, 0, 0 };
 		_items.push_back(row);
 		std::string cat = getCategory(_items.size() - 1);
 		if (std::find(_cats.begin(), _cats.end(), cat) == _cats.end())
@@ -233,7 +233,7 @@ void SellState::delayedInit()
 	}
 	if (_base->getAvailableEngineers() > 0 && _debriefingState == 0)
 	{
-		TransferRow row = { TRANSFER_ENGINEER, 0, tr("STR_ENGINEER"), 0, _base->getAvailableEngineers(), 0, 0, -1, 0, 0, 0 };
+		TransferRow row = { TRANSFER_ENGINEER, 0, ltr("STR_ENGINEER"), 0, _base->getAvailableEngineers(), 0, 0, -1, 0, 0, 0 };
 		_items.push_back(row);
 		std::string cat = getCategory(_items.size() - 1);
 		if (std::find(_cats.begin(), _cats.end(), cat) == _cats.end())
@@ -273,7 +273,7 @@ void SellState::delayedInit()
 		}
 		if (qty > 0 && (options1.canSellLiveAliens() || !rule->isAlien()))
 		{
-			TransferRow row = { TRANSFER_ITEM, rule, tr(itemType), rule->getSellCostAdjusted(_base, _game->getSavedGame()), qty, 0, 0, rule->getListOrder(), rule->getSize(), qty * rule->getSize(), (int64_t)qty * rule->getSellCostAdjusted(_base, _game->getSavedGame()) };
+			TransferRow row = { TRANSFER_ITEM, rule, ltr(itemType), rule->getSellCostAdjusted(_base, _game->getSavedGame()), qty, 0, 0, rule->getListOrder(), rule->getSize(), qty * rule->getSize(), (int64_t)qty * rule->getSellCostAdjusted(_base, _game->getSavedGame()) };
 			if ((_debriefingState != 0) && (_game->getSavedGame()->getAutosell(rule)))
 			{
 				row.amount = qty;
@@ -340,7 +340,7 @@ void SellState::delayedInit()
 		}
 	}
 
-	_txtSales->setText(tr("STR_VALUE_OF_SALES").arg(Unicode::formatFunding(_total)));
+	_txtSales->setText(ltr("STR_VALUE_OF_SALES").arg(Unicode::formatFunding(_total)));
 
 	_cbxCategory->setOptions(_cats, true);
 	_cbxCategory->onChange((ActionHandler)&SellState::cbxCategoryChange);
@@ -1147,7 +1147,7 @@ void SellState::changeByValue(int change, int dir)
 			_timerDec->stop();
 			RuleInterface* menuInterface = _game->getMod()->getInterface("buyMenu");
 			_game->pushState(new ErrorMessageState(
-				tr(tmpItem->getSellActionMessage()),
+				ltr(tmpItem->getSellActionMessage()),
 				_palette,
 				menuInterface->getElement("errorMessage")->color,
 				"BACK13.SCR",
@@ -1222,7 +1222,7 @@ void SellState::updateItemStrings()
 	_lstItems->setCellText(_sel, 2, ss.str());
 	ss2 << getRow().qtySrc - getRow().amount;
 	_lstItems->setCellText(_sel, 1, ss2.str());
-	_txtSales->setText(tr("STR_VALUE_OF_SALES").arg(Unicode::formatFunding(_total)));
+	_txtSales->setText(ltr("STR_VALUE_OF_SALES").arg(Unicode::formatFunding(_total)));
 
 	if (getRow().amount > 0)
 	{
@@ -1250,7 +1250,7 @@ void SellState::updateItemStrings()
 		ss3 << std::fixed << std::setprecision(1) << _spaceChange << ")";
 	}
 	ss3 << ":" << _base->getAvailableStores();
-	_txtSpaceUsed->setText(tr("STR_SPACE_USED").arg(ss3.str()));
+	_txtSpaceUsed->setText(ltr("STR_SPACE_USED").arg(ss3.str()));
 	if (_debriefingState == 0 && options1.storageLimitsEnforced())
 	{
 		_btnOk->setVisible(!_base->storesOverfull(_spaceChange));

@@ -139,7 +139,7 @@ void SaveGameState::buildUi(SDL_Color *palette)
 	// Set up objects
 	_txtStatus->setBig();
 	_txtStatus->setAlign(ALIGN_CENTER);
-	_txtStatus->setText(tr("STR_SAVING_GAME"));
+	_txtStatus->setText(ltr("STR_SAVING_GAME"));
 
 }
 
@@ -171,7 +171,7 @@ void SaveGameState::think()
 			break;
 		case SAVE_INSTA:
 			// timestamp is visible already, no need to repeat it
-			_game->getSavedGame()->setName(tr("STR_INSTA_SAVE"));
+			_game->getSavedGame()->setName(ltr("STR_INSTA_SAVE"));
 			break;
 		case SAVE_QUICK:
 		case SAVE_AUTO_GEOSCAPE:
@@ -229,7 +229,7 @@ void SaveGameState::error(const std::string &msg)
 {
 	Log(LOG_ERROR) << msg;
 	std::ostringstream error;
-	error << tr("STR_SAVE_UNSUCCESSFUL") << Unicode::TOK_NL_SMALL << msg;
+	error << ltr("STR_SAVE_UNSUCCESSFUL") << Unicode::TOK_NL_SMALL << msg;
 	if (_origin != OPT_BATTLESCAPE)
 		_game->pushState(new ErrorMessageState(error.str(), _palette, _game->getMod()->getInterface("errorMessages")->getElement("geoscapeColor")->color, "BACK01.SCR", _game->getMod()->getInterface("errorMessages")->getElement("geoscapePalette")->color));
 	else

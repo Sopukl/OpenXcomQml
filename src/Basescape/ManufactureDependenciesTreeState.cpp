@@ -64,12 +64,12 @@ ManufactureDependenciesTreeState::ManufactureDependenciesTreeState(const std::st
 	setWindowBackground(_window, "dependencyTree");
 
 	_txtTitle->setAlign(ALIGN_CENTER);
-	_txtTitle->setText(tr("STR_TOPIC").arg(tr(_selectedItem)));
+	_txtTitle->setText(ltr("STR_TOPIC").arg(ltr(_selectedItem)));
 
-	_btnShowAll->setText(tr("STR_SHOW_ALL"));
+	_btnShowAll->setText(ltr("STR_SHOW_ALL"));
 	_btnShowAll->onMouseClick((ActionHandler)&ManufactureDependenciesTreeState::btnShowAllClick);
 
-	_btnOk->setText(tr("STR_OK"));
+	_btnOk->setText(ltr("STR_OK"));
 	_btnOk->onMouseClick((ActionHandler)&ManufactureDependenciesTreeState::btnOkClick);
 	_btnOk->onKeyboardPress((ActionHandler)&ManufactureDependenciesTreeState::btnOkClick, options1.keyCancel());
 
@@ -82,7 +82,7 @@ ManufactureDependenciesTreeState::ManufactureDependenciesTreeState(const std::st
 	{
 		_txtTitle->setHeight(_txtTitle->getHeight() * 11);
 		_txtTitle->setWordWrap(true);
-		_txtTitle->setText(tr("STR_THIS_FEATURE_IS_DISABLED_3"));
+		_txtTitle->setText(ltr("STR_THIS_FEATURE_IS_DISABLED_3"));
 		_btnShowAll->setVisible(false);
 		_lstTopics->setVisible(false);
 		return;
@@ -178,14 +178,14 @@ void ManufactureDependenciesTreeState::initList()
 
 	if (firstLevel.empty() && facilitiesLevel.empty())
 	{
-		_lstTopics->addRow(1, tr("STR_NO_DEPENDENCIES").c_str());
+		_lstTopics->addRow(1, ltr("STR_NO_DEPENDENCIES").c_str());
 		_lstTopics->setRowColor(row, _lstTopics->getSecondaryColor());
 		++row;
 		return;
 	}
 
 	// first level
-	_lstTopics->addRow(1, tr("STR_DIRECT_DEPENDENCIES").c_str());
+	_lstTopics->addRow(1, ltr("STR_DIRECT_DEPENDENCIES").c_str());
 	_lstTopics->setRowColor(row, _lstTopics->getSecondaryColor());
 	++row;
 
@@ -194,7 +194,7 @@ void ManufactureDependenciesTreeState::initList()
 	{
 		if (_showAll || _game->getSavedGame()->isResearched(fac->getRequirements()))
 		{
-			_lstTopics->addRow(1, tr(fac->getType()).c_str());
+			_lstTopics->addRow(1, ltr(fac->getType()).c_str());
 		}
 		else
 		{
@@ -207,7 +207,7 @@ void ManufactureDependenciesTreeState::initList()
 	{
 		if (_showAll || _game->getSavedGame()->isResearched(_game->getMod()->getManufacture(name)->getRequirements()))
 		{
-			_lstTopics->addRow(1, tr(name).c_str());
+			_lstTopics->addRow(1, ltr(name).c_str());
 		}
 		else
 		{
@@ -229,14 +229,14 @@ void ManufactureDependenciesTreeState::initList()
 	++row;
 	if (secondLevel.empty())
 	{
-		_lstTopics->addRow(1, tr("STR_END_OF_SEARCH").c_str());
+		_lstTopics->addRow(1, ltr("STR_END_OF_SEARCH").c_str());
 		_lstTopics->setRowColor(row, _lstTopics->getSecondaryColor());
 		++row;
 		return;
 	}
 
 	// second level
-	_lstTopics->addRow(1, tr("STR_LEVEL_2_DEPENDENCIES").c_str());
+	_lstTopics->addRow(1, ltr("STR_LEVEL_2_DEPENDENCIES").c_str());
 	_lstTopics->setRowColor(row, _lstTopics->getSecondaryColor());
 	++row;
 
@@ -244,7 +244,7 @@ void ManufactureDependenciesTreeState::initList()
 	{
 		if (_showAll || _game->getSavedGame()->isResearched(_game->getMod()->getManufacture(name)->getRequirements()))
 		{
-			_lstTopics->addRow(1, tr(name).c_str());
+			_lstTopics->addRow(1, ltr(name).c_str());
 		}
 		else
 		{
@@ -266,14 +266,14 @@ void ManufactureDependenciesTreeState::initList()
 	++row;
 	if (thirdLevel.empty())
 	{
-		_lstTopics->addRow(1, tr("STR_END_OF_SEARCH").c_str());
+		_lstTopics->addRow(1, ltr("STR_END_OF_SEARCH").c_str());
 		_lstTopics->setRowColor(row, _lstTopics->getSecondaryColor());
 		++row;
 		return;
 	}
 
 	// third level
-	_lstTopics->addRow(1, tr("STR_LEVEL_3_DEPENDENCIES").c_str());
+	_lstTopics->addRow(1, ltr("STR_LEVEL_3_DEPENDENCIES").c_str());
 	_lstTopics->setRowColor(row, _lstTopics->getSecondaryColor());
 	++row;
 
@@ -281,7 +281,7 @@ void ManufactureDependenciesTreeState::initList()
 	{
 		if (_showAll || _game->getSavedGame()->isResearched(_game->getMod()->getManufacture(name)->getRequirements()))
 		{
-			_lstTopics->addRow(1, tr(name).c_str());
+			_lstTopics->addRow(1, ltr(name).c_str());
 		}
 		else
 		{
@@ -303,14 +303,14 @@ void ManufactureDependenciesTreeState::initList()
 	++row;
 	if (fourthLevel.empty())
 	{
-		_lstTopics->addRow(1, tr("STR_END_OF_SEARCH").c_str());
+		_lstTopics->addRow(1, ltr("STR_END_OF_SEARCH").c_str());
 		_lstTopics->setRowColor(row, _lstTopics->getSecondaryColor());
 		++row;
 		return;
 	}
 
 	// fourth level
-	_lstTopics->addRow(1, tr("STR_LEVEL_4_DEPENDENCIES").c_str());
+	_lstTopics->addRow(1, ltr("STR_LEVEL_4_DEPENDENCIES").c_str());
 	_lstTopics->setRowColor(row, _lstTopics->getSecondaryColor());
 	++row;
 
@@ -318,7 +318,7 @@ void ManufactureDependenciesTreeState::initList()
 	{
 		if (_showAll || _game->getSavedGame()->isResearched(_game->getMod()->getManufacture(name)->getRequirements()))
 		{
-			_lstTopics->addRow(1, tr(name).c_str());
+			_lstTopics->addRow(1, ltr(name).c_str());
 		}
 		else
 		{
@@ -340,13 +340,13 @@ void ManufactureDependenciesTreeState::initList()
 	++row;
 	if (fifthLevel.empty())
 	{
-		_lstTopics->addRow(1, tr("STR_END_OF_SEARCH").c_str());
+		_lstTopics->addRow(1, ltr("STR_END_OF_SEARCH").c_str());
 		_lstTopics->setRowColor(row, _lstTopics->getSecondaryColor());
 		++row;
 		return;
 	}
 
-	_lstTopics->addRow(1, tr("STR_MORE_DEPENDENCIES").c_str());
+	_lstTopics->addRow(1, ltr("STR_MORE_DEPENDENCIES").c_str());
 	_lstTopics->setRowColor(row, _lstTopics->getSecondaryColor());
 	++row;
 }

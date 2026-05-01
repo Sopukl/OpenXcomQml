@@ -65,7 +65,7 @@ BaseNameState::BaseNameState(Base *base, Globe *globe, bool first, bool fixedLoc
 	// Set up objects
 	setWindowBackground(_window, "baseNaming");
 
-	_btnOk->setText(tr("STR_OK"));
+	_btnOk->setText(ltr("STR_OK"));
 	_btnOk->onMouseClick((ActionHandler)&BaseNameState::btnOkClick);
 	//_btnOk->onKeyboardPress((ActionHandler)&BaseNameState::btnOkClick, options1.keyOk());
 	_btnOk->onKeyboardPress((ActionHandler)&BaseNameState::btnOkClick, options1.keyCancel());
@@ -75,7 +75,7 @@ BaseNameState::BaseNameState(Base *base, Globe *globe, bool first, bool fixedLoc
 
 	_txtTitle->setAlign(ALIGN_CENTER);
 	_txtTitle->setBig();
-	_txtTitle->setText(tr("STR_BASE_NAME"));
+	_txtTitle->setText(ltr("STR_BASE_NAME"));
 
 	if (!_game->getMod()->getBaseNamesFirst().empty())
 	{

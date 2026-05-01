@@ -107,9 +107,9 @@ namespace OpenXcom
 
 		_txtTitle->setBig();
 		_txtTitle->setAlign(ALIGN_CENTER);
-		_txtTitle->setText(tr("STR_UFOPAEDIA"));
+		_txtTitle->setText(ltr("STR_UFOPAEDIA"));
 
-		_btnOk->setText(tr("STR_OK"));
+		_btnOk->setText(ltr("STR_OK"));
 		_btnOk->onMouseClick((ActionHandler)&UfopaediaStartState::btnOkClick);
 		_btnOk->onKeyboardPress((ActionHandler)&UfopaediaStartState::btnOkClick, options1.keyCancel());
 		_btnOk->onKeyboardPress((ActionHandler)&UfopaediaStartState::btnOkClick, options1.keyGeoUfopedia());
@@ -235,7 +235,7 @@ namespace OpenXcom
 	{
 		for (size_t i = 0; i < _btnSections.size(); ++i)
 		{
-			_btnSections[i]->setText(tr(_cats[_offset + i]));
+			_btnSections[i]->setText(ltr(_cats[_offset + i]));
 		}
 	}
 }

@@ -42,8 +42,8 @@ namespace OpenXcom
 PlaceStartFacilityState::PlaceStartFacilityState(Base *base, SelectStartFacilityState *select, const RuleBaseFacility *rule) : PlaceFacilityState(base, rule), _select(select)
 {
 	_view->onMouseClick((ActionHandler)&PlaceStartFacilityState::viewClick);
-	_numCost->setText(tr("STR_NONE"));
-	_numTime->setText(tr("STR_NONE"));
+	_numCost->setText(ltr("STR_NONE"));
+	_numTime->setText(ltr("STR_NONE"));
 }
 
 /**
@@ -63,7 +63,7 @@ void PlaceStartFacilityState::viewClick(Action *)
 	if (_view->getPlacementError(_rule, nullptr, true))
 	{
 		_game->popState();
-		_game->pushState(new ErrorMessageState(tr("STR_CANNOT_BUILD_HERE"), _palette, _game->getMod()->getInterface("basescape")->getElement("errorMessage")->color, "BACK01.SCR", _game->getMod()->getInterface("basescape")->getElement("errorPalette")->color));
+		_game->pushState(new ErrorMessageState(ltr("STR_CANNOT_BUILD_HERE"), _palette, _game->getMod()->getInterface("basescape")->getElement("errorMessage")->color, "BACK01.SCR", _game->getMod()->getInterface("basescape")->getElement("errorPalette")->color));
 	}
 	else
 	{

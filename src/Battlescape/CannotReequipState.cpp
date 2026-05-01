@@ -69,27 +69,27 @@ CannotReequipState::CannotReequipState(std::vector<ReequipStat> &missingItems, B
 	// Set up objects
 	setWindowBackground(_window, "cannotReequip");
 
-	_btnManufacture->setText(tr("STR_MANUFACTURE"));
+	_btnManufacture->setText(ltr("STR_MANUFACTURE"));
 	_btnManufacture->onMouseClick((ActionHandler)&CannotReequipState::btnManufactureClick);
 
-	_btnPurchase->setText(tr("STR_PURCHASE_RECRUIT"));
+	_btnPurchase->setText(ltr("STR_PURCHASE_RECRUIT"));
 	_btnPurchase->onMouseClick((ActionHandler)&CannotReequipState::btnPurchaseClick);
 
-	_btnOk->setText(tr("STR_OK"));
+	_btnOk->setText(ltr("STR_OK"));
 	_btnOk->onMouseClick((ActionHandler)&CannotReequipState::btnOkClick);
 	_btnOk->onKeyboardPress((ActionHandler)&CannotReequipState::btnOkClick, options1.keyOk());
 	_btnOk->onKeyboardPress((ActionHandler)&CannotReequipState::btnOkClick, options1.keyCancel());
 
-	_txtTitle->setText(tr("STR_NOT_ENOUGH_EQUIPMENT_TO_FULLY_RE_EQUIP_SQUAD"));
+	_txtTitle->setText(ltr("STR_NOT_ENOUGH_EQUIPMENT_TO_FULLY_RE_EQUIP_SQUAD"));
 	_txtTitle->setAlign(ALIGN_CENTER);
 	_txtTitle->setBig();
 	_txtTitle->setWordWrap(true);
 
-	_txtItem->setText(tr("STR_ITEM"));
+	_txtItem->setText(ltr("STR_ITEM"));
 
-	_txtQuantity->setText(tr("STR_QUANTITY_UC"));
+	_txtQuantity->setText(ltr("STR_QUANTITY_UC"));
 
-	_txtCraft->setText(tr("STR_CRAFT"));
+	_txtCraft->setText(ltr("STR_CRAFT"));
 
 	_lstItems->setColumns(3, 162, 46, 80);
 	_lstItems->setSelectable(true);
@@ -119,7 +119,7 @@ void CannotReequipState::init()
 		{
 			std::ostringstream ss;
 			ss << reequipStat.qty;
-			_lstItems->addRow(3, tr(reequipStat.item).c_str(), ss.str().c_str(), reequipStat.craft.c_str());
+			_lstItems->addRow(3, ltr(reequipStat.item).c_str(), ss.str().c_str(), reequipStat.craft.c_str());
 		}
 	}
 }

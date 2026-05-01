@@ -56,7 +56,7 @@ InfoboxOKState::InfoboxOKState(const std::string &msg)
 	_frame->setThickness(3);
 	_frame->setHighContrast(true);
 
-	_btnOk->setText(tr("STR_OK"));
+	_btnOk->setText(ltr("STR_OK"));
 	_btnOk->onMouseClick((ActionHandler)&InfoboxOKState::btnOkClick);
 	_btnOk->onKeyboardPress((ActionHandler)&InfoboxOKState::btnOkClick, options1.keyOk());
 	_btnOk->onKeyboardPress((ActionHandler)&InfoboxOKState::btnOkClick, options1.keyCancel());

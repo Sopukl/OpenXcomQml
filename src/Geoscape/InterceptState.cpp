@@ -121,30 +121,30 @@ InterceptState::InterceptState(Globe *globe, bool useCustomSound, Base *base, Ta
 	// Set up objects
 	setWindowBackground(_window, "intercept");
 
-	_btnCancel->setText(tr("STR_CANCEL"));
+	_btnCancel->setText(ltr("STR_CANCEL"));
 	_btnCancel->onMouseClick((ActionHandler)&InterceptState::btnCancelClick);
 	_btnCancel->onKeyboardPress((ActionHandler)&InterceptState::btnCancelClick, options1.keyCancel());
 	_btnCancel->onKeyboardPress((ActionHandler)&InterceptState::btnCancelClick, options1.keyGeoIntercept());
 
-	_btnGotoBase->setText(tr("STR_GO_TO_BASE"));
+	_btnGotoBase->setText(ltr("STR_GO_TO_BASE"));
 	_btnGotoBase->onMouseClick((ActionHandler)&InterceptState::btnGotoBaseClick);
 	_btnGotoBase->setVisible(_base != 0);
 
 	_txtTitle->setAlign(ALIGN_CENTER);
 	_txtTitle->setBig();
-	_txtTitle->setText(tr("STR_LAUNCH_INTERCEPTION"));
+	_txtTitle->setText(ltr("STR_LAUNCH_INTERCEPTION"));
 
-	_txtCraft->setText(tr("STR_CRAFT"));
+	_txtCraft->setText(ltr("STR_CRAFT"));
 
-	_txtStatus->setText(tr("STR_STATUS"));
+	_txtStatus->setText(ltr("STR_STATUS"));
 
-	_txtBase->setText(tr("STR_BASE"));
+	_txtBase->setText(ltr("STR_BASE"));
 
 	if (options1.oxceInterceptGuiMaintenanceTime() > 0)
 	{
 		_txtWeapons->setAlign(ALIGN_RIGHT);
 	}
-	_txtWeapons->setText(tr("STR_WEAPONS_CREW_HWPS"));
+	_txtWeapons->setText(ltr("STR_WEAPONS_CREW_HWPS"));
 
 	if (options1.oxceInterceptGuiMaintenanceTime() > 0)
 	{
@@ -209,11 +209,11 @@ InterceptState::InterceptState(Globe *globe, bool useCustomSound, Base *base, Ta
 				// QoL: let's give the player a bit more info
 				if (xcraft->getDestination() == 0 || xcraft->getIsAutoPatrolling())
 				{
-					ssStatus << tr("STR_PATROLLING");
+					ssStatus << ltr("STR_PATROLLING");
 				}
 				else if (xcraft->getLowFuel() || xcraft->getMissionComplete() || xcraft->getDestination() == (Target*)xcraft->getBase())
 				{
-					ssStatus << tr("STR_RETURNING");
+					ssStatus << ltr("STR_RETURNING");
 					//ssStatus << tr("STR_RETURNING_TO_BASE"); // vanilla craft info
 				}
 				else
@@ -226,29 +226,29 @@ InterceptState::InterceptState(Globe *globe, bool useCustomSound, Base *base, Ta
 					{
 						if (xcraft->isInDogfight())
 						{
-							ssStatus << tr("STR_TAILING_UFO");
+							ssStatus << ltr("STR_TAILING_UFO");
 						}
 						else if (u->getStatus() == Ufo::FLYING)
 						{
-							ssStatus << tr("STR_INTERCEPTING");
+							ssStatus << ltr("STR_INTERCEPTING");
 							//ssStatus << tr("STR_INTERCEPTING_UFO").arg(u->getId()); // vanilla craft info
 						}
 						else
 						{
-							ssStatus << tr("STR_EN_ROUTE");
+							ssStatus << ltr("STR_EN_ROUTE");
 						}
 					}
 					else if (craftTarget != 0)
 					{
-						ssStatus << tr("STR_ESCORTING");
+						ssStatus << ltr("STR_ESCORTING");
 					}
 					else if (m != 0 || b != 0)
 					{
-						ssStatus << tr("STR_EN_ROUTE");
+						ssStatus << ltr("STR_EN_ROUTE");
 					}
 					else
 					{
-						ssStatus << tr(status); // "STR_OUT"
+						ssStatus << ltr(status); // "STR_OUT"
 					}
 				}
 			}
@@ -256,11 +256,11 @@ InterceptState::InterceptState(Globe *globe, bool useCustomSound, Base *base, Ta
 			{
 				if (!hasEnoughPilots && status == "STR_READY")
 				{
-					ssStatus << tr("STR_PILOT_MISSING");
+					ssStatus << ltr("STR_PILOT_MISSING");
 				}
 				else
 				{
-					ssStatus << tr(status);
+					ssStatus << ltr(status);
 				}
 			}
 			if (status != "STR_READY" && status != "STR_OUT")
@@ -291,7 +291,7 @@ InterceptState::InterceptState(Globe *globe, bool useCustomSound, Base *base, Ta
 					ssStatus << " (";
 					if (days > 0)
 					{
-						ssStatus << tr("STR_DAY_SHORT").arg(days);
+						ssStatus << ltr("STR_DAY_SHORT").arg(days);
 					}
 					if (hours > 0)
 					{
@@ -299,7 +299,7 @@ InterceptState::InterceptState(Globe *globe, bool useCustomSound, Base *base, Ta
 						{
 							ssStatus << "/";
 						}
-						ssStatus << tr("STR_HOUR_SHORT").arg(hours);
+						ssStatus << ltr("STR_HOUR_SHORT").arg(hours);
 					}
 					ssStatus << ")";
 				}
@@ -322,11 +322,11 @@ InterceptState::InterceptState(Globe *globe, bool useCustomSound, Base *base, Ta
 						int days = etaInHoursHelper / 24;
 						int hours = etaInHoursHelper % 24;
 						ssStatus << " (";
-						if (days > 0) ssStatus << tr("STR_DAY_SHORT").arg(days);
+						if (days > 0) ssStatus << ltr("STR_DAY_SHORT").arg(days);
 						if (hours > 0 || days == 0)
 						{
 							if (days > 0) ssStatus << "/";
-							ssStatus << tr("STR_HOUR_SHORT").arg(hours);
+							ssStatus << ltr("STR_HOUR_SHORT").arg(hours);
 						}
 						ssStatus << ")";
 					}

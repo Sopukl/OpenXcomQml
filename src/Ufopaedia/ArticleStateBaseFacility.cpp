@@ -60,7 +60,7 @@ namespace OpenXcom
 
 		_txtTitle->setColor(Palette::blockOffset(13)+10);
 		_txtTitle->setBig();
-		_txtTitle->setText(tr(defs->getTitleForPage(_state->current_page)));
+		_txtTitle->setText(ltr(defs->getTitleForPage(_state->current_page)));
 
 		// build preview image
 		int tile_size = 32;
@@ -111,7 +111,7 @@ namespace OpenXcom
 		_txtInfo->setSecondaryColor(Palette::blockOffset(13));
 		_txtInfo->setWordWrap(true);
 		_txtInfo->setScrollable(true);
-		_txtInfo->setText(tr(defs->getTextForPage(_state->current_page)));
+		_txtInfo->setText(ltr(defs->getTextForPage(_state->current_page)));
 
 		_lstInfo = new TextList(200, 42, 10, 42);
 		add(_lstInfo);
@@ -120,29 +120,29 @@ namespace OpenXcom
 		_lstInfo->setColumns(2, 140, 60);
 		_lstInfo->setDot(true);
 
-		_lstInfo->addRow(2, tr("STR_CONSTRUCTION_TIME").c_str(), tr("STR_DAY", facility->getBuildTime()).c_str());
+		_lstInfo->addRow(2, ltr("STR_CONSTRUCTION_TIME").c_str(), ltr("STR_DAY", facility->getBuildTime()).c_str());
 		_lstInfo->setCellColor(0, 1, Palette::blockOffset(13)+0);
 
 		std::ostringstream ss;
 		ss << Unicode::formatFunding(facility->getBuildCost());
-		_lstInfo->addRow(2, tr("STR_CONSTRUCTION_COST").c_str(), ss.str().c_str());
+		_lstInfo->addRow(2, ltr("STR_CONSTRUCTION_COST").c_str(), ss.str().c_str());
 		_lstInfo->setCellColor(1, 1, Palette::blockOffset(13)+0);
 
 		ss.str("");ss.clear();
 		ss << Unicode::formatFunding(facility->getMonthlyCost());
-		_lstInfo->addRow(2, tr("STR_MAINTENANCE_COST").c_str(), ss.str().c_str());
+		_lstInfo->addRow(2, ltr("STR_MAINTENANCE_COST").c_str(), ss.str().c_str());
 		_lstInfo->setCellColor(2, 1, Palette::blockOffset(13)+0);
 
 		if (facility->getDefenseValue() > 0)
 		{
 			ss.str("");ss.clear();
 			ss << facility->getDefenseValue();
-			_lstInfo->addRow(2, tr("STR_DEFENSE_VALUE").c_str(), ss.str().c_str());
+			_lstInfo->addRow(2, ltr("STR_DEFENSE_VALUE").c_str(), ss.str().c_str());
 			_lstInfo->setCellColor(3, 1, Palette::blockOffset(13)+0);
 
 			ss.str("");ss.clear();
 			ss << Unicode::formatPercentage(facility->getHitRatio());
-			_lstInfo->addRow(2, tr("STR_HIT_RATIO").c_str(), ss.str().c_str());
+			_lstInfo->addRow(2, ltr("STR_HIT_RATIO").c_str(), ss.str().c_str());
 			_lstInfo->setCellColor(4, 1, Palette::blockOffset(13)+0);
 		}
 		centerAllSurfaces();

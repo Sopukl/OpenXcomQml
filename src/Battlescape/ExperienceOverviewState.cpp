@@ -84,14 +84,14 @@ ExperienceOverviewState::ExperienceOverviewState(BattlescapeState* parent) : _pa
 	_window->setBackground(_game->getMod()->getSurface("TAC00.SCR"));
 
 	_btnOk->setHighContrast(true);
-	_btnOk->setText(tr("STR_OK"));
+	_btnOk->setText(ltr("STR_OK"));
 	_btnOk->onMouseClick((ActionHandler)&ExperienceOverviewState::btnOkClick);
 	_btnOk->onKeyboardPress((ActionHandler)&ExperienceOverviewState::btnOkClick, options1.keyCancel());
 
 	_txtTitle->setHighContrast(true);
 	_txtTitle->setBig();
 	_txtTitle->setAlign(ALIGN_CENTER);
-	_txtTitle->setText(tr("STR_EXPERIENCE_OVERVIEW"));
+	_txtTitle->setText(ltr("STR_EXPERIENCE_OVERVIEW"));
 
 	_txtName->setHighContrast(true);
 	_txtBravery->setHighContrast(true);
@@ -103,17 +103,17 @@ ExperienceOverviewState::ExperienceOverviewState(BattlescapeState* parent) : _pa
 	_txtMelee->setHighContrast(true);
 	_txtMana->setHighContrast(true);
 
-	_txtName->setText(tr("STR_NAME"));
-	_txtBravery->setText(tr("STR_BRAVERY_ABBREVIATION"));
-	_txtReactions->setText(tr("STR_REACTIONS_ABBREVIATION"));
-	_txtFiring->setText(tr("STR_FIRING_ACCURACY_ABBREVIATION"));
-	_txtThrowing->setText(tr("STR_THROWING_ACCURACY_ABBREVIATION"));
-	_txtPsiSkill->setText(tr("STR_PSIONIC_SKILL_ABBREVIATION"));
-	_txtPsiStrength->setText(tr("STR_PSIONIC_STRENGTH_ABBREVIATION"));
-	_txtMelee->setText(tr("STR_MELEE_ACCURACY_ABBREVIATION"));
+	_txtName->setText(ltr("STR_NAME"));
+	_txtBravery->setText(ltr("STR_BRAVERY_ABBREVIATION"));
+	_txtReactions->setText(ltr("STR_REACTIONS_ABBREVIATION"));
+	_txtFiring->setText(ltr("STR_FIRING_ACCURACY_ABBREVIATION"));
+	_txtThrowing->setText(ltr("STR_THROWING_ACCURACY_ABBREVIATION"));
+	_txtPsiSkill->setText(ltr("STR_PSIONIC_SKILL_ABBREVIATION"));
+	_txtPsiStrength->setText(ltr("STR_PSIONIC_STRENGTH_ABBREVIATION"));
+	_txtMelee->setText(ltr("STR_MELEE_ACCURACY_ABBREVIATION"));
 	if (_game->getMod()->isManaFeatureEnabled() && _game->getMod()->isManaTrainingPrimary())
 	{
-		_txtMana->setText(tr("STR_MANA_ABBREVIATION"));
+		_txtMana->setText(ltr("STR_MANA_ABBREVIATION"));
 	}
 
 	_lstSoldiers->setColumns(10, 110, 21, 21, 21, 21, 21, 21, 21, 21, 18);

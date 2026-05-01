@@ -165,7 +165,7 @@ NextTurnState::NextTurnState(SavedBattleGame *battleGame, BattlescapeState *stat
 	_txtMessageReinforcements->setHighContrast(true);
 	_txtMessageReinforcements->setColor(_game->getMod()->getInterface("inventory")->getElement("weight")->color2); // red
 
-	_btnBriefingReinforcements->setText(tr("STR_TELL_ME_MORE"));
+	_btnBriefingReinforcements->setText(ltr("STR_TELL_ME_MORE"));
 	_btnBriefingReinforcements->setHighContrast(true);
 	_btnBriefingReinforcements->onMouseClick((ActionHandler)&NextTurnState::btnBriefingReinforcementsClick);
 	_btnBriefingReinforcements->setVisible(false);
@@ -173,14 +173,14 @@ NextTurnState::NextTurnState(SavedBattleGame *battleGame, BattlescapeState *stat
 	_txtTitle->setBig();
 	_txtTitle->setAlign(ALIGN_CENTER);
 	_txtTitle->setHighContrast(true);
-	_txtTitle->setText(tr("STR_OPENXCOM").arg(Options::getActiveMasterInfo()->getVersionDisplay()));
+	_txtTitle->setText(ltr("STR_OPENXCOM").arg(Options::getActiveMasterInfo()->getVersionDisplay()));
 
 
 	_txtTurn->setBig();
 	_txtTurn->setAlign(ALIGN_CENTER);
 	_txtTurn->setHighContrast(true);
 	std::stringstream ss;
-	ss << tr("STR_TURN").arg(_currentTurn);
+	ss << ltr("STR_TURN").arg(_currentTurn);
 	if (battleGame->getTurnLimit() > 0)
 	{
 		ss << "/" << battleGame->getTurnLimit();
@@ -196,13 +196,13 @@ NextTurnState::NextTurnState(SavedBattleGame *battleGame, BattlescapeState *stat
 	_txtSide->setBig();
 	_txtSide->setAlign(ALIGN_CENTER);
 	_txtSide->setHighContrast(true);
-	_txtSide->setText(tr("STR_SIDE").arg(tr((_battleGame->getSide() == FACTION_PLAYER ? "STR_XCOM" : "STR_ALIENS"))));
+	_txtSide->setText(ltr("STR_SIDE").arg(ltr((_battleGame->getSide() == FACTION_PLAYER ? "STR_XCOM" : "STR_ALIENS"))));
 
 
 	_txtMessage->setBig();
 	_txtMessage->setAlign(ALIGN_CENTER);
 	_txtMessage->setHighContrast(true);
-	_txtMessage->setText(tr("STR_PRESS_BUTTON_TO_CONTINUE"));
+	_txtMessage->setText(ltr("STR_PRESS_BUTTON_TO_CONTINUE"));
 
 	_txtMessage2->setBig();
 	_txtMessage2->setAlign(ALIGN_CENTER);
@@ -231,7 +231,7 @@ NextTurnState::NextTurnState(SavedBattleGame *battleGame, BattlescapeState *stat
 			if (showMessage)
 			{
 				_txtMessage2->setColor(friendly.color);
-				message = tr(friendly.message);
+				message = ltr(friendly.message);
 				_txtMessage2->setText(message);
 			}
 		}
@@ -256,20 +256,20 @@ NextTurnState::NextTurnState(SavedBattleGame *battleGame, BattlescapeState *stat
 				if (applyEnvironmentalConditionToFaction(FACTION_HOSTILE, hostile))
 				{
 					_txtMessage2->setColor(hostile.color);
-					_txtMessage2->setText(tr(hostile.message));
+					_txtMessage2->setText(ltr(hostile.message));
 					showMessage = true;
 				}
 				if (applyEnvironmentalConditionToFaction(FACTION_NEUTRAL, neutral))
 				{
 					_txtMessage3->setColor(neutral.color);
-					_txtMessage3->setText(tr(neutral.message));
+					_txtMessage3->setText(ltr(neutral.message));
 					showMessage = true;
 				}
 
 				if (showMessage)
 				{
 					ss.clear();
-					ss << tr(hostile.message) << tr(neutral.message);
+					ss << ltr(hostile.message) << ltr(neutral.message);
 					message = ss.str();
 				}
 			}
@@ -302,7 +302,7 @@ NextTurnState::NextTurnState(SavedBattleGame *battleGame, BattlescapeState *stat
 		bool showAlert = determineReinforcements();
 		if (showAlert && _battleGame->getTurn() > 0)
 		{
-			messageReinforcements = tr("STR_REINFORCEMENTS_ALERT");
+			messageReinforcements = ltr("STR_REINFORCEMENTS_ALERT");
 			_txtMessageReinforcements->setText(messageReinforcements);
 		}
 	}

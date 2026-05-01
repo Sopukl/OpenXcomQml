@@ -126,19 +126,19 @@ void SkillMenuState::addItem(const RuleSkill* skill, int *id, SDLKey key)
 	{
 		int acc = BattleUnit::getFiringAccuracy(BattleActionAttack::GetBeforeShoot(ba, _action->actor, _action->weapon, _action->skillRules), _game->getMod());
 		if (ba == BA_THROW || ba == BA_AIMEDSHOT || ba == BA_SNAPSHOT || ba == BA_AUTOSHOT || ba == BA_LAUNCH || ba == BA_HIT)
-			s1 = tr("STR_ACCURACY_SHORT").arg(Unicode::formatPercentage(acc));
+			s1 = ltr("STR_ACCURACY_SHORT").arg(Unicode::formatPercentage(acc));
 	}
 
 	if (cost.Time > 0)
 	{
-		s2 = tr("STR_TIME_UNITS_SHORT").arg(cost.Time);
+		s2 = ltr("STR_TIME_UNITS_SHORT").arg(cost.Time);
 	}
 	else if (cost.Mana > 0)
 	{
-		s2 = tr("STR_MANA_SHORT").arg(cost.Mana);
+		s2 = ltr("STR_MANA_SHORT").arg(cost.Mana);
 	}
 
-	_actionMenu[*id]->setAction(ba, tr(skill->getType()), s1, s2, cost.Time);
+	_actionMenu[*id]->setAction(ba, ltr(skill->getType()), s1, s2, cost.Time);
 	_actionMenu[*id]->setSkill(skill);
 	_actionMenu[*id]->setVisible(true);
 

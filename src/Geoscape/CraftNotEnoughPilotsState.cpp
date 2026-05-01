@@ -58,11 +58,11 @@ CraftNotEnoughPilotsState::CraftNotEnoughPilotsState(Craft *craft) : _craft(craf
 	// Set up objects
 	setWindowBackground(_window, "craftPilotError");
 
-	_btnOk->setText(tr("STR_OK"));
+	_btnOk->setText(ltr("STR_OK"));
 	_btnOk->onMouseClick((ActionHandler)&CraftNotEnoughPilotsState::btnOkClick);
 	_btnOk->onKeyboardPress((ActionHandler)&CraftNotEnoughPilotsState::btnOkClick, options1.keyCancel());
 
-	_btnAssignPilots->setText(tr("STR_ASSIGN_PILOTS"));
+	_btnAssignPilots->setText(ltr("STR_ASSIGN_PILOTS"));
 	_btnAssignPilots->onMouseClick((ActionHandler)&CraftNotEnoughPilotsState::btnAssignPilotsClick);
 	_btnAssignPilots->onKeyboardPress((ActionHandler)&CraftNotEnoughPilotsState::btnAssignPilotsClick, options1.keyOk());
 	if (_craft->getMissionComplete() || _craft->getStatus() == "STR_OUT")
@@ -74,7 +74,7 @@ CraftNotEnoughPilotsState::CraftNotEnoughPilotsState(Craft *craft) : _craft(craf
 	_txtMessage->setVerticalAlign(ALIGN_MIDDLE);
 	_txtMessage->setBig();
 	_txtMessage->setWordWrap(true);
-	_txtMessage->setText(tr("STR_NOT_ENOUGH_PILOTS").arg(_craft->getRules()->getPilots()));
+	_txtMessage->setText(ltr("STR_NOT_ENOUGH_PILOTS").arg(_craft->getRules()->getPilots()));
 }
 
 /**

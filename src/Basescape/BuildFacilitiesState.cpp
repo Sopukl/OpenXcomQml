@@ -65,13 +65,13 @@ BuildFacilitiesState::BuildFacilitiesState(Base *base, State *state) : _base(bas
 	// Set up objects
 	setWindowBackground(_window, "selectFacility");
 
-	_btnOk->setText(tr("STR_OK"));
+	_btnOk->setText(ltr("STR_OK"));
 	_btnOk->onMouseClick((ActionHandler)&BuildFacilitiesState::btnOkClick);
 	_btnOk->onKeyboardPress((ActionHandler)&BuildFacilitiesState::btnOkClick, options1.keyCancel());
 
 	_txtTitle->setBig();
 	_txtTitle->setAlign(ALIGN_CENTER);
-	_txtTitle->setText(tr("STR_INSTALLATION"));
+	_txtTitle->setText(ltr("STR_INSTALLATION"));
 
 	_lstFacilities->setColumns(1, 104);
 	_lstFacilities->setSelectable(true);
@@ -165,7 +165,7 @@ void BuildFacilitiesState::populateBuildList()
 	int row = 0;
 	for (const auto* facRule : _facilities)
 	{
-		_lstFacilities->addRow(1, tr(facRule->getType()).c_str());
+		_lstFacilities->addRow(1, ltr(facRule->getType()).c_str());
 		++row;
 	}
 
@@ -174,7 +174,7 @@ void BuildFacilitiesState::populateBuildList()
 		Uint8 disabledColor = _lstFacilities->getSecondaryColor();
 		for (const auto* facRule : _disabledFacilities)
 		{
-			_lstFacilities->addRow(1, tr(facRule->getType()).c_str());
+			_lstFacilities->addRow(1, ltr(facRule->getType()).c_str());
 			_lstFacilities->setRowColor(row, disabledColor);
 			++row;
 		}

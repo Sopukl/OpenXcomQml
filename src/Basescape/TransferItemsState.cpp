@@ -104,24 +104,24 @@ TransferItemsState::TransferItemsState(Base *baseFrom, Base *baseTo, DebriefingS
 
 	touchComponentsConfigure();
 
-	_btnOk->setText(tr("STR_TRANSFER"));
+	_btnOk->setText(ltr("STR_TRANSFER"));
 	_btnOk->onMouseClick((ActionHandler)&TransferItemsState::btnOkClick);
 	_btnOk->onKeyboardPress((ActionHandler)&TransferItemsState::btnOkClick, options1.keyOk());
 
-	_btnCancel->setText(tr("STR_CANCEL"));
+	_btnCancel->setText(ltr("STR_CANCEL"));
 	_btnCancel->onMouseClick((ActionHandler)&TransferItemsState::btnCancelClick);
 	_btnCancel->onKeyboardPress((ActionHandler)&TransferItemsState::btnCancelClick, options1.keyCancel());
 
 	_txtTitle->setBig();
 	_txtTitle->setAlign(ALIGN_CENTER);
-	_txtTitle->setText(tr("STR_TRANSFER"));
+	_txtTitle->setText(ltr("STR_TRANSFER"));
 
-	_txtQuantity->setText(tr("STR_QUANTITY_UC"));
+	_txtQuantity->setText(ltr("STR_QUANTITY_UC"));
 
-	_txtAmountTransfer->setText(tr("STR_AMOUNT_TO_TRANSFER"));
+	_txtAmountTransfer->setText(ltr("STR_AMOUNT_TO_TRANSFER"));
 	_txtAmountTransfer->setWordWrap(true);
 
-	_txtAmountDestination->setText(tr("STR_AMOUNT_AT_DESTINATION"));
+	_txtAmountDestination->setText(ltr("STR_AMOUNT_AT_DESTINATION"));
 	_txtAmountDestination->setWordWrap(true);
 
 	_lstItems->setArrowColumn(193, ARROW_VERTICAL);
@@ -177,7 +177,7 @@ TransferItemsState::TransferItemsState(Base *baseFrom, Base *baseTo, DebriefingS
 	}
 	if (_baseFrom->getAvailableScientists() > 0 && _debriefingState == 0)
 	{
-		TransferRow row = { TRANSFER_SCIENTIST, 0, tr("STR_SCIENTIST"),  (int)(5 * _distance), _baseFrom->getAvailableScientists(), _baseTo->getAvailableScientists(), 0, -2, 0, 0, _baseFrom->getAvailableScientists() * (int)(5 * _distance) };
+		TransferRow row = { TRANSFER_SCIENTIST, 0, ltr("STR_SCIENTIST"),  (int)(5 * _distance), _baseFrom->getAvailableScientists(), _baseTo->getAvailableScientists(), 0, -2, 0, 0, _baseFrom->getAvailableScientists() * (int)(5 * _distance) };
 		_items.push_back(row);
 		std::string cat = getCategory(_items.size() - 1);
 		if (std::find(_cats.begin(), _cats.end(), cat) == _cats.end())
@@ -187,7 +187,7 @@ TransferItemsState::TransferItemsState(Base *baseFrom, Base *baseTo, DebriefingS
 	}
 	if (_baseFrom->getAvailableEngineers() > 0 && _debriefingState == 0)
 	{
-		TransferRow row = { TRANSFER_ENGINEER, 0, tr("STR_ENGINEER"),  (int)(5 * _distance), _baseFrom->getAvailableEngineers(), _baseTo->getAvailableEngineers(), 0, -1, 0, 0, _baseFrom->getAvailableEngineers() * (int)(5 * _distance) };
+		TransferRow row = { TRANSFER_ENGINEER, 0, ltr("STR_ENGINEER"),  (int)(5 * _distance), _baseFrom->getAvailableEngineers(), _baseTo->getAvailableEngineers(), 0, -1, 0, 0, _baseFrom->getAvailableEngineers() * (int)(5 * _distance) };
 		_items.push_back(row);
 		std::string cat = getCategory(_items.size() - 1);
 		if (std::find(_cats.begin(), _cats.end(), cat) == _cats.end())
@@ -205,7 +205,7 @@ TransferItemsState::TransferItemsState(Base *baseFrom, Base *baseTo, DebriefingS
 		}
 		if (qty > 0)
 		{
-			TransferRow row = { TRANSFER_ITEM, rule, tr(itemType),  (int)(1 * _distance), qty, _baseTo->getStorageItems()->getItem(rule), 0, rule->getListOrder(), rule->getSize(), qty * rule->getSize(), qty * (int)(1 * _distance) };
+			TransferRow row = { TRANSFER_ITEM, rule, ltr(itemType),  (int)(1 * _distance), qty, _baseTo->getStorageItems()->getItem(rule), 0, rule->getListOrder(), rule->getSize(), qty * rule->getSize(), qty * (int)(1 * _distance) };
 			_items.push_back(row);
 			std::string cat = getCategory(_items.size() - 1);
 			if (std::find(_cats.begin(), _cats.end(), cat) == _cats.end())
@@ -536,7 +536,7 @@ void TransferItemsState::btnOkClick(Action *)
 		if (_iQty > 0.0 ? freeStoresTo < -0.00001 : freeStoresFrom < -0.00001)
 		{
 			RuleInterface *menuInterface = _game->getMod()->getInterface("transferMenu");
-			_game->pushState(new ErrorMessageState(tr("STR_NOT_ENOUGH_STORE_SPACE"), _palette, menuInterface->getElement("errorMessage")->color, "BACK13.SCR", menuInterface->getElement("errorPalette")->color));
+			_game->pushState(new ErrorMessageState(ltr("STR_NOT_ENOUGH_STORE_SPACE"), _palette, menuInterface->getElement("errorMessage")->color, "BACK13.SCR", menuInterface->getElement("errorPalette")->color));
 			return;
 		}
 	}
@@ -909,25 +909,25 @@ void TransferItemsState::increaseByValue(int change)
 	case TRANSFER_ENGINEER:
 		if (_pQty + 1 > _baseTo->getAvailableQuarters() - _baseTo->getUsedQuarters())
 		{
-			errorMessage = tr("STR_NO_FREE_ACCOMODATION");
+			errorMessage = ltr("STR_NO_FREE_ACCOMODATION");
 		}
 		break;
 	case TRANSFER_CRAFT:
 		craft = (Craft*)getRow().rule;
 		if (_cQty + 1 > _baseTo->getAvailableHangars() - _baseTo->getUsedHangars())
 		{
-			errorMessage = tr("STR_NO_FREE_HANGARS_FOR_TRANSFER");
+			errorMessage = ltr("STR_NO_FREE_HANGARS_FOR_TRANSFER");
 		}
 		else if (craft->getNumTotalSoldiers() > 0 && _pQty + craft->getNumTotalSoldiers() > _baseTo->getAvailableQuarters() - _baseTo->getUsedQuarters())
 		{
-			errorMessage = tr("STR_NO_FREE_ACCOMODATION_CREW");
+			errorMessage = ltr("STR_NO_FREE_ACCOMODATION_CREW");
 		}
 		else if (options1.storageLimitsEnforced())
 		{
 			double used = craft->getTotalItemStorageSize();
 			if (used > 0.0 && _baseTo->storesOverfull(_iQty + used))
 			{
-				errorMessage = tr("STR_NOT_ENOUGH_STORE_SPACE_FOR_CRAFT");
+				errorMessage = ltr("STR_NOT_ENOUGH_STORE_SPACE_FOR_CRAFT");
 			}
 		}
 		break;
@@ -935,13 +935,13 @@ void TransferItemsState::increaseByValue(int change)
 		selItem = (RuleItem*)getRow().rule;
 		if (selItem->getSize() > 0.0 && _baseTo->storesOverfull(selItem->getSize() + _iQty))
 		{
-			errorMessage = tr("STR_NOT_ENOUGH_STORE_SPACE");
+			errorMessage = ltr("STR_NOT_ENOUGH_STORE_SPACE");
 		}
 		if (selItem->isAlien())
 		{
 			if (options1.storageLimitsEnforced() * _aQty + 1 > _baseTo->getAvailableContainment(selItem->getPrisonType()) - options1.storageLimitsEnforced() * _baseTo->getUsedContainment(selItem->getPrisonType()))
 			{
-				errorMessage = trAlt("STR_NO_ALIEN_CONTAINMENT_FOR_TRANSFER", selItem->getPrisonType());
+				errorMessage = ltrAlt("STR_NO_ALIEN_CONTAINMENT_FOR_TRANSFER", selItem->getPrisonType());
 			}
 		}
 		break;

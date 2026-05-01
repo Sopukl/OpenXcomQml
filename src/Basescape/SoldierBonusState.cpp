@@ -72,18 +72,18 @@ SoldierBonusState::SoldierBonusState(Base *base, size_t soldier) : _base(base), 
 	// Set up objects
 	setWindowBackground(_window, "soldierBonus");
 
-	_btnSummary->setText(tr("STR_SUMMARY"));
+	_btnSummary->setText(ltr("STR_SUMMARY"));
 	_btnSummary->onMouseClick((ActionHandler)&SoldierBonusState::btnSummaryClick);
 
-	_btnCancel->setText(tr("STR_CANCEL_UC"));
+	_btnCancel->setText(ltr("STR_CANCEL_UC"));
 	_btnCancel->onMouseClick((ActionHandler)&SoldierBonusState::btnCancelClick);
 	_btnCancel->onKeyboardPress((ActionHandler)&SoldierBonusState::btnCancelClick, options1.keyCancel());
 
 	Soldier *s = _base ? _base->getSoldiers()->at(_soldier) : _game->getSavedGame()->getDeadSoldiers()->at(_soldier);
 	_txtTitle->setAlign(ALIGN_CENTER);
-	_txtTitle->setText(tr("STR_SOLDIER_BONUSES_FOR").arg(s->getName()));
+	_txtTitle->setText(ltr("STR_SOLDIER_BONUSES_FOR").arg(s->getName()));
 
-	_txtType->setText(tr("STR_TYPE"));
+	_txtType->setText(ltr("STR_TYPE"));
 
 	_lstBonuses->setColumns(1, 150);
 	_lstBonuses->setSelectable(true);
@@ -95,7 +95,7 @@ SoldierBonusState::SoldierBonusState(Base *base, size_t soldier) : _base(base), 
 	for (auto* bonusRule : *s->getBonuses(nullptr))
 	{
 		_bonuses.push_back(bonusRule->getName());
-		_lstBonuses->addRow(1, tr(bonusRule->getName()).c_str());
+		_lstBonuses->addRow(1, ltr(bonusRule->getName()).c_str());
 	}
 
 	_lstBonuses->onMouseClick((ActionHandler)& SoldierBonusState::lstBonusesClick);
@@ -139,29 +139,29 @@ SoldierBonusState::SoldierBonusState(Base *base, size_t soldier) : _base(base), 
 		manaRecovery = manaRecovery || bonusRule->getManaRecoveryRaw()->isModded();
 	}
 	if (stats.tu != 0)
-		_lstSummary->addRow(2, tr("STR_TIME_UNITS").c_str(), std::to_string(stats.tu).c_str());
+		_lstSummary->addRow(2, ltr("STR_TIME_UNITS").c_str(), std::to_string(stats.tu).c_str());
 	if (stats.stamina != 0)
-		_lstSummary->addRow(2, tr("STR_STAMINA").c_str(), std::to_string(stats.stamina).c_str());
+		_lstSummary->addRow(2, ltr("STR_STAMINA").c_str(), std::to_string(stats.stamina).c_str());
 	if (stats.health != 0)
-		_lstSummary->addRow(2, tr("STR_HEALTH").c_str(), std::to_string(stats.health).c_str());
+		_lstSummary->addRow(2, ltr("STR_HEALTH").c_str(), std::to_string(stats.health).c_str());
 	if (stats.bravery != 0)
-		_lstSummary->addRow(2, tr("STR_BRAVERY").c_str(), std::to_string(stats.bravery).c_str());
+		_lstSummary->addRow(2, ltr("STR_BRAVERY").c_str(), std::to_string(stats.bravery).c_str());
 	if (stats.reactions != 0)
-		_lstSummary->addRow(2, tr("STR_REACTIONS").c_str(), std::to_string(stats.reactions).c_str());
+		_lstSummary->addRow(2, ltr("STR_REACTIONS").c_str(), std::to_string(stats.reactions).c_str());
 	if (stats.firing != 0)
-		_lstSummary->addRow(2, tr("STR_FIRING_ACCURACY").c_str(), std::to_string(stats.firing).c_str());
+		_lstSummary->addRow(2, ltr("STR_FIRING_ACCURACY").c_str(), std::to_string(stats.firing).c_str());
 	if (stats.throwing != 0)
-		_lstSummary->addRow(2, tr("STR_THROWING_ACCURACY").c_str(), std::to_string(stats.throwing).c_str());
+		_lstSummary->addRow(2, ltr("STR_THROWING_ACCURACY").c_str(), std::to_string(stats.throwing).c_str());
 	if (stats.melee != 0)
-		_lstSummary->addRow(2, tr("STR_MELEE_ACCURACY").c_str(), std::to_string(stats.melee).c_str());
+		_lstSummary->addRow(2, ltr("STR_MELEE_ACCURACY").c_str(), std::to_string(stats.melee).c_str());
 	if (stats.strength != 0)
-		_lstSummary->addRow(2, tr("STR_STRENGTH").c_str(), std::to_string(stats.strength).c_str());
+		_lstSummary->addRow(2, ltr("STR_STRENGTH").c_str(), std::to_string(stats.strength).c_str());
 	if (stats.mana != 0)
-		_lstSummary->addRow(2, tr("STR_MANA_POOL").c_str(), std::to_string(stats.mana).c_str());
+		_lstSummary->addRow(2, ltr("STR_MANA_POOL").c_str(), std::to_string(stats.mana).c_str());
 	if (stats.psiStrength != 0)
-		_lstSummary->addRow(2, tr("STR_PSIONIC_STRENGTH").c_str(), std::to_string(stats.psiStrength).c_str());
+		_lstSummary->addRow(2, ltr("STR_PSIONIC_STRENGTH").c_str(), std::to_string(stats.psiStrength).c_str());
 	if (stats.psiSkill != 0)
-		_lstSummary->addRow(2, tr("STR_PSIONIC_SKILL").c_str(), std::to_string(stats.psiSkill).c_str());
+		_lstSummary->addRow(2, ltr("STR_PSIONIC_SKILL").c_str(), std::to_string(stats.psiSkill).c_str());
 
 
 	helper::SingleRun gap;
@@ -171,27 +171,27 @@ SoldierBonusState::SoldierBonusState(Base *base, size_t soldier) : _base(base), 
 	if (frontArmor != 0)
 	{
 		if (gap.tryRun()) _lstSummary->addRow(1, "");
-		_lstSummary->addRow(2, tr("STR_FRONT_ARMOR_UC").c_str(), std::to_string(frontArmor).c_str());
+		_lstSummary->addRow(2, ltr("STR_FRONT_ARMOR_UC").c_str(), std::to_string(frontArmor).c_str());
 	}
 	if (leftArmor != 0)
 	{
 		if (gap.tryRun()) _lstSummary->addRow(1, "");
-		_lstSummary->addRow(2, tr("STR_LEFT_ARMOR_UC").c_str(), std::to_string(leftArmor).c_str());
+		_lstSummary->addRow(2, ltr("STR_LEFT_ARMOR_UC").c_str(), std::to_string(leftArmor).c_str());
 	}
 	if (rightArmor != 0)
 	{
 		if (gap.tryRun()) _lstSummary->addRow(1, "");
-		_lstSummary->addRow(2, tr("STR_RIGHT_ARMOR_UC").c_str(), std::to_string(rightArmor).c_str());
+		_lstSummary->addRow(2, ltr("STR_RIGHT_ARMOR_UC").c_str(), std::to_string(rightArmor).c_str());
 	}
 	if (rearArmor != 0)
 	{
 		if (gap.tryRun()) _lstSummary->addRow(1, "");
-		_lstSummary->addRow(2, tr("STR_REAR_ARMOR_UC").c_str(), std::to_string(rearArmor).c_str());
+		_lstSummary->addRow(2, ltr("STR_REAR_ARMOR_UC").c_str(), std::to_string(rearArmor).c_str());
 	}
 	if (underArmor != 0)
 	{
 		if (gap.tryRun()) _lstSummary->addRow(1, "");
-		_lstSummary->addRow(2, tr("STR_UNDER_ARMOR_UC").c_str(), std::to_string(underArmor).c_str());
+		_lstSummary->addRow(2, ltr("STR_UNDER_ARMOR_UC").c_str(), std::to_string(underArmor).c_str());
 	}
 
 
@@ -199,46 +199,46 @@ SoldierBonusState::SoldierBonusState(Base *base, size_t soldier) : _base(base), 
 	if (visibilityAtDark != 0)
 	{
 		if (gap.tryRun()) _lstSummary->addRow(1, "");
-		_lstSummary->addRow(2, tr("visibilityAtDark").c_str(), std::to_string(visibilityAtDark).c_str());
+		_lstSummary->addRow(2, ltr("visibilityAtDark").c_str(), std::to_string(visibilityAtDark).c_str());
 	}
 	if (visibilityAtDay != 0)
 	{
 		if (gap.tryRun()) _lstSummary->addRow(1, "");
-		_lstSummary->addRow(2, tr("visibilityAtDay").c_str(), std::to_string(visibilityAtDay).c_str());
+		_lstSummary->addRow(2, ltr("visibilityAtDay").c_str(), std::to_string(visibilityAtDay).c_str());
 	}
 	if (psiVision != 0)
 	{
 		if (gap.tryRun()) _lstSummary->addRow(1, "");
-		_lstSummary->addRow(2, tr("psiVision").c_str(), std::to_string(psiVision).c_str());
+		_lstSummary->addRow(2, ltr("psiVision").c_str(), std::to_string(psiVision).c_str());
 	}
 	if (bonusVisibilityThroughSmoke != 0)
 	{
 		if (gap.tryRun()) _lstSummary->addRow(1, "");
-		_lstSummary->addRow(2, tr("heatVision").c_str(), std::to_string(bonusVisibilityThroughSmoke).c_str());
+		_lstSummary->addRow(2, ltr("heatVision").c_str(), std::to_string(bonusVisibilityThroughSmoke).c_str());
 	}
 	if (bonusVisibilityThroughFire != 0)
 	{
 		if (gap.tryRun()) _lstSummary->addRow(1, "");
-		_lstSummary->addRow(2, tr("visibilityThroughFire").c_str(), std::to_string(bonusVisibilityThroughFire).c_str());
+		_lstSummary->addRow(2, ltr("visibilityThroughFire").c_str(), std::to_string(bonusVisibilityThroughFire).c_str());
 	}
 
 
 	if (timeRecovery || energyRecovery || moraleRecovery || healthRecovery || stunRecovery || manaRecovery)
 	{
 		_lstSummary->addRow(1, "");
-		_lstSummary->addRow(1, tr("recovery").c_str());
+		_lstSummary->addRow(1, ltr("recovery").c_str());
 		if (timeRecovery)
-			_lstSummary->addRow(1, tr("time").c_str());
+			_lstSummary->addRow(1, ltr("time").c_str());
 		if (energyRecovery)
-			_lstSummary->addRow(1, tr("energy").c_str());
+			_lstSummary->addRow(1, ltr("energy").c_str());
 		if (moraleRecovery)
-			_lstSummary->addRow(1, tr("morale").c_str());
+			_lstSummary->addRow(1, ltr("morale").c_str());
 		if (healthRecovery)
-			_lstSummary->addRow(1, tr("health").c_str());
+			_lstSummary->addRow(1, ltr("health").c_str());
 		if (stunRecovery)
-			_lstSummary->addRow(1, tr("stun").c_str());
+			_lstSummary->addRow(1, ltr("stun").c_str());
 		if (manaRecovery)
-			_lstSummary->addRow(1, tr("mana").c_str());
+			_lstSummary->addRow(1, ltr("mana").c_str());
 	}
 }
 

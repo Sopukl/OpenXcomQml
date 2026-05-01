@@ -230,6 +230,7 @@ struct SaveDesc
 	  signals:
 		void aboutToQuit();
 		void stateChanged();
+		void createNewBase(OpenXcom::GeoscapeState*);
 	};
 	inline Game game;
 }

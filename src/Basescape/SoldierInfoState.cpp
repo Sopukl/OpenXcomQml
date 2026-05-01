@@ -248,7 +248,7 @@ SoldierInfoState::SoldierInfoState(Base *base, size_t soldierId, bool forceLimit
 	// Set up objects
 	_game->getMod()->getSurface("BACK06.SCR")->blitNShade(_bg, 0, 0);
 
-	_btnOk->setText(tr("STR_OK"));
+	_btnOk->setText(ltr("STR_OK"));
 	_btnOk->onMouseClick((ActionHandler)&SoldierInfoState::btnOkClick);
 	_btnOk->onKeyboardPress((ActionHandler)&SoldierInfoState::btnOkClick, options1.keyCancel());
 
@@ -276,17 +276,17 @@ SoldierInfoState::SoldierInfoState(Base *base, size_t soldierId, bool forceLimit
 		_btnNext->onKeyboardPress((ActionHandler)&SoldierInfoState::btnNextClick, options1.keyBattleNextUnit());
 	}
 
-	_btnArmor->setText(tr("STR_ARMOR"));
+	_btnArmor->setText(ltr("STR_ARMOR"));
 	_btnArmor->onMouseClick((ActionHandler)&SoldierInfoState::btnArmorClick);
 	if (_readOnly)
 	{
 		_btnArmor->setVisible(false);
 	}
 
-	_btnBonuses->setText(tr("STR_BONUSES_BUTTON")); // tiny button, default translation is " "
+	_btnBonuses->setText(ltr("STR_BONUSES_BUTTON")); // tiny button, default translation is " "
 	_btnBonuses->onMouseClick((ActionHandler)&SoldierInfoState::btnBonusesClick);
 
-	_btnTransformations->setText(tr("STR_TRANSFORMATIONS_BUTTON"));
+	_btnTransformations->setText(ltr("STR_TRANSFORMATIONS_BUTTON"));
 	_btnTransformations->onMouseClick((ActionHandler)&SoldierInfoState::btnTransformationsClick);
 
 	std::vector<RuleSoldierTransformation*> availableTransformations;
@@ -316,62 +316,62 @@ SoldierInfoState::SoldierInfoState(Base *base, size_t soldierId, bool forceLimit
 		_rank->onMouseClick((ActionHandler)&SoldierInfoState::btnRankClick);
 	}
 
-	_btnSack->setText(tr("STR_SACK"));
+	_btnSack->setText(ltr("STR_SACK"));
 	_btnSack->onMouseClick((ActionHandler)&SoldierInfoState::btnSackClick);
 
-	_btnDiary->setText(tr("STR_DIARY"));
+	_btnDiary->setText(ltr("STR_DIARY"));
 	_btnDiary->onMouseClick((ActionHandler)&SoldierInfoState::btnDiaryClick);
 	_btnDiary->setVisible(options1.soldierDiaries());
 
-	_txtPsionic->setText(tr("STR_IN_PSIONIC_TRAINING"));
+	_txtPsionic->setText(ltr("STR_IN_PSIONIC_TRAINING"));
 
-	_txtTimeUnits->setText(tr("STR_TIME_UNITS"));
+	_txtTimeUnits->setText(ltr("STR_TIME_UNITS"));
 
 	_barTimeUnits->setScale(1.0);
 
-	_txtStamina->setText(tr("STR_STAMINA"));
+	_txtStamina->setText(ltr("STR_STAMINA"));
 
 	_barStamina->setScale(1.0);
 
-	_txtHealth->setText(tr("STR_HEALTH"));
+	_txtHealth->setText(ltr("STR_HEALTH"));
 
 	_barHealth->setScale(1.0);
 
-	_txtBravery->setText(tr("STR_BRAVERY"));
+	_txtBravery->setText(ltr("STR_BRAVERY"));
 
 	_barBravery->setScale(1.0);
 
-	_txtReactions->setText(tr("STR_REACTIONS"));
+	_txtReactions->setText(ltr("STR_REACTIONS"));
 
 	_barReactions->setScale(1.0);
 
-	_txtFiring->setText(tr("STR_FIRING_ACCURACY"));
+	_txtFiring->setText(ltr("STR_FIRING_ACCURACY"));
 
 	_barFiring->setScale(1.0);
 
-	_txtThrowing->setText(tr("STR_THROWING_ACCURACY"));
+	_txtThrowing->setText(ltr("STR_THROWING_ACCURACY"));
 
 	_barThrowing->setScale(1.0);
 
-	_txtMelee->setText(tr("STR_MELEE_ACCURACY"));
+	_txtMelee->setText(ltr("STR_MELEE_ACCURACY"));
 
 	_barMelee->setScale(1.0);
 
-	_txtStrength->setText(tr("STR_STRENGTH"));
+	_txtStrength->setText(ltr("STR_STRENGTH"));
 
 	_barStrength->setScale(1.0);
 
 	if (_game->getMod()->isManaFeatureEnabled())
 	{
-		_txtMana->setText(tr("STR_MANA_POOL"));
+		_txtMana->setText(ltr("STR_MANA_POOL"));
 		_barMana->setScale(1.0);
 	}
 
-	_txtPsiStrength->setText(tr("STR_PSIONIC_STRENGTH"));
+	_txtPsiStrength->setText(ltr("STR_PSIONIC_STRENGTH"));
 
 	_barPsiStrength->setScale(1.0);
 
-	_txtPsiSkill->setText(tr("STR_PSIONIC_SKILL"));
+	_txtPsiSkill->setText(ltr("STR_PSIONIC_SKILL"));
 
 	_barPsiSkill->setScale(1.0);
 }
@@ -473,11 +473,11 @@ void SoldierInfoState::init()
 	std::string wsArmor;
 	if (_soldier->getArmor() == _soldier->getRules()->getDefaultArmor())
 	{
-		wsArmor= tr("STR_ARMOR_").arg(tr(_soldier->getArmor()->getType()));
+		wsArmor= ltr("STR_ARMOR_").arg(ltr(_soldier->getArmor()->getType()));
 	}
 	else
 	{
-		wsArmor = tr(_soldier->getArmor()->getType());
+		wsArmor = ltr(_soldier->getArmor()->getType());
 	}
 
 	_btnArmor->setText(wsArmor);
@@ -487,25 +487,25 @@ void SoldierInfoState::init()
 	_btnSack->setVisible(showNastyButtons);
 	_btnTransformations->setVisible(showNastyButtons && !_noTransformations);
 
-	_txtRank->setText(tr("STR_RANK_").arg(tr(_soldier->getRankString())));
+	_txtRank->setText(ltr("STR_RANK_").arg(ltr(_soldier->getRankString())));
 
-	_txtMissions->setText(tr("STR_MISSIONS").arg(_soldier->getMissions()));
+	_txtMissions->setText(ltr("STR_MISSIONS").arg(_soldier->getMissions()));
 
-	_txtKills->setText(tr("STR_KILLS").arg(_soldier->getKills()));
+	_txtKills->setText(ltr("STR_KILLS").arg(_soldier->getKills()));
 
-	_txtStuns->setText(tr("STR_STUNS").arg(_soldier->getStuns()));
+	_txtStuns->setText(ltr("STR_STUNS").arg(_soldier->getStuns()));
 	_txtStuns->setVisible(!options1.soldierDiaries());
 
 	std::string craft;
 	if (_soldier->getCraft() == 0)
 	{
-		craft = tr("STR_NONE_UC");
+		craft = ltr("STR_NONE_UC");
 	}
 	else
 	{
 		craft = _soldier->getCraft()->getName(_game->getLanguage());
 	}
-	_txtCraft->setText(tr("STR_CRAFT_").arg(craft));
+	_txtCraft->setText(ltr("STR_CRAFT_").arg(craft));
 
 	BaseSumDailyRecovery recovery = _base ? _base->getSumRecoveryPerDay() : BaseSumDailyRecovery();
 	auto getDaysOrInfinity = [&](int days)
@@ -516,13 +516,13 @@ void SoldierInfoState::init()
 		}
 		else
 		{
-			return std::string{tr("STR_DAY", days)};
+			return std::string{ltr("STR_DAY", days)};
 		}
 	};
 	if (_soldier->isWounded())
 	{
 		int recoveryTime = _soldier->getNeededRecoveryTime(recovery);
-		_txtRecovery->setText(tr("STR_WOUND_RECOVERY").arg(getDaysOrInfinity(recoveryTime)));
+		_txtRecovery->setText(ltr("STR_WOUND_RECOVERY").arg(getDaysOrInfinity(recoveryTime)));
 	}
 	else
 	{
@@ -530,12 +530,12 @@ void SoldierInfoState::init()
 		if (_soldier->getManaMissing() > 0)
 		{
 			int manaRecoveryTime = _soldier->getManaRecovery(recovery.ManaRecovery);
-			_txtRecovery->setText(tr("STR_MANA_RECOVERY").arg(getDaysOrInfinity(manaRecoveryTime)));
+			_txtRecovery->setText(ltr("STR_MANA_RECOVERY").arg(getDaysOrInfinity(manaRecoveryTime)));
 		}
 		if (_soldier->getHealthMissing() > 0)
 		{
 			int healthRecoveryTime = _soldier->getHealthRecovery(recovery.HealthRecovery);
-			_txtRecovery->setText(tr("STR_HEALTH_RECOVERY").arg(getDaysOrInfinity(healthRecoveryTime)));
+			_txtRecovery->setText(ltr("STR_HEALTH_RECOVERY").arg(getDaysOrInfinity(healthRecoveryTime)));
 		}
 	}
 
@@ -601,7 +601,7 @@ void SoldierInfoState::init()
 		{
 			status = "STR_KILLED_IN_ACTION";
 		}
-		_txtDead->setText(tr(status, _soldier->getGender()));
+		_txtDead->setText(ltr(status, _soldier->getGender()));
 	}
 	else
 	{
@@ -674,7 +674,7 @@ void SoldierInfoState::btnOkClick(Action *)
 			// Note: we could sell a currently opened craft here and crash the game
 			_game->pushState(new SellState(_base, 0));
 		}
-		_game->pushState(new ErrorMessageState(tr("STR_STORAGE_EXCEEDED").arg(_base->getName()), _palette, _game->getMod()->getInterface("soldierInfo")->getElement("errorMessage")->color, "BACK01.SCR", _game->getMod()->getInterface("soldierInfo")->getElement("errorPalette")->color));
+		_game->pushState(new ErrorMessageState(ltr("STR_STORAGE_EXCEEDED").arg(_base->getName()), _palette, _game->getMod()->getInterface("soldierInfo")->getElement("errorMessage")->color, "BACK01.SCR", _game->getMod()->getInterface("soldierInfo")->getElement("errorPalette")->color));
 	}
 }
 

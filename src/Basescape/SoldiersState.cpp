@@ -116,21 +116,21 @@ SoldiersState::SoldiersState(Base *base) : _base(base), _origSoldierOrder(*_base
 	// Set up objects
 	setWindowBackground(_window, "soldierList");
 
-	_btnOk->setText(tr("STR_OK"));
+	_btnOk->setText(ltr("STR_OK"));
 	_btnOk->onMouseClick((ActionHandler)&SoldiersState::btnOkClick);
 	_btnOk->onKeyboardPress((ActionHandler)&SoldiersState::btnOkClick, options1.keyCancel());
 	_btnOk->onKeyboardPress((ActionHandler)&SoldiersState::btnInventoryClick, options1.keyBattleInventory());
 	_btnOk->onKeyboardPress((ActionHandler)&SoldiersState::btnTransformationsOverviewClick, SDLK_t);
 
-	_btnPsiTraining->setText(tr("STR_PSI_TRAINING"));
+	_btnPsiTraining->setText(ltr("STR_PSI_TRAINING"));
 	_btnPsiTraining->onMouseClick((ActionHandler)&SoldiersState::btnPsiTrainingClick);
 	_btnPsiTraining->setVisible(isPsiBtnVisible);
 
-	_btnTraining->setText(tr("STR_TRAINING"));
+	_btnTraining->setText(ltr("STR_TRAINING"));
 	_btnTraining->onMouseClick((ActionHandler)&SoldiersState::btnTrainingClick);
 	_btnTraining->setVisible(isTrnBtnVisible);
 
-	_btnMemorial->setText(tr("STR_MEMORIAL"));
+	_btnMemorial->setText(ltr("STR_MEMORIAL"));
 	_btnMemorial->onMouseClick((ActionHandler)&SoldiersState::btnMemorialClick);
 
 	_availableOptions.clear();
@@ -180,21 +180,21 @@ SoldiersState::SoldiersState(Base *base) : _base(base), _origSoldierOrder(*_base
 
 	_txtTitle->setBig();
 	_txtTitle->setAlign(ALIGN_LEFT);
-	_txtTitle->setText(tr("STR_SOLDIER_LIST"));
+	_txtTitle->setText(ltr("STR_SOLDIER_LIST"));
 
-	_txtName->setText(tr("STR_NAME_UC"));
+	_txtName->setText(ltr("STR_NAME_UC"));
 
-	_txtRank->setText(tr("STR_RANK"));
+	_txtRank->setText(ltr("STR_RANK"));
 
-	_txtCraft->setText(tr("STR_CRAFT"));
+	_txtCraft->setText(ltr("STR_CRAFT"));
 
 	// populate sort options
 	std::vector<std::string> sortOptions;
-	sortOptions.push_back(tr("STR_ORIGINAL_ORDER"));
+	sortOptions.push_back(ltr("STR_ORIGINAL_ORDER"));
 	_sortFunctors.push_back(NULL);
 
 #define PUSH_IN(strId, functor) \
-	sortOptions.push_back(tr(strId)); \
+	sortOptions.push_back(ltr(strId)); \
 	_sortFunctors.push_back(new SortFunctor(_game, functor));
 
 	PUSH_IN("STR_ID", idStat);
@@ -232,7 +232,7 @@ SoldiersState::SoldiersState(Base *base) : _base(base), _origSoldierOrder(*_base
 	_cbxSortBy->setOptions(sortOptions);
 	_cbxSortBy->setSelected(0);
 	_cbxSortBy->onChange((ActionHandler)&SoldiersState::cbxSortByChange);
-	_cbxSortBy->setText(tr("STR_SORT_BY"));
+	_cbxSortBy->setText(ltr("STR_SORT_BY"));
 
 	//_lstSoldiers->setArrowColumn(188, ARROW_VERTICAL);
 	_lstSoldiers->setColumns(3, 106, 98, 76);
@@ -446,11 +446,11 @@ void SoldiersState::initList(size_t scrl)
 			int dynStat = (*_dynGetter)(_game, soldier);
 			std::ostringstream ss;
 			ss << dynStat;
-			_lstSoldiers->addRow(4, soldier->getName(true).c_str(), tr(soldier->getRankString()).c_str(), craftString.c_str(), ss.str().c_str());
+			_lstSoldiers->addRow(4, soldier->getName(true).c_str(), ltr(soldier->getRankString()).c_str(), craftString.c_str(), ss.str().c_str());
 		}
 		else
 		{
-			_lstSoldiers->addRow(3, soldier->getName(true).c_str(), tr(soldier->getRankString()).c_str(), craftString.c_str());
+			_lstSoldiers->addRow(3, soldier->getName(true).c_str(), ltr(soldier->getRankString()).c_str(), craftString.c_str());
 		}
 
 		if (soldier->getCraft() == 0)
@@ -487,7 +487,7 @@ void SoldiersState::lstItemsLeftArrowClick(Action *action)
 			moveSoldierUp(action, row, true);
 		}
 	}
-	_cbxSortBy->setText(tr("STR_SORT_BY"));
+	_cbxSortBy->setText(ltr("STR_SORT_BY"));
 	_cbxSortBy->setSelected(-1);
 }
 
@@ -540,7 +540,7 @@ void SoldiersState::lstItemsRightArrowClick(Action *action)
 			moveSoldierDown(action, row, true);
 		}
 	}
-	_cbxSortBy->setText(tr("STR_SORT_BY"));
+	_cbxSortBy->setText(ltr("STR_SORT_BY"));
 	_cbxSortBy->setSelected(-1);
 }
 

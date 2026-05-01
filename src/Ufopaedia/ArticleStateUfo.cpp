@@ -60,7 +60,7 @@ namespace OpenXcom
 		_txtTitle->setColor(Palette::blockOffset(8)+5);
 		_txtTitle->setBig();
 		_txtTitle->setWordWrap(true);
-		_txtTitle->setText(tr(defs->getTitleForPage(_state->current_page)));
+		_txtTitle->setText(ltr(defs->getTitleForPage(_state->current_page)));
 
 		_image = new Surface(160, 52, 160, 6);
 		add(_image);
@@ -97,7 +97,7 @@ namespace OpenXcom
 		_txtInfo->setSecondaryColor(Palette::blockOffset(8) + 10);
 		_txtInfo->setWordWrap(true);
 		_txtInfo->setScrollable(true);
-		_txtInfo->setText(tr(defs->getTextForPage(_state->current_page)));
+		_txtInfo->setText(ltr(defs->getTextForPage(_state->current_page)));
 
 		_lstInfo = new TextList(310, 64, 10, 68);
 		add(_lstInfo);
@@ -110,13 +110,13 @@ namespace OpenXcom
 		_lstInfo->setBig();
 		_lstInfo->setDot(true);
 
-		_lstInfo->addRow(2, tr("STR_DAMAGE_CAPACITY").c_str(), Unicode::formatNumber(ufo->getStats().damageMax).c_str());
+		_lstInfo->addRow(2, ltr("STR_DAMAGE_CAPACITY").c_str(), Unicode::formatNumber(ufo->getStats().damageMax).c_str());
 
-		_lstInfo->addRow(2, tr("STR_WEAPON_POWER").c_str(), Unicode::formatNumber(ufo->getWeaponPower()).c_str());
+		_lstInfo->addRow(2, ltr("STR_WEAPON_POWER").c_str(), Unicode::formatNumber(ufo->getWeaponPower()).c_str());
 
-		_lstInfo->addRow(2, tr("STR_WEAPON_RANGE").c_str(), tr("STR_KILOMETERS").arg(ufo->getWeaponRange()).c_str());
+		_lstInfo->addRow(2, ltr("STR_WEAPON_RANGE").c_str(), ltr("STR_KILOMETERS").arg(ufo->getWeaponRange()).c_str());
 
-		_lstInfo->addRow(2, tr("STR_MAXIMUM_SPEED").c_str(), tr("STR_KNOTS").arg(Unicode::formatNumber(ufo->getStats().speedMax)).c_str());
+		_lstInfo->addRow(2, ltr("STR_MAXIMUM_SPEED").c_str(), ltr("STR_KNOTS").arg(Unicode::formatNumber(ufo->getStats().speedMax)).c_str());
 	}
 
 	ArticleStateUfo::~ArticleStateUfo()

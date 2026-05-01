@@ -58,14 +58,14 @@ namespace OpenXcom
 		// Set up objects
 		setWindowBackground(_window, "optionsMenu");
 
-		_btnYes->setText(tr("STR_YES"));
+		_btnYes->setText(ltr("STR_YES"));
 		_btnYes->onMouseClick((ActionHandler)&ModConfirmExtendedState::btnYesClick);
 		if (!modInfo->isEngineOk())
 		{
 			_btnYes->setVisible(false);
 		}
 
-		_btnNo->setText(tr("STR_CANCEL"));
+		_btnNo->setText(ltr("STR_CANCEL"));
 		_btnNo->onMouseClick((ActionHandler)&ModConfirmExtendedState::btnNoClick);
 
 		_txtTitle->setAlign(ALIGN_CENTER);
@@ -73,15 +73,15 @@ namespace OpenXcom
 		_txtTitle->setWordWrap(true);
 		if (masterInfo && !modInfo->isParentMasterOk(masterInfo))
 		{
-			_txtTitle->setText(tr("STR_MASTER_MOD_VERSION_REQUIRED_QUESTION").arg(modInfo->getRequiredMasterVersion()).arg(masterInfo->getVersion()));
+			_txtTitle->setText(ltr("STR_MASTER_MOD_VERSION_REQUIRED_QUESTION").arg(modInfo->getRequiredMasterVersion()).arg(masterInfo->getVersion()));
 		}
 		else if (modInfo->getRequiredExtendedEngine() != OPENXCOM_VERSION_ENGINE)
 		{
-			_txtTitle->setText(tr("STR_OXCE_REQUIRED_QUESTION").arg(modInfo->getRequiredExtendedEngine()));
+			_txtTitle->setText(ltr("STR_OXCE_REQUIRED_QUESTION").arg(modInfo->getRequiredExtendedEngine()));
 		}
 		else
 		{
-			_txtTitle->setText(tr("STR_VERSION_REQUIRED_QUESTION").arg(modInfo->getRequiredExtendedVersion()));
+			_txtTitle->setText(ltr("STR_VERSION_REQUIRED_QUESTION").arg(modInfo->getRequiredExtendedVersion()));
 		}
 	}
 

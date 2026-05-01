@@ -67,11 +67,11 @@ ConfirmNewBaseState::ConfirmNewBaseState(Base *base, Globe *globe) : _base(base)
 	// Set up objects
 	setWindowBackground(_window, "geoscape");
 
-	_btnOk->setText(tr("STR_OK"));
+	_btnOk->setText(ltr("STR_OK"));
 	_btnOk->onMouseClick((ActionHandler)&ConfirmNewBaseState::btnOkClick);
 	_btnOk->onKeyboardPress((ActionHandler)&ConfirmNewBaseState::btnOkClick, options1.keyOk());
 
-	_btnCancel->setText(tr("STR_CANCEL_UC"));
+	_btnCancel->setText(ltr("STR_CANCEL_UC"));
 	_btnCancel->onMouseClick((ActionHandler)&ConfirmNewBaseState::btnCancelClick);
 	_btnCancel->onKeyboardPress((ActionHandler)&ConfirmNewBaseState::btnCancelClick, options1.keyCancel());
 
@@ -81,14 +81,14 @@ ConfirmNewBaseState::ConfirmNewBaseState(Base *base, Globe *globe) : _base(base)
 		if (region->getRules()->insideRegion(_base->getLongitude(), _base->getLatitude()))
 		{
 			_cost = region->getRules()->getBaseCost();
-			area = tr(region->getRules()->getType());
+			area = ltr(region->getRules()->getType());
 			break;
 		}
 	}
 
-	_txtCost->setText(tr("STR_COST_").arg(Unicode::formatFunding(_cost)));
+	_txtCost->setText(ltr("STR_COST_").arg(Unicode::formatFunding(_cost)));
 
-	_txtArea->setText(tr("STR_AREA_").arg(area));
+	_txtArea->setText(ltr("STR_AREA_").arg(area));
 }
 
 /**
@@ -113,7 +113,7 @@ void ConfirmNewBaseState::btnOkClick(Action *)
 	}
 	else
 	{
-		_game->pushState(new ErrorMessageState(tr("STR_NOT_ENOUGH_MONEY"), _palette, _game->getMod()->getInterface("geoscape")->getElement("genericWindow")->color, "BACK01.SCR", _game->getMod()->getInterface("geoscape")->getElement("palette")->color));
+		_game->pushState(new ErrorMessageState(ltr("STR_NOT_ENOUGH_MONEY"), _palette, _game->getMod()->getInterface("geoscape")->getElement("genericWindow")->color, "BACK01.SCR", _game->getMod()->getInterface("geoscape")->getElement("palette")->color));
 	}
 	_game->closeState(this);
 }

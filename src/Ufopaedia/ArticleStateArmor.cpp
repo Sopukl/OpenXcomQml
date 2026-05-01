@@ -76,7 +76,7 @@ namespace OpenXcom
 
 		_txtTitle->setColor(_textColor);
 		_txtTitle->setBig();
-		_txtTitle->setText(tr(defs->getTitleForPage(_state->current_page)));
+		_txtTitle->setText(ltr(defs->getTitleForPage(_state->current_page)));
 
 		// optional background image
 		if (!defs->customPalette)
@@ -139,7 +139,7 @@ namespace OpenXcom
 		_txtInfo->setSecondaryColor(_textColor2);
 		_txtInfo->setWordWrap(true);
 		_txtInfo->setScrollable(true);
-		_txtInfo->setText(tr(defs->getTextForPage(_state->current_page)));
+		_txtInfo->setText(ltr(defs->getTextForPage(_state->current_page)));
 
 		// Add armor values
 		addStat("STR_FRONT_ARMOR", armor->getFrontArmor());
@@ -255,7 +255,7 @@ namespace OpenXcom
 			if (plus && stat > 0)
 				ss << "+";
 			ss << stat;
-			_lstInfo->addRow(2, tr(label).c_str(), ss.str().c_str());
+			_lstInfo->addRow(2, ltr(label).c_str(), ss.str().c_str());
 			_lstInfo->setCellColor(_row, 1, _listColor2);
 			++_row;
 		}
@@ -263,10 +263,10 @@ namespace OpenXcom
 
 	void ArticleStateArmor::addModifier(const std::string &label, const std::string &stat)
 	{
-		std::string translation = tr(label);
+		std::string translation = ltr(label);
 		if (translation.length() > 2) // filter out unused OXCE damage types
 		{
-			_lstInfo->addRow(2, tr(label).c_str(), stat.c_str());
+			_lstInfo->addRow(2, ltr(label).c_str(), stat.c_str());
 			_lstInfo->setCellColor(_row, 1, _listColor2);
 			++_row;
 		}

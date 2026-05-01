@@ -47,9 +47,9 @@ ListLoadState::ListLoadState(OptionsOrigin origin) : ListGamesState(origin, 0, t
 	add(_btnOld, "button", "saveMenus");
 
 	// Set up objects
-	_txtTitle->setText(tr("STR_SELECT_GAME_TO_LOAD"));
+	_txtTitle->setText(ltr("STR_SELECT_GAME_TO_LOAD"));
 
-	_btnOld->setText(tr("STR_ORIGINAL_XCOM"));
+	_btnOld->setText(ltr("STR_ORIGINAL_XCOM"));
 	_btnOld->onMouseClick((ActionHandler)&ListLoadState::btnOldClick);
 
 	centerAllSurfaces();

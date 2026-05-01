@@ -57,18 +57,18 @@ OptionsDefaultsState::OptionsDefaultsState(OptionsOrigin origin, OptionsBaseStat
 	// Set up objects
 	setWindowBackground(_window, "optionsMenu");
 
-	_btnYes->setText(tr("STR_YES"));
+	_btnYes->setText(ltr("STR_YES"));
 	_btnYes->onMouseClick((ActionHandler)&OptionsDefaultsState::btnYesClick);
 	_btnYes->onKeyboardPress((ActionHandler)&OptionsDefaultsState::btnYesClick, options1.keyOk());
 
-	_btnNo->setText(tr("STR_NO"));
+	_btnNo->setText(ltr("STR_NO"));
 	_btnNo->onMouseClick((ActionHandler)&OptionsDefaultsState::btnNoClick);
 	_btnNo->onKeyboardPress((ActionHandler)&OptionsDefaultsState::btnNoClick, options1.keyCancel());
 
 	_txtTitle->setAlign(ALIGN_CENTER);
 	_txtTitle->setBig();
 	_txtTitle->setWordWrap(true);
-	_txtTitle->setText(tr("STR_RESTORE_DEFAULTS_QUESTION"));
+	_txtTitle->setText(ltr("STR_RESTORE_DEFAULTS_QUESTION"));
 
 	if (_origin == OPT_BATTLESCAPE)
 	{

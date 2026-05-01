@@ -75,25 +75,25 @@ GlobalResearchState::GlobalResearchState(bool openedFromBasescape) : _openedFrom
 	// Set up objects
 	setWindowBackground(_window, "globalResearchMenu");
 
-	_btnDiary->setText(tr("STR_RESEARCH_DIARY"));
+	_btnDiary->setText(ltr("STR_RESEARCH_DIARY"));
 	_btnDiary->onMouseClick((ActionHandler)&GlobalResearchState::btnDiaryClick);
 	_btnDiary->onKeyboardPress((ActionHandler)&GlobalResearchState::btnDiaryClick, options1.keyGeoGlobalResearch());
 
-	_btnOk->setText(tr("STR_OK"));
+	_btnOk->setText(ltr("STR_OK"));
 	_btnOk->onMouseClick((ActionHandler)&GlobalResearchState::btnOkClick);
 	_btnOk->onKeyboardPress((ActionHandler)&GlobalResearchState::btnOkClick, options1.keyCancel());
 
 	_txtTitle->setBig();
 	_txtTitle->setAlign(ALIGN_CENTER);
-	_txtTitle->setText(tr("STR_RESEARCH_OVERVIEW"));
+	_txtTitle->setText(ltr("STR_RESEARCH_OVERVIEW"));
 
 	_txtProject->setWordWrap(true);
-	_txtProject->setText(tr("STR_RESEARCH_PROJECT"));
+	_txtProject->setText(ltr("STR_RESEARCH_PROJECT"));
 
 	_txtScientists->setWordWrap(true);
-	_txtScientists->setText(tr("STR_SCIENTISTS_ALLOCATED_UC"));
+	_txtScientists->setText(ltr("STR_SCIENTISTS_ALLOCATED_UC"));
 
-	_txtProgress->setText(tr("STR_PROGRESS"));
+	_txtProgress->setText(ltr("STR_PROGRESS"));
 
 	_lstResearch->setColumns(3, 158, 58, 70);
 	_lstResearch->setSelectable(true);
@@ -209,15 +209,15 @@ void GlobalResearchState::fillProjectList()
 			sstr << proj->getAssigned();
 			const RuleResearch *r = proj->getRules();
 
-			std::string wstr = tr(r->getName());
-			_lstResearch->addRow(3, wstr.c_str(), sstr.str().c_str(), tr(proj->getResearchProgress()).c_str());
+			std::string wstr = ltr(r->getName());
+			_lstResearch->addRow(3, wstr.c_str(), sstr.str().c_str(), ltr(proj->getResearchProgress()).c_str());
 
 			_bases.push_back(xbase);
 			_topics.push_back(r);
 		}
 		if (baseProjects.empty() && xbase->getScientists() > 0)
 		{
-			_lstResearch->addRow(3, tr("STR_NONE").c_str(), "", "");
+			_lstResearch->addRow(3, ltr("STR_NONE").c_str(), "", "");
 
 			_bases.push_back(xbase);
 			_topics.push_back(0);
@@ -228,9 +228,9 @@ void GlobalResearchState::fillProjectList()
 		freeLaboratories += xbase->getFreeLaboratories();
 	}
 
-	_txtAvailable->setText(tr("STR_SCIENTISTS_AVAILABLE").arg(availableScientists));
-	_txtAllocated->setText(tr("STR_SCIENTISTS_ALLOCATED").arg(allocatedScientists));
-	_txtSpace->setText(tr("STR_LABORATORY_SPACE_AVAILABLE").arg(freeLaboratories));
+	_txtAvailable->setText(ltr("STR_SCIENTISTS_AVAILABLE").arg(availableScientists));
+	_txtAllocated->setText(ltr("STR_SCIENTISTS_ALLOCATED").arg(allocatedScientists));
+	_txtSpace->setText(ltr("STR_LABORATORY_SPACE_AVAILABLE").arg(freeLaboratories));
 }
 
 }

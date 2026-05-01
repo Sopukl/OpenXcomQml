@@ -101,12 +101,12 @@ GraphsState::GraphsState() : _butRegionsOffset(0), _butCountriesOffset(0), _zoom
 	{
 		// always save in toggles all the region
 		Uint8 color = 13 + 8 * (offset % GRAPH_MAX_BUTTONS);
-		_regionToggles.push_back(new GraphButInfo(tr(region->getRules()->getType()), color));
+		_regionToggles.push_back(new GraphButInfo(ltr(region->getRules()->getType()), color));
 		// initially add the GRAPH_MAX_BUTTONS having the first regions information
 		if (offset < GRAPH_MAX_BUTTONS)
 		{
 			_btnRegions.push_back(new ToggleTextButton(88, 11, 0, offset*11));
-			_btnRegions.at(offset)->setText(tr(region->getRules()->getType()));
+			_btnRegions.at(offset)->setText(ltr(region->getRules()->getType()));
 			_btnRegions.at(offset)->setInvertColor(color);
 			_btnRegions.at(offset)->onMousePress((ActionHandler)&GraphsState::btnRegionListClick);
 			add(_btnRegions.at(offset), "button", "graphs");
@@ -123,10 +123,10 @@ GraphsState::GraphsState() : _butRegionsOffset(0), _butCountriesOffset(0), _zoom
 		_btnRegionTotal = new ToggleTextButton(88, 11, 0, _regionToggles.size()*11);
 	else
 		_btnRegionTotal = new ToggleTextButton(88, 11, 0, GRAPH_MAX_BUTTONS*11);
-	_regionToggles.push_back(new GraphButInfo(tr("STR_TOTAL_UC"), regionTotalColor));
+	_regionToggles.push_back(new GraphButInfo(ltr("STR_TOTAL_UC"), regionTotalColor));
 	_btnRegionTotal->onMousePress((ActionHandler)&GraphsState::btnRegionListClick);
 	_btnRegionTotal->setInvertColor(regionTotalColor);
-	_btnRegionTotal->setText(tr("STR_TOTAL_UC"));
+	_btnRegionTotal->setText(ltr("STR_TOTAL_UC"));
 	_alienRegionLines.push_back(new Surface(320,200,0,0));
 	add(_alienRegionLines.at(offset));
 	_xcomRegionLines.push_back(new Surface(320,200,0,0));
@@ -138,13 +138,13 @@ GraphsState::GraphsState() : _butRegionsOffset(0), _butCountriesOffset(0), _zoom
 	{
 		// always save in toggles all the countries
 		Uint8 color = 13 + 8 * (offset % GRAPH_MAX_BUTTONS);
-		_countryToggles.push_back(new GraphButInfo(tr(country->getRules()->getType()), color));
+		_countryToggles.push_back(new GraphButInfo(ltr(country->getRules()->getType()), color));
 		// initially add the GRAPH_MAX_BUTTONS having the first countries information
 		if (offset < GRAPH_MAX_BUTTONS)
 		{
 			_btnCountries.push_back(new ToggleTextButton(88, 11, 0, offset*11));
 			_btnCountries.at(offset)->setInvertColor(color);
-			_btnCountries.at(offset)->setText(tr(country->getRules()->getType()));
+			_btnCountries.at(offset)->setText(ltr(country->getRules()->getType()));
 			_btnCountries.at(offset)->onMousePress((ActionHandler)&GraphsState::btnCountryListClick);
 			add(_btnCountries.at(offset), "button", "graphs");
 		}
@@ -162,10 +162,10 @@ GraphsState::GraphsState() : _butRegionsOffset(0), _butCountriesOffset(0), _zoom
 		_btnCountryTotal = new ToggleTextButton(88, 11, 0, _countryToggles.size()*11);
 	else
 		_btnCountryTotal = new ToggleTextButton(88, 11, 0, GRAPH_MAX_BUTTONS*11);
-	_countryToggles.push_back(new GraphButInfo(tr("STR_TOTAL_UC"), countryTotalColor));
+	_countryToggles.push_back(new GraphButInfo(ltr("STR_TOTAL_UC"), countryTotalColor));
 	_btnCountryTotal->onMousePress((ActionHandler)&GraphsState::btnCountryListClick);
 	_btnCountryTotal->setInvertColor(countryTotalColor);
-	_btnCountryTotal->setText(tr("STR_TOTAL_UC"));
+	_btnCountryTotal->setText(ltr("STR_TOTAL_UC"));
 	_alienCountryLines.push_back(new Surface(320,200,0,0));
 	add(_alienCountryLines.at(offset));
 	_xcomCountryLines.push_back(new Surface(320,200,0,0));
@@ -187,11 +187,11 @@ GraphsState::GraphsState() : _butRegionsOffset(0), _butCountriesOffset(0), _zoom
 		add(_financeLines.at(offset));
 	}
 
-	_btnFinances.at(0)->setText(tr("STR_INCOME"));
-	_btnFinances.at(1)->setText(tr("STR_EXPENDITURE"));
-	_btnFinances.at(2)->setText(tr("STR_MAINTENANCE"));
-	_btnFinances.at(3)->setText(tr("STR_BALANCE"));
-	_btnFinances.at(4)->setText(tr("STR_SCORE"));
+	_btnFinances.at(0)->setText(ltr("STR_INCOME"));
+	_btnFinances.at(1)->setText(ltr("STR_EXPENDITURE"));
+	_btnFinances.at(2)->setText(ltr("STR_MAINTENANCE"));
+	_btnFinances.at(3)->setText(ltr("STR_BALANCE"));
+	_btnFinances.at(4)->setText(ltr("STR_SCORE"));
 
 	// load back the button state
 	std::string graphRegionToggles = _game->getSavedGame()->getGraphRegionToggles();
@@ -266,7 +266,7 @@ GraphsState::GraphsState() : _butRegionsOffset(0), _butCountriesOffset(0), _zoom
 				_txtYears->setCellText(0, 0, ss2.str());
 			}
 		}
-		_txtMonths->setCellText(0, iter, tr(months[month]));
+		_txtMonths->setCellText(0, iter, ltr(months[month]));
 		++month;
 	}
 
@@ -289,7 +289,7 @@ GraphsState::GraphsState() : _butRegionsOffset(0), _butCountriesOffset(0), _zoom
 
 	_txtTitle->setAlign(ALIGN_CENTER);
 
-	_txtFactor->setText(tr("STR_FINANCE_THOUSANDS"));
+	_txtFactor->setText(ltr("STR_FINANCE_THOUSANDS"));
 
 	// Set up buttons
 	_btnUfoRegion->onMousePress((ActionHandler)&GraphsState::btnUfoRegionClick);
@@ -385,7 +385,7 @@ void GraphsState::btnUfoRegionClick(Action *)
 	}
 	_btnRegionTotal->setVisible(true);
 	_txtTitle->setBig();
-	_txtTitle->setText(tr("STR_UFO_ACTIVITY_IN_AREAS"));
+	_txtTitle->setText(ltr("STR_UFO_ACTIVITY_IN_AREAS"));
 }
 
 /**
@@ -406,7 +406,7 @@ void GraphsState::btnUfoCountryClick(Action *)
 	}
 	_btnCountryTotal->setVisible(true);
 	_txtTitle->setBig();
-	_txtTitle->setText(tr("STR_UFO_ACTIVITY_IN_COUNTRIES"));
+	_txtTitle->setText(ltr("STR_UFO_ACTIVITY_IN_COUNTRIES"));
 }
 
 /**
@@ -427,7 +427,7 @@ void GraphsState::btnXcomRegionClick(Action *)
 	}
 	_btnRegionTotal->setVisible(true);
 	_txtTitle->setBig();
-	_txtTitle->setText(tr("STR_XCOM_ACTIVITY_IN_AREAS"));
+	_txtTitle->setText(ltr("STR_XCOM_ACTIVITY_IN_AREAS"));
 }
 
 /**
@@ -448,7 +448,7 @@ void GraphsState::btnXcomCountryClick(Action *)
 	}
 	_btnCountryTotal->setVisible(true);
 	_txtTitle->setBig();
-	_txtTitle->setText(tr("STR_XCOM_ACTIVITY_IN_COUNTRIES"));
+	_txtTitle->setText(ltr("STR_XCOM_ACTIVITY_IN_COUNTRIES"));
 }
 
 /**
@@ -470,7 +470,7 @@ void GraphsState::btnIncomeClick(Action *)
 	}
 	_btnCountryTotal->setVisible(true);
 	_txtTitle->setBig();
-	_txtTitle->setText(tr("STR_INCOME"));
+	_txtTitle->setText(ltr("STR_INCOME"));
 }
 
 /**
@@ -491,7 +491,7 @@ void GraphsState::btnFinanceClick(Action *)
 		toggleButton->setVisible(true);
 	}
 	_txtTitle->setBig();
-	_txtTitle->setText(tr("STR_FINANCE"));
+	_txtTitle->setText(ltr("STR_FINANCE"));
 
 }
 

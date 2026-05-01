@@ -66,7 +66,7 @@ CraftEquipmentSaveState::CraftEquipmentSaveState(CraftEquipmentState *parent) : 
 	setWindowBackground(_window, "craftEquipmentSave");
 
 	_txtTitle->setAlign(ALIGN_CENTER);
-	_txtTitle->setText(tr("STR_SAVE_CRAFT_LOADOUT_TEMPLATE"));
+	_txtTitle->setText(ltr("STR_SAVE_CRAFT_LOADOUT_TEMPLATE"));
 
 	_lstLoadout->setColumns(1, 192);
 	_lstLoadout->setSelectable(true);
@@ -74,11 +74,11 @@ CraftEquipmentSaveState::CraftEquipmentSaveState(CraftEquipmentState *parent) : 
 	_lstLoadout->setMargin(8);
 	_lstLoadout->onMousePress((ActionHandler)&CraftEquipmentSaveState::lstLoadoutPress);
 
-	_btnCancel->setText(tr("STR_CANCEL_UC"));
+	_btnCancel->setText(ltr("STR_CANCEL_UC"));
 	_btnCancel->onMouseClick((ActionHandler)&CraftEquipmentSaveState::btnCancelClick);
 	_btnCancel->onKeyboardPress((ActionHandler)&CraftEquipmentSaveState::btnCancelClick, options1.keyCancel());
 
-	_btnSave->setText(tr("STR_SAVE_UC"));
+	_btnSave->setText(ltr("STR_SAVE_UC"));
 	_btnSave->onMouseClick((ActionHandler)&CraftEquipmentSaveState::btnSaveClick);
 
 	_edtSave->setColor(_lstLoadout->getSecondaryColor());
@@ -90,14 +90,14 @@ CraftEquipmentSaveState::CraftEquipmentSaveState(CraftEquipmentState *parent) : 
 		ItemContainer *item = _game->getSavedGame()->getGlobalCraftLoadout(i);
 		if (item->empty())
 		{
-			_lstLoadout->addRow(1, tr("STR_EMPTY_SLOT_N").arg(i + 1).c_str());
+			_lstLoadout->addRow(1, ltr("STR_EMPTY_SLOT_N").arg(i + 1).c_str());
 		}
 		else
 		{
 			const std::string &itemName = _game->getSavedGame()->getGlobalCraftLoadoutName(i);
 			if (itemName.empty())
 			{
-				_lstLoadout->addRow(1, tr("STR_UNNAMED_SLOT_N").arg(i + 1).c_str());
+				_lstLoadout->addRow(1, ltr("STR_UNNAMED_SLOT_N").arg(i + 1).c_str());
 			}
 			else
 			{

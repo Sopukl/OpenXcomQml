@@ -59,7 +59,7 @@ InventoryLoadState::InventoryLoadState(InventoryState *parent) : _parent(parent)
 
 	_txtTitle->setHighContrast(true);
 	_txtTitle->setAlign(ALIGN_CENTER);
-	_txtTitle->setText(tr("STR_LOAD_EQUIPMENT_TEMPLATE"));
+	_txtTitle->setText(ltr("STR_LOAD_EQUIPMENT_TEMPLATE"));
 
 	_lstLayout->setHighContrast(true);
 	_lstLayout->setColumns(1, 192);
@@ -69,7 +69,7 @@ InventoryLoadState::InventoryLoadState(InventoryState *parent) : _parent(parent)
 	_lstLayout->onMouseClick((ActionHandler)&InventoryLoadState::lstLayoutClick);
 
 	_btnCancel->setHighContrast(true);
-	_btnCancel->setText(tr("STR_CANCEL_UC"));
+	_btnCancel->setText(ltr("STR_CANCEL_UC"));
 	_btnCancel->onMouseClick((ActionHandler)&InventoryLoadState::btnCancelClick);
 	_btnCancel->onKeyboardPress((ActionHandler)&InventoryLoadState::btnCancelClick, options1.keyCancel());
 
@@ -80,17 +80,17 @@ InventoryLoadState::InventoryLoadState(InventoryState *parent) : _parent(parent)
 		const std::string& armorName = _game->getSavedGame()->getGlobalEquipmentLayoutArmor(i);
 		if (!armorName.empty())
 		{
-			ss << "[" << tr(armorName) << "] ";
+			ss << "[" << ltr(armorName) << "] ";
 		}
 		if (item->empty())
 		{
-			ss << tr("STR_EMPTY_SLOT_N").arg(i + 1);
+			ss << ltr("STR_EMPTY_SLOT_N").arg(i + 1);
 		}
 		else
 		{
 			const std::string &itemName = _game->getSavedGame()->getGlobalEquipmentLayoutName(i);
 			if (itemName.empty())
-				ss << tr("STR_UNNAMED_SLOT_N").arg(i + 1);
+				ss << ltr("STR_UNNAMED_SLOT_N").arg(i + 1);
 			else
 				ss << itemName;
 		}

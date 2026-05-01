@@ -45,6 +45,7 @@ class AlienBase;
  */
 class GeoscapeState : public State
 {
+	Q_OBJECT
 private:
 	Surface *_bg, *_sideLine, *_sidebar;
 	Globe *_globe;

@@ -82,7 +82,7 @@ PrimeGrenadeState::PrimeGrenadeState(BattleAction *action, bool inInventoryView,
 	add(_title, "grenadeMenu", "battlescape");
 	_title->setAlign(ALIGN_CENTER);
 	_title->setBig();
-	_title->setText(tr("STR_SET_TIMER"));
+	_title->setText(ltr("STR_SET_TIMER"));
 	_title->setHighContrast(true);
 
 	for (int i = 0; i < 24; ++i)

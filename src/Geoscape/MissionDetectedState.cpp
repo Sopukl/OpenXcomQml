@@ -71,24 +71,24 @@ MissionDetectedState::MissionDetectedState(MissionSite *mission, GeoscapeState *
 	// Set up objects
 	_window->setBackground(_game->getMod()->getSurface(mission->getDeployment()->getAlertBackground()));
 
-	_btnIntercept->setText(tr("STR_INTERCEPT"));
+	_btnIntercept->setText(ltr("STR_INTERCEPT"));
 	_btnIntercept->onMouseClick((ActionHandler)&MissionDetectedState::btnInterceptClick);
 
-	_btnCenter->setText(tr("STR_CENTER_ON_SITE_TIME_5_SECONDS"));
+	_btnCenter->setText(ltr("STR_CENTER_ON_SITE_TIME_5_SECONDS"));
 	_btnCenter->onMouseClick((ActionHandler)&MissionDetectedState::btnCenterClick);
 
-	_btnCancel->setText(tr("STR_CANCEL_UC"));
+	_btnCancel->setText(ltr("STR_CANCEL_UC"));
 	_btnCancel->onMouseClick((ActionHandler)&MissionDetectedState::btnCancelClick);
 	_btnCancel->onKeyboardPress((ActionHandler)&MissionDetectedState::btnCancelClick, options1.keyCancel());
 
 	_txtTitle->setBig();
 	_txtTitle->setAlign(ALIGN_CENTER);
 	_txtTitle->setWordWrap(true);
-	_txtTitle->setText(tr(mission->getDeployment()->getAlertMessage()));
+	_txtTitle->setText(ltr(mission->getDeployment()->getAlertMessage()));
 
 	_txtCity->setBig();
 	_txtCity->setAlign(ALIGN_CENTER);
-	_txtCity->setText(tr(mission->getCity()));
+	_txtCity->setText(ltr(mission->getCity()));
 }
 
 /**

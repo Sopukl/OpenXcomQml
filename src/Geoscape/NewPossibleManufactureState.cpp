@@ -63,15 +63,15 @@ NewPossibleManufactureState::NewPossibleManufactureState(Base * base, const std:
 	// Set up objects
 	setWindowBackground(_window, "geoManufacture");
 
-	_btnOk->setText(tr("STR_OK"));
+	_btnOk->setText(ltr("STR_OK"));
 	_btnOk->onMouseClick((ActionHandler)&NewPossibleManufactureState::btnOkClick);
 	_btnOk->onKeyboardPress((ActionHandler)&NewPossibleManufactureState::btnOkClick, options1.keyCancel());
-	_btnManufacture->setText(tr("STR_ALLOCATE_MANUFACTURE"));
+	_btnManufacture->setText(ltr("STR_ALLOCATE_MANUFACTURE"));
 	_btnManufacture->onMouseClick((ActionHandler)&NewPossibleManufactureState::btnManufactureClick);
 	_btnManufacture->onKeyboardPress((ActionHandler)&NewPossibleManufactureState::btnManufactureClick, options1.keyOk());
 	_txtTitle->setBig();
 	_txtTitle->setAlign(ALIGN_CENTER);
-	_txtTitle->setText(tr("STR_WE_CAN_NOW_PRODUCE"));
+	_txtTitle->setText(ltr("STR_WE_CAN_NOW_PRODUCE"));
 
 	// Caveat
 	{
@@ -86,13 +86,13 @@ NewPossibleManufactureState::NewPossibleManufactureState(Base * base, const std:
 		{
 			if (i > 0)
 				ss << ", ";
-			ss << tr(serviceName);
+			ss << ltr(serviceName);
 			i++;
 		}
 		std::string argument = ss.str();
 
 		_txtCaveat->setAlign(ALIGN_CENTER);
-		_txtCaveat->setText(tr("STR_REQUIRED_BASE_SERVICES").arg(argument));
+		_txtCaveat->setText(ltr("STR_REQUIRED_BASE_SERVICES").arg(argument));
 		_txtCaveat->setVisible(requiredServices.any());
 	}
 
@@ -102,7 +102,7 @@ NewPossibleManufactureState::NewPossibleManufactureState(Base * base, const std:
 	_lstPossibilities->setScrolling(true, 0);
 	for (const auto* manuf : possibilities)
 	{
-		_lstPossibilities->addRow (1, tr(manuf->getName()).c_str());
+		_lstPossibilities->addRow (1, ltr(manuf->getName()).c_str());
 	}
 }
 
