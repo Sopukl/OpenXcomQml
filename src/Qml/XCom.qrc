@@ -32,5 +32,9 @@
         <file>OpenXcom/MainMenu/Options/Controls/BoolOption.qml</file>
         <file>OpenXcom/MainMenu/Options/Controls/IntOption.qml</file>
         <file>OpenXcom/Geoscape/BuildNewBase.qml</file>
+        <file>OpenXcom/Controls/Popup.qml</file>
+        <file>OpenXcom/Controls/ErrorMessage.qml</file>
+        <file>OpenXcom/Controls/Button.qml</file>
+        <file>OpenXcom/Geoscape/BaseName.qml</file>
     </qresource>
 </RCC>

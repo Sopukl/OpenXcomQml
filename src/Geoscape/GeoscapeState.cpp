@@ -4309,52 +4309,37 @@ void GeoscapeState::globeCenterAt(int mouseX, int mouseY)
 	}
 }
 
-void GeoscapeState::buildNewBaseAt(int mouseX, int mouseY)
+bool GeoscapeState::buildNewBaseAt(int mouseX, int mouseY, Base* base, bool isFirst)
 {
-	// double lon, lat;
-	// //int mouseX = (int)floor(action->getAbsoluteXMouse()), mouseY = (int)floor(action->getAbsoluteYMouse());
-	// _globe->cartToPolar(mouseX, mouseY, &lon, &lat);
+	double lon, lat;
+	_globe->cartToPolar(mouseX, mouseY, &lon, &lat);
 
- //    // Clicking on a polygon for a base location
- //    if (_globe->insideLand(lon, lat))
- //    {
- //        bool fakeUnderwaterBasesUnlocked = true;
- //        if (!_game->getMod()->getFakeUnderwaterBaseUnlockResearch().empty())
- //        {
- //            fakeUnderwaterBasesUnlocked = _game->getSavedGame()->isResearched(_game->getMod()->getFakeUnderwaterBaseUnlockResearch(), true);
- //        }
- //        bool fakeUnderwaterTexture = _globe->insideFakeUnderwaterTexture(lon, lat);
- //        if ((_first || !fakeUnderwaterBasesUnlocked) && fakeUnderwaterTexture)
- //        {
- //            // first (starting) base can't be fake underwater base
- //            _game->pushState(new ErrorMessageState(ltr("STR_XCOM_BASE_CANNOT_BE_BUILT"), _palette, _game->getMod()->getInterface("geoscape")->getElement("genericWindow")->color, "BACK01.SCR", _game->getMod()->getInterface("geoscape")->getElement("palette")->color));
- //        }
- //        else
- //        {
- //            _base->setFakeUnderwater(fakeUnderwaterTexture);
- //            _base->setLongitude(lon);
- //            _base->setLatitude(lat);
- //            _base->calculateServices(_game->getSavedGame());
- //            for (auto* craft : *_base->getCrafts())
- //            {
- //                craft->setLongitude(lon);
- //                craft->setLatitude(lat);
- //            }
- //            if (_first)
- //            {
- //                _game->pushState(new BaseNameState(_base, _globe, _first, false));
- //            }
- //            else
- //            {
- //                _game->pushState(new ConfirmNewBaseState(_base, _globe));
- //            }
- //        }
- //        game.closeState(this);
- //    }
- //    else
- //    {
- //        _game->pushState(new ErrorMessageState(ltr("STR_XCOM_BASE_CANNOT_BE_BUILT"), _palette, _game->getMod()->getInterface("geoscape")->getElement("genericWindow")->color, "BACK01.SCR", _game->getMod()->getInterface("geoscape")->getElement("palette")->color));
- //    }
+	if (!_globe->insideLand(lon, lat))
+		return false;
+
+    auto mod = game.getMod();
+    auto savedGame = game.getSavedGame();
+
+    auto underwaterBaseResearch = mod->getFakeUnderwaterBaseUnlockResearch();
+    bool fakeUnderwaterBasesUnlocked = underwaterBaseResearch.empty()?true:
+            savedGame->isResearched(underwaterBaseResearch, true);
+
+    bool fakeUnderwaterTexture = _globe->insideFakeUnderwaterTexture(lon, lat);
+
+    if ((isFirst || !fakeUnderwaterBasesUnlocked) && fakeUnderwaterTexture)
+        return false;
+
+    base->setFakeUnderwater(fakeUnderwaterTexture);
+    base->setLongitude(lon);
+    base->setLatitude(lat);
+    base->calculateServices(savedGame);
+    for (auto* craft : *base->getCrafts())
+    {
+        craft->setLongitude(lon);
+        craft->setLatitude(lat);
+    }
+
+    return true;
 }
 
 /**

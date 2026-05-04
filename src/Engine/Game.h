@@ -25,6 +25,7 @@
 #include <QJsonArray>
 #include <QJsonObject>
 #include "SavesManager.h"
+#include "../Savegame/Base.h"
 
 namespace OpenXcom
 {
@@ -230,7 +231,7 @@ struct SaveDesc
 	  signals:
 		void aboutToQuit();
 		void stateChanged();
-		void createNewBase(OpenXcom::GeoscapeState*);
+		void createNewBase(OpenXcom::GeoscapeState* geoscape, OpenXcom::Base* base, bool isFirst);
 	};
 	inline Game game;
 }

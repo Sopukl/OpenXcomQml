@@ -197,7 +197,7 @@ public:
 	//build new base
 	Q_INVOKABLE void setBuildNewBasePos(int mouseX, int mouseY);
 	Q_INVOKABLE void globeCenterAt(int mouseX, int mouseY);
-	Q_INVOKABLE void buildNewBaseAt(int mouseX, int mouseY);
+	Q_INVOKABLE bool buildNewBaseAt(int mouseX, int mouseY, Base* base, bool isFirst);
 private:
 	bool attemptAlienRaceEvolution(int month, AlienBase* ab) const;
 	/// Process each individual mission script command.

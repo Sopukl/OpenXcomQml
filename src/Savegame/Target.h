@@ -17,6 +17,7 @@
  * You should have received a copy of the GNU General Public License
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
+#include <QObject>
 #include <string>
 #include <vector>
 #include "../Engine/Yaml.h"
@@ -33,8 +34,9 @@ class Ufo;
  * Base class for targets on the globe
  * with a set of radian coordinates.
  */
-class Target
+class Target: public QObject
 {
+	Q_OBJECT
 protected:
 	double _lon, _lat;
 	int _id;

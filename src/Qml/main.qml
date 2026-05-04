@@ -38,9 +38,11 @@ Window {
         focus: true
         Connections {
             target: Game
-            function onCreateNewBase(geoscape) {
-                let ooo = Xcom.createWindow("Geoscape/BuildNewBase.qml", gameWindow,
-                                  {geoscape: geoscape})
+            function onCreateNewBase(geoscape, base, isFirst) {
+                Xcom.createWindow("Geoscape/BuildNewBase.qml", gameWindow,
+                   {geoscape: geoscape,
+                    base: base,
+                    isFirst: isFirst})
             }
         }
     }
@@ -74,17 +76,4 @@ Window {
             root.visible = !root.visible
         }
     }
-
-    // Slider {
-    //     anchors {
-    //         horizontalCenter: parent.horizontalCenter
-    //         bottom: parent.bottom
-    //         bottomMargin: 5
-    //     }
-    //     from: 0.5
-    //     to: 4.0
-    //     stepSize: 0.5
-    //     value: wnd.tScale
-    //     onValueChanged: wnd.tScale = value
-    // }
 }

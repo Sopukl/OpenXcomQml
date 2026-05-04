@@ -352,38 +352,6 @@ void Game::processLogic()
 		_fpsCounter->blit(_screen->getSurface());
 		_cursor->blit(_screen->getSurface());
 		_screen->flip();
-
-		// {
-		// 	SDL_Surface* screen = _screen->getSurface();
-		// 	SDL_LockSurface(screen);
-		// 	QImage image(
-		// 		(const uchar*)screen->pixels,
-		// 		screen->w,
-		// 		screen->h,
-		// 		screen->pitch,
-		// 		screen->format->BitsPerPixel == 32 ?
-		// 			QImage::Format_ARGB32 : QImage::Format_Indexed8
-		// 		);
-
-		// 	if (screen->format->BitsPerPixel == 8) {
-		// 		QVector<QRgb> colorTable(256);
-		// 		SDL_Palette* pal = screen->format->palette;
-		// 		for (int i = 0; i < pal->ncolors; i++) {
-		// 			colorTable[i] = qRgb(pal->colors[i].r,
-		// 								 pal->colors[i].g,
-		// 								 pal->colors[i].b);
-		// 		}
-		// 		image.setColorTable(colorTable);
-		// 	}
-
-		// 	mutex.lock();
-		// 	gameImage = image.convertToFormat(QImage::Format_RGBA8888);
-		// 	if(gameImage.isNull())
-		// 		qDebug() << "!!!!!!!!";
-		// 	mutex.unlock();
-		// 	SDL_UnlockSurface(screen);
-		// }
-
 	}
 }
 
@@ -958,8 +926,8 @@ void Game::newGame(int difficulty, bool ironMan)
 	else
 	{
 		// custom location, custom name
-		Q_EMIT createNewBase(gs);
-		pushState(new BuildNewBaseState(base, gs->getGlobe(), true));
+		Q_EMIT createNewBase(gs, base, true);
+		//pushState(new BuildNewBaseState(base, gs->getGlobe(), true));
 	}
 }
 

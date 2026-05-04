@@ -110,6 +110,7 @@ struct BaseSumDailyRecovery
  */
 class Base : public Target
 {
+	Q_OBJECT
 private:
 	static const int BASE_SIZE = 6;
 	const Mod *_mod;
@@ -347,6 +348,8 @@ public:
 	const Texture* getGlobeTexture() const { return _globeTexture; }
 	/// Sets the base's globe texture.
 	void setGlobeTexture(const Texture* globeTexture) { _globeTexture = globeTexture; }
+  public slots:
+    void set_Name(QString);
 };
 
 }
