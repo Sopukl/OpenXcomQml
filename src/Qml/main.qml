@@ -39,7 +39,8 @@ Window {
         Connections {
             target: Game
             function onCreateNewBase(geoscape) {
-                console.log(geoscape)
+                let ooo = Xcom.createWindow("Geoscape/BuildNewBase.qml", gameWindow,
+                                  {geoscape: geoscape})
             }
         }
     }

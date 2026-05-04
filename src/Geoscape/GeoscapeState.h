@@ -193,6 +193,11 @@ public:
 	void resize(int &dX, int &dY) override;
 	/// Handle alien mission generation.
 	void determineAlienMissions(bool isNewMonth = true, const RuleEvent* eventRules = nullptr);
+
+	//build new base
+	Q_INVOKABLE void setBuildNewBasePos(int mouseX, int mouseY);
+	Q_INVOKABLE void globeCenterAt(int mouseX, int mouseY);
+	Q_INVOKABLE void buildNewBaseAt(int mouseX, int mouseY);
 private:
 	bool attemptAlienRaceEvolution(int month, AlienBase* ab) const;
 	/// Process each individual mission script command.

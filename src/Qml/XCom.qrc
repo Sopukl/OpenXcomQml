@@ -31,5 +31,6 @@
         <file>OpenXcom/MainMenu/Options/Advanced/OXCE.qml</file>
         <file>OpenXcom/MainMenu/Options/Controls/BoolOption.qml</file>
         <file>OpenXcom/MainMenu/Options/Controls/IntOption.qml</file>
+        <file>OpenXcom/Geoscape/BuildNewBase.qml</file>
     </qresource>
 </RCC>
