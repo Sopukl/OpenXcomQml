@@ -10,17 +10,61 @@ XC.Popup {
     anchors.centerIn: parent
     property var mods: Game.getModsInfo()
 
-    function moveUp(idx) {
-        if(idx > 0)
+    ListModel {
+        id: modsModel
+    }
+
+    function visibleModIndexes() {
+        let res = [];
+        let masterMod = mods[masterCombo.currentValue];
+
+        if(masterMod === undefined)
+            return res;
+
+        mods.forEach((mod, idx) =>
         {
-            [mods[idx-1], mods[idx]] = [mods[idx], mods[idx-1]];
-            modsChanged();
-        }
+            if(!mod.isMaster &&
+               (mod.masterId === masterMod.id))
+                res.push(idx);
+        })
+        return res;
     }
-    function moveMod(idxFrom, idxTo) {
-        [mods[idxFrom], mods[idxTo]] = [mods[idxTo], mods[idxFrom]];
-        modsChanged();
+
+    function rebuildModsModel() {
+        modsModel.clear();
+        visibleModIndexes().forEach(modIdx =>
+        {
+            let mod = mods[modIdx];
+            modsModel.append({
+                "modId": mod.id,
+                "modName": mod.name,
+                "modEnabled": mod.enabled
+            });
+        })
     }
+
+    function syncModsFromModel() {
+        let visibleMods = visibleModIndexes();
+        let modsById = {};
+
+        mods.forEach(mod => modsById[mod.id] = mod);
+        visibleMods.forEach((modIdx, idx) => mods[modIdx] = modsById[modsModel.get(idx).modId]);
+    }
+
+    function moveMod(fromListIndex, toListIndex) {
+        if(fromListIndex === toListIndex ||
+           fromListIndex < 0 ||
+           toListIndex < 0 ||
+           fromListIndex >= modsList.count ||
+           toListIndex >= modsList.count)
+            return false;
+
+        modsModel.move(fromListIndex, toListIndex, 1);
+        syncModsFromModel();
+        return true;
+    }
+
+    Component.onCompleted: rebuildModsModel()
 
     // ========== ЗАГОЛОВОК "BASE GAME" ==========
     Text {
@@ -61,6 +105,7 @@ XC.Popup {
             return res
         }
         onModelChanged: currentIndex= model.findIndex(e=>mods[e].enabled)
+        onCurrentValueChanged: ctrl.rebuildModsModel()
         onActivated: {
             model.forEach((modIdx, idx) =>
                 mods[modIdx].enabled = (idx === currentIndex))
@@ -110,113 +155,148 @@ XC.Popup {
         }
         clip: true
 
-        model: {
-            let res = []
-            let masterMod = mods[masterCombo.currentValue]
-            mods.forEach((mod, idx) =>
-            {
-                if(!mod.isMaster &&
-                   (mod.masterId === masterMod.id))
-                    res.push(idx)
-            })
-            return res;
-        }
+        model: modsModel
 
         delegate: Item {
             id: delegateItem
             width: modsList.width
             height: 10
-            Row {
-                id: rrow
+            z: dragArea.drag.active ? 1 : 0
+
+            Item {
+                id: dragContent
                 width: parent.width
                 height: parent.height
-                spacing: 2
 
-                // Название мода
-                Rectangle {
-                    width: 200
-                    height: 10
-                    color: "transparent"
+                Row {
+                    id: rrow
+                    width: parent.width
+                    height: parent.height
+                    spacing: 2
 
-                    Text {
-                        text: mods[modelData].name
-                        color: "white"
-                        font.pixelSize: 8
-                        anchors {
-                            left: parent.left
-                            leftMargin: 2
-                            verticalCenter: parent.verticalCenter
-                        }
-                        elide: Text.ElideRight
-                    }
-                }
-
-                // Колонка со стрелками
-                Column {
-                    width: 25
-                    height: 10
-
+                    // Название мода
                     Rectangle {
-                        width: 23
-                        height: 4
-                        enabled: index > 0
-                        color: enabled ? "#404040" : "#202020"
-                        border.width: 1
-                        border.color: "#606060"
+                        width: 200
+                        height: 10
+                        color: "transparent"
 
                         Text {
-                            text: "▲"
-                            color: enabled ? "white" : "#606060"
-                            font.pixelSize: 4
-                            anchors.centerIn: parent
-                        }
-                        MouseArea {
-                            anchors.fill: parent
-                            onClicked: ctrl.moveMod(modsList.model[index],
-                                                    modsList.model[index-1])
+                            text: modName
+                            color: "white"
+                            font.pixelSize: 8
+                            anchors {
+                                left: parent.left
+                                leftMargin: 2
+                                verticalCenter: parent.verticalCenter
+                            }
+                            elide: Text.ElideRight
                         }
                     }
 
+                    // Колонка со стрелками
+                    MouseArea {
+                        id: dragArea
+                        width: 25
+                        height: 10
+                        Column {
+                            id: col
+                            anchors.fill: parent
+                            Rectangle {
+                                width: 23
+                                height: 4
+                                enabled: index > 0
+                                color: enabled ? "#404040" : "#202020"
+                                border.width: 1
+                                border.color: "#606060"
+
+                                Text {
+                                    text: "▲"
+                                    color: enabled ? "white" : "#606060"
+                                    font.pixelSize: 4
+                                    anchors.centerIn: parent
+                                }
+                            }
+                            Rectangle {
+                                width: 23
+                                height: 4
+                                enabled: index < modsList.count - 1
+                                color: enabled ? "#404040" : "#202020"
+                                border.width: 1
+                                border.color: "#606060"
+
+                                Text {
+                                    text: "▼"
+                                    color: enabled ? "white" : "#606060"
+                                    font.pixelSize: 4
+                                    anchors.centerIn: parent
+                                }
+                            }
+                        }
+                        preventStealing: true
+                        drag.target: dragContent
+                        drag.axis: Drag.YAxis
+                        drag.minimumY: -delegateItem.y
+                        drag.maximumY: modsList.contentHeight - delegateItem.y - delegateItem.height
+                        cursorShape: pressed ? Qt.ClosedHandCursor:
+                                               Qt.OpenHandCursor
+                        property int fromIndex: -1
+
+                        onPressed: fromIndex = index
+                        onPositionChanged: {
+                            if(fromIndex >= 0)
+                            {
+                                let targetIndex = modsList.indexAt(width / 2,
+                                    delegateItem.y + dragContent.y + delegateItem.height / 2);
+
+                                if(targetIndex >= 0 &&
+                                   targetIndex !== fromIndex &&
+                                   ctrl.moveMod(fromIndex, targetIndex))
+                                {
+                                    fromIndex = targetIndex;
+                                    dragContent.y = 0;
+                                }
+                            }
+                        }
+                        onReleased: {
+                            dragContent.y = 0;
+                            fromIndex = -1;
+                        }
+                        onCanceled: {
+                            dragContent.y = 0;
+                            fromIndex = -1;
+                        }
+
+                    }
+
+                    // Колонка Yes/No
                     Rectangle {
-                        width: 23
-                        height: 4
-                        enabled: index < modsList.count - 1
-                        color: enabled ? "#404040" : "#202020"
+                        width: 60
+                        height: 10
+                        color: modEnabled ? "#2a6b2a" : "#6b2a2a"
                         border.width: 1
-                        border.color: "#606060"
+                        border.color: "green"
 
                         Text {
-                            text: "▼"
-                            color: enabled ? "white" : "#606060"
-                            font.pixelSize: 4
+                            text: modEnabled ? "YES" : "NO"
+                            color: "white"
+                            font.pixelSize: 8
                             anchors.centerIn: parent
                         }
-                        MouseArea {
-                            anchors.fill: parent
-                            onClicked: ctrl.moveMod(modsList.model[index],
-                                                    modsList.model[index+1])
-                        }
-
-                    }
-                }
-
-                // Колонка Yes/No
-                Rectangle {
-                    width: 60
-                    height: 10
-                    color: modelData.enabled ? "#2a6b2a" : "#6b2a2a"
-                    border.width: 1
-                    border.color: "green"
-
-                    Text {
-                        text: modelData.enabled ? "YES" : "NO"
-                        color: "white"
-                        font.pixelSize: 8
-                        anchors.centerIn: parent
                     }
                 }
             }
         }
+
+        Transition {
+            id: tr
+            NumberAnimation {
+                properties: "y"
+                duration: 100
+            }
+        }
+
+        move: tr
+        moveDisplaced: tr
     }
 
     // ========== КНОПКИ ВНИЗУ ==========
