@@ -232,6 +232,7 @@ struct SaveDesc
 		void aboutToQuit();
 		void stateChanged();
 		void createNewBase(OpenXcom::GeoscapeState* geoscape, OpenXcom::Base* base, bool isFirst);
+		void openPopupWindow(QString url);
 	};
 	inline Game game;
 }

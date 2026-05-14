@@ -44,6 +44,10 @@ Window {
                     base: base,
                     isFirst: isFirst})
             }
+
+            function onOpenPopupWindow(path) {
+                Xcom.createWindow(path, gameWindow).open()
+            }
         }
     }
 

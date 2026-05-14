@@ -36,5 +36,6 @@
         <file>OpenXcom/Controls/ErrorMessage.qml</file>
         <file>OpenXcom/Controls/Button.qml</file>
         <file>OpenXcom/Geoscape/BaseName.qml</file>
+        <file>OpenXcom/Geoscape/Intercept.qml</file>
     </qresource>
 </RCC>
