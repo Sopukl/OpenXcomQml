@@ -275,7 +275,7 @@ void StoresState::initList()
 				}
 
 				// 3. armor in use (worn by soldiers)
-				for (const auto* soldier : *xbase->getSoldiers())
+				for (const auto* soldier : xbase->getSoldiers())
 				{
 					if (soldier->getArmor()->getStoreItem() == rule)
 					{

@@ -86,7 +86,7 @@ PromotionsState::PromotionsState()
 
 	for (auto* xbase : *_game->getSavedGame()->getBases())
 	{
-		for (auto* soldier : *xbase->getSoldiers())
+		for (auto* soldier : xbase->getSoldiers())
 		{
 			if (soldier->isPromoted())
 			{

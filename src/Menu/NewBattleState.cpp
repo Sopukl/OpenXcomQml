@@ -512,11 +512,11 @@ void NewBattleState::initSave()
 	save->getBases()->push_back(base);
 
 	// Kill everything we don't want in this base
-	for (auto* soldier : *base->getSoldiers())
+	for (auto* soldier : base->getSoldiers())
 	{
 		delete soldier;
 	}
-	base->getSoldiers()->clear();
+	base->getSoldiers().clear();
 	for (auto* xcraft : *base->getCrafts())
 	{
 		delete xcraft;
@@ -562,7 +562,7 @@ void NewBattleState::initSave()
 		// update again, could have been changed since soldier creation
 		soldier->calcStatString(mod->getStatStrings(), psiStrengthEval);
 
-		base->getSoldiers()->push_back(soldier);
+		base->getSoldiers().push_back(soldier);
 
 		int space = _craft->getSpaceAvailable();
 		if (_craft->validateAddingSoldier(space, soldier) == CPE_None)
@@ -803,7 +803,7 @@ void NewBattleState::cbxCraftChange(Action *)
 	Craft* tmpCraft = new Craft(_craft->getRules(), _craft->getBase(), 0);
 
 	// temporarily re-assign all soldiers to a dummy craft
-	for (auto* soldier : *_craft->getBase()->getSoldiers())
+	for (auto* soldier : _craft->getBase()->getSoldiers())
 	{
 		if (soldier->getCraft() == _craft)
 		{
@@ -812,7 +812,7 @@ void NewBattleState::cbxCraftChange(Action *)
 		}
 	}
 	// try assigning all soldiers back while validating constraints
-	for (auto* soldier : *_craft->getBase()->getSoldiers())
+	for (auto* soldier : _craft->getBase()->getSoldiers())
 	{
 		if (count <= 0)
 		{

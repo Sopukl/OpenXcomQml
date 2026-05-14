@@ -441,7 +441,7 @@ void ConfirmDestinationState::btnTransferClick(Action *)
 	{
 		// Transfer soldiers inside craft
 		Base *currentBase = _crafts.front()->getBase();
-		for (auto soldierIt = currentBase->getSoldiers()->begin(); soldierIt != currentBase->getSoldiers()->end();)
+		for (auto soldierIt = currentBase->getSoldiers().begin(); soldierIt != currentBase->getSoldiers().end();)
 		{
 			Soldier* soldier = (*soldierIt);
 			if (soldier->getCraft() == _crafts.front())
@@ -452,8 +452,8 @@ void ConfirmDestinationState::btnTransferClick(Action *)
 					soldier->setReturnToTrainingWhenHealed(true);
 				}
 				soldier->setTraining(false);
-				targetBase->getSoldiers()->push_back(soldier);
-				soldierIt = currentBase->getSoldiers()->erase(soldierIt);
+				targetBase->getSoldiers().push_back(soldier);
+				soldierIt = currentBase->getSoldiers().erase(soldierIt);
 			}
 			else
 			{

@@ -2302,7 +2302,7 @@ bool SavedGame::isSoldierTypeHired(const std::string& soldierType) const
 {
 	for (auto* xbase : _bases)
 	{
-		for (auto* soldier : *xbase->getSoldiers())
+		for (auto* soldier : xbase->getSoldiers())
 		{
 			if (soldier->getRules()->getType() == soldierType)
 			{
@@ -2322,7 +2322,7 @@ Soldier *SavedGame::getSoldier(int id) const
 {
 	for (auto* xbase : _bases)
 	{
-		for (auto* soldier : *xbase->getSoldiers())
+		for (auto* soldier : xbase->getSoldiers())
 		{
 			if (soldier->getId() == id)
 			{
@@ -2886,7 +2886,7 @@ std::vector<Soldier*> SavedGame::getAllActiveSoldiers() const
 	std::vector<Soldier*> soldiers;
 	for (auto* xbase : _bases)
 	{
-		std::vector<Soldier*> baseSoldiers = *xbase->getSoldiers();
+		std::vector<Soldier*> baseSoldiers = xbase->getSoldiers();
 		soldiers.insert(soldiers.end(), baseSoldiers.begin(), baseSoldiers.end());
 
 		for (auto* transfer : *xbase->getTransfers())
@@ -3048,13 +3048,13 @@ std::vector<Soldier*>::iterator SavedGame::killSoldier(bool resetArmor, Soldier 
 	std::vector<Soldier*>::iterator soldierIt;
 	for (auto* xbase : _bases)
 	{
-		for (soldierIt = xbase->getSoldiers()->begin(); soldierIt != xbase->getSoldiers()->end(); ++soldierIt)
+		for (soldierIt = xbase->getSoldiers().begin(); soldierIt != xbase->getSoldiers().end(); ++soldierIt)
 		{
 			if ((*soldierIt) == soldier)
 			{
 				soldier->die(new SoldierDeath(*_time, cause));
 				_deadSoldiers.push_back(soldier);
-				return xbase->getSoldiers()->erase(soldierIt);
+				return xbase->getSoldiers().erase(soldierIt);
 			}
 		}
 	}
@@ -3094,7 +3094,7 @@ void SavedGame::removeAllSoldiersFromXcomCraft(Craft *craft)
 {
 	for (auto* xbase : _bases)
 	{
-		for (auto* soldier : *xbase->getSoldiers())
+		for (auto* soldier : xbase->getSoldiers())
 		{
 			if (soldier->getCraft() == craft)
 			{

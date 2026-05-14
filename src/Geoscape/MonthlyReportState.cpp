@@ -324,7 +324,7 @@ void MonthlyReportState::btnOkClick(Action *)
 		for (auto* xbase : *_game->getSavedGame()->getBases())
 		{
 			// Iterate through all your soldiers
-			for (auto* soldier : *xbase->getSoldiers())
+			for (auto* soldier : xbase->getSoldiers())
 			{
 				// Award medals to eligible soldiers
 				soldier->getDiary()->addMonthlyService();

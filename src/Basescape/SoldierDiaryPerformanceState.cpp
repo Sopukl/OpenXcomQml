@@ -54,7 +54,7 @@ SoldierDiaryPerformanceState::SoldierDiaryPerformanceState(Base *base, size_t so
 	}
 	else
 	{
-		_list = _base->getSoldiers();
+		_list = &_base->getSoldiers();
 	}
 
 	// Create objects

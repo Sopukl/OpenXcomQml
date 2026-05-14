@@ -83,7 +83,7 @@ InventoryState::InventoryState(bool tu, BattlescapeState *parent, Base *base, bo
 	if (options1.oxceAlternateCraftEquipmentManagement() && !_tu && _base && _noCraft)
 	{
 		// deassign all soldiers
-		for (auto* soldier : *_base->getSoldiers())
+		for (auto* soldier : _base->getSoldiers())
 		{
 			_backup[soldier] = soldier->getCraft();
 			if (soldier->getCraft() && soldier->getCraft()->getStatus() != "STR_OUT")
@@ -814,11 +814,11 @@ void InventoryState::btnArmorClick(Action *action)
 	if (!(s->getCraft() && s->getCraft()->getStatus() == "STR_OUT"))
 	{
 		size_t soldierIndex = 0;
-		for (auto soldierIt = _base->getSoldiers()->begin(); soldierIt != _base->getSoldiers()->end(); ++soldierIt)
+		for (auto soldierIt = _base->getSoldiers().begin(); soldierIt != _base->getSoldiers().end(); ++soldierIt)
 		{
 			if ((*soldierIt)->getId() == s->getId())
 			{
-				soldierIndex = soldierIt - _base->getSoldiers()->begin();
+				soldierIndex = soldierIt - _base->getSoldiers().begin();
 			}
 		}
 
@@ -852,11 +852,11 @@ void InventoryState::btnArmorClickRight(Action *action)
 	if (!(s->getCraft() && s->getCraft()->getStatus() == "STR_OUT"))
 	{
 		size_t soldierIndex = 0;
-		for (auto soldierIt = _base->getSoldiers()->begin(); soldierIt != _base->getSoldiers()->end(); ++soldierIt)
+		for (auto soldierIt = _base->getSoldiers().begin(); soldierIt != _base->getSoldiers().end(); ++soldierIt)
 		{
 			if ((*soldierIt)->getId() == s->getId())
 			{
-				soldierIndex = soldierIt - _base->getSoldiers()->begin();
+				soldierIndex = soldierIt - _base->getSoldiers().begin();
 			}
 		}
 
@@ -1156,7 +1156,7 @@ void InventoryState::btnOkClick(Action *)
 		if (options1.oxceAlternateCraftEquipmentManagement() && !_tu && _base && _noCraft)
 		{
 			// assign all soldiers back, if possible
-			for (auto* soldier : *_base->getSoldiers())
+			for (auto* soldier : _base->getSoldiers())
 			{
 				Craft* c = _backup[soldier];
 				if (!soldier->getCraft() && c && c->getStatus() != "STR_OUT")

@@ -94,7 +94,7 @@ DogfightExperienceState::DogfightExperienceState()
 	_lstPilots->clearList();
 	for (auto* xbase : *_game->getSavedGame()->getBases())
 	{
-		for (auto* soldier : *xbase->getSoldiers())
+		for (auto* soldier : xbase->getSoldiers())
 		{
 			auto* tmp = soldier->getDailyDogfightExperienceCache();
 			if (tmp->firing > 0 || tmp->reactions > 0 || tmp->bravery > 0)

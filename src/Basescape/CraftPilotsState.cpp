@@ -127,7 +127,7 @@ CraftPilotsState::CraftPilotsState(Base *base, size_t craft) : _base(base), _cra
 	_txtDodgeBonus->setText(ltr("STR_DODGE_BONUS"));
 	_txtApproachSpeed->setText(ltr("STR_APPROACH_SPEED"));
 
-	for (auto* soldier : *_base->getSoldiers())
+	for (auto* soldier : _base->getSoldiers())
 	{
 		if (soldier->getCraft() == c)
 		{
@@ -209,7 +209,7 @@ void CraftPilotsState::updateUI()
 	_btnAdd->setVisible((int)(_lstPilots->getTexts()) < c->getRules()->getPilots());
 
 	int availablePilots = 0;
-	for (const auto* soldier : *_base->getSoldiers())
+	for (const auto* soldier : _base->getSoldiers())
 	{
 		// must be on board & able to drive
 		if (soldier->getCraft() == c && soldier->hasAllPilotingRequirements())

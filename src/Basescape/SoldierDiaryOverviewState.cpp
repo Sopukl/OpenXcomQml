@@ -55,7 +55,7 @@ SoldierDiaryOverviewState::SoldierDiaryOverviewState(Base *base, size_t soldierI
 	}
 	else
 	{
-		_list = _base->getSoldiers();
+		_list = &_base->getSoldiers();
 	}
 
 	// Create objects

@@ -168,7 +168,7 @@ void StatisticsState::listStats()
 	std::vector<Soldier*> allSoldiers;
 	for (auto* xbase : *save->getBases())
 	{
-		allSoldiers.insert(allSoldiers.end(), xbase->getSoldiers()->begin(), xbase->getSoldiers()->end());
+		allSoldiers.insert(allSoldiers.end(), xbase->getSoldiers().begin(), xbase->getSoldiers().end());
 	}
 	allSoldiers.insert(allSoldiers.end(), save->getDeadSoldiers()->begin(), save->getDeadSoldiers()->end());
 	int soldiersRecruited = allSoldiers.size();

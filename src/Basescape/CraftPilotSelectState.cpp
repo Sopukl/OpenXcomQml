@@ -92,7 +92,7 @@ CraftPilotSelectState::CraftPilotSelectState(Base *base, size_t craft) : _base(b
 	_lstPilot->setBackground(_window);
 	_lstPilot->setMargin(8);
 
-	for (const auto* soldier : *_base->getSoldiers())
+	for (const auto* soldier : _base->getSoldiers())
 	{
 		// must be on board & able to drive
 		if (soldier->getCraft() == c && soldier->hasAllPilotingRequirements())

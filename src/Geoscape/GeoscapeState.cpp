@@ -651,7 +651,7 @@ void GeoscapeState::handle(Action *action)
 				_txtDebug->setText("SOLDIER DIARIES DELETED");
 				for (auto* xbase : *_game->getSavedGame()->getBases())
 				{
-					for (auto* soldier : *xbase->getSoldiers())
+					for (auto* soldier : xbase->getSoldiers())
 					{
 						soldier->resetDiary();
 					}
@@ -663,7 +663,7 @@ void GeoscapeState::handle(Action *action)
 				_txtDebug->setText("SOLDIER COMMENDATIONS DELETED");
 				for (auto* xbase : *_game->getSavedGame()->getBases())
 				{
-					for (auto* soldier : *xbase->getSoldiers())
+					for (auto* soldier : xbase->getSoldiers())
 					{
 						for (auto* commendation : *soldier->getDiary()->getSoldierCommendations())
 						{
@@ -1171,7 +1171,7 @@ void GeoscapeState::time5Seconds()
 				// if a transport craft has been shot down, kill all the soldiers on board.
 				if (xcraft->getRules()->getMaxUnitsLimit() > 0)
 				{
-					for (auto soldierIt = xbase->getSoldiers()->begin(); soldierIt != xbase->getSoldiers()->end();)
+					for (auto soldierIt = xbase->getSoldiers().begin(); soldierIt != xbase->getSoldiers().end();)
 					{
 						Soldier* soldier = (*soldierIt);
 						if (soldier->getCraft() == xcraft)
@@ -2642,7 +2642,7 @@ void GeoscapeState::time1Day()
 		// Handle soldier wounds and martial training
 		BaseSumDailyRecovery recovery = xbase->getSumRecoveryPerDay();
 		std::vector<Soldier *> trainingFinishedList;
-		for (auto* soldier : *xbase->getSoldiers())
+		for (auto* soldier : xbase->getSoldiers())
 		{
 			soldier->replenishStats(recovery);
 
@@ -2677,7 +2677,7 @@ void GeoscapeState::time1Day()
 		if (xbase->getAvailablePsiLabs() > 0 && options1.anytimePsiTraining())
 		{
 			std::vector<Soldier*> psiTrainingFinishedList;
-			for (auto* s : *xbase->getSoldiers())
+			for (auto* s : xbase->getSoldiers())
 			{
 				s->trainPsi1Day();
 				s->calcStatString(_game->getMod()->getStatStrings(), psiStrengthEval);
@@ -2805,7 +2805,7 @@ void GeoscapeState::time1Day()
 	// clear the daily dogfight experience cache
 	for (auto* xbase : *saveGame->getBases())
 	{
-		for (auto* soldier : *xbase->getSoldiers())
+		for (auto* soldier : xbase->getSoldiers())
 		{
 			soldier->resetDailyDogfightExperienceCache();
 		}
@@ -2888,7 +2888,7 @@ void GeoscapeState::time1Month()
 		{
 			if (xbase->getAvailablePsiLabs() > 0)
 			{
-				for (auto* soldier : *xbase->getSoldiers())
+				for (auto* soldier : xbase->getSoldiers())
 				{
 					if (soldier->isInPsiTraining())
 					{
@@ -4882,7 +4882,7 @@ void GeoscapeState::updateSlackingIndicator()
 			if (facilityGym > 0)
 			{
 				int soldGym = 0;
-				for (auto* soldier : *xcomBase->getSoldiers())
+				for (auto* soldier : xcomBase->getSoldiers())
 				{
 					bool isTraining = soldier->isInTraining();
 					bool isQueued = !isTraining && soldier->getReturnToTrainingWhenHealed();
@@ -4906,7 +4906,7 @@ void GeoscapeState::updateSlackingIndicator()
 			if (facilityPsi > 0)
 			{
 				int soldPsi = 0;
-				for (auto* soldier : *xcomBase->getSoldiers())
+				for (auto* soldier : xcomBase->getSoldiers())
 				{
 					bool isTraining = soldier->isInPsiTraining();
 					bool isDone = soldier->isFullyPsiTrained();

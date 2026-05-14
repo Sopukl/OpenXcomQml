@@ -434,9 +434,9 @@ std::vector<BaseFacility*> *Base::getFacilities()
  * Returns the list of soldiers in the base.
  * @return Pointer to the soldier list.
  */
-std::vector<Soldier*> *Base::getSoldiers()
+std::vector<Soldier*>& Base::getSoldiers()
 {
-	return &_soldiers;
+	return _soldiers;
 }
 
 /**

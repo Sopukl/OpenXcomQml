@@ -158,7 +158,7 @@ public:
 	/// Gets the base's facilities.
 	std::vector<BaseFacility*> *getFacilities();
 	/// Gets the base's soldiers.
-	std::vector<Soldier*> *getSoldiers();
+	std::vector<Soldier*>& getSoldiers();
 	/// Pre-calculates soldier stats with various bonuses.
 	void prepareSoldierStatsWithBonuses();
 	/// Gets the base's crafts.

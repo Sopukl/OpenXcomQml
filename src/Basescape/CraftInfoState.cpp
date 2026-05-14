@@ -274,7 +274,7 @@ void CraftInfoState::init()
 
 		SurfaceSet *customArmorPreviews = _game->getMod()->getSurfaceSet("CustomArmorPreviews");
 		int x = 0;
-		for (const auto* soldier : *_base->getSoldiers())
+		for (const auto* soldier : _base->getSoldiers())
 		{
 			if (soldier->getCraft() == _craft)
 			{
