@@ -44,7 +44,7 @@ private:
 	bool _readOnly;
 	bool _noTransformations;
 	Soldier *_soldier;
-	std::vector<Soldier*> *_list;
+	std::vector<Soldier*>* _list;
 
 	Surface *_bg;
 	InteractiveSurface *_rank;

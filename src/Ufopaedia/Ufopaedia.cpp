@@ -341,7 +341,7 @@ namespace OpenXcom
 			}
 
 			// 2. check dead soldiers
-			for (std::vector<Soldier*>::reverse_iterator deadManIt = save->getDeadSoldiers()->rbegin(); deadManIt != save->getDeadSoldiers()->rend(); ++deadManIt)
+			for (std::vector<Soldier*>::reverse_iterator deadManIt = save->getDeadSoldiers().rbegin(); deadManIt != save->getDeadSoldiers().rend(); ++deadManIt)
 			{
 				for (auto* comm : *(*deadManIt)->getDiary()->getSoldierCommendations())
 				{

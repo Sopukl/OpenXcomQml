@@ -513,10 +513,10 @@ void SoldierTransformationState::performTransformation()
 		if (_sourceSoldier->getDeath())
 		{
 			// true resurrect = remove from Memorial Wall
-			auto it = find(_game->getSavedGame()->getDeadSoldiers()->begin(), _game->getSavedGame()->getDeadSoldiers()->end(), _sourceSoldier);
-			if (it != _game->getSavedGame()->getDeadSoldiers()->end())
+			auto it = find(_game->getSavedGame()->getDeadSoldiers().begin(), _game->getSavedGame()->getDeadSoldiers().end(), _sourceSoldier);
+			if (it != _game->getSavedGame()->getDeadSoldiers().end())
 			{
-				_game->getSavedGame()->getDeadSoldiers()->erase(it);
+				_game->getSavedGame()->getDeadSoldiers().erase(it);
 			}
 		}
 		else if (_transformationRule->getTransferTime() > 0)
@@ -556,11 +556,11 @@ void SoldierTransformationState::retire()
 		if (_sourceSoldier->getDeath())
 		{
 			// I wonder if anyone will ever use THIS option
-			auto it = find(_game->getSavedGame()->getDeadSoldiers()->begin(), _game->getSavedGame()->getDeadSoldiers()->end(), _sourceSoldier);
-			if (it != _game->getSavedGame()->getDeadSoldiers()->end())
+			auto it = find(_game->getSavedGame()->getDeadSoldiers().begin(), _game->getSavedGame()->getDeadSoldiers().end(), _sourceSoldier);
+			if (it != _game->getSavedGame()->getDeadSoldiers().end())
 			{
 				delete (*it);
-				_game->getSavedGame()->getDeadSoldiers()->erase(it);
+				_game->getSavedGame()->getDeadSoldiers().erase(it);
 			}
 		}
 		else

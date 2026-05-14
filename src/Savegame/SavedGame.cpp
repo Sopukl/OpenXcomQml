@@ -2872,9 +2872,9 @@ bool SavedGame::wasEventGenerated(const std::string& eventName)
  * Returns the list of dead soldiers.
  * @return Pointer to soldier list.
  */
-std::vector<Soldier*> *SavedGame::getDeadSoldiers()
+std::vector<Soldier*>& SavedGame::getDeadSoldiers()
 {
-	return &_deadSoldiers;
+	return _deadSoldiers;
 }
 
 /**

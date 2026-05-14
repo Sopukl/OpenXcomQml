@@ -50,7 +50,7 @@ SoldierDiaryPerformanceState::SoldierDiaryPerformanceState(Base *base, size_t so
 {
 	if (_base == 0)
 	{
-		_list = _game->getSavedGame()->getDeadSoldiers();
+		_list = &_game->getSavedGame()->getDeadSoldiers();
 	}
 	else
 	{

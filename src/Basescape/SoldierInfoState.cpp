@@ -61,7 +61,7 @@ SoldierInfoState::SoldierInfoState(Base *base, size_t soldierId, bool forceLimit
 {
 	if (_base == 0)
 	{
-		_list = _game->getSavedGame()->getDeadSoldiers();
+		_list = &_game->getSavedGame()->getDeadSoldiers();
 		if (_soldierId >= _list->size())
 		{
 			_soldierId = 0;

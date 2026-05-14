@@ -170,9 +170,9 @@ void StatisticsState::listStats()
 	{
 		allSoldiers.insert(allSoldiers.end(), xbase->getSoldiers().begin(), xbase->getSoldiers().end());
 	}
-	allSoldiers.insert(allSoldiers.end(), save->getDeadSoldiers()->begin(), save->getDeadSoldiers()->end());
+	allSoldiers.insert(allSoldiers.end(), save->getDeadSoldiers().begin(), save->getDeadSoldiers().end());
 	int soldiersRecruited = allSoldiers.size();
-	int soldiersLost = save->getDeadSoldiers()->size();
+	int soldiersLost = save->getDeadSoldiers().size();
 	int vehiclesLost = save->getVehiclesLost();
 	int craftLostDogfight = save->getCraftLostDogfight();
 	int craftLostMission = save->getCraftLostMission();

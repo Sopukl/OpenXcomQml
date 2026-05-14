@@ -167,7 +167,7 @@ SoldiersState::SoldiersState(Base *base) : _base(base), _origSoldierOrder(_base-
 		}
 		if (refreshDeadSoldierStats)
 		{
-			for (auto* deadMan : *_game->getSavedGame()->getDeadSoldiers())
+			for (auto* deadMan : _game->getSavedGame()->getDeadSoldiers())
 			{
 				deadMan->prepareStatsWithBonuses(_game->getMod()); // refresh stats for sorting
 			}
@@ -413,7 +413,7 @@ void SoldiersState::initList(size_t scrl)
 					_filteredIndicesOfSoldiers.push_back(idx);
 				}
 			}
-			for (auto* deadMan : *_game->getSavedGame()->getDeadSoldiers())
+			for (auto* deadMan : _game->getSavedGame()->getDeadSoldiers())
 			{
 				if (deadMan->isEligibleForTransformation(transformationRule))
 				{

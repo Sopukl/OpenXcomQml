@@ -254,7 +254,7 @@ void SoldierTransformationListState::initList()
 				++eligibleSoldiers;
 			}
 		}
-		for (const auto* deadMan : *_game->getSavedGame()->getDeadSoldiers())
+		for (const auto* deadMan : _game->getSavedGame()->getDeadSoldiers())
 		{
 			if (deadMan->isEligibleForTransformation(transformationRule))
 			{

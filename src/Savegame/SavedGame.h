@@ -460,7 +460,7 @@ public:
 	/// checks if an event has been generated previously
 	bool wasEventGenerated(const std::string& eventName);
 	/// Gets the list of dead soldiers.
-	std::vector<Soldier*> *getDeadSoldiers();
+	std::vector<Soldier*>& getDeadSoldiers();
 	/// Gets a list of all active soldiers.
 	std::vector<Soldier*> getAllActiveSoldiers() const;
 	/// Gets the last selected player base.

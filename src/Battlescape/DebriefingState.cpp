@@ -649,7 +649,7 @@ void DebriefingState::init()
 
 		/// Best-of awards
 		// Find the best soldier per rank by comparing score.
-		for (auto* deadSoldier : *_game->getSavedGame()->getDeadSoldiers())
+		for (auto* deadSoldier : _game->getSavedGame()->getDeadSoldiers())
 		{
 			int score = deadSoldier->getDiary()->getScoreTotal(_game->getSavedGame()->getMissionStatistics());
 
