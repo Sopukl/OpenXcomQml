@@ -111,7 +111,7 @@ void MiniBaseView::draw()
 		{
 			SDL_Rect r;
 			lock();
-			for (const auto* fac : *_bases->at(i)->getFacilities())
+			for (const auto* fac : _bases->at(i)->getFacilities())
 			{
 				int color;
 				if (fac->getDisabled())

@@ -1212,7 +1212,7 @@ void Globe::drawRadars()
 			else
 			{
 				range = 0;
-				for (auto* fac : *xbase->getFacilities())
+				for (auto* fac : xbase->getFacilities())
 				{
 					if (fac->getBuildTime() == 0)
 					{

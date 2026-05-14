@@ -152,7 +152,7 @@ BaseDefenseState::BaseDefenseState(Base *base, Ufo *ufo, GeoscapeState *state, b
 		bool extraInfo = ufo->getHyperDetected();
 		if (!extraInfo && instaHyper)
 		{
-			for (auto* fac : *_base->getFacilities())
+			for (auto* fac : _base->getFacilities())
 			{
 				if (fac->getBuildTime() == 0 && fac->getRules()->isHyperwave())
 				{

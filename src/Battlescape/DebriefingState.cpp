@@ -1195,7 +1195,7 @@ void DebriefingState::prepareDebriefing()
 			save->stopHuntingXcomCrafts(base);
 
 			std::vector<BaseFacility*> toBeDamaged;
-			for (auto* fac : *base->getFacilities())
+			for (auto* fac : base->getFacilities())
 			{
 				// this facility was demolished
 				if (battle->getModuleMap()[fac->getX()][fac->getY()].second == 0)

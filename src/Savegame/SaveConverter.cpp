@@ -747,7 +747,7 @@ void SaveConverter::loadDatBase()
 					facility->setX(x);
 					facility->setY(y);
 					facility->setBuildTime(days);
-					base->getFacilities()->push_back(facility);
+					base->getFacilities().push_back(facility);
 				}
 			}
 			int engineers = load<Uint8>(bdata + _rules->getOffset("BASE.DAT_ENGINEERS"));

@@ -153,7 +153,7 @@ void GlobalAlienContainmentState::fillPrisonerList()
 		{
 			totalBaseCapacity += xbase->getAvailableContainment(prisonType);
 
-			for(auto* baseFacility : *xbase->getFacilities())
+			for(auto* baseFacility : xbase->getFacilities())
 			{
 				if(baseFacility->getRules()->getAliens() > 0 && baseFacility->getRules()->getPrisonType() == prisonType)
 				{

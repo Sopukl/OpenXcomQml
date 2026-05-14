@@ -425,9 +425,9 @@ int Base::getMarker() const
  * Returns the list of facilities in the base.
  * @return Pointer to the facility list.
  */
-std::vector<BaseFacility*> *Base::getFacilities()
+std::vector<BaseFacility*>& Base::getFacilities()
 {
-	return &_facilities;
+	return _facilities;
 }
 
 /**

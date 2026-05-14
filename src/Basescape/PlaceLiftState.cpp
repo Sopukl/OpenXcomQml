@@ -149,7 +149,7 @@ void PlaceLiftState::viewClick(Action *)
 	BaseFacility *fac = new BaseFacility(_lift, _base);
 	fac->setX(_view->getGridX());
 	fac->setY(_view->getGridY());
-	_base->getFacilities()->push_back(fac);
+	_base->getFacilities().push_back(fac);
 	if (fac->getRules()->getPlaceSound() != Mod::NO_SOUND)
 	{
 		_game->getMod()->getSound("GEO.CAT", fac->getRules()->getPlaceSound())->play();

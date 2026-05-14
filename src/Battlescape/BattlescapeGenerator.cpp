@@ -3363,7 +3363,7 @@ void BattlescapeGenerator::generateMap(const std::vector<MapScript*> *script, co
 void BattlescapeGenerator::generateBaseMap()
 {
 	// add modules based on the base's layout
-	for (const auto* fac : *_base->getFacilities())
+	for (const auto* fac : _base->getFacilities())
 	{
 		if (fac->isBuiltOrHadPreviousFacility())
 		{

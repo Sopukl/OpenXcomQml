@@ -156,11 +156,11 @@ void DismantleFacilityState::btnOkClick(Action *)
 			_fac->setAmmo(0);
 		}
 
-		for (auto facIt = _base->getFacilities()->begin(); facIt != _base->getFacilities()->end(); ++facIt)
+		for (auto facIt = _base->getFacilities().begin(); facIt != _base->getFacilities().end(); ++facIt)
 		{
 			if (*facIt == _fac)
 			{
-				_base->getFacilities()->erase(facIt);
+				_base->getFacilities().erase(facIt);
 				// Determine if we leave behind any facilities when this one is removed
 				if (_fac->getBuildTime() == 0 && _fac->getRules()->getLeavesBehindOnSell().size() != 0)
 				{
@@ -187,7 +187,7 @@ void DismantleFacilityState::btnOkClick(Action *)
 						{
 							fac->setIfHadPreviousFacility(true);
 						}
-						_base->getFacilities()->push_back(fac);
+						_base->getFacilities().push_back(fac);
 					}
 					else
 					{
@@ -212,7 +212,7 @@ void DismantleFacilityState::btnOkClick(Action *)
 								{
 									fac->setIfHadPreviousFacility(true);
 								}
-								_base->getFacilities()->push_back(fac);
+								_base->getFacilities().push_back(fac);
 
 								++j;
 								if (j == facList.size())

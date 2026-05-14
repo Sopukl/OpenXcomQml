@@ -566,7 +566,7 @@ void GeoscapeState::handle(Action *action)
 				_txtDebug->setText("ALL FACILITY CONSTRUCTION COMPLETED");
 				for (auto* xbase : *_game->getSavedGame()->getBases())
 				{
-					for (auto* facility : *xbase->getFacilities())
+					for (auto* facility : xbase->getFacilities())
 					{
 						facility->setBuildTime(0);
 						facility->setIfHadPreviousFacility(false);
@@ -2177,7 +2177,7 @@ void GeoscapeState::time1Hour()
 	// Handle base defenses maintenance
 	for (auto* xbase : *_game->getSavedGame()->getBases())
 	{
-		for (auto* facility : *xbase->getFacilities())
+		for (auto* facility : xbase->getFacilities())
 		{
 			auto* ammo = facility->rearm();
 			if (ammo)
@@ -2419,7 +2419,7 @@ void GeoscapeState::time1Day()
 	{
 		// Handle facility construction
 		std::map<const RuleBaseFacility*, int> finishedFacilities;
-		for (auto* facility : *xbase->getFacilities())
+		for (auto* facility : xbase->getFacilities())
 		{
 			if (facility->getBuildTime() > 0)
 			{
@@ -2783,7 +2783,7 @@ void GeoscapeState::time1Day()
 		for (auto* xcomBase : *_game->getSavedGame()->getBases())
 		{
 			int distance = XcomDistance(xcomBase->getDistance(alienBase));
-			for (auto* facility : *xcomBase->getFacilities())
+			for (auto* facility : xcomBase->getFacilities())
 			{
 				if (facility->getBuildTime() == 0 && facility->getRules()->getSightRange() > distance)
 				{

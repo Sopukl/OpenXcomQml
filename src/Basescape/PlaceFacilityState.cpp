@@ -196,9 +196,9 @@ void PlaceFacilityState::viewClick(Action *)
 		const BaseAreaSubset areaToBuildOverTemp = BaseAreaSubset(_rule->getSizeX(), _rule->getSizeY()).offset(_view->getGridX(), _view->getGridY());
 		int refundValueTemp = 0;
 		std::map<const std::string, int> refundItemsTemp;
-		for (int i = _base->getFacilities()->size() - 1; i >= 0; --i)
+		for (int i = _base->getFacilities().size() - 1; i >= 0; --i)
 		{
-			BaseFacility* checkFacilityTemp = _base->getFacilities()->at(i);
+			BaseFacility* checkFacilityTemp = _base->getFacilities().at(i);
 			if (BaseAreaSubset::intersection(areaToBuildOverTemp, checkFacilityTemp->getPlacement()))
 			{
 				const std::map<std::string, std::pair<int, int> >& itemCostTemp = checkFacilityTemp->getRules()->getBuildCostItems();
@@ -307,9 +307,9 @@ void PlaceFacilityState::viewClick(Action *)
 			double reducedBuildTime = 0.0;
 			bool buildingOver = false;
 			const BaseAreaSubset areaToBuildOver = BaseAreaSubset(_rule->getSizeX(), _rule->getSizeY()).offset(_view->getGridX(), _view->getGridY());
-			for (int i = _base->getFacilities()->size() - 1; i >= 0; --i)
+			for (int i = _base->getFacilities().size() - 1; i >= 0; --i)
 			{
-				BaseFacility *checkFacility = _base->getFacilities()->at(i);
+				BaseFacility *checkFacility = _base->getFacilities().at(i);
 				if (BaseAreaSubset::intersection(areaToBuildOver, checkFacility->getPlacement()))
 				{
 					// Get a refund from the facility we're building over
@@ -350,7 +350,7 @@ void PlaceFacilityState::viewClick(Action *)
 					}
 
 					// Remove the facility from the base
-					_base->getFacilities()->erase(_base->getFacilities()->begin() + i);
+					_base->getFacilities().erase(_base->getFacilities().begin() + i);
 					delete checkFacility;
 				}
 
@@ -367,7 +367,7 @@ void PlaceFacilityState::viewClick(Action *)
 				int reducedBuildTimeRounded = (int)std::round(reducedBuildTime);
 				fac->setBuildTime(std::max(1, fac->getBuildTime() - reducedBuildTimeRounded));
 			}
-			_base->getFacilities()->push_back(fac);
+			_base->getFacilities().push_back(fac);
 			if (fac->getRules()->getPlaceSound() != Mod::NO_SOUND)
 			{
 				_game->getMod()->getSound("GEO.CAT", fac->getRules()->getPlaceSound())->play();

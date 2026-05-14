@@ -108,7 +108,7 @@ void BaseView::setBase(Base *base)
 	}
 
 	// Fill grid with base facilities
-	for (auto* fac : *_base->getFacilities())
+	for (auto* fac : _base->getFacilities())
 	{
 		for (int y = fac->getY(); y < fac->getY() + fac->getRules()->getSizeY(); ++y)
 		{
@@ -384,7 +384,7 @@ void BaseView::reCalcQueuedBuildings()
 {
 	setBase(_base);
 	std::vector<BaseFacility*> facilities;
-	for (auto* fac : *_base->getFacilities())
+	for (auto* fac : _base->getFacilities())
 	{
 		if (fac->getAdjustedBuildTime() > 0)
 		{
@@ -502,7 +502,7 @@ void BaseView::draw()
 
 	auto craftIt = _base->getCrafts().begin();
 
-	for (const auto* fac : *_base->getFacilities())
+	for (const auto* fac : _base->getFacilities())
 	{
 		// Draw facility shape
 		int num = 0;
@@ -527,7 +527,7 @@ void BaseView::draw()
 		}
 	}
 
-	for (const auto* fac : *_base->getFacilities())
+	for (const auto* fac : _base->getFacilities())
 	{
 		// Draw connectors
 		if (fac->isBuiltOrHadPreviousFacility() && !fac->getRules()->connectorsDisabled())
@@ -567,7 +567,7 @@ void BaseView::draw()
 	}
 
 	// TODO: make const in the future
-	for (auto* fac : *_base->getFacilities())
+	for (auto* fac : _base->getFacilities())
 	{
 		// Draw facility graphic
 		int num = 0;

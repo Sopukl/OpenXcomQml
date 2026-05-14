@@ -260,7 +260,7 @@ void StoresState::initList()
 				qty += xbase->getStorageItems()->getItem(rule);
 
 				// 1b. items from base defense facilities
-				for (const auto* facility : *xbase->getFacilities())
+				for (const auto* facility : xbase->getFacilities())
 				{
 					if (facility->getRules()->getAmmoMax() > 0 && facility->getRules()->getAmmoItem() == rule)
 					{
