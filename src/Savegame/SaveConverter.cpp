@@ -866,7 +866,7 @@ void SaveConverter::loadDatTransfer()
 				break;
 			}
 
-			b->getTransfers()->push_back(transfer);
+			b->getTransfers().push_back(transfer);
 		}
 	}
 }

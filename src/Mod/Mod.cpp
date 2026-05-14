@@ -5063,7 +5063,7 @@ Soldier *Mod::genSoldier(SavedGame *save, const RuleSoldier* ruleSoldier, int na
 					duplicate = true;
 				}
 			}
-			for (auto* transfer : *xbase->getTransfers())
+			for (auto* transfer : xbase->getTransfers())
 			{
 				if (duplicate) break; // loop finished
 				if (transfer->getType() == TRANSFER_SOLDIER && transfer->getSoldier()->getName() == soldier->getName())

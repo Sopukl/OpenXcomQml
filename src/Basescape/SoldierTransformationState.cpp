@@ -543,7 +543,7 @@ void SoldierTransformationState::performTransformation()
 		int transferTime = _transformationRule->getTransferTime() > 0 ? _transformationRule->getTransferTime() : 24;
 		Transfer *transfer = new Transfer(transferTime);
 		transfer->setSoldier(destinationSoldier);
-		_base->getTransfers()->push_back(transfer);
+		_base->getTransfers().push_back(transfer);
 	}
 
 	destinationSoldier->transform(_game->getMod(), _transformationRule, _sourceSoldier, _base);
@@ -579,7 +579,7 @@ void SoldierTransformationState::retire()
 		int transferTime = _transformationRule->getTransferTime() > 0 ? _transformationRule->getTransferTime() : 1;
 		Transfer *transfer = new Transfer(transferTime);
 		transfer->setItems(_game->getMod()->getItem(_transformationRule->getProducedItem(), true), 1);
-		_base->getTransfers()->push_back(transfer);
+		_base->getTransfers().push_back(transfer);
 	}
 }
 

@@ -298,7 +298,7 @@ void StoresState::initList()
 				}
 
 				// 5. items in transfer
-				for (auto* transfer : *xbase->getTransfers())
+				for (auto* transfer : xbase->getTransfers())
 				{
 					if (transfer->getCraft())
 					{

@@ -93,7 +93,7 @@ PromotionsState::PromotionsState()
 				_lstSoldiers->addRow(3, soldier->getName().c_str(), ltr(soldier->getRankString()).c_str(), xbase->getName().c_str());
 			}
 		}
-		for (auto* transfer : *xbase->getTransfers())
+		for (auto* transfer : xbase->getTransfers())
 		{
 			if (transfer->getType() == TRANSFER_SOLDIER)
 			{

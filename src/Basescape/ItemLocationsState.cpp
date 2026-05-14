@@ -83,7 +83,7 @@ ItemLocationsState::ItemLocationsState(const RuleItem* selectedItem)
 		std::ostringstream ssInBase, ssInTransfer;
 		ssInBase << xbase->getStorageItems()->getItem(selectedItem);
 		int total = 0;
-		for (auto* xtransfer : *xbase->getTransfers())
+		for (auto* xtransfer : xbase->getTransfers())
 		{
 			if (xtransfer->getType() == TRANSFER_ITEM && xtransfer->getItems() == selectedItem)
 			{

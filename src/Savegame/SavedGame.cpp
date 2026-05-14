@@ -2889,7 +2889,7 @@ std::vector<Soldier*> SavedGame::getAllActiveSoldiers() const
 		std::vector<Soldier*> baseSoldiers = xbase->getSoldiers();
 		soldiers.insert(soldiers.end(), baseSoldiers.begin(), baseSoldiers.end());
 
-		for (auto* transfer : *xbase->getTransfers())
+		for (auto* transfer : xbase->getTransfers())
 		{
 			if (transfer->getType() == TRANSFER_SOLDIER)
 			{
@@ -3418,7 +3418,7 @@ void SavedGame::handlePrimaryResearchSideEffects(const std::vector<const RuleRes
 		{
 			Transfer* t = new Transfer(1);
 			t->setItems(spawnedItem, std::max(1, myResearchRule->getSpawnedItemCount()));
-			base->getTransfers()->push_back(t);
+			base->getTransfers().push_back(t);
 		}
 		for (const auto& spawnedItemName2 : myResearchRule->getSpawnedItemList())
 		{
@@ -3427,7 +3427,7 @@ void SavedGame::handlePrimaryResearchSideEffects(const std::vector<const RuleRes
 			{
 				Transfer* t = new Transfer(1);
 				t->setItems(spawnedItem2);
-				base->getTransfers()->push_back(t);
+				base->getTransfers().push_back(t);
 			}
 		}
 		// 3l. handle spawned events

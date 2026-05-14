@@ -179,7 +179,7 @@ productionProgress_e Production::step(Base * b, SavedGame * g, const Mod *m, Lan
 				{
 					Transfer* t = new Transfer(transferTimeCraft);
 					t->setCraft(craft);
-					b->getTransfers()->push_back(t);
+					b->getTransfers().push_back(t);
 				}
 				else
 				{
@@ -203,7 +203,7 @@ productionProgress_e Production::step(Base * b, SavedGame * g, const Mod *m, Lan
 						{
 							Transfer* t = new Transfer(transferTimeItems);
 							t->setItems(i.first, i.second);
-							b->getTransfers()->push_back(t);
+							b->getTransfers().push_back(t);
 						}
 						else
 						{
@@ -246,7 +246,7 @@ productionProgress_e Production::step(Base * b, SavedGame * g, const Mod *m, Lan
 							{
 								Transfer* t = new Transfer(transferTimeItems);
 								t->setItems(i.first, i.second);
-								b->getTransfers()->push_back(t);
+								b->getTransfers().push_back(t);
 							}
 							else
 							{
@@ -275,13 +275,13 @@ productionProgress_e Production::step(Base * b, SavedGame * g, const Mod *m, Lan
 				{
 					Transfer *t = new Transfer(transferTimePersonnel);
 					t->setScientists(1);
-					b->getTransfers()->push_back(t);
+					b->getTransfers().push_back(t);
 				}
 				else if (spawnedPersonType == "STR_ENGINEER")
 				{
 					Transfer *t = new Transfer(transferTimePersonnel);
 					t->setEngineers(1);
-					b->getTransfers()->push_back(t);
+					b->getTransfers().push_back(t);
 				}
 				else
 				{
@@ -302,7 +302,7 @@ productionProgress_e Production::step(Base * b, SavedGame * g, const Mod *m, Lan
 							s->genName();
 						}
 						t->setSoldier(s);
-						b->getTransfers()->push_back(t);
+						b->getTransfers().push_back(t);
 					}
 				}
 			}

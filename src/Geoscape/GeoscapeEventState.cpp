@@ -216,13 +216,13 @@ void GeoscapeEventState::eventLogic()
 		{
 			Transfer* t = new Transfer(24);
 			t->setScientists(rule.getSpawnedPersons());
-			hq->getTransfers()->push_back(t);
+			hq->getTransfers().push_back(t);
 		}
 		else if (spawnedPersonType == "STR_ENGINEER")
 		{
 			Transfer* t = new Transfer(24);
 			t->setEngineers(rule.getSpawnedPersons());
-			hq->getTransfers()->push_back(t);
+			hq->getTransfers().push_back(t);
 		}
 		else
 		{
@@ -245,7 +245,7 @@ void GeoscapeEventState::eventLogic()
 						s->genName();
 					}
 					t->setSoldier(s);
-					hq->getTransfers()->push_back(t);
+					hq->getTransfers().push_back(t);
 				}
 			}
 		}
@@ -292,7 +292,7 @@ void GeoscapeEventState::eventLogic()
 					s->genName();
 				}
 				t->setSoldier(s);
-				hq->getTransfers()->push_back(t);
+				hq->getTransfers().push_back(t);
 			}
 		}
 	}
@@ -405,7 +405,7 @@ void GeoscapeEventState::eventLogic()
 		{
 			Transfer* t = new Transfer(1);
 			t->setItems(mod->getItem(ti.first, true), ti.second);
-			hq->getTransfers()->push_back(t);
+			hq->getTransfers().push_back(t);
 		}
 	}
 
@@ -427,7 +427,7 @@ void GeoscapeEventState::eventLogic()
 			craft->setStatus("STR_REFUELLING");
 			Transfer* t = new Transfer(1);
 			t->setCraft(craft);
-			hq->getTransfers()->push_back(t);
+			hq->getTransfers().push_back(t);
 		}
 	}
 

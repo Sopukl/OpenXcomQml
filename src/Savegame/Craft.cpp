@@ -1073,7 +1073,7 @@ void Craft::evacuateCrew(const Mod *mod)
 				// transfer to base
 				Transfer *t = new Transfer(mod->getPersonnelTime());
 				t->setSoldier(soldier);
-				_base->getTransfers()->push_back(t);
+				_base->getTransfers().push_back(t);
 				// next
 				iter = _base->getSoldiers().erase(iter);
 			}

@@ -254,7 +254,7 @@ void SellState::delayedInit()
 			qty = _base->getStorageItems()->getItem(rule);
 			if (options1.storageLimitsEnforced() && (_origin == OPT_BATTLESCAPE || overfullCritical))
 			{
-				for (auto* transfer : *_base->getTransfers())
+				for (auto* transfer : _base->getTransfers())
 				{
 					if (transfer->getItems() == rule)
 					{
@@ -798,7 +798,7 @@ void SellState::btnOkClick(Action *)
 					}
 
 					// if there are STILL any left to remove, take them from the transfers, and if necessary, delete it.
-					for (auto transferIt = _base->getTransfers()->begin(); transferIt != _base->getTransfers()->end() && toRemove;)
+					for (auto transferIt = _base->getTransfers().begin(); transferIt != _base->getTransfers().end() && toRemove;)
 					{
 						auto* transfer = (*transferIt);
 						if (transfer->getItems() == item)
@@ -807,7 +807,7 @@ void SellState::btnOkClick(Action *)
 							{
 								toRemove -= transfer->getQuantity();
 								delete transfer;
-								transferIt = _base->getTransfers()->erase(transferIt);
+								transferIt = _base->getTransfers().erase(transferIt);
 							}
 							else
 							{

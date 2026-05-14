@@ -2582,13 +2582,13 @@ void DebriefingState::recoverCivilian(BattleUnit *from, Base *base, Craft* craft
 	{
 		Transfer *t = new Transfer(24);
 		t->setScientists(1);
-		base->getTransfers()->push_back(t);
+		base->getTransfers().push_back(t);
 	}
 	else if (rule->isRecoverableAsEngineer())
 	{
 		Transfer *t = new Transfer(24);
 		t->setEngineers(1);
-		base->getTransfers()->push_back(t);
+		base->getTransfers().push_back(t);
 	}
 	else
 	{
@@ -2614,7 +2614,7 @@ void DebriefingState::recoverCivilian(BattleUnit *from, Base *base, Craft* craft
 				s->genName();
 			}
 			t->setSoldier(s);
-			base->getTransfers()->push_back(t);
+			base->getTransfers().push_back(t);
 		}
 		else
 		{

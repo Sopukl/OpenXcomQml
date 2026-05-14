@@ -574,7 +574,7 @@ void TransferItemsState::completeTransfer()
 						soldier->setTraining(false);
 						t = new Transfer(time);
 						t->setSoldier(soldier);
-						_baseTo->getTransfers()->push_back(t);
+						_baseTo->getTransfers().push_back(t);
 						_baseFrom->getSoldiers().erase(soldierIt);
 						break;
 					}
@@ -602,7 +602,7 @@ void TransferItemsState::completeTransfer()
 						{
 							t = new Transfer(time);
 							t->setSoldier(soldier);
-							_baseTo->getTransfers()->push_back(t);
+							_baseTo->getTransfers().push_back(t);
 						}
 						soldierIt = _baseFrom->getSoldiers().erase(soldierIt);
 					}
@@ -634,27 +634,27 @@ void TransferItemsState::completeTransfer()
 				{
 					t = new Transfer(time);
 					t->setCraft(craft);
-					_baseTo->getTransfers()->push_back(t);
+					_baseTo->getTransfers().push_back(t);
 				}
 				break;
 			case TRANSFER_SCIENTIST:
 				_baseFrom->setScientists(_baseFrom->getScientists() - transferRow.amount);
 				t = new Transfer(time);
 				t->setScientists(transferRow.amount);
-				_baseTo->getTransfers()->push_back(t);
+				_baseTo->getTransfers().push_back(t);
 				break;
 			case TRANSFER_ENGINEER:
 				_baseFrom->setEngineers(_baseFrom->getEngineers() - transferRow.amount);
 				t = new Transfer(time);
 				t->setEngineers(transferRow.amount);
-				_baseTo->getTransfers()->push_back(t);
+				_baseTo->getTransfers().push_back(t);
 				break;
 			case TRANSFER_ITEM:
 				RuleItem *item = (RuleItem*)transferRow.rule;
 				_baseFrom->getStorageItems()->removeItem(item, transferRow.amount);
 				t = new Transfer(time);
 				t->setItems(item, transferRow.amount);
-				_baseTo->getTransfers()->push_back(t);
+				_baseTo->getTransfers().push_back(t);
 				if (_debriefingState != 0)
 				{
 					// remember the decreased amount for next sell/transfer

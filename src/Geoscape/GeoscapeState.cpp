@@ -2195,7 +2195,7 @@ void GeoscapeState::time1Hour()
 	bool window = false;
 	for (auto* xbase : *_game->getSavedGame()->getBases())
 	{
-		for (auto* transfer : *xbase->getTransfers())
+		for (auto* transfer : xbase->getTransfers())
 		{
 			transfer->advance(xbase);
 			if (!window && transfer->getHours() <= 0)

@@ -166,9 +166,9 @@ public:
 	/// Gets the base's crafts.
 	const std::vector<Craft*>& getCrafts() const { return _crafts; }
 	/// Gets the base's transfers.
-	std::vector<Transfer*> *getTransfers() { return &_transfers; }
+	std::vector<Transfer*>& getTransfers() { return _transfers; }
 	/// Gets the base's transfers.
-	const std::vector<Transfer*> *getTransfers() const { return &_transfers; }
+	const std::vector<Transfer*>& getTransfers() const { return _transfers; }
 	/// Gets the base's items.
 	ItemContainer *getStorageItems() { return _items; }
 	/// Gets the base's items.

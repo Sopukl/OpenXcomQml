@@ -811,18 +811,18 @@ void PurchaseState::btnOkClick(Action *)
 						}
 					}
 					t->setSoldier(soldier);
-					_base->getTransfers()->push_back(t);
+					_base->getTransfers().push_back(t);
 				}
 				break;
 			case TRANSFER_SCIENTIST:
 				t = new Transfer(_game->getMod()->getPersonnelTime());
 				t->setScientists(transferRow.amount);
-				_base->getTransfers()->push_back(t);
+				_base->getTransfers().push_back(t);
 				break;
 			case TRANSFER_ENGINEER:
 				t = new Transfer(_game->getMod()->getPersonnelTime());
 				t->setEngineers(transferRow.amount);
-				_base->getTransfers()->push_back(t);
+				_base->getTransfers().push_back(t);
 				break;
 			case TRANSFER_CRAFT:
 				for (int c = 0; c < transferRow.amount; c++)
@@ -839,7 +839,7 @@ void PurchaseState::btnOkClick(Action *)
 					craft->initFixedWeapons(_game->getMod());
 					craft->setStatus("STR_REFUELLING");
 					t->setCraft(craft);
-					_base->getTransfers()->push_back(t);
+					_base->getTransfers().push_back(t);
 				}
 				break;
 			case TRANSFER_ITEM:
@@ -853,7 +853,7 @@ void PurchaseState::btnOkClick(Action *)
 					}
 					t = new Transfer(rule->getTransferTime());
 					t->setItems(rule, transferRow.amount);
-					_base->getTransfers()->push_back(t);
+					_base->getTransfers().push_back(t);
 					if (_parent && !_missingItemsMap.empty() && _missingItemsMap.find(rule) != _missingItemsMap.end())
 					{
 						// remember the decreased amount for next buy

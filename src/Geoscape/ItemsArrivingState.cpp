@@ -98,7 +98,7 @@ ItemsArrivingState::ItemsArrivingState(GeoscapeState *state) : _state(state), _b
 
 	for (auto* xbase : *_game->getSavedGame()->getBases())
 	{
-		for (auto transferIt = xbase->getTransfers()->begin(); transferIt != xbase->getTransfers()->end();)
+		for (auto transferIt = xbase->getTransfers().begin(); transferIt != xbase->getTransfers().end();)
 		{
 			Transfer* transfer = (*transferIt);
 			if (transfer->getHours() == 0)
@@ -123,7 +123,7 @@ ItemsArrivingState::ItemsArrivingState(GeoscapeState *state) : _state(state), _b
 				ss << transfer->getQuantity();
 				_lstTransfers->addRow(3, transfer->getName(_game->getLanguage()).c_str(), ss.str().c_str(), xbase->getName().c_str());
 				delete transfer;
-				transferIt = xbase->getTransfers()->erase(transferIt);
+				transferIt = xbase->getTransfers().erase(transferIt);
 			}
 			else
 			{
