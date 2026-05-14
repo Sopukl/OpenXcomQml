@@ -18,6 +18,7 @@
  */
 #include "InteractiveSurface.h"
 #include "Action.h"
+#include <qdebug.h>
 
 namespace OpenXcom
 {

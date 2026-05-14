@@ -53,6 +53,7 @@
 #include "../Mod/Texture.h"
 #include "../Interface/Cursor.h"
 #include "../Engine/Screen.h"
+#include "MultipleTargetsState.h"
 
 namespace OpenXcom
 {
@@ -784,6 +785,7 @@ bool Globe::targetNear(Target* target, int x, int y) const
  */
 std::vector<Target*> Globe::getTargets(int x, int y, bool craft, Craft *currentCraft) const
 {
+	qDebug() << "Globe::getTargets " << x << y;
 	std::vector<Target*> v;
 	{
 		for (auto* xbase : *_game->getSavedGame()->getBases())
@@ -1920,6 +1922,19 @@ void Globe::mousePress(Action *action, State *state)
 	if (lat == lat && lon == lon)
 	{
 		InteractiveSurface::mousePress(action, state);
+		int mouseX = (int)floor(action->getAbsoluteXMouse()), mouseY = (int)floor(action->getAbsoluteYMouse());
+
+			   // Clicking markers on the globe
+		if (action->getDetails()->button.button == SDL_BUTTON_LEFT)
+		{
+			std::vector<Target*> v = getTargets(mouseX, mouseY, false, 0);
+			if (!v.empty())
+			{
+				// Pass empty vector
+				std::vector<Craft*> crafts;
+				_game->pushState(new MultipleTargetsState(v, crafts, _game->getGeoscapeState(), true));
+			}
+		}
 	}
 }
 

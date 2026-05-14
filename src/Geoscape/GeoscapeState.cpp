@@ -2964,17 +2964,17 @@ void GeoscapeState::globeClick(Action *action)
 {
 	int mouseX = (int)floor(action->getAbsoluteXMouse()), mouseY = (int)floor(action->getAbsoluteYMouse());
 
-	// Clicking markers on the globe
-	if (action->getDetails()->button.button == SDL_BUTTON_LEFT)
-	{
-		std::vector<Target*> v = _globe->getTargets(mouseX, mouseY, false, 0);
-		if (!v.empty())
-		{
-			// Pass empty vector
-			std::vector<Craft*> crafts;
-			_game->pushState(new MultipleTargetsState(v, crafts, this, true));
-		}
-	}
+	// // Clicking markers on the globe
+	// if (action->getDetails()->button.button == SDL_BUTTON_LEFT)
+	// {
+	// 	std::vector<Target*> v = _globe->getTargets(mouseX, mouseY, false, 0);
+	// 	if (!v.empty())
+	// 	{
+	// 		// Pass empty vector
+	// 		std::vector<Craft*> crafts;
+	// 		_game->pushState(new MultipleTargetsState(v, crafts, this, true));
+	// 	}
+	// }
 
 	if (_game->getSavedGame()->getDebugMode())
 	{
