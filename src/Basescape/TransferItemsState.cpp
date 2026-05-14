@@ -161,7 +161,7 @@ TransferItemsState::TransferItemsState(Base *baseFrom, Base *baseTo, DebriefingS
 			}
 		}
 	}
-	for (auto* craft : *_baseFrom->getCrafts())
+	for (auto* craft : _baseFrom->getCrafts())
 	{
 		if (_debriefingState) break;
 		if (craft->getStatus() != "STR_OUT" || (options1.canTransferCraftsWhileAirborne() && craft->getFuel() >= craft->getFuelLimit(_baseTo)))
@@ -617,7 +617,7 @@ void TransferItemsState::completeTransfer()
 				if (craft->getStatus() == "STR_OUT")
 				{
 					bool returning = (craft->getDestination() == (Target*)craft->getBase());
-					_baseTo->getCrafts()->push_back(craft);
+					_baseTo->getCrafts().push_back(craft);
 					craft->setBase(_baseTo, false);
 					if (craft->getFuel() <= craft->getFuelLimit(_baseTo))
 					{

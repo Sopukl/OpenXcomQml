@@ -931,7 +931,7 @@ const std::vector<Craft*>* GeoscapeState::updateActiveCrafts()
 	_activeCrafts.clear();
 	for (auto* xbase : *_game->getSavedGame()->getBases())
 	{
-		for (auto* xcraft : *xbase->getCrafts())
+		for (auto* xcraft : xbase->getCrafts())
 		{
 			if (xcraft->getStatus() == "STR_OUT" && !xcraft->isDestroyed())
 			{
@@ -1142,7 +1142,7 @@ void GeoscapeState::time5Seconds()
 	// Handle craft logic
 	for (auto* xbase : *_game->getSavedGame()->getBases())
 	{
-		for (auto craftIt = xbase->getCrafts()->begin(); craftIt != xbase->getCrafts()->end();)
+		for (auto craftIt = xbase->getCrafts().begin(); craftIt != xbase->getCrafts().end();)
 		{
 			Craft* xcraft = (*craftIt);
 			if (xcraft->isDestroyed())
@@ -1535,7 +1535,7 @@ void GeoscapeState::time10Minutes()
 	for (auto* xbase : *_game->getSavedGame()->getBases())
 	{
 		// Fuel consumption for XCOM craft.
-		for (auto* xcraft : *xbase->getCrafts())
+		for (auto* xcraft : xbase->getCrafts())
 		{
 			if (xcraft->getStatus() == "STR_OUT")
 			{
@@ -1940,7 +1940,7 @@ void GeoscapeState::time30Minutes()
 	// Handle craft maintenance and alien base detection
 	for (auto* xbase : *_game->getSavedGame()->getBases())
 	{
-		for (auto* xcraft : *xbase->getCrafts())
+		for (auto* xcraft : xbase->getCrafts())
 		{
 			if (xcraft->getStatus() == "STR_REFUELLING")
 			{
@@ -2148,7 +2148,7 @@ void GeoscapeState::time1Hour()
 	// Handle craft maintenance
 	for (auto* xbase : *_game->getSavedGame()->getBases())
 	{
-		for (auto* xcraft : *xbase->getCrafts())
+		for (auto* xcraft : xbase->getCrafts())
 		{
 			if (xcraft->getStatus() == "STR_REPAIRS")
 			{
@@ -4334,7 +4334,7 @@ bool GeoscapeState::buildNewBaseAt(int mouseX, int mouseY, Base* base, bool isFi
     base->setLongitude(lon);
     base->setLatitude(lat);
     base->calculateServices(savedGame);
-    for (auto* craft : *base->getCrafts())
+	for (auto* craft : base->getCrafts())
     {
         craft->setLongitude(lon);
         craft->setLatitude(lat);

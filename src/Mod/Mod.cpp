@@ -3844,7 +3844,7 @@ SavedGame *Mod::newSave(GameDifficulty diff) const
 	save->getBases()->push_back(base);
 
 	// Correct IDs
-	for (auto* craft : *base->getCrafts())
+	for (auto* craft : base->getCrafts())
 	{
 		save->getId(craft->getRules()->getType());
 	}
@@ -3856,7 +3856,7 @@ SavedGame *Mod::newSave(GameDifficulty diff) const
 	}
 
 	// Remove craft weapons if needed
-	for (auto* craft : *base->getCrafts())
+	for (auto* craft : base->getCrafts())
 	{
 		if (craft->getMaxUnitsRaw() < 0 || craft->getMaxVehiclesAndLargeSoldiersRaw() < 0)
 		{
@@ -3954,7 +3954,7 @@ SavedGame *Mod::newSave(GameDifficulty diff) const
 				}
 
 				Craft *found = 0;
-				for (auto* craft : *base->getCrafts())
+				for (auto* craft : base->getCrafts())
 				{
 					CraftPlacementErrors err = craft->validateAddingSoldier(craft->getSpaceAvailable(), soldier);
 					if (!found && craft->getRules()->getAllowLanding() && err == CPE_None)

@@ -57,7 +57,7 @@ CraftSoldiersState::CraftSoldiersState(Base *base, size_t craft)
 		:  _base(base), _craft(craft), _otherCraftColor(0), _origSoldierOrder(_base->getSoldiers()), _dynGetter(NULL)
 {
 	bool hidePreview = _game->getSavedGame()->getMonthsPassed() == -1;
-	Craft *c = _base->getCrafts()->at(_craft);
+	Craft *c = _base->getCrafts().at(_craft);
 	if (c && !c->getRules()->isForNewBattle())
 	{
 		// no battlescape map available
@@ -308,7 +308,7 @@ void CraftSoldiersState::btnOkClick(Action *)
  */
 void CraftSoldiersState::btnPreviewClick(Action *)
 {
-	Craft* c = _base->getCrafts()->at(_craft);
+	Craft* c = _base->getCrafts().at(_craft);
 	if (c->getSpaceUsed() <= 0)
 	{
 		// at least one unit must be onboard
@@ -348,7 +348,7 @@ void CraftSoldiersState::initList(size_t scrl)
 		_lstSoldiers->setColumns(3, 106, 98, 76);
 	}
 
-	Craft *c = _base->getCrafts()->at(_craft);
+	Craft *c = _base->getCrafts().at(_craft);
 	BaseSumDailyRecovery recovery = _base->getSumRecoveryPerDay();
 	for (const auto* soldier : _base->getSoldiers())
 	{
@@ -399,7 +399,7 @@ void CraftSoldiersState::init()
 	initList(_lstSoldiers->getScroll());
 
 	// update the label to indicate presence of a saved craft deployment
-	Craft* c = _base->getCrafts()->at(_craft);
+	Craft* c = _base->getCrafts().at(_craft);
 	if (c->hasCustomDeployment())
 		_btnPreview->setText(ltr("STR_CRAFT_DEPLOYMENT_PREVIEW_SAVED"));
 	else
@@ -527,7 +527,7 @@ void CraftSoldiersState::lstSoldiersClick(Action *action)
 	int row = _lstSoldiers->getSelectedRow();
 	if (_game->isLeftClick(action, true))
 	{
-		Craft *c = _base->getCrafts()->at(_craft);
+		Craft *c = _base->getCrafts().at(_craft);
 		Soldier *s = _base->getSoldiers().at(_lstSoldiers->getSelectedRow());
 		if (s->getCraft() == c)
 		{
@@ -627,7 +627,7 @@ void CraftSoldiersState::btnDeassignAllSoldiersClick(Action *action)
 		row++;
 	}
 
-	Craft *c = _base->getCrafts()->at(_craft);
+	Craft *c = _base->getCrafts().at(_craft);
 	_txtAvailable->setText(ltr("STR_SPACE_AVAILABLE").arg(c->getSpaceAvailable()));
 	_txtUsed->setText(ltr("STR_SPACE_USED").arg(c->getSpaceUsed()));
 }
@@ -638,7 +638,7 @@ void CraftSoldiersState::btnDeassignAllSoldiersClick(Action *action)
  */
 void CraftSoldiersState::btnDeassignCraftSoldiersClick(Action *action)
 {
-	Craft *c = _base->getCrafts()->at(_craft);
+	Craft *c = _base->getCrafts().at(_craft);
 	int row = 0;
 	for (auto* soldier : _base->getSoldiers())
 	{

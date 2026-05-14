@@ -288,7 +288,7 @@ void Craft::finishLoading(const YAML::YamlNodeReader& reader, SavedGame *save)
 		for (auto* xbase : *save->getBases())
 		{
 			if (found) break; // loop finished
-			for (auto* xcraft : *xbase->getCrafts())
+			for (auto* xcraft : xbase->getCrafts())
 			{
 				if (found) break; // loop finished
 				if (xcraft->getId() == id && xcraft->getRules()->getType() == type)

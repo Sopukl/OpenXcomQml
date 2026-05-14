@@ -463,7 +463,7 @@ void ConfirmDestinationState::btnTransferClick(Action *)
 
 		// Transfer craft
 		currentBase->removeCraft(_crafts.front(), false);
-		targetBase->getCrafts()->push_back(_crafts.front());
+		targetBase->getCrafts().push_back(_crafts.front());
 		_crafts.front()->setBase(targetBase, false);
 		_crafts.front()->returnToBase();
 		_crafts.front()->setStatus("STR_OUT");

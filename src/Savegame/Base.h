@@ -162,9 +162,9 @@ public:
 	/// Pre-calculates soldier stats with various bonuses.
 	void prepareSoldierStatsWithBonuses();
 	/// Gets the base's crafts.
-	std::vector<Craft*> *getCrafts() {	return &_crafts; }
+	std::vector<Craft*>& getCrafts() {	return _crafts; }
 	/// Gets the base's crafts.
-	const std::vector<Craft*> *getCrafts() const { return &_crafts; }
+	const std::vector<Craft*>& getCrafts() const { return _crafts; }
 	/// Gets the base's transfers.
 	std::vector<Transfer*> *getTransfers() { return &_transfers; }
 	/// Gets the base's transfers.

@@ -69,7 +69,7 @@ CraftEquipmentState::CraftEquipmentState(Base *base, size_t craft) :
 	_lstScroll(0), _sel(0), _craft(craft), _base(base), _totalItems(0), _totalItemStorageSize(0.0), _ammoColor(0),
 	_reload(true), _returningFromGlobalTemplates(false), _returningFromInventory(false), _firstInit(true), _isNewBattle(false)
 {
-	Craft *c = _base->getCrafts()->at(_craft);
+	Craft *c = _base->getCrafts().at(_craft);
 	bool craftHasACrew = c->getNumTotalSoldiers() > 0;
 	_isNewBattle = _game->getSavedGame()->getMonthsPassed() == -1;
 
@@ -258,7 +258,7 @@ void CraftEquipmentState::init()
 
 	_game->getSavedGame()->setBattleGame(0);
 
-	Craft *c = _base->getCrafts()->at(_craft);
+	Craft *c = _base->getCrafts().at(_craft);
 	c->setInBattlescape(false);
 
 	// don't reload after closing error popups
@@ -339,7 +339,7 @@ void CraftEquipmentState::initList()
 	bool categoryNotEquipped = (selectedCategory == "STR_NOT_EQUIPPED");
 	bool shareAmmoCategories = _game->getMod()->getShareAmmoCategories();
 
-	Craft *c = _base->getCrafts()->at(_craft);
+	Craft *c = _base->getCrafts().at(_craft);
 
 	// reset
 	_totalItems = 0;
@@ -652,7 +652,7 @@ void CraftEquipmentState::lstEquipmentMousePress(Action *action)
  */
 void CraftEquipmentState::updateQuantity()
 {
-	Craft *c = _base->getCrafts()->at(_craft);
+	Craft *c = _base->getCrafts().at(_craft);
 	RuleItem *item = _game->getMod()->getItem(_items[_sel], true);
 	int cQty = 0;
 	if (item->getVehicleUnit())
@@ -729,7 +729,7 @@ void CraftEquipmentState::moveLeft()
  */
 void CraftEquipmentState::moveLeftByValue(int change)
 {
-	Craft *c = _base->getCrafts()->at(_craft);
+	Craft *c = _base->getCrafts().at(_craft);
 	const RuleItem *item = _game->getMod()->getItem(_items[_sel], true);
 	int cQty = 0;
 	if (item->getVehicleUnit()) cQty = c->getVehicleCount(_items[_sel]);
@@ -819,7 +819,7 @@ void CraftEquipmentState::moveRight()
  */
 void CraftEquipmentState::moveRightByValue(int change, bool suppressErrors)
 {
-	Craft *c = _base->getCrafts()->at(_craft);
+	Craft *c = _base->getCrafts().at(_craft);
 	const RuleItem *item = _game->getMod()->getItem(_items[_sel], true);
 	int bqty = _base->getStorageItems()->getItem(item);
 	if (_isNewBattle)
@@ -949,7 +949,7 @@ void CraftEquipmentState::btnClearClick(Action *)
 	// in New Battle, clear also stuff that is not displayed on the GUI (for whatever reason)
 	if (_isNewBattle)
 	{
-		Craft* c = _base->getCrafts()->at(_craft);
+		Craft* c = _base->getCrafts().at(_craft);
 		c->getItems()->clear();
 	}
 }
@@ -961,7 +961,7 @@ void CraftEquipmentState::btnClearClick(Action *)
  */
 void CraftEquipmentState::btnInventoryClick(Action *)
 {
-	Craft *craft = _base->getCrafts()->at(_craft);
+	Craft *craft = _base->getCrafts().at(_craft);
 	if (craft->getNumTotalSoldiers() > 0)
 	{
 		if (options1.oxceAlternateCraftEquipmentManagement() && !_isNewBattle)
@@ -1024,7 +1024,7 @@ void CraftEquipmentState::saveGlobalLoadout(int index)
 	ItemContainer *tmpl = _game->getSavedGame()->getGlobalCraftLoadout(index);
 	tmpl->clear();
 
-	Craft *c = _base->getCrafts()->at(_craft);
+	Craft *c = _base->getCrafts().at(_craft);
 	// save only what is visible on the screen (can be DIFFERENT than what's really in the craft for various reasons)
 	for (const auto& itemType : _items)
 	{
@@ -1056,7 +1056,7 @@ void CraftEquipmentState::loadGlobalLoadout(int index, bool onlyAddItems)
 	_cbxFilterBy->setSelected(0);
 	initList();
 
-	Craft* c = _base->getCrafts()->at(_craft);
+	Craft* c = _base->getCrafts().at(_craft);
 
 	ItemContainer craftItemsBackup;
 	std::vector<Vehicle*> craftVehiclesBackup;

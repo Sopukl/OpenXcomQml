@@ -94,7 +94,7 @@ CraftPilotsState::CraftPilotsState(Base *base, size_t craft) : _base(base), _cra
 	_btnOk->onKeyboardPress((ActionHandler)&CraftPilotsState::btnOkClick, options1.keyOk());
 	_btnOk->onKeyboardPress((ActionHandler)&CraftPilotsState::btnOkClick, options1.keyCancel());
 
-	Craft *c = _base->getCrafts()->at(_craft);
+	Craft *c = _base->getCrafts().at(_craft);
 
 	_txtTitle->setBig();
 	_txtTitle->setAlign(ALIGN_CENTER);
@@ -160,7 +160,7 @@ void CraftPilotsState::updateUI()
 {
 	_lstPilots->clearList();
 
-	Craft *c = _base->getCrafts()->at(_craft);
+	Craft *c = _base->getCrafts().at(_craft);
 
 	const std::vector<Soldier*> pilots = c->getPilotList(false, nullptr); // stats already refreshed in the constructor
 	for (const auto* pilot : pilots)
@@ -244,7 +244,7 @@ void CraftPilotsState::btnAddClick(Action *)
 */
 void CraftPilotsState::btnRemoveAllClick(Action *)
 {
-	Craft *c = _base->getCrafts()->at(_craft);
+	Craft *c = _base->getCrafts().at(_craft);
 
 	c->removeAllPilots();
 

@@ -435,15 +435,15 @@ void NewBattleState::load(const std::string &filename)
 				}
 
 				// Fix invalid contents
-				if (base->getCrafts()->empty())
+				if (base->getCrafts().empty())
 				{
 					std::string craftType = _crafts[_cbxCraft->getSelected()];
 					_craft = new Craft(_game->getMod()->getCraft(craftType), base, save->getId(craftType));
-					base->getCrafts()->push_back(_craft);
+					base->getCrafts().push_back(_craft);
 				}
 				else
 				{
-					_craft = base->getCrafts()->front();
+					_craft = base->getCrafts().front();
 				}
 
 				_game->setSavedGame(save);
@@ -517,15 +517,15 @@ void NewBattleState::initSave()
 		delete soldier;
 	}
 	base->getSoldiers().clear();
-	for (auto* xcraft : *base->getCrafts())
+	for (auto* xcraft : base->getCrafts())
 	{
 		delete xcraft;
 	}
-	base->getCrafts()->clear();
+	base->getCrafts().clear();
 	base->getStorageItems()->clear();
 
 	_craft = new Craft(mod->getCraft(_crafts[_cbxCraft->getSelected()]), base, 1);
-	base->getCrafts()->push_back(_craft);
+	base->getCrafts().push_back(_craft);
 
 	// Generate soldiers
 	bool psiStrengthEval = (options1.psiStrengthEval() && save->isResearched(mod->getPsiRequirements()));

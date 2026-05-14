@@ -956,7 +956,7 @@ void SaveConverter::loadDatCraft()
 				{
 					Base *b = dynamic_cast<Base*>(_targets[base]);
 					craft->setBase(b, false);
-					b->getCrafts()->push_back(craft);
+					b->getCrafts().push_back(craft);
 				}
 			}
 			Ufo *ufo = dynamic_cast<Ufo*>(_targets[i]);

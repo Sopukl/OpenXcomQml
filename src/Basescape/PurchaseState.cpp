@@ -539,7 +539,7 @@ bool PurchaseState::isEquipped(int sel) const
 		if (rule)
 		{
 			// iterate all craft, also craft which are currently not at the base
-			for (auto* xcraft : *_base->getCrafts())
+			for (auto* xcraft : _base->getCrafts())
 			{
 				if (xcraft->getItems()->getItem(rule) > 0)
 					return true;

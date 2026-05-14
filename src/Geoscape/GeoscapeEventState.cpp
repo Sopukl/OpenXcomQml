@@ -373,7 +373,7 @@ void GeoscapeEventState::eventLogic()
 			{
 				for (auto* xbase : *save->getBases())
 				{
-					for (auto* xcraft : *xbase->getCrafts())
+					for (auto* xcraft : xbase->getCrafts())
 					{
 						int cQty = xcraft->getItems()->getItem(r);
 						if (cQty > 0 && xcraft->getStatus() != "STR_OUT")
@@ -419,7 +419,7 @@ void GeoscapeEventState::eventLogic()
 		{
 			// same as manufacture
 			craft->checkup();
-			hq->getCrafts()->push_back(craft);
+			hq->getCrafts().push_back(craft);
 		}
 		else
 		{

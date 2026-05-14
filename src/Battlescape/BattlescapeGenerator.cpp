@@ -1048,7 +1048,7 @@ void BattlescapeGenerator::deployXCOM(const RuleStartingCondition* startingCondi
 			// due to the geoscape calling base->setupDefenses()
 			if (_game->getSavedGame()->getMonthsPassed() == -1)
 			{
-				for (auto* craft : *_base->getCrafts())
+				for (auto* craft : _base->getCrafts())
 				{
 					for (auto* vehicle : *craft->getVehicles())
 					{
@@ -1284,7 +1284,7 @@ void BattlescapeGenerator::deployXCOM(const RuleStartingCondition* startingCondi
 			}
 		}
 		// add items from crafts in base
-		for (auto* craft : *_base->getCrafts())
+		for (auto* craft : _base->getCrafts())
 		{
 			if (craft->getStatus() == "STR_OUT")
 				continue;

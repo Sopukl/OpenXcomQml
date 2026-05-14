@@ -1380,7 +1380,7 @@ void SavedBattleGame::saveDummyCraftDeployment()
 	// don't forget to invalidate custom deployments of all real craft of this type
 	for (auto* xbase : *save->getBases())
 	{
-		for (auto* xcraft : *xbase->getCrafts())
+		for (auto* xcraft : xbase->getCrafts())
 		{
 			if (xcraft->getRules() == _craftForPreview->getRules())
 			{

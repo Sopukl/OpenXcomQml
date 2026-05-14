@@ -177,7 +177,7 @@ InterceptState::InterceptState(Globe *globe, bool useCustomSound, Base *base, Ta
 	{
 		if (_base != 0 && xbase != _base)
 			continue;
-		for (auto* xcraft : *xbase->getCrafts())
+		for (auto* xcraft : xbase->getCrafts())
 		{
 			double xdistance = 0.0;
 			if (_target) xdistance = xcraft->getDistance(_target);
@@ -506,9 +506,9 @@ void InterceptState::lstCraftsRightClick(Action *)
 		{
 			if (_base != 0 && xbase != _base)
 				continue;
-			for (size_t ci = 0; ci < xbase->getCrafts()->size(); ++ci)
+			for (size_t ci = 0; ci < xbase->getCrafts().size(); ++ci)
 			{
-				if (c == xbase->getCrafts()->at(ci))
+				if (c == xbase->getCrafts().at(ci))
 				{
 					_game->pushState(new CraftInfoState(xbase, ci));
 					found = true;

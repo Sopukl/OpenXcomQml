@@ -1090,7 +1090,7 @@ void DebriefingState::prepareDebriefing()
 	for (auto* xbase : *save->getBases())
 	{
 		// in case we have a craft - check which craft it is about
-		for (auto* xcraft : *xbase->getCrafts())
+		for (auto* xcraft : xbase->getCrafts())
 		{
 			if (xcraft->isInBattlescape())
 			{
@@ -1725,7 +1725,7 @@ void DebriefingState::prepareDebriefing()
 	}
 	if ((aborted || playersSurvived == 0) && target == "STR_BASE")
 	{
-		for (auto* xcraft : *base->getCrafts())
+		for (auto* xcraft : base->getCrafts())
 		{
 			addStat("STR_XCOM_CRAFT_LOST", 1, -xcraft->getRules()->getScore());
 		}
@@ -2085,7 +2085,7 @@ void DebriefingState::prepareDebriefing()
 		if (!_destroyBase)
 		{
 			// reequip crafts (only those on the base) after a base defense mission
-			for (auto* xcraft : *base->getCrafts())
+			for (auto* xcraft : base->getCrafts())
 			{
 				if (xcraft->getStatus() != "STR_OUT")
 					reequipCraft(base, xcraft, false);
@@ -2520,7 +2520,7 @@ void DebriefingState::recoverItems(std::vector<BattleItem*> *from, Base *base, C
 				}
 				if (rule->getBattleType() == BT_NONE)
 				{
-					for (auto* xcraft : *base->getCrafts())
+					for (auto* xcraft : base->getCrafts())
 					{
 						xcraft->reuseItem(rule);
 					}
