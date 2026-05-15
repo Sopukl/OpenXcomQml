@@ -1047,7 +1047,7 @@ void GeoscapeState::time5Seconds()
 					continue;
 				}
 
-				size_t count = _game->getSavedGame()->getMissionSites()->size();
+				size_t count = _game->getSavedGame()->getMissionSites().size();
 				AlienMission *mission = ufo->getMission();
 				bool detected = ufo->getDetected();
 				mission->ufoReachedWaypoint(*ufo, *_game, *_globe);
@@ -1061,9 +1061,9 @@ void GeoscapeState::time5Seconds()
 					if (!(ufo->getTrajectory().getID() == UfoTrajectory::RETALIATION_ASSAULT_RUN && ufo->getStatus() == Ufo::LANDED))
 						popup(new UfoLostState(ufo->getName(_game->getLanguage())));
 				}
-				if (count < _game->getSavedGame()->getMissionSites()->size())
+				if (count < _game->getSavedGame()->getMissionSites().size())
 				{
-					MissionSite *site = _game->getSavedGame()->getMissionSites()->back();
+					MissionSite *site = _game->getSavedGame()->getMissionSites().back();
 					site->setDetected(true);
 					popup(new MissionDetectedState(site, this));
 				}
@@ -2035,7 +2035,7 @@ void GeoscapeState::time30Minutes()
 
 	// Processes MissionSites
 	Collections::deleteIf(
-		*_game->getSavedGame()->getMissionSites(),
+		_game->getSavedGame()->getMissionSites(),
 		[&](MissionSite* site)
 		{
 			return processMissionSite(site);
@@ -2266,7 +2266,7 @@ void GeoscapeState::time1Hour()
 	_game->getSavedGame()->setAlienContainmentChecked(true); // check only once after reload
 
 	bool postpone = false;
-	for (auto* msite : *_game->getSavedGame()->getMissionSites())
+	for (auto* msite : _game->getSavedGame()->getMissionSites())
 	{
 		if (!msite->getDetected())
 		{
@@ -2282,7 +2282,7 @@ void GeoscapeState::time1Hour()
 	}
 	if (postpone)
 	{
-		for (auto* msite : *_game->getSavedGame()->getMissionSites())
+		for (auto* msite : _game->getSavedGame()->getMissionSites())
 		{
 			if (!msite->getDetected())
 			{

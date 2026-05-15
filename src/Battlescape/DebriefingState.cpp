@@ -1219,7 +1219,7 @@ void DebriefingState::prepareDebriefing()
 
 	// mission site disappears (even when you abort)
 	Ufo* ignoredUfo = nullptr;
-	for (auto msIt = save->getMissionSites()->begin(); msIt != save->getMissionSites()->end(); ++msIt)
+	for (auto msIt = save->getMissionSites().begin(); msIt != save->getMissionSites().end(); ++msIt)
 	{
 		MissionSite* ms = (*msIt);
 		if (ms->isInBattlescape())
@@ -1231,7 +1231,7 @@ void DebriefingState::prepareDebriefing()
 			}
 			_missionStatistics->alienRace = ms->getAlienRace();
 			delete ms;
-			save->getMissionSites()->erase(msIt);
+			save->getMissionSites().erase(msIt);
 			break;
 		}
 	}

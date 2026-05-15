@@ -673,7 +673,7 @@ void NewBattleState::btnOkClick(Action *)
 		m->setAlienRace(_alienRaces[_cbxAlienRace->getSelected()]);
 		_craft->setDestination(m);
 		bgen.setMissionSite(m);
-		_game->getSavedGame()->getMissionSites()->push_back(m);
+		_game->getSavedGame()->getMissionSites().push_back(m);
 	}
 
 	if (_craft)

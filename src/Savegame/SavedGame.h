@@ -272,7 +272,7 @@ public:
 	/// Gets the list of waypoints.
 	std::vector<Waypoint*>& getWaypoints();
 	/// Gets the list of mission sites.
-	std::vector<MissionSite*> *getMissionSites();
+	std::vector<MissionSite*>& getMissionSites();
 	/// Gets the current battle game.
 	SavedBattleGame *getSavedBattle();
 	/// Sets the current battle game.

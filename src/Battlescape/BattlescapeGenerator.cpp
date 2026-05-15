@@ -702,7 +702,7 @@ void BattlescapeGenerator::nextStage()
 
 	if (_alienRace.empty())
 	{
-		for (const auto* missionSite : *_game->getSavedGame()->getMissionSites())
+		for (const auto* missionSite : _game->getSavedGame()->getMissionSites())
 		{
 			if (missionSite->isInBattlescape())
 			{

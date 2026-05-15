@@ -122,7 +122,7 @@ UfoTrackerState::UfoTrackerState(GeoscapeState *state, Globe *globe) : _state(st
 	_lstObjects->onMouseClick((ActionHandler)&UfoTrackerState::lstObjectsMiddleClick, SDL_BUTTON_MIDDLE);
 
 	int row = 0;
-	for (auto* site : *_game->getSavedGame()->getMissionSites())
+	for (auto* site : _game->getSavedGame()->getMissionSites())
 	{
 		if (!site->getDetected())
 			continue;

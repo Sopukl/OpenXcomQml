@@ -699,7 +699,7 @@ void SaveConverter::loadDatLoc()
 			mission->setAlienRace(_rules->getCrews()[dat]);
 			mission->setSecondsRemaining(timer * 3600);
 			mission->setDetected(detected);
-			_save->getMissionSites()->push_back(mission);
+			_save->getMissionSites().push_back(mission);
 			target = mission;
 		}
 		if (target != 0)

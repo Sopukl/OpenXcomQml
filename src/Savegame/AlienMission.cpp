@@ -1462,7 +1462,7 @@ MissionSite *AlienMission::spawnMissionSite(SavedGame &game, const Mod &mod, con
 		missionSite->setAlienRace(_race);
 		missionSite->setTexture(area.texture);
 		missionSite->setCity(area.name);
-		game.getMissionSites()->push_back(missionSite);
+		game.getMissionSites().push_back(missionSite);
 
 		if (options1.oxceGeoscapeDebugLogMaxEntries() > 0)
 		{

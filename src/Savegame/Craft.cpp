@@ -231,7 +231,7 @@ void Craft::load(const YAML::YamlNodeReader& node, const ScriptGlobal *shared, c
 			if (type == "STR_ALIEN_TERROR")
 				type = "STR_TERROR_SITE";
 			bool found = false;
-			for (auto* ms : *save->getMissionSites())
+			for (auto* ms : save->getMissionSites())
 			{
 				if (found) break; // loop finished
 				if (ms->getId() == id && ms->getDeployment()->getMarkerName() == type)

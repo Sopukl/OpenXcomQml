@@ -1379,9 +1379,9 @@ std::vector<Waypoint*>& SavedGame::getWaypoints()
  * Returns the list of mission sites.
  * @return Pointer to mission site list.
  */
-std::vector<MissionSite*> *SavedGame::getMissionSites()
+std::vector<MissionSite*>& SavedGame::getMissionSites()
 {
-	return &_missionSites;
+	return _missionSites;
 }
 
 /**

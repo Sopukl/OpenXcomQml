@@ -829,7 +829,7 @@ std::vector<Target*> Globe::getTargets(int x, int y, bool craft, Craft *currentC
 			v.push_back(wp);
 		}
 	}
-	for (auto* site : *_game->getSavedGame()->getMissionSites())
+	for (auto* site : _game->getSavedGame()->getMissionSites())
 	{
 		if (targetNear(site, x, y))
 		{
@@ -1772,7 +1772,7 @@ void Globe::drawMarkers()
 	}
 
 	// Draw the mission site markers
-	for (auto* site : *_game->getSavedGame()->getMissionSites())
+	for (auto* site : _game->getSavedGame()->getMissionSites())
 	{
 		drawTarget(site, _markers);
 	}
