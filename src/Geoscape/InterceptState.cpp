@@ -173,7 +173,7 @@ InterceptState::InterceptState(Globe *globe, bool useCustomSound, Base *base, Ta
 	_selCrafts.clear();
 
 	std::vector< std::tuple<Craft*, double, Base*> > craftList;
-	for (auto* xbase : *_game->getSavedGame()->getBases())
+	for (auto* xbase : _game->getSavedGame()->getBases())
 	{
 		if (_base != 0 && xbase != _base)
 			continue;
@@ -502,7 +502,7 @@ void InterceptState::lstCraftsRightClick(Action *)
 		_game->popState();
 
 		bool found = false;
-		for (auto* xbase : *_game->getSavedGame()->getBases())
+		for (auto* xbase : _game->getSavedGame()->getBases())
 		{
 			if (_base != 0 && xbase != _base)
 				continue;

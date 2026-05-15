@@ -1378,7 +1378,7 @@ void SavedBattleGame::saveDummyCraftDeployment()
 	auto* save = getGeoscapeSave();
 
 	// don't forget to invalidate custom deployments of all real craft of this type
-	for (auto* xbase : *save->getBases())
+	for (auto* xbase : save->getBases())
 	{
 		for (auto* xcraft : xbase->getCrafts())
 		{

@@ -92,7 +92,7 @@ TransferBaseState::TransferBaseState(Base *base, DebriefingState *debriefingStat
 	_lstBases->onMouseClick((ActionHandler)&TransferBaseState::lstBasesClick);
 
 	int row = 0;
-	for (auto* xbase : *_game->getSavedGame()->getBases())
+	for (auto* xbase : _game->getSavedGame()->getBases())
 	{
 		if (xbase != _base)
 		{

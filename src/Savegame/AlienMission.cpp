@@ -414,7 +414,7 @@ void AlienMission::think(Game &engine, const Globe &globe)
 Base* AlienMission::selectXcomBase(SavedGame& game, const RuleRegion& regionRules)
 {
 	std::vector<Base*> validxcombases;
-	for (auto* xb : *game.getBases())
+	for (auto* xb : game.getBases())
 	{
 		if (regionRules.insideRegion(xb->getLongitude(), xb->getLatitude()))
 		{
@@ -512,7 +512,7 @@ Ufo *AlienMission::spawnUfo(SavedGame &game, const Mod &mod, const Globe &globe,
 		// skip the scouting phase of a retaliation mission
 		if (_rule.skipScoutingPhase() && _rule.getObjective() == OBJECTIVE_RETALIATION)
 		{
-			for (auto* xbase : *game.getBases())
+			for (auto* xbase : game.getBases())
 			{
 				if (regionRules.insideRegion(xbase->getLongitude(), xbase->getLatitude()))
 				{
@@ -937,7 +937,7 @@ void AlienMission::ufoReachedWaypoint(Ufo &ufo, Game &engine, const Globe &globe
 			// Remove UFO, replace with Base defense.
 			ufo.setDetected(false);
 			Base* found = nullptr;
-			for (auto* xbase : *game.getBases())
+			for (auto* xbase : game.getBases())
 			{
 				if (AreSame(xbase->getLongitude(), ufo.getLongitude()) && AreSame(xbase->getLatitude(), ufo.getLatitude()))
 				{

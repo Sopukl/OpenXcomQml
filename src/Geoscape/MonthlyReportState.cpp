@@ -321,7 +321,7 @@ void MonthlyReportState::btnOkClick(Action *)
 		_game->popState();
 		// Award medals for service time
 		// Iterate through all your bases
-		for (auto* xbase : *_game->getSavedGame()->getBases())
+		for (auto* xbase : _game->getSavedGame()->getBases())
 		{
 			// Iterate through all your soldiers
 			for (auto* soldier : xbase->getSoldiers())
@@ -340,7 +340,7 @@ void MonthlyReportState::btnOkClick(Action *)
 		}
 
 		bool psi = false;
-		for (auto* xbase : *_game->getSavedGame()->getBases())
+		for (auto* xbase : _game->getSavedGame()->getBases())
 		{
 			psi = psi || xbase->getAvailablePsiLabs();
 		}

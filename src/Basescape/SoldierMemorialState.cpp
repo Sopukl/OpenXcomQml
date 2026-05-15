@@ -96,7 +96,7 @@ SoldierMemorialState::SoldierMemorialState()
 
 	size_t lost = _game->getSavedGame()->getDeadSoldiers().size();
 	size_t recruited = lost;
-	for (const auto* xbase : *_game->getSavedGame()->getBases())
+	for (const auto* xbase : _game->getSavedGame()->getBases())
 	{
 		recruited += xbase->getTotalSoldiers();
 	}

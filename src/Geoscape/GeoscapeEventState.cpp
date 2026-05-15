@@ -143,7 +143,7 @@ void GeoscapeEventState::eventLogic()
 	}
 
 	SavedGame *save = _game->getSavedGame();
-	Base *hq = save->getBases()->front();
+	Base *hq = save->getBases().front();
 	const Mod *mod = _game->getMod();
 	const RuleEvent &rule = _eventRule;
 
@@ -357,7 +357,7 @@ void GeoscapeEventState::eventLogic()
 		{
 			RuleItem* r = mod->getItem(ti.first, true);
 			int removed = 0;
-			for (auto* xbase : *save->getBases())
+			for (auto* xbase : save->getBases())
 			{
 				int bQty = xbase->getStorageItems().getItem(r);
 				if (bQty > 0)
@@ -371,7 +371,7 @@ void GeoscapeEventState::eventLogic()
 			}
 			if (ti.second > 0)
 			{
-				for (auto* xbase : *save->getBases())
+				for (auto* xbase : save->getBases())
 				{
 					for (auto* xcraft : xbase->getCrafts())
 					{
@@ -559,7 +559,7 @@ void GeoscapeEventState::btnOkClick(Action *)
 
 	if (_game->getSavedGame()->getEnding() == END_NONE)
 	{
-		Base* base = _game->getSavedGame()->getBases()->front();
+		Base* base = _game->getSavedGame()->getBases().front();
 		if (_game->getSavedGame()->getMonthsPassed() > -1 && options1.storageLimitsEnforced() && base != 0 && base->storesOverfull())
 		{
 			_game->pushState(new SellState(base, 0));

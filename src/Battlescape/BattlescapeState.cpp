@@ -2741,7 +2741,7 @@ inline void BattlescapeState::handle(Action *action)
 				if (key == SDLK_b && ctrlPressed)
 				{
 					Craft* ycraft = nullptr;
-					for (auto* xbase : *_game->getSavedGame()->getBases())
+					for (auto* xbase : _game->getSavedGame()->getBases())
 					{
 						for (auto* xcraft : xbase->getCrafts())
 						{
@@ -3603,7 +3603,7 @@ void BattlescapeState::finishBattle(bool abort, int inExitArea)
 			_game->getSavedGame()->setBattleGame(0);
 
 			// unmark all craft and all bases (current craft would be enough, but better safe than sorry)
-			for (auto* xbase : *_game->getSavedGame()->getBases())
+			for (auto* xbase : _game->getSavedGame()->getBases())
 			{
 				xbase->setInBattlescape(false);
 				for (auto* craft : xbase->getCrafts())

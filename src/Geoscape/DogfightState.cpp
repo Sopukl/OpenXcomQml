@@ -535,7 +535,7 @@ DogfightState::DogfightState(GeoscapeState *state, Craft *craft, Ufo *ufo, bool 
 	if (_craft->getInterceptionOrder() == 0)
 	{
 		int maxInterceptionOrder = 0;
-		for (auto* xbase : *_game->getSavedGame()->getBases())
+		for (auto* xbase : _game->getSavedGame()->getBases())
 		{
 			for (auto* xcraft : xbase->getCrafts())
 			{

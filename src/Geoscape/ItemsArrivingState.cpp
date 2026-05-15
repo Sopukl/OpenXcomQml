@@ -96,7 +96,7 @@ ItemsArrivingState::ItemsArrivingState(GeoscapeState *state) : _state(state), _b
 	_lstTransfers->setBackground(_window);
 	_lstTransfers->setMargin(2);
 
-	for (auto* xbase : *_game->getSavedGame()->getBases())
+	for (auto* xbase : _game->getSavedGame()->getBases())
 	{
 		for (auto transferIt = xbase->getTransfers().begin(); transferIt != xbase->getTransfers().end();)
 		{

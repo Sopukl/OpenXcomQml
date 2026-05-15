@@ -364,7 +364,7 @@ void DebriefingState::applyVisibility()
 
 	// Set text on toggle button accordingly
 	_btnSell->setVisible(showItems && _showSellButton);
-	_btnTransfer->setVisible(showItems && _showSellButton && _game->getSavedGame()->getBases()->size() > 1);
+	_btnTransfer->setVisible(showItems && _showSellButton && _game->getSavedGame()->getBases().size() > 1);
 	if (showScore)
 	{
 		_btnStats->setText(ltr("STR_STATS"));
@@ -1087,7 +1087,7 @@ void DebriefingState::prepareDebriefing()
 	_missionStatistics->type = battle->getMissionType();
 	_stats.push_back(new DebriefingStat(_game->getMod()->getAlienFuelName(), true));
 
-	for (auto* xbase : *save->getBases())
+	for (auto* xbase : save->getBases())
 	{
 		// in case we have a craft - check which craft it is about
 		for (auto* xcraft : xbase->getCrafts())
@@ -2093,7 +2093,7 @@ void DebriefingState::prepareDebriefing()
 		}
 		else if (save->getMonthsPassed() != -1)
 		{
-			for (auto xbaseIt = save->getBases()->begin(); xbaseIt != save->getBases()->end(); ++xbaseIt)
+			for (auto xbaseIt = save->getBases().begin(); xbaseIt != save->getBases().end(); ++xbaseIt)
 			{
 				Base* xbase = (*xbaseIt);
 				if (xbase == base)
@@ -2101,7 +2101,7 @@ void DebriefingState::prepareDebriefing()
 					save->stopHuntingXcomCrafts(xbase); // destroyed together with the base
 					delete xbase;
 					base = 0; // To avoid similar (potential) problems as with the deleted craft
-					save->getBases()->erase(xbaseIt);
+					save->getBases().erase(xbaseIt);
 					break;
 				}
 			}
@@ -2632,7 +2632,7 @@ void DebriefingState::recoverCivilian(BattleUnit *from, Base *base, Craft* craft
 					if (killPrisonersAutomatically)
 					{
 						// check also other bases, maybe we can transfer/redirect prisoners there
-						for (auto* xbase : *_game->getSavedGame()->getBases())
+						for (auto* xbase : _game->getSavedGame()->getBases())
 						{
 							if (xbase->getAvailableContainment(ruleLiveAlienItem->getPrisonType()) > 0)
 							{
@@ -2708,7 +2708,7 @@ void DebriefingState::recoverAlien(BattleUnit *from, Base *base, Craft* craft)
 	if (killPrisonersAutomatically)
 	{
 		// check also other bases, maybe we can transfer/redirect prisoners there
-		for (auto* xbase : *_game->getSavedGame()->getBases())
+		for (auto* xbase : _game->getSavedGame()->getBases())
 		{
 			if (xbase->getAvailableContainment(ruleLiveAlienItem->getPrisonType()) > 0)
 			{

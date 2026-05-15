@@ -326,7 +326,7 @@ namespace OpenXcom
 		if (article->section == UFOPAEDIA_COMMENDATIONS)
 		{
 			// 1. check living soldiers
-			for (auto* xbase : *save->getBases())
+			for (auto* xbase : save->getBases())
 			{
 				for (auto* soldier : xbase->getSoldiers())
 				{

@@ -773,7 +773,7 @@ void SaveConverter::loadDatBase()
 	{
 		if (*i != 0)
 		{
-			_save->getBases()->push_back(*i);
+			_save->getBases().push_back(*i);
 		}
 	}
 }
@@ -1196,9 +1196,9 @@ void SaveConverter::loadDatProject()
 	const size_t ENTRIES = _rules->getResearch().size();
 	// days (Uint16) | scientists (Uint8)
 	const size_t ENTRY_SIZE = ENTRIES * (sizeof(Uint16) + sizeof(Uint8));
-	for (size_t i = 0; i < _save->getBases()->size(); ++i)
+	for (size_t i = 0; i < _save->getBases().size(); ++i)
 	{
-		Base *base = _save->getBases()->at(i);
+		Base *base = _save->getBases().at(i);
 		char *pdata = (data + i * ENTRY_SIZE);
 		Uint16 *arrRemaining = (Uint16*)pdata;
 		Uint8 *arrScientists = (Uint8*)(&arrRemaining[ENTRIES]);
@@ -1234,9 +1234,9 @@ void SaveConverter::loadDatBProd()
 	const size_t ENTRIES = _rules->getManufacture().size();
 	// hours (int) | engineers (Uint16) | quantity (Uint16)| produced (Uint16)
 	const size_t ENTRY_SIZE = ENTRIES * (sizeof(int) + 3 * sizeof(Uint16));
-	for (size_t i = 0; i < _save->getBases()->size(); ++i)
+	for (size_t i = 0; i < _save->getBases().size(); ++i)
 	{
-		Base *base = _save->getBases()->at(i);
+		Base *base = _save->getBases().at(i);
 		char *pdata = (data + i * ENTRY_SIZE);
 		int *arrRemaining = (int*)pdata;
 		Uint16 *arrEngineers = (Uint16*)(&arrRemaining[ENTRIES]);

@@ -166,7 +166,7 @@ void StatisticsState::listStats()
 	worstScore = (worstScore == 9999) ? 0 : worstScore;
 
 	std::vector<Soldier*> allSoldiers;
-	for (auto* xbase : *save->getBases())
+	for (auto* xbase : save->getBases())
 	{
 		allSoldiers.insert(allSoldiers.end(), xbase->getSoldiers().begin(), xbase->getSoldiers().end());
 	}
@@ -267,9 +267,9 @@ void StatisticsState::listStats()
 		totalCrafts += std::max(0, ids[craftType] - 1);
 	}
 
-	int xcomBases = save->getBases()->size() + xcomBasesLost;
+	int xcomBases = save->getBases().size() + xcomBasesLost;
 	int currentScientists = 0, currentEngineers = 0;
-	for (const auto* xbase : *save->getBases())
+	for (const auto* xbase : save->getBases())
 	{
 		currentScientists += xbase->getTotalScientists();
 		currentEngineers += xbase->getTotalEngineers();

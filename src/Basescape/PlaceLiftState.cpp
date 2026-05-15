@@ -156,7 +156,7 @@ void PlaceLiftState::viewClick(Action *)
 	}
 	_game->popState();
 	BasescapeState *bState = new BasescapeState(_base, _globe);
-	_game->getSavedGame()->setSelectedBase(_game->getSavedGame()->getBases()->size() - 1);
+	_game->getSavedGame()->setSelectedBase(_game->getSavedGame()->getBases().size() - 1);
 	_game->pushState(bState);
 	if (_first)
 	{

@@ -190,7 +190,7 @@ void GlobalResearchState::fillProjectList()
 	int allocatedScientists = 0;
 	int freeLaboratories = 0;
 
-	for (Base *xbase : *_game->getSavedGame()->getBases())
+	for (Base *xbase : _game->getSavedGame()->getBases())
 	{
 		auto& baseProjects = xbase->getResearch();
 		if (!baseProjects.empty() || xbase->getScientists() > 0)

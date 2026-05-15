@@ -260,9 +260,9 @@ public:
 	/// Gets the list of regions.
 	std::vector<Region*>& getRegions();
 	/// Gets the list of bases.
-	std::vector<Base*> *getBases();
+	std::vector<Base*>& getBases();
 	/// Gets the list of bases.
-	const std::vector<Base*> *getBases() const;
+	const std::vector<Base*>& getBases() const;
 	/// Gets the total base maintenance.
 	int getBaseMaintenance() const;
 	/// Gets the list of UFOs.

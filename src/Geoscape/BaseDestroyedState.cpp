@@ -166,14 +166,14 @@ void BaseDestroyedState::btnOkClick(Action *)
 		return;
 	}
 
-	for (auto xbaseIt = _game->getSavedGame()->getBases()->begin(); xbaseIt != _game->getSavedGame()->getBases()->end(); ++xbaseIt)
+	for (auto xbaseIt = _game->getSavedGame()->getBases().begin(); xbaseIt != _game->getSavedGame()->getBases().end(); ++xbaseIt)
 	{
 		Base* xbase = (*xbaseIt);
 		if (xbase == _base)
 		{
 			_game->getSavedGame()->stopHuntingXcomCrafts(xbase); // destroyed together with the base
 			delete xbase;
-			_game->getSavedGame()->getBases()->erase(xbaseIt);
+			_game->getSavedGame()->getBases().erase(xbaseIt);
 			break;
 		}
 	}

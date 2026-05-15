@@ -84,7 +84,7 @@ PromotionsState::PromotionsState()
 	_lstSoldiers->setBackground(_window);
 	_lstSoldiers->setMargin(8);
 
-	for (auto* xbase : *_game->getSavedGame()->getBases())
+	for (auto* xbase : _game->getSavedGame()->getBases())
 	{
 		for (auto* soldier : xbase->getSoldiers())
 		{

@@ -788,7 +788,7 @@ std::vector<Target*> Globe::getTargets(int x, int y, bool craft, Craft *currentC
 	qDebug() << "Globe::getTargets " << x << y;
 	std::vector<Target*> v;
 	{
-		for (auto* xbase : *_game->getSavedGame()->getBases())
+		for (auto* xbase : _game->getSavedGame()->getBases())
 		{
 			if (xbase->getLongitude() == 0.0 && xbase->getLatitude() == 0.0)
 				continue;
@@ -1197,7 +1197,7 @@ void Globe::drawRadars()
 	}
 
 	// Draw radars around bases
-	for (auto* xbase : *_game->getSavedGame()->getBases())
+	for (auto* xbase : _game->getSavedGame()->getBases())
 	{
 		lat = xbase->getLatitude();
 		lon = xbase->getLongitude();
@@ -1490,7 +1490,7 @@ void Globe::drawDetail()
 			}
 		}
 		// Draw bases names
-		for (auto* xbase : *_game->getSavedGame()->getBases())
+		for (auto* xbase : _game->getSavedGame()->getBases())
 		{
 			if (xbase->getMarker() == -1 || pointBack(xbase->getLongitude(), xbase->getLatitude()))
 				continue;
@@ -1657,7 +1657,7 @@ void Globe::drawFlights()
 	_radars->lock();
 
 	// Draw the craft flight paths
-	for (auto* xbase : *_game->getSavedGame()->getBases())
+	for (auto* xbase : _game->getSavedGame()->getBases())
 	{
 		for (auto* xcraft : xbase->getCrafts())
 		{
@@ -1760,7 +1760,7 @@ void Globe::drawMarkers()
 	_markers->clear();
 	_markers->lock();
 	// Draw the base markers
-	for (auto* xbase : *_game->getSavedGame()->getBases())
+	for (auto* xbase : _game->getSavedGame()->getBases())
 	{
 		drawTarget(xbase, _markers);
 	}
@@ -1791,7 +1791,7 @@ void Globe::drawMarkers()
 	}
 
 	// Draw the craft markers
-	for (auto* xbase : *_game->getSavedGame()->getBases())
+	for (auto* xbase : _game->getSavedGame()->getBases())
 	{
 		for (auto* xcraft : xbase->getCrafts())
 		{

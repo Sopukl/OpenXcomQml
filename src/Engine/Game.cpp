@@ -903,7 +903,7 @@ void Game::newGame(int difficulty, bool ironMan)
 	setState(gs);
 	gs->init();
 
-	auto* base = getSavedGame()->getBases()->back();
+	auto* base = getSavedGame()->getBases().back();
 	if (base->getMarker() != -1)
 	{
 		// location known already
