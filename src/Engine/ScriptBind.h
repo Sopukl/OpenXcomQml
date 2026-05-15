@@ -80,7 +80,8 @@ struct ParserWriter
 		ScriptRefData finalLabel = { };
 	};
 
-	template<typename T, typename = typename std::enable_if_t<std::is_pod<T>::value>>
+	template<typename T, typename = typename std::enable_if_t<std::is_standard_layout_v<T> &&
+															  std::is_trivial_v<T>>>
 	class ReservedPos
 	{
 		ProgPos _pos;

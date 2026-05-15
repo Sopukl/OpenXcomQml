@@ -1283,15 +1283,16 @@ void Globe::drawGlobeCircle(double lat, double lon, double radius, int segments,
 {
 	double x, y, x2 = 0, y2 = 0;
 	double lat1, lon1;
-	double seg = M_PI / (static_cast<double>(segments) / 2);
-	int i = 0;
-	for (double az = 0; az <= M_PI*2+0.01; az+=seg) //48 circle segments
+	const double step = (M_PI * 2) / segments;
+
+	for (int i = 0; i < segments; ++i)
 	{
+		double az = i * step;
 		//calculating sphere-projected circle
 		lat1 = asin(sin(lat) * cos(radius) + cos(lat) * sin(radius) * cos(az));
 		lon1 = lon + atan2(sin(az) * sin(radius) * cos(lat), cos(radius) - sin(lat) * sin(lat1));
 		polarToCart(lon1, lat1, &x, &y);
-		if ( AreSame(az, 0.0) ) //first vertex is for initialization only
+		if ( i == 0 ) //first vertex is for initialization only
 		{
 			x2=x;
 			y2=y;
@@ -1300,7 +1301,6 @@ void Globe::drawGlobeCircle(double lat, double lon, double radius, int segments,
 		if (!pointBack(lon1,lat1) && i % frac == 0)
 			XuLine(_radars, this, x, y, x2, y2, 6);
 		x2=x; y2=y;
-		i++;
 	}
 }
 
