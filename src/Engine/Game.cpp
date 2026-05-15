@@ -539,6 +539,7 @@ void Game::setSavedGame(SavedGame *save)
 {
 	delete _save;
 	_save = save;
+	Q_EMIT savedGameChanged();
 }
 
 /**
@@ -903,7 +904,7 @@ void Game::newGame(int difficulty, bool ironMan)
 	setState(gs);
 	gs->init();
 
-	auto* base = getSavedGame()->getBases().back();
+	auto* base = savedGame()->bases().back();
 	if (base->getMarker() != -1)
 	{
 		// location known already
@@ -944,16 +945,15 @@ void Game::loadGame(QString fileName)
 		// else
 		// 	_game->pushState(new ErrorMessageState(error.str(), _palette, _game->getMod()->getInterface("errorMessages")->getElement("battlescapeColor")->color, "TAC00.SCR", _game->getMod()->getInterface("errorMessages")->getElement("battlescapePalette")->color));
 
-		if (getSavedGame() == save)
+		if (savedGame() == save)
 			setSavedGame(0);
 		else
 			delete save;
 	};
 
 
-	auto savedGame = getSavedGame();
-	auto savedBattle = savedGame?savedGame->getSavedBattle():
-								 nullptr;
+	auto savedBattle = savedGame()?savedGame()->getSavedBattle():
+								   nullptr;
 	auto origBattleState = savedBattle?savedBattle->getBattleState():
 									   nullptr;
 
@@ -966,7 +966,7 @@ void Game::loadGame(QString fileName)
 	{
 		s->load(fileName.toStdString(), getMod(), getLanguage());
 		setSavedGame(s);
-		if (getSavedGame()->getEnding() != END_NONE)
+		if (savedGame()->getEnding() != END_NONE)
 		{
 			options1.baseXResolution = Screen::ORIGINAL_WIDTH;
 			options1.baseYResolution = Screen::ORIGINAL_HEIGHT;
@@ -984,15 +984,15 @@ void Game::loadGame(QString fileName)
 				origBattleState->resetPalettes();
 			}
 			setState(new GeoscapeState);
-			if (getSavedGame()->getSavedBattle() != 0)
+			if (savedGame()->getSavedBattle() != 0)
 			{
-				getSavedGame()->getSavedBattle()->loadMapResources(getMod());
+				savedGame()->getSavedBattle()->loadMapResources(getMod());
 				options1.baseXResolution = options1.baseXBattlescape;
 				options1.baseYResolution = options1.baseYBattlescape;
 				getScreen()->resetDisplay(false);
 				auto bs = new BattlescapeState;
 				pushState(bs);
-				getSavedGame()->getSavedBattle()->setBattleState(bs);
+				savedGame()->getSavedBattle()->setBattleState(bs);
 				// Try to reactivate the touch buttons
 				bs->toggleTouchButtons(false, true);
 			}

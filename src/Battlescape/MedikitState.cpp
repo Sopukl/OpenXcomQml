@@ -131,7 +131,7 @@ MedikitState::MedikitState (BattleUnit *targetUnit, BattleAction *action, TileEn
 	_bg = new Surface(320, 200);
 
 	// Set palette
-	_game->getSavedGame()->getSavedBattle()->setPaletteByDepth(this);
+	_game->savedGame()->getSavedBattle()->setPaletteByDepth(this);
 
 	if (_game->getScreen()->getDY() > 50)
 	{

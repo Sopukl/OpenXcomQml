@@ -473,7 +473,7 @@ void CraftArmorState::lstSoldiersClick(Action *action)
 				Craft* c = _base->getCrafts().at(_craft);
 				if (s->getCraft() == c)
 				{
-					s->setCraftAndMoveEquipment(0, _base, _game->getSavedGame()->getMonthsPassed() == -1);
+					s->setCraftAndMoveEquipment(0, _base, _game->savedGame()->getMonthsPassed() == -1);
 					_lstSoldiers->setCellText(_lstSoldiers->getSelectedRow(), 1, ltr("STR_NONE_UC"));
 					_lstSoldiers->setRowColor(_lstSoldiers->getSelectedRow(), _lstSoldiers->getColor());
 				}
@@ -483,7 +483,7 @@ void CraftArmorState::lstSoldiersClick(Action *action)
 					CraftPlacementErrors err = c->validateAddingSoldier(space, s);
 					if (err == CPE_None)
 					{
-						s->setCraftAndMoveEquipment(c, _base, _game->getSavedGame()->getMonthsPassed() == -1, true);
+						s->setCraftAndMoveEquipment(c, _base, _game->savedGame()->getMonthsPassed() == -1, true);
 						_lstSoldiers->setCellText(_lstSoldiers->getSelectedRow(), 1, c->getName(_game->getLanguage()));
 						_lstSoldiers->setRowColor(_lstSoldiers->getSelectedRow(), _lstSoldiers->getSecondaryColor());
 					}
@@ -514,10 +514,10 @@ void CraftArmorState::lstSoldiersClick(Action *action)
 		else if (_game->isRightClick(action, true))
 		{
 			SavedGame *save;
-			save = _game->getSavedGame();
+			save = _game->savedGame();
 			Armor *a = _game->isCtrlPressed(true) ? s->getRules()->getDefaultArmor() : _game->getMod()->getArmor(save->getLastSelectedArmor());
 			bool armorUnlocked = true;
-			if (a && a->getRequiredResearch() && !_game->getSavedGame()->isResearched(a->getRequiredResearch()))
+			if (a && a->getRequiredResearch() && !_game->savedGame()->isResearched(a->getRequiredResearch()))
 			{
 				armorUnlocked = false;
 			}

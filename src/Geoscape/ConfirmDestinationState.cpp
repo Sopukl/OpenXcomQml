@@ -268,7 +268,7 @@ std::string ConfirmDestinationState::checkStartingCondition()
 		for (auto& soldierType : list)
 		{
 			RuleSoldier* soldierTypeRule = _game->getMod()->getSoldier(soldierType, false);
-			if (soldierTypeRule && _game->getSavedGame()->isResearched(soldierTypeRule->getRequirements()))
+			if (soldierTypeRule && _game->savedGame()->isResearched(soldierTypeRule->getRequirements()))
 			{
 				if (i > 0)
 					ss << ", ";
@@ -300,7 +300,7 @@ std::string ConfirmDestinationState::checkStartingCondition()
 	for (auto& articleName : list)
 	{
 		ArticleDefinition *article = _game->getMod()->getUfopaediaArticle(articleName, false);
-		if (article && Ufopaedia::isArticleAvailable(_game->getSavedGame(), article))
+		if (article && Ufopaedia::isArticleAvailable(_game->savedGame(), article))
 		{
 			if (i > 0)
 				ss << ", ";
@@ -358,8 +358,8 @@ void ConfirmDestinationState::btnOkClick(Action *)
 	Waypoint *w = dynamic_cast<Waypoint*>(_target);
 	if (w != 0 && w->getId() == 0)
 	{
-		w->setId(_game->getSavedGame()->getId("STR_WAY_POINT"));
-		_game->getSavedGame()->getWaypoints().push_back(w);
+		w->setId(_game->savedGame()->getId("STR_WAY_POINT"));
+		_game->savedGame()->getWaypoints().push_back(w);
 	}
 
 	// first selected _craft (first shift-clicked craft) is wing leader; the other crafts follow the wing leader

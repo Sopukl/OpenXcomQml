@@ -68,7 +68,7 @@ BriefingState::BriefingState(Craft *craft, Base *base, bool infoOnly, BriefingDa
 	_txtCraft = new Text(300, 17, 16, 56);
 	_txtBriefing = new Text(274, 94, 16, 72);
 
-	auto* battleSave = _game->getSavedGame()->getSavedBattle();
+	auto* battleSave = _game->savedGame()->getSavedBattle();
 
 	std::string mission = battleSave->getMissionType();
 	AlienDeployment *deployment = _game->getMod()->getDeployment(mission);
@@ -278,16 +278,16 @@ void BriefingState::btnOkClick(Action *)
 	BattlescapeState *bs = new BattlescapeState;
 	bs->getBattleGame()->spawnFromPrimedItems();
 	BattlescapeTally tally = bs->getBattleGame()->tallyUnits();
-	bool isPreview = _game->getSavedGame()->getSavedBattle()->isPreview();
+	bool isPreview = _game->savedGame()->getSavedBattle()->isPreview();
 	if (tally.liveAliens > 0 || isPreview)
 	{
 		_game->pushState(bs);
-		_game->getSavedGame()->getSavedBattle()->setBattleState(bs);
-		_game->pushState(new NextTurnState(_game->getSavedGame()->getSavedBattle(), bs));
+		_game->savedGame()->getSavedBattle()->setBattleState(bs);
+		_game->pushState(new NextTurnState(_game->savedGame()->getSavedBattle(), bs));
 		if (isPreview)
 		{
 			// skip InventoryState
-			_game->getSavedGame()->getSavedBattle()->startFirstTurn();
+			_game->savedGame()->getSavedBattle()->startFirstTurn();
 			return;
 		}
 		_game->pushState(new InventoryState(false, bs, 0));

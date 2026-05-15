@@ -257,7 +257,7 @@ void ConfirmLandingState::btnYesClick(Action *)
 	AlienBase* b = dynamic_cast<AlienBase*>(_craft->getDestination());
 
 	SavedBattleGame *bgame = new SavedBattleGame(_game->getMod(), _game->getLanguage());
-	_game->getSavedGame()->setBattleGame(bgame);
+	_game->savedGame()->setBattleGame(bgame);
 	BattlescapeGenerator bgen(_game);
 	bgen.setWorldTexture(_missionTexture, _globeTexture);
 	bgen.setWorldShade(_shade);

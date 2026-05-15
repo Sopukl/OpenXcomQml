@@ -59,7 +59,7 @@ SoldiersState::SoldiersState(Base *base) : _base(base), _origSoldierOrder(_base-
 	bool isPsiBtnVisible = options1.anytimePsiTraining() && _base->getAvailablePsiLabs() > 0;
 	bool isTrnBtnVisible = _base->getAvailableTraining() > 0;
 	std::vector<RuleSoldierTransformation* > availableTransformations;
-	_game->getSavedGame()->getAvailableTransformations(availableTransformations, _game->getMod(), _base);
+	_game->savedGame()->getAvailableTransformations(availableTransformations, _game->getMod(), _base);
 	bool isTransformationAvailable = availableTransformations.size() > 0;
 
 	// if both training buttons would be displayed, or if there are any transformations, switch to combobox
@@ -167,7 +167,7 @@ SoldiersState::SoldiersState(Base *base) : _base(base), _origSoldierOrder(_base-
 		}
 		if (refreshDeadSoldierStats)
 		{
-			for (auto* deadMan : _game->getSavedGame()->getDeadSoldiers())
+			for (auto* deadMan : _game->savedGame()->getDeadSoldiers())
 			{
 				deadMan->prepareStatsWithBonuses(_game->getMod()); // refresh stats for sorting
 			}
@@ -358,7 +358,7 @@ void SoldiersState::init()
 	State::init();
 
 	// resets the savegame when coming back from the inventory
-	_game->getSavedGame()->setBattleGame(0);
+	_game->savedGame()->setBattleGame(0);
 	_base->setInBattlescape(false);
 
 	_base->prepareSoldierStatsWithBonuses(); // refresh stats for sorting
@@ -413,7 +413,7 @@ void SoldiersState::initList(size_t scrl)
 					_filteredIndicesOfSoldiers.push_back(idx);
 				}
 			}
-			for (auto* deadMan : _game->getSavedGame()->getDeadSoldiers())
+			for (auto* deadMan : _game->savedGame()->getDeadSoldiers())
 			{
 				if (deadMan->isEligibleForTransformation(transformationRule))
 				{
@@ -673,12 +673,12 @@ void SoldiersState::btnInventoryClick(Action *)
 	if (_base->getAvailableSoldiers(true, true) > 0)
 	{
 		SavedBattleGame *bgame = new SavedBattleGame(_game->getMod(), _game->getLanguage());
-		_game->getSavedGame()->setBattleGame(bgame);
+		_game->savedGame()->setBattleGame(bgame);
 		bgame->setMissionType("STR_BASE_DEFENSE");
 
 		if (_game->isCtrlPressed() && _game->isAltPressed())
 		{
-			_game->getSavedGame()->setDisableSoldierEquipment(true);
+			_game->savedGame()->setDisableSoldierEquipment(true);
 		}
 		BattlescapeGenerator bgen = BattlescapeGenerator(_game);
 		bgen.setBase(_base);

@@ -149,7 +149,7 @@ PurchaseState::PurchaseState(Base *base, CannotReequipState *parent) : _base(bas
 	_txtTitle->setAlign(ALIGN_CENTER);
 	_txtTitle->setText(ltr("STR_PURCHASE_HIRE_PERSONNEL"));
 
-	_txtFunds->setText(ltr("STR_CURRENT_FUNDS").arg(Unicode::formatFunding(_game->getSavedGame()->getFunds())));
+	_txtFunds->setText(ltr("STR_CURRENT_FUNDS").arg(Unicode::formatFunding(_game->savedGame()->getFunds())));
 
 	_txtPurchases->setText(ltr("STR_COST_OF_PURCHASES").arg(Unicode::formatFunding(_total)));
 
@@ -192,11 +192,11 @@ PurchaseState::PurchaseState(Base *base, CannotReequipState *parent) : _base(bas
 	};
 	constexpr auto requirementsAreResearched = [](const auto* rule)
 	{
-		return _game->getSavedGame()->isResearched(rule->getRequirements());
+		return _game->savedGame()->isResearched(rule->getRequirements());
 	};
 	constexpr auto buyRequirementsAreResearched = [](const auto* rule)
 	{
-		return _game->getSavedGame()->isResearched(rule->getBuyRequirements());
+		return _game->savedGame()->isResearched(rule->getBuyRequirements());
 	};
 	auto necessaryBaseFunctionsPresent = [&providedBaseFunc](const auto* rule)
 	{
@@ -206,7 +206,7 @@ PurchaseState::PurchaseState(Base *base, CannotReequipState *parent) : _base(bas
 	{
 		if (!rule->getRequiresBuyCountry().empty())
 		{
-			for (const auto* country : *_game->getSavedGame()->getCountries())
+			for (const auto* country : *_game->savedGame()->getCountries())
 			{
 				if (country->getPact() && country->getRules()->getType() == rule->getRequiresBuyCountry())
 				{
@@ -234,7 +234,7 @@ PurchaseState::PurchaseState(Base *base, CannotReequipState *parent) : _base(bas
 			}
 		}
 	}
-	if ((_game->getMod()->getHireScientistsUnlockResearch().empty() || _game->getSavedGame()->isResearched(_game->getMod()->getHireScientistsUnlockResearch(), true))
+	if ((_game->getMod()->getHireScientistsUnlockResearch().empty() || _game->savedGame()->isResearched(_game->getMod()->getHireScientistsUnlockResearch(), true))
 		&& (~providedBaseFunc & _game->getMod()->getHireScientistsRequiresBaseFunc()).none())
 	{
 		TransferRow row = { TRANSFER_SCIENTIST, 0, ltr("STR_SCIENTIST"), _game->getMod()->getHireScientistCost(), _base->getTotalScientists(), 0, 0, -3, 0, 0, 0 };
@@ -245,7 +245,7 @@ PurchaseState::PurchaseState(Base *base, CannotReequipState *parent) : _base(bas
 			_cats.push_back(cat);
 		}
 	}
-	if ((_game->getMod()->getHireEngineersUnlockResearch().empty() || _game->getSavedGame()->isResearched(_game->getMod()->getHireEngineersUnlockResearch(), true))
+	if ((_game->getMod()->getHireEngineersUnlockResearch().empty() || _game->savedGame()->isResearched(_game->getMod()->getHireEngineersUnlockResearch(), true))
 		&& (~providedBaseFunc & _game->getMod()->getHireEngineersRequiresBaseFunc()).none())
 	{
 		TransferRow row = { TRANSFER_ENGINEER, 0, ltr("STR_ENGINEER"), _game->getMod()->getHireEngineerCost(), _base->getTotalEngineers(), 0, 0, -2, 0, 0, 0 };
@@ -275,7 +275,7 @@ PurchaseState::PurchaseState(Base *base, CannotReequipState *parent) : _base(bas
 		RuleItem *rule = _game->getMod()->getItem(itemType);
 		if (itemFilter(rule))
 		{
-			TransferRow row = { TRANSFER_ITEM, rule, ltr(rule->getType()), rule->getBuyCostAdjusted(_base, _game->getSavedGame()), _base->getStorageItems().getItem(rule), 0, 0, rule->getListOrder(), 0, 0, 0 };
+			TransferRow row = { TRANSFER_ITEM, rule, ltr(rule->getType()), rule->getBuyCostAdjusted(_base, _game->savedGame()), _base->getStorageItems().getItem(rule), 0, 0, rule->getListOrder(), 0, 0, 0 };
 			_items.push_back(row);
 			std::string cat = getCategory(_items.size() - 1);
 			if (std::find(_cats.begin(), _cats.end(), cat) == _cats.end())
@@ -503,7 +503,7 @@ bool PurchaseState::isHidden(int sel) const
 		}
 		if (!itemName.empty())
 		{
-			auto& hiddenMap = _game->getSavedGame()->getHiddenPurchaseItems();
+			auto& hiddenMap = _game->savedGame()->getHiddenPurchaseItems();
 			auto iter = hiddenMap.find(itemName);
 			if (iter != hiddenMap.end())
 			{
@@ -573,7 +573,7 @@ int PurchaseState::getMissingQty(int sel) const
 			{
 				if (rule->getMonthlyBuyLimit() > 0)
 				{
-					auto& itemPurchaseLimitLog = _game->getSavedGame()->getMonthlyPurchaseLimitLog();
+					auto& itemPurchaseLimitLog = _game->savedGame()->getMonthlyPurchaseLimitLog();
 					int maxByLimit = std::max(0, rule->getMonthlyBuyLimit() - itemPurchaseLimitLog[rule->getType()]);
 					return std::min(maxByLimit, iter->second);
 				}
@@ -760,7 +760,7 @@ void PurchaseState::btnOkClick(Action *)
 	if (!_missingItemsMap.empty())
 	{
 		std::string errorMessage;
-		if (_total > _game->getSavedGame()->getFunds())
+		if (_total > _game->savedGame()->getFunds())
 		{
 			errorMessage = ltr("STR_NOT_ENOUGH_MONEY");
 		}
@@ -776,7 +776,7 @@ void PurchaseState::btnOkClick(Action *)
 		}
 	}
 
-	_game->getSavedGame()->setFunds(_game->getSavedGame()->getFunds() - _total);
+	_game->savedGame()->setFunds(_game->savedGame()->getFunds() - _total);
 	for (const auto& transferRow : _items)
 	{
 		if (transferRow.amount > 0)
@@ -791,20 +791,20 @@ void PurchaseState::btnOkClick(Action *)
 					if (rule->getMonthlyBuyLimit() > 0)
 					{
 						// remember the hire for the limit check
-						auto& soldierHireLimitLog = _game->getSavedGame()->getMonthlyPurchaseLimitLog();
+						auto& soldierHireLimitLog = _game->savedGame()->getMonthlyPurchaseLimitLog();
 						soldierHireLimitLog[rule->getType()] += 1;
 					}
 					int time = rule->getTransferTime();
 					if (time == 0)
 						time = _game->getMod()->getPersonnelTime();
 					t = new Transfer(time);
-					int nationality = _game->getSavedGame()->selectSoldierNationalityByLocation(_game->getMod(), rule, _base);
-					Soldier* soldier = _game->getMod()->genSoldier(_game->getSavedGame(), rule, nationality);
+					int nationality = _game->savedGame()->selectSoldierNationalityByLocation(_game->getMod(), rule, _base);
+					Soldier* soldier = _game->getMod()->genSoldier(_game->savedGame(), rule, nationality);
 					if (!rule->getSpawnedSoldierTemplate().yaml.empty())
 					{
 						YAML::YamlRootNodeReader reader(rule->getSpawnedSoldierTemplate(), "(spawned soldier template)");
 						int nationalityOrig = soldier->getNationality();
-						soldier->load(reader.toBase(), _game->getMod(), _game->getSavedGame(), _game->getMod()->getScriptGlobal(), true); // load from soldier template
+						soldier->load(reader.toBase(), _game->getMod(), _game->savedGame(), _game->getMod()->getScriptGlobal(), true); // load from soldier template
 						if (soldier->getNationality() != nationalityOrig)
 						{
 							soldier->genName();
@@ -831,11 +831,11 @@ void PurchaseState::btnOkClick(Action *)
 					if (rule->getMonthlyBuyLimit() > 0)
 					{
 						// remember the purchase for the limit check
-						auto& craftPurchaseLimitLog = _game->getSavedGame()->getMonthlyPurchaseLimitLog();
+						auto& craftPurchaseLimitLog = _game->savedGame()->getMonthlyPurchaseLimitLog();
 						craftPurchaseLimitLog[rule->getType()] += 1;
 					}
 					t = new Transfer(rule->getTransferTime());
-					Craft *craft = new Craft(rule, _base, _game->getSavedGame()->getId(rule->getType()));
+					Craft *craft = new Craft(rule, _base, _game->savedGame()->getId(rule->getType()));
 					craft->initFixedWeapons(_game->getMod());
 					craft->setStatus("STR_REFUELLING");
 					t->setCraft(craft);
@@ -848,7 +848,7 @@ void PurchaseState::btnOkClick(Action *)
 					if (rule->getMonthlyBuyLimit() > 0)
 					{
 						// remember the purchase for the limit check
-						auto& itemPurchaseLimitLog = _game->getSavedGame()->getMonthlyPurchaseLimitLog();
+						auto& itemPurchaseLimitLog = _game->savedGame()->getMonthlyPurchaseLimitLog();
 						itemPurchaseLimitLog[rule->getType()] += transferRow.amount;
 					}
 					t = new Transfer(rule->getTransferTime());
@@ -1033,17 +1033,17 @@ void PurchaseState::lstItemsMousePress(Action *action)
 		}
 		if (!itemName.empty())
 		{
-			auto& hiddenMap = _game->getSavedGame()->getHiddenPurchaseItems();
+			auto& hiddenMap = _game->savedGame()->getHiddenPurchaseItems();
 			auto iter = hiddenMap.find(itemName);
 			if (iter != hiddenMap.end())
 			{
 				// found => flip it
-				_game->getSavedGame()->setHiddenPurchaseItemsStatus(itemName, !iter->second);
+				_game->savedGame()->setHiddenPurchaseItemsStatus(itemName, !iter->second);
 			}
 			else
 			{
 				// not found = not hidden yet => hide it
-				_game->getSavedGame()->setHiddenPurchaseItemsStatus(itemName, true);
+				_game->savedGame()->setHiddenPurchaseItemsStatus(itemName, true);
 			}
 
 			// update screen
@@ -1073,7 +1073,7 @@ void PurchaseState::increaseByValue(int change)
 	if (0 >= change) return;
 	std::string errorMessage;
 
-	if (_total + getRow().cost > _game->getSavedGame()->getFunds())
+	if (_total + getRow().cost > _game->savedGame()->getFunds())
 	{
 		errorMessage = ltr("STR_NOT_ENOUGH_MONEY");
 	}
@@ -1088,7 +1088,7 @@ void PurchaseState::increaseByValue(int change)
 			ruleS = (RuleSoldier*)getRow().rule;
 			if (ruleS->getMonthlyBuyLimit() > 0)
 			{
-				auto& soldierHireLimitLog = _game->getSavedGame()->getMonthlyPurchaseLimitLog();
+				auto& soldierHireLimitLog = _game->savedGame()->getMonthlyPurchaseLimitLog();
 				int alreadyBought = soldierHireLimitLog[ruleS->getType()];
 				int maxByLimit = std::max(0, ruleS->getMonthlyBuyLimit() - alreadyBought - getRow().amount);
 				if (maxByLimit <= 0)
@@ -1116,7 +1116,7 @@ void PurchaseState::increaseByValue(int change)
 			}
 			else if (ruleC->getMonthlyBuyLimit() > 0)
 			{
-				auto& craftPurchaseLimitLog = _game->getSavedGame()->getMonthlyPurchaseLimitLog();
+				auto& craftPurchaseLimitLog = _game->savedGame()->getMonthlyPurchaseLimitLog();
 				int alreadyBought = craftPurchaseLimitLog[ruleC->getType()];
 				int maxByLimit = std::max(0, ruleC->getMonthlyBuyLimit() - alreadyBought - getRow().amount);
 				if (maxByLimit <= 0)
@@ -1145,7 +1145,7 @@ void PurchaseState::increaseByValue(int change)
 			}
 			else if (rule->getMonthlyBuyLimit() > 0)
 			{
-				auto& itemPurchaseLimitLog = _game->getSavedGame()->getMonthlyPurchaseLimitLog();
+				auto& itemPurchaseLimitLog = _game->savedGame()->getMonthlyPurchaseLimitLog();
 				int alreadyBought = itemPurchaseLimitLog[rule->getType()];
 				int maxByLimit = std::max(0, rule->getMonthlyBuyLimit() - alreadyBought - getRow().amount);
 				if (maxByLimit <= 0)
@@ -1163,7 +1163,7 @@ void PurchaseState::increaseByValue(int change)
 
 	if (errorMessage.empty())
 	{
-		int maxByMoney = (_game->getSavedGame()->getFunds() - _total) / getRow().cost;
+		int maxByMoney = (_game->savedGame()->getFunds() - _total) / getRow().cost;
 		if (maxByMoney >= 0)
 			change = std::min(maxByMoney, change);
 		switch (getRow().type)
@@ -1173,7 +1173,7 @@ void PurchaseState::increaseByValue(int change)
 				RuleSoldier *ruleS = (RuleSoldier*)getRow().rule;
 				if (ruleS->getMonthlyBuyLimit() > 0)
 				{
-					auto& soldierHireLimitLog = _game->getSavedGame()->getMonthlyPurchaseLimitLog();
+					auto& soldierHireLimitLog = _game->savedGame()->getMonthlyPurchaseLimitLog();
 					int maxByLimit = std::max(0, ruleS->getMonthlyBuyLimit() - soldierHireLimitLog[ruleS->getType()] - getRow().amount);
 					change = std::min(maxByLimit, change);
 				}
@@ -1192,7 +1192,7 @@ void PurchaseState::increaseByValue(int change)
 				RuleCraft *ruleC = (RuleCraft*)getRow().rule;
 				if (ruleC->getMonthlyBuyLimit() > 0)
 				{
-					auto& craftPurchaseLimitLog = _game->getSavedGame()->getMonthlyPurchaseLimitLog();
+					auto& craftPurchaseLimitLog = _game->savedGame()->getMonthlyPurchaseLimitLog();
 					int maxByLimit = std::max(0, ruleC->getMonthlyBuyLimit() - craftPurchaseLimitLog[ruleC->getType()] - getRow().amount);
 					change = std::min(maxByLimit, change);
 				}
@@ -1206,7 +1206,7 @@ void PurchaseState::increaseByValue(int change)
 				RuleItem *rule = (RuleItem*)getRow().rule;
 				if (rule->getMonthlyBuyLimit() > 0)
 				{
-					auto& itemPurchaseLimitLog = _game->getSavedGame()->getMonthlyPurchaseLimitLog();
+					auto& itemPurchaseLimitLog = _game->savedGame()->getMonthlyPurchaseLimitLog();
 					int maxByLimit = std::max(0, rule->getMonthlyBuyLimit() - itemPurchaseLimitLog[rule->getType()] - getRow().amount);
 					change = std::min(maxByLimit, change);
 				}

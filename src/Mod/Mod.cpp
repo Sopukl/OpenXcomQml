@@ -3841,7 +3841,7 @@ SavedGame *Mod::newSave(GameDifficulty diff) const
 	{
 		save->loadUfopediaRuleStatus(ufopediaRuleStatus);
 	}
-	save->getBases().push_back(base);
+	save->bases().push_back(base);
 
 	// Correct IDs
 	for (auto* craft : base->getCrafts())
@@ -5052,7 +5052,7 @@ Soldier *Mod::genSoldier(SavedGame *save, const RuleSoldier* ruleSoldier, int na
 		delete soldier;
 		soldier = new Soldier(const_cast<RuleSoldier*>(ruleSoldier), ruleSoldier->getDefaultArmor(), nationality, newId);
 		duplicate = false;
-		for (auto* xbase : save->getBases())
+		for (auto* xbase : save->bases())
 		{
 			if (duplicate) break; // loop finished
 			for (auto* xsoldier : xbase->getSoldiers())

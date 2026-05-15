@@ -87,14 +87,14 @@ CraftEquipmentSaveState::CraftEquipmentSaveState(CraftEquipmentState *parent) : 
 
 	for (int i = 0; i < SavedGame::MAX_CRAFT_LOADOUT_TEMPLATES; ++i)
 	{
-		ItemContainer *item = _game->getSavedGame()->getGlobalCraftLoadout(i);
+		ItemContainer *item = _game->savedGame()->getGlobalCraftLoadout(i);
 		if (item->empty())
 		{
 			_lstLoadout->addRow(1, ltr("STR_EMPTY_SLOT_N").arg(i + 1).c_str());
 		}
 		else
 		{
-			const std::string &itemName = _game->getSavedGame()->getGlobalCraftLoadoutName(i);
+			const std::string &itemName = _game->savedGame()->getGlobalCraftLoadoutName(i);
 			if (itemName.empty())
 			{
 				_lstLoadout->addRow(1, ltr("STR_UNNAMED_SLOT_N").arg(i + 1).c_str());
@@ -194,7 +194,7 @@ void CraftEquipmentSaveState::saveTemplate()
 {
 	if (_selectedRow >= 0 && _selectedRow < SavedGame::MAX_CRAFT_LOADOUT_TEMPLATES)
 	{
-		_game->getSavedGame()->setGlobalCraftLoadoutName(_selectedRow, _edtSave->getText());
+		_game->savedGame()->setGlobalCraftLoadoutName(_selectedRow, _edtSave->getText());
 		_parent->saveGlobalLoadout(_selectedRow);
 
 		_game->popState();

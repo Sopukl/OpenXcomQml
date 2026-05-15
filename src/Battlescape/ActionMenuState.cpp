@@ -61,7 +61,7 @@ ActionMenuState::ActionMenuState(BattleAction *action, int x, int y) : _action(a
 	_screen = false;
 
 	// Set palette
-	_game->getSavedGame()->getSavedBattle()->setPaletteByDepth(this);
+	_game->savedGame()->getSavedBattle()->setPaletteByDepth(this);
 
 	for (int i = 0; i < 6; ++i)
 	{
@@ -88,7 +88,7 @@ ActionMenuState::ActionMenuState(BattleAction *action, int x, int y) : _action(a
 
 	if (weapon->isManaRequired() && _action->actor->getOriginalFaction() == FACTION_PLAYER)
 	{
-		if (!_game->getMod()->isManaFeatureEnabled() || !_game->getSavedGame()->isManaUnlocked(_game->getMod()))
+		if (!_game->getMod()->isManaFeatureEnabled() || !_game->savedGame()->isManaUnlocked(_game->getMod()))
 		{
 			return;
 		}
@@ -269,11 +269,11 @@ void ActionMenuState::handle(Action *action)
  */
 void ActionMenuState::btnActionMenuItemClick(Action *action)
 {
-	_game->getSavedGame()->getSavedBattle()->getPathfinding()->removePreview();
+	_game->savedGame()->getSavedBattle()->getPathfinding()->removePreview();
 
 	int btnID = -1;
 
-	if (_game->getSavedGame()->getSavedBattle()->isPreview())
+	if (_game->savedGame()->getSavedBattle()->isPreview())
 	{
 		_action->result = "STR_UNABLE_TO_USE_ALIEN_ARTIFACT_UNTIL_RESEARCHED";
 		_game->popState();
@@ -311,13 +311,13 @@ void ActionMenuState::handleAction()
 
 		if (_action->type != BA_THROW &&
 			_action->actor->getOriginalFaction() == FACTION_PLAYER &&
-			!_game->getSavedGame()->isResearched(weapon->getRequirements()))
+			!_game->savedGame()->isResearched(weapon->getRequirements()))
 		{
 			_action->result = "STR_UNABLE_TO_USE_ALIEN_ARTIFACT_UNTIL_RESEARCHED";
 			_game->popState();
 		}
 		else if (_action->type != BA_THROW &&
-			!_game->getSavedGame()->getSavedBattle()->canUseWeapon(_action->weapon, _action->actor, false, _action->type, &actionResult))
+			!_game->savedGame()->getSavedBattle()->canUseWeapon(_action->weapon, _action->actor, false, _action->type, &actionResult))
 		{
 			_action->result = actionResult;
 			_game->popState();
@@ -342,8 +342,8 @@ void ActionMenuState::handleAction()
 		else if (_action->type == BA_USE && weapon->getBattleType() == BT_MEDIKIT)
 		{
 			BattleUnit *targetUnit = 0;
-			TileEngine *tileEngine = _game->getSavedGame()->getSavedBattle()->getTileEngine();
-			for (auto* bu : *_game->getSavedGame()->getSavedBattle()->getUnits())
+			TileEngine *tileEngine = _game->savedGame()->getSavedBattle()->getTileEngine();
+			for (auto* bu : *_game->savedGame()->getSavedBattle()->getUnits())
 			{
 				// we can heal a unit that is at the same position, unconscious and healable(=woundable)
 				if (bu->getPosition() == _action->actor->getPosition() &&
@@ -374,7 +374,7 @@ void ActionMenuState::handleAction()
 					_action->actor,
 					0, &_action->target, false))
 				{
-					Tile *tile = _game->getSavedGame()->getSavedBattle()->getTile(_action->target);
+					Tile *tile = _game->savedGame()->getSavedBattle()->getTile(_action->target);
 					if (tile != 0 && tile->getUnit() && (tile->getUnit()->isWoundable() || weapon->getAllowTargetImmune()))
 					{
 						if ((weapon->getAllowTargetFriendStanding() && tile->getUnit()->getOriginalFaction() == FACTION_PLAYER) ||
@@ -490,13 +490,13 @@ void ActionMenuState::handleAction()
 			{
 				//nothing
 			}
-			else if (!_game->getSavedGame()->getSavedBattle()->getTileEngine()->validMeleeRange(
+			else if (!_game->savedGame()->getSavedBattle()->getTileEngine()->validMeleeRange(
 				_action->actor->getPosition(),
 				_action->actor->getDirection(),
 				_action->actor,
 				0, &_action->target))
 			{
-				if (!_game->getSavedGame()->getSavedBattle()->getTileEngine()->validTerrainMeleeRange(_action))
+				if (!_game->savedGame()->getSavedBattle()->getTileEngine()->validTerrainMeleeRange(_action))
 				{
 					_action->result = "STR_THERE_IS_NO_ONE_THERE";
 				}
@@ -522,7 +522,7 @@ void ActionMenuState::handleAction()
 
 		if (newHitLog)
 		{
-			_game->getSavedGame()->getSavedBattle()->appendToHitLog(HITLOG_PLAYER_FIRING, FACTION_PLAYER, ltr(weapon->getType()));
+			_game->savedGame()->getSavedBattle()->appendToHitLog(HITLOG_PLAYER_FIRING, FACTION_PLAYER, ltr(weapon->getType()));
 		}
 	}
 }

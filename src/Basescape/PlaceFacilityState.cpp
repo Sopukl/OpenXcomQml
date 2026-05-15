@@ -286,7 +286,7 @@ void PlaceFacilityState::viewClick(Action *)
 					break;
 			}
 		}
-		else if (_game->getSavedGame()->getFunds() < (_rule->getBuildCost() - refundValueTemp))
+		else if (_game->savedGame()->getFunds() < (_rule->getBuildCost() - refundValueTemp))
 		{
 			_game->popState();
 			_game->pushState(new ErrorMessageState(ltr("STR_NOT_ENOUGH_MONEY"), _palette, _game->getMod()->getInterface("placeFacility")->getElement("errorMessage")->color, "BACK01.SCR", _game->getMod()->getInterface("placeFacility")->getElement("errorPalette")->color));
@@ -318,7 +318,7 @@ void PlaceFacilityState::viewClick(Action *)
 					if (checkFacility->getBuildTime() > checkFacility->getRules()->getBuildTime())
 					{
 						// Give full refund if this is a (not yet started) queued build.
-						_game->getSavedGame()->setFunds(_game->getSavedGame()->getFunds() + checkFacility->getRules()->getBuildCost());
+						_game->savedGame()->setFunds(_game->savedGame()->getFunds() + checkFacility->getRules()->getBuildCost());
 						for (auto& item : itemCost)
 						{
 							_base->getStorageItems().addItem(_game->getMod()->getItem(item.first, true), item.second.first);
@@ -327,7 +327,7 @@ void PlaceFacilityState::viewClick(Action *)
 					else
 					{
 						// Give partial refund if this is a started build or a completed facility.
-						_game->getSavedGame()->setFunds(_game->getSavedGame()->getFunds() + checkFacility->getRules()->getRefundValue());
+						_game->savedGame()->setFunds(_game->savedGame()->getFunds() + checkFacility->getRules()->getRefundValue());
 						for (auto& item : itemCost)
 						{
 							_base->getStorageItems().addItem(_game->getMod()->getItem(item.first, true), item.second.second);
@@ -378,7 +378,7 @@ void PlaceFacilityState::viewClick(Action *)
 				_view->reCalcQueuedBuildings();
 			}
 			_view->setBase(_base);
-			_game->getSavedGame()->setFunds(_game->getSavedGame()->getFunds() - _rule->getBuildCost());
+			_game->savedGame()->setFunds(_game->savedGame()->getFunds() - _rule->getBuildCost());
 			for (const auto& item: _rule->getBuildCostItems())
 			{
 				_base->getStorageItems().removeItem(item.first, item.second.first);

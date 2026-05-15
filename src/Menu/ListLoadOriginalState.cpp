@@ -57,7 +57,7 @@ ListLoadOriginalState::ListLoadOriginalState(OptionsOrigin origin) : _origin(ori
 	_txtDate = new Text(90, 9, 225, 24);
 
 	// Set palette
-	setInterface("geoscape", true, _game->getSavedGame() ? _game->getSavedGame()->getSavedBattle() : 0);
+	setInterface("geoscape", true, _game->savedGame() ? _game->savedGame()->getSavedBattle() : 0);
 
 	add(_window, "window", "saveMenus");
 	add(_btnNew, "button", "saveMenus");
@@ -197,15 +197,15 @@ void ListLoadOriginalState::btnSlotClick(Action *action)
 			options1.baseYResolution = options1.baseYGeoscape;
 			_game->getScreen()->resetDisplay(false);
 			_game->setState(new GeoscapeState);
-			if (_game->getSavedGame()->getSavedBattle() != 0)
+			if (_game->savedGame()->getSavedBattle() != 0)
 			{
-				_game->getSavedGame()->getSavedBattle()->loadMapResources(_game->getMod());
+				_game->savedGame()->getSavedBattle()->loadMapResources(_game->getMod());
 				options1.baseXResolution = options1.baseXBattlescape;
 				options1.baseYResolution = options1.baseYBattlescape;
 				_game->getScreen()->resetDisplay(false);
 				BattlescapeState *bs = new BattlescapeState;
 				_game->pushState(bs);
-				_game->getSavedGame()->getSavedBattle()->setBattleState(bs);
+				_game->savedGame()->getSavedBattle()->setBattleState(bs);
 				// Try to reactivate the touch buttons
 				bs->toggleTouchButtons(false, true);
 			}

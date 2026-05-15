@@ -59,7 +59,7 @@ namespace OpenXcom
 CraftInfoState::CraftInfoState(Base *base, size_t craftId) : _base(base), _craftId(craftId), _craft(0)
 {
 	// Create objects
-	if (_game->getSavedGame()->getMonthsPassed() != -1)
+	if (_game->savedGame()->getMonthsPassed() != -1)
 	{
 		_window = new Window(this, 320, 200, 0, 0, POPUP_BOTH);
 	}
@@ -74,7 +74,7 @@ CraftInfoState::CraftInfoState(Base *base, size_t craftId) : _base(base), _craft
 		_weaponNum = RuleCraft::WeaponMax;
 
 	int showNewBattle = 0;
-	if (_game->getSavedGame()->getDebugMode() && _game->getSavedGame()->getMonthsPassed() != -1)
+	if (_game->savedGame()->getDebugMode() && _game->savedGame()->getMonthsPassed() != -1)
 	{
 		// only the first craft can be used
 		if (_craftId == 0 && _craft->getRules()->isForNewBattle())
@@ -562,7 +562,7 @@ void CraftInfoState::btnNewBattleClick(Action *)
 	}
 
 	// transfer also the difficulty
-	difficulty = _game->getSavedGame()->getDifficulty();
+	difficulty = _game->savedGame()->getDifficulty();
 
 	YAML::YamlRootNodeWriter writer;
 	writer.setAsMap();

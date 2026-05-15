@@ -91,7 +91,7 @@ PlaceLiftState::PlaceLiftState(Base *base, Globe *globe, bool first) : _base(bas
 	{
 		auto* facilityRule = _game->getMod()->getBaseFacility(facilityType);
 		if ((facilityRule->isLift() && !facilityRule->isUpgradeOnly())
-			&& facilityRule->isAllowedForBaseType(_base->isFakeUnderwater()) && _game->getSavedGame()->isResearched(facilityRule->getRequirements()))
+			&& facilityRule->isAllowedForBaseType(_base->isFakeUnderwater()) && _game->savedGame()->isResearched(facilityRule->getRequirements()))
 		{
 			_accessLifts.push_back(facilityRule);
 		}
@@ -156,7 +156,7 @@ void PlaceLiftState::viewClick(Action *)
 	}
 	_game->popState();
 	BasescapeState *bState = new BasescapeState(_base, _globe);
-	_game->getSavedGame()->setSelectedBase(_game->getSavedGame()->getBases().size() - 1);
+	_game->savedGame()->setSelectedBase(_game->savedGame()->bases().size() - 1);
 	_game->pushState(bState);
 	if (_first)
 	{

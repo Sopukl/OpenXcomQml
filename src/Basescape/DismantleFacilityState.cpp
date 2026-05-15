@@ -99,7 +99,7 @@ DismantleFacilityState::DismantleFacilityState(Base *base, BaseView *view, BaseF
 	if (refundValue < 0)
 	{
 		_txtRefundValue->setText(ltr("STR_REFUND_VALUE_NEGATIVE").arg(Unicode::formatFunding(-refundValue)));
-		if (_game->getSavedGame()->getFunds() < -refundValue)
+		if (_game->savedGame()->getFunds() < -refundValue)
 		{
 			// cannot afford dismantle, expenses too high
 			_btnOk->setVisible(false);
@@ -134,7 +134,7 @@ void DismantleFacilityState::btnOkClick(Action *)
 		if (_fac->getBuildTime() > _fac->getRules()->getBuildTime())
 		{
 			// Give full refund if this is a (not yet started) queued build.
-			_game->getSavedGame()->setFunds(_game->getSavedGame()->getFunds() + _fac->getRules()->getBuildCost());
+			_game->savedGame()->setFunds(_game->savedGame()->getFunds() + _fac->getRules()->getBuildCost());
 			for (auto& pair : itemCost)
 			{
 				_base->getStorageItems().addItem(_game->getMod()->getItem(pair.first, true), pair.second.first);
@@ -143,7 +143,7 @@ void DismantleFacilityState::btnOkClick(Action *)
 		else
 		{
 			// Give partial refund if this is a started build or a completed facility.
-			_game->getSavedGame()->setFunds(_game->getSavedGame()->getFunds() + _fac->getRules()->getRefundValue());
+			_game->savedGame()->setFunds(_game->savedGame()->getFunds() + _fac->getRules()->getRefundValue());
 			for (auto& pair : itemCost)
 			{
 				_base->getStorageItems().addItem(_game->getMod()->getItem(pair.first, true), pair.second.second);
@@ -235,11 +235,11 @@ void DismantleFacilityState::btnOkClick(Action *)
 	// Remove whole base if it's the access lift
 	else
 	{
-		for (auto xbaseIt = _game->getSavedGame()->getBases().begin(); xbaseIt != _game->getSavedGame()->getBases().end(); ++xbaseIt)
+		for (auto xbaseIt = _game->savedGame()->bases().begin(); xbaseIt != _game->savedGame()->bases().end(); ++xbaseIt)
 		{
 			if (*xbaseIt == _base)
 			{
-				_game->getSavedGame()->getBases().erase(xbaseIt);
+				_game->savedGame()->bases().erase(xbaseIt);
 				delete _base;
 				break;
 			}

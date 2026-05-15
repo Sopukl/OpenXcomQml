@@ -101,11 +101,11 @@ MonthlyCostsState::MonthlyCostsState(Base *base) : _base(base)
 	_txtSalaries->setText(ltr("STR_SALARIES"));
 
 	std::ostringstream ss;
-	ss << ltr("STR_INCOME") << "=" << Unicode::formatFunding(_game->getSavedGame()->getCountryFunding());
+	ss << ltr("STR_INCOME") << "=" << Unicode::formatFunding(_game->savedGame()->getCountryFunding());
 	_txtIncome->setText(ss.str());
 
 	std::ostringstream ss2;
-	ss2 << ltr("STR_MAINTENANCE") << "=" << Unicode::formatFunding(_game->getSavedGame()->getBaseMaintenance());
+	ss2 << ltr("STR_MAINTENANCE") << "=" << Unicode::formatFunding(_game->savedGame()->getBaseMaintenance());
 	_txtMaintenance->setText(ss2.str());
 
 	_lstCrafts->setColumns(4, 125, 70, 44, 50);
@@ -114,7 +114,7 @@ MonthlyCostsState::MonthlyCostsState(Base *base) : _base(base)
 	for (auto& craftType : _game->getMod()->getCraftsList())
 	{
 		RuleCraft *craft = _game->getMod()->getCraft(craftType);
-		if (craft->getRentCost() != 0 && _game->getSavedGame()->isResearched(craft->getRequirements()))
+		if (craft->getRentCost() != 0 && _game->savedGame()->isResearched(craft->getRequirements()))
 		{
 			int count = _base->getCraftCount(craft);
 			if (count > 0 || craft->forceShowInMonthlyCosts())
@@ -147,7 +147,7 @@ MonthlyCostsState::MonthlyCostsState(Base *base) : _base(base)
 		for (auto& soldierType : soldierTypes)
 		{
 			RuleSoldier *soldier = _game->getMod()->getSoldier(soldierType);
-			if (soldier->getSalaryCost(0) != 0 && _game->getSavedGame()->isResearched(soldier->getRequirements()))
+			if (soldier->getSalaryCost(0) != 0 && _game->savedGame()->isResearched(soldier->getRequirements()))
 			{
 				std::pair<int, int> info = _base->getSoldierCountAndSalary(soldierType);
 				std::ostringstream ss4;

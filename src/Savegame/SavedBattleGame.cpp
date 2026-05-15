@@ -1131,7 +1131,7 @@ bool SavedBattleGame::canUseWeapon(const BattleItem* weapon, const BattleUnit* u
 	{
 		return false;
 	}
-	if (unit->getOriginalFaction() == FACTION_PLAYER && !_battleState->getGame()->getSavedGame()->isResearched(rule->getRequirements()))
+	if (unit->getOriginalFaction() == FACTION_PLAYER && !_battleState->getGame()->savedGame()->isResearched(rule->getRequirements()))
 	{
 		return false;
 	}
@@ -1141,7 +1141,7 @@ bool SavedBattleGame::canUseWeapon(const BattleItem* weapon, const BattleUnit* u
 	}
 	if (rule->isManaRequired() && unit->getOriginalFaction() == FACTION_PLAYER)
 	{
-		if (!_rule->isManaFeatureEnabled() || !_battleState->getGame()->getSavedGame()->isManaUnlocked(_rule))
+		if (!_rule->isManaFeatureEnabled() || !_battleState->getGame()->savedGame()->isManaUnlocked(_rule))
 		{
 			return false;
 		}
@@ -1378,7 +1378,7 @@ void SavedBattleGame::saveDummyCraftDeployment()
 	auto* save = getGeoscapeSave();
 
 	// don't forget to invalidate custom deployments of all real craft of this type
-	for (auto* xbase : save->getBases())
+	for (auto* xbase : save->bases())
 	{
 		for (auto* xcraft : xbase->getCrafts())
 		{
@@ -3020,7 +3020,7 @@ void SavedBattleGame::calculateModuleMap()
  */
 SavedGame *SavedBattleGame::getGeoscapeSave() const
 {
-	return _battleState->getGame()->getSavedGame();
+	return _battleState->getGame()->savedGame();
 }
 
 /**

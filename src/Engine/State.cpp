@@ -129,7 +129,7 @@ void State::setInterface(const std::string& category, bool alterPal, SavedBattle
  */
 void State::setWindowBackground(Window *window, const std::string &s)
 {
-	auto& bgImageName = _game->getMod()->getInterface(s)->getBackgroundImage(_game->getMod(), _game->getSavedGame());
+	auto& bgImageName = _game->getMod()->getInterface(s)->getBackgroundImage(_game->getMod(), _game->savedGame());
 	setWindowBackgroundImage(window, bgImageName);
 }
 

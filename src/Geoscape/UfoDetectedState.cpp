@@ -52,7 +52,7 @@ UfoDetectedState::UfoDetectedState(Ufo *ufo, GeoscapeState *state, bool detected
 	// Generate UFO ID
 	if (_ufo->getId() == 0)
 	{
-		_ufo->setId(_game->getSavedGame()->getId("STR_UFO"));
+		_ufo->setId(_game->savedGame()->getId("STR_UFO"));
 
 		int soundId = _ufo->getRules()->getAlertSound();
 		if (soundId != Mod::NO_SOUND)
@@ -63,7 +63,7 @@ UfoDetectedState::UfoDetectedState(Ufo *ufo, GeoscapeState *state, bool detected
 	}
 	if (_ufo->getAltitude() == "STR_GROUND" && _ufo->getLandId() == 0)
 	{
-		_ufo->setLandId(_game->getSavedGame()->getId("STR_LANDING_SITE"));
+		_ufo->setLandId(_game->savedGame()->getId("STR_LANDING_SITE"));
 	}
 
 	_screen = false;
@@ -254,7 +254,7 @@ void UfoDetectedState::btnCancelClick(Action *)
 	if (_game->isCtrlPressed())
 	{
 		// don't show UFO Detected window for this UFO anymore
-		_game->getSavedGame()->addUfoToIgnoreList(_ufo->getId());
+		_game->savedGame()->addUfoToIgnoreList(_ufo->getId());
 	}
 	_game->popState();
 }

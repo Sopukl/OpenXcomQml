@@ -56,7 +56,7 @@ namespace OpenXcom
 CraftSoldiersState::CraftSoldiersState(Base *base, size_t craft)
 		:  _base(base), _craft(craft), _otherCraftColor(0), _origSoldierOrder(_base->getSoldiers()), _dynGetter(NULL)
 {
-	bool hidePreview = _game->getSavedGame()->getMonthsPassed() == -1;
+	bool hidePreview = _game->savedGame()->getMonthsPassed() == -1;
 	Craft *c = _base->getCrafts().at(_craft);
 	if (c && !c->getRules()->isForNewBattle())
 	{
@@ -316,7 +316,7 @@ void CraftSoldiersState::btnPreviewClick(Action *)
 	}
 
 	SavedBattleGame* bgame = new SavedBattleGame(_game->getMod(), _game->getLanguage(), true);
-	_game->getSavedGame()->setBattleGame(bgame);
+	_game->savedGame()->setBattleGame(bgame);
 	BattlescapeGenerator bgen = BattlescapeGenerator(_game);
 	bgame->setMissionType(c->getRules()->getCustomPreviewType());
 	bgame->setCraftForPreview(c);
@@ -531,7 +531,7 @@ void CraftSoldiersState::lstSoldiersClick(Action *action)
 		Soldier *s = _base->getSoldiers().at(_lstSoldiers->getSelectedRow());
 		if (s->getCraft() == c)
 		{
-			s->setCraftAndMoveEquipment(0, _base, _game->getSavedGame()->getMonthsPassed() == -1);
+			s->setCraftAndMoveEquipment(0, _base, _game->savedGame()->getMonthsPassed() == -1);
 			_lstSoldiers->setCellText(row, 2, ltr("STR_NONE_UC"));
 			_lstSoldiers->setRowColor(row, _lstSoldiers->getColor());
 		}
@@ -545,7 +545,7 @@ void CraftSoldiersState::lstSoldiersClick(Action *action)
 			CraftPlacementErrors err = c->validateAddingSoldier(space, s);
 			if (err == CPE_None)
 			{
-				s->setCraftAndMoveEquipment(c, _base, _game->getSavedGame()->getMonthsPassed() == -1, true);
+				s->setCraftAndMoveEquipment(c, _base, _game->savedGame()->getMonthsPassed() == -1, true);
 				_lstSoldiers->setCellText(row, 2, c->getName(_game->getLanguage()));
 				_lstSoldiers->setRowColor(row, _lstSoldiers->getSecondaryColor());
 
@@ -620,7 +620,7 @@ void CraftSoldiersState::btnDeassignAllSoldiersClick(Action *action)
 	{
 		if (soldier->getCraft() && soldier->getCraft()->getStatus() != "STR_OUT")
 		{
-			soldier->setCraftAndMoveEquipment(0, _base, _game->getSavedGame()->getMonthsPassed() == -1);
+			soldier->setCraftAndMoveEquipment(0, _base, _game->savedGame()->getMonthsPassed() == -1);
 			_lstSoldiers->setCellText(row, 2, ltr("STR_NONE_UC"));
 			_lstSoldiers->setRowColor(row, _lstSoldiers->getColor());
 		}
@@ -644,7 +644,7 @@ void CraftSoldiersState::btnDeassignCraftSoldiersClick(Action *action)
 	{
 		if (soldier->getCraft() == c)
 		{
-			soldier->setCraftAndMoveEquipment(0, _base, _game->getSavedGame()->getMonthsPassed() == -1);
+			soldier->setCraftAndMoveEquipment(0, _base, _game->savedGame()->getMonthsPassed() == -1);
 			_lstSoldiers->setCellText(row, 2, ltr("STR_NONE_UC"));
 			_lstSoldiers->setRowColor(row, _lstSoldiers->getColor());
 		}

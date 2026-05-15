@@ -93,7 +93,7 @@ SaveGameState::SaveGameState(OptionsOrigin origin, SaveType type, SDL_Color *pal
 		break;
 	case SAVE_IRONMAN:
 	case SAVE_IRONMAN_END:
-		_filename = CrossPlatform::sanitizeFilename(_game->getSavedGame()->getName()) + ".sav";
+		_filename = CrossPlatform::sanitizeFilename(_game->savedGame()->getName()) + ".sav";
 		break;
 	default:
 		break;
@@ -163,7 +163,7 @@ void SaveGameState::think()
 		case SAVE_DEFAULT:
 			// manual save, close the save screen
 			_game->popState();
-			if (!_game->getSavedGame()->isIronman())
+			if (!_game->savedGame()->isIronman())
 			{
 				// and pause screen too
 				_game->popState();
@@ -171,13 +171,13 @@ void SaveGameState::think()
 			break;
 		case SAVE_INSTA:
 			// timestamp is visible already, no need to repeat it
-			_game->getSavedGame()->setName(ltr("STR_INSTA_SAVE"));
+			_game->savedGame()->setName(ltr("STR_INSTA_SAVE"));
 			break;
 		case SAVE_QUICK:
 		case SAVE_AUTO_GEOSCAPE:
 		case SAVE_AUTO_BATTLESCAPE:
 			// automatic save, give it a default name
-			_game->getSavedGame()->setName(_filename);
+			_game->savedGame()->setName(_filename);
 		default:
 			break;
 		}
@@ -186,7 +186,7 @@ void SaveGameState::think()
 		try
 		{
 			std::string backup = _filename + ".bak";
-			_game->getSavedGame()->save(backup, _game->getMod());
+			_game->savedGame()->save(backup, _game->getMod());
 			std::string fullPath = Options::getMasterUserFolder() + _filename;
 			std::string bakPath = Options::getMasterUserFolder() + backup;
 			if (!CrossPlatform::moveFile(bakPath, fullPath))

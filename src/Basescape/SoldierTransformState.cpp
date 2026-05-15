@@ -100,7 +100,7 @@ SoldierTransformState::SoldierTransformState(Base* base, size_t soldier) : _base
 	_sortName->onMouseClick((ActionHandler)&SoldierTransformState::sortNameClick);
 
 	std::vector<RuleSoldierTransformation*> availableTransformations;
-	_game->getSavedGame()->getAvailableTransformations(availableTransformations, _game->getMod(), _base);
+	_game->savedGame()->getAvailableTransformations(availableTransformations, _game->getMod(), _base);
 
 	for (auto* trRule : availableTransformations)
 	{

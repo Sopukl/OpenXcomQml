@@ -608,7 +608,7 @@ bool NextTurnState::determineReinforcements()
 	{
 		// 1. check pre-requisites
 		{
-			if (_game->getSavedGame()->getDifficulty() < wave.minDifficulty || _game->getSavedGame()->getDifficulty() > wave.maxDifficulty)
+			if (_game->savedGame()->getDifficulty() < wave.minDifficulty || _game->savedGame()->getDifficulty() > wave.maxDifficulty)
 			{
 				continue;
 			}
@@ -886,7 +886,7 @@ bool NextTurnState::deployReinforcements(const ReinforcementsData &wave)
 	{
 		int quantity;
 
-		switch (_game->getSavedGame()->getDifficulty())
+		switch (_game->savedGame()->getDifficulty())
 		{
 		case DIFF_BEGINNER:
 			quantity = dd.lowQty;

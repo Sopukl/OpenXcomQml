@@ -370,8 +370,8 @@ void GeoscapeCraftState::btnCancelClick(Action *)
 	// Go to the last known UFO position
 	if (_waypoint != 0)
 	{
-		_waypoint->setId(_game->getSavedGame()->getId("STR_WAY_POINT"));
-		_game->getSavedGame()->getWaypoints().push_back(_waypoint);
+		_waypoint->setId(_game->savedGame()->getId("STR_WAY_POINT"));
+		_game->savedGame()->getWaypoints().push_back(_waypoint);
 		_craft->setDestination(_waypoint);
 	}
 	// Cancel

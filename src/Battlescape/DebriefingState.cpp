@@ -364,7 +364,7 @@ void DebriefingState::applyVisibility()
 
 	// Set text on toggle button accordingly
 	_btnSell->setVisible(showItems && _showSellButton);
-	_btnTransfer->setVisible(showItems && _showSellButton && _game->getSavedGame()->getBases().size() > 1);
+	_btnTransfer->setVisible(showItems && _showSellButton && _game->savedGame()->bases().size() > 1);
 	if (showScore)
 	{
 		_btnStats->setText(ltr("STR_STATS"));
@@ -418,7 +418,7 @@ void DebriefingState::init()
 	if (_base && _showSellButton)
 	{
 		int row = 0;
-		ItemContainer *origBaseItems = _game->getSavedGame()->getSavedBattle()->getBaseStorageItems();
+		ItemContainer *origBaseItems = _game->savedGame()->getSavedBattle()->getBaseStorageItems();
 		for (auto& itemType : _game->getMod()->getItemsList())
 		{
 			RuleItem *rule = _game->getMod()->getItem(itemType);
@@ -589,12 +589,12 @@ void DebriefingState::init()
 	_missionStatistics->score = total;
 	_txtRating->setText(ltr("STR_RATING").arg(ltr(rating)));
 
-	SavedGame *save = _game->getSavedGame();
+	SavedGame *save = _game->savedGame();
 	SavedBattleGame *battle = save->getSavedBattle();
 
 	_missionStatistics->daylight = save->getSavedBattle()->getGlobalShade();
-	_missionStatistics->id = _game->getSavedGame()->getMissionStatistics()->size();
-	_game->getSavedGame()->getMissionStatistics()->push_back(_missionStatistics);
+	_missionStatistics->id = _game->savedGame()->getMissionStatistics()->size();
+	_game->savedGame()->getMissionStatistics()->push_back(_missionStatistics);
 
 	// Award Best-of commendations.
 	int bestScoreID[7] = {0, 0, 0, 0, 0, 0, 0};
@@ -649,9 +649,9 @@ void DebriefingState::init()
 
 		/// Best-of awards
 		// Find the best soldier per rank by comparing score.
-		for (auto* deadSoldier : _game->getSavedGame()->getDeadSoldiers())
+		for (auto* deadSoldier : _game->savedGame()->getDeadSoldiers())
 		{
-			int score = deadSoldier->getDiary()->getScoreTotal(_game->getSavedGame()->getMissionStatistics());
+			int score = deadSoldier->getDiary()->getScoreTotal(_game->savedGame()->getMissionStatistics());
 
 			// Don't forget this mission's score!
 			if (deadSoldier->getId() == deadUnit->getId())
@@ -755,15 +755,15 @@ void DebriefingState::init()
 			// Set the UnitStats delta
 			bu->getStatistics()->delta = *bu->getGeoscapeSoldier()->getCurrentStats() - *bu->getGeoscapeSoldier()->getInitStats();
 
-			bu->getGeoscapeSoldier()->getDiary()->updateDiary(bu->getStatistics(), _game->getSavedGame()->getMissionStatistics(), _game->getMod());
+			bu->getGeoscapeSoldier()->getDiary()->updateDiary(bu->getStatistics(), _game->savedGame()->getMissionStatistics(), _game->getMod());
 			if (!bu->getStatistics()->MIA && !bu->getStatistics()->KIA &&
-				bu->getGeoscapeSoldier()->getDiary()->manageCommendations(_game->getMod(), _game->getSavedGame(), bu->getGeoscapeSoldier()))
+				bu->getGeoscapeSoldier()->getDiary()->manageCommendations(_game->getMod(), _game->savedGame(), bu->getGeoscapeSoldier()))
 			{
 				_soldiersCommended.push_back(bu->getGeoscapeSoldier());
 			}
 			else if (bu->getStatistics()->MIA || bu->getStatistics()->KIA)
 			{
-				bu->getGeoscapeSoldier()->getDiary()->manageCommendations(_game->getMod(), _game->getSavedGame(), bu->getGeoscapeSoldier());
+				bu->getGeoscapeSoldier()->getDiary()->manageCommendations(_game->getMod(), _game->savedGame(), bu->getGeoscapeSoldier());
 				_deadSoldiersCommended.push_back(bu->getGeoscapeSoldier());
 			}
 		}
@@ -772,7 +772,7 @@ void DebriefingState::init()
 	_positiveScore = (total > 0);
 
 	std::vector<Soldier*> participants;
-	for (auto* bu : *_game->getSavedGame()->getSavedBattle()->getUnits())
+	for (auto* bu : *_game->savedGame()->getSavedBattle()->getUnits())
 	{
 		if (bu->getGeoscapeSoldier())
 		{
@@ -787,10 +787,10 @@ void DebriefingState::init()
 
 	if (options1.oxceAutomaticPromotions())
 	{
-		_promotions = _game->getSavedGame()->handlePromotions(participants, _game->getMod());
+		_promotions = _game->savedGame()->handlePromotions(participants, _game->getMod());
 	}
 
-	_game->getSavedGame()->setBattleGame(0);
+	_game->savedGame()->setBattleGame(0);
 
 	if (_positiveScore)
 	{
@@ -865,14 +865,14 @@ void DebriefingState::btnTransferClick(Action *)
 void DebriefingState::btnOkClick(Action *)
 {
 	_game->popState();
-	if (_game->getSavedGame()->getMonthsPassed() == -1)
+	if (_game->savedGame()->getMonthsPassed() == -1)
 	{
 		_game->setState(new MainMenuState);
 	}
 	else
 	{
 		// Autosave after mission
-		if (_game->getSavedGame()->isIronman())
+		if (_game->savedGame()->isIronman())
 		{
 			_game->pushState(new SaveGameState(OPT_GEOSCAPE, SAVE_IRONMAN, _palette));
 		}
@@ -883,7 +883,7 @@ void DebriefingState::btnOkClick(Action *)
 
 		if (_eventToSpawn)
 		{
-			bool canSpawn = _game->getSavedGame()->canSpawnInstantEvent(_eventToSpawn);
+			bool canSpawn = _game->savedGame()->canSpawnInstantEvent(_eventToSpawn);
 			if (canSpawn)
 			{
 				_game->pushState(new GeoscapeEventState(*_eventToSpawn));
@@ -912,7 +912,7 @@ void DebriefingState::btnOkClick(Action *)
 			{
 				if (soldier->getCraft() != nullptr && soldier->isWounded())
 				{
-					soldier->setCraftAndMoveEquipment(nullptr, _base, _game->getSavedGame()->getMonthsPassed() == -1);
+					soldier->setCraftAndMoveEquipment(nullptr, _base, _game->savedGame()->getMonthsPassed() == -1);
 				}
 			}
 
@@ -1002,7 +1002,7 @@ void DebriefingState::prepareDebriefing()
 		}
 	}
 
-	SavedGame *save = _game->getSavedGame();
+	SavedGame *save = _game->savedGame();
 	SavedBattleGame *battle = save->getSavedBattle();
 
 	AlienDeployment *ruleDeploy = _game->getMod()->getDeployment(battle->getMissionType());
@@ -1087,7 +1087,7 @@ void DebriefingState::prepareDebriefing()
 	_missionStatistics->type = battle->getMissionType();
 	_stats.push_back(new DebriefingStat(_game->getMod()->getAlienFuelName(), true));
 
-	for (auto* xbase : save->getBases())
+	for (auto* xbase : save->bases())
 	{
 		// in case we have a craft - check which craft it is about
 		for (auto* xcraft : xbase->getCrafts())
@@ -2093,7 +2093,7 @@ void DebriefingState::prepareDebriefing()
 		}
 		else if (save->getMonthsPassed() != -1)
 		{
-			for (auto xbaseIt = save->getBases().begin(); xbaseIt != save->getBases().end(); ++xbaseIt)
+			for (auto xbaseIt = save->bases().begin(); xbaseIt != save->bases().end(); ++xbaseIt)
 			{
 				Base* xbase = (*xbaseIt);
 				if (xbase == base)
@@ -2101,7 +2101,7 @@ void DebriefingState::prepareDebriefing()
 					save->stopHuntingXcomCrafts(xbase); // destroyed together with the base
 					delete xbase;
 					base = 0; // To avoid similar (potential) problems as with the deleted craft
-					save->getBases().erase(xbaseIt);
+					save->bases().erase(xbaseIt);
 					break;
 				}
 			}
@@ -2450,7 +2450,7 @@ void DebriefingState::recoverItems(std::vector<BattleItem*> *from, Base *base, C
 					}
 				}
 				// only add recovery points for unresearched items
-				else if (!_game->getSavedGame()->isResearched(rule->getRequirements()))
+				else if (!_game->savedGame()->isResearched(rule->getRequirements()))
 				{
 					addStat("STR_ALIEN_ARTIFACTS_RECOVERED", 1, rule->getRecoveryPoints());
 				}
@@ -2601,10 +2601,10 @@ void DebriefingState::recoverCivilian(BattleUnit *from, Base *base, Craft* craft
 			{
 				target = base;
 			}
-			int nationality = _game->getSavedGame()->selectSoldierNationalityByLocation(_game->getMod(), ruleSoldier, target);
-			Soldier *s = _game->getMod()->genSoldier(_game->getSavedGame(), ruleSoldier, nationality);
+			int nationality = _game->savedGame()->selectSoldierNationalityByLocation(_game->getMod(), ruleSoldier, target);
+			Soldier *s = _game->getMod()->genSoldier(_game->savedGame(), ruleSoldier, nationality);
 			YAML::YamlRootNodeReader reader(from->getUnitRules()->getSpawnedSoldierTemplate(), "(spawned soldier template)");
-			s->load(reader.toBase(), _game->getMod(), _game->getSavedGame(), _game->getMod()->getScriptGlobal(), true); // load from soldier template
+			s->load(reader.toBase(), _game->getMod(), _game->savedGame(), _game->getMod()->getScriptGlobal(), true); // load from soldier template
 			if (!from->getUnitRules()->getSpawnedPersonName().empty())
 			{
 				s->setName(ltr(from->getUnitRules()->getSpawnedPersonName()));
@@ -2632,7 +2632,7 @@ void DebriefingState::recoverCivilian(BattleUnit *from, Base *base, Craft* craft
 					if (killPrisonersAutomatically)
 					{
 						// check also other bases, maybe we can transfer/redirect prisoners there
-						for (auto* xbase : _game->getSavedGame()->getBases())
+						for (auto* xbase : _game->savedGame()->bases())
 						{
 							if (xbase->getAvailableContainment(ruleLiveAlienItem->getPrisonType()) > 0)
 							{
@@ -2708,7 +2708,7 @@ void DebriefingState::recoverAlien(BattleUnit *from, Base *base, Craft* craft)
 	if (killPrisonersAutomatically)
 	{
 		// check also other bases, maybe we can transfer/redirect prisoners there
-		for (auto* xbase : _game->getSavedGame()->getBases())
+		for (auto* xbase : _game->savedGame()->bases())
 		{
 			if (xbase->getAvailableContainment(ruleLiveAlienItem->getPrisonType()) > 0)
 			{
@@ -2739,8 +2739,8 @@ void DebriefingState::recoverAlien(BattleUnit *from, Base *base, Craft* craft)
 	{
 		RuleResearch *research = _game->getMod()->getResearch(from->getUnitRules()->getType());
 		bool surrendered = (!from->isOut() || from->isIgnored())
-			&& (from->isSurrendering() || _game->getSavedGame()->getSavedBattle()->getChronoTrigger() == FORCE_WIN_SURRENDER);
-		if (research != 0 && !_game->getSavedGame()->isResearched(research))
+			&& (from->isSurrendering() || _game->savedGame()->getSavedBattle()->getChronoTrigger() == FORCE_WIN_SURRENDER);
+		if (research != 0 && !_game->savedGame()->isResearched(research))
 		{
 			// more points if it's not researched
 			addStat(surrendered ? "STR_LIVE_ALIENS_SURRENDERED" : "STR_LIVE_ALIENS_RECOVERED", 1, from->getValue() * 2);

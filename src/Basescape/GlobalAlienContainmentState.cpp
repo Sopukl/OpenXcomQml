@@ -142,7 +142,7 @@ void GlobalAlienContainmentState::fillPrisonerList()
 		}
 	}
 
-	for (auto* xbase : _game->getSavedGame()->getBases())
+	for (auto* xbase : _game->savedGame()->bases())
 	{
 		bool displayed = false;
 		int totalBaseCapacity = 0;

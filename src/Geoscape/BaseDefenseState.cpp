@@ -480,8 +480,8 @@ void BaseDefenseState::btnOkClick(Action *)
 			if (!am)
 			{
 				// backwards-compatibility
-				RuleRegion* regionRule = _game->getSavedGame()->getRegions().front()->getRules(); // wrong, but that's how it is in OXC
-				for (const auto* region : _game->getSavedGame()->getRegions())
+				RuleRegion* regionRule = _game->savedGame()->getRegions().front()->getRules(); // wrong, but that's how it is in OXC
+				for (const auto* region : _game->savedGame()->getRegions())
 				{
 					if (region->getRules()->insideRegion(_base->getLongitude(), _base->getLatitude()))
 					{
@@ -489,7 +489,7 @@ void BaseDefenseState::btnOkClick(Action *)
 						break;
 					}
 				}
-				am = _game->getSavedGame()->findAlienMission(regionRule->getType(), OBJECTIVE_RETALIATION);
+				am = _game->savedGame()->findAlienMission(regionRule->getType(), OBJECTIVE_RETALIATION);
 			}
 
 			if (am && am->getRules().isMultiUfoRetaliation())
@@ -500,7 +500,7 @@ void BaseDefenseState::btnOkClick(Action *)
 			else
 			{
 				// Delete the mission and any live UFOs
-				_game->getSavedGame()->deleteRetaliationMission(am, _base);
+				_game->savedGame()->deleteRetaliationMission(am, _base);
 			}
 		}
 	}

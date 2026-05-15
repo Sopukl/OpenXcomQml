@@ -59,7 +59,7 @@ AbandonGameState::AbandonGameState(OptionsOrigin origin) : _origin(origin)
 	_txtTitle = new Text(206, 17, x+5, 70);
 
 	// Set palette
-	setInterface("geoscape", false, _game->getSavedGame() ? _game->getSavedGame()->getSavedBattle() : 0);
+	setInterface("geoscape", false, _game->savedGame() ? _game->savedGame()->getSavedBattle() : 0);
 
 	add(_window, "genericWindow", "geoscape");
 	add(_btnYes, "genericButton2", "geoscape");
@@ -106,9 +106,9 @@ void AbandonGameState::btnYesClick(Action *)
 	// Reset touch flags
 	_game->resetTouchButtonFlags();
 
-	if (_origin == OPT_BATTLESCAPE && _game->getSavedGame()->getSavedBattle()->getAmbientSound() != Mod::NO_SOUND)
-		_game->getMod()->getSoundByDepth(0, _game->getSavedGame()->getSavedBattle()->getAmbientSound())->stopLoop();
-	if (!_game->getSavedGame()->isIronman())
+	if (_origin == OPT_BATTLESCAPE && _game->savedGame()->getSavedBattle()->getAmbientSound() != Mod::NO_SOUND)
+		_game->getMod()->getSoundByDepth(0, _game->savedGame()->getSavedBattle()->getAmbientSound())->stopLoop();
+	if (!_game->savedGame()->isIronman())
 	{
 		Screen::updateScale(options1.geoscapeScale(), options1.baseXGeoscape, options1.baseYGeoscape, true);
 		_game->getScreen()->resetDisplay(false);

@@ -123,7 +123,7 @@ SoldierArmorState::SoldierArmorState(Base *base, size_t soldier, SoldierArmorOri
 
 	for (auto* a : _game->getMod()->getArmorsForSoldiers())
 	{
-		if (a->getRequiredResearch() && !_game->getSavedGame()->isResearched(a->getRequiredResearch()))
+		if (a->getRequiredResearch() && !_game->savedGame()->isResearched(a->getRequiredResearch()))
 			continue;
 		if (!a->getCanBeUsedBy(s))
 			continue;
@@ -134,7 +134,7 @@ SoldierArmorState::SoldierArmorState(Base *base, size_t soldier, SoldierArmorOri
 		else if (_base->getStorageItems().getItem(a->getStoreItem()) > 0 || a->getStoreItem() == s->getArmor()->getStoreItem())
 		{
 			std::ostringstream ss;
-			if (_game->getSavedGame()->getMonthsPassed() > -1)
+			if (_game->savedGame()->getMonthsPassed() > -1)
 			{
 				ss << _base->getStorageItems().getItem(a->getStoreItem());
 			}
@@ -303,7 +303,7 @@ void SoldierArmorState::lstArmorClick(Action *)
 			return;
 		}
 	}
-	if (_game->getSavedGame()->getMonthsPassed() != -1)
+	if (_game->savedGame()->getMonthsPassed() != -1)
 	{
 		if (prev->getStoreItem())
 		{
@@ -315,7 +315,7 @@ void SoldierArmorState::lstArmorClick(Action *)
 		}
 	}
 	soldier->setArmor(next, true);
-	_game->getSavedGame()->setLastSelectedArmor(next->getType());
+	_game->savedGame()->setLastSelectedArmor(next->getType());
 
 	_game->popState();
 }

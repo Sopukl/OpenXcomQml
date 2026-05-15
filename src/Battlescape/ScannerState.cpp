@@ -56,7 +56,7 @@ ScannerState::ScannerState (BattleAction *action) : _action(action)
 	}
 
 	// Set palette
-	_game->getSavedGame()->getSavedBattle()->setPaletteByDepth(this);
+	_game->savedGame()->getSavedBattle()->setPaletteByDepth(this);
 
 	add(_scan);
 	add(_scannerView);

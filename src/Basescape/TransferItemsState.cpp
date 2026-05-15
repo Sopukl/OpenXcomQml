@@ -443,7 +443,7 @@ void TransferItemsState::updateList()
 			if (_items[i].type == TRANSFER_ITEM)
 			{
 				RuleItem* rule = (RuleItem*)_items[i].rule;
-				bool isResearchable = _game->getSavedGame()->isResearchable(rule, _game->getMod());
+				bool isResearchable = _game->savedGame()->isResearchable(rule, _game->getMod());
 				if (categoryResearched && isResearchable) continue;
 				if (categoryResearchable && !isResearchable) continue;
 			}
@@ -550,7 +550,7 @@ void TransferItemsState::btnOkClick(Action *)
 void TransferItemsState::completeTransfer()
 {
 	int time = (int)floor(6 + _distance / 10.0);
-	_game->getSavedGame()->setFunds(_game->getSavedGame()->getFunds() - _total);
+	_game->savedGame()->setFunds(_game->savedGame()->getFunds() - _total);
 	for (const auto& transferRow : _items)
 	{
 		if (transferRow.amount > 0)

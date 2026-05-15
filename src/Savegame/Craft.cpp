@@ -285,7 +285,7 @@ void Craft::finishLoading(const YAML::YamlNodeReader& reader, SavedGame *save)
 		int id = dest["id"].readVal<int>();
 
 		bool found = false;
-		for (auto* xbase : save->getBases())
+		for (auto* xbase : save->bases())
 		{
 			if (found) break; // loop finished
 			for (auto* xcraft : xbase->getCrafts())

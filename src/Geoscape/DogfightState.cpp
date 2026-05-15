@@ -535,7 +535,7 @@ DogfightState::DogfightState(GeoscapeState *state, Craft *craft, Ufo *ufo, bool 
 	if (_craft->getInterceptionOrder() == 0)
 	{
 		int maxInterceptionOrder = 0;
-		for (auto* xbase : _game->getSavedGame()->getBases())
+		for (auto* xbase : _game->savedGame()->bases())
 		{
 			for (auto* xcraft : xbase->getCrafts())
 			{
@@ -664,9 +664,9 @@ DogfightState::DogfightState(GeoscapeState *state, Craft *craft, Ufo *ufo, bool 
 	if (!_ufo->getEscapeCountdown())
 	{
 		_ufo->setFireCountdown(0);
-		int escapeCountdown = _ufo->getRules()->getBreakOffTime() + RNG::generate(0, _ufo->getRules()->getBreakOffTime()) - 30 * _game->getSavedGame()->getDifficultyCoefficient();
+		int escapeCountdown = _ufo->getRules()->getBreakOffTime() + RNG::generate(0, _ufo->getRules()->getBreakOffTime()) - 30 * _game->savedGame()->getDifficultyCoefficient();
 		{
-			int diff = _game->getSavedGame()->getDifficulty();
+			int diff = _game->savedGame()->getDifficulty();
 			auto& custom = _game->getMod()->getUfoEscapeCountdownCoefficients();
 			if (custom.size() > (size_t)diff)
 			{
@@ -1515,7 +1515,7 @@ void DogfightState::update()
 				bool returnedToBase = _craft->think();
 				if (returnedToBase)
 				{
-					_game->getSavedGame()->stopHuntingXcomCraft(_craft); // hiding in the base is good enough, obviously
+					_game->savedGame()->stopHuntingXcomCraft(_craft); // hiding in the base is good enough, obviously
 				}
 			}
 		}
@@ -1594,9 +1594,9 @@ void DogfightState::update()
 				int retaliationOdds = mission->getRules().getRetaliationOdds();
 				if (retaliationOdds == -1)
 				{
-					retaliationOdds = 100 - (4 * (24 - _game->getSavedGame()->getDifficultyCoefficient()) - race->getRetaliationAggression());
+					retaliationOdds = 100 - (4 * (24 - _game->savedGame()->getDifficultyCoefficient()) - race->getRetaliationAggression());
 					{
-						int diff = _game->getSavedGame()->getDifficulty();
+						int diff = _game->savedGame()->getDifficulty();
 						auto& custom = _game->getMod()->getRetaliationTriggerOdds();
 						if (custom.size() > (size_t)diff)
 						{
@@ -1605,7 +1605,7 @@ void DogfightState::update()
 					}
 				}
 				// Have mercy on beginners
-				if (_game->getSavedGame()->getMonthsPassed() < Mod::DIFFICULTY_BASED_RETAL_DELAY[_game->getSavedGame()->getDifficulty()])
+				if (_game->savedGame()->getMonthsPassed() < Mod::DIFFICULTY_BASED_RETAL_DELAY[_game->savedGame()->getDifficulty()])
 				{
 					retaliationOdds = 0;
 				}
@@ -1614,9 +1614,9 @@ void DogfightState::update()
 				{
 					// Spawn retaliation mission.
 					std::string targetRegion;
-					int retaliationUfoMissionRegionOdds = 50 - 6 * _game->getSavedGame()->getDifficultyCoefficient();
+					int retaliationUfoMissionRegionOdds = 50 - 6 * _game->savedGame()->getDifficultyCoefficient();
 					{
-						int diff = _game->getSavedGame()->getDifficulty();
+						int diff = _game->savedGame()->getDifficulty();
 						auto& custom = _game->getMod()->getRetaliationBaseRegionOdds();
 						if (custom.size() > (size_t)diff)
 						{
@@ -1631,28 +1631,28 @@ void DogfightState::update()
 					else
 					{
 						// Try to find and attack the originating base.
-						targetRegion = _game->getSavedGame()->locateRegion(*_craft->getBase())->getRules()->getType();
+						targetRegion = _game->savedGame()->locateRegion(*_craft->getBase())->getRules()->getType();
 						// TODO: If the base is removed, the mission is canceled.
 					}
 					// Difference from original: No retaliation until final UFO lands (Original: Is spawned).
-					if (!_game->getSavedGame()->findAlienMission(targetRegion, OBJECTIVE_RETALIATION, race))
+					if (!_game->savedGame()->findAlienMission(targetRegion, OBJECTIVE_RETALIATION, race))
 					{
-						auto* retalWeights = race->retaliationMissionWeights(_game->getSavedGame()->getMonthsPassed());
+						auto* retalWeights = race->retaliationMissionWeights(_game->savedGame()->getMonthsPassed());
 						std::string retalMission = retalWeights ? retalWeights->choose() : "";
 						const RuleAlienMission *rule = _game->getMod()->getAlienMission(retalMission, false);
 						if (!rule)
 						{
-							rule = _game->getMod()->getRandomMission(OBJECTIVE_RETALIATION, _game->getSavedGame()->getMonthsPassed());
+							rule = _game->getMod()->getRandomMission(OBJECTIVE_RETALIATION, _game->savedGame()->getMonthsPassed());
 						}
 
 						if (rule)
 						{
 							AlienMission *newMission = new AlienMission(*rule);
-							newMission->setId(_game->getSavedGame()->getId("ALIEN_MISSIONS"));
+							newMission->setId(_game->savedGame()->getId("ALIEN_MISSIONS"));
 							newMission->setRegion(targetRegion, *_game->getMod());
 							newMission->setRace(_ufo->getAlienRace());
 							newMission->start(*_game, *_state->getGlobe(), newMission->getRules().getWave(0).spawnTimer); // fixed delay for first scout
-							_game->getSavedGame()->getAlienMissions().push_back(newMission);
+							_game->savedGame()->getAlienMissions().push_back(newMission);
 						}
 					}
 				}
@@ -1662,7 +1662,7 @@ void DogfightState::update()
 			{
 				if (_ufo->getShotDownByCraftId() == _craft->getUniqueId())
 				{
-					for (auto* country : *_game->getSavedGame()->getCountries())
+					for (auto* country : *_game->savedGame()->getCountries())
 					{
 						if (country->getRules()->insideCountry(_ufo->getLongitude(), _ufo->getLatitude()))
 						{
@@ -1670,7 +1670,7 @@ void DogfightState::update()
 							break;
 						}
 					}
-					for (auto* region : _game->getSavedGame()->getRegions())
+					for (auto* region : _game->savedGame()->getRegions())
 					{
 						if (region->getRules()->insideRegion(_ufo->getLongitude(), _ufo->getLatitude()))
 						{
@@ -1689,7 +1689,7 @@ void DogfightState::update()
 				{
 					setStatus("STR_UFO_CRASH_LANDS");
 					_game->getMod()->getSound("GEO.CAT", Mod::UFO_CRASH)->play(); //10
-					for (auto* country : *_game->getSavedGame()->getCountries())
+					for (auto* country : *_game->savedGame()->getCountries())
 					{
 						if (country->getRules()->insideCountry(_ufo->getLongitude(), _ufo->getLatitude()))
 						{
@@ -1697,7 +1697,7 @@ void DogfightState::update()
 							break;
 						}
 					}
-					for (auto* region : _game->getSavedGame()->getRegions())
+					for (auto* region : _game->savedGame()->getRegions())
 					{
 						if (region->getRules()->insideRegion(_ufo->getLongitude(), _ufo->getLatitude()))
 						{
@@ -1735,7 +1735,7 @@ void DogfightState::update()
 					_ufo->setAltitude("STR_GROUND");
 					if (_ufo->getCrashId() == 0)
 					{
-						_ufo->setCrashId(_game->getSavedGame()->getId("STR_CRASH_SITE"));
+						_ufo->setCrashId(_game->savedGame()->getId("STR_CRASH_SITE"));
 						if (_ufo->isHunterKiller())
 						{
 							// stop being a hunter-killer
@@ -1790,7 +1790,7 @@ void DogfightState::update()
 				_ufo->setSpeed(0);
 				_ufo->setStatus(Ufo::DESTROYED);
 				_destroyUfo = true;
-				for (auto* country : *_game->getSavedGame()->getCountries())
+				for (auto* country : *_game->savedGame()->getCountries())
 				{
 					if (country->getRules()->insideCountry(_ufo->getLongitude(), _ufo->getLatitude()))
 					{
@@ -1798,7 +1798,7 @@ void DogfightState::update()
 						break;
 					}
 				}
-				for (auto* region : _game->getSavedGame()->getRegions())
+				for (auto* region : _game->savedGame()->getRegions())
 				{
 					if (region->getRules()->insideRegion(_ufo->getLongitude(), _ufo->getLatitude()))
 					{
@@ -1818,7 +1818,7 @@ void DogfightState::update()
 				_ufo->setTractorBeamSlowdown(0);
 				if (_ufo->getLandId() == 0)
 				{
-					_ufo->setLandId(_game->getSavedGame()->getId("STR_LANDING_SITE"));
+					_ufo->setLandId(_game->savedGame()->getId("STR_LANDING_SITE"));
 				}
 			}
 		}
@@ -1862,9 +1862,9 @@ void DogfightState::fireWeapon(int i)
  */
 void DogfightState::ufoFireWeapon()
 {
-	int fireCountdown = std::max(1, (_ufo->getRules()->getWeaponReload() - 2 * _game->getSavedGame()->getDifficultyCoefficient()));
+	int fireCountdown = std::max(1, (_ufo->getRules()->getWeaponReload() - 2 * _game->savedGame()->getDifficultyCoefficient()));
 	{
-		int diff = _game->getSavedGame()->getDifficulty();
+		int diff = _game->savedGame()->getDifficulty();
 		auto& custom = _game->getMod()->getUfoFiringRateCoefficients();
 		if (custom.size() > (size_t)diff)
 		{
@@ -2711,7 +2711,7 @@ void DogfightState::awardExperienceToPilots()
 {
 	if (_firedAtLeastOnce && !_experienceAwarded && _craft && _ufo && (_ufo->isCrashed() || _ufo->isDestroyed()))
 	{
-		bool psiStrengthEval = (options1.psiStrengthEval() && _game->getSavedGame()->isResearched(_game->getMod()->getPsiRequirements()));
+		bool psiStrengthEval = (options1.psiStrengthEval() && _game->savedGame()->isResearched(_game->getMod()->getPsiRequirements()));
 		for (auto* pilot : _craft->getPilotList(false, nullptr)) // refresh already done in the constructor
 		{
 			if (pilot->getCurrentStats()->firing < pilot->getRules()->getStatCaps().firing)

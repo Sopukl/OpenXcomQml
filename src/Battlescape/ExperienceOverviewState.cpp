@@ -61,7 +61,7 @@ ExperienceOverviewState::ExperienceOverviewState(BattlescapeState* parent) : _pa
 	_txtMana = new Text(18, 10, 267 - 3, 40);
 
 	// Set palette
-	_game->getSavedGame()->getSavedBattle()->setPaletteByDepth(this);
+	_game->savedGame()->getSavedBattle()->setPaletteByDepth(this);
 
 	add(_window, "messageWindowBorder", "battlescape");
 	add(_btnOk, "messageWindowButtons", "battlescape");
@@ -125,7 +125,7 @@ ExperienceOverviewState::ExperienceOverviewState(BattlescapeState* parent) : _pa
 
 	_lstSoldiers->clearList();
 	int row = 0;
-	for (auto* soldier : *_game->getSavedGame()->getSavedBattle()->getUnits())
+	for (auto* soldier : *_game->savedGame()->getSavedBattle()->getUnits())
 	{
 		if (!soldier->getGeoscapeSoldier())
 		{
@@ -201,7 +201,7 @@ void ExperienceOverviewState::lstSoldiersClick(Action*)
 		auto index = _lstSoldiers->getSelectedRow();
 		auto* bu = _soldiers.at(index);
 
-		if (bu->isSelectable(_game->getSavedGame()->getSavedBattle()->getSide(), false, false))
+		if (bu->isSelectable(_game->savedGame()->getSavedBattle()->getSide(), false, false))
 		{
 			// select
 			_parent->getBattleGame()->cancelAllActions();

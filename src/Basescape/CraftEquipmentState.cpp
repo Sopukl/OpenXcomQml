@@ -71,7 +71,7 @@ CraftEquipmentState::CraftEquipmentState(Base *base, size_t craft) :
 {
 	Craft *c = _base->getCrafts().at(_craft);
 	bool craftHasACrew = c->getNumTotalSoldiers() > 0;
-	_isNewBattle = _game->getSavedGame()->getMonthsPassed() == -1;
+	_isNewBattle = _game->savedGame()->getMonthsPassed() == -1;
 
 	// Create objects
 	_window = new Window(this, 320, 200, 0, 0);
@@ -169,7 +169,7 @@ CraftEquipmentState::CraftEquipmentState(Base *base, size_t craft) :
 		int cQty = isVehicle ? c->getVehicleCount(itemType) : c->getItems()->getItem(rule);
 
 		if ((isVehicle || rule->isInventoryItem()) && rule->canBeEquippedToCraftInventory() &&
-			_game->getSavedGame()->isResearched(rule->getRequirements()) &&
+			_game->savedGame()->isResearched(rule->getRequirements()) &&
 			(_base->getStorageItems().getItem(rule) > 0 || cQty > 0))
 		{
 			if (rule->getCategories().empty())
@@ -256,7 +256,7 @@ void CraftEquipmentState::init()
 {
 	State::init();
 
-	_game->getSavedGame()->setBattleGame(0);
+	_game->savedGame()->setBattleGame(0);
 
 	Craft *c = _base->getCrafts().at(_craft);
 	c->setInBattlescape(false);
@@ -375,7 +375,7 @@ void CraftEquipmentState::initList()
 			(bQty > 0 || cQty > 0 || reserved > 0))
 		{
 			// check research requirements
-			if (!_game->getSavedGame()->isResearched(rule->getRequirements()))
+			if (!_game->savedGame()->isResearched(rule->getRequirements()))
 			{
 				continue;
 			}
@@ -413,7 +413,7 @@ void CraftEquipmentState::initList()
 						{
 							if (_base->getStorageItems().getItem(ammoRule) > 0 || c->getItems()->getItem(ammoRule) > 0)
 							{
-								if (ammoRule->isInventoryItem() && ammoRule->canBeEquippedToCraftInventory() && _game->getSavedGame()->isResearched(ammoRule->getRequirements()))
+								if (ammoRule->isInventoryItem() && ammoRule->canBeEquippedToCraftInventory() && _game->savedGame()->isResearched(ammoRule->getRequirements()))
 								{
 									isOK = ammoRule->belongsToCategory(selectedCategory);
 									if (isOK) break;
@@ -1003,11 +1003,11 @@ void CraftEquipmentState::btnInventoryClick(Action *)
 		}
 
 		SavedBattleGame *bgame = new SavedBattleGame(_game->getMod(), _game->getLanguage());
-		_game->getSavedGame()->setBattleGame(bgame);
+		_game->savedGame()->setBattleGame(bgame);
 
 		if (_game->isCtrlPressed(true) && _game->isAltPressed(true))
 		{
-			_game->getSavedGame()->setDisableSoldierEquipment(true);
+			_game->savedGame()->setDisableSoldierEquipment(true);
 		}
 		BattlescapeGenerator bgen = BattlescapeGenerator(_game);
 		bgen.runInventory(craft);
@@ -1021,7 +1021,7 @@ void CraftEquipmentState::btnInventoryClick(Action *)
 void CraftEquipmentState::saveGlobalLoadout(int index)
 {
 	// clear the template
-	ItemContainer *tmpl = _game->getSavedGame()->getGlobalCraftLoadout(index);
+	ItemContainer *tmpl = _game->savedGame()->getGlobalCraftLoadout(index);
 	tmpl->clear();
 
 	Craft *c = _base->getCrafts().at(_craft);
@@ -1076,7 +1076,7 @@ void CraftEquipmentState::loadGlobalLoadout(int index, bool onlyAddItems)
 	}
 
 	// now start applying the template (consider ONLY items visible on the GUI)
-	ItemContainer *tmpl = _game->getSavedGame()->getGlobalCraftLoadout(index);
+	ItemContainer *tmpl = _game->savedGame()->getGlobalCraftLoadout(index);
 	for (_sel = 0; _sel != _items.size(); ++_sel)
 	{
 		RuleItem *item = _game->getMod()->getItem(_items[_sel], true);

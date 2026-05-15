@@ -46,7 +46,7 @@ TurnDiaryState::TurnDiaryState(const HitLog *hitLog)
 	_lstTurnDiary = new TextList(180, 96, 65, 52);
 
 	// Set palette
-	_game->getSavedGame()->getSavedBattle()->setPaletteByDepth(this);
+	_game->savedGame()->getSavedBattle()->setPaletteByDepth(this);
 
 	add(_window, "messageWindowBorder", "battlescape");
 	add(_txtTitle, "messageWindows", "battlescape");

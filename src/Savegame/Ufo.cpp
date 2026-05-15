@@ -186,7 +186,7 @@ void Ufo::finishLoading(const YAML::YamlNodeReader& reader, SavedGame &save)
 			std::string type = dest["type"].readVal<std::string>();
 			int id = dest["id"].readVal<int>();
 			bool found = false;
-			for (auto* xbase : save.getBases())
+			for (auto* xbase : save.bases())
 			{
 				for (auto* xcraft : xbase->getCrafts())
 				{

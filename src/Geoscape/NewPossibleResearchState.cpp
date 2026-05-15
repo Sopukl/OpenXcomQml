@@ -86,9 +86,9 @@ NewPossibleResearchState::NewPossibleResearchState(Base * base, const std::vecto
 			// Also ignore:
 			// 1. things that already popped before
 			// 2. things that never popped, but are researched already (can happen for topics that can be researched multiple times)
-			if (!_game->getSavedGame()->wasResearchPopped(rule) && !_game->getSavedGame()->isResearched(rule, false))
+			if (!_game->savedGame()->wasResearchPopped(rule) && !_game->savedGame()->isResearched(rule, false))
 			{
-				_game->getSavedGame()->addPoppedResearch(rule);
+				_game->savedGame()->addPoppedResearch(rule);
 				_lstPossibilities->addRow(1, ltr(rule->getName()).c_str());
 				foundNew = true;
 			}

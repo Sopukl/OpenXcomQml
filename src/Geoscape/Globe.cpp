@@ -351,9 +351,9 @@ Globe::Globe(Game* game, int cenX, int cenY, int width, int height, int x, int y
 	_rotTimer = new Timer(10);
 	_rotTimer->onTimer((SurfaceHandler)&Globe::rotate);
 
-	_cenLon = _game->getSavedGame()->getGlobeLongitude();
-	_cenLat = _game->getSavedGame()->getGlobeLatitude();
-	_zoom = _game->getSavedGame()->getGlobeZoom();
+	_cenLon = _game->savedGame()->getGlobeLongitude();
+	_cenLat = _game->savedGame()->getGlobeLatitude();
+	_zoom = _game->savedGame()->getGlobeZoom();
 	_zoomOld = _zoom;
 
 	setupRadii(width, height);
@@ -576,7 +576,7 @@ void Globe::setZoom(size_t zoom)
 	_zoom = Clamp(zoom, (size_t)0u, _zoomRadius.size() - 1);
 	_zoomTexture = (2 - (int)floor(_zoom / 2.0)) * (_texture->getTotalFrames() / 3);
 	_radius = _zoomRadius[_zoom];
-	_game->getSavedGame()->setGlobeZoom(_zoom);
+	_game->savedGame()->setGlobeZoom(_zoom);
 	if (_isMouseScrolling)
 	{
 		_lonBeforeMouseScrolling = _cenLon;
@@ -698,8 +698,8 @@ void Globe::center(double lon, double lat)
 {
 	_cenLon = lon;
 	_cenLat = lat;
-	_game->getSavedGame()->setGlobeLongitude(_cenLon);
-	_game->getSavedGame()->setGlobeLatitude(_cenLat);
+	_game->savedGame()->setGlobeLongitude(_cenLon);
+	_game->savedGame()->setGlobeLatitude(_cenLat);
 	invalidate();
 }
 
@@ -788,7 +788,7 @@ std::vector<Target*> Globe::getTargets(int x, int y, bool craft, Craft *currentC
 	qDebug() << "Globe::getTargets " << x << y;
 	std::vector<Target*> v;
 	{
-		for (auto* xbase : _game->getSavedGame()->getBases())
+		for (auto* xbase : _game->savedGame()->bases())
 		{
 			if (xbase->getLongitude() == 0.0 && xbase->getLatitude() == 0.0)
 				continue;
@@ -812,7 +812,7 @@ std::vector<Target*> Globe::getTargets(int x, int y, bool craft, Craft *currentC
 			}
 		}
 	}
-	for (auto* ufo : _game->getSavedGame()->getUfos())
+	for (auto* ufo : _game->savedGame()->getUfos())
 	{
 		if (!ufo->getDetected() || ufo->getStatus() == Ufo::IGNORE_ME)
 			continue;
@@ -822,21 +822,21 @@ std::vector<Target*> Globe::getTargets(int x, int y, bool craft, Craft *currentC
 			v.push_back(ufo);
 		}
 	}
-	for (auto* wp : _game->getSavedGame()->getWaypoints())
+	for (auto* wp : _game->savedGame()->getWaypoints())
 	{
 		if (targetNear(wp, x, y))
 		{
 			v.push_back(wp);
 		}
 	}
-	for (auto* site : _game->getSavedGame()->getMissionSites())
+	for (auto* site : _game->savedGame()->getMissionSites())
 	{
 		if (targetNear(site, x, y))
 		{
 			v.push_back(site);
 		}
 	}
-	for (auto* ab : *_game->getSavedGame()->getAlienBases())
+	for (auto* ab : *_game->savedGame()->getAlienBases())
 	{
 		if (!ab->isDiscovered())
 		{
@@ -952,8 +952,8 @@ void Globe::rotate()
 {
 	_cenLon += _rotLon * ((110 - options1.geoScrollSpeed()) / 100.0) / (_zoom+1);
 	_cenLat += _rotLat * ((110 - options1.geoScrollSpeed()) / 100.0) / (_zoom+1);
-	_game->getSavedGame()->setGlobeLongitude(_cenLon);
-	_game->getSavedGame()->setGlobeLatitude(_cenLat);
+	_game->savedGame()->setGlobeLongitude(_cenLon);
+	_game->savedGame()->setGlobeLatitude(_cenLat);
 	invalidate();
 }
 
@@ -1021,7 +1021,7 @@ void Globe::drawLand()
  */
 Cord Globe::getSunDirection(double lon, double lat) const
 {
-	const double curTime = _game->getSavedGame()->getTime()->getDaylight();
+	const double curTime = _game->savedGame()->getTime()->getDaylight();
 	const double rot = curTime * 2*M_PI;
 	double sun;
 
@@ -1030,13 +1030,13 @@ Cord Globe::getSunDirection(double lon, double lat) const
 		const int MonthDays1[] = {0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334, 365};
 		const int MonthDays2[] = {0, 31, 60, 91, 121, 152, 182, 213, 244, 274, 305, 335, 366};
 
-		int year=_game->getSavedGame()->getTime()->getYear();
-		int month=_game->getSavedGame()->getTime()->getMonth()-1;
-		int day=_game->getSavedGame()->getTime()->getDay()-1;
+		int year=_game->savedGame()->getTime()->getYear();
+		int month=_game->savedGame()->getTime()->getMonth()-1;
+		int day=_game->savedGame()->getTime()->getDay()-1;
 
-		double tm = (double)(( _game->getSavedGame()->getTime()->getHour() * 60
-			+ _game->getSavedGame()->getTime()->getMinute() ) * 60
-			+ _game->getSavedGame()->getTime()->getSecond() ) / 86400; //day fraction is also taken into account
+		double tm = (double)(( _game->savedGame()->getTime()->getHour() * 60
+			+ _game->savedGame()->getTime()->getMinute() ) * 60
+			+ _game->savedGame()->getTime()->getSecond() ) / 86400; //day fraction is also taken into account
 
 		double CurDay;
 		if (year%4 == 0 && !(year%100 == 0 && year%400 != 0))
@@ -1197,7 +1197,7 @@ void Globe::drawRadars()
 	}
 
 	// Draw radars around bases
-	for (auto* xbase : _game->getSavedGame()->getBases())
+	for (auto* xbase : _game->savedGame()->bases())
 	{
 		lat = xbase->getLatitude();
 		lon = xbase->getLongitude();
@@ -1243,7 +1243,7 @@ void Globe::drawRadars()
 	if (_game->getMod()->getDrawEnemyRadarCircles() > 0)
 	{
 		// Draw radars around UFO hunter-killers
-		for (auto* ufo : _game->getSavedGame()->getUfos())
+		for (auto* ufo : _game->savedGame()->getUfos())
 		{
 			if (ufo->isHunterKiller() && ufo->getDetected() && ufo->getStatus() != Ufo::IGNORE_ME)
 			{
@@ -1260,7 +1260,7 @@ void Globe::drawRadars()
 		}
 
 		// Draw radars around alien bases
-		for (auto* ab : *_game->getSavedGame()->getAlienBases())
+		for (auto* ab : *_game->savedGame()->getAlienBases())
 		{
 			if (ab->getDeployment()->getBaseDetectionRange() > 0 && ab->isDiscovered())
 			{
@@ -1403,7 +1403,7 @@ void Globe::drawDetail()
 		label->setAlign(ALIGN_CENTER);
 
 		Sint16 x, y;
-		for (auto* country : *_game->getSavedGame()->getCountries())
+		for (auto* country : *_game->savedGame()->getCountries())
 		{
 			// Don't draw if label is facing back
 			if (pointBack(country->getRules()->getLabelLongitude(), country->getRules()->getLabelLatitude()))
@@ -1470,7 +1470,7 @@ void Globe::drawDetail()
 		label->setColor(CITY_LABEL_COLOR);
 
 		Sint16 x, y;
-		for (auto* region : _game->getSavedGame()->getRegions())
+		for (auto* region : _game->savedGame()->getRegions())
 		{
 			for (auto* city : *region->getRules()->getCities())
 			{
@@ -1490,7 +1490,7 @@ void Globe::drawDetail()
 			}
 		}
 		// Draw bases names
-		for (auto* xbase : _game->getSavedGame()->getBases())
+		for (auto* xbase : _game->savedGame()->bases())
 		{
 			if (xbase->getMarker() == -1 || pointBack(xbase->getLongitude(), xbase->getLatitude()))
 				continue;
@@ -1505,18 +1505,18 @@ void Globe::drawDetail()
 		delete label;
 	}
 
-	int& debugType = _game->getSavedGame()->debugType;
+	int& debugType = _game->savedGame()->debugType;
 	static bool canSwitchDebugType = false;
-	if (_game->getSavedGame()->getDebugMode())
+	if (_game->savedGame()->getDebugMode())
 	{
 		int color;
 		canSwitchDebugType = true;
 		if (debugType == 0)
 		{
 			color = 0;
-			for (auto* country : *_game->getSavedGame()->getCountries())
+			for (auto* country : *_game->savedGame()->getCountries())
 			{
-				if (_game->getSavedGame()->debugCountry && _game->getSavedGame()->debugCountry != country)
+				if (_game->savedGame()->debugCountry && _game->savedGame()->debugCountry != country)
 					continue;
 
 				color += 10;
@@ -1537,9 +1537,9 @@ void Globe::drawDetail()
 		else if (debugType == 1)
 		{
 			color = 0;
-			for (auto* region : _game->getSavedGame()->getRegions())
+			for (auto* region : _game->savedGame()->getRegions())
 			{
-				if (_game->getSavedGame()->debugRegion && _game->getSavedGame()->debugRegion != region)
+				if (_game->savedGame()->debugRegion && _game->savedGame()->debugRegion != region)
 					continue;
 
 				color += 10;
@@ -1559,9 +1559,9 @@ void Globe::drawDetail()
 		}
 		else if (debugType == 2)
 		{
-			for (auto* region : _game->getSavedGame()->getRegions())
+			for (auto* region : _game->savedGame()->getRegions())
 			{
-				if (_game->getSavedGame()->debugRegion && _game->getSavedGame()->debugRegion != region)
+				if (_game->savedGame()->debugRegion && _game->savedGame()->debugRegion != region)
 					continue;
 
 				color = -1;
@@ -1569,7 +1569,7 @@ void Globe::drawDetail()
 				for (const auto& missionZone : region->getRules()->getMissionZones())
 				{
 					++zoneNumber;
-					if (_game->getSavedGame()->debugZone > 0 && _game->getSavedGame()->debugZone != zoneNumber)
+					if (_game->savedGame()->debugZone > 0 && _game->savedGame()->debugZone != zoneNumber)
 						continue;
 
 					color += 2;
@@ -1577,7 +1577,7 @@ void Globe::drawDetail()
 					for (const auto& missionArea : missionZone.areas)
 					{
 						++areaNumber;
-						if (_game->getSavedGame()->debugArea > 0 && _game->getSavedGame()->debugArea != areaNumber)
+						if (_game->savedGame()->debugArea > 0 && _game->savedGame()->debugArea != areaNumber)
 							continue;
 
 						double lon2 = missionArea.lonMax;
@@ -1657,7 +1657,7 @@ void Globe::drawFlights()
 	_radars->lock();
 
 	// Draw the craft flight paths
-	for (auto* xbase : _game->getSavedGame()->getBases())
+	for (auto* xbase : _game->savedGame()->bases())
 	{
 		for (auto* xcraft : xbase->getCrafts())
 		{
@@ -1688,9 +1688,9 @@ void Globe::drawFlights()
 	}
 
 	// Draw the hunting UFO flight paths
-	for (auto* ufo : _game->getSavedGame()->getUfos())
+	for (auto* ufo : _game->savedGame()->getUfos())
 	{
-		if (ufo->getDestination() && (ufo->isHunting() || _game->getSavedGame()->getDebugMode()) && ufo->getDetected() && ufo->getStatus() != Ufo::IGNORE_ME)
+		if (ufo->getDestination() && (ufo->isHunting() || _game->savedGame()->getDebugMode()) && ufo->getDetected() && ufo->getStatus() != Ufo::IGNORE_ME)
 		{
 			double lon1 = ufo->getLongitude();
 			double lon2 = ufo->getDestination()->getLongitude();
@@ -1760,38 +1760,38 @@ void Globe::drawMarkers()
 	_markers->clear();
 	_markers->lock();
 	// Draw the base markers
-	for (auto* xbase : _game->getSavedGame()->getBases())
+	for (auto* xbase : _game->savedGame()->bases())
 	{
 		drawTarget(xbase, _markers);
 	}
 
 	// Draw the waypoint markers
-	for (auto* wp : _game->getSavedGame()->getWaypoints())
+	for (auto* wp : _game->savedGame()->getWaypoints())
 	{
 		drawTarget(wp, _markers);
 	}
 
 	// Draw the mission site markers
-	for (auto* site : _game->getSavedGame()->getMissionSites())
+	for (auto* site : _game->savedGame()->getMissionSites())
 	{
 		drawTarget(site, _markers);
 	}
 
 	// Draw the alien base markers
-	for (auto* ab : *_game->getSavedGame()->getAlienBases())
+	for (auto* ab : *_game->savedGame()->getAlienBases())
 	{
 		drawTarget(ab, _markers);
 	}
 
 	// Draw the UFO markers
-	for (auto* ufo : _game->getSavedGame()->getUfos())
+	for (auto* ufo : _game->savedGame()->getUfos())
 	{
 		if (ufo->getStatus() == Ufo::IGNORE_ME) continue;
 		drawTarget(ufo, _markers);
 	}
 
 	// Draw the craft markers
-	for (auto* xbase : _game->getSavedGame()->getBases())
+	for (auto* xbase : _game->savedGame()->bases())
 	{
 		for (auto* xcraft : xbase->getCrafts())
 		{

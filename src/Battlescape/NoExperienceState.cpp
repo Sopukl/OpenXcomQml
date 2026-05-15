@@ -46,7 +46,7 @@ NoExperienceState::NoExperienceState()
 	_lstSoldiers = new TextList(180, 96, 65, 52);
 
 	// Set palette
-	_game->getSavedGame()->getSavedBattle()->setPaletteByDepth(this);
+	_game->savedGame()->getSavedBattle()->setPaletteByDepth(this);
 
 	add(_window, "messageWindowBorder", "battlescape");
 	add(_txtTitle, "messageWindows", "battlescape");
@@ -78,7 +78,7 @@ NoExperienceState::NoExperienceState()
 	_lstSoldiers->setWordWrap(true);
 
 	size_t row = 0;
-	for (auto* bu : *_game->getSavedGame()->getSavedBattle()->getUnits())
+	for (auto* bu : *_game->savedGame()->getSavedBattle()->getUnits())
 	{
 		if (bu->getOriginalFaction() == FACTION_PLAYER && !bu->isOut())
 		{

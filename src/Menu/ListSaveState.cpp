@@ -40,7 +40,7 @@ ListSaveState::ListSaveState(OptionsOrigin origin) : ListGamesState(origin, 1, f
 {
 	// Create objects
 	_edtSave = new TextEdit(this, 168, 9, 0, 0);
-	_btnSaveGame = new TextButton(_game->getSavedGame()->isIronman() ? 200 : 80, 16, 60, 172);
+	_btnSaveGame = new TextButton(_game->savedGame()->isIronman() ? 200 : 80, 16, 60, 172);
 
 	add(_edtSave);
 	add(_btnSaveGame, "button", "saveMenus");
@@ -48,7 +48,7 @@ ListSaveState::ListSaveState(OptionsOrigin origin) : ListGamesState(origin, 1, f
 	// Set up objects
 	_txtTitle->setText(ltr("STR_SELECT_SAVE_POSITION"));
 
-	if (_game->getSavedGame()->isIronman())
+	if (_game->savedGame()->isIronman())
 	{
 		_btnCancel->setVisible(false);
 	}
@@ -167,7 +167,7 @@ void ListSaveState::btnSaveGameClick(Action *)
  */
 void ListSaveState::saveGame()
 {
-	_game->getSavedGame()->setName(_edtSave->getText());
+	_game->savedGame()->setName(_edtSave->getText());
 	std::string oldFilename, newFilename;
 	newFilename = CrossPlatform::sanitizeFilename(_edtSave->getText());
 	if (_selectedRow > 0)

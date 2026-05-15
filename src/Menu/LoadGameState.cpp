@@ -105,9 +105,9 @@ void LoadGameState::buildUi(SDL_Color *palette)
 	{
 		add(_txtStatus, "textLoad", "battlescape");
 		_txtStatus->setHighContrast(true);
-		if (_game->getSavedGame()->getSavedBattle()->getAmbientSound() != Mod::NO_SOUND)
+		if (_game->savedGame()->getSavedBattle()->getAmbientSound() != Mod::NO_SOUND)
 		{
-			_game->getMod()->getSoundByDepth(0, _game->getSavedGame()->getSavedBattle()->getAmbientSound())->stopLoop();
+			_game->getMod()->getSoundByDepth(0, _game->savedGame()->getSavedBattle()->getAmbientSound())->stopLoop();
 		}
 	}
 	else
@@ -154,9 +154,9 @@ void LoadGameState::think()
 
 		// Remember for later (palette reset)
 		BattlescapeState *origBattleState = 0;
-		if (_game->getSavedGame() != 0 && _game->getSavedGame()->getSavedBattle() != 0)
+		if (_game->savedGame() != 0 && _game->savedGame()->getSavedBattle() != 0)
 		{
-			origBattleState = _game->getSavedGame()->getSavedBattle()->getBattleState();
+			origBattleState = _game->savedGame()->getSavedBattle()->getBattleState();
 		}
 
 		// Reset touch flags
@@ -168,7 +168,7 @@ void LoadGameState::think()
 		{
 			s->load(_filename, _game->getMod(), _game->getLanguage());
 			_game->setSavedGame(s);
-			if (_game->getSavedGame()->getEnding() != END_NONE)
+			if (_game->savedGame()->getEnding() != END_NONE)
 			{
 				options1.baseXResolution = Screen::ORIGINAL_WIDTH;
 				options1.baseYResolution = Screen::ORIGINAL_HEIGHT;
@@ -186,15 +186,15 @@ void LoadGameState::think()
 					origBattleState->resetPalettes();
 				}
 				_game->setState(new GeoscapeState);
-				if (_game->getSavedGame()->getSavedBattle() != 0)
+				if (_game->savedGame()->getSavedBattle() != 0)
 				{
-					_game->getSavedGame()->getSavedBattle()->loadMapResources(_game->getMod());
+					_game->savedGame()->getSavedBattle()->loadMapResources(_game->getMod());
 					options1.baseXResolution = options1.baseXBattlescape;
 					options1.baseYResolution = options1.baseYBattlescape;
 					_game->getScreen()->resetDisplay(false);
 					BattlescapeState *bs = new BattlescapeState;
 					_game->pushState(bs);
-					_game->getSavedGame()->getSavedBattle()->setBattleState(bs);
+					_game->savedGame()->getSavedBattle()->setBattleState(bs);
 					// Try to reactivate the touch buttons
 					bs->toggleTouchButtons(false, true);
 				}
@@ -236,7 +236,7 @@ void LoadGameState::error(const std::string &msg, SavedGame *save)
 	else
 		_game->pushState(new ErrorMessageState(error.str(), _palette, _game->getMod()->getInterface("errorMessages")->getElement("battlescapeColor")->color, "TAC00.SCR", _game->getMod()->getInterface("errorMessages")->getElement("battlescapePalette")->color));
 
-	if (_game->getSavedGame() == save)
+	if (_game->savedGame() == save)
 		_game->setSavedGame(0);
 	else
 		delete save;

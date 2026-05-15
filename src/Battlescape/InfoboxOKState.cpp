@@ -44,7 +44,7 @@ InfoboxOKState::InfoboxOKState(const std::string &msg)
 	_txtTitle = new Text(255, 61, 33, 51);
 
 	// Set palette
-	_game->getSavedGame()->getSavedBattle()->setPaletteByDepth(this);
+	_game->savedGame()->getSavedBattle()->setPaletteByDepth(this);
 
 	add(_frame, "infoBoxOK", "battlescape");
 	add(_btnOk, "infoBoxOKButton", "battlescape");

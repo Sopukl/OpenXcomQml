@@ -143,14 +143,14 @@ namespace OpenXcom
 	{
 		// change status
 		const std::string rule = _filtered_article_list[_lstSelection->getSelectedRow()]->id;
-		int oldState = _game->getSavedGame()->getUfopediaRuleStatus(rule);
+		int oldState = _game->savedGame()->getUfopediaRuleStatus(rule);
 		int newState = (oldState + 1) % ArticleDefinition::PEDIA_STATUSES;
 		if (!options1.oxceHighlightNewTopics())
 		{
 			// only switch between hidden and not hidden
 			newState = (oldState == ArticleDefinition::PEDIA_STATUS_HIDDEN) ? ArticleDefinition::PEDIA_STATUS_NORMAL : ArticleDefinition::PEDIA_STATUS_HIDDEN;
 		}
-		_game->getSavedGame()->setUfopediaRuleStatus(rule, newState);
+		_game->savedGame()->setUfopediaRuleStatus(rule, newState);
 
 		if (newState == ArticleDefinition::PEDIA_STATUS_HIDDEN)
 		{
@@ -219,7 +219,7 @@ namespace OpenXcom
 
 		_lstSelection->clearList();
 		_article_list.clear();
-		Ufopaedia::list(_game->getSavedGame(), _game->getMod(), _section, _article_list);
+		Ufopaedia::list(_game->savedGame(), _game->getMod(), _section, _article_list);
 		_filtered_article_list.clear();
 		size_t selectedFilter = _cbxFilter->getSelected();
 
@@ -228,7 +228,7 @@ namespace OpenXcom
 		int ruleStatus = 0;
 		for (auto* articleDef : _article_list)
 		{
-			ruleStatus = _game->getSavedGame()->getUfopediaRuleStatus(articleDef->id);
+			ruleStatus = _game->savedGame()->getUfopediaRuleStatus(articleDef->id);
 
 			// filter
 			if (selectedFilter == 0)
@@ -249,7 +249,7 @@ namespace OpenXcom
 			{
 				if (_isCommendationsSection)
 				{
-					if (Ufopaedia::isAwardedCommendation(_game->getSavedGame(), articleDef))
+					if (Ufopaedia::isAwardedCommendation(_game->savedGame(), articleDef))
 					{
 						continue;
 					}
@@ -280,7 +280,7 @@ namespace OpenXcom
 			if (markAllAsSeen)
 			{
 				// remember all listed articles as seen/normal
-				_game->getSavedGame()->setUfopediaRuleStatus(articleDef->id, ArticleDefinition::PEDIA_STATUS_NORMAL);
+				_game->savedGame()->setUfopediaRuleStatus(articleDef->id, ArticleDefinition::PEDIA_STATUS_NORMAL);
 			}
 			else
 			{

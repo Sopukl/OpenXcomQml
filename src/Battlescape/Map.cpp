@@ -143,7 +143,7 @@ Map::Map(Game *game, int width, int height, int x, int y, int visibleMapHeight) 
 	_previewSettingTu     = previewSetting & PATH_TU_COST;
 	_previewSettingEnergy = previewSetting & PATH_ENERGY_COST;
 
-	_save = _game->getSavedGame()->getSavedBattle();
+	_save = _game->savedGame()->getSavedBattle();
 	if ((int)(_game->getMod()->getLUTs()->size()) > _save->getDepth())
 	{
 		_transparencies = &_game->getMod()->getLUTs()->at(_save->getDepth());
@@ -185,7 +185,7 @@ Map::Map(Game *game, int width, int height, int x, int y, int visibleMapHeight) 
 	if (options1.oxceToggleNightVisionType() == 2)
 	{
 		// persisted per campaign
-		_nightVisionOn = _game->getSavedGame()->getToggleNightVision();
+		_nightVisionOn = _game->savedGame()->getToggleNightVision();
 	}
 	else if (options1.oxceToggleNightVisionType() == 1)
 	{
@@ -197,7 +197,7 @@ Map::Map(Game *game, int width, int height, int x, int y, int visibleMapHeight) 
 	if (options1.oxceToggleBrightnessType() == 2)
 	{
 		// persisted per campaign
-		_debugVisionMode = _game->getSavedGame()->getToggleBrightness();
+		_debugVisionMode = _game->savedGame()->getToggleBrightness();
 	}
 	else if (options1.oxceToggleBrightnessType() == 1)
 	{
@@ -1454,7 +1454,7 @@ void Map::drawTerrain(Surface *surface)
 									if (_cacheActiveWeaponUfopediaArticleUnlocked == -1)
 									{
 										_cacheActiveWeaponUfopediaArticleUnlocked = 0;
-										if (_game->getSavedGame()->getMonthsPassed() == -1)
+										if (_game->savedGame()->getMonthsPassed() == -1)
 										{
 											_cacheActiveWeaponUfopediaArticleUnlocked = 1; // new battle mode
 										}
@@ -1462,14 +1462,14 @@ void Map::drawTerrain(Surface *surface)
 										{
 											_cacheActiveWeaponUfopediaArticleUnlocked = 1; // assume unlocked
 											ArticleDefinition *article = _game->getMod()->getUfopaediaArticle(rule->getType(), false);
-											if (article && !Ufopaedia::isArticleAvailable(_game->getSavedGame(), article))
+											if (article && !Ufopaedia::isArticleAvailable(_game->savedGame(), article))
 											{
 												_cacheActiveWeaponUfopediaArticleUnlocked = 0; // ammo/weapon locked
 											}
 											if (rule->getType() != weapon->getType())
 											{
 												article = _game->getMod()->getUfopaediaArticle(weapon->getType(), false);
-												if (article && !Ufopaedia::isArticleAvailable(_game->getSavedGame(), article))
+												if (article && !Ufopaedia::isArticleAvailable(_game->savedGame(), article))
 												{
 													_cacheActiveWeaponUfopediaArticleUnlocked = 0; // weapon locked
 												}
@@ -1899,7 +1899,7 @@ void Map::persistToggles()
 	if (options1.oxceToggleNightVisionType() == 2)
 	{
 		// persisted per campaign
-		_game->getSavedGame()->setToggleNightVision(_nightVisionOn);
+		_game->savedGame()->setToggleNightVision(_nightVisionOn);
 	}
 	else if (options1.oxceToggleNightVisionType() == 1)
 	{
@@ -1910,7 +1910,7 @@ void Map::persistToggles()
 	if (options1.oxceToggleBrightnessType() == 2)
 	{
 		// persisted per campaign
-		_game->getSavedGame()->setToggleBrightness(_debugVisionMode);
+		_game->savedGame()->setToggleBrightness(_debugVisionMode);
 	}
 	else if (options1.oxceToggleBrightnessType() == 1)
 	{

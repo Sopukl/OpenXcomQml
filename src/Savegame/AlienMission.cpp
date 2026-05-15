@@ -176,7 +176,7 @@ void AlienMission::think(Game &engine, const Globe &globe)
 	}
 
 	const Mod &mod = *engine.getMod();
-	SavedGame &game = *engine.getSavedGame();
+	SavedGame &game = *engine.savedGame();
 	if (_nextWave >= _rule.getWaveCount())
 		return;
 	if (_spawnCountdown > 30)
@@ -414,7 +414,7 @@ void AlienMission::think(Game &engine, const Globe &globe)
 Base* AlienMission::selectXcomBase(SavedGame& game, const RuleRegion& regionRules)
 {
 	std::vector<Base*> validxcombases;
-	for (auto* xb : game.getBases())
+	for (auto* xb : game.bases())
 	{
 		if (regionRules.insideRegion(xb->getLongitude(), xb->getLatitude()))
 		{
@@ -512,7 +512,7 @@ Ufo *AlienMission::spawnUfo(SavedGame &game, const Mod &mod, const Globe &globe,
 		// skip the scouting phase of a retaliation mission
 		if (_rule.skipScoutingPhase() && _rule.getObjective() == OBJECTIVE_RETALIATION)
 		{
-			for (auto* xbase : game.getBases())
+			for (auto* xbase : game.bases())
 			{
 				if (regionRules.insideRegion(xbase->getLongitude(), xbase->getLatitude()))
 				{
@@ -735,7 +735,7 @@ void AlienMission::start(Game &engine, const Globe &globe, size_t initialCount)
 	if (_rule.getOperationType() != AMOT_SPACE && !_base)
 	{
 		const Mod &mod = *engine.getMod();
-		SavedGame &game = *engine.getSavedGame();
+		SavedGame &game = *engine.savedGame();
 
 		std::vector<AlienBase*> possibilities;
 		if (_rule.getOperationType() == AMOT_REGION_NEW_BASE)
@@ -850,7 +850,7 @@ void AlienMission::ufoReachedWaypoint(Ufo &ufo, Game &engine, const Globe &globe
 	}
 
 	const Mod &mod = *engine.getMod();
-	SavedGame &game = *engine.getSavedGame();
+	SavedGame &game = *engine.savedGame();
 	const size_t curWaypoint = ufo.getTrajectoryPoint();
 	const size_t nextWaypoint = curWaypoint + 1;
 	const UfoTrajectory &trajectory = ufo.getTrajectory();
@@ -937,7 +937,7 @@ void AlienMission::ufoReachedWaypoint(Ufo &ufo, Game &engine, const Globe &globe
 			// Remove UFO, replace with Base defense.
 			ufo.setDetected(false);
 			Base* found = nullptr;
-			for (auto* xbase : game.getBases())
+			for (auto* xbase : game.bases())
 			{
 				if (AreSame(xbase->getLongitude(), ufo.getLongitude()) && AreSame(xbase->getLatitude(), ufo.getLatitude()))
 				{
@@ -977,7 +977,7 @@ void AlienMission::ufoReachedWaypoint(Ufo &ufo, Game &engine, const Globe &globe
 				ufo.setSecondsRemaining(trajectory.groundTimer() * 5);
 				if (ufo.getDetected() && ufo.getLandId() == 0)
 				{
-					ufo.setLandId(engine.getSavedGame()->getId("STR_LANDING_SITE"));
+					ufo.setLandId(engine.savedGame()->getId("STR_LANDING_SITE"));
 				}
 
 				// Many players wanted this over the years... you're welcome
@@ -1157,7 +1157,7 @@ void AlienMission::addScore(double lon, double lat, SavedGame &game) const
  */
 AlienBase *AlienMission::spawnAlienBase(Country *pactCountry, Game &engine, std::pair<double, double> pos, AlienDeployment *deployment)
 {
-	SavedGame &game = *engine.getSavedGame();
+	SavedGame &game = *engine.savedGame();
 	AlienBase *ab = new AlienBase(deployment, game.getMonthsPassed());
 	if (pactCountry)
 	{

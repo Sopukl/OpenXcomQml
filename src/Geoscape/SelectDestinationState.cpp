@@ -133,7 +133,7 @@ SelectDestinationState::SelectDestinationState(std::vector<Craft*> crafts, Globe
 		_crafts.front()->getFuelPercentage() < 100 ||
 		!_crafts.front()->getRules()->getSpacecraft() ||
 		(_game->getMod()->getFinalResearch() && // if not Research specified then we look only on `getSpacecraft`
-			!_game->getSavedGame()->isResearched(_game->getMod()->getFinalResearch())))
+			!_game->savedGame()->isResearched(_game->getMod()->getFinalResearch())))
 	{
 		_btnCydonia->setVisible(false);
 	}

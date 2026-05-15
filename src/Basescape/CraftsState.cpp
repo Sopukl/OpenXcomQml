@@ -153,7 +153,7 @@ void CraftsState::btnOkClick(Action *)
 {
 	_game->popState();
 
-	if (_game->getSavedGame()->getMonthsPassed() > -1 && options1.storageLimitsEnforced() && _base->storesOverfull())
+	if (_game->savedGame()->getMonthsPassed() > -1 && options1.storageLimitsEnforced() && _base->storesOverfull())
 	{
 		_game->pushState(new SellState(_base, 0));
 		_game->pushState(new ErrorMessageState(ltr("STR_STORAGE_EXCEEDED").arg(_base->getName()), _palette, _game->getMod()->getInterface("craftSelect")->getElement("errorMessage")->color, "BACK01.SCR", _game->getMod()->getInterface("craftSelect")->getElement("errorPalette")->color));

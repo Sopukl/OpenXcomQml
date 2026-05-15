@@ -137,12 +137,12 @@ namespace OpenXcom
 		alienArmor[SIDE_REAR] = civArmor[SIDE_REAR];
 		alienArmor[SIDE_UNDER] = civArmor[SIDE_UNDER];
 
-		if (_game->getSavedGame())
+		if (_game->savedGame())
 		{
 			if (defs->unit_mode != 1)
 			{
 				std::string diff;
-				switch (_game->getSavedGame()->getDifficulty())
+				switch (_game->savedGame()->getDifficulty())
 				{
 				case DIFF_SUPERHUMAN: diff = ltr("STR_5_SUPERHUMAN"); break;
 				case DIFF_GENIUS: diff = ltr("STR_4_GENIUS"); break;
@@ -154,7 +154,7 @@ namespace OpenXcom
 			}
 
 			// FACTION_HOSTILE scales with difficulty
-			auto* adjustment = _game->getMod()->getStatAdjustment(_game->getSavedGame()->getDifficulty());
+			auto* adjustment = _game->getMod()->getStatAdjustment(_game->savedGame()->getDifficulty());
 
 			alien += UnitStats::percent(alien, adjustment->statGrowth, adjustment->growthMultiplier);
 

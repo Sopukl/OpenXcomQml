@@ -334,12 +334,12 @@ void StatsForNerdsState::init()
 		_btnPreview->setVisible(false);
 		if (_typeId == UFOPAEDIA_TYPE_CRAFT || _typeId == UFOPAEDIA_TYPE_TFTD_CRAFT)
 		{
-			if (!_game->getSavedGame())
+			if (!_game->savedGame())
 			{
 				// how did we even get here?
 				return;
 			}
-			if (_game->getSavedGame()->getSavedBattle())
+			if (_game->savedGame()->getSavedBattle())
 			{
 				// there is already a battle going on, don't start another one
 				return;
@@ -353,7 +353,7 @@ void StatsForNerdsState::init()
 			RuleCraft* craftRule = _game->getMod()->getCraft(_topicId);
 			if (craftRule->isForNewBattle())
 			{
-				auto& data = _game->getSavedGame()->getCustomRuleCraftDeployments();
+				auto& data = _game->savedGame()->getCustomRuleCraftDeployments();
 				auto find = data.find(craftRule->getType());
 
 				// update the label to indicate presence of a saved deployment
@@ -383,7 +383,7 @@ void StatsForNerdsState::cbxAmmoSelect(Action *)
 			// perform same checks as in ArticleStateItem.cpp
 			const auto& ammoId = _filterOptions.at(selIdx);
 			auto* ammo_article = _game->getMod()->getUfopaediaArticle(ammoId, true);
-			if (Ufopaedia::isArticleAvailable(_game->getSavedGame(), ammo_article))
+			if (Ufopaedia::isArticleAvailable(_game->savedGame(), ammo_article))
 			{
 				auto* ammo_rule = _game->getMod()->getItem(ammoId, true);
 				_game->pushState(new StatsForNerdsState(UFOPAEDIA_TYPE_ITEM, ammo_rule->getType(), _btnIncludeDebug->getPressed(), _btnIncludeIds->getPressed(), _btnIncludeDefaults->getPressed()));
@@ -394,7 +394,7 @@ void StatsForNerdsState::cbxAmmoSelect(Action *)
 			// perform similar checks as above, but don't crash if article is not found
 			const auto& builtInItemId = _filterOptions.at(selIdx);
 			auto* builtInItem_article = _game->getMod()->getUfopaediaArticle(builtInItemId, false);
-			if (builtInItem_article && Ufopaedia::isArticleAvailable(_game->getSavedGame(), builtInItem_article))
+			if (builtInItem_article && Ufopaedia::isArticleAvailable(_game->savedGame(), builtInItem_article))
 			{
 				auto* builtInItem_rule = _game->getMod()->getItem(builtInItemId, true);
 				_game->pushState(new StatsForNerdsState(UFOPAEDIA_TYPE_ITEM, builtInItem_rule->getType(), _btnIncludeDebug->getPressed(), _btnIncludeIds->getPressed(), _btnIncludeDefaults->getPressed()));
@@ -439,7 +439,7 @@ void StatsForNerdsState::btnOkClick(Action *)
 void StatsForNerdsState::btnPreviewClick(Action *)
 {
 	const Mod* mod = _game->getMod();
-	SavedGame* save = _game->getSavedGame();
+	SavedGame* save = _game->savedGame();
 	Base* base = save->getPreviewBase();
 	if (!base)
 	{
@@ -505,7 +505,7 @@ void StatsForNerdsState::btnPreviewClick(Action *)
 	}
 
 	SavedBattleGame* bgame = new SavedBattleGame(_game->getMod(), _game->getLanguage(), true);
-	_game->getSavedGame()->setBattleGame(bgame);
+	_game->savedGame()->setBattleGame(bgame);
 	BattlescapeGenerator bgen = BattlescapeGenerator(_game);
 	bgame->setMissionType(c->getRules()->getCustomPreviewType());
 	bgame->setCraftForPreview(c);
@@ -691,7 +691,7 @@ void StatsForNerdsState::addHeading(const std::string &propertyName, const std::
 		if (addDifficulty)
 		{
 			std::string diff;
-			switch (_game->getSavedGame()->getDifficulty())
+			switch (_game->savedGame()->getDifficulty())
 			{
 				case DIFF_SUPERHUMAN: diff = ltr("STR_5_SUPERHUMAN"); break;
 				case DIFF_GENIUS: diff = ltr("STR_4_GENIUS"); break;
@@ -2254,7 +2254,7 @@ void StatsForNerdsState::initItemList()
 	addVectorOfRulesId(ss, itemRule->getSupportedInventorySections(), "supportedInventorySections");
 
 	addDouble(ss, itemRule->getSize(), "size");
-	if (_game->getSavedGame()->getBuyPriceCoefficient() == 100)
+	if (_game->savedGame()->getBuyPriceCoefficient() == 100)
 	{
 		addInteger(ss, itemRule->getBuyCost(), "costBuy", 0, true);
 	}
@@ -2262,7 +2262,7 @@ void StatsForNerdsState::initItemList()
 	{
 		addHeading("_calculatedValues", "STR_FOR_DIFFICULTY", true);
 		{
-			int adjustedCost = itemRule->getBuyCost() * _game->getSavedGame()->getBuyPriceCoefficient() / 100;
+			int adjustedCost = itemRule->getBuyCost() * _game->savedGame()->getBuyPriceCoefficient() / 100;
 			addInteger(ss, adjustedCost, "costBuy", 0, true);
 
 			endHeading();
@@ -2272,7 +2272,7 @@ void StatsForNerdsState::initItemList()
 	addInteger(ss, itemRule->getTransferTime(), "transferTime", 24);
 	addInteger(ss, itemRule->getMonthlySalary(), "monthlySalary", 0, true);
 	addInteger(ss, itemRule->getMonthlyMaintenance(), "monthlyMaintenance", 0, true);
-	if (_game->getSavedGame()->getSellPriceCoefficient() == 100)
+	if (_game->savedGame()->getSellPriceCoefficient() == 100)
 	{
 		addInteger(ss, itemRule->getSellCost(), "costSell", 0, true);
 	}
@@ -2280,14 +2280,14 @@ void StatsForNerdsState::initItemList()
 	{
 		addHeading("_calculatedValues", "STR_FOR_DIFFICULTY", true);
 		{
-			int adjustedCost = itemRule->getSellCost() * _game->getSavedGame()->getSellPriceCoefficient() / 100;
+			int adjustedCost = itemRule->getSellCost() * _game->savedGame()->getSellPriceCoefficient() / 100;
 			addInteger(ss, adjustedCost, "costSell", 0, true);
 
 			endHeading();
 		}
 	}
 
-	ModScript::scriptCallback<ModScript::StatsForNerdsItem>(itemRule, itemRule, this, _game->getSavedGame());
+	ModScript::scriptCallback<ModScript::StatsForNerdsItem>(itemRule, itemRule, this, _game->savedGame());
 
 	if (_showDebug)
 	{
@@ -2872,7 +2872,7 @@ void StatsForNerdsState::initArmorList()
 	addRule(ss, armorRule->getRequiredAward(), "requiresAward");
 	addRuleNamed(ss, armorRule->getRequiredBonus(), "requiresBonus");
 
-	ModScript::scriptCallback<ModScript::StatsForNerdsArmor>(armorRule, armorRule, this, _game->getSavedGame());
+	ModScript::scriptCallback<ModScript::StatsForNerdsArmor>(armorRule, armorRule, this, _game->savedGame());
 
 	if (_showDebug)
 	{
@@ -3529,7 +3529,7 @@ void StatsForNerdsState::initCraftList()
 		endHeading();
 	}
 
-	ModScript::scriptCallback<ModScript::StatsForNerdsCraft>(craftRule, craftRule, this, _game->getSavedGame());
+	ModScript::scriptCallback<ModScript::StatsForNerdsCraft>(craftRule, craftRule, this, _game->savedGame());
 
 	if (_showDebug)
 	{
@@ -3723,10 +3723,10 @@ void StatsForNerdsState::initUfoList()
 
 	addHeading("_calculatedValues", "STR_FOR_DIFFICULTY", true);
 	{
-		int escapeCountdown = ufoRule->getBreakOffTime() - 30 * _game->getSavedGame()->getDifficultyCoefficient();
+		int escapeCountdown = ufoRule->getBreakOffTime() - 30 * _game->savedGame()->getDifficultyCoefficient();
 		int escapeCountdownMax = escapeCountdown + ufoRule->getBreakOffTime();
 		{
-			int diff = _game->getSavedGame()->getDifficulty();
+			int diff = _game->savedGame()->getDifficulty();
 			auto& custom = _game->getMod()->getUfoEscapeCountdownCoefficients();
 			if (custom.size() > (size_t)diff)
 			{
@@ -3736,9 +3736,9 @@ void StatsForNerdsState::initUfoList()
 		}
 		addIntegerSeconds(ss, std::max(1, escapeCountdown), "_escapeCountdown", 0, std::max(1, escapeCountdownMax));
 
-		int fireCountdown = std::max(1, (ufoRule->getWeaponReload() - 2 * _game->getSavedGame()->getDifficultyCoefficient()));
+		int fireCountdown = std::max(1, (ufoRule->getWeaponReload() - 2 * _game->savedGame()->getDifficultyCoefficient()));
 		{
-			int diff = _game->getSavedGame()->getDifficulty();
+			int diff = _game->savedGame()->getDifficulty();
 			auto& custom = _game->getMod()->getUfoFiringRateCoefficients();
 			if (custom.size() > (size_t)diff)
 			{
@@ -3791,7 +3791,7 @@ void StatsForNerdsState::initUfoList()
 		}
 	}
 
-	ModScript::scriptCallback<ModScript::StatsForNerdsUfo>(ufoRule, ufoRule, this, _game->getSavedGame());
+	ModScript::scriptCallback<ModScript::StatsForNerdsUfo>(ufoRule, ufoRule, this, _game->savedGame());
 
 	if (_showDebug)
 	{

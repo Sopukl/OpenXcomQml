@@ -253,7 +253,7 @@ void AllocatePsiTrainingState::cbxSortByChange(Action *action)
 void AllocatePsiTrainingState::btnOkClick(Action *)
 {
 	// Note: statString updates are needed only because of the potential "psiTraining" attribute change
-	bool psiStrengthEval = (options1.psiStrengthEval() && _game->getSavedGame()->isResearched(_game->getMod()->getPsiRequirements()));
+	bool psiStrengthEval = (options1.psiStrengthEval() && _game->savedGame()->isResearched(_game->getMod()->getPsiRequirements()));
 	for (auto* soldier : _base->getSoldiers())
 	{
 		soldier->calcStatString(_game->getMod()->getStatStrings(), psiStrengthEval);
@@ -312,7 +312,7 @@ void AllocatePsiTrainingState::initList(size_t scrl)
 		std::ostringstream ssStr;
 		std::ostringstream ssSkl;
 		_soldiers.push_back(soldier);
-		if (soldier->getCurrentStats()->psiSkill > 0 || (options1.psiStrengthEval() && _game->getSavedGame()->isResearched(_game->getMod()->getPsiRequirements())))
+		if (soldier->getCurrentStats()->psiSkill > 0 || (options1.psiStrengthEval() && _game->savedGame()->isResearched(_game->getMod()->getPsiRequirements())))
 		{
 			ssStr << "   " << stats->psiStrength;
 			if (options1.allowPsiStrengthImprovement()) ssStr << "/+" << soldier->getPsiStrImprovement();

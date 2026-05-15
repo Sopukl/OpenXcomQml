@@ -125,8 +125,8 @@ BaseDestroyedState::BaseDestroyedState(Base *base, const Ufo* ufo, bool missiles
 	if (!am)
 	{
 		// backwards-compatibility
-		RuleRegion* regionRule = _game->getSavedGame()->getRegions().front()->getRules(); // wrong, but that's how it is in OXC
-		for (const auto* region : _game->getSavedGame()->getRegions())
+		RuleRegion* regionRule = _game->savedGame()->getRegions().front()->getRules(); // wrong, but that's how it is in OXC
+		for (const auto* region : _game->savedGame()->getRegions())
 		{
 			if (region->getRules()->insideRegion(_base->getLongitude(), _base->getLatitude()))
 			{
@@ -134,9 +134,9 @@ BaseDestroyedState::BaseDestroyedState(Base *base, const Ufo* ufo, bool missiles
 				break;
 			}
 		}
-		am = _game->getSavedGame()->findAlienMission(regionRule->getType(), OBJECTIVE_RETALIATION);
+		am = _game->savedGame()->findAlienMission(regionRule->getType(), OBJECTIVE_RETALIATION);
 	}
-	_game->getSavedGame()->deleteRetaliationMission(am, _base);
+	_game->savedGame()->deleteRetaliationMission(am, _base);
 }
 
 /**
@@ -156,7 +156,7 @@ void BaseDestroyedState::btnOkClick(Action *)
 
 	if (_partialDestruction)
 	{
-		if (_game->getSavedGame()->getMonthsPassed() > -1 && options1.storageLimitsEnforced() && _base != 0 && _base->storesOverfull())
+		if (_game->savedGame()->getMonthsPassed() > -1 && options1.storageLimitsEnforced() && _base != 0 && _base->storesOverfull())
 		{
 			_game->pushState(new SellState(_base, 0, OPT_BATTLESCAPE));
 			_game->pushState(new ErrorMessageState(ltr("STR_STORAGE_EXCEEDED").arg(_base->getName()), _palette, _game->getMod()->getInterface("debriefing")->getElement("errorMessage")->color, "BACK01.SCR", _game->getMod()->getInterface("debriefing")->getElement("errorPalette")->color));
@@ -166,14 +166,14 @@ void BaseDestroyedState::btnOkClick(Action *)
 		return;
 	}
 
-	for (auto xbaseIt = _game->getSavedGame()->getBases().begin(); xbaseIt != _game->getSavedGame()->getBases().end(); ++xbaseIt)
+	for (auto xbaseIt = _game->savedGame()->bases().begin(); xbaseIt != _game->savedGame()->bases().end(); ++xbaseIt)
 	{
 		Base* xbase = (*xbaseIt);
 		if (xbase == _base)
 		{
-			_game->getSavedGame()->stopHuntingXcomCrafts(xbase); // destroyed together with the base
+			_game->savedGame()->stopHuntingXcomCrafts(xbase); // destroyed together with the base
 			delete xbase;
-			_game->getSavedGame()->getBases().erase(xbaseIt);
+			_game->savedGame()->bases().erase(xbaseIt);
 			break;
 		}
 	}

@@ -71,14 +71,14 @@ namespace OpenXcom
  * @param game pointer to Game object.
  */
 BattlescapeGenerator::BattlescapeGenerator(Game *game) :
-	_game(game), _save(game->getSavedGame()->getSavedBattle()), _mod(_game->getMod()),
+	_game(game), _save(game->savedGame()->getSavedBattle()), _mod(_game->getMod()),
 	_craft(0), _craftRules(0), _ufo(0), _base(0), _mission(0), _alienBase(0), _terrain(0), _baseTerrain(0), _globeTerrain(0), _alternateTerrain(0),
 	_mapsize_x(0), _mapsize_y(0), _mapsize_z(0), _missionTexture(0), _globeTexture(0), _worldShade(0),
 	_unitSequence(0), _craftInventoryTile(0), _alienCustomDeploy(0), _alienCustomMission(0), _alienItemLevel(0), _ufoDamagePercentage(0),
 	_baseInventory(false), _generateFuel(true), _craftDeployed(false), _ufoDeployed(false), _craftZ(0), _craftPos(), _markAsReinforcementsBlock(0), _blocksToDo(0), _dummy(0)
 {
 	_allowAutoLoadout = !options1.disableAutoEquip();
-	if (_game->getSavedGame()->getDisableSoldierEquipment())
+	if (_game->savedGame()->getDisableSoldierEquipment())
 	{
 		_allowAutoLoadout = false;
 	}
@@ -409,7 +409,7 @@ void BattlescapeGenerator::nextStage()
 						if ((bi->getUnit() &&
 							(bi->getUnit()->getOriginalFaction() != FACTION_PLAYER ||
 							bi->getUnit()->getStatus() == STATUS_DEAD))
-							|| !_game->getSavedGame()->isResearched(bi->getRules()->getRequirements()))
+							|| !_game->savedGame()->isResearched(bi->getRules()->getRequirements()))
 						{
 							toContainer = takeHomeGuaranteed;
 						}
@@ -702,7 +702,7 @@ void BattlescapeGenerator::nextStage()
 
 	if (_alienRace.empty())
 	{
-		for (const auto* missionSite : _game->getSavedGame()->getMissionSites())
+		for (const auto* missionSite : _game->savedGame()->getMissionSites())
 		{
 			if (missionSite->isInBattlescape())
 			{
@@ -714,7 +714,7 @@ void BattlescapeGenerator::nextStage()
 
 	if (_alienRace.empty())
 	{
-		for (const auto* ab : *_game->getSavedGame()->getAlienBases())
+		for (const auto* ab : *_game->savedGame()->getAlienBases())
 		{
 			if (ab->isInBattlescape())
 			{
@@ -826,12 +826,12 @@ void BattlescapeGenerator::run()
 
 	{
 		int month;
-		if (_game->getSavedGame()->getMonthsPassed() != -1)
+		if (_game->savedGame()->getMonthsPassed() != -1)
 		{
 			month =
-			((size_t) _game->getSavedGame()->getMonthsPassed()) > _game->getMod()->getAlienItemLevels().size() - 1 ?  // if
+			((size_t) _game->savedGame()->getMonthsPassed()) > _game->getMod()->getAlienItemLevels().size() - 1 ?  // if
 			_game->getMod()->getAlienItemLevels().size() - 1 : // then
-			_game->getSavedGame()->getMonthsPassed() ;  // else
+			_game->savedGame()->getMonthsPassed() ;  // else
 		}
 		else
 		{
@@ -1046,7 +1046,7 @@ void BattlescapeGenerator::deployXCOM(const RuleStartingCondition* startingCondi
 			// we only add vehicles from the craft in new battle mode,
 			// otherwise the base's vehicle vector will already contain these
 			// due to the geoscape calling base->setupDefenses()
-			if (_game->getSavedGame()->getMonthsPassed() == -1)
+			if (_game->savedGame()->getMonthsPassed() == -1)
 			{
 				for (auto* craft : _base->getCrafts())
 				{
@@ -1112,7 +1112,7 @@ void BattlescapeGenerator::deployXCOM(const RuleStartingCondition* startingCondi
 				(_craft == 0 && (soldier->hasFullHealth() || soldier->canDefendBase()) && (soldier->getCraft() == 0 || soldier->getCraft()->getStatus() != "STR_OUT")))
 			{
 				// clear the soldier's equipment layout, we want to start fresh
-				if (_game->getSavedGame()->getDisableSoldierEquipment())
+				if (_game->savedGame()->getDisableSoldierEquipment())
 				{
 					soldier->clearEquipmentLayout();
 				}
@@ -1173,7 +1173,7 @@ void BattlescapeGenerator::deployXCOM(const RuleStartingCondition* startingCondi
 				(_craft == 0 && (soldier->hasFullHealth() || soldier->canDefendBase()) && (soldier->getCraft() == 0 || soldier->getCraft()->getStatus() != "STR_OUT")))
 			{
 				// clear the soldier's equipment layout, we want to start fresh
-				if (_game->getSavedGame()->getDisableSoldierEquipment())
+				if (_game->savedGame()->getDisableSoldierEquipment())
 				{
 					soldier->clearEquipmentLayout();
 				}
@@ -1185,7 +1185,7 @@ void BattlescapeGenerator::deployXCOM(const RuleStartingCondition* startingCondi
 	}
 
 	// job's done
-	_game->getSavedGame()->setDisableSoldierEquipment(false);
+	_game->savedGame()->setDisableSoldierEquipment(false);
 
 	// Corner case: the base has some soldiers, but nowhere to spawn them (e.g. after a previous base defense destroyed everything but access lift)
 	if (_save->getUnits()->empty() && _save->getMissionType() == "STR_BASE_DEFENSE")
@@ -1249,7 +1249,7 @@ void BattlescapeGenerator::deployXCOM(const RuleStartingCondition* startingCondi
 	else
 	{
 		// only use the items in the craft in new battle mode.
-		if (_game->getSavedGame()->getMonthsPassed() != -1)
+		if (_game->savedGame()->getMonthsPassed() != -1)
 		{
 			// add items that are in the base
 			for (auto i = _base->getStorageItems().getContents()->begin(); i != _base->getStorageItems().getContents()->end();)
@@ -1264,7 +1264,7 @@ void BattlescapeGenerator::deployXCOM(const RuleStartingCondition* startingCondi
 					// in some cases we forbid some items from craft but still allow them in base defense if normally they were available.
 					(rule->isUsefulBattlescapeItem() || rule->canBeEquippedToCraftInventory()) &&
 					// we know how to use this item
-					_game->getSavedGame()->isResearched(rule->getRequirements()))
+					_game->savedGame()->isResearched(rule->getRequirements()))
 				{
 					for (int count = 0; count < i->second; count++)
 					{
@@ -1673,7 +1673,7 @@ void BattlescapeGenerator::deployAliens(const AlienDeployment *deployment)
 {
 	// race defined by deployment if there is one.
 	std::string tmpRace = deployment->getRace();
-	if (!tmpRace.empty() && _game->getSavedGame()->getMonthsPassed() > -1)
+	if (!tmpRace.empty() && _game->savedGame()->getMonthsPassed() > -1)
 	{
 		_alienRace = tmpRace;
 	}
@@ -1700,7 +1700,7 @@ void BattlescapeGenerator::deployAliens(const AlienDeployment *deployment)
 	{
 		int quantity;
 
-		switch (_game->getSavedGame()->getDifficulty())
+		switch (_game->savedGame()->getDifficulty())
 		{
 		case DIFF_BEGINNER:
 			quantity = dd.lowQty;
@@ -1809,9 +1809,9 @@ BattleUnit *BattlescapeGenerator::addAlien(Unit *rules, int alienRank, bool outs
 			node = _save->getSpawnNode(Node::nodeRank[alienRank][i], unit);
 	}
 
-	int aliensFacingCraftOdds = 20 * _game->getSavedGame()->getDifficultyCoefficient();
+	int aliensFacingCraftOdds = 20 * _game->savedGame()->getDifficultyCoefficient();
 	{
-		int diff = _game->getSavedGame()->getDifficulty();
+		int diff = _game->savedGame()->getDifficulty();
 		auto& custom = _game->getMod()->getAliensFacingCraftOdds();
 		if (custom.size() > (size_t)diff)
 		{
@@ -1824,7 +1824,7 @@ BattleUnit *BattlescapeGenerator::addAlien(Unit *rules, int alienRank, bool outs
 		unit->getAIModule()->setStartNode(node);
 		unit->setRankInt(alienRank);
 		int dir = _save->getTileEngine()->faceWindow(node->getPosition());
-		Position craft = _game->getSavedGame()->getSavedBattle()->getUnits()->at(0)->getPosition();
+		Position craft = _game->savedGame()->getSavedBattle()->getUnits()->at(0)->getPosition();
 		if (Position::distance2d(node->getPosition(), craft) <= 20 && RNG::percent(aliensFacingCraftOdds))
 			dir = unit->directionTo(craft);
 		if (dir != -1)
@@ -1843,7 +1843,7 @@ BattleUnit *BattlescapeGenerator::addAlien(Unit *rules, int alienRank, bool outs
 		{
 			unit->setRankInt(alienRank);
 			int dir = _save->getTileEngine()->faceWindow(unit->getPosition());
-			Position craft = _game->getSavedGame()->getSavedBattle()->getUnits()->at(0)->getPosition();
+			Position craft = _game->savedGame()->getSavedBattle()->getUnits()->at(0)->getPosition();
 			if (Position::distance2d(unit->getPosition(), craft) <= 20 && RNG::percent(aliensFacingCraftOdds))
 				dir = unit->directionTo(craft);
 			if (dir != -1)

@@ -132,10 +132,10 @@ namespace OpenXcom
 		_state = std::move(state);
 
 		// remember this article as seen/normal
-		int ruleStatus = _game->getSavedGame()->getUfopediaRuleStatus(_id);
+		int ruleStatus = _game->savedGame()->getUfopediaRuleStatus(_id);
 		if (ruleStatus != ArticleDefinition::PEDIA_STATUS_HIDDEN)
 		{
-			_game->getSavedGame()->setUfopediaRuleStatus(_id, ArticleDefinition::PEDIA_STATUS_NORMAL);
+			_game->savedGame()->setUfopediaRuleStatus(_id, ArticleDefinition::PEDIA_STATUS_NORMAL);
 		}
 	}
 

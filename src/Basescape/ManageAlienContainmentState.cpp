@@ -255,7 +255,7 @@ void ManageAlienContainmentState::resetListAndTotals()
 			std::string formattedCost = "";
 			if (options1.canSellLiveAliens())
 			{
-				int64_t adjustedCost = rule->getSellCostAdjusted(_base, _game->getSavedGame());
+				int64_t adjustedCost = rule->getSellCostAdjusted(_base, _game->savedGame());
 				formattedCost = Unicode::formatFunding(adjustedCost / 1000).append("K");
 			}
 
@@ -359,9 +359,9 @@ void ManageAlienContainmentState::dealWithSelectedAliens(bool sell)
 
 			if (sell)
 			{
-				int64_t adjustedCost = _game->getMod()->getItem(_aliens[i], true)->getSellCostAdjusted(_base, _game->getSavedGame());
+				int64_t adjustedCost = _game->getMod()->getItem(_aliens[i], true)->getSellCostAdjusted(_base, _game->savedGame());
 				adjustedCost = adjustedCost * _qtys[i];
-				_game->getSavedGame()->setFunds(_game->getSavedGame()->getFunds() + adjustedCost);
+				_game->savedGame()->setFunds(_game->savedGame()->getFunds() + adjustedCost);
 			}
 			else
 			{
@@ -632,7 +632,7 @@ void ManageAlienContainmentState::updateStrings()
 		{
 			if (_qtys[i] > 0)
 			{
-				int64_t adjustedCost = _game->getMod()->getItem(_aliens[i])->getSellCostAdjusted(_base, _game->getSavedGame());
+				int64_t adjustedCost = _game->getMod()->getItem(_aliens[i])->getSellCostAdjusted(_base, _game->savedGame());
 				adjustedCost *= _qtys[i];
 				_total += adjustedCost;
 			}

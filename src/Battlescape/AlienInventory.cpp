@@ -153,7 +153,7 @@ void AlienInventory::drawGrid()
  */
 void AlienInventory::drawItems()
 {
-	const SavedBattleGame* save = _game->getSavedGame()->getSavedBattle();
+	const SavedBattleGame* save = _game->savedGame()->getSavedBattle();
 	ScriptWorkerBlit work;
 	_items->clear();
 	if (_selUnit != 0)

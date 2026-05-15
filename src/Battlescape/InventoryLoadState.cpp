@@ -75,9 +75,9 @@ InventoryLoadState::InventoryLoadState(InventoryState *parent) : _parent(parent)
 
 	for (int i = 0; i < options1.oxceMaxEquipmentLayoutTemplates(); ++i)
 	{
-		std::vector<EquipmentLayoutItem*> *item = _game->getSavedGame()->getGlobalEquipmentLayout(i);
+		std::vector<EquipmentLayoutItem*> *item = _game->savedGame()->getGlobalEquipmentLayout(i);
 		std::ostringstream ss;
-		const std::string& armorName = _game->getSavedGame()->getGlobalEquipmentLayoutArmor(i);
+		const std::string& armorName = _game->savedGame()->getGlobalEquipmentLayoutArmor(i);
 		if (!armorName.empty())
 		{
 			ss << "[" << ltr(armorName) << "] ";
@@ -88,7 +88,7 @@ InventoryLoadState::InventoryLoadState(InventoryState *parent) : _parent(parent)
 		}
 		else
 		{
-			const std::string &itemName = _game->getSavedGame()->getGlobalEquipmentLayoutName(i);
+			const std::string &itemName = _game->savedGame()->getGlobalEquipmentLayoutName(i);
 			if (itemName.empty())
 				ss << ltr("STR_UNNAMED_SLOT_N").arg(i + 1);
 			else

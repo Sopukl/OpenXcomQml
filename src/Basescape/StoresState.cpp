@@ -254,7 +254,7 @@ void StoresState::initList()
 		{
 
 			// items from all bases
-			for (auto* xbase : _game->getSavedGame()->getBases())
+			for (auto* xbase : _game->savedGame()->bases())
 			{
 				// 1. items in base stores
 				qty += xbase->getStorageItems().getItem(rule);

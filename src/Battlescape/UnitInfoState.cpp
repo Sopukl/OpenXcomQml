@@ -55,7 +55,7 @@ UnitInfoState::UnitInfoState(BattleUnit *unit, BattlescapeState *parent, bool fr
 		options1.baseYResolution = Screen::ORIGINAL_HEIGHT;
 		_game->getScreen()->resetDisplay(false);
 	}
-	_battleGame = _game->getSavedGame()->getSavedBattle();
+	_battleGame = _game->savedGame()->getSavedBattle();
 
 	// Create objects
 	_bg = new Surface(320, 200, 0, 0);
@@ -589,7 +589,7 @@ void UnitInfoState::init()
 
 	if (_game->getMod()->isManaFeatureEnabled())
 	{
-		if (_game->getSavedGame()->isManaUnlocked(_game->getMod()))
+		if (_game->savedGame()->isManaUnlocked(_game->getMod()))
 		{
 			ss.str("");
 			ss << _unit->getMana();
@@ -614,7 +614,7 @@ void UnitInfoState::init()
 	{
 		psiSkillWithoutAnyBonuses = _unit->getGeoscapeSoldier()->getCurrentStats()->psiSkill;
 	}
-	if (psiSkillWithoutAnyBonuses > 0 || (options1.psiStrengthEval() && _game->getSavedGame()->isResearched(_game->getMod()->getPsiRequirements())))
+	if (psiSkillWithoutAnyBonuses > 0 || (options1.psiStrengthEval() && _game->savedGame()->isResearched(_game->getMod()->getPsiRequirements())))
 	{
 		ss.str("");
 		ss << _unit->getBaseStats()->psiStrength;

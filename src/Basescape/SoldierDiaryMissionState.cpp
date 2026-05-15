@@ -121,7 +121,7 @@ void SoldierDiaryMissionState::init()
 		_game->popState();
 		return;
 	}
-	std::vector<MissionStatistics*> *missionStatistics = _game->getSavedGame()->getMissionStatistics();
+	std::vector<MissionStatistics*> *missionStatistics = _game->savedGame()->getMissionStatistics();
 	unsigned int missionId = _soldier->getDiary()->getMissionIdList().at(_rowEntry);
 	if (missionId > missionStatistics->size())
 	{

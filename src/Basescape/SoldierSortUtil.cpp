@@ -14,7 +14,7 @@ GET_ATTRIB_STAT_FN(strength)
 int OpenXcom::manaStat(const Game* game, const Soldier* s)
 {
 	// don't reveal mana before it would otherwise be known
-	if (game->getSavedGame()->isManaUnlocked(game->getMod()))
+	if (game->savedGame()->isManaUnlocked(game->getMod()))
 	{
 		return s->getStatsWithAllBonuses()->mana;
 	}
@@ -25,7 +25,7 @@ int OpenXcom::psiStrengthStat(const Game *game, const Soldier *s)
 	// don't reveal psi strength before it would otherwise be known
 	if (s->getCurrentStats()->psiSkill > 0
 		|| (options1.psiStrengthEval()
-		&& game->getSavedGame()->isResearched(game->getMod()->getPsiRequirements())))
+		&& game->savedGame()->isResearched(game->getMod()->getPsiRequirements())))
 	{
 		return s->getStatsWithAllBonuses()->psiStrength;
 	}
@@ -56,7 +56,7 @@ GET_ATTRIB_STAT_FN(strength)
 int OpenXcom::manaStatBase(const Game* game, const Soldier* s)
 {
 	// don't reveal mana before it would otherwise be known
-	if (game->getSavedGame()->isManaUnlocked(game->getMod()))
+	if (game->savedGame()->isManaUnlocked(game->getMod()))
 	{
 		return s->getCurrentStats()->mana;
 	}
@@ -67,7 +67,7 @@ int OpenXcom::psiStrengthStatBase(const Game *game, const Soldier *s)
 	// don't reveal psi strength before it would otherwise be known
 	if (s->getCurrentStats()->psiSkill > 0
 		|| (options1.psiStrengthEval()
-		&& game->getSavedGame()->isResearched(game->getMod()->getPsiRequirements())))
+		&& game->savedGame()->isResearched(game->getMod()->getPsiRequirements())))
 	{
 		return s->getCurrentStats()->psiStrength;
 	}
@@ -98,7 +98,7 @@ GET_ATTRIB_STAT_FN(strength)
 int OpenXcom::manaStatPlus(const Game* game, const Soldier* s)
 {
 	// don't reveal mana before it would otherwise be known
-	if (game->getSavedGame()->isManaUnlocked(game->getMod()))
+	if (game->savedGame()->isManaUnlocked(game->getMod()))
 	{
 		return s->getStatsWithSoldierBonusesOnly()->mana;
 	}
@@ -109,7 +109,7 @@ int OpenXcom::psiStrengthStatPlus(const Game *game, const Soldier *s)
 	// don't reveal psi strength before it would otherwise be known
 	if (s->getCurrentStats()->psiSkill > 0
 		|| (options1.psiStrengthEval()
-		&& game->getSavedGame()->isResearched(game->getMod()->getPsiRequirements())))
+		&& game->savedGame()->isResearched(game->getMod()->getPsiRequirements())))
 	{
 		return s->getStatsWithSoldierBonusesOnly()->psiStrength;
 	}
@@ -158,6 +158,6 @@ int OpenXcom::woundRecoveryStat(const Game *game, const Soldier *s)
 GET_SOLDIER_STAT_FN(manaMissing, ManaMissing)
 int OpenXcom::idleDaysStat(const Game *game, const Soldier *s)
 {
-	return game->getSavedGame()->getSoldierIdleDays(s);
+	return game->savedGame()->getSoldierIdleDays(s);
 }
 #undef GET_SOLDIER_STAT_FN

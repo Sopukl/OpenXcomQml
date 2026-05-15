@@ -223,7 +223,7 @@ void ManufactureState::fillProductionList(size_t scrl)
 	_txtAvailable->setText(ltr("STR_ENGINEERS_AVAILABLE").arg(_base->getAvailableEngineers()));
 	_txtAllocated->setText(ltr("STR_ENGINEERS_ALLOCATED").arg(_base->getAllocatedEngineers()));
 	_txtSpace->setText(ltr("STR_WORKSHOP_SPACE_AVAILABLE").arg(_base->getFreeWorkshops()));
-	_txtFunds->setText(ltr("STR_CURRENT_FUNDS").arg(Unicode::formatFunding(_game->getSavedGame()->getFunds())));
+	_txtFunds->setText(ltr("STR_CURRENT_FUNDS").arg(Unicode::formatFunding(_game->savedGame()->getFunds())));
 
 	if (scrl)
 		_lstManufacture->scrollTo(scrl);

@@ -66,7 +66,7 @@ Inventory::Inventory(Game *game, int width, int height, int x, int y, bool base)
 	_twoHandedRed = _game->getMod()->getInterface("battlescape")->getElement("twoHandedRed")->color;
 	_twoHandedGreen = _game->getMod()->getInterface("battlescape")->getElement("twoHandedGreen")->color;
 
-	_depth = _game->getSavedGame()->getSavedBattle()->getDepth();
+	_depth = _game->savedGame()->getSavedBattle()->getDepth();
 	_grid = new Surface(width, height, 0, 0);
 	_items = new Surface(width, height, 0, 0);
 	_gridLabels = new Surface(width, height, 0, 0);
@@ -88,7 +88,7 @@ Inventory::Inventory(Game *game, int width, int height, int x, int y, bool base)
 	_burnIndicator = _game->getMod()->getSurface("BigBurnIndicator", false);
 	_shockIndicator = _game->getMod()->getSurface("BigShockIndicator", false);
 
-	const SavedBattleGame *battleSave = _game->getSavedGame()->getSavedBattle();
+	const SavedBattleGame *battleSave = _game->savedGame()->getSavedBattle();
 	if (battleSave)
 	{
 		auto* enviro = battleSave->getEnviroEffects();
@@ -301,7 +301,7 @@ void Inventory::drawGridLabels(bool showTuCost)
 void Inventory::drawItems()
 {
 	const int Pulsate[8] = { 0, 1, 2, 3, 4, 3, 2, 1 };
-	const SavedBattleGame* save = _game->getSavedGame()->getSavedBattle();
+	const SavedBattleGame* save = _game->savedGame()->getSavedBattle();
 	Surface *tempSurface = _game->getMod()->getSurfaceSet("SCANG.DAT")->getFrame(6);
 	auto primers = [&](int x, int y, bool a)
 	{
@@ -476,7 +476,7 @@ void Inventory::drawSelectedItem()
 	if (_selItem)
 	{
 		_selection->clear();
-		_selItem->getRules()->drawHandSprite(_game->getMod()->getSurfaceSet("BIGOBS.PCK"), _selection, _selItem, _game->getSavedGame()->getSavedBattle(), _animFrame);
+		_selItem->getRules()->drawHandSprite(_game->getMod()->getSurfaceSet("BIGOBS.PCK"), _selection, _selItem, _game->savedGame()->getSavedBattle(), _animFrame);
 	}
 }
 
@@ -505,7 +505,7 @@ std::vector<std::vector<char>>* Inventory::clearOccupiedSlotsCache()
  */
 void Inventory::moveItem(BattleItem *item, const RuleInventory *slot, int x, int y)
 {
-	_game->getSavedGame()->getSavedBattle()->getTileEngine()->itemMoveInventory(_selUnit->getTile(), _selUnit, item, slot, x, y);
+	_game->savedGame()->getSavedBattle()->getTileEngine()->itemMoveInventory(_selUnit->getTile(), _selUnit, item, slot, x, y);
 }
 
 /**
@@ -1454,7 +1454,7 @@ bool Inventory::isInSearchString(BattleItem *item)
 	}
 
 	std::string itemLocalName;
-	if (!_game->getSavedGame()->isResearched(item->getRules()->getRequirements()))
+	if (!_game->savedGame()->isResearched(item->getRules()->getRequirements()))
 	{
 		// Alien artifact, shouldn't match on the real name.
 		itemLocalName = _game->getLanguage()->getString("STR_ALIEN_ARTIFACT");
@@ -1472,7 +1472,7 @@ bool Inventory::isInSearchString(BattleItem *item)
 
 	// If present in the Ufopaedia, check categories for a match as well.
 	ArticleDefinition *articleID = _game->getMod()->getUfopaediaArticle(item->getRules()->getType());
-	if (articleID && Ufopaedia::isArticleAvailable(_game->getSavedGame(), articleID))
+	if (articleID && Ufopaedia::isArticleAvailable(_game->savedGame(), articleID))
 	{
 		for (const auto& itemCategoryName : item->getRules()->getCategories())
 		{
@@ -1807,7 +1807,7 @@ void Inventory::animate()
 {
 	if (_tu)
 	{
-		SavedBattleGame* save = _game->getSavedGame()->getSavedBattle();
+		SavedBattleGame* save = _game->savedGame()->getSavedBattle();
 		save->nextAnimFrame();
 		_animFrame = save->getAnimFrame();
 	}

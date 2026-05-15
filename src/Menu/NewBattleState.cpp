@@ -418,7 +418,7 @@ void NewBattleState::load(const std::string &filename)
 
 				Base *base = new Base(mod);
 				base->load(cfgReader["base"], save, false);
-				save->getBases().push_back(base);
+				save->bases().push_back(base);
 
 				// Add research
 				save->makeAllResearchDiscovered(mod);
@@ -463,11 +463,11 @@ void NewBattleState::load(const std::string &filename)
 	YAML::YamlRootNodeReader starterBaseReader(_game->getMod()->getDefaultStartingBase(), "(starting base template)");
 	if (const auto& globalTemplates = starterBaseReader["globalTemplates"])
 	{
-		_game->getSavedGame()->loadTemplates(globalTemplates, _game->getMod());
+		_game->savedGame()->loadTemplates(globalTemplates, _game->getMod());
 	}
 	if (const auto& ufopediaRuleStatus = starterBaseReader["ufopediaRuleStatus"])
 	{
-		_game->getSavedGame()->loadUfopediaRuleStatus(ufopediaRuleStatus);
+		_game->savedGame()->loadUfopediaRuleStatus(ufopediaRuleStatus);
 	}
 
 }
@@ -488,7 +488,7 @@ void NewBattleState::save(const std::string &filename)
 	writer.write("alienRace", _cbxAlienRace->getSelected());
 	writer.write("difficulty", _cbxDifficulty->getSelected());
 	writer.write("alienTech", _slrAlienTech->getValue());
-	_game->getSavedGame()->getBases().front()->save(writer["base"]);
+	_game->savedGame()->bases().front()->save(writer["base"]);
 
 	std::string filepath = Options::getMasterUserFolder() + filename + ".cfg";
 	if (!CrossPlatform::writeFile(filepath, writer.emit().yaml))
@@ -509,7 +509,7 @@ void NewBattleState::initSave()
 	Base *base = new Base(mod);
 	YAML::YamlRootNodeReader startingBaseReader(_game->getMod()->getDefaultStartingBase(), "(starting base template)");
 	base->load(startingBaseReader, save, true, true);
-	save->getBases().push_back(base);
+	save->bases().push_back(base);
 
 	// Kill everything we don't want in this base
 	for (auto* soldier : base->getSoldiers())
@@ -611,7 +611,7 @@ void NewBattleState::btnOkClick(Action *)
 	}
 
 	SavedBattleGame *bgame = new SavedBattleGame(_game->getMod(), _game->getLanguage());
-	_game->getSavedGame()->setBattleGame(bgame);
+	_game->savedGame()->setBattleGame(bgame);
 	bgame->setMissionType(_missionTypes[_cbxMission->getSelected()]);
 	BattlescapeGenerator bgen = BattlescapeGenerator(_game);
 	Base *base = 0;
@@ -640,7 +640,7 @@ void NewBattleState::btnOkClick(Action *)
 		b->setAlienRace(_alienRaces[_cbxAlienRace->getSelected()]);
 		_craft->setDestination(b);
 		bgen.setAlienBase(b);
-		_game->getSavedGame()->getAlienBases()->push_back(b);
+		_game->savedGame()->getAlienBases()->push_back(b);
 	}
 	// ufo assault
 	else if (_craft && _game->getMod()->getUfo(_missionTypes[_cbxMission->getSelected()]))
@@ -661,7 +661,7 @@ void NewBattleState::btnOkClick(Action *)
 			u->setStatus(Ufo::CRASHED);
 			bgame->setMissionType("STR_UFO_CRASH_RECOVERY");
 		}
-		_game->getSavedGame()->getUfos().push_back(u);
+		_game->savedGame()->getUfos().push_back(u);
 	}
 	// mission site
 	else
@@ -673,7 +673,7 @@ void NewBattleState::btnOkClick(Action *)
 		m->setAlienRace(_alienRaces[_cbxAlienRace->getSelected()]);
 		_craft->setDestination(m);
 		bgen.setMissionSite(m);
-		_game->getSavedGame()->getMissionSites().push_back(m);
+		_game->savedGame()->getMissionSites().push_back(m);
 	}
 
 	if (_craft)
@@ -682,7 +682,7 @@ void NewBattleState::btnOkClick(Action *)
 		bgen.setCraft(_craft);
 	}
 
-	_game->getSavedGame()->setDifficulty((GameDifficulty)_cbxDifficulty->getSelected());
+	_game->savedGame()->setDifficulty((GameDifficulty)_cbxDifficulty->getSelected());
 
 	bgen.setWorldShade(_slrDarkness->getValue());
 	bgen.setAlienRace(_alienRaces[_cbxAlienRace->getSelected()]);
@@ -740,7 +740,7 @@ void NewBattleState::btnRandomClick(Action *)
  */
 void NewBattleState::btnEquipClick(Action *)
 {
-	_game->pushState(new CraftInfoState(_game->getSavedGame()->getBases().front(), 0));
+	_game->pushState(new CraftInfoState(_game->savedGame()->bases().front(), 0));
 }
 
 /**

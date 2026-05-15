@@ -94,9 +94,9 @@ SoldierMemorialState::SoldierMemorialState()
 
 	_txtDate->setText(ltr("STR_DATE_UC"));
 
-	size_t lost = _game->getSavedGame()->getDeadSoldiers().size();
+	size_t lost = _game->savedGame()->getDeadSoldiers().size();
 	size_t recruited = lost;
-	for (const auto* xbase : _game->getSavedGame()->getBases())
+	for (const auto* xbase : _game->savedGame()->bases())
 	{
 		recruited += xbase->getTotalSoldiers();
 	}
@@ -204,7 +204,7 @@ void SoldierMemorialState::fillMemorialList()
 	_indices.clear();
 
 	int index = -1;
-	for (std::vector<Soldier *>::reverse_iterator i = _game->getSavedGame()->getDeadSoldiers().rbegin(); i != _game->getSavedGame()->getDeadSoldiers().rend(); ++i)
+	for (std::vector<Soldier *>::reverse_iterator i = _game->savedGame()->getDeadSoldiers().rbegin(); i != _game->savedGame()->getDeadSoldiers().rend(); ++i)
 	{
 		++index;
 		const Soldier* deadSoldier = (*i);

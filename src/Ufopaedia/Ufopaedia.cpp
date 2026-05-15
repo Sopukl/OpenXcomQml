@@ -168,7 +168,7 @@ namespace OpenXcom
 	 */
 	void Ufopaedia::openArticle(Game *game, ArticleDefinition *article)
 	{
-		auto state = createCommonArticleState(game->getSavedGame(), game->getMod());
+		auto state = createCommonArticleState(game->savedGame(), game->getMod());
 		state->current_index = getArticleIndex(state->articleList, article->id);
 		if (state->current_index != ArticleCommonState::invalid)
 		{
@@ -183,7 +183,7 @@ namespace OpenXcom
 	 */
 	void Ufopaedia::openArticle(Game *game, const std::string &article_id)
 	{
-		auto state = createCommonArticleState(game->getSavedGame(), game->getMod());
+		auto state = createCommonArticleState(game->savedGame(), game->getMod());
 		state->current_index = getArticleIndex(state->articleList, article_id);
 		if (state->current_index != ArticleCommonState::invalid)
 		{
@@ -198,7 +198,7 @@ namespace OpenXcom
 	 */
 	void Ufopaedia::openArticleDetail(Game *game, const std::string &article_id)
 	{
-		auto state = createCommonArticleState(game->getSavedGame(), game->getMod());
+		auto state = createCommonArticleState(game->savedGame(), game->getMod());
 		state->current_index = getArticleIndex(state->articleList, article_id);
 		if (state->current_index != ArticleCommonState::invalid)
 		{
@@ -326,7 +326,7 @@ namespace OpenXcom
 		if (article->section == UFOPAEDIA_COMMENDATIONS)
 		{
 			// 1. check living soldiers
-			for (auto* xbase : save->getBases())
+			for (auto* xbase : save->bases())
 			{
 				for (auto* soldier : xbase->getSoldiers())
 				{

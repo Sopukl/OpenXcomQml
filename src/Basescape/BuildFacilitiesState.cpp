@@ -113,7 +113,7 @@ void BuildFacilitiesState::populateBuildList()
 			continue;
 		}
 		if ((rule->isLift() && !rule->isUpgradeOnly())
-			|| !_game->getSavedGame()->isResearched(rule->getRequirements()))
+			|| !_game->savedGame()->isResearched(rule->getRequirements()))
 		{
 			continue;
 		}

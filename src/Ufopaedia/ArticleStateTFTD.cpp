@@ -123,7 +123,7 @@ namespace OpenXcom
 		ArticleState::initLayout();
 
 		// Step 1: background image
-		auto& bgImageName = ruleInterface->getBackgroundImage(_game->getMod(), _game->getSavedGame());
+		auto& bgImageName = ruleInterface->getBackgroundImage(_game->getMod(), _game->savedGame());
 		if (!defs->customPalette)
 		{
 			_game->getMod()->getSurface(bgImageName)->blitNShade(_bg, 0, 0);

@@ -395,7 +395,7 @@ namespace OpenXcom
 					for (auto* type : *ammo_data)
 					{
 						ArticleDefinition *ammo_article = _game->getMod()->getUfopaediaArticle(type->getType(), true);
-						if (Ufopaedia::isArticleAvailable(_game->getSavedGame(), ammo_article))
+						if (Ufopaedia::isArticleAvailable(_game->savedGame(), ammo_article))
 						{
 							if (skipShow > 0)
 							{

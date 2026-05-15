@@ -128,7 +128,7 @@ FundingState::FundingState()
 
 	_fundingCountryOrder = FC_NONE;
 
-	for (auto* country : *_game->getSavedGame()->getCountries())
+	for (auto* country : *_game->savedGame()->getCountries())
 	{
 		_fundingCountryList.push_back(FundingCountry(
 			ltr(country->getRules()->getType()),
@@ -253,8 +253,8 @@ void FundingState::updateList()
 
 		_lstCountries->addRow(3, country.name.c_str(), ss.str().c_str(), ss2.str().c_str());
 	}
-	_lstCountries->addRow(2, ltr("STR_TOTAL_UC").c_str(), Unicode::formatFunding(_game->getSavedGame()->getCountryFunding()).c_str());
-	_lstCountries->setRowColor(_game->getSavedGame()->getCountries()->size(), _txtCountry->getColor());
+	_lstCountries->addRow(2, ltr("STR_TOTAL_UC").c_str(), Unicode::formatFunding(_game->savedGame()->getCountryFunding()).c_str());
+	_lstCountries->setRowColor(_game->savedGame()->getCountries()->size(), _txtCountry->getColor());
 }
 
 /**

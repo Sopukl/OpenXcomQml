@@ -78,7 +78,7 @@ ItemLocationsState::ItemLocationsState(const RuleItem* selectedItem)
 	_lstLocations->setMargin(2);
 	_lstLocations->setSelectable(true);
 
-	for (auto* xbase : _game->getSavedGame()->getBases())
+	for (auto* xbase : _game->savedGame()->bases())
 	{
 		std::ostringstream ssInBase, ssInTransfer;
 		ssInBase << xbase->getStorageItems().getItem(selectedItem);

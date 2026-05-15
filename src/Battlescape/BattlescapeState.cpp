@@ -106,7 +106,7 @@ BattlescapeState::BattlescapeState() :
 	_autosave(0),
 	_numberOfDirectlyVisibleUnits(0), _numberOfEnemiesTotal(0), _numberOfEnemiesTotalPlusWounded(0)
 {
-	_save = _game->getSavedGame()->getSavedBattle();
+	_save = _game->savedGame()->getSavedBattle();
 
 	std::fill_n(_visibleUnit, 10, (BattleUnit*)(0));
 
@@ -226,7 +226,7 @@ BattlescapeState::BattlescapeState() :
 
 	_manaBarVisible = _game->getMod()->isManaFeatureEnabled()
 		&& _game->getMod()->isManaBarEnabled()
-		&& _game->getSavedGame()->isManaUnlocked(_game->getMod());
+		&& _game->savedGame()->isManaUnlocked(_game->getMod());
 	int step = _manaBarVisible ? 3 : 4;
 
 	_numTimeUnits = new NumberText(15, 5, x + 136, y + 42);
@@ -843,7 +843,7 @@ void BattlescapeState::init()
 	{
 		int currentTurn = _autosave;
 		_autosave = 0;
-		if (_game->getSavedGame()->isIronman())
+		if (_game->savedGame()->isIronman())
 		{
 			_game->pushState(new SaveGameState(OPT_BATTLESCAPE, SAVE_IRONMAN, _palette));
 		}
@@ -2641,14 +2641,14 @@ std::string BattlescapeState::getMeleeDamagePreview(BattleUnit *actor, BattleIte
 		return "";
 
 	bool discovered = false;
-	if (_game->getSavedGame()->getMonthsPassed() == -1)
+	if (_game->savedGame()->getMonthsPassed() == -1)
 	{
 		discovered = true; // new battle mode
 	}
 	else
 	{
 		ArticleDefinition *article = _game->getMod()->getUfopaediaArticle(weapon->getRules()->getType(), false);
-		if (article && Ufopaedia::isArticleAvailable(_game->getSavedGame(), article))
+		if (article && Ufopaedia::isArticleAvailable(_game->savedGame(), article))
 		{
 			discovered = true; // pedia article unlocked
 		}
@@ -2741,7 +2741,7 @@ inline void BattlescapeState::handle(Action *action)
 				if (key == SDLK_b && ctrlPressed)
 				{
 					Craft* ycraft = nullptr;
-					for (auto* xbase : _game->getSavedGame()->getBases())
+					for (auto* xbase : _game->savedGame()->bases())
 					{
 						for (auto* xcraft : xbase->getCrafts())
 						{
@@ -3129,7 +3129,7 @@ inline void BattlescapeState::handle(Action *action)
 					}
 				}
 				// quick save and quick load
-				if (!_game->getSavedGame()->isIronman() && !_save->isPreview())
+				if (!_game->savedGame()->isIronman() && !_save->isPreview())
 				{
 					if (key == options1.keyQuickSave())
 					{
@@ -3552,7 +3552,7 @@ void BattlescapeState::finishBattle(bool abort, int inExitArea)
 	AlienDeployment *ruleDeploy = _game->getMod()->getDeployment(_save->getMissionType());
 	if (!ruleDeploy)
 	{
-		for (auto* ufo : _game->getSavedGame()->getUfos())
+		for (auto* ufo : _game->savedGame()->getUfos())
 		{
 			if (ufo->isInBattlescape())
 			{
@@ -3600,10 +3600,10 @@ void BattlescapeState::finishBattle(bool abort, int inExitArea)
 			_game->getCursor()->setVisible(true);
 
 			// delete SavedBattleGame
-			_game->getSavedGame()->setBattleGame(0);
+			_game->savedGame()->setBattleGame(0);
 
 			// unmark all craft and all bases (current craft would be enough, but better safe than sorry)
-			for (auto* xbase : _game->getSavedGame()->getBases())
+			for (auto* xbase : _game->savedGame()->bases())
 			{
 				xbase->setInBattlescape(false);
 				for (auto* craft : xbase->getCrafts())
@@ -3643,14 +3643,14 @@ void BattlescapeState::finishBattle(bool abort, int inExitArea)
 			const RuleVideo *videoRule = _game->getMod()->getVideo(cutscene, true);
 			if (videoRule->getWinGame())
 			{
-				_game->getSavedGame()->setEnding(END_WIN);
+				_game->savedGame()->setEnding(END_WIN);
 			}
 			else if (videoRule->getLoseGame())
 			{
-				_game->getSavedGame()->setEnding(END_LOSE);
+				_game->savedGame()->setEnding(END_LOSE);
 			}
 			// Autosave if game is over
-			if (_game->getSavedGame()->getEnding() != END_NONE && _game->getSavedGame()->isIronman())
+			if (_game->savedGame()->getEnding() != END_NONE && _game->savedGame()->isIronman())
 			{
 				_game->pushState(new SaveGameState(OPT_BATTLESCAPE, SAVE_IRONMAN, _palette));
 			}

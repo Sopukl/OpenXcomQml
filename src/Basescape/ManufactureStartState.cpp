@@ -100,7 +100,7 @@ ManufactureStartState::ManufactureStartState(Base *base, RuleManufacture *item) 
 	_btnCancel->onMouseClick((ActionHandler)&ManufactureStartState::btnCancelClick);
 	_btnCancel->onKeyboardPress((ActionHandler)&ManufactureStartState::btnCancelClick, options1.keyCancel());
 
-	bool productionPossible = _item->haveEnoughMoneyForOneMoreUnit(_game->getSavedGame()->getFunds());
+	bool productionPossible = _item->haveEnoughMoneyForOneMoreUnit(_game->savedGame()->getFunds());
 	// check available workspace later
 	//int availableWorkSpace = _base->getFreeWorkshops();
 	//productionPossible &= (availableWorkSpace > 0);
@@ -217,9 +217,9 @@ ManufactureStartState::ManufactureStartState(Base *base, RuleManufacture *item) 
 	if (_item)
 	{
 		// mark new as normal
-		if (_game->getSavedGame()->getManufactureRuleStatus(_item->getName()) == RuleManufacture::MANU_STATUS_NEW)
+		if (_game->savedGame()->getManufactureRuleStatus(_item->getName()) == RuleManufacture::MANU_STATUS_NEW)
 		{
-			_game->getSavedGame()->setManufactureRuleStatus(_item->getName(), RuleManufacture::MANU_STATUS_NORMAL);
+			_game->savedGame()->setManufactureRuleStatus(_item->getName(), RuleManufacture::MANU_STATUS_NORMAL);
 		}
 	}
 }

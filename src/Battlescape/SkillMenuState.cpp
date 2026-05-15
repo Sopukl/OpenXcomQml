@@ -53,7 +53,7 @@ SkillMenuState::SkillMenuState(BattleAction *action, int x, int y) : ActionMenuS
 	_screen = false;
 
 	// Set palette
-	_game->getSavedGame()->getSavedBattle()->setPaletteByDepth(this);
+	_game->savedGame()->getSavedBattle()->setPaletteByDepth(this);
 
 	for (int i = 0; i < (int)std::size(_actionMenu); ++i)
 	{
@@ -156,11 +156,11 @@ void SkillMenuState::addItem(const RuleSkill* skill, int *id, SDLKey key)
  */
 void SkillMenuState::btnActionMenuItemClick(Action *action)
 {
-	_game->getSavedGame()->getSavedBattle()->getPathfinding()->removePreview();
+	_game->savedGame()->getSavedBattle()->getPathfinding()->removePreview();
 
 	int btnID = -1;
 
-	if (_game->getSavedGame()->getSavedBattle()->isPreview())
+	if (_game->savedGame()->getSavedBattle()->isPreview())
 	{
 		_action->result = "STR_UNABLE_TO_USE_ALIEN_ARTIFACT_UNTIL_RESEARCHED";
 		_game->popState();
@@ -179,7 +179,7 @@ void SkillMenuState::btnActionMenuItemClick(Action *action)
 
 	if (btnID != -1)
 	{
-		TileEngine *tileEngine = _game->getSavedGame()->getSavedBattle()->getTileEngine();
+		TileEngine *tileEngine = _game->savedGame()->getSavedBattle()->getTileEngine();
 		const RuleSkill *selectedSkill = _actionMenu[btnID]->getSkill();
 		_action->skillRules = selectedSkill;
 		_action->type = _actionMenu[btnID]->getAction();

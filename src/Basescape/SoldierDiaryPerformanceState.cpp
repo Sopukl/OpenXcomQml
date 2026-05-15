@@ -50,7 +50,7 @@ SoldierDiaryPerformanceState::SoldierDiaryPerformanceState(Base *base, size_t so
 {
 	if (_base == 0)
 	{
-		_list = &_game->getSavedGame()->getDeadSoldiers();
+		_list = &_game->savedGame()->getDeadSoldiers();
 	}
 	else
 	{
@@ -277,7 +277,7 @@ void SoldierDiaryPerformanceState::init()
 			}
 		}
 
-		if (_soldier->getCurrentStats()->psiSkill > 0 || (options1.psiStrengthEval() && _game->getSavedGame()->isResearched(_game->getMod()->getPsiRequirements())))
+		if (_soldier->getCurrentStats()->psiSkill > 0 || (options1.psiStrengthEval() && _game->savedGame()->isResearched(_game->getMod()->getPsiRequirements())))
 		{
 			_lstKillTotals->addRow(4, ltr("STR_KILLS").arg(_soldier->getDiary()->getKillTotal()).c_str(),
 										ltr("STR_STUNS").arg(_soldier->getDiary()->getStunTotal()).c_str(),
@@ -295,9 +295,9 @@ void SoldierDiaryPerformanceState::init()
 	else if (_display == DIARY_MISSIONS)
 	{
 		std::map<std::string, int> mapArray[] = {
-			_soldier->getDiary()->getRegionTotal(_game->getSavedGame()->getMissionStatistics()),
-			_soldier->getDiary()->getTypeTotal(_game->getSavedGame()->getMissionStatistics()),
-			_soldier->getDiary()->getUFOTotal(_game->getSavedGame()->getMissionStatistics())
+			_soldier->getDiary()->getRegionTotal(_game->savedGame()->getMissionStatistics()),
+			_soldier->getDiary()->getTypeTotal(_game->savedGame()->getMissionStatistics()),
+			_soldier->getDiary()->getUFOTotal(_game->savedGame()->getMissionStatistics())
 		};
 		std::string titleArray[] = { "STR_MISSIONS_BY_LOCATION", "STR_MISSIONS_BY_TYPE", "STR_MISSIONS_BY_UFO" };
 
@@ -319,8 +319,8 @@ void SoldierDiaryPerformanceState::init()
 		}
 
 		_lstMissionTotals->addRow(4, ltr("STR_MISSIONS").arg(_soldier->getDiary()->getMissionTotal()).c_str(),
-									ltr("STR_WINS").arg(_soldier->getDiary()->getWinTotal(_game->getSavedGame()->getMissionStatistics())).c_str(),
-									ltr("STR_SCORE_VALUE").arg(_soldier->getDiary()->getScoreTotal(_game->getSavedGame()->getMissionStatistics())).c_str(),
+									ltr("STR_WINS").arg(_soldier->getDiary()->getWinTotal(_game->savedGame()->getMissionStatistics())).c_str(),
+									ltr("STR_SCORE_VALUE").arg(_soldier->getDiary()->getScoreTotal(_game->savedGame()->getMissionStatistics())).c_str(),
 									ltr("STR_DAYS_WOUNDED").arg(_soldier->getDiary()->getDaysWoundedTotal()).c_str());
 	}
 	else if (_display == DIARY_COMMENDATIONS && !_game->getMod()->getCommendationsList().empty())

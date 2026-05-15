@@ -159,12 +159,12 @@ TechTreeViewerState::TechTreeViewerState(const RuleResearch *r, const RuleManufa
 
 	int discoveredSum = 0;
 	// pre-calculate globally
-	for (auto* discoveredResearchRule : _game->getSavedGame()->getDiscoveredResearch())
+	for (auto* discoveredResearchRule : _game->savedGame()->getDiscoveredResearch())
 	{
 		_alreadyAvailableResearch.insert(discoveredResearchRule->getName());
 		discoveredSum += discoveredResearchRule->getCost();
 	}
-	for (auto& info : _game->getSavedGame()->getResearchRuleStatusRaw())
+	for (auto& info : _game->savedGame()->getResearchRuleStatusRaw())
 	{
 		if (info.second == RuleResearch::RESEARCH_STATUS_DISABLED)
 		{
@@ -191,7 +191,7 @@ TechTreeViewerState::TechTreeViewerState(const RuleResearch *r, const RuleManufa
 	for (auto& manuf : _game->getMod()->getManufactureList())
 	{
 		manRule = _game->getMod()->getManufacture(manuf);
-		if (_game->getSavedGame()->isResearched(manRule->getRequirements()))
+		if (_game->savedGame()->isResearched(manRule->getRequirements()))
 		{
 			_alreadyAvailableManufacture.insert(manRule->getName());
 		}
@@ -201,7 +201,7 @@ TechTreeViewerState::TechTreeViewerState(const RuleResearch *r, const RuleManufa
 	for (auto& facType : _game->getMod()->getBaseFacilitiesList())
 	{
 		facRule = _game->getMod()->getBaseFacility(facType);
-		if (_game->getSavedGame()->isResearched(facRule->getRequirements()))
+		if (_game->savedGame()->isResearched(facRule->getRequirements()))
 		{
 			_alreadyAvailableFacilities.insert(facRule->getType());
 		}
@@ -214,7 +214,7 @@ TechTreeViewerState::TechTreeViewerState(const RuleResearch *r, const RuleManufa
 		if (!itemRule->getRequirements().empty() || !itemRule->getBuyRequirements().empty())
 		{
 			_protectedItems.insert(itemRule->getType());
-			if (_game->getSavedGame()->isResearched(itemRule->getRequirements()) && _game->getSavedGame()->isResearched(itemRule->getBuyRequirements()))
+			if (_game->savedGame()->isResearched(itemRule->getRequirements()) && _game->savedGame()->isResearched(itemRule->getBuyRequirements()))
 			{
 				_alreadyAvailableItems.insert(itemRule->getType());
 			}
@@ -225,7 +225,7 @@ TechTreeViewerState::TechTreeViewerState(const RuleResearch *r, const RuleManufa
 	for (auto& craftType : _game->getMod()->getCraftsList())
 	{
 		craftRule = _game->getMod()->getCraft(craftType);
-		if (_game->getSavedGame()->isResearched(craftRule->getRequirements()))
+		if (_game->savedGame()->isResearched(craftRule->getRequirements()))
 		{
 			_alreadyAvailableCrafts.insert(craftRule->getType());
 		}

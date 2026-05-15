@@ -78,7 +78,7 @@ InventoryState::InventoryState(bool tu, BattlescapeState *parent, Base *base, bo
 	_tu(tu), _noCraft(noCraft), _parent(parent), _base(base),
 	_resetCustomDeploymentBackup(false), _reloadUnit(false), _globalLayoutIndex(-1)
 {
-	_battleGame = _game->getSavedGame()->getSavedBattle();
+	_battleGame = _game->savedGame()->getSavedBattle();
 
 	if (options1.oxceAlternateCraftEquipmentManagement() && !_tu && _base && _noCraft)
 	{
@@ -88,7 +88,7 @@ InventoryState::InventoryState(bool tu, BattlescapeState *parent, Base *base, bo
 			_backup[soldier] = soldier->getCraft();
 			if (soldier->getCraft() && soldier->getCraft()->getStatus() != "STR_OUT")
 			{
-				soldier->setCraftAndMoveEquipment(0, _base, _game->getSavedGame()->getMonthsPassed() == -1);
+				soldier->setCraftAndMoveEquipment(0, _base, _game->savedGame()->getMonthsPassed() == -1);
 			}
 		}
 	}
@@ -322,7 +322,7 @@ InventoryState::InventoryState(bool tu, BattlescapeState *parent, Base *base, bo
 
 	_inv->draw();
 	_inv->setTuMode(_tu);
-	_inv->setSelectedUnit(_game->getSavedGame()->getSavedBattle()->getSelectedUnit(), true);
+	_inv->setSelectedUnit(_game->savedGame()->getSavedBattle()->getSelectedUnit(), true);
 	_inv->onMouseClick((ActionHandler)&InventoryState::invClick, 0);
 	_inv->onMouseOver((ActionHandler)&InventoryState::invMouseOver);
 	_inv->onMouseOut((ActionHandler)&InventoryState::invMouseOut);
@@ -668,7 +668,7 @@ void InventoryState::updateStats()
 	{
 		psiSkillWithoutAnyBonuses = unit->getGeoscapeSoldier()->getCurrentStats()->psiSkill;
 	}
-	bool showPsiStrength = (psiSkillWithoutAnyBonuses > 0 || (options1.psiStrengthEval() && _game->getSavedGame()->isResearched(_game->getMod()->getPsiRequirements())));
+	bool showPsiStrength = (psiSkillWithoutAnyBonuses > 0 || (options1.psiStrengthEval() && _game->savedGame()->isResearched(_game->getMod()->getPsiRequirements())));
 
 	auto updateStatLine = [&](Text* txtField, const std::string& elementId)
 	{
@@ -903,7 +903,7 @@ void InventoryState::btnArmorClickMiddle(Action *action)
 
 void InventoryState::saveGlobalLayout(int index, bool includingArmor)
 {
-	std::vector<EquipmentLayoutItem*> *tmpl = _game->getSavedGame()->getGlobalEquipmentLayout(index);
+	std::vector<EquipmentLayoutItem*> *tmpl = _game->savedGame()->getGlobalEquipmentLayout(index);
 
 	// clear current template
 	_clearInventoryTemplate(*tmpl);
@@ -914,24 +914,24 @@ void InventoryState::saveGlobalLayout(int index, bool includingArmor)
 	// optionally save armor info too
 	if (includingArmor && _battleGame->getSelectedUnit()->getGeoscapeSoldier())
 	{
-		_game->getSavedGame()->setGlobalEquipmentLayoutArmor(index, _battleGame->getSelectedUnit()->getArmor()->getType());
+		_game->savedGame()->setGlobalEquipmentLayoutArmor(index, _battleGame->getSelectedUnit()->getArmor()->getType());
 	}
 	else
 	{
-		_game->getSavedGame()->setGlobalEquipmentLayoutArmor(index, std::string());
+		_game->savedGame()->setGlobalEquipmentLayoutArmor(index, std::string());
 	}
 }
 
 void InventoryState::loadGlobalLayout(int index)
 {
-	std::vector<EquipmentLayoutItem*> *tmpl = _game->getSavedGame()->getGlobalEquipmentLayout(index);
+	std::vector<EquipmentLayoutItem*> *tmpl = _game->savedGame()->getGlobalEquipmentLayout(index);
 
 	_applyInventoryTemplate(*tmpl);
 }
 
 bool InventoryState::loadGlobalLayoutArmor(int index)
 {
-	auto& armorName = _game->getSavedGame()->getGlobalEquipmentLayoutArmor(index);
+	auto& armorName = _game->savedGame()->getGlobalEquipmentLayoutArmor(index);
 	return tryArmorChange(armorName);
 }
 
@@ -959,7 +959,7 @@ bool InventoryState::tryArmorChange(const std::string& armorName)
 	if (prev && next && next != prev && soldier && _base)
 	{
 		armorAvailable = true;
-		if (_game->getSavedGame()->getMonthsPassed() != -1)
+		if (_game->savedGame()->getMonthsPassed() != -1)
 		{
 			// is the armor physically available?
 			if (next->getStoreItem() && prev->getStoreItem() != next->getStoreItem())
@@ -970,7 +970,7 @@ bool InventoryState::tryArmorChange(const std::string& armorName)
 				}
 			}
 			// is the armor unlocked?
-			if (next->getRequiredResearch() && !_game->getSavedGame()->isResearched(next->getRequiredResearch()))
+			if (next->getRequiredResearch() && !_game->savedGame()->isResearched(next->getRequiredResearch()))
 			{
 				armorAvailable = false;
 			}
@@ -1001,7 +1001,7 @@ bool InventoryState::tryArmorChange(const std::string& armorName)
 				return false;
 			}
 		}
-		if (_game->getSavedGame()->getMonthsPassed() != -1)
+		if (_game->savedGame()->getMonthsPassed() != -1)
 		{
 			if (prev->getStoreItem())
 			{
@@ -1164,7 +1164,7 @@ void InventoryState::btnOkClick(Action *)
 					int space = c->getSpaceAvailable();
 					if (c->validateAddingSoldier(space, soldier) == CPE_None)
 					{
-						soldier->setCraftAndMoveEquipment(c, _base, _game->getSavedGame()->getMonthsPassed() == -1, _resetCustomDeploymentBackup);
+						soldier->setCraftAndMoveEquipment(c, _base, _game->savedGame()->getMonthsPassed() == -1, _resetCustomDeploymentBackup);
 					}
 				}
 			}
@@ -1828,7 +1828,7 @@ void InventoryState::calculateCurrentDamageTooltip()
 	}
 
 	// step 2: check if unlocked
-	if (_game->getSavedGame()->getMonthsPassed() == -1)
+	if (_game->savedGame()->getMonthsPassed() == -1)
 	{
 		// new battle mode
 	}
@@ -1838,7 +1838,7 @@ void InventoryState::calculateCurrentDamageTooltip()
 		// same as for the battlescape indicator
 		// it's arguable if this is the correct approach, but so far this is what we have
 		ArticleDefinition *article = _game->getMod()->getUfopaediaArticle(rule->getType(), false);
-		if (article && !Ufopaedia::isArticleAvailable(_game->getSavedGame(), article))
+		if (article && !Ufopaedia::isArticleAvailable(_game->savedGame(), article))
 		{
 			// ammo/weapon locked
 			rule = 0;
@@ -1846,7 +1846,7 @@ void InventoryState::calculateCurrentDamageTooltip()
 		if (rule && rule->getType() != weaponRule->getType())
 		{
 			article = _game->getMod()->getUfopaediaArticle(weaponRule->getType(), false);
-			if (article && !Ufopaedia::isArticleAvailable(_game->getSavedGame(), article))
+			if (article && !Ufopaedia::isArticleAvailable(_game->savedGame(), article))
 			{
 				// weapon locked
 				rule = 0;
@@ -1927,7 +1927,7 @@ void InventoryState::invMouseOver(Action *)
 		}
 		else
 		{
-			auto* save = _game->getSavedGame();
+			auto* save = _game->savedGame();
 			if (save->isResearched(item->getRules()->getRequirements()))
 			{
 				std::string text = ltr(item->getRules()->getName());
@@ -2098,7 +2098,7 @@ void InventoryState::onMoveGroundInventoryToBase(Action *)
 		BattleItem* item = (*itemIt);
 		item->setOwner(NULL);
 		itemIt = groundInv->erase(itemIt);
-		_game->getSavedGame()->getSavedBattle()->removeItem(item);
+		_game->savedGame()->getSavedBattle()->removeItem(item);
 	}
 
 	// refresh ui
@@ -2212,7 +2212,7 @@ void InventoryState::think()
 			r.w -= 2;
 			r.h -= 2;
 			_selAmmo->drawRect(&r, Palette::blockOffset(0)+15);
-			firstAmmo->getRules()->drawHandSprite(_game->getMod()->getSurfaceSet("BIGOBS.PCK"), _selAmmo, firstAmmo, _game->getSavedGame()->getSavedBattle(), anim);
+			firstAmmo->getRules()->drawHandSprite(_game->getMod()->getSurfaceSet("BIGOBS.PCK"), _selAmmo, firstAmmo, _game->savedGame()->getSavedBattle(), anim);
 		}
 		else
 		{

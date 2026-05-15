@@ -66,7 +66,7 @@ TrainingState::TrainingState()
 	_txtTitle->setText(ltr("STR_PHYSICAL_TRAINING"));
 
 	int buttons = 0;
-	for (auto* xbase : _game->getSavedGame()->getBases())
+	for (auto* xbase : _game->savedGame()->bases())
 	{
 		if (xbase->getAvailableTraining())
 		{

@@ -157,7 +157,7 @@ void SellState::delayedInit()
 	_txtTitle->setAlign(ALIGN_CENTER);
 	_txtTitle->setText(ltr("STR_SELL_ITEMS_SACK_PERSONNEL"));
 
-	_txtFunds->setText(ltr("STR_FUNDS").arg(Unicode::formatFunding(_game->getSavedGame()->getFunds())));
+	_txtFunds->setText(ltr("STR_FUNDS").arg(Unicode::formatFunding(_game->savedGame()->getFunds())));
 
 	_txtSpaceUsed->setVisible(options1.storageLimitsEnforced());
 
@@ -273,8 +273,8 @@ void SellState::delayedInit()
 		}
 		if (qty > 0 && (options1.canSellLiveAliens() || !rule->isAlien()))
 		{
-			TransferRow row = { TRANSFER_ITEM, rule, ltr(itemType), rule->getSellCostAdjusted(_base, _game->getSavedGame()), qty, 0, 0, rule->getListOrder(), rule->getSize(), qty * rule->getSize(), (int64_t)qty * rule->getSellCostAdjusted(_base, _game->getSavedGame()) };
-			if ((_debriefingState != 0) && (_game->getSavedGame()->getAutosell(rule)))
+			TransferRow row = { TRANSFER_ITEM, rule, ltr(itemType), rule->getSellCostAdjusted(_base, _game->savedGame()), qty, 0, 0, rule->getListOrder(), rule->getSize(), qty * rule->getSize(), (int64_t)qty * rule->getSellCostAdjusted(_base, _game->savedGame()) };
+			if ((_debriefingState != 0) && (_game->savedGame()->getAutosell(rule)))
 			{
 				row.amount = qty;
 				_total += row.cost * qty;
@@ -482,7 +482,7 @@ bool SellState::isHidden(int sel) const
 		}
 		if (!itemName.empty())
 		{
-			auto& hiddenMap = _game->getSavedGame()->getHiddenPurchaseItems();
+			auto& hiddenMap = _game->savedGame()->getHiddenPurchaseItems();
 			auto iter = hiddenMap.find(itemName);
 			if (iter != hiddenMap.end())
 			{
@@ -574,7 +574,7 @@ void SellState::updateList()
 			if (_items[i].type == TRANSFER_ITEM)
 			{
 				RuleItem* rule = (RuleItem*)_items[i].rule;
-				bool isResearchable = _game->getSavedGame()->isResearchable(rule, _game->getMod());
+				bool isResearchable = _game->savedGame()->isResearchable(rule, _game->getMod());
 				if (categoryResearched && isResearchable) continue;
 				if (categoryResearchable && !isResearchable) continue;
 			}
@@ -652,7 +652,7 @@ void SellState::updateList()
  */
 void SellState::btnOkClick(Action *)
 {
-	_game->getSavedGame()->setFunds(_game->getSavedGame()->getFunds() + _total);
+	_game->savedGame()->setFunds(_game->savedGame()->getFunds() + _total);
 
 	auto cleanUpContainer = [&](ItemContainer* container, const RuleItem* rule, int toRemove) -> int
 	{
@@ -837,7 +837,7 @@ void SellState::btnOkClick(Action *)
 					_debriefingState->decreaseRecoveredItemCount(item, transferRow.amount);
 
 					// set autosell status if we sold all of the item
-					_game->getSavedGame()->setAutosell(item, (transferRow.qtySrc == transferRow.amount));
+					_game->savedGame()->setAutosell(item, (transferRow.qtySrc == transferRow.amount));
 				}
 
 				break;
@@ -848,7 +848,7 @@ void SellState::btnOkClick(Action *)
 			if (_debriefingState != 0 && transferRow.type == TRANSFER_ITEM)
 			{
 				// disable autosell since we haven't sold any of the item.
-				_game->getSavedGame()->setAutosell((RuleItem*)transferRow.rule, false);
+				_game->savedGame()->setAutosell((RuleItem*)transferRow.rule, false);
 			}
 		}
 	}
@@ -1039,7 +1039,7 @@ void SellState::lstItemsMousePress(Action *action)
 						{
 							bool categoryHidden = (_cats[_cbxCategory->getSelected()] == "STR_FILTER_HIDDEN");
 
-							auto& hiddenMap = _game->getSavedGame()->getHiddenPurchaseItems();
+							auto& hiddenMap = _game->savedGame()->getHiddenPurchaseItems();
 							auto iter = hiddenMap.find(rule->getType());
 							bool hidden = false;
 							if (iter != hiddenMap.end())
@@ -1052,7 +1052,7 @@ void SellState::lstItemsMousePress(Action *action)
 								// not found = not hidden yet => mark it as hidden
 								hidden = true;
 							}
-							_game->getSavedGame()->setHiddenPurchaseItemsStatus(rule->getType(), hidden);
+							_game->savedGame()->setHiddenPurchaseItemsStatus(rule->getType(), hidden);
 
 							if (categoryHidden)
 							{

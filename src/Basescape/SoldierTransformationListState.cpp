@@ -52,7 +52,7 @@ namespace OpenXcom
 SoldierTransformationListState::SoldierTransformationListState(Base *base, ComboBox *screenActions) : _base(base), _screenActions(screenActions)
 {
 	// Calculate once
-	_game->getSavedGame()->getAvailableTransformations(_availableTransformations, _game->getMod(), _base);
+	_game->savedGame()->getAvailableTransformations(_availableTransformations, _game->getMod(), _base);
 
 	// Create objects
 	_window = new Window(this, 320, 200, 0, 0);
@@ -217,7 +217,7 @@ void SoldierTransformationListState::initList()
 		int projectsPossible = 10; // max
 		if (transformationRule->getCost() > 0)
 		{
-			int byFunds = _game->getSavedGame()->getFunds() / transformationRule->getCost();
+			int byFunds = _game->savedGame()->getFunds() / transformationRule->getCost();
 			projectsPossible = std::min(projectsPossible, byFunds);
 		}
 		for (auto& item : transformationRule->getRequiredItems())
@@ -254,7 +254,7 @@ void SoldierTransformationListState::initList()
 				++eligibleSoldiers;
 			}
 		}
-		for (const auto* deadMan : _game->getSavedGame()->getDeadSoldiers())
+		for (const auto* deadMan : _game->savedGame()->getDeadSoldiers())
 		{
 			if (deadMan->isEligibleForTransformation(transformationRule))
 			{

@@ -92,7 +92,7 @@ DogfightExperienceState::DogfightExperienceState()
 	_lstPilots->setDot(true);
 
 	_lstPilots->clearList();
-	for (auto* xbase : _game->getSavedGame()->getBases())
+	for (auto* xbase : _game->savedGame()->bases())
 	{
 		for (auto* soldier : xbase->getSoldiers())
 		{

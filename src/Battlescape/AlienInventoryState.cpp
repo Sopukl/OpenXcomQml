@@ -317,7 +317,7 @@ void AlienInventoryState::calculateMeleeWeapon(BattleUnit* unit, BattleItem* wea
 {
 	std::ostringstream ss;
 
-	TileEngine* tileEngine = _game->getSavedGame()->getSavedBattle()->getTileEngine();
+	TileEngine* tileEngine = _game->savedGame()->getSavedBattle()->getTileEngine();
 
 	// Start by finding the target for the check
 	int surroundingTilePositions[8][2] = {
@@ -335,9 +335,9 @@ void AlienInventoryState::calculateMeleeWeapon(BattleUnit* unit, BattleItem* wea
 	tileToCheck.x += surroundingTilePositions[dir][0];
 	tileToCheck.y += surroundingTilePositions[dir][1];
 	BattleUnit* meleeDodgeTarget = nullptr;
-	if (_game->getSavedGame()->getSavedBattle()->getTile(tileToCheck)) // Make sure the tile is in bounds
+	if (_game->savedGame()->getSavedBattle()->getTile(tileToCheck)) // Make sure the tile is in bounds
 	{
-		meleeDodgeTarget = _game->getSavedGame()->getSavedBattle()->selectUnit(tileToCheck);
+		meleeDodgeTarget = _game->savedGame()->getSavedBattle()->selectUnit(tileToCheck);
 	}
 
 	ss << ltr(weapon->getRules()->getType()) << " > ";
@@ -375,7 +375,7 @@ void AlienInventoryState::calculateRangedWeapon(BattleUnit* unit, BattleItem* we
 {
 	std::ostringstream ss;
 
-	TileEngine* tileEngine = _game->getSavedGame()->getSavedBattle()->getTileEngine();
+	TileEngine* tileEngine = _game->savedGame()->getSavedBattle()->getTileEngine();
 
 	// Start by finding 'targets' for the check
 	std::vector<BattleUnit*> closeQuartersTargetList;
@@ -395,9 +395,9 @@ void AlienInventoryState::calculateRangedWeapon(BattleUnit* unit, BattleItem* we
 		tileToCheck.x += surroundingTilePositions[dir][0];
 		tileToCheck.y += surroundingTilePositions[dir][1];
 
-		if (_game->getSavedGame()->getSavedBattle()->getTile(tileToCheck)) // Make sure the tile is in bounds
+		if (_game->savedGame()->getSavedBattle()->getTile(tileToCheck)) // Make sure the tile is in bounds
 		{
-			BattleUnit* closeQuartersTarget = _game->getSavedGame()->getSavedBattle()->selectUnit(tileToCheck);
+			BattleUnit* closeQuartersTarget = _game->savedGame()->getSavedBattle()->selectUnit(tileToCheck);
 			// Variable for LOS check
 			int checkDirection = tileEngine->getDirectionTo(tileToCheck, unit->getPosition());
 			if (closeQuartersTarget && unit->getFaction() != closeQuartersTarget->getFaction() // Unit must exist and not be same faction

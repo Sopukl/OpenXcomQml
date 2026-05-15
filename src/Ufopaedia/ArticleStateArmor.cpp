@@ -81,7 +81,7 @@ namespace OpenXcom
 		// optional background image
 		if (!defs->customPalette)
 		{
-			auto& bgImageName = itf->getBackgroundImage(_game->getMod(), _game->getSavedGame());
+			auto& bgImageName = itf->getBackgroundImage(_game->getMod(), _game->savedGame());
 			if (!bgImageName.empty())
 			{
 				_game->getMod()->getSurface(bgImageName)->blitNShade(_bg, 0, 0);

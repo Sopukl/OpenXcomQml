@@ -263,7 +263,7 @@ void ManufactureInfoState::initProfitInfo ()
 	{
 		for (auto& pair : manuf->getProducedItems())
 		{
-			int64_t adjustedSellValue = pair.first->getSellCostAdjusted(_base, _game->getSavedGame());
+			int64_t adjustedSellValue = pair.first->getSellCostAdjusted(_base, _game->savedGame());
 			adjustedSellValue *= pair.second;
 			_producedItemsValue += adjustedSellValue;
 		}
@@ -324,7 +324,7 @@ void ManufactureInfoState::btnStopClick(Action *)
 {
 	if (!_item && _production && _production->getRules()->getRefund())
 	{
-		_production->refundItem(_base, _game->getSavedGame(), _game->getMod());
+		_production->refundItem(_base, _game->savedGame(), _game->getMod());
 	}
 	_base->removeProduction(_production);
 	exitState();
@@ -338,7 +338,7 @@ void ManufactureInfoState::btnOkClick(Action *)
 {
 	if (_item)
 	{
-		_production->startItem(_base, _game->getSavedGame(), _game->getMod());
+		_production->startItem(_base, _game->savedGame(), _game->getMod());
 	}
 	_production->setSellItems(_btnSell->getPressed());
 	if (_btnFallback->getPressed())
@@ -652,7 +652,7 @@ void ManufactureInfoState::lessUnitClick(Action *action)
 				auto* manufRule = _production->getRules();
 				if (manufRule->getManufactureCost() > 0)
 				{
-					int64_t byFunds = _game->getSavedGame()->getFunds() / manufRule->getManufactureCost();
+					int64_t byFunds = _game->savedGame()->getFunds() / manufRule->getManufactureCost();
 					if (byFunds < 1000LL)
 					{
 						int byFundsInt = (int)byFunds;

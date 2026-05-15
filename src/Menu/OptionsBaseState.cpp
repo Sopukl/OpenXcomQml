@@ -71,7 +71,7 @@ OptionsBaseState::OptionsBaseState(OptionsOrigin origin) : _origin(origin), _gro
 	_txtTooltip = new Text(305, 25, 8, 148);
 
 	// Set palette
-	setInterface("optionsMenu", false, _game->getSavedGame() ? _game->getSavedGame()->getSavedBattle() : 0);
+	setInterface("optionsMenu", false, _game->savedGame() ? _game->savedGame()->getSavedBattle() : 0);
 
 	add(_window, "window", "optionsMenu");
 
@@ -151,9 +151,9 @@ void OptionsBaseState::restart(OptionsOrigin origin)
 	else if (origin == OPT_BATTLESCAPE)
 	{
 		BattlescapeState *origBattleState = 0;
-		if (_game->getSavedGame() != 0 && _game->getSavedGame()->getSavedBattle() != 0)
+		if (_game->savedGame() != 0 && _game->savedGame()->getSavedBattle() != 0)
 		{
-			origBattleState = _game->getSavedGame()->getSavedBattle()->getBattleState();
+			origBattleState = _game->savedGame()->getSavedBattle()->getBattleState();
 		}
 		if (origBattleState != 0)
 		{
@@ -164,7 +164,7 @@ void OptionsBaseState::restart(OptionsOrigin origin)
 		_game->setState(new GeoscapeState);
 		BattlescapeState *bs = new BattlescapeState;
 		_game->pushState(bs);
-		_game->getSavedGame()->getSavedBattle()->setBattleState(bs);
+		_game->savedGame()->getSavedBattle()->setBattleState(bs);
 		// Try to reactivate the touch buttons
 		bs->toggleTouchButtons(false, true);
 	}

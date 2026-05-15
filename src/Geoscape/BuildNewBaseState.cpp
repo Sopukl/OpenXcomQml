@@ -237,7 +237,7 @@ void BuildNewBaseState::globeClick(Action *action)
 			bool fakeUnderwaterBasesUnlocked = true;
 			if (!_game->getMod()->getFakeUnderwaterBaseUnlockResearch().empty())
 			{
-				fakeUnderwaterBasesUnlocked = _game->getSavedGame()->isResearched(_game->getMod()->getFakeUnderwaterBaseUnlockResearch(), true);
+				fakeUnderwaterBasesUnlocked = _game->savedGame()->isResearched(_game->getMod()->getFakeUnderwaterBaseUnlockResearch(), true);
 			}
 			bool fakeUnderwaterTexture = _globe->insideFakeUnderwaterTexture(lon, lat);
 			if ((_first || !fakeUnderwaterBasesUnlocked) && fakeUnderwaterTexture)
@@ -250,7 +250,7 @@ void BuildNewBaseState::globeClick(Action *action)
 				_base->setFakeUnderwater(fakeUnderwaterTexture);
 				_base->setLongitude(lon);
 				_base->setLatitude(lat);
-				_base->calculateServices(_game->getSavedGame());
+				_base->calculateServices(_game->savedGame());
 				for (auto* craft : _base->getCrafts())
 				{
 					craft->setLongitude(lon);

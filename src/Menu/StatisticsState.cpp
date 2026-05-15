@@ -104,7 +104,7 @@ T StatisticsState::sumVector(const std::vector<T> &vec) const
 
 void StatisticsState::listStats()
 {
-	SavedGame *save = _game->getSavedGame();
+	SavedGame *save = _game->savedGame();
 
 	std::ostringstream ss;
 	GameTime *time = save->getTime();
@@ -166,7 +166,7 @@ void StatisticsState::listStats()
 	worstScore = (worstScore == 9999) ? 0 : worstScore;
 
 	std::vector<Soldier*> allSoldiers;
-	for (auto* xbase : save->getBases())
+	for (auto* xbase : save->bases())
 	{
 		allSoldiers.insert(allSoldiers.end(), xbase->getSoldiers().begin(), xbase->getSoldiers().end());
 	}
@@ -267,9 +267,9 @@ void StatisticsState::listStats()
 		totalCrafts += std::max(0, ids[craftType] - 1);
 	}
 
-	int xcomBases = save->getBases().size() + xcomBasesLost;
+	int xcomBases = save->bases().size() + xcomBasesLost;
 	int currentScientists = 0, currentEngineers = 0;
-	for (const auto* xbase : save->getBases())
+	for (const auto* xbase : save->bases())
 	{
 		currentScientists += xbase->getTotalScientists();
 		currentEngineers += xbase->getTotalEngineers();
@@ -341,7 +341,7 @@ void StatisticsState::listStats()
  */
 void StatisticsState::btnOkClick(Action *)
 {
-	if (_game->getSavedGame()->getEnding() == END_NONE)
+	if (_game->savedGame()->getEnding() == END_NONE)
 	{
 		_game->popState();
 	}

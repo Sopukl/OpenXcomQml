@@ -122,7 +122,7 @@ UfoTrackerState::UfoTrackerState(GeoscapeState *state, Globe *globe) : _state(st
 	_lstObjects->onMouseClick((ActionHandler)&UfoTrackerState::lstObjectsMiddleClick, SDL_BUTTON_MIDDLE);
 
 	int row = 0;
-	for (auto* site : _game->getSavedGame()->getMissionSites())
+	for (auto* site : _game->savedGame()->getMissionSites())
 	{
 		if (!site->getDetected())
 			continue;
@@ -133,7 +133,7 @@ UfoTrackerState::UfoTrackerState(GeoscapeState *state, Globe *globe) : _state(st
 		row++;
 	}
 
-	for (auto* ufo : _game->getSavedGame()->getUfos())
+	for (auto* ufo : _game->savedGame()->getUfos())
 	{
 		if (!ufo->getDetected() || ufo->getStatus() == Ufo::IGNORE_ME)
 			continue;
@@ -161,7 +161,7 @@ UfoTrackerState::UfoTrackerState(GeoscapeState *state, Globe *globe) : _state(st
 		row++;
 	}
 
-	for (auto* ab : *_game->getSavedGame()->getAlienBases())
+	for (auto* ab : *_game->savedGame()->getAlienBases())
 	{
 		if (!ab->isDiscovered())
 			continue;

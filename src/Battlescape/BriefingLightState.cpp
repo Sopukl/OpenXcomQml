@@ -121,7 +121,7 @@ void BriefingLightState::checkStartingCondition(AlienDeployment *deployment)
 			{
 				Armor* armor = _game->getMod()->getArmor(armorType, false);
 				ArticleDefinition* article = _game->getMod()->getUfopaediaArticle(armor ? armor->getUfopediaType() : armorType, false);
-				if (article && Ufopaedia::isArticleAvailable(_game->getSavedGame(), article))
+				if (article && Ufopaedia::isArticleAvailable(_game->savedGame(), article))
 				{
 					std::string translation = ltr(armorType);
 					_armorNameList.push_back(std::make_pair(armorType, translation));

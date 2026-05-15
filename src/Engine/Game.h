@@ -25,6 +25,7 @@
 #include <QJsonArray>
 #include <QJsonObject>
 #include "SavesManager.h"
+#include "../Savegame/SavedGame.h"
 #include "../Savegame/Base.h"
 
 namespace OpenXcom
@@ -34,7 +35,6 @@ class State;
 class Screen;
 class Cursor;
 class Language;
-class SavedGame;
 class Mod;
 class ModInfo;
 class FpsCounter;
@@ -77,6 +77,7 @@ struct SaveDesc
         };
         Q_ENUM(GameState)
         Q_PROPERTY(GameState state READ state WRITE setGameState NOTIFY stateChanged FINAL)
+		Q_PROPERTY(SavedGame* savedGame READ savedGame WRITE setSavedGame NOTIFY savedGameChanged FINAL)
 
     private:
         enum ApplicationState { RUNNING = 0, SLOWED = 1, PAUSED = 2 } runningState = RUNNING;
@@ -137,7 +138,7 @@ struct SaveDesc
         /// Gets the currently loaded language.
         Language *getLanguage() const { return _lang; }
         /// Gets the currently loaded saved game.
-        SavedGame *getSavedGame() const { return _save; }
+		SavedGame *savedGame() const { return _save; }
         /// Sets a new saved game for the game.
         void setSavedGame(SavedGame *save);
         /// Gets the currently loaded mod.
@@ -233,6 +234,7 @@ struct SaveDesc
 		void stateChanged();
 		void createNewBase(OpenXcom::GeoscapeState* geoscape, OpenXcom::Base* base, bool isFirst);
 		void openPopupWindow(QString url);
+		void savedGameChanged();
 	};
 	inline Game game;
 }

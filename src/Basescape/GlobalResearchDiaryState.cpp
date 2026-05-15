@@ -134,7 +134,7 @@ GlobalResearchDiaryState::GlobalResearchDiaryState() : _doNotReset(false)
 	_btnOk->onKeyboardRelease((ActionHandler)&GlobalResearchDiaryState::btnQuickSearchToggle, options1.keyToggleQuickSearch());
 
 	// translate only once
-	auto& vec = _game->getSavedGame()->getResearchDiary();
+	auto& vec = _game->savedGame()->getResearchDiary();
 	int sortOrder = vec.size();
 	for (auto it = vec.rbegin(); it != vec.rend(); ++it)
 	{

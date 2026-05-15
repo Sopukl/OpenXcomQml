@@ -48,6 +48,11 @@ Window {
             function onOpenPopupWindow(path) {
                 Xcom.createWindow(path, gameWindow).open()
             }
+            function onSavedGameChanged() {
+                console.log(Game.savedGame)
+                console.log(Game.savedGame.bases)
+                console.log(Game.savedGame.bases.length)
+            }
         }
     }
 

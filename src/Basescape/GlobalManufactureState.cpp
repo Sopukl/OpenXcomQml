@@ -87,7 +87,7 @@ GlobalManufactureState::GlobalManufactureState(bool openedFromBasescape) : _open
 	_txtTitle->setAlign(ALIGN_CENTER);
 	_txtTitle->setText(ltr("STR_PRODUCTION_OVERVIEW"));
 
-	_txtFunds->setText(ltr("STR_CURRENT_FUNDS").arg(Unicode::formatFunding(_game->getSavedGame()->getFunds())));
+	_txtFunds->setText(ltr("STR_CURRENT_FUNDS").arg(Unicode::formatFunding(_game->savedGame()->getFunds())));
 
 	_txtItem->setText(ltr("STR_ITEM"));
 
@@ -200,7 +200,7 @@ void GlobalManufactureState::fillProductionList()
 	int allocatedEngineers = 0;
 	int freeWorkshops = 0;
 
-	for (Base *xbase : _game->getSavedGame()->getBases())
+	for (Base *xbase : _game->savedGame()->bases())
 	{
 		auto& baseProductions = xbase->getProductions();
 		if (!baseProductions.empty() || xbase->getEngineers() > 0)

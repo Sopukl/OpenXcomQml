@@ -61,7 +61,7 @@ SoldierInfoState::SoldierInfoState(Base *base, size_t soldierId, bool forceLimit
 {
 	if (_base == 0)
 	{
-		_list = &_game->getSavedGame()->getDeadSoldiers();
+		_list = &_game->savedGame()->getDeadSoldiers();
 		if (_soldierId >= _list->size())
 		{
 			_soldierId = 0;
@@ -292,7 +292,7 @@ SoldierInfoState::SoldierInfoState(Base *base, size_t soldierId, bool forceLimit
 	std::vector<RuleSoldierTransformation*> availableTransformations;
 	if (_base)
 	{
-		_game->getSavedGame()->getAvailableTransformations(availableTransformations, _game->getMod(), _base);
+		_game->savedGame()->getAvailableTransformations(availableTransformations, _game->getMod(), _base);
 	}
 	if (availableTransformations.empty())
 	{
@@ -482,7 +482,7 @@ void SoldierInfoState::init()
 
 	_btnArmor->setText(wsArmor);
 
-	bool showNastyButtons = !_readOnly && _game->getSavedGame()->getMonthsPassed() > -1 && !(_soldier->getCraft() && _soldier->getCraft()->getStatus() == "STR_OUT");
+	bool showNastyButtons = !_readOnly && _game->savedGame()->getMonthsPassed() > -1 && !(_soldier->getCraft() && _soldier->getCraft()->getStatus() == "STR_OUT");
 
 	_btnSack->setVisible(showNastyButtons);
 	_btnTransformations->setVisible(showNastyButtons && !_noTransformations);
@@ -543,7 +543,7 @@ void SoldierInfoState::init()
 
 	if (_game->getMod()->isManaFeatureEnabled())
 	{
-		if (_game->getSavedGame()->isManaUnlocked(_game->getMod()))
+		if (_game->savedGame()->isManaUnlocked(_game->getMod()))
 		{
 			formatStat(current->mana, max.mana, withArmor.mana, initial->mana, _numMana, _barMana);
 
@@ -559,7 +559,7 @@ void SoldierInfoState::init()
 		}
 	}
 
-	if (current->psiSkill > 0 || (options1.psiStrengthEval() && _game->getSavedGame()->isResearched(_game->getMod()->getPsiRequirements())))
+	if (current->psiSkill > 0 || (options1.psiStrengthEval() && _game->savedGame()->isResearched(_game->getMod()->getPsiRequirements())))
 	{
 		formatStat(current->psiStrength, max.psiStrength, withArmor.psiStrength, initial->psiStrength, _numPsiStrength, _barPsiStrength);
 
@@ -667,7 +667,7 @@ void SoldierInfoState::btnOkClick(Action *)
 {
 
 	_game->popState();
-	if (_game->getSavedGame()->getMonthsPassed() > -1 && options1.storageLimitsEnforced() && _base != 0 && _base->storesOverfull())
+	if (_game->savedGame()->getMonthsPassed() > -1 && options1.storageLimitsEnforced() && _base != 0 && _base->storesOverfull())
 	{
 		if (_forceLimits)
 		{

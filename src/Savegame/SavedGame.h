@@ -26,7 +26,8 @@
 #include "GameTime.h"
 #include "../Mod/RuleAlienMission.h"
 #include "../Mod/RuleEvent.h"
-#include "../Savegame/Craft.h"
+#include "Craft.h"
+#include "Base.h"
 #include "../Mod/RuleManufacture.h"
 #include "../Mod/RuleBaseFacility.h"
 #include "../Mod/RuleCraft.h"
@@ -39,7 +40,6 @@ namespace OpenXcom
 class Mod;
 class GameTime;
 class Country;
-class Base;
 class Region;
 class Ufo;
 class Waypoint;
@@ -101,8 +101,12 @@ struct SaveInfo
  * A saved game holds all the variable info in a game like funds,
  * game time, current bases and contents, world activities, score, etc.
  */
-class SavedGame
+class SavedGame: public QObject
 {
+	Q_OBJECT
+	Q_PROPERTY(std::vector<OpenXcom::Base*> bases READ bases NOTIFY basesChanged FINAL)
+
+	QML_ELEMENT
 public:
 	Country *debugCountry = nullptr;
 	Region *debugRegion = nullptr;
@@ -260,9 +264,9 @@ public:
 	/// Gets the list of regions.
 	std::vector<Region*>& getRegions();
 	/// Gets the list of bases.
-	std::vector<Base*>& getBases();
+	std::vector<Base*>& bases();
 	/// Gets the list of bases.
-	const std::vector<Base*>& getBases() const;
+	const std::vector<Base*>& bases() const;
 	/// Gets the total base maintenance.
 	int getBaseMaintenance() const;
 	/// Gets the list of UFOs.
@@ -535,6 +539,9 @@ public:
 	std::vector<std::string>& getUserNotes() { return _userNotes; }
 	/// Gets the list of geoscape debug log entries.
 	std::vector<std::string>& getGeoscapeDebugLog() { return _geoscapeDebugLog; }
+  signals:
+	void basesChanged();
 };
 
 }
+Q_DECLARE_METATYPE(std::vector<OpenXcom::Base*>)

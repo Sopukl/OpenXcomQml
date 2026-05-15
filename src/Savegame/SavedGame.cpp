@@ -1294,7 +1294,7 @@ std::vector<Region*>& SavedGame::getRegions()
  * Returns the list of player bases.
  * @return Pointer to base list.
  */
-std::vector<Base*>& SavedGame::getBases()
+std::vector<Base*>& SavedGame::bases()
 {
 	return _bases;
 }
@@ -1329,7 +1329,7 @@ void SavedGame::setSelectedBase(size_t base)
  * Returns an immutable list of player bases.
  * @return Pointer to base list.
  */
-const std::vector<Base*>& SavedGame::getBases() const
+const std::vector<Base*>& SavedGame::bases() const
 {
 	return _bases;
 }

@@ -77,7 +77,7 @@ TransferBaseState::TransferBaseState(Base *base, DebriefingState *debriefingStat
 	_txtTitle->setAlign(ALIGN_CENTER);
 	_txtTitle->setText(ltr("STR_SELECT_DESTINATION_BASE"));
 
-	_txtFunds->setText(ltr("STR_CURRENT_FUNDS").arg(Unicode::formatFunding(_game->getSavedGame()->getFunds())));
+	_txtFunds->setText(ltr("STR_CURRENT_FUNDS").arg(Unicode::formatFunding(_game->savedGame()->getFunds())));
 
 	_txtName->setText(ltr("STR_NAME"));
 	_txtName->setBig();
@@ -92,13 +92,13 @@ TransferBaseState::TransferBaseState(Base *base, DebriefingState *debriefingStat
 	_lstBases->onMouseClick((ActionHandler)&TransferBaseState::lstBasesClick);
 
 	int row = 0;
-	for (auto* xbase : _game->getSavedGame()->getBases())
+	for (auto* xbase : _game->savedGame()->bases())
 	{
 		if (xbase != _base)
 		{
 			// Get area
 			std::string area;
-			for (const auto* region : _game->getSavedGame()->getRegions())
+			for (const auto* region : _game->savedGame()->getRegions())
 			{
 				if (region->getRules()->insideRegion(xbase->getLongitude(), xbase->getLatitude()))
 				{
