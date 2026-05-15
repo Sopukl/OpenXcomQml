@@ -205,7 +205,7 @@ void Craft::load(const YAML::YamlNodeReader& node, const ScriptGlobal *shared, c
 		}
 		else if (type == "STR_UFO")
 		{
-			for (auto* ufo : *save->getUfos())
+			for (auto* ufo : save->getUfos())
 			{
 				if (ufo->getId() == id)
 				{
@@ -216,7 +216,7 @@ void Craft::load(const YAML::YamlNodeReader& node, const ScriptGlobal *shared, c
 		}
 		else if (type == "STR_WAY_POINT")
 		{
-			for (auto* wp : *save->getWaypoints())
+			for (auto* wp : save->getWaypoints())
 			{
 				if (wp->getId() == id)
 				{

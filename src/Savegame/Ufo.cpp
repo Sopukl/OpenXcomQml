@@ -217,7 +217,7 @@ void Ufo::finishLoading(const YAML::YamlNodeReader& reader, SavedGame &save)
 				int uniqueUfoId = dest["uniqueId"].readVal(0);
 				if (uniqueUfoId > 0)
 				{
-					for (auto* ufo : *save.getUfos())
+					for (auto* ufo : save.getUfos())
 					{
 						if (ufo->getUniqueId() == uniqueUfoId)
 						{

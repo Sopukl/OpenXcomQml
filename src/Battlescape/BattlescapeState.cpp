@@ -3552,7 +3552,7 @@ void BattlescapeState::finishBattle(bool abort, int inExitArea)
 	AlienDeployment *ruleDeploy = _game->getMod()->getDeployment(_save->getMissionType());
 	if (!ruleDeploy)
 	{
-		for (auto* ufo : *_game->getSavedGame()->getUfos())
+		for (auto* ufo : _game->getSavedGame()->getUfos())
 		{
 			if (ufo->isInBattlescape())
 			{

@@ -635,7 +635,7 @@ void GeoscapeState::handle(Action *action)
 			if (action->getDetails()->key.keysym.sym == SDLK_7)
 			{
 				_txtDebug->setText("BIG BROTHER SEES ALL");
-				for (auto* ufo : *_game->getSavedGame()->getUfos())
+				for (auto* ufo : _game->getSavedGame()->getUfos())
 				{
 					ufo->setDetected(true);
 					ufo->setHyperDetected(true);
@@ -973,7 +973,7 @@ void GeoscapeState::time5Seconds()
 
 	// Handle UFO logic
 	bool ufoIsAttacking = false;
-	for (auto* ufo : *_game->getSavedGame()->getUfos())
+	for (auto* ufo : _game->getSavedGame()->getUfos())
 	{
 		switch (ufo->getStatus())
 		{
@@ -1449,7 +1449,7 @@ void GeoscapeState::time5Seconds()
 	}
 
 	// Clean up dead UFOs and end dogfights which were minimized.
-	Collections::deleteIf(*_game->getSavedGame()->getUfos(), _game->getSavedGame()->getUfos()->size(),
+	Collections::deleteIf(_game->getSavedGame()->getUfos(), _game->getSavedGame()->getUfos().size(),
 		[&](Ufo* ufo)
 		{
 			if (ufo->getStatus() == Ufo::DESTROYED)
@@ -1484,7 +1484,7 @@ void GeoscapeState::time5Seconds()
 	}
 
 	// Clean up unused waypoints
-	Collections::deleteIf(*_game->getSavedGame()->getWaypoints(), _game->getSavedGame()->getWaypoints()->size(),
+	Collections::deleteIf(_game->getSavedGame()->getWaypoints(), _game->getSavedGame()->getWaypoints().size(),
 		[&](Waypoint* way)
 		{
 			return way->getFollowers()->empty();
@@ -1584,8 +1584,8 @@ void GeoscapeState::time10Minutes()
 		for (auto* xbase : _game->getSavedGame()->getBases())
 		{
 			// Find a UFO that detected this base, if any.
-			auto uu = std::find_if (_game->getSavedGame()->getUfos()->begin(), _game->getSavedGame()->getUfos()->end(), DetectXCOMBase(*xbase));
-			if (uu != _game->getSavedGame()->getUfos()->end())
+			auto uu = std::find_if (_game->getSavedGame()->getUfos().begin(), _game->getSavedGame()->getUfos().end(), DetectXCOMBase(*xbase));
+			if (uu != _game->getSavedGame()->getUfos().end())
 			{
 				// Base found
 				xbase->setRetaliationTarget(true);
@@ -1599,8 +1599,8 @@ void GeoscapeState::time10Minutes()
 		for (auto* xbase : _game->getSavedGame()->getBases())
 		{
 			// Find a UFO that detected this base, if any.
-			auto uu = std::find_if (_game->getSavedGame()->getUfos()->begin(), _game->getSavedGame()->getUfos()->end(), DetectXCOMBase(*xbase));
-			if (uu != _game->getSavedGame()->getUfos()->end())
+			auto uu = std::find_if (_game->getSavedGame()->getUfos().begin(), _game->getSavedGame()->getUfos().end(), DetectXCOMBase(*xbase));
+			if (uu != _game->getSavedGame()->getUfos().end())
 			{
 				discovered[_game->getSavedGame()->locateRegion(*xbase)] = xbase;
 			}
@@ -1623,7 +1623,7 @@ void GeoscapeState::ufoHuntingAndEscorting()
 {
 	auto* activeCrafts = updateActiveCrafts();
 
-	for (auto* ufo : *_game->getSavedGame()->getUfos())
+	for (auto* ufo : _game->getSavedGame()->getUfos())
 	{
 		if (ufo->isHunterKiller() && ufo->getStatus() == Ufo::FLYING)
 		{
@@ -1699,7 +1699,7 @@ void GeoscapeState::ufoHuntingAndEscorting()
 			if (ufo->isEscort() && !ufo->isHunting() && !ufo->isEscorting())
 			{
 				// Find a UFO to escort
-				for (auto* ufoToBeEscorted : *_game->getSavedGame()->getUfos())
+				for (auto* ufoToBeEscorted : _game->getSavedGame()->getUfos())
 				{
 					// From the same mission
 					if (ufoToBeEscorted->getMission()->getId() == ufo->getMission()->getId())
@@ -1923,7 +1923,7 @@ void GeoscapeState::time30Minutes()
 	);
 
 	// Handle crashed UFOs expiration
-	for (auto* ufo : *_game->getSavedGame()->getUfos())
+	for (auto* ufo : _game->getSavedGame()->getUfos())
 	{
 		if (ufo->getStatus() == Ufo::CRASHED)
 		{
@@ -1965,7 +1965,7 @@ void GeoscapeState::time30Minutes()
 							if (w != 0 && w->getId() == 0)
 							{
 								w->setId(_game->getSavedGame()->getId("STR_WAY_POINT"));
-								_game->getSavedGame()->getWaypoints()->push_back(w);
+								_game->getSavedGame()->getWaypoints().push_back(w);
 							}
 							xcraft->setDestination(w);
 							xcraft->setStatus("STR_OUT");
@@ -1988,7 +1988,7 @@ void GeoscapeState::time30Minutes()
 	auto* activeCrafts = updateActiveCrafts();
 
 	// Handle UFO detection and give aliens points
-	for (auto* ufo : *_game->getSavedGame()->getUfos())
+	for (auto* ufo : _game->getSavedGame()->getUfos())
 	{
 		// instant retaliation missions are ignored (UFOs shouldn't be detected)
 		if (ufo->getMission()->getRules().getObjective() == OBJECTIVE_INSTANT_RETALIATION)

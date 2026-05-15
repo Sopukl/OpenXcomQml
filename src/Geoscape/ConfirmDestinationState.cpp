@@ -359,7 +359,7 @@ void ConfirmDestinationState::btnOkClick(Action *)
 	if (w != 0 && w->getId() == 0)
 	{
 		w->setId(_game->getSavedGame()->getId("STR_WAY_POINT"));
-		_game->getSavedGame()->getWaypoints()->push_back(w);
+		_game->getSavedGame()->getWaypoints().push_back(w);
 	}
 
 	// first selected _craft (first shift-clicked craft) is wing leader; the other crafts follow the wing leader

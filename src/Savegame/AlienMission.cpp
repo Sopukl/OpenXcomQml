@@ -191,7 +191,7 @@ void AlienMission::think(Game &engine, const Globe &globe)
 	{
 		//Some missions may not spawn a UFO!
 		ufo->setMissionWaveNumber(_nextWave);
-		game.getUfos()->push_back(ufo);
+		game.getUfos().push_back(ufo);
 	}
 	else if ((mod.getDeployment(wave.ufoType) && !mod.getUfo(wave.ufoType) && !mod.getDeployment(wave.ufoType)->getMarkerName().empty()) // a mission site that we want to spawn directly
 			|| (_rule.getObjective() == OBJECTIVE_SITE && wave.objective)) // or we want to spawn one at random according to our terrain
@@ -635,7 +635,7 @@ Ufo *AlienMission::spawnUfo(SavedGame &game, const Mod &mod, const Globe &globe,
 		{
 			ufo->setEscort(true);
 			// Find a UFO to escort
-			for (auto* ufoToBeEscorted : *game.getUfos())
+			for (auto* ufoToBeEscorted : game.getUfos())
 			{
 				// From the same mission
 				if (ufoToBeEscorted->getMission()->getId() == ufo->getMission()->getId())
@@ -696,7 +696,7 @@ Ufo *AlienMission::spawnUfo(SavedGame &game, const Mod &mod, const Globe &globe,
 	{
 		ufo->setEscort(true);
 		// Find a UFO to escort
-		for (auto* ufoToBeEscorted : *game.getUfos())
+		for (auto* ufoToBeEscorted : game.getUfos())
 		{
 			// From the same mission
 			if (ufoToBeEscorted->getMission()->getId() == ufo->getMission()->getId())

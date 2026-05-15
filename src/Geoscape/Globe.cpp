@@ -812,7 +812,7 @@ std::vector<Target*> Globe::getTargets(int x, int y, bool craft, Craft *currentC
 			}
 		}
 	}
-	for (auto* ufo : *_game->getSavedGame()->getUfos())
+	for (auto* ufo : _game->getSavedGame()->getUfos())
 	{
 		if (!ufo->getDetected() || ufo->getStatus() == Ufo::IGNORE_ME)
 			continue;
@@ -822,7 +822,7 @@ std::vector<Target*> Globe::getTargets(int x, int y, bool craft, Craft *currentC
 			v.push_back(ufo);
 		}
 	}
-	for (auto* wp : *_game->getSavedGame()->getWaypoints())
+	for (auto* wp : _game->getSavedGame()->getWaypoints())
 	{
 		if (targetNear(wp, x, y))
 		{
@@ -1243,7 +1243,7 @@ void Globe::drawRadars()
 	if (_game->getMod()->getDrawEnemyRadarCircles() > 0)
 	{
 		// Draw radars around UFO hunter-killers
-		for (auto* ufo : *_game->getSavedGame()->getUfos())
+		for (auto* ufo : _game->getSavedGame()->getUfos())
 		{
 			if (ufo->isHunterKiller() && ufo->getDetected() && ufo->getStatus() != Ufo::IGNORE_ME)
 			{
@@ -1688,7 +1688,7 @@ void Globe::drawFlights()
 	}
 
 	// Draw the hunting UFO flight paths
-	for (auto* ufo : *_game->getSavedGame()->getUfos())
+	for (auto* ufo : _game->getSavedGame()->getUfos())
 	{
 		if (ufo->getDestination() && (ufo->isHunting() || _game->getSavedGame()->getDebugMode()) && ufo->getDetected() && ufo->getStatus() != Ufo::IGNORE_ME)
 		{
@@ -1766,7 +1766,7 @@ void Globe::drawMarkers()
 	}
 
 	// Draw the waypoint markers
-	for (auto* wp : *_game->getSavedGame()->getWaypoints())
+	for (auto* wp : _game->getSavedGame()->getWaypoints())
 	{
 		drawTarget(wp, _markers);
 	}
@@ -1784,7 +1784,7 @@ void Globe::drawMarkers()
 	}
 
 	// Draw the UFO markers
-	for (auto* ufo : *_game->getSavedGame()->getUfos())
+	for (auto* ufo : _game->getSavedGame()->getUfos())
 	{
 		if (ufo->getStatus() == Ufo::IGNORE_ME) continue;
 		drawTarget(ufo, _markers);

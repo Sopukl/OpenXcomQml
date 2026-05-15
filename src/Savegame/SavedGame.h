@@ -266,11 +266,11 @@ public:
 	/// Gets the total base maintenance.
 	int getBaseMaintenance() const;
 	/// Gets the list of UFOs.
-	std::vector<Ufo*> *getUfos();
+	std::vector<Ufo*>& getUfos();
 	/// Gets the list of UFOs.
-	const std::vector<Ufo*> *getUfos() const;
+	const std::vector<Ufo*>& getUfos() const;
 	/// Gets the list of waypoints.
-	std::vector<Waypoint*> *getWaypoints();
+	std::vector<Waypoint*>& getWaypoints();
 	/// Gets the list of mission sites.
 	std::vector<MissionSite*> *getMissionSites();
 	/// Gets the current battle game.

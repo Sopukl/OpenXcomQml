@@ -133,7 +133,7 @@ UfoTrackerState::UfoTrackerState(GeoscapeState *state, Globe *globe) : _state(st
 		row++;
 	}
 
-	for (auto* ufo : *_game->getSavedGame()->getUfos())
+	for (auto* ufo : _game->getSavedGame()->getUfos())
 	{
 		if (!ufo->getDetected() || ufo->getStatus() == Ufo::IGNORE_ME)
 			continue;

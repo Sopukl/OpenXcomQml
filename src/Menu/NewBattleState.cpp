@@ -661,7 +661,7 @@ void NewBattleState::btnOkClick(Action *)
 			u->setStatus(Ufo::CRASHED);
 			bgame->setMissionType("STR_UFO_CRASH_RECOVERY");
 		}
-		_game->getSavedGame()->getUfos()->push_back(u);
+		_game->getSavedGame()->getUfos().push_back(u);
 	}
 	// mission site
 	else

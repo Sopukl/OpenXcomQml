@@ -674,7 +674,7 @@ void SaveConverter::loadDatLoc()
 		case TARGET_WAYPOINT:
 			waypoint = new Waypoint();
 			waypoint->setId(id);
-			_save->getWaypoints()->push_back(waypoint);
+			_save->getWaypoints().push_back(waypoint);
 			target = waypoint;
 			break;
 		case TARGET_TERROR:
@@ -1020,7 +1020,7 @@ void SaveConverter::loadDatCraft()
 					ufo->setSecondsRemaining(0);
 				}
 
-				_save->getUfos()->push_back(ufo);
+				_save->getUfos().push_back(ufo);
 			}
 		}
 	}

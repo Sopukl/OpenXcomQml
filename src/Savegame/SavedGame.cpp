@@ -1352,27 +1352,27 @@ int SavedGame::getBaseMaintenance() const
  * Returns the list of alien UFOs.
  * @return Pointer to UFO list.
  */
-std::vector<Ufo*> *SavedGame::getUfos()
+std::vector<Ufo*>& SavedGame::getUfos()
 {
-	return &_ufos;
+	return _ufos;
 }
 
 /**
  * Returns the list of alien UFOs.
  * @return Pointer to UFO list.
  */
-const std::vector<Ufo*> *SavedGame::getUfos() const
+const std::vector<Ufo*>& SavedGame::getUfos() const
 {
-	return &_ufos;
+	return _ufos;
 }
 
 /**
  * Returns the list of craft waypoints.
  * @return Pointer to waypoint list.
  */
-std::vector<Waypoint*> *SavedGame::getWaypoints()
+std::vector<Waypoint*>& SavedGame::getWaypoints()
 {
-	return &_waypoints;
+	return _waypoints;
 }
 
 /**

@@ -1015,7 +1015,7 @@ void DebriefingState::prepareDebriefing()
 	// OXCE: Don't forget about UFO landings/crash sites
 	if (!ruleDeploy)
 	{
-		for (auto* ufo : *save->getUfos())
+		for (auto* ufo : save->getUfos())
 		{
 			if (ufo->isInBattlescape())
 			{
@@ -1177,7 +1177,7 @@ void DebriefingState::prepareDebriefing()
 				}
 			}
 			// Loop through the UFOs and see which one is sitting on top of the base... that is probably the one attacking you.
-			for (auto* ufo : *save->getUfos())
+			for (auto* ufo : save->getUfos())
 			{
 				if (AreSame(ufo->getLongitude(), base->getLongitude()) && AreSame(ufo->getLatitude(), base->getLatitude()))
 				{
@@ -1321,7 +1321,7 @@ void DebriefingState::prepareDebriefing()
 	}
 
 	// if it's a UFO, let's see what happens to it
-	for (auto ufoIt = save->getUfos()->begin(); ufoIt != save->getUfos()->end(); ++ufoIt)
+	for (auto ufoIt = save->getUfos().begin(); ufoIt != save->getUfos().end(); ++ufoIt)
 	{
 		Ufo* ufo = (*ufoIt);
 		if (ufo->isInBattlescape())
@@ -1351,7 +1351,7 @@ void DebriefingState::prepareDebriefing()
 					}
 				}
 				delete ufo;
-				save->getUfos()->erase(ufoIt);
+				save->getUfos().erase(ufoIt);
 			}
 			break;
 		}
