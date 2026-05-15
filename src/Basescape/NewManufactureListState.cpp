@@ -394,7 +394,7 @@ void NewManufactureListState::fillProductionList(bool refreshCategories)
 	_game->getSavedGame()->getAvailableProductions(_possibleProductions, _game->getMod(), _base, basicFilter);
 	_displayedStrings.clear();
 
-	ItemContainer * itemContainer (_base->getStorageItems());
+	ItemContainer& itemContainer = _base->getStorageItems();
 	int row = 0;
 	bool hasUnseen = false;
 	for (const auto* manuf : _possibleProductions)
@@ -445,7 +445,7 @@ void NewManufactureListState::fillProductionList(bool refreshCategories)
 			}
 			for (auto& iter : manuf->getRequiredItems())
 			{
-				productionPossible = std::min(productionPossible, itemContainer->getItem(iter.first) / iter.second);
+				productionPossible = std::min(productionPossible, itemContainer.getItem(iter.first) / iter.second);
 			}
 			std::ostringstream ss;
 			if (productionPossible <= 0)

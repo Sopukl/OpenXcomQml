@@ -964,7 +964,7 @@ bool InventoryState::tryArmorChange(const std::string& armorName)
 			// is the armor physically available?
 			if (next->getStoreItem() && prev->getStoreItem() != next->getStoreItem())
 			{
-				if (_base->getStorageItems()->getItem(next->getStoreItem()) <= 0)
+				if (_base->getStorageItems().getItem(next->getStoreItem()) <= 0)
 				{
 					armorAvailable = false;
 				}
@@ -1005,11 +1005,11 @@ bool InventoryState::tryArmorChange(const std::string& armorName)
 		{
 			if (prev->getStoreItem())
 			{
-				_base->getStorageItems()->addItem(prev->getStoreItem());
+				_base->getStorageItems().addItem(prev->getStoreItem());
 			}
 			if (next->getStoreItem())
 			{
-				_base->getStorageItems()->removeItem(next->getStoreItem());
+				_base->getStorageItems().removeItem(next->getStoreItem());
 			}
 		}
 		if (options1.oxceAlternateCraftEquipmentManagement() && next->getSize() > prev->getSize())
@@ -2083,13 +2083,13 @@ void InventoryState::onMoveGroundInventoryToBase(Action *)
 				if (weaponType != ammoType)
 				{
 					c->getItems()->removeItem(ammoType);
-					_base->getStorageItems()->addItem(ammoType);
+					_base->getStorageItems().addItem(ammoType);
 				}
 			}
 		}
 		// and the weapon as last
 		c->getItems()->removeItem(weaponType);
-		_base->getStorageItems()->addItem(weaponType);
+		_base->getStorageItems().addItem(weaponType);
 	}
 
 	// step 2: clear ground

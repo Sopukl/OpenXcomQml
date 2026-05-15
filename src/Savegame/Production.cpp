@@ -120,7 +120,7 @@ bool Production::haveEnoughMaterialsForOneMoreUnit(Base * b, const Mod *m) const
 {
 	for (const auto& i : _rules->getRequiredItems())
 	{
-		if (b->getStorageItems()->getItem(i.first) < i.second)
+		if (b->getStorageItems().getItem(i.first) < i.second)
 			return false;
 	}
 	for (const auto& i : _rules->getRequiredCrafts())
@@ -207,7 +207,7 @@ productionProgress_e Production::step(Base * b, SavedGame * g, const Mod *m, Lan
 						}
 						else
 						{
-							b->getStorageItems()->addItem(i.first, i.second);
+							b->getStorageItems().addItem(i.first, i.second);
 							if (i.first->getBattleType() == BT_NONE)
 							{
 								for (auto* c : b->getCrafts())
@@ -250,7 +250,7 @@ productionProgress_e Production::step(Base * b, SavedGame * g, const Mod *m, Lan
 							}
 							else
 							{
-								b->getStorageItems()->addItem(i.first, i.second);
+								b->getStorageItems().addItem(i.first, i.second);
 								if (i.first->getBattleType() == BT_NONE)
 								{
 									for (auto* c : b->getCrafts())
@@ -352,7 +352,7 @@ void Production::startItem(Base * b, SavedGame * g, const Mod *m) const
 	g->setFunds(g->getFunds() - _rules->getManufactureCost());
 	for (const auto& i : _rules->getRequiredItems())
 	{
-		b->getStorageItems()->removeItem(i.first, i.second);
+		b->getStorageItems().removeItem(i.first, i.second);
 	}
 	for (const auto& i : _rules->getRequiredCrafts())
 	{
@@ -375,7 +375,7 @@ void Production::refundItem(Base * b, SavedGame * g, const Mod *m) const
 	g->setFunds(g->getFunds() + _rules->getManufactureCost());
 	for (const auto& pair : _rules->getRequiredItems())
 	{
-		b->getStorageItems()->addItem(pair.first, pair.second);
+		b->getStorageItems().addItem(pair.first, pair.second);
 	}
 	//for (const auto& pair : _rules->getRequiredCrafts())
 	//{

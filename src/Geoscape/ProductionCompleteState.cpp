@@ -220,9 +220,9 @@ void ProductionCompleteState::lstSummaryClick(Action *)
 	if (itemRule)
 	{
 		// check if we sold something in the meantime
-		if (_base->getStorageItems()->getItem(itemRule) < itemCount)
+		if (_base->getStorageItems().getItem(itemRule) < itemCount)
 		{
-			itemCount = _base->getStorageItems()->getItem(itemRule);
+			itemCount = _base->getStorageItems().getItem(itemRule);
 			_randomProductionInfo[itemName] -= itemCount; // just decrease amount by the maximum we can sell
 		}
 		else
@@ -236,7 +236,7 @@ void ProductionCompleteState::lstSummaryClick(Action *)
 			int64_t adjustedSellValue = itemRule->getSellCostAdjusted(_base, _game->getSavedGame());
 			adjustedSellValue *= itemCount;
 			_game->getSavedGame()->setFunds(_game->getSavedGame()->getFunds() + adjustedSellValue);
-			_base->getStorageItems()->removeItem(itemRule, itemCount);
+			_base->getStorageItems().removeItem(itemRule, itemCount);
 		}
 	}
 

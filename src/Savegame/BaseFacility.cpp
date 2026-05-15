@@ -230,7 +230,7 @@ const RuleItem* BaseFacility::rearm()
 	const RuleItem* ammoItem = nullptr;
 	if (_rules->getAmmoItem())
 	{
-		int ammoAvailable = _base->getStorageItems()->getItem(_rules->getAmmoItem());
+		int ammoAvailable = _base->getStorageItems().getItem(_rules->getAmmoItem());
 		if (ammoAvailable < ammoUsed)
 		{
 			if (!_ammoMissingReported)
@@ -240,7 +240,7 @@ const RuleItem* BaseFacility::rearm()
 			}
 			ammoUsed = ammoAvailable;
 		}
-		_base->getStorageItems()->removeItem(_rules->getAmmoItem(), ammoUsed);
+		_base->getStorageItems().removeItem(_rules->getAmmoItem(), ammoUsed);
 	}
 
 	_ammo += ammoUsed;

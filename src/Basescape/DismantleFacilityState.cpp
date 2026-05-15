@@ -137,7 +137,7 @@ void DismantleFacilityState::btnOkClick(Action *)
 			_game->getSavedGame()->setFunds(_game->getSavedGame()->getFunds() + _fac->getRules()->getBuildCost());
 			for (auto& pair : itemCost)
 			{
-				_base->getStorageItems()->addItem(_game->getMod()->getItem(pair.first, true), pair.second.first);
+				_base->getStorageItems().addItem(_game->getMod()->getItem(pair.first, true), pair.second.first);
 			}
 		}
 		else
@@ -146,13 +146,13 @@ void DismantleFacilityState::btnOkClick(Action *)
 			_game->getSavedGame()->setFunds(_game->getSavedGame()->getFunds() + _fac->getRules()->getRefundValue());
 			for (auto& pair : itemCost)
 			{
-				_base->getStorageItems()->addItem(_game->getMod()->getItem(pair.first, true), pair.second.second);
+				_base->getStorageItems().addItem(_game->getMod()->getItem(pair.first, true), pair.second.second);
 			}
 		}
 		if (_fac->getAmmo() > 0)
 		{
 			// Full refund of loaded ammo
-			_base->getStorageItems()->addItem(_fac->getRules()->getAmmoItem(), _fac->getAmmo());
+			_base->getStorageItems().addItem(_fac->getRules()->getAmmoItem(), _fac->getAmmo());
 			_fac->setAmmo(0);
 		}
 

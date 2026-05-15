@@ -424,13 +424,13 @@ void NewBattleState::load(const std::string &filename)
 				save->makeAllResearchDiscovered(mod);
 
 				// Generate items
-				base->getStorageItems()->clear();
+				base->getStorageItems().clear();
 				for (auto& itemType : mod->getItemsList())
 				{
 					RuleItem *rule = _game->getMod()->getItem(itemType);
 					if (rule->getBattleType() != BT_CORPSE && rule->isRecoverable())
 					{
-						base->getStorageItems()->addItem(rule, 1);
+						base->getStorageItems().addItem(rule, 1);
 					}
 				}
 
@@ -522,7 +522,7 @@ void NewBattleState::initSave()
 		delete xcraft;
 	}
 	base->getCrafts().clear();
-	base->getStorageItems()->clear();
+	base->getStorageItems().clear();
 
 	_craft = new Craft(mod->getCraft(_crafts[_cbxCraft->getSelected()]), base, 1);
 	base->getCrafts().push_back(_craft);
@@ -578,7 +578,7 @@ void NewBattleState::initSave()
 		if (rule->getBattleType() != BT_CORPSE && rule->isRecoverable())
 		{
 			int howMany = rule->getBattleType() == BT_AMMO ? 2 : 1;
-			base->getStorageItems()->addItem(rule, howMany);
+			base->getStorageItems().addItem(rule, howMany);
 			if (rule->getBattleType() != BT_NONE && rule->isInventoryItem())
 			{
 				_craft->getItems()->addItem(rule, howMany);

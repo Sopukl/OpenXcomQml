@@ -233,7 +233,7 @@ void ManageAlienContainmentState::resetListAndTotals()
 	{
 		RuleItem *rule = _game->getMod()->getItem(itemType, true);
 
-		int qty = _base->getStorageItems()->getItem(rule);
+		int qty = _base->getStorageItems().getItem(rule);
 		if (qty > 0 && rule->isAlien() && rule->getPrisonType() == _prisonType)
 		{
 			_qtys.push_back(0);
@@ -355,7 +355,7 @@ void ManageAlienContainmentState::dealWithSelectedAliens(bool sell)
 		if (_qtys[i] > 0)
 		{
 			// remove the aliens
-			_base->getStorageItems()->removeItem(_aliens[i], _qtys[i]);
+			_base->getStorageItems().removeItem(_aliens[i], _qtys[i]);
 
 			if (sell)
 			{
@@ -372,7 +372,7 @@ void ManageAlienContainmentState::dealWithSelectedAliens(bool sell)
 					auto* ruleCorpse = ruleUnit->getArmor()->getCorpseGeoscape();
 					if (ruleCorpse && ruleCorpse->isRecoverable() && ruleCorpse->isCorpseRecoverable())
 					{
-						_base->getStorageItems()->addItem(ruleCorpse, _qtys[i]);
+						_base->getStorageItems().addItem(ruleCorpse, _qtys[i]);
 					}
 				}
 			}
@@ -548,7 +548,7 @@ void ManageAlienContainmentState::lstItemsMousePress(Action *action)
  */
 int ManageAlienContainmentState::getQuantity()
 {
-	return _base->getStorageItems()->getItem(_aliens[_sel]);
+	return _base->getStorageItems().getItem(_aliens[_sel]);
 }
 
 /**

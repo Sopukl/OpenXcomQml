@@ -359,11 +359,11 @@ void GeoscapeEventState::eventLogic()
 			int removed = 0;
 			for (auto* xbase : *save->getBases())
 			{
-				int bQty = xbase->getStorageItems()->getItem(r);
+				int bQty = xbase->getStorageItems().getItem(r);
 				if (bQty > 0)
 				{
 					int toRemove = std::min(bQty, ti.second);
-					xbase->getStorageItems()->removeItem(r, toRemove);
+					xbase->getStorageItems().removeItem(r, toRemove);
 					ti.second -= toRemove;
 					removed += toRemove;
 				}
@@ -395,7 +395,7 @@ void GeoscapeEventState::eventLogic()
 		}
 		else if (options1.oxceGeoscapeEventsInstantDelivery())
 		{
-			hq->getStorageItems()->addItem(mod->getItem(ti.first, true), ti.second);
+			hq->getStorageItems().addItem(mod->getItem(ti.first, true), ti.second);
 
 			std::ostringstream ss;
 			ss << ti.second;

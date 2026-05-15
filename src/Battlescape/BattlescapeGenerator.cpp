@@ -984,7 +984,7 @@ void BattlescapeGenerator::deployXCOM(const RuleStartingCondition* startingCondi
 	if (!isPreview && _base != 0)
 	{
 		ItemContainer *rememberMe = _save->getBaseStorageItems();
-		for (const auto& pair : *_base->getStorageItems()->getContents())
+		for (const auto& pair : *_base->getStorageItems().getContents())
 		{
 			rememberMe->addItem(pair.first, pair.second);
 		}
@@ -1017,12 +1017,12 @@ void BattlescapeGenerator::deployXCOM(const RuleStartingCondition* startingCondi
 				if (hwpDisabled)
 				{
 					// send disabled vehicles back to base
-					_base->getStorageItems()->addItem(item, 1);
+					_base->getStorageItems().addItem(item, 1);
 					// ammo too, if necessary
 					if (item->getVehicleClipAmmo())
 					{
 						// Calculate how much ammo needs to be added to the base.
-						_base->getStorageItems()->addItem(item->getVehicleClipAmmo(), item->getVehicleClipsLoaded());
+						_base->getStorageItems().addItem(item->getVehicleClipAmmo(), item->getVehicleClipsLoaded());
 					}
 				}
 				else if (item->getVehicleUnit()->getArmor()->getSize() > 1 || Mod::EXTENDED_HWP_LOAD_ORDER == false)
@@ -1235,7 +1235,7 @@ void BattlescapeGenerator::deployXCOM(const RuleStartingCondition* startingCondi
 			if (startingCondition != 0 && !startingCondition->isItemPermitted(pair.first->getType(), _game->getMod(), _craft))
 			{
 				// send disabled items back to base
-				_base->getStorageItems()->addItem(pair.first, pair.second);
+				_base->getStorageItems().addItem(pair.first, pair.second);
 			}
 			else
 			{
@@ -1252,7 +1252,7 @@ void BattlescapeGenerator::deployXCOM(const RuleStartingCondition* startingCondi
 		if (_game->getSavedGame()->getMonthsPassed() != -1)
 		{
 			// add items that are in the base
-			for (auto i = _base->getStorageItems()->getContents()->begin(); i != _base->getStorageItems()->getContents()->end();)
+			for (auto i = _base->getStorageItems().getContents()->begin(); i != _base->getStorageItems().getContents()->end();)
 			{
 				const RuleItem *rule = i->first;
 				if (
@@ -1274,7 +1274,7 @@ void BattlescapeGenerator::deployXCOM(const RuleStartingCondition* startingCondi
 					++i;
 					if (!_baseInventory)
 					{
-						_base->getStorageItems()->removeItem(tmp->first, tmp->second);
+						_base->getStorageItems().removeItem(tmp->first, tmp->second);
 					}
 				}
 				else

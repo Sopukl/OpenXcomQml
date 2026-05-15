@@ -541,15 +541,15 @@ void CraftArmorState::lstSoldiersClick(Action *action)
 				{
 					if (a->getStoreItem() == nullptr ||
 						a->getStoreItem() == s->getArmor()->getStoreItem() ||
-						_base->getStorageItems()->getItem(a->getStoreItem()) > 0)
+						_base->getStorageItems().getItem(a->getStoreItem()) > 0)
 					{
 						if (s->getArmor()->getStoreItem())
 						{
-							_base->getStorageItems()->addItem(s->getArmor()->getStoreItem());
+							_base->getStorageItems().addItem(s->getArmor()->getStoreItem());
 						}
 						if (a->getStoreItem())
 						{
-							_base->getStorageItems()->removeItem(a->getStoreItem());
+							_base->getStorageItems().removeItem(a->getStoreItem());
 						}
 
 						s->setArmor(a, true);
@@ -622,15 +622,15 @@ void CraftArmorState::btnDeequipAllArmorClick(Action *action)
 				row++;
 				continue;
 			}
-			if (a->getStoreItem() == nullptr || _base->getStorageItems()->getItem(a->getStoreItem()) > 0)
+			if (a->getStoreItem() == nullptr || _base->getStorageItems().getItem(a->getStoreItem()) > 0)
 			{
 				if (soldier->getArmor()->getStoreItem())
 				{
-					_base->getStorageItems()->addItem(soldier->getArmor()->getStoreItem());
+					_base->getStorageItems().addItem(soldier->getArmor()->getStoreItem());
 				}
 				if (a->getStoreItem())
 				{
-					_base->getStorageItems()->removeItem(a->getStoreItem());
+					_base->getStorageItems().removeItem(a->getStoreItem());
 				}
 
 				soldier->setArmor(a, true);
@@ -662,15 +662,15 @@ void CraftArmorState::btnDeequipCraftArmorClick(Action *action)
 				row++;
 				continue;
 			}
-			if (a->getStoreItem() == nullptr || _base->getStorageItems()->getItem(a->getStoreItem()) > 0)
+			if (a->getStoreItem() == nullptr || _base->getStorageItems().getItem(a->getStoreItem()) > 0)
 			{
 				if (s->getArmor()->getStoreItem())
 				{
-					_base->getStorageItems()->addItem(s->getArmor()->getStoreItem());
+					_base->getStorageItems().addItem(s->getArmor()->getStoreItem());
 				}
 				if (a->getStoreItem())
 				{
-					_base->getStorageItems()->removeItem(a->getStoreItem());
+					_base->getStorageItems().removeItem(a->getStoreItem());
 				}
 
 				s->setArmor(a, true);

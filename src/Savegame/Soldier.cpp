@@ -480,7 +480,7 @@ Craft *Soldier::getCraft() const
  */
 void Soldier::autoMoveEquipment(Craft* craft, Base* base, int toBase)
 {
-	auto* inTheBase = base->getStorageItems();
+	auto& inTheBase = base->getStorageItems();
 	auto* onTheCraft = _craft->getItems();
 	auto* reservedForTheCraft = _craft->getSoldierItems();
 
@@ -495,16 +495,16 @@ void Soldier::autoMoveEquipment(Craft* craft, Base* base, int toBase)
 			{
 				if (onTheCraft->getItem(invItemMain) > 0)
 				{
-					inTheBase->addItem(invItemMain, 1);
+					inTheBase.addItem(invItemMain, 1);
 					onTheCraft->removeItem(invItemMain, 1);
 				}
 				reservedForTheCraft->removeItem(invItemMain, 1);
 			}
 			else if (toBase < 0)
 			{
-				if (inTheBase->getItem(invItemMain) > 0)
+				if (inTheBase.getItem(invItemMain) > 0)
 				{
-					inTheBase->removeItem(invItemMain, 1);
+					inTheBase.removeItem(invItemMain, 1);
 					onTheCraft->addItem(invItemMain, 1);
 				}
 				reservedForTheCraft->addItem(invItemMain, 1);
@@ -520,16 +520,16 @@ void Soldier::autoMoveEquipment(Craft* craft, Base* base, int toBase)
 				{
 					if (onTheCraft->getItem(invItemAmmo) > 0)
 					{
-						inTheBase->addItem(invItemAmmo, 1);
+						inTheBase.addItem(invItemAmmo, 1);
 						onTheCraft->removeItem(invItemAmmo, 1);
 					}
 					reservedForTheCraft->removeItem(invItemAmmo, 1);
 				}
 				else if (toBase < 0)
 				{
-					if (inTheBase->getItem(invItemAmmo) > 0)
+					if (inTheBase.getItem(invItemAmmo) > 0)
 					{
-						inTheBase->removeItem(invItemAmmo, 1);
+						inTheBase.removeItem(invItemAmmo, 1);
 						onTheCraft->addItem(invItemAmmo, 1);
 					}
 					reservedForTheCraft->addItem(invItemAmmo, 1);
@@ -1872,7 +1872,7 @@ void Soldier::transform(const Mod *mod, RuleSoldierTransformation *transformatio
 		{
 			if (oldArmor->getStoreItem())
 			{
-				base->getStorageItems()->addItem(oldArmor->getStoreItem());
+				base->getStorageItems().addItem(oldArmor->getStoreItem());
 			}
 		}
 	}

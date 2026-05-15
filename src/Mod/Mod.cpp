@@ -3863,8 +3863,8 @@ SavedGame *Mod::newSave(GameDifficulty diff) const
 			size_t weaponIndex = 0;
 			for (auto* current : *craft->getWeapons())
 			{
-				base->getStorageItems()->addItem(current->getRules()->getLauncherItem());
-				base->getStorageItems()->addItem(current->getRules()->getClipItem(), current->getClipsLoaded());
+				base->getStorageItems().addItem(current->getRules()->getLauncherItem());
+				base->getStorageItems().addItem(current->getRules()->getClipItem(), current->getClipsLoaded());
 				craft->addCraftStats(-current->getRules()->getBonusStats());
 				craft->setShield(craft->getShield());
 				delete current;

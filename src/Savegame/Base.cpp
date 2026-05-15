@@ -62,7 +62,6 @@ namespace OpenXcom
 Base::Base(const Mod *mod) : Target(), _mod(mod), _scientists(0), _engineers(0), _inBattlescape(false),
 	_retaliationTarget(false), _retaliationMission(nullptr), _fakeUnderwater(false)
 {
-	_items = new ItemContainer();
 }
 
 /**
@@ -90,7 +89,6 @@ Base::~Base()
 	{
 		delete prod;
 	}
-	delete _items;
 	for (auto* proj : _research)
 	{
 		delete proj;
@@ -167,7 +165,7 @@ void Base::load(const YAML::YamlNodeReader& reader, SavedGame *save, bool newGam
 		}
 	}
 
-	_items->load(reader["items"], _mod);
+	_items.load(reader["items"], _mod);
 
 	reader.tryRead("scientists", _scientists);
 	reader.tryRead("engineers", _engineers);
@@ -367,7 +365,7 @@ void Base::save(YAML::YamlNodeWriter writer) const
 	writer.write("crafts", _crafts,
 		[&](YAML::YamlNodeWriter& vectorWriter, Craft* c)
 		{ c->save(vectorWriter.write(), _mod->getScriptGlobal()); });
-	_items->save(writer["items"]);
+	_items.save(writer["items"]);
 	writer.write("scientists", _scientists);
 	writer.write("engineers", _engineers);
 	if (_inBattlescape)
@@ -720,7 +718,7 @@ int Base::getTotalOtherStaffAndInventoryCost(int& staffCount, int& inventoryCoun
 			}
 		}
 	}
-	for (const auto& storeItem : *_items->getContents())
+	for (const auto& storeItem : *_items.getContents())
 	{
 		auto* ruleItem = storeItem.first;
 		if (ruleItem->getMonthlySalary() != 0)
@@ -827,7 +825,7 @@ int Base::getAvailableQuarters() const
  */
 double Base::getUsedStores(bool excludeNormalItems) const
 {
-	double total = excludeNormalItems ? 0.0 : _items->getTotalSize();
+	double total = excludeNormalItems ? 0.0 : _items.getTotalSize();
 	for (const auto* xcraft : _crafts)
 	{
 		total += xcraft->getTotalItemStorageSize();
@@ -1316,7 +1314,7 @@ void Base::removeResearch(ResearchProject * project)
 	{
 		if (ruleResearch->needItem() && ruleResearch->destroyItem())
 		{
-			getStorageItems()->addItem(ruleResearch->getNeededItem(), 1);
+			getStorageItems().addItem(ruleResearch->getNeededItem(), 1);
 		}
 	}
 
@@ -1482,7 +1480,7 @@ int Base::getUsedContainment(int prisonType, bool onlyExternal) const
 		return total;
 	}
 
-	for (const auto& pair : *_items->getContents())
+	for (const auto& pair : *_items.getContents())
 	{
 		rule = pair.first;
 		if (rule->isAlien() && rule->getPrisonType() == prisonType)
@@ -1617,7 +1615,7 @@ void Base::setupDefenses(AlienMission* am)
 	}
 
 	// add vehicles left on the base
-	for (auto iter = _items->getContents()->begin(); iter != _items->getContents()->end(); )
+	for (auto iter = _items.getContents()->begin(); iter != _items.getContents()->end(); )
 	{
 		int itemQty = iter->second;
 		const RuleItem *rule = iter->first;
@@ -1632,14 +1630,14 @@ void Base::setupDefenses(AlienMission* am)
 					_vehicles.push_back(vehicle);
 					_vehiclesFromBase.push_back(vehicle);
 				}
-				_items->removeItem(rule, itemQty);
+				_items.removeItem(rule, itemQty);
 			}
 			else // so this vehicle needs ammo
 			{
 				const RuleItem *ammo = rule->getVehicleClipAmmo();
 				int ammoPerVehicle = rule->getVehicleClipsLoaded();
 
-				int baseQty = _items->getItem(ammo) / ammoPerVehicle;
+				int baseQty = _items.getItem(ammo) / ammoPerVehicle;
 				if (!baseQty)
 				{
 					++iter;
@@ -1651,12 +1649,12 @@ void Base::setupDefenses(AlienMission* am)
 					auto* vehicle = new Vehicle(rule, rule->getVehicleClipSize(), size);
 					_vehicles.push_back(vehicle);
 					_vehiclesFromBase.push_back(vehicle);
-					_items->removeItem(ammo, ammoPerVehicle);
+					_items.removeItem(ammo, ammoPerVehicle);
 				}
-				_items->removeItem(rule, canBeAdded);
+				_items.removeItem(rule, canBeAdded);
 			}
 
-			iter = _items->getContents()->begin(); // we have to start over because iterator is broken because of the removeItem
+			iter = _items.getContents()->begin(); // we have to start over because iterator is broken because of the removeItem
 		}
 		else ++iter;
 	}
@@ -1900,7 +1898,7 @@ void Base::destroyFacility(BASEFACILITIESITERATOR facility)
 			while (!(*facility)->getCraftForDrawing()->getItems()->getContents()->empty())
 			{
 				auto i = (*facility)->getCraftForDrawing()->getItems()->getContents()->begin();
-				_items->addItem(i->first, i->second);
+				_items.addItem(i->first, i->second);
 				(*facility)->getCraftForDrawing()->getItems()->removeItem(i->first, i->second);
 			}
 			Collections::deleteIf(_crafts, 1,
@@ -2079,7 +2077,7 @@ void Base::cleanupPrisons(int prisonType)
 				{
 					_scientists += project->getAssigned();
 					project->setAssigned(0);
-					getStorageItems()->addItem(projRules->getNeededItem(), 1);
+					getStorageItems().addItem(projRules->getNeededItem(), 1);
 					return true;
 				}
 			}
@@ -2096,7 +2094,7 @@ void Base::cleanupPrisons(int prisonType)
 				const auto* rule = transfer->getItems();
 				if (rule->isAlien() && rule->getPrisonType() == prisonType)
 				{
-					getStorageItems()->addItem(rule, transfer->getQuantity());
+					getStorageItems().addItem(rule, transfer->getQuantity());
 					return true;
 				}
 			}
@@ -2118,10 +2116,10 @@ void Base::cleanupDefenses(bool reclaimItems)
 		for (auto* vehicle : _vehiclesFromBase)
 		{
 			const RuleItem *rule = vehicle->getRules();
-			_items->addItem(rule);
+			_items.addItem(rule);
 			if (rule->getVehicleClipAmmo())
 			{
-				_items->addItem(rule->getVehicleClipAmmo(), rule->getVehicleClipsLoaded());
+				_items.addItem(rule->getVehicleClipAmmo(), rule->getVehicleClipsLoaded());
 			}
 		}
 	}

@@ -365,7 +365,7 @@ void BaseDefenseState::nextStep()
 			{
 				_lstDefenses->setCellText(_row, 1, ltr("STR_NO_AMMO"));
 			}
-			else if (!hasOwnAmmo && ammo && _base->getStorageItems()->getItem(ammo) < ammoNeeded)
+			else if (!hasOwnAmmo && ammo && _base->getStorageItems().getItem(ammo) < ammoNeeded)
 			{
 				_lstDefenses->setCellText(_row, 1, ltr("STR_NO_AMMO"));
 			}
@@ -382,7 +382,7 @@ void BaseDefenseState::nextStep()
 			{
 				//_lstDefenses->setCellText(_row, 2, tr("STR_NO_AMMO"));
 			}
-			else if (!hasOwnAmmo && ammo && _base->getStorageItems()->getItem(ammo) < ammoNeeded)
+			else if (!hasOwnAmmo && ammo && _base->getStorageItems().getItem(ammo) < ammoNeeded)
 			{
 				//_lstDefenses->setCellText(_row, 2, tr("STR_NO_AMMO"));
 			}
@@ -418,7 +418,7 @@ void BaseDefenseState::nextStep()
 				}
 				else if (!hasOwnAmmo && ammo)
 				{
-					_base->getStorageItems()->removeItem(ammo, ammoNeeded);
+					_base->getStorageItems().removeItem(ammo, ammoNeeded);
 				}
 			}
 			if (_ufo->getStatus() == Ufo::DESTROYED)

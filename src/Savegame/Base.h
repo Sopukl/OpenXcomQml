@@ -17,6 +17,7 @@
  * You should have received a copy of the GNU General Public License
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
+#include "ItemContainer.h"
 #include "Target.h"
 #include <string>
 #include <vector>
@@ -35,7 +36,6 @@ namespace OpenXcom
 class RuleCraft;
 class Soldier;
 class Craft;
-class ItemContainer;
 class Transfer;
 class Language;
 class Mod;
@@ -118,7 +118,7 @@ private:
 	std::vector<Soldier*> _soldiers;
 	std::vector<Craft*> _crafts;
 	std::vector<Transfer*> _transfers;
-	ItemContainer *_items;
+	ItemContainer _items;
 	int _scientists, _engineers;
 	std::vector<ResearchProject *> _research;
 	std::vector<Production *> _productions;
@@ -170,9 +170,9 @@ public:
 	/// Gets the base's transfers.
 	const std::vector<Transfer*>& getTransfers() const { return _transfers; }
 	/// Gets the base's items.
-	ItemContainer *getStorageItems() { return _items; }
+	ItemContainer& getStorageItems() { return _items; }
 	/// Gets the base's items.
-	const ItemContainer *getStorageItems() const { return _items; }
+	const ItemContainer& getStorageItems() const { return _items; }
 	/// Gets the base's scientists.
 	int getScientists() const;
 	/// Sets the base's scientists.

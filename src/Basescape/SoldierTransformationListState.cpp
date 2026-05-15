@@ -170,7 +170,7 @@ void SoldierTransformationListState::initList()
 	Unicode::upperCase(searchString);
 
 	int currentIndex = -1;
-	ItemContainer* itemContainer(_base->getStorageItems());
+	ItemContainer& itemContainer(_base->getStorageItems());
 	for (const auto* transformationRule : _availableTransformations)
 	{
 		++currentIndex;
@@ -223,7 +223,7 @@ void SoldierTransformationListState::initList()
 		for (auto& item : transformationRule->getRequiredItems())
 		{
 			RuleItem* itemRule = _game->getMod()->getItem(item.first);
-			projectsPossible = std::min(projectsPossible, itemContainer->getItem(itemRule) / item.second);
+			projectsPossible = std::min(projectsPossible, itemContainer.getItem(itemRule) / item.second);
 		}
 		if (projectsPossible <= 0)
 		{

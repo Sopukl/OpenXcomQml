@@ -170,7 +170,7 @@ CraftEquipmentState::CraftEquipmentState(Base *base, size_t craft) :
 
 		if ((isVehicle || rule->isInventoryItem()) && rule->canBeEquippedToCraftInventory() &&
 			_game->getSavedGame()->isResearched(rule->getRequirements()) &&
-			(_base->getStorageItems()->getItem(rule) > 0 || cQty > 0))
+			(_base->getStorageItems().getItem(rule) > 0 || cQty > 0))
 		{
 			if (rule->getCategories().empty())
 			{
@@ -365,7 +365,7 @@ void CraftEquipmentState::initList()
 			_totalItemStorageSize += cQty * rule->getSize();
 		}
 
-		int bQty = _base->getStorageItems()->getItem(rule);
+		int bQty = _base->getStorageItems().getItem(rule);
 		int reserved = 0;
 		if (options1.oxceAlternateCraftEquipmentManagement() && !_isNewBattle)
 		{
@@ -411,7 +411,7 @@ void CraftEquipmentState::initList()
 					{
 						for (auto* ammoRule : *rule->getPrimaryCompatibleAmmo())
 						{
-							if (_base->getStorageItems()->getItem(ammoRule) > 0 || c->getItems()->getItem(ammoRule) > 0)
+							if (_base->getStorageItems().getItem(ammoRule) > 0 || c->getItems()->getItem(ammoRule) > 0)
 							{
 								if (ammoRule->isInventoryItem() && ammoRule->canBeEquippedToCraftInventory() && _game->getSavedGame()->isResearched(ammoRule->getRequirements()))
 								{
@@ -448,7 +448,7 @@ void CraftEquipmentState::initList()
 					int itemsToAdd = std::min(bQty, reserved - cQty);
 					if (itemsToAdd > 0)
 					{
-						_base->getStorageItems()->removeItem(rule, itemsToAdd);
+						_base->getStorageItems().removeItem(rule, itemsToAdd);
 						bQty -= itemsToAdd;
 						c->getItems()->addItem(rule, itemsToAdd);
 						cQty += itemsToAdd;
@@ -666,7 +666,7 @@ void CraftEquipmentState::updateQuantity()
 	std::ostringstream ss, ss2;
 	if (!_isNewBattle)
 	{
-		ss << _base->getStorageItems()->getItem(item);
+		ss << _base->getStorageItems().getItem(item);
 	}
 	else
 	{
@@ -764,8 +764,8 @@ void CraftEquipmentState::moveLeftByValue(int change)
 			// Put the vehicles and their ammo back as separate items.
 			if (!_isNewBattle)
 			{
-				_base->getStorageItems()->addItem(item, change);
-				_base->getStorageItems()->addItem(ammo, ammoPerVehicle * change);
+				_base->getStorageItems().addItem(item, change);
+				_base->getStorageItems().addItem(ammo, ammoPerVehicle * change);
 			}
 			// now delete the vehicles from the craft.
 			Collections::deleteIf(*c->getVehicles(), change,
@@ -779,7 +779,7 @@ void CraftEquipmentState::moveLeftByValue(int change)
 		{
 			if (!_isNewBattle)
 			{
-				_base->getStorageItems()->addItem(item, change);
+				_base->getStorageItems().addItem(item, change);
 			}
 			Collections::deleteIf(*c->getVehicles(), change,
 				[&](Vehicle* v)
@@ -796,7 +796,7 @@ void CraftEquipmentState::moveLeftByValue(int change)
 		_totalItemStorageSize -= change * item->getSize();
 		if (!_isNewBattle)
 		{
-			_base->getStorageItems()->addItem(item, change);
+			_base->getStorageItems().addItem(item, change);
 		}
 	}
 	updateQuantity();
@@ -821,7 +821,7 @@ void CraftEquipmentState::moveRightByValue(int change, bool suppressErrors)
 {
 	Craft *c = _base->getCrafts().at(_craft);
 	const RuleItem *item = _game->getMod()->getItem(_items[_sel], true);
-	int bqty = _base->getStorageItems()->getItem(item);
+	int bqty = _base->getStorageItems().getItem(item);
 	if (_isNewBattle)
 	{
 		if (change == INT_MAX)
@@ -847,7 +847,7 @@ void CraftEquipmentState::moveRightByValue(int change, bool suppressErrors)
 				const RuleItem *ammo = item->getVehicleClipAmmo();
 				int ammoPerVehicle = item->getVehicleClipsLoaded();
 
-				int baseQty = _base->getStorageItems()->getItem(ammo) / ammoPerVehicle;
+				int baseQty = _base->getStorageItems().getItem(ammo) / ammoPerVehicle;
 				if (_isNewBattle)
 					baseQty = change;
 				int canBeAdded = std::min(change, baseQty);
@@ -857,8 +857,8 @@ void CraftEquipmentState::moveRightByValue(int change, bool suppressErrors)
 					{
 						if (!_isNewBattle)
 						{
-							_base->getStorageItems()->removeItem(ammo, ammoPerVehicle);
-							_base->getStorageItems()->removeItem(item);
+							_base->getStorageItems().removeItem(ammo, ammoPerVehicle);
+							_base->getStorageItems().removeItem(item);
 						}
 						c->getVehicles()->push_back(new Vehicle(item, item->getVehicleClipSize(), size));
 						c->resetCustomDeployment(); // adding a vehicle into a craft invalidates a custom craft deployment
@@ -883,7 +883,7 @@ void CraftEquipmentState::moveRightByValue(int change, bool suppressErrors)
 					c->resetCustomDeployment(); // adding a vehicle into a craft invalidates a custom craft deployment
 					if (!_isNewBattle)
 					{
-						_base->getStorageItems()->removeItem(item);
+						_base->getStorageItems().removeItem(item);
 					}
 				}
 		}
@@ -930,7 +930,7 @@ void CraftEquipmentState::moveRightByValue(int change, bool suppressErrors)
 		_totalItemStorageSize += change * item->getSize();
 		if (!_isNewBattle)
 		{
-			_base->getStorageItems()->removeItem(item, change);
+			_base->getStorageItems().removeItem(item, change);
 		}
 	}
 	updateQuantity();

@@ -123,14 +123,14 @@ CraftWeaponsState::CraftWeaponsState(Base *base, size_t craft, size_t weapon) : 
 		{
 			isResearched = isResearched && _game->getSavedGame()->isResearched(w->getClipItem()->getRequirements());
 		}
-		if (isResearched && _base->getStorageItems()->getItem(w->getLauncherItem()) > 0 && c->isValidWeaponSlot(weapon, w->getWeaponType()))
+		if (isResearched && _base->getStorageItems().getItem(w->getLauncherItem()) > 0 && c->isValidWeaponSlot(weapon, w->getWeaponType()))
 		{
 			_weapons.push_back(w);
 			std::ostringstream ss, ss2;
-			ss << _base->getStorageItems()->getItem(w->getLauncherItem());
+			ss << _base->getStorageItems().getItem(w->getLauncherItem());
 			if (w->getClipItem())
 			{
-				ss2 << _base->getStorageItems()->getItem(w->getClipItem());
+				ss2 << _base->getStorageItems().getItem(w->getClipItem());
 			}
 			else
 			{
@@ -277,8 +277,8 @@ void CraftWeaponsState::lstWeaponsClick(Action *)
 	// Remove current weapon
 	if (current != 0)
 	{
-		_base->getStorageItems()->addItem(current->getRules()->getLauncherItem());
-		_base->getStorageItems()->addItem(current->getRules()->getClipItem(), current->getClipsLoaded());
+		_base->getStorageItems().addItem(current->getRules()->getLauncherItem());
+		_base->getStorageItems().addItem(current->getRules()->getClipItem(), current->getClipsLoaded());
 		_craft->addCraftStats(-current->getRules()->getBonusStats());
 		// Make sure any extra shield is removed from craft too when the shield capacity decreases (exploit protection)
 		_craft->setShield(_craft->getShield());
@@ -291,7 +291,7 @@ void CraftWeaponsState::lstWeaponsClick(Action *)
 	{
 		CraftWeapon *sel = new CraftWeapon(_weapons[_lstWeapons->getSelectedRow()], 0);
 		_craft->addCraftStats(sel->getRules()->getBonusStats());
-		_base->getStorageItems()->removeItem(sel->getRules()->getLauncherItem());
+		_base->getStorageItems().removeItem(sel->getRules()->getLauncherItem());
 		_craft->getWeapons()->at(_weapon) = sel;
 	}
 

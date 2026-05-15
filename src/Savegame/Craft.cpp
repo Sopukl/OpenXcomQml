@@ -810,7 +810,7 @@ void Craft::setFuel(int fuel)
 			int returnQty = overflowFuel / _rules->getRefuelRate();
 			if (returnQty > 0)
 			{
-				_base->getStorageItems()->addItem(_rules->getRefuelItem(), returnQty);
+				_base->getStorageItems().addItem(_rules->getRefuelItem(), returnQty);
 			}
 			_excessFuel = overflowFuel % _rules->getRefuelRate();
 		}
@@ -1308,9 +1308,9 @@ std::string Craft::refuel()
 		}
 		else
 		{
-			if (_base->getStorageItems()->getItem(item) > 0)
+			if (_base->getStorageItems().getItem(item) > 0)
 			{
-				_base->getStorageItems()->removeItem(item);
+				_base->getStorageItems().removeItem(item);
 				setFuel(_fuel + _rules->getRefuelRate());
 				_lowFuel = false;
 			}
@@ -1363,7 +1363,7 @@ const RuleItem* Craft::rearm()
 		if (cw != 0 && cw->isRearming())
 		{
 			auto* clip = cw->getRules()->getClipItem();
-			int available = _base->getStorageItems()->getItem(clip);
+			int available = _base->getStorageItems().getItem(clip);
 			if (clip == nullptr)
 			{
 				cw->rearm(0, 0);
@@ -1378,7 +1378,7 @@ const RuleItem* Craft::rearm()
 					cw->setRearming(false);
 				}
 
-				_base->getStorageItems()->removeItem(clip, used);
+				_base->getStorageItems().removeItem(clip, used);
 			}
 			else
 			{
@@ -1849,8 +1849,8 @@ void Craft::unload()
 	{
 		if (cw != 0)
 		{
-			_base->getStorageItems()->addItem(cw->getRules()->getLauncherItem());
-			_base->getStorageItems()->addItem(cw->getRules()->getClipItem(), cw->getClipsLoaded());
+			_base->getStorageItems().addItem(cw->getRules()->getLauncherItem());
+			_base->getStorageItems().addItem(cw->getRules()->getClipItem(), cw->getClipsLoaded());
 			delete cw;
 			cw = nullptr;
 		}
@@ -1859,16 +1859,16 @@ void Craft::unload()
 	// Remove items
 	for (const auto& pair : *_items->getContents())
 	{
-		_base->getStorageItems()->addItem(pair.first, pair.second);
+		_base->getStorageItems().addItem(pair.first, pair.second);
 	}
 
 	// Remove vehicles
 	for (auto*& vehicle : _vehicles)
 	{
-		_base->getStorageItems()->addItem(vehicle->getRules());
+		_base->getStorageItems().addItem(vehicle->getRules());
 		if (vehicle->getRules()->getVehicleClipAmmo())
 		{
-			_base->getStorageItems()->addItem(vehicle->getRules()->getVehicleClipAmmo(), vehicle->getRules()->getVehicleClipsLoaded());
+			_base->getStorageItems().addItem(vehicle->getRules()->getVehicleClipAmmo(), vehicle->getRules()->getVehicleClipsLoaded());
 		}
 		delete vehicle;
 		vehicle = nullptr;

@@ -1830,7 +1830,7 @@ void SavedGame::getAvailableResearchProjects(std::vector<RuleResearch *> &projec
 			}
 
 			// Check for needed item in the given base
-			if (research->needItem() && base->getStorageItems()->getItem(research->getNeededItem()) == 0)
+			if (research->needItem() && base->getStorageItems().getItem(research->getNeededItem()) == 0)
 			{
 				continue;
 			}
@@ -2261,7 +2261,7 @@ bool SavedGame::isItemObtained(const std::string &itemType, const Mod* mod) cons
 	{
 		for (auto* xbase : _bases)
 		{
-			if (xbase->getStorageItems()->getItem(item) > 0)
+			if (xbase->getStorageItems().getItem(item) > 0)
 				return true;
 
 			for (auto* xcraft : xbase->getCrafts())

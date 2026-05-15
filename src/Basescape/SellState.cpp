@@ -251,7 +251,7 @@ void SellState::delayedInit()
 		}
 		else
 		{
-			qty = _base->getStorageItems()->getItem(rule);
+			qty = _base->getStorageItems().getItem(rule);
 			if (options1.storageLimitsEnforced() && (_origin == OPT_BATTLESCAPE || overfullCritical))
 			{
 				for (auto* transfer : _base->getTransfers())
@@ -695,7 +695,7 @@ void SellState::btnOkClick(Action *)
 		{
 			if (s.ToSave > 0)
 			{
-				_base->getStorageItems()->addItem(s.rule, s.ToSave);
+				_base->getStorageItems().addItem(s.rule, s.ToSave);
 			}
 		};
 
@@ -761,7 +761,7 @@ void SellState::btnOkClick(Action *)
 					{
 						if (tmpSoldier->getArmor()->getStoreItem())
 						{
-							_base->getStorageItems()->addItem(tmpSoldier->getArmor()->getStoreItem());
+							_base->getStorageItems().addItem(tmpSoldier->getArmor()->getStoreItem());
 						}
 						_base->getSoldiers().erase(soldierIt);
 						break;
@@ -784,7 +784,7 @@ void SellState::btnOkClick(Action *)
 				RuleItem *item = (RuleItem*)transferRow.rule;
 				{
 					// remove all of said items from base
-					int toRemove = cleanUpContainer(_base->getStorageItems(), item, transferRow.amount);
+					int toRemove = cleanUpContainer(&_base->getStorageItems(), item, transferRow.amount);
 
 					// if we still need to remove any, remove them from the crafts first, and keep a running tally
 					for (auto* craft : _base->getCrafts())

@@ -81,7 +81,7 @@ ItemLocationsState::ItemLocationsState(const RuleItem* selectedItem)
 	for (auto* xbase : *_game->getSavedGame()->getBases())
 	{
 		std::ostringstream ssInBase, ssInTransfer;
-		ssInBase << xbase->getStorageItems()->getItem(selectedItem);
+		ssInBase << xbase->getStorageItems().getItem(selectedItem);
 		int total = 0;
 		for (auto* xtransfer : xbase->getTransfers())
 		{

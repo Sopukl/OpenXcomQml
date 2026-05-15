@@ -198,14 +198,14 @@ TransferItemsState::TransferItemsState(Base *baseFrom, Base *baseTo, DebriefingS
 	for (auto& itemType : _game->getMod()->getItemsList())
 	{
 		RuleItem *rule = _game->getMod()->getItem(itemType, true);
-		int qty = _baseFrom->getStorageItems()->getItem(rule);
+		int qty = _baseFrom->getStorageItems().getItem(rule);
 		if (_debriefingState != 0)
 		{
 			qty = _debriefingState->getRecoveredItemCount(rule);
 		}
 		if (qty > 0)
 		{
-			TransferRow row = { TRANSFER_ITEM, rule, ltr(itemType),  (int)(1 * _distance), qty, _baseTo->getStorageItems()->getItem(rule), 0, rule->getListOrder(), rule->getSize(), qty * rule->getSize(), qty * (int)(1 * _distance) };
+			TransferRow row = { TRANSFER_ITEM, rule, ltr(itemType),  (int)(1 * _distance), qty, _baseTo->getStorageItems().getItem(rule), 0, rule->getListOrder(), rule->getSize(), qty * rule->getSize(), qty * (int)(1 * _distance) };
 			_items.push_back(row);
 			std::string cat = getCategory(_items.size() - 1);
 			if (std::find(_cats.begin(), _cats.end(), cat) == _cats.end())
@@ -651,7 +651,7 @@ void TransferItemsState::completeTransfer()
 				break;
 			case TRANSFER_ITEM:
 				RuleItem *item = (RuleItem*)transferRow.rule;
-				_baseFrom->getStorageItems()->removeItem(item, transferRow.amount);
+				_baseFrom->getStorageItems().removeItem(item, transferRow.amount);
 				t = new Transfer(time);
 				t->setItems(item, transferRow.amount);
 				_baseTo->getTransfers().push_back(t);

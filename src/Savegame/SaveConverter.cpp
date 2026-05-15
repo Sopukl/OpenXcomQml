@@ -759,7 +759,7 @@ void SaveConverter::loadDatBase()
 				if (qty != 0 && !_rules->getItems()[k].empty())
 				{
 					const RuleItem *rule = _mod->getItem(_rules->getItems()[k], true);
-					base->getStorageItems()->addItem(rule, qty);
+					base->getStorageItems().addItem(rule, qty);
 				}
 			}
 			base->setEngineers(engineers);
@@ -804,7 +804,7 @@ void SaveConverter::loadDatAStore()
 			{
 				Base *b = dynamic_cast<Base*>(_targets[base]);
 				const RuleItem *rule = _mod->getItem(liveAlien, true);
-				b->getStorageItems()->addItem(rule);
+				b->getStorageItems().addItem(rule);
 			}
 		}
 		_aliens.push_back(liveAlien);

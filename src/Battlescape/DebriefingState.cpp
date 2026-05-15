@@ -423,7 +423,7 @@ void DebriefingState::init()
 		{
 			RuleItem *rule = _game->getMod()->getItem(itemType);
 
-			int qty = _base->getStorageItems()->getItem(rule);
+			int qty = _base->getStorageItems().getItem(rule);
 			if (qty > 0 && (options1.canSellLiveAliens() || !rule->isAlien()))
 			{
 
@@ -2208,15 +2208,15 @@ void DebriefingState::reequipCraft(Base *base, Craft *craft, bool vehicleItemsCa
 	auto craftItemsCopy = *craft->getItems()->getContents();
 	for (const auto& pair : craftItemsCopy)
 	{
-		int qty = base->getStorageItems()->getItem(pair.first);
+		int qty = base->getStorageItems().getItem(pair.first);
 		if (qty >= pair.second)
 		{
-			base->getStorageItems()->removeItem(pair.first, pair.second);
+			base->getStorageItems().removeItem(pair.first, pair.second);
 		}
 		else
 		{
 			int missing = pair.second - qty;
-			base->getStorageItems()->removeItem(pair.first, qty);
+			base->getStorageItems().removeItem(pair.first, qty);
 			craft->getItems()->removeItem(pair.first, missing);
 			ReequipStat stat = {pair.first->getType(), missing, craft->getName(_game->getLanguage()), 0};
 			_missingItems.push_back(stat);
@@ -2244,7 +2244,7 @@ void DebriefingState::reequipCraft(Base *base, Craft *craft, bool vehicleItemsCa
 	// Ok, now read those vehicles
 	for (const auto& pair : *craftVehicles.getContents())
 	{
-		int qty = base->getStorageItems()->getItem(pair.first);
+		int qty = base->getStorageItems().getItem(pair.first);
 		const RuleItem *tankRule = pair.first;
 		int size = tankRule->getVehicleUnit()->getArmor()->getTotalSize();
 		int canBeAdded = std::min(qty, pair.second);
@@ -2260,14 +2260,14 @@ void DebriefingState::reequipCraft(Base *base, Craft *craft, bool vehicleItemsCa
 			{
 				craft->getVehicles()->push_back(new Vehicle(tankRule, tankRule->getVehicleClipSize(), size));
 			}
-			base->getStorageItems()->removeItem(pair.first, canBeAdded);
+			base->getStorageItems().removeItem(pair.first, canBeAdded);
 		}
 		else
 		{ // so this tank requires ammo
 			const RuleItem *ammo = tankRule->getVehicleClipAmmo();
 			int ammoPerVehicle = tankRule->getVehicleClipsLoaded();
 
-			int baqty = base->getStorageItems()->getItem(ammo); // Ammo Quantity for this vehicle-type on the base
+			int baqty = base->getStorageItems().getItem(ammo); // Ammo Quantity for this vehicle-type on the base
 			if (baqty < pair.second * ammoPerVehicle)
 			{ // missing ammo
 				int missing = (pair.second * ammoPerVehicle) - baqty;
@@ -2280,9 +2280,9 @@ void DebriefingState::reequipCraft(Base *base, Craft *craft, bool vehicleItemsCa
 				for (int j = 0; j < canBeAdded; ++j)
 				{
 					craft->getVehicles()->push_back(new Vehicle(tankRule, tankRule->getVehicleClipSize(), size));
-					base->getStorageItems()->removeItem(ammo, ammoPerVehicle);
+					base->getStorageItems().removeItem(ammo, ammoPerVehicle);
 				}
-				base->getStorageItems()->removeItem(pair.first, canBeAdded);
+				base->getStorageItems().removeItem(pair.first, canBeAdded);
 			}
 		}
 	}
@@ -2299,7 +2299,7 @@ void DebriefingState::addItemsToBaseStores(const RuleItem *ruleItem, Base *base,
 {
 	if (!considerTransformations)
 	{
-		base->getStorageItems()->addItem(ruleItem, quantity);
+		base->getStorageItems().addItem(ruleItem, quantity);
 	}
 	else
 	{
@@ -2326,7 +2326,7 @@ void DebriefingState::addItemsToBaseStores(const RuleItem *ruleItem, Base *base,
 							runningTotal += it;
 							if (runningTotal >= roll)
 							{
-								base->getStorageItems()->addItem(pair.first, position);
+								base->getStorageItems().addItem(pair.first, position);
 								break;
 							}
 							++position;
@@ -2336,13 +2336,13 @@ void DebriefingState::addItemsToBaseStores(const RuleItem *ruleItem, Base *base,
 				else
 				{
 					// no RNG
-					base->getStorageItems()->addItem(pair.first, quantity * pair.second.front());
+					base->getStorageItems().addItem(pair.first, quantity * pair.second.front());
 				}
 			}
 		}
 		else
 		{
-			base->getStorageItems()->addItem(ruleItem, quantity);
+			base->getStorageItems().addItem(ruleItem, quantity);
 		}
 	}
 }

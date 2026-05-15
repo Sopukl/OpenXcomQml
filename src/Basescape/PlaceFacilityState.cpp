@@ -295,7 +295,7 @@ void PlaceFacilityState::viewClick(Action *)
 		{
 			for (const auto& item: _rule->getBuildCostItems())
 			{
-				int needed = (item.second.first - refundItemsTemp[item.first]) - _base->getStorageItems()->getItem(item.first);
+				int needed = (item.second.first - refundItemsTemp[item.first]) - _base->getStorageItems().getItem(item.first);
 				if (needed > 0)
 				{
 					_game->popState();
@@ -321,7 +321,7 @@ void PlaceFacilityState::viewClick(Action *)
 						_game->getSavedGame()->setFunds(_game->getSavedGame()->getFunds() + checkFacility->getRules()->getBuildCost());
 						for (auto& item : itemCost)
 						{
-							_base->getStorageItems()->addItem(_game->getMod()->getItem(item.first, true), item.second.first);
+							_base->getStorageItems().addItem(_game->getMod()->getItem(item.first, true), item.second.first);
 						}
 					}
 					else
@@ -330,7 +330,7 @@ void PlaceFacilityState::viewClick(Action *)
 						_game->getSavedGame()->setFunds(_game->getSavedGame()->getFunds() + checkFacility->getRules()->getRefundValue());
 						for (auto& item : itemCost)
 						{
-							_base->getStorageItems()->addItem(_game->getMod()->getItem(item.first, true), item.second.second);
+							_base->getStorageItems().addItem(_game->getMod()->getItem(item.first, true), item.second.second);
 						}
 
 						// Reduce the build time of the new facility
@@ -345,7 +345,7 @@ void PlaceFacilityState::viewClick(Action *)
 					if (checkFacility->getAmmo() > 0)
 					{
 						// Full refund of loaded ammo
-						_base->getStorageItems()->addItem(checkFacility->getRules()->getAmmoItem(), checkFacility->getAmmo());
+						_base->getStorageItems().addItem(checkFacility->getRules()->getAmmoItem(), checkFacility->getAmmo());
 						checkFacility->setAmmo(0);
 					}
 
@@ -381,7 +381,7 @@ void PlaceFacilityState::viewClick(Action *)
 			_game->getSavedGame()->setFunds(_game->getSavedGame()->getFunds() - _rule->getBuildCost());
 			for (const auto& item: _rule->getBuildCostItems())
 			{
-				_base->getStorageItems()->removeItem(item.first, item.second.first);
+				_base->getStorageItems().removeItem(item.first, item.second.first);
 			}
 			if (!_game->isShiftPressed())
 			{
