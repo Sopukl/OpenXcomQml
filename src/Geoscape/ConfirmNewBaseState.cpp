@@ -76,7 +76,7 @@ ConfirmNewBaseState::ConfirmNewBaseState(Base *base, Globe *globe) : _base(base)
 	_btnCancel->onKeyboardPress((ActionHandler)&ConfirmNewBaseState::btnCancelClick, options1.keyCancel());
 
 	std::string area;
-	for (const auto* region : *_game->getSavedGame()->getRegions())
+	for (const auto* region : _game->getSavedGame()->getRegions())
 	{
 		if (region->getRules()->insideRegion(_base->getLongitude(), _base->getLatitude()))
 		{

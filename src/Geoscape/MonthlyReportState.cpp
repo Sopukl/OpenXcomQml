@@ -420,7 +420,7 @@ void MonthlyReportState::calculateChanges()
 		lastMonthOffset += 2;
 	// update activity meters, calculate a total score based on regional activity
 	// and gather last month's score
-	for (auto* region : *_game->getSavedGame()->getRegions())
+	for (auto* region : _game->getSavedGame()->getRegions())
 	{
 		region->newMonth();
 		if (region->getActivityXcom().size() > 2)

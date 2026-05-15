@@ -1670,7 +1670,7 @@ void DogfightState::update()
 							break;
 						}
 					}
-					for (auto* region : *_game->getSavedGame()->getRegions())
+					for (auto* region : _game->getSavedGame()->getRegions())
 					{
 						if (region->getRules()->insideRegion(_ufo->getLongitude(), _ufo->getLatitude()))
 						{
@@ -1697,7 +1697,7 @@ void DogfightState::update()
 							break;
 						}
 					}
-					for (auto* region : *_game->getSavedGame()->getRegions())
+					for (auto* region : _game->getSavedGame()->getRegions())
 					{
 						if (region->getRules()->insideRegion(_ufo->getLongitude(), _ufo->getLatitude()))
 						{
@@ -1798,7 +1798,7 @@ void DogfightState::update()
 						break;
 					}
 				}
-				for (auto* region : *_game->getSavedGame()->getRegions())
+				for (auto* region : _game->getSavedGame()->getRegions())
 				{
 					if (region->getRules()->insideRegion(_ufo->getLongitude(), _ufo->getLatitude()))
 					{

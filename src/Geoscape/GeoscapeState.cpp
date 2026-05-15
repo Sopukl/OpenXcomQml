@@ -439,7 +439,7 @@ GeoscapeState::GeoscapeState() : _pause(false), _zoomInEffectDone(false), _zoomO
 	{
 		std::vector<std::string> regionList;
 		regionList.push_back("All regions");
-		for (auto* r : *_game->getSavedGame()->getRegions())
+		for (auto* r : _game->getSavedGame()->getRegions())
 		{
 			regionList.push_back(r->getRules()->getType());
 		}
@@ -620,7 +620,7 @@ void GeoscapeState::handle(Action *action)
 			{
 				_txtDebug->setText("XCOM/ALIEN ACTIVITY FOR THIS MONTH RESET");
 				size_t invertedEntry = _game->getSavedGame()->getFundsList().size() - 1;
-				for (auto* region : *_game->getSavedGame()->getRegions())
+				for (auto* region : _game->getSavedGame()->getRegions())
 				{
 					region->getActivityXcom().at(invertedEntry) = 0;
 					region->getActivityAlien().at(invertedEntry) = 0;
@@ -1155,7 +1155,7 @@ void GeoscapeState::time5Seconds()
 						break;
 					}
 				}
-				for (auto* region : *_game->getSavedGame()->getRegions())
+				for (auto* region : _game->getSavedGame()->getRegions())
 				{
 					if (region->getRules()->insideRegion(xcraft->getLongitude(), xcraft->getLatitude()))
 					{
@@ -2004,7 +2004,7 @@ void GeoscapeState::time30Minutes()
 			FALLTHROUGH;
 		case Ufo::FLYING:
 			// Get area
-			for (auto* region : *_game->getSavedGame()->getRegions())
+			for (auto* region : _game->getSavedGame()->getRegions())
 			{
 				if (region->getRules()->insideRegion(ufo->getLongitude(), ufo->getLatitude()))
 				{
@@ -2754,7 +2754,7 @@ void GeoscapeState::time1Day()
 	// handle regional and country points for alien bases
 	for (auto* ab : *saveGame->getAlienBases())
 	{
-		for (auto* region : *saveGame->getRegions())
+		for (auto* region : saveGame->getRegions())
 		{
 			if (region->getRules()->insideRegion(ab->getLongitude(), ab->getLatitude()))
 			{
@@ -4965,7 +4965,7 @@ void GeoscapeState::cbxRegionChange(Action *)
 	}
 	else
 	{
-		_game->getSavedGame()->debugRegion = (*_game->getSavedGame()->getRegions())[index-1];
+		_game->getSavedGame()->debugRegion = (_game->getSavedGame()->getRegions())[index-1];
 	}
 	updateZoneInfo();
 }

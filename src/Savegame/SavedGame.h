@@ -258,7 +258,7 @@ public:
 	/// Gets the total country funding.
 	int getCountryFunding() const;
 	/// Gets the list of regions.
-	std::vector<Region*> *getRegions();
+	std::vector<Region*>& getRegions();
 	/// Gets the list of bases.
 	std::vector<Base*> *getBases();
 	/// Gets the list of bases.

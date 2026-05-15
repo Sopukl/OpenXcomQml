@@ -1129,7 +1129,7 @@ void AlienMission::addScore(double lon, double lat, SavedGame &game) const
 {
 	if (_rule.getObjective() == OBJECTIVE_INFILTRATION)
 		return; // pact score is a special case
-	for (auto* region : *game.getRegions())
+	for (auto* region : game.getRegions())
 	{
 		if (region->getRules()->insideRegion(lon, lat))
 		{

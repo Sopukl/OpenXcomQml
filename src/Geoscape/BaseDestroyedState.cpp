@@ -125,8 +125,8 @@ BaseDestroyedState::BaseDestroyedState(Base *base, const Ufo* ufo, bool missiles
 	if (!am)
 	{
 		// backwards-compatibility
-		RuleRegion* regionRule = _game->getSavedGame()->getRegions()->front()->getRules(); // wrong, but that's how it is in OXC
-		for (const auto* region : *_game->getSavedGame()->getRegions())
+		RuleRegion* regionRule = _game->getSavedGame()->getRegions().front()->getRules(); // wrong, but that's how it is in OXC
+		for (const auto* region : _game->getSavedGame()->getRegions())
 		{
 			if (region->getRules()->insideRegion(_base->getLongitude(), _base->getLatitude()))
 			{

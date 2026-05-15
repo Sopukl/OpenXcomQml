@@ -1285,9 +1285,9 @@ int SavedGame::getCountryFunding() const
  * Returns the list of world regions.
  * @return Pointer to region list.
  */
-std::vector<Region*> *SavedGame::getRegions()
+std::vector<Region*>& SavedGame::getRegions()
 {
-	return &_regions;
+	return _regions;
 }
 
 /**

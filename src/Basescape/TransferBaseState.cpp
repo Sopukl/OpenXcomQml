@@ -98,7 +98,7 @@ TransferBaseState::TransferBaseState(Base *base, DebriefingState *debriefingStat
 		{
 			// Get area
 			std::string area;
-			for (const auto* region : *_game->getSavedGame()->getRegions())
+			for (const auto* region : _game->getSavedGame()->getRegions())
 			{
 				if (region->getRules()->insideRegion(xbase->getLongitude(), xbase->getLatitude()))
 				{

@@ -124,7 +124,7 @@ void StatisticsState::listStats()
 	_txtTitle->setText(ss.str());
 
 	int totalScore = sumVector(save->getResearchScores());
-	for (auto* region : *save->getRegions())
+	for (auto* region : save->getRegions())
 	{
 		totalScore += sumVector(region->getActivityXcom()) - sumVector(region->getActivityAlien());
 	}

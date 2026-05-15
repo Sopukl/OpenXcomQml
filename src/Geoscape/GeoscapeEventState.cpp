@@ -191,7 +191,7 @@ void GeoscapeEventState::eventLogic()
 	// 1. give/take score points
 	if (regionRule)
 	{
-		for (auto* region : *_game->getSavedGame()->getRegions())
+		for (auto* region : _game->getSavedGame()->getRegions())
 		{
 			if (region->getRules() == regionRule)
 			{

@@ -171,7 +171,7 @@ SavedGame *SaveConverter::loadOriginal()
 		Region *region = new Region(_mod->getRegion(_rules->getRegions()[i], true));
 		region->getActivityAlien().clear();
 		region->getActivityXcom().clear();
-		_save->getRegions()->push_back(region);
+		_save->getRegions().push_back(region);
 	}
 	loadDatXcom();
 	loadDatAlien();
@@ -288,7 +288,7 @@ void SaveConverter::loadDatIGlob()
 	}
 	for (size_t i = 0; i < _rules->getRegions().size(); ++i)
 	{
-		Region *region = _save->getRegions()->at(i);
+		Region *region = _save->getRegions().at(i);
 		graphVector(region->getActivityAlien(), month, _year != _mod->getStartingTime().getYear());
 		graphVector(region->getActivityXcom(), month, _year != _mod->getStartingTime().getYear());
 	}
@@ -423,7 +423,7 @@ void SaveConverter::loadDatXcom()
 		else
 		{
 			j -= _rules->getCountries().size();
-			_save->getRegions()->at(j)->getActivityXcom().push_back(score);
+			_save->getRegions().at(j)->getActivityXcom().push_back(score);
 		}
 	}
 }
@@ -452,7 +452,7 @@ void SaveConverter::loadDatAlien()
 		else
 		{
 			j -= _rules->getCountries().size();
-			_save->getRegions()->at(j)->getActivityAlien().push_back(score);
+			_save->getRegions().at(j)->getActivityAlien().push_back(score);
 		}
 	}
 }

@@ -80,7 +80,7 @@ AlienBaseState::AlienBaseState(AlienBase *base, GeoscapeState *state) : _state(s
 			break;
 		}
 	}
-	for (const auto* region : *_game->getSavedGame()->getRegions())
+	for (const auto* region : _game->getSavedGame()->getRegions())
 	{
 		if (region->getRules()->insideRegion(_base->getLongitude(), _base->getLatitude()))
 		{

@@ -278,7 +278,7 @@ void Base::calculateServices(SavedGame* save)
 			break;
 		}
 	}
-	for (const auto* region : *save->getRegions())
+	for (const auto* region : save->getRegions())
 	{
 		if (region->getRules()->insideRegion(_lon, _lat))
 		{

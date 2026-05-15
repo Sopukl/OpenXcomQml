@@ -1094,7 +1094,7 @@ void DebriefingState::prepareDebriefing()
 		{
 			if (xcraft->isInBattlescape())
 			{
-				for (auto* region : *save->getRegions())
+				for (auto* region : save->getRegions())
 				{
 					if (region->getRules()->insideRegion(xcraft->getLongitude(), xcraft->getLatitude()))
 					{
@@ -1158,7 +1158,7 @@ void DebriefingState::prepareDebriefing()
 			target = base->getType();
 			base->setInBattlescape(false);
 			base->cleanupDefenses(false);
-			for (auto* region : *save->getRegions())
+			for (auto* region : save->getRegions())
 			{
 				if (region->getRules()->insideRegion(base->getLongitude(), base->getLatitude()))
 				{

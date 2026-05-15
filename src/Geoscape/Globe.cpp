@@ -1470,7 +1470,7 @@ void Globe::drawDetail()
 		label->setColor(CITY_LABEL_COLOR);
 
 		Sint16 x, y;
-		for (auto* region : *_game->getSavedGame()->getRegions())
+		for (auto* region : _game->getSavedGame()->getRegions())
 		{
 			for (auto* city : *region->getRules()->getCities())
 			{
@@ -1537,7 +1537,7 @@ void Globe::drawDetail()
 		else if (debugType == 1)
 		{
 			color = 0;
-			for (auto* region : *_game->getSavedGame()->getRegions())
+			for (auto* region : _game->getSavedGame()->getRegions())
 			{
 				if (_game->getSavedGame()->debugRegion && _game->getSavedGame()->debugRegion != region)
 					continue;
@@ -1559,7 +1559,7 @@ void Globe::drawDetail()
 		}
 		else if (debugType == 2)
 		{
-			for (auto* region : *_game->getSavedGame()->getRegions())
+			for (auto* region : _game->getSavedGame()->getRegions())
 			{
 				if (_game->getSavedGame()->debugRegion && _game->getSavedGame()->debugRegion != region)
 					continue;

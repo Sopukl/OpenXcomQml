@@ -3826,7 +3826,7 @@ SavedGame *Mod::newSave(GameDifficulty diff) const
 	{
 		RuleRegion *regionRule = getRegion(regionName);
 		if (!regionRule->getLonMin().empty())
-			save->getRegions()->push_back(new Region(regionRule));
+			save->getRegions().push_back(new Region(regionRule));
 	}
 
 	// Set up starting base
