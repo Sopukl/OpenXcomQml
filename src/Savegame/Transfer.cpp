@@ -305,7 +305,7 @@ void Transfer::advance(Base *base)
 		}
 		else if (_craft != 0)
 		{
-			base->getCrafts().push_back(_craft);
+			base->crafts().push_back(_craft);
 			_craft->setBase(base);
 			_craft->checkup();
 		}

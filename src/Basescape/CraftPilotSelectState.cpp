@@ -74,7 +74,7 @@ CraftPilotSelectState::CraftPilotSelectState(Base *base, size_t craft) : _base(b
 	_btnCancel->onMouseClick((ActionHandler)&CraftPilotSelectState::btnCancelClick);
 	_btnCancel->onKeyboardPress((ActionHandler)&CraftPilotSelectState::btnCancelClick, options1.keyCancel());
 
-	Craft *c = _base->getCrafts().at(_craft);
+	Craft *c = _base->crafts().at(_craft);
 
 	_txtTitle->setAlign(ALIGN_CENTER);
 	_txtTitle->setText(ltr("STR_SELECT_PILOT"));
@@ -140,7 +140,7 @@ void CraftPilotSelectState::btnCancelClick(Action *)
 void CraftPilotSelectState::lstPilotClick(Action *)
 {
 	int pilotId = _pilot[_lstPilot->getSelectedRow()];
-	Craft *c = _base->getCrafts().at(_craft);
+	Craft *c = _base->crafts().at(_craft);
 	c->addPilot(pilotId);
 
 	_game->popState();

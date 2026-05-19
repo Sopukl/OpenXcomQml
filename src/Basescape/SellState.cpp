@@ -207,7 +207,7 @@ void SellState::delayedInit()
 			}
 		}
 	}
-	for (auto* craft : _base->getCrafts())
+	for (auto* craft : _base->crafts())
 	{
 		if (_debriefingState) break;
 		if (craft->getStatus() != "STR_OUT")
@@ -265,7 +265,7 @@ void SellState::delayedInit()
 						qty += overfullCritical ? transfer->getCraft()->getTotalItemCount(rule) : transfer->getCraft()->getItems()->getItem(rule);
 					}
 				}
-				for (auto* craft : _base->getCrafts())
+				for (auto* craft : _base->crafts())
 				{
 					qty +=  overfullCritical ? craft->getTotalItemCount(rule) : craft->getItems()->getItem(rule);
 				}
@@ -787,7 +787,7 @@ void SellState::btnOkClick(Action *)
 					int toRemove = cleanUpContainer(&_base->getStorageItems(), item, transferRow.amount);
 
 					// if we still need to remove any, remove them from the crafts first, and keep a running tally
-					for (auto* craft : _base->getCrafts())
+					for (auto* craft : _base->crafts())
 					{
 						if (toRemove <= 0) break; // loop finished
 						toRemove = cleanUpContainer(craft->getItems(), item, toRemove);

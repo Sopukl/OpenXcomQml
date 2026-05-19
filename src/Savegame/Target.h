@@ -18,6 +18,7 @@
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include <QObject>
+#include <qqmlintegration.h>
 #include <string>
 #include <vector>
 #include "../Engine/Yaml.h"

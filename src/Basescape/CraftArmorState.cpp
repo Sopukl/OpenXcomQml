@@ -299,7 +299,7 @@ void CraftArmorState::initList(size_t scrl)
 		_lstSoldiers->setColumns(3, 106, 70, 104);
 	}
 
-	Craft *c = _base->getCrafts().at(_craft);
+	Craft *c = _base->crafts().at(_craft);
 	BaseSumDailyRecovery recovery = _base->getSumRecoveryPerDay();
 	for (const auto* soldier : _base->getSoldiers())
 	{
@@ -470,7 +470,7 @@ void CraftArmorState::lstSoldiersClick(Action *action)
 		{
 			if (_game->isCtrlPressed(true))
 			{
-				Craft* c = _base->getCrafts().at(_craft);
+				Craft* c = _base->crafts().at(_craft);
 				if (s->getCraft() == c)
 				{
 					s->setCraftAndMoveEquipment(0, _base, _game->savedGame()->getMonthsPassed() == -1);
@@ -648,7 +648,7 @@ void CraftArmorState::btnDeequipAllArmorClick(Action *action)
  */
 void CraftArmorState::btnDeequipCraftArmorClick(Action *action)
 {
-	Craft *c = _base->getCrafts().at(_craft);
+	Craft *c = _base->crafts().at(_craft);
 	int row = 0;
 	for (auto* s : _base->getSoldiers())
 	{

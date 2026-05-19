@@ -269,7 +269,7 @@ void StoresState::initList()
 				}
 
 				// 2. items from craft
-				for (const auto* craft : xbase->getCrafts())
+				for (const auto* craft : xbase->crafts())
 				{
 					qty += craft->getTotalItemCount(rule);
 				}

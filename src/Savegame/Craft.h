@@ -79,6 +79,8 @@ struct VehicleDeploymentData
  */
 class Craft : public MovingTarget
 {
+	Q_OBJECT
+	QML_ELEMENT
 public:
 	/// Name of class used in script.
 	static constexpr const char *ScriptName = "Craft";

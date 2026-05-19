@@ -183,7 +183,7 @@ productionProgress_e Production::step(Base * b, SavedGame * g, const Mod *m, Lan
 				}
 				else
 				{
-					b->getCrafts().push_back(craft);
+					b->crafts().push_back(craft);
 				}
 			}
 			else
@@ -210,7 +210,7 @@ productionProgress_e Production::step(Base * b, SavedGame * g, const Mod *m, Lan
 							b->getStorageItems().addItem(i.first, i.second);
 							if (i.first->getBattleType() == BT_NONE)
 							{
-								for (auto* c : b->getCrafts())
+								for (auto* c : b->crafts())
 								{
 									c->reuseItem(i.first);
 								}
@@ -253,7 +253,7 @@ productionProgress_e Production::step(Base * b, SavedGame * g, const Mod *m, Lan
 								b->getStorageItems().addItem(i.first, i.second);
 								if (i.first->getBattleType() == BT_NONE)
 								{
-									for (auto* c : b->getCrafts())
+									for (auto* c : b->crafts())
 									{
 										c->reuseItem(i.first);
 									}
@@ -357,7 +357,7 @@ void Production::startItem(Base * b, SavedGame * g, const Mod *m) const
 	for (const auto& i : _rules->getRequiredCrafts())
 	{
 		// Find suitable craft
-		for (auto* c : b->getCrafts())
+		for (auto* c : b->crafts())
 		{
 			if (c->getRules() == i.first)
 			{

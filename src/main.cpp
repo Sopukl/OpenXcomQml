@@ -103,23 +103,6 @@ void exceptionLogger()
 // programming license revoked...
 int main(int argc, char *argv[])
 {
-// #ifndef DUMP_CORE
-// #ifdef _MSC_VER
-// 	// Uncomment to check memory leaks in VS
-// 	//_CrtSetDbgFlag ( _CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF );
-
-// 	SetUnhandledExceptionFilter(crashLogger);
-// #ifdef __MINGW32__
-// 	// MinGW can use SJLJ or Dwarf exceptions, because of this SEH can't catch it.
-// 	std::set_terminate(exceptionLogger);
-// #endif
-// 	// Uncomment to debug crash handler
-// 	// AddVectoredContinueHandler(1, crashLogger);
-// #else
-// 	signal(SIGSEGV, signalLogger);
-// 	std::set_terminate(exceptionLogger);
-// #endif
-// #endif
 	QQuickWindow::setGraphicsApi(QSGRendererInterface::OpenGL);
 	QGuiApplication app(argc, argv);
 	QQuickStyle::setStyle("Universal");
@@ -128,6 +111,7 @@ int main(int argc, char *argv[])
 	qmlRegisterType<OpenXcom::GeoscapeState>("OpenXcom", 1, 0, "GeoscapeState");
 	qmlRegisterType<OpenXcom::SavedGame>("OpenXcom", 1, 0, "SavedGame");
 	qmlRegisterType<OpenXcom::Base>("OpenXcom", 1, 0, "Base");
+	qmlRegisterType<OpenXcom::Craft>("OpenXcom", 1, 0, "Craft");
 	qmlRegisterType<OpenXcom::Options1>("OpenXcom", 1, 0, "Options1");
 	qmlRegisterSingletonType<Options1>("OpenXcom", 1, 0, "Options1",
 		[](QQmlEngine *engine, QJSEngine *scriptEngine) -> QObject* {

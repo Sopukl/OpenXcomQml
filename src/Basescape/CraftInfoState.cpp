@@ -68,7 +68,7 @@ CraftInfoState::CraftInfoState(Base *base, size_t craftId) : _base(base), _craft
 		_window = new Window(this, 320, 200, 0, 0, POPUP_NONE);
 	}
 
-	_craft = _base->getCrafts().at(_craftId);
+	_craft = _base->crafts().at(_craftId);
 	_weaponNum = _craft->getRules()->getWeapons();
 	if (_weaponNum > RuleCraft::WeaponMax)
 		_weaponNum = RuleCraft::WeaponMax;

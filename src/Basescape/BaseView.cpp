@@ -500,7 +500,7 @@ void BaseView::draw()
 		}
 	}
 
-	auto craftIt = _base->getCrafts().begin();
+	auto craftIt = _base->crafts().begin();
 
 	for (const auto* fac : _base->getFacilities())
 	{
@@ -591,7 +591,7 @@ void BaseView::draw()
 		fac->setCraftForDrawing(0);
 		if (fac->getBuildTime() == 0 && fac->getRules()->getCrafts() > 0)
 		{
-			if (craftIt != _base->getCrafts().end())
+			if (craftIt != _base->crafts().end())
 			{
 				if ((*craftIt)->getStatus() != "STR_OUT")
 				{

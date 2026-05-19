@@ -251,7 +251,7 @@ void BuildNewBaseState::globeClick(Action *action)
 				_base->setLongitude(lon);
 				_base->setLatitude(lat);
 				_base->calculateServices(_game->savedGame());
-				for (auto* craft : _base->getCrafts())
+				for (auto* craft : _base->crafts())
 				{
 					craft->setLongitude(lon);
 					craft->setLatitude(lat);

@@ -2264,7 +2264,7 @@ bool SavedGame::isItemObtained(const std::string &itemType, const Mod* mod) cons
 			if (xbase->getStorageItems().getItem(item) > 0)
 				return true;
 
-			for (auto* xcraft : xbase->getCrafts())
+			for (auto* xcraft : xbase->crafts())
 			{
 				if (xcraft->getItems()->getItem(item) > 0)
 					return true;
@@ -3120,7 +3120,7 @@ void SavedGame::stopHuntingXcomCraft(Craft *target)
  */
 void SavedGame::stopHuntingXcomCrafts(Base *base)
 {
-	for (auto* xcraft : base->getCrafts())
+	for (auto* xcraft : base->crafts())
 	{
 		for (auto* ufo : _ufos)
 		{

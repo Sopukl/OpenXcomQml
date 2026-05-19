@@ -111,7 +111,7 @@ ItemsArrivingState::ItemsArrivingState(GeoscapeState *state) : _state(state), _b
 					const auto* item = transfer->getItems();
 					if (item->getBattleType() == BT_NONE)
 					{
-						for (auto* xcraft : xbase->getCrafts())
+						for (auto* xcraft : xbase->crafts())
 						{
 							xcraft->reuseItem(item);
 						}

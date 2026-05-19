@@ -519,9 +519,9 @@ void BasescapeState::viewRightClick(Action *)
 			_game->pushState(new CraftsState(_base));
 		}
 		else
-			for (size_t craft = 0; craft < _base->getCrafts().size(); ++craft)
+			for (size_t craft = 0; craft < _base->crafts().size(); ++craft)
 			{
-				if (f->getCraftForDrawing() == _base->getCrafts().at(craft))
+				if (f->getCraftForDrawing() == _base->crafts().at(craft))
 				{
 					_game->pushState(new CraftInfoState(_base, craft));
 					break;

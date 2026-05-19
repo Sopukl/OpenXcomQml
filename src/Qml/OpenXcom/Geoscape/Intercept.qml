@@ -13,4 +13,19 @@ XC.Popup {
         font.pixelSize: 10
         text: "LAUNCH INTERCEPTION"
     }
+    Component.onCompleted: {
+        let bases = Game.savedGame.bases
+        if(bases)
+        {
+            console.log(bases)
+            for(let base of bases)
+            {
+                console.log(">>> " + base)
+                for(let craft of base.crafts)
+                {
+                    console.log("    -->" + craft)
+                }
+            }
+        }
+    }
 }

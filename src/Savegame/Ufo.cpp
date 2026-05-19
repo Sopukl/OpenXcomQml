@@ -188,7 +188,7 @@ void Ufo::finishLoading(const YAML::YamlNodeReader& reader, SavedGame &save)
 			bool found = false;
 			for (auto* xbase : save.bases())
 			{
-				for (auto* xcraft : xbase->getCrafts())
+				for (auto* xcraft : xbase->crafts())
 				{
 					if (xcraft->getId() == id && xcraft->getRules()->getType() == type)
 					{

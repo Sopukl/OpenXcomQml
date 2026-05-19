@@ -485,16 +485,17 @@ void StatsForNerdsState::btnPreviewClick(Action *)
 		{
 			soldier->setCraft(nullptr);
 		}
-		for (auto* craft : base->getCrafts())
+
+		for (auto* craft : base->crafts())
 		{
 			delete craft;
 		}
-		base->getCrafts().clear();
+		base->crafts().clear();
 	}
 	// and finally create the craft we need
 	RuleCraft* craftRule = mod->getCraft(_topicId);
 	Craft* c = new Craft(craftRule, base, RuleCraft::DUMMY_CRAFT_ID); // a negative integer
-	base->getCrafts().push_back(c);
+	base->crafts().push_back(c);
 	c->setName(ltr(craftRule->getType()));
 	int max = craftRule->getMaxUnitsLimit();
 	for (auto* soldier : base->getSoldiers())

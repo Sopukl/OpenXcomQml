@@ -798,7 +798,7 @@ std::vector<Target*> Globe::getTargets(int x, int y, bool craft, Craft *currentC
 				v.push_back(xbase);
 			}
 
-			for (auto* xcraft : xbase->getCrafts())
+			for (auto* xcraft : xbase->crafts())
 			{
 				if (xcraft == currentCraft)
 					continue;
@@ -1228,7 +1228,7 @@ void Globe::drawRadars()
 		}
 
 		// Draw radars around player craft
-		for (auto* xcraft : xbase->getCrafts())
+		for (auto* xcraft : xbase->crafts())
 		{
 			if (xcraft->getStatus() != "STR_OUT")
 				continue;
@@ -1659,7 +1659,7 @@ void Globe::drawFlights()
 	// Draw the craft flight paths
 	for (auto* xbase : _game->savedGame()->bases())
 	{
-		for (auto* xcraft : xbase->getCrafts())
+		for (auto* xcraft : xbase->crafts())
 		{
 			// Hide crafts docked at base
 			if (xcraft->getStatus() != "STR_OUT" || xcraft->getDestination() == 0 /*|| pointBack(xcraft->getLongitude(), xcraft->getLatitude())*/)
@@ -1793,7 +1793,7 @@ void Globe::drawMarkers()
 	// Draw the craft markers
 	for (auto* xbase : _game->savedGame()->bases())
 	{
-		for (auto* xcraft : xbase->getCrafts())
+		for (auto* xcraft : xbase->crafts())
 		{
 			drawTarget(xcraft, _markers);
 		}

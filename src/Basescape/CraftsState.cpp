@@ -132,7 +132,7 @@ void CraftsState::init()
 void CraftsState::initList(size_t scrl)
 {
 	_lstCrafts->clearList();
-	for (const auto* craft : _base->getCrafts())
+	for (const auto* craft : _base->crafts())
 	{
 		std::ostringstream ss, ss2, ss3;
 		ss << craft->getNumWeapons() << "/" << craft->getRules()->getWeapons();
@@ -166,7 +166,7 @@ void CraftsState::btnOkClick(Action *)
  */
 void CraftsState::lstCraftsClick(Action *action)
 {
-	auto& crafts = _base->getCrafts();
+	auto& crafts = _base->crafts();
 	auto row = _lstCrafts->getSelectedRow();
 
 	if (_game->isLeftClick(action))

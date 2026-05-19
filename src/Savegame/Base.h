@@ -18,7 +18,7 @@
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "ItemContainer.h"
-#include "Target.h"
+#include "Craft.h"
 #include <string>
 #include <vector>
 #include <map>
@@ -111,6 +111,8 @@ struct BaseSumDailyRecovery
 class Base : public Target
 {
 	Q_OBJECT
+
+	Q_PROPERTY(std::vector<OpenXcom::Craft*> crafts READ crafts NOTIFY craftsChanged FINAL)
 private:
 	static const int BASE_SIZE = 6;
 	const Mod *_mod;
@@ -162,9 +164,9 @@ public:
 	/// Pre-calculates soldier stats with various bonuses.
 	void prepareSoldierStatsWithBonuses();
 	/// Gets the base's crafts.
-	std::vector<Craft*>& getCrafts() {	return _crafts; }
+	std::vector<Craft*>& crafts() {	return _crafts; }
 	/// Gets the base's crafts.
-	const std::vector<Craft*>& getCrafts() const { return _crafts; }
+	const std::vector<Craft*>& crafts() const { return _crafts; }
 	/// Gets the base's transfers.
 	std::vector<Transfer*>& getTransfers() { return _transfers; }
 	/// Gets the base's transfers.
@@ -348,8 +350,11 @@ public:
 	const Texture* getGlobeTexture() const { return _globeTexture; }
 	/// Sets the base's globe texture.
 	void setGlobeTexture(const Texture* globeTexture) { _globeTexture = globeTexture; }
+  signals:
+	void craftsChanged();
   public slots:
     void set_Name(QString);
 };
 
 }
+Q_DECLARE_METATYPE(std::vector<OpenXcom::Craft*>)

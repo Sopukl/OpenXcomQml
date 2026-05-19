@@ -2743,7 +2743,7 @@ inline void BattlescapeState::handle(Action *action)
 					Craft* ycraft = nullptr;
 					for (auto* xbase : _game->savedGame()->bases())
 					{
-						for (auto* xcraft : xbase->getCrafts())
+						for (auto* xcraft : xbase->crafts())
 						{
 							if (xcraft->isInBattlescape())
 							{
@@ -3606,7 +3606,7 @@ void BattlescapeState::finishBattle(bool abort, int inExitArea)
 			for (auto* xbase : _game->savedGame()->bases())
 			{
 				xbase->setInBattlescape(false);
-				for (auto* craft : xbase->getCrafts())
+				for (auto* craft : xbase->crafts())
 				{
 					craft->setInBattlescape(false);
 				}
