@@ -38,6 +38,7 @@ class Ufo;
 class Target: public QObject
 {
 	Q_OBJECT
+	QML_ELEMENT
 protected:
 	double _lon, _lat;
 	int _id;
@@ -55,7 +56,7 @@ public:
 	/// Saves the target's ID to YAML.
 	virtual void saveId(YAML::YamlNodeWriter writer) const;
 	/// Gets the target's type.
-	virtual std::string getType() const = 0;
+	virtual std::string getType() const;
 	/// Gets the target's longitude.
 	double getLongitude() const;
 	/// Sets the target's longitude.
@@ -79,7 +80,7 @@ public:
 	/// Gets the target's marker ID.
 	virtual int getMarkerId() const;
 	/// Gets the target's marker sprite.
-	virtual int getMarker() const = 0;
+	virtual int getMarker() const;
 	/// Gets the target's followers.
 	std::vector<MovingTarget*> *getFollowers();
 	/// Gets the target's craft followers.

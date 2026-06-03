@@ -3806,16 +3806,16 @@ SavedGame *Mod::newSave(GameDifficulty diff) const
 	{
 		RuleCountry *countryRule = getCountry(countryName);
 		if (!countryRule->getLonMin().empty())
-			save->getCountries()->push_back(new Country(countryRule));
+			save->countries().push_back(new Country(countryRule));
 	}
 	// Adjust funding to total $6M
-	int missing = ((_initialFunding - save->getCountryFunding()/1000) / (int)save->getCountries()->size()) * 1000;
-	for (auto* country : *save->getCountries())
+	int missing = ((_initialFunding - save->getCountryFunding()/1000) / (int)save->countries().size()) * 1000;
+	for (auto* country : save->countries())
 	{
-		int funding = country->getFunding().back() + missing;
+		int funding = country->funding().back() + missing;
 		if (funding < 0)
 		{
-			funding = country->getFunding().back();
+			funding = country->funding().back();
 		}
 		country->setFunding(funding);
 	}

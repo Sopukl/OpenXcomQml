@@ -1403,7 +1403,7 @@ void Globe::drawDetail()
 		label->setAlign(ALIGN_CENTER);
 
 		Sint16 x, y;
-		for (auto* country : *_game->savedGame()->getCountries())
+		for (auto* country : _game->savedGame()->countries())
 		{
 			// Don't draw if label is facing back
 			if (pointBack(country->getRules()->getLabelLongitude(), country->getRules()->getLabelLatitude()))
@@ -1514,7 +1514,7 @@ void Globe::drawDetail()
 		if (debugType == 0)
 		{
 			color = 0;
-			for (auto* country : *_game->savedGame()->getCountries())
+			for (auto* country : _game->savedGame()->countries())
 			{
 				if (_game->savedGame()->debugCountry && _game->savedGame()->debugCountry != country)
 					continue;

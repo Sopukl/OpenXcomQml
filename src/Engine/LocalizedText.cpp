@@ -65,4 +65,9 @@ LocalizedText &LocalizedText::arg(const std::string &val)
 	return *this;
 }
 
+const std::string &LocalizedText::text() const
+{
+	return _text;
+}
+
 }

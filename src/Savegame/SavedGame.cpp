@@ -1262,9 +1262,9 @@ void SavedGame::setAllIds(const std::map<std::string, int> &ids)
  * Returns the list of countries in the game world.
  * @return Pointer to country list.
  */
-std::vector<Country*> *SavedGame::getCountries()
+std::vector<Country*>& SavedGame::countries()
 {
-	return &_countries;
+	return _countries;
 }
 
 /**
@@ -1276,7 +1276,7 @@ int SavedGame::getCountryFunding() const
 	int total = 0;
 	for (auto* country : _countries)
 	{
-		total += country->getFunding().back();
+		total += country->funding().back();
 	}
 	return total;
 }

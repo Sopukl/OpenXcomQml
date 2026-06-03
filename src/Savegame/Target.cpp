@@ -88,6 +88,11 @@ void Target::saveId(YAML::YamlNodeWriter writer) const
 	writer.write("id", _id);
 }
 
+std::string Target::getType() const
+{
+	return "";
+}
+
 /**
  * Returns the longitude coordinate of the target.
  * @return Longitude in radian.
@@ -207,6 +212,11 @@ std::string Target::getMarkerName() const
 int Target::getMarkerId() const
 {
 	return _id;
+}
+
+int Target::getMarker() const
+{
+	return -1;
 }
 
 /**

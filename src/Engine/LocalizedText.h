@@ -58,6 +58,8 @@ public:
 	LocalizedText &arg(const std::string &) OX_REQUIRED_RESULT;
 	template <typename T> LocalizedText arg(T) const OX_REQUIRED_RESULT;
 	template <typename T> LocalizedText &arg(T) OX_REQUIRED_RESULT;
+
+	const std::string& text() const;
 private:
 	std::string _text; ///< The actual localized text.
 	unsigned _nextArg; ///< The next argument ID.

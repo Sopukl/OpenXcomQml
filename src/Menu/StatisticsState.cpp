@@ -276,7 +276,7 @@ void StatisticsState::listStats()
 	}
 
 	int countriesLost = 0;
-	for (const auto* country : *save->getCountries())
+	for (const auto* country : save->countries())
 	{
 		if (country->getPact())
 		{

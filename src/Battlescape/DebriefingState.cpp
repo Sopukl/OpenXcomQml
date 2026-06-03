@@ -1103,7 +1103,7 @@ void DebriefingState::prepareDebriefing()
 						break;
 					}
 				}
-				for (auto* country : *save->getCountries())
+				for (auto* country : save->countries())
 				{
 					if (country->getRules()->insideCountry(xcraft->getLongitude(), xcraft->getLatitude()))
 					{
@@ -1167,7 +1167,7 @@ void DebriefingState::prepareDebriefing()
 					break;
 				}
 			}
-			for (auto* country : *save->getCountries())
+			for (auto* country : save->countries())
 			{
 				if (country->getRules()->insideCountry(base->getLongitude(), base->getLatitude()))
 				{

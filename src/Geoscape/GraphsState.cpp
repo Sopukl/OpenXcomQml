@@ -134,7 +134,7 @@ GraphsState::GraphsState() : _butRegionsOffset(0), _butCountriesOffset(0), _zoom
 	add(_btnRegionTotal, "button", "graphs");
 
 	offset = 0;
-	for (auto* country : *_game->savedGame()->getCountries())
+	for (auto* country : _game->savedGame()->countries())
 	{
 		// always save in toggles all the countries
 		Uint8 color = 13 + 8 * (offset % GRAPH_MAX_BUTTONS);
@@ -714,38 +714,38 @@ void GraphsState::drawCountryLines()
 		int total = 0;
 		if (_alien)
 		{
-			for (size_t iter = 0; iter != _game->savedGame()->getCountries()->size(); ++iter)
+			for (size_t iter = 0; iter != _game->savedGame()->countries().size(); ++iter)
 			{
-				total += _game->savedGame()->getCountries()->at(iter)->getActivityAlien().at(entry);
-				if (_game->savedGame()->getCountries()->at(iter)->getActivityAlien().at(entry) > upperLimit && _countryToggles.at(iter)->_pushed)
+				total += _game->savedGame()->countries().at(iter)->getActivityAlien().at(entry);
+				if (_game->savedGame()->countries().at(iter)->getActivityAlien().at(entry) > upperLimit && _countryToggles.at(iter)->_pushed)
 				{
-					upperLimit = _game->savedGame()->getCountries()->at(iter)->getActivityAlien().at(entry);
+					upperLimit = _game->savedGame()->countries().at(iter)->getActivityAlien().at(entry);
 				}
 			}
 		}
 		else if (_income)
 		{
-			for (size_t iter = 0; iter != _game->savedGame()->getCountries()->size(); ++iter)
+			for (size_t iter = 0; iter != _game->savedGame()->countries().size(); ++iter)
 			{
-				total += _game->savedGame()->getCountries()->at(iter)->getFunding().at(entry) / 1000;
-				if (_game->savedGame()->getCountries()->at(iter)->getFunding().at(entry) / 1000 > upperLimit && _countryToggles.at(iter)->_pushed)
+				total += _game->savedGame()->countries().at(iter)->funding().at(entry) / 1000;
+				if (_game->savedGame()->countries().at(iter)->funding().at(entry) / 1000 > upperLimit && _countryToggles.at(iter)->_pushed)
 				{
-					upperLimit = _game->savedGame()->getCountries()->at(iter)->getFunding().at(entry) / 1000;
+					upperLimit = _game->savedGame()->countries().at(iter)->funding().at(entry) / 1000;
 				}
 			}
 		}
 		else
 		{
-			for (size_t iter = 0; iter != _game->savedGame()->getCountries()->size(); ++iter)
+			for (size_t iter = 0; iter != _game->savedGame()->countries().size(); ++iter)
 			{
-				total += _game->savedGame()->getCountries()->at(iter)->getActivityXcom().at(entry);
-				if (_game->savedGame()->getCountries()->at(iter)->getActivityXcom().at(entry) > upperLimit && _countryToggles.at(iter)->_pushed)
+				total += _game->savedGame()->countries().at(iter)->getActivityXcom().at(entry);
+				if (_game->savedGame()->countries().at(iter)->getActivityXcom().at(entry) > upperLimit && _countryToggles.at(iter)->_pushed)
 				{
-					upperLimit = _game->savedGame()->getCountries()->at(iter)->getActivityXcom().at(entry);
+					upperLimit = _game->savedGame()->countries().at(iter)->getActivityXcom().at(entry);
 				}
-				if (_game->savedGame()->getCountries()->at(iter)->getActivityXcom().at(entry) < lowerLimit && _countryToggles.at(iter)->_pushed)
+				if (_game->savedGame()->countries().at(iter)->getActivityXcom().at(entry) < lowerLimit && _countryToggles.at(iter)->_pushed)
 				{
-					lowerLimit = _game->savedGame()->getCountries()->at(iter)->getActivityXcom().at(entry);
+					lowerLimit = _game->savedGame()->countries().at(iter)->getActivityXcom().at(entry);
 				}
 
 			}
@@ -786,9 +786,9 @@ void GraphsState::drawCountryLines()
 	double units = range / 126;
 
 	// draw country line
-	for (size_t entry = 0; entry != _game->savedGame()->getCountries()->size(); ++entry)
+	for (size_t entry = 0; entry != _game->savedGame()->countries().size(); ++entry)
 	{
-		Country *country = _game->savedGame()->getCountries()->at(entry);
+		Country *country = _game->savedGame()->countries().at(entry);
 		_alienCountryLines.at(entry)->clear();
 		_xcomCountryLines.at(entry)->clear();
 		_incomeLines.at(entry)->clear();
@@ -809,11 +809,11 @@ void GraphsState::drawCountryLines()
 			}
 			else if (_income)
 			{
-				if (iter < country->getFunding().size())
+				if (iter < country->funding().size())
 				{
-					reduction = (country->getFunding().at(country->getFunding().size()-(1+iter)) / 1000) / units;
+					reduction = (country->funding().at(country->funding().size()-(1+iter)) / 1000) / units;
 					y -= reduction;
-					totals[iter] += country->getFunding().at(country->getFunding().size()-(1+iter)) / 1000;
+					totals[iter] += country->funding().at(country->funding().size()-(1+iter)) / 1000;
 				}
 			}
 			else

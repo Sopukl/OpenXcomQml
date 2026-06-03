@@ -16,6 +16,7 @@
  * You should have received a copy of the GNU General Public License
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
+#include "../Engine/Game.h"
 #include "Country.h"
 #include "../Mod/RuleCountry.h"
 #include "../Mod/Mod.h"
@@ -101,7 +102,7 @@ const RuleCountry *Country::getRules() const
  * Returns the country's current monthly funding.
  * @return Monthly funding.
  */
-std::vector<int> &Country::getFunding()
+std::vector<int> &Country::funding()
 {
 	return _funding;
 }
@@ -113,6 +114,7 @@ std::vector<int> &Country::getFunding()
 void Country::setFunding(int funding)
 {
 	_funding.back() = funding;
+	Q_EMIT fundingChanged();
 }
 
 /*
@@ -176,7 +178,7 @@ void Country::newMonth(int xcomTotal, int alienTotal, int pactScore, int average
 {
 	// Note: this is a TEMPORARY variable! it's not saved in the save file, i.e. we don't know the value from the previous month!
 	_satisfaction = Satisfaction::SATISFIED;
-	const int funding = getFunding().back();
+	const int curFunding = funding().back();
 	const int good = (xcomTotal / 10) + _activityXcom.back();
 	const int bad = (alienTotal / 20) + _activityAlien.back();
 	const int oldFunding = _funding.back() / 1000;
@@ -194,8 +196,8 @@ void Country::newMonth(int xcomTotal, int alienTotal, int pactScore, int average
 			{
 				// don't go over the cap
 				int cap = getRules()->getFundingCap()*1000;
-				if (funding + newFunding > cap)
-					newFunding = cap - funding;
+				if (curFunding + newFunding > cap)
+					newFunding = cap - curFunding;
 				if (newFunding)
 					_satisfaction = Satisfaction::HAPPY;
 			}
@@ -209,8 +211,8 @@ void Country::newMonth(int xcomTotal, int alienTotal, int pactScore, int average
 			{
 				newFunding = -newFunding;
 				// don't go below zero
-				if (funding + newFunding < 0)
-					newFunding = 0 - funding;
+				if (curFunding + newFunding < 0)
+					newFunding = 0 - curFunding;
 				if (newFunding)
 					_satisfaction = Satisfaction::UNHAPPY;
 			}
@@ -259,7 +261,7 @@ void Country::newMonth(int xcomTotal, int alienTotal, int pactScore, int average
 	if (_pact)
 		_funding.push_back(0); // yes, hardcoded!
 	else
-		_funding.push_back(funding + newFunding);
+		_funding.push_back(curFunding + newFunding);
 
 	_activityAlien.push_back(0);
 	_activityXcom.push_back(0);
@@ -411,6 +413,12 @@ ModScript::NewMonthCountryParser::NewMonthCountryParser(ScriptGlobal* shared, co
 	BindBase b { this };
 
 	b.addCustomPtr<const Mod>("rules", mod);
+}
+
+QString Country::name() const
+{
+	const auto& stdName = game.getLanguage()->getString(_rules->getType());
+	return QString::fromStdString(stdName);
 }
 
 }

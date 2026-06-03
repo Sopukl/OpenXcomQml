@@ -28,6 +28,7 @@
 #include "../Mod/RuleEvent.h"
 #include "Craft.h"
 #include "Base.h"
+#include "Country.h"
 #include "../Mod/RuleManufacture.h"
 #include "../Mod/RuleBaseFacility.h"
 #include "../Mod/RuleCraft.h"
@@ -105,6 +106,7 @@ class SavedGame: public QObject
 {
 	Q_OBJECT
 	Q_PROPERTY(std::vector<OpenXcom::Base*> bases READ bases NOTIFY basesChanged FINAL)
+	Q_PROPERTY(std::vector<OpenXcom::Country*> countries READ countries CONSTANT FINAL)
 
 	QML_ELEMENT
 public:
@@ -258,7 +260,7 @@ public:
 	/// Resets the list of object IDs.
 	void setAllIds(const std::map<std::string, int> &ids);
 	/// Gets the list of countries.
-	std::vector<Country*> *getCountries();
+	std::vector<Country*>& countries();
 	/// Gets the total country funding.
 	int getCountryFunding() const;
 	/// Gets the list of regions.
@@ -545,3 +547,4 @@ public:
 
 }
 Q_DECLARE_METATYPE(std::vector<OpenXcom::Base*>)
+Q_DECLARE_METATYPE(std::vector<OpenXcom::Country*>)

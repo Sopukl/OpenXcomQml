@@ -110,8 +110,10 @@ int main(int argc, char *argv[])
 	qmlRegisterType<OpenXcom::GameRenderer>("OpenXcom", 1, 0, "GameRenderer");
 	qmlRegisterType<OpenXcom::GeoscapeState>("OpenXcom", 1, 0, "GeoscapeState");
 	qmlRegisterType<OpenXcom::SavedGame>("OpenXcom", 1, 0, "SavedGame");
+	qmlRegisterType<OpenXcom::Target>("OpenXcom", 1, 0, "Target");
 	qmlRegisterType<OpenXcom::Base>("OpenXcom", 1, 0, "Base");
 	qmlRegisterType<OpenXcom::Craft>("OpenXcom", 1, 0, "Craft");
+	qmlRegisterType<OpenXcom::Country>("OpenXcom", 1, 0, "Country");
 	qmlRegisterType<OpenXcom::Options1>("OpenXcom", 1, 0, "Options1");
 	qmlRegisterSingletonType<Options1>("OpenXcom", 1, 0, "Options1",
 		[](QQmlEngine *engine, QJSEngine *scriptEngine) -> QObject* {

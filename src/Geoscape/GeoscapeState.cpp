@@ -469,7 +469,7 @@ GeoscapeState::GeoscapeState() : _pause(false), _zoomInEffectDone(false), _zoomO
 
 		std::vector<std::string> countryList;
 		countryList.push_back("All countries");
-		for (auto* c : *_game->savedGame()->getCountries())
+		for (auto* c : _game->savedGame()->countries())
 		{
 			countryList.push_back(ltr(c->getRules()->getType()));
 		}
@@ -625,7 +625,7 @@ void GeoscapeState::handle(Action *action)
 					region->getActivityXcom().at(invertedEntry) = 0;
 					region->getActivityAlien().at(invertedEntry) = 0;
 				}
-				for (auto* country : *_game->savedGame()->getCountries())
+				for (auto* country : _game->savedGame()->countries())
 				{
 					country->getActivityXcom().at(invertedEntry) = 0;
 					country->getActivityAlien().at(invertedEntry) = 0;
@@ -1147,7 +1147,7 @@ void GeoscapeState::time5Seconds()
 			Craft* xcraft = (*craftIt);
 			if (xcraft->isDestroyed())
 			{
-				for (auto* country : *_game->savedGame()->getCountries())
+				for (auto* country : _game->savedGame()->countries())
 				{
 					if (country->getRules()->insideCountry(xcraft->getLongitude(), xcraft->getLatitude()))
 					{
@@ -1858,7 +1858,7 @@ bool GeoscapeState::processMissionSite(MissionSite *site)
 	{
 		region->addActivityAlien(score);
 	}
-	for (auto* country : *_game->savedGame()->getCountries())
+	for (auto* country : _game->savedGame()->countries())
 	{
 		if (country->getRules()->insideCountry(site->getLongitude(), site->getLatitude()))
 		{
@@ -2013,7 +2013,7 @@ void GeoscapeState::time30Minutes()
 				}
 			}
 			// Get country
-			for (auto* country : *_game->savedGame()->getCountries())
+			for (auto* country : _game->savedGame()->countries())
 			{
 				if (country->getRules()->insideCountry(ufo->getLongitude(), ufo->getLatitude()))
 				{
@@ -2762,7 +2762,7 @@ void GeoscapeState::time1Day()
 				break;
 			}
 		}
-		for (auto* country : *saveGame->getCountries())
+		for (auto* country : saveGame->countries())
 		{
 			if (country->getRules()->insideCountry(ab->getLongitude(), ab->getLatitude()))
 			{
@@ -3184,7 +3184,9 @@ void GeoscapeState::btnFundingClick(Action *)
 	}
 	else
 	{
-		_game->pushState(new FundingState);
+		//_game->pushState(new FundingState);
+		game.openPopupWindow("/OpenXcom/Geoscape/Funding.qml");
+
 	}
 }
 
@@ -3628,7 +3630,7 @@ void GeoscapeState::determineAlienMissions(bool isNewMonth, const RuleEvent* eve
 			xcomBaseCountries.insert(country->getRules()->getType());
 		}
 	}
-	for (auto* country : *save->getCountries())
+	for (auto* country : save->countries())
 	{
 		if (country->getPact())
 		{
@@ -5041,7 +5043,7 @@ void GeoscapeState::cbxCountryChange(Action *)
 	}
 	else
 	{
-		_game->savedGame()->debugCountry = (*_game->savedGame()->getCountries())[index - 1];
+		_game->savedGame()->debugCountry = (_game->savedGame()->countries())[index - 1];
 	}
 
 	std::ostringstream ss;

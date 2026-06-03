@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU General Public License
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
-#include <vector>
+#include <QObject>
 #include "../Engine/Yaml.h"
 #include "../Engine/Script.h"
 
@@ -32,8 +32,11 @@ class SavedGame;
  * Contains variable info about a country like
  * monthly funding and various activities.
  */
-class Country
+class Country: public QObject
 {
+	Q_OBJECT
+	Q_PROPERTY(QString name READ name CONSTANT FINAL)
+	Q_PROPERTY(std::vector<int> funding READ funding NOTIFY fundingChanged FINAL)
 public:
 	enum class Satisfaction : int { ALIEN_PACT, UNHAPPY, SATISFIED, HAPPY };
 
@@ -61,7 +64,7 @@ public:
 	/// Gets the country's ruleset.
 	const RuleCountry *getRules() const;
 	/// Gets the country's funding.
-	std::vector<int> &getFunding();
+	std::vector<int> &funding();
 	/// Sets the country's funding.
 	void setFunding(int funding);
 	/// get the country's satisfaction level
@@ -91,10 +94,15 @@ public:
 	/// can be (re)infiltrated?
 	bool canBeInfiltrated();
 
-private:
+	QString name() const;
+  signals:
+	void fundingChanged();
+  private:
 	int getCurrentFunding() const { return _funding.back(); }
 	int getCurrentActivityAlien()  const { return _activityAlien.back(); }
 	int getCurrentActivityXcom() const { return _activityXcom.back(); }
 };
 
 }
+
+Q_DECLARE_METATYPE(std::vector<int>)

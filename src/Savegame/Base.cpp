@@ -269,7 +269,7 @@ void Base::finishLoading(const YAML::YamlNodeReader& reader, SavedGame *save)
  */
 void Base::calculateServices(SavedGame* save)
 {
-	for (const auto* country : *save->getCountries())
+	for (const auto* country : save->countries())
 	{
 		if (country->getRules()->insideCountry(_lon, _lat))
 		{

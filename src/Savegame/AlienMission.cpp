@@ -229,7 +229,7 @@ void AlienMission::think(Game &engine, const Globe &globe)
 	}
 	if (_rule.getObjective() == OBJECTIVE_INFILTRATION && _nextWave == _rule.getWaveCount())
 	{
-		std::vector<Country*> countriesCopy = *game.getCountries();
+		std::vector<Country*> countriesCopy = game.countries();
 		if (mod.getInfiltrateRandomCountryInTheRegion())
 		{
 			RNG::shuffle(countriesCopy);
@@ -1137,7 +1137,7 @@ void AlienMission::addScore(double lon, double lat, SavedGame &game) const
 			break;
 		}
 	}
-	for (auto* country : *game.getCountries())
+	for (auto* country : game.countries())
 	{
 		if (country->getRules()->insideCountry(lon, lat))
 		{

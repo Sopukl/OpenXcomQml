@@ -37,5 +37,6 @@
         <file>OpenXcom/Controls/Button.qml</file>
         <file>OpenXcom/Geoscape/BaseName.qml</file>
         <file>OpenXcom/Geoscape/Intercept.qml</file>
+        <file>OpenXcom/Geoscape/Funding.qml</file>
     </qresource>
 </RCC>

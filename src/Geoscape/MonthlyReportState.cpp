@@ -448,8 +448,8 @@ void MonthlyReportState::calculateChanges()
 	{
 		pactScore = infiltration->getPoints();
 	}
-	int averageFunding = _game->savedGame()->getCountryFunding() / _game->savedGame()->getCountries()->size() / 1000 * 1000;
-	for (auto* country : *_game->savedGame()->getCountries())
+	int averageFunding = _game->savedGame()->getCountryFunding() / _game->savedGame()->countries().size() / 1000 * 1000;
+	for (auto* country : _game->savedGame()->countries())
 	{
 		// check pact status before and after, because scripting can arbitrarily form/break pacts
 		bool wasInPact = country->getPact();
@@ -459,7 +459,7 @@ void MonthlyReportState::calculateChanges()
 		country->newMonth(xcomTotal, alienTotal, pactScore, averageFunding, _game->savedGame());
 		// and after they've made their decisions, calculate the difference, and add
 		// them to the appropriate lists.
-		_fundingDiff += country->getFunding().back() - country->getFunding().at(country->getFunding().size()-2);
+		_fundingDiff += country->funding().back() - country->funding().at(country->funding().size()-2);
 
 		bool isInPact = country->getPact();
 		if (!wasInPact && isInPact) // signed a new pact this month
