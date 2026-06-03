@@ -8,7 +8,7 @@ find_package(Qt6 REQUIRED COMPONENTS
     Quick
     Qml
     QuickControls2
-    LabsQmlModels
+    QmlModels
 )
 add_definitions(-DQT_NO_EMIT)
 
@@ -101,7 +101,7 @@ target_link_libraries(openxcom
     Qt6::Quick
     Qt6::Qml
     Qt6::QuickControls2
-    Qt6::LabsQmlModels
+    Qt6::QmlModels
 )
 
 if(NOT UNIX)

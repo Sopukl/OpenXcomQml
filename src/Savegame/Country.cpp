@@ -421,4 +421,16 @@ QString Country::name() const
 	return QString::fromStdString(stdName);
 }
 
+int Country::getCurrentFunding() const
+{
+	return _funding.empty() ? 0 : _funding.back();
+}
+
+int Country::getFundingChange() const
+{
+	if (_funding.size() < 2)
+		return 0;
+	return _funding.back() - _funding[_funding.size() - 2];
+}
+
 }
