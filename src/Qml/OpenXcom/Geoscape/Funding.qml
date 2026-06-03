@@ -6,7 +6,7 @@ import "../Controls" as XC
 XC.Popup {
     id: popup
     width: 320
-    height: 140
+    height: 200
 
     bgImage.source: "image://xcom/fundingWindow"
 
@@ -62,7 +62,6 @@ XC.Popup {
         }
         cursorShape: Qt.PointingHandCursor
     }
-
 
     SortFilterProxyModel {
         id: fundingProxy
@@ -151,9 +150,22 @@ XC.Popup {
         spacing: 1
         model: fundingProxy
 
-        delegate: Item {
+        highlight: Rectangle {
             width: list.width
             height: 10
+            color: "white"
+            opacity: 0.2
+            y: ListView.view.currentItem.y
+        }
+
+        delegate: MouseArea {
+            width: list.width
+            height: 10
+            hoverEnabled: true
+            onContainsMouseChanged: {
+                if(containsMouse)
+                    list.currentIndex = index
+            }
 
             Row {
                 width: parent.width
