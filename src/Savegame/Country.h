@@ -95,11 +95,10 @@ public:
 	bool canBeInfiltrated();
 
 	QString name() const;
-	Q_INVOKABLE int getCurrentFunding() const;
-	Q_INVOKABLE int getFundingChange() const;
   signals:
 	void fundingChanged();
   private:
+	int getCurrentFunding() const;
 	int getCurrentActivityAlien()  const { return _activityAlien.back(); }
 	int getCurrentActivityXcom() const { return _activityXcom.back(); }
 };

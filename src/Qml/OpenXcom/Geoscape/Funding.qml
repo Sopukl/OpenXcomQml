@@ -16,6 +16,7 @@ XC.Popup {
 
     property string sortColumn: ""
     property int sortOrder: Qt.AscendingOrder
+    property int totalFunding: 0
 
     component HeaderTab: MouseArea {
         height: tableHeader.height
@@ -139,7 +140,7 @@ XC.Popup {
         anchors {
             top: tableHeader.bottom
             topMargin: 1
-            bottom: okBtn.top
+            bottom: totalFundingLabel.top
             bottomMargin: 1
             left: parent.left
             leftMargin: 5
@@ -214,6 +215,21 @@ XC.Popup {
         }
     }
 
+    Text {
+        id: totalFundingLabel
+        anchors {
+            bottom: okBtn.top
+            bottomMargin: 2
+            left: list.left
+            right:list.right
+        }
+
+        font.pixelSize: 10
+        color: "white"
+        text: `TOTAL: ${totalFunding}`
+
+    }
+
     XC.Button {
         id: okBtn
         anchors {
@@ -227,11 +243,26 @@ XC.Popup {
     }
 
     Component.onCompleted: {
+        let fund = 0;
+        let diff = 0;
+
+        totalFunding = 0;
         for (let country of Game.savedGame.countries)
+        {
+            let count = country.funding.length;
+            fund = country.funding[count-1];
+            if(count > 1)
+                diff = fund - country.funding[count-2];
+            else
+                diff = 0;
+
+            totalFunding += fund;
+
             fundingProxy.model.append({
                 "name": country.name,
-                "funding": country.getCurrentFunding(),
-                "fundingDiff": country.getFundingChange()
+                "funding": fund,
+                "fundingDiff": diff
             });
+        }
     }
 }
