@@ -294,8 +294,8 @@ void BasescapeState::btnNewBaseClick(Action *)
 {
 	auto base = new Base(_game->getMod());
 	_game->popState();
-	Q_EMIT _game->createNewBase(game.getGeoscapeState(), base, false);
-	//_game->pushState(new BuildNewBaseState(base, _globe, false));
+	//Q_EMIT _game->createNewBase(game.getGeoscapeState(), base, false);
+	_game->pushState(new BuildNewBaseState(base, _globe, false));
 }
 
 /**
