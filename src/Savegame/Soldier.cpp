@@ -377,6 +377,21 @@ void Soldier::setName(const std::string &name)
 	_name = name;
 }
 
+QString Soldier::name() const
+{
+	return QString::fromStdString(_name);
+}
+
+void Soldier::setName(const QString &newName)
+{
+	if(auto strName  = newName.toStdString();
+			strName != _name)
+	{
+		_name = strName;
+		Q_EMIT nameChanged();
+	}
+}
+
 /**
  * Generates a new name based on nationality.
  */

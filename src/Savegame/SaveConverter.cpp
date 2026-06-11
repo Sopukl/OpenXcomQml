@@ -1103,7 +1103,7 @@ void SaveConverter::loadDatSoldier()
 			if (base != 0xFFFF)
 			{
 				Base *b = dynamic_cast<Base*>(_targets[base]);
-				b->getSoldiers().push_back(soldier);
+				b->soldiers().push_back(soldier);
 			}
 			if (craft != 0xFFFF)
 			{

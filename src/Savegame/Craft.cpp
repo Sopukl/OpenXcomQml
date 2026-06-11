@@ -655,7 +655,7 @@ void Craft::calculateTotalSoldierEquipment()
 {
 	_tempSoldierItems->clear();
 
-	for (auto* soldier : _base->getSoldiers())
+	for (auto* soldier : _base->soldiers())
 	{
 		if (soldier->getCraft() == this)
 		{
@@ -1052,7 +1052,7 @@ void Craft::returnToBase()
  */
 void Craft::evacuateCrew(const Mod *mod)
 {
-	for (auto iter = _base->getSoldiers().begin(); iter != _base->getSoldiers().end(); )
+	for (auto iter = _base->soldiers().begin(); iter != _base->soldiers().end(); )
 	{
 		Soldier* soldier = (*iter);
 		if (soldier->getCraft() == this)
@@ -1075,7 +1075,7 @@ void Craft::evacuateCrew(const Mod *mod)
 				t->setSoldier(soldier);
 				_base->getTransfers().push_back(t);
 				// next
-				iter = _base->getSoldiers().erase(iter);
+				iter = _base->soldiers().erase(iter);
 			}
 			else
 			{
@@ -1445,7 +1445,7 @@ int Craft::getSpaceUsed() const
 	{
 		vehicleSpaceUsed += vehicle->getTotalSize();
 	}
-	for (auto* soldier : _base->getSoldiers())
+	for (auto* soldier : _base->soldiers())
 	{
 		if (soldier->getCraft() == this)
 		{
@@ -1461,7 +1461,7 @@ int Craft::getSpaceUsed() const
  */
 bool Craft::isCommanderOnboard() const
 {
-	for (const auto* soldier : _base->getSoldiers())
+	for (const auto* soldier : _base->soldiers())
 	{
 		if (soldier->getCraft() == this && soldier->getRank() == RANK_COMMANDER)
 		{
@@ -1477,7 +1477,7 @@ bool Craft::isCommanderOnboard() const
  */
 bool Craft::areOnlyPermittedSoldierTypesOnboard(const RuleStartingCondition* sc) const
 {
-	for (const auto* soldier : _base->getSoldiers())
+	for (const auto* soldier : _base->soldiers())
 	{
 		if (soldier->getCraft() == this && !sc->isSoldierTypePermitted(soldier->getRules()->getType()))
 		{
@@ -1540,7 +1540,7 @@ bool Craft::areBannedArmorsOnboard()
 	if (!_rules->getAllowedArmorGroups().empty())
 	{
 		auto& allowedArmorGroups = _rules->getAllowedArmorGroups();
-		for (auto* xsoldier : _base->getSoldiers())
+		for (auto* xsoldier : _base->soldiers())
 		{
 			if (xsoldier->getCraft() == this)
 			{
@@ -1557,7 +1557,7 @@ bool Craft::areBannedArmorsOnboard()
 		for (auto& limit : limitArmorGroups)
 		{
 			int subTotal = 0;
-			for (const auto* tmpSoldier : _base->getSoldiers())
+			for (const auto* tmpSoldier : _base->soldiers())
 			{
 				if (tmpSoldier->getCraft() == this && tmpSoldier->getArmor()->getGroup() == limit.first)
 				{
@@ -1635,7 +1635,7 @@ const std::vector<Soldier*> Craft::getPilotList(bool autoAdd, const Mod* mod)
 	{
 		// 2. just enough pilots or pilot candidates onboard (assign them all automatically)
 		int total = 0;
-		for (auto* soldier : _base->getSoldiers())
+		for (auto* soldier : _base->soldiers())
 		{
 			if (soldier->getCraft() == this && mod)
 			{
@@ -1659,7 +1659,7 @@ const std::vector<Soldier*> Craft::getPilotList(bool autoAdd, const Mod* mod)
 			// 3a. first take all available (manually selected) pilots
 			for (int soldierId : _pilots)
 			{
-				for (auto* soldier : _base->getSoldiers())
+				for (auto* soldier : _base->soldiers())
 				{
 					if (soldier->getCraft() == this && soldier->getId() == soldierId && soldier->hasAllPilotingRequirements())
 					{
@@ -1676,7 +1676,7 @@ const std::vector<Soldier*> Craft::getPilotList(bool autoAdd, const Mod* mod)
 			if (autoAdd)
 			{
 				// 3b. if not enough manually selected pilots, take some pilot candidates automatically (take from the rear first)
-				for (std::vector<Soldier*>::reverse_iterator iter = _base->getSoldiers().rbegin(); iter != _base->getSoldiers().rend(); ++iter)
+				for (std::vector<Soldier*>::reverse_iterator iter = _base->soldiers().rbegin(); iter != _base->soldiers().rend(); ++iter)
 				{
 					Soldier* soldier = (*iter);
 					if (soldier->getCraft() == this && !isPilot(soldier->getId()) && soldier->hasAllPilotingRequirements())
@@ -1876,7 +1876,7 @@ void Craft::unload()
 	_vehicles.clear();
 
 	// Remove soldiers
-	for (auto* soldier : _base->getSoldiers())
+	for (auto* soldier : _base->soldiers())
 	{
 		if (soldier->getCraft() == this)
 		{
@@ -2030,7 +2030,7 @@ int Craft::getNumSmallSoldiers() const
 
 	int total = 0;
 
-	for (const auto* s : _base->getSoldiers())
+	for (const auto* s : _base->soldiers())
 	{
 		if (s->getCraft() == this && s->getArmor()->getSize() == 1)
 			++total;
@@ -2050,7 +2050,7 @@ int Craft::getNumLargeSoldiers() const
 
 	int total = 0;
 
-	for (const auto* s : _base->getSoldiers())
+	for (const auto* s : _base->soldiers())
 	{
 		if (s->getCraft() == this && s->getArmor()->getSize() == 2)
 			++total;
@@ -2128,7 +2128,7 @@ int Craft::getNumTotalSoldiers() const
 
 	int total = 0;
 
-	for (const auto* s : _base->getSoldiers())
+	for (const auto* s : _base->soldiers())
 	{
 		if (s->getCraft() == this)
 			++total;
@@ -2251,7 +2251,7 @@ CraftPlacementErrors Craft::validateAddingSoldier(int space, const Soldier* s) c
 	if (_rules->isOnlyOneSoldierGroupAllowed() && getNumTotalSoldiers() > 0)
 	{
 		int currentGroup = -1;
-		for (const auto* tmpSoldier : _base->getSoldiers())
+		for (const auto* tmpSoldier : _base->soldiers())
 		{
 			if (tmpSoldier->getCraft() == this)
 			{
@@ -2278,7 +2278,7 @@ CraftPlacementErrors Craft::validateAddingSoldier(int space, const Soldier* s) c
 		for (auto& limit : limitArmorGroups)
 		{
 			int subTotal = 0;
-			for (const auto* tmpSoldier : _base->getSoldiers())
+			for (const auto* tmpSoldier : _base->soldiers())
 			{
 				if (tmpSoldier->getCraft() == this && tmpSoldier->getArmor()->getGroup() == limit.first)
 				{

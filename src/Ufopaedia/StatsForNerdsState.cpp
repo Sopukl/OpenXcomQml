@@ -475,13 +475,13 @@ void StatsForNerdsState::btnPreviewClick(Action *)
 			// we use NEGATIVE soldier IDs to make sure there is not even a theoretical chance of modifying real geoscape soldiers during the preview
 			int newId = -(i + 1);
 			Soldier* soldier = new Soldier(soldierRule, defaultArmor, 0 /*nationality*/, newId);
-			base->getSoldiers().push_back(soldier);
+			base->soldiers().push_back(soldier);
 			soldier->setName("Position" + std::to_string(newId));
 		}
 	}
 	// now clean up from the previous preview
 	{
-		for (auto* soldier : base->getSoldiers())
+		for (auto* soldier : base->soldiers())
 		{
 			soldier->setCraft(nullptr);
 		}
@@ -498,7 +498,7 @@ void StatsForNerdsState::btnPreviewClick(Action *)
 	base->crafts().push_back(c);
 	c->setName(ltr(craftRule->getType()));
 	int max = craftRule->getMaxUnitsLimit();
-	for (auto* soldier : base->getSoldiers())
+	for (auto* soldier : base->soldiers())
 	{
 		soldier->setCraft(c);
 		max--;

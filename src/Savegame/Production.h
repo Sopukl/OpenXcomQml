@@ -17,6 +17,7 @@
  * You should have received a copy of the GNU General Public License
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
+#include <QObject>
 #include "../Engine/Yaml.h"
 
 namespace OpenXcom
@@ -29,7 +30,7 @@ class Language;
 class Mod;
 enum productionProgress_e { PROGRESS_NOT_COMPLETE, PROGRESS_COMPLETE, PROGRESS_NOT_ENOUGH_MONEY, PROGRESS_NOT_ENOUGH_MATERIALS, PROGRESS_NOT_ENOUGH_LIVING_SPACE, PROGRESS_MAX, PROGRESS_CONSTRUCTION };
 
-class Production
+class Production: public QObject
 {
 public:
 	Production (const RuleManufacture * rules, int amount);

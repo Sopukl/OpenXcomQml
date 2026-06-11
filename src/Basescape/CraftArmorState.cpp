@@ -51,7 +51,7 @@ namespace OpenXcom
  * @param base Pointer to the base to get info from.
  * @param craft ID of the selected craft.
  */
-CraftArmorState::CraftArmorState(Base *base, size_t craft) : _base(base), _craft(craft), _savedScrollPosition(0), _origSoldierOrder(_base->getSoldiers()), _dynGetter(NULL)
+CraftArmorState::CraftArmorState(Base *base, size_t craft) : _base(base), _craft(craft), _savedScrollPosition(0), _origSoldierOrder(_base->soldiers()), _dynGetter(NULL)
 {
 	// Create objects
 	_window = new Window(this, 320, 200, 0, 0);
@@ -196,7 +196,7 @@ void CraftArmorState::cbxSortByChange(Action *action)
 		{
 			if (selIdx == 2)
 			{
-				std::stable_sort(_base->getSoldiers().begin(), _base->getSoldiers().end(),
+				std::stable_sort(_base->soldiers().begin(), _base->soldiers().end(),
 					[](const Soldier* a, const Soldier* b)
 					{
 						return Unicode::naturalCompare(a->getName(), b->getName());
@@ -205,7 +205,7 @@ void CraftArmorState::cbxSortByChange(Action *action)
 			}
 			else if (selIdx == 3)
 			{
-				std::stable_sort(_base->getSoldiers().begin(), _base->getSoldiers().end(),
+				std::stable_sort(_base->soldiers().begin(), _base->soldiers().end(),
 					[](const Soldier* a, const Soldier* b)
 					{
 						if (a->getCraft())
@@ -232,11 +232,11 @@ void CraftArmorState::cbxSortByChange(Action *action)
 			}
 			else
 			{
-				std::stable_sort(_base->getSoldiers().begin(), _base->getSoldiers().end(), *compFunc);
+				std::stable_sort(_base->soldiers().begin(), _base->soldiers().end(), *compFunc);
 			}
 			if (_game->isShiftPressed(true))
 			{
-				std::reverse(_base->getSoldiers().begin(), _base->getSoldiers().end());
+				std::reverse(_base->soldiers().begin(), _base->soldiers().end());
 			}
 		}
 	}
@@ -246,12 +246,12 @@ void CraftArmorState::cbxSortByChange(Action *action)
 		// soldiers that have been sacked since this state started
 		for (const auto* origSoldier : _origSoldierOrder)
 		{
-			auto soldierIt = std::find(_base->getSoldiers().begin(), _base->getSoldiers().end(), origSoldier);
-			if (soldierIt != _base->getSoldiers().end())
+			auto soldierIt = std::find(_base->soldiers().begin(), _base->soldiers().end(), origSoldier);
+			if (soldierIt != _base->soldiers().end())
 			{
 				Soldier *s = *soldierIt;
-				_base->getSoldiers().erase(soldierIt);
-				_base->getSoldiers().insert(_base->getSoldiers().end(), s);
+				_base->soldiers().erase(soldierIt);
+				_base->soldiers().insert(_base->soldiers().end(), s);
 			}
 		}
 	}
@@ -270,7 +270,7 @@ void CraftArmorState::init()
 	initList(_savedScrollPosition);
 
 	int row = 0;
-	for (const auto* soldier : _base->getSoldiers())
+	for (const auto* soldier : _base->soldiers())
 	{
 		_lstSoldiers->setCellText(row, 2, ltr(soldier->getArmor()->getType()));
 		row++;
@@ -301,7 +301,7 @@ void CraftArmorState::initList(size_t scrl)
 
 	Craft *c = _base->crafts().at(_craft);
 	BaseSumDailyRecovery recovery = _base->getSumRecoveryPerDay();
-	for (const auto* soldier : _base->getSoldiers())
+	for (const auto* soldier : _base->soldiers())
 	{
 		if (_dynGetter != NULL)
 		{
@@ -367,16 +367,16 @@ void CraftArmorState::lstItemsLeftArrowClick(Action *action)
  */
 void CraftArmorState::moveSoldierUp(Action *action, unsigned int row, bool max)
 {
-	Soldier *s = _base->getSoldiers().at(row);
+	Soldier *s = _base->soldiers().at(row);
 	if (max)
 	{
-		_base->getSoldiers().erase(_base->getSoldiers().begin() + row);
-		_base->getSoldiers().insert(_base->getSoldiers().begin(), s);
+		_base->soldiers().erase(_base->soldiers().begin() + row);
+		_base->soldiers().insert(_base->soldiers().begin(), s);
 	}
 	else
 	{
-		_base->getSoldiers().at(row) = _base->getSoldiers().at(row - 1);
-		_base->getSoldiers().at(row - 1) = s;
+		_base->soldiers().at(row) = _base->soldiers().at(row - 1);
+		_base->soldiers().at(row - 1) = s;
 		if (row != _lstSoldiers->getScroll())
 		{
 			SDL_WarpMouse(action->getLeftBlackBand() + action->getXMouse(), action->getTopBlackBand() + action->getYMouse() - static_cast<Uint16>(8 * action->getYScale()));
@@ -396,7 +396,7 @@ void CraftArmorState::moveSoldierUp(Action *action, unsigned int row, bool max)
 void CraftArmorState::lstItemsRightArrowClick(Action *action)
 {
 	unsigned int row = _lstSoldiers->getSelectedRow();
-	size_t numSoldiers = _base->getSoldiers().size();
+	size_t numSoldiers = _base->soldiers().size();
 	if (0 < numSoldiers && INT_MAX >= numSoldiers && row < numSoldiers - 1)
 	{
 		if (_game->isLeftClick(action, true))
@@ -420,16 +420,16 @@ void CraftArmorState::lstItemsRightArrowClick(Action *action)
  */
 void CraftArmorState::moveSoldierDown(Action *action, unsigned int row, bool max)
 {
-	Soldier *s = _base->getSoldiers().at(row);
+	Soldier *s = _base->soldiers().at(row);
 	if (max)
 	{
-		_base->getSoldiers().erase(_base->getSoldiers().begin() + row);
-		_base->getSoldiers().insert(_base->getSoldiers().end(), s);
+		_base->soldiers().erase(_base->soldiers().begin() + row);
+		_base->soldiers().insert(_base->soldiers().end(), s);
 	}
 	else
 	{
-		_base->getSoldiers().at(row) = _base->getSoldiers().at(row + 1);
-		_base->getSoldiers().at(row + 1) = s;
+		_base->soldiers().at(row) = _base->soldiers().at(row + 1);
+		_base->soldiers().at(row + 1) = s;
 		if (row != _lstSoldiers->getVisibleRows() - 1 + _lstSoldiers->getScroll())
 		{
 			SDL_WarpMouse(action->getLeftBlackBand() + action->getXMouse(), action->getTopBlackBand() + action->getYMouse() + static_cast<Uint16>(8 * action->getYScale()));
@@ -463,7 +463,7 @@ void CraftArmorState::lstSoldiersClick(Action *action)
 		return;
 	}
 
-	Soldier *s = _base->getSoldiers().at(_lstSoldiers->getSelectedRow());
+	Soldier *s = _base->soldiers().at(_lstSoldiers->getSelectedRow());
 	if (!(s->getCraft() && s->getCraft()->getStatus() == "STR_OUT"))
 	{
 		if (_game->isLeftClick(action, true))
@@ -582,7 +582,7 @@ void CraftArmorState::lstSoldiersMousePress(Action *action)
 	if (options1.changeValueByMouseWheel() == 0)
 		return;
 	unsigned int row = _lstSoldiers->getSelectedRow();
-	size_t numSoldiers = _base->getSoldiers().size();
+	size_t numSoldiers = _base->soldiers().size();
 	if (action->getDetails()->button.button == SDL_BUTTON_WHEELUP &&
 		row > 0)
 	{
@@ -610,7 +610,7 @@ void CraftArmorState::lstSoldiersMousePress(Action *action)
 void CraftArmorState::btnDeequipAllArmorClick(Action *action)
 {
 	int row = 0;
-	for (auto* soldier : _base->getSoldiers())
+	for (auto* soldier : _base->soldiers())
 	{
 		if (!(soldier->getCraft() && soldier->getCraft()->getStatus() == "STR_OUT"))
 		{
@@ -650,7 +650,7 @@ void CraftArmorState::btnDeequipCraftArmorClick(Action *action)
 {
 	Craft *c = _base->crafts().at(_craft);
 	int row = 0;
-	for (auto* s : _base->getSoldiers())
+	for (auto* s : _base->soldiers())
 	{
 		if (s->getCraft() == c || s->getCraft() == 0)
 		{

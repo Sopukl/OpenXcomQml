@@ -17,6 +17,7 @@
  * You should have received a copy of the GNU General Public License
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
+#include <QObject>
 #include <string>
 #include "../Engine/Yaml.h"
 #include "../Mod/Unit.h"
@@ -51,8 +52,10 @@ struct BaseSumDailyRecovery;
  * Soldiers have a wide variety of stats that affect
  * their performance during battles.
  */
-class Soldier
+class Soldier: public QObject
 {
+	Q_OBJECT
+	Q_PROPERTY(QString name READ name WRITE setName NOTIFY nameChanged FINAL)
 public:
 
 	/// Name of class used in script.
@@ -103,6 +106,8 @@ public:
 	std::string getName(bool statstring = false, unsigned int maxLength = 20) const;
 	/// Sets the soldier's name.
 	void setName(const std::string &name);
+	QString name() const;
+	void setName(const QString&);
 	/// Generates a new name based on nationality.
 	void genName();
 	/// Gets the soldier's callsign.
@@ -306,7 +311,8 @@ public:
 	bool hasAllRequiredBonusesForSkill(const RuleSkill* skillRules);
 	/// Check if the soldier has all the required stats and soldier bonuses for piloting the (current or new) craft.
 	bool hasAllPilotingRequirements(const Craft* newCraft = nullptr) const;
-
+  signals:
+	void nameChanged();
 private:
 	std::string generateCallsign(const std::vector<SoldierNamePool*> &names);
 	/// Automatically move equipment between the craft and the base when assigning/deassigning/reassigning soldiers.

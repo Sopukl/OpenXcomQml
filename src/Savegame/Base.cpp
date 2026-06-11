@@ -407,6 +407,11 @@ std::string Base::getName(Language *) const
 	return _name;
 }
 
+QString Base::name() const
+{
+	return QString::fromStdString(getName());
+}
+
 /**
  * Returns the globe marker for the base.
  * @return Marker sprite, -1 if none.
@@ -432,7 +437,7 @@ std::vector<BaseFacility*>& Base::getFacilities()
  * Returns the list of soldiers in the base.
  * @return Pointer to the soldier list.
  */
-std::vector<Soldier*>& Base::getSoldiers()
+std::vector<Soldier*>& Base::soldiers()
 {
 	return _soldiers;
 }

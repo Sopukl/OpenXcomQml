@@ -28,6 +28,7 @@
 #include "Menu/StartState.h"
 #include "Savegame/SavedGame.h"
 #include "Savegame/Base.h"
+#include "Savegame/Soldier.h"
 #include "Geoscape/GeoscapeState.h"
 #include <QGuiApplication>
 #include "GameRenderer.h"
@@ -112,6 +113,7 @@ int main(int argc, char *argv[])
 	qmlRegisterType<OpenXcom::SavedGame>("OpenXcom", 1, 0, "SavedGame");
 	qmlRegisterType<OpenXcom::Target>("OpenXcom", 1, 0, "Target");
 	qmlRegisterType<OpenXcom::Base>("OpenXcom", 1, 0, "Base");
+	qmlRegisterType<OpenXcom::Soldier>("OpenXcom", 1, 0, "Soldier");
 	qmlRegisterType<OpenXcom::Craft>("OpenXcom", 1, 0, "Craft");
 	qmlRegisterType<OpenXcom::Country>("OpenXcom", 1, 0, "Country");
 	qmlRegisterType<OpenXcom::Options1>("OpenXcom", 1, 0, "Options1");

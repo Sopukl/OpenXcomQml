@@ -18,6 +18,7 @@ Button {
         color: "#64CCBC"
         text: control.text
         horizontalAlignment: Text.AlignHCenter
+        verticalAlignment: Text.AlignVCenter
     }
 
     palette {

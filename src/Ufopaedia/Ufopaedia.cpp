@@ -328,7 +328,7 @@ namespace OpenXcom
 			// 1. check living soldiers
 			for (auto* xbase : save->bases())
 			{
-				for (auto* soldier : xbase->getSoldiers())
+				for (auto* soldier : xbase->soldiers())
 				{
 					for (auto* comm : *soldier->getDiary()->getSoldierCommendations())
 					{

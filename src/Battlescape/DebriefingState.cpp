@@ -908,7 +908,7 @@ void DebriefingState::btnOkClick(Action *)
 				_game->pushState(new CannotReequipState(_missingItems, _base));
 			}
 			// remove the wounded soldiers (and their items too if needed); this was moved here from BattleUnit::postMissionProcedures()
-			for (auto* soldier : _base->getSoldiers())
+			for (auto* soldier : _base->soldiers())
 			{
 				if (soldier->getCraft() != nullptr && soldier->isWounded())
 				{
@@ -2112,7 +2112,7 @@ void DebriefingState::prepareDebriefing()
 	{
 		// clean up remaining armor backups
 		// Note: KIA and MIA soldiers have been handled already, only survivors can have non-empty values
-		for (auto* soldier : base->getSoldiers())
+		for (auto* soldier : base->soldiers())
 		{
 			if (soldier->getReplacedArmor())
 			{

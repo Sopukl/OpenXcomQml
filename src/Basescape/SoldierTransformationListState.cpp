@@ -242,7 +242,7 @@ void SoldierTransformationListState::initList()
 		}
 
 		int eligibleSoldiers = 0;
-		for (const auto* soldier : _base->getSoldiers())
+		for (const auto* soldier : _base->soldiers())
 		{
 			if (soldier->getCraft() && soldier->getCraft()->getStatus() == "STR_OUT")
 			{

@@ -147,7 +147,7 @@ TransferItemsState::TransferItemsState(Base *baseFrom, Base *baseTo, DebriefingS
 		_cats.push_back("STR_FILTER_RESEARCHABLE");
 	}
 
-	for (auto* soldier : _baseFrom->getSoldiers())
+	for (auto* soldier : _baseFrom->soldiers())
 	{
 		if (_debriefingState) break;
 		if (soldier->getCraft() == 0)
@@ -561,7 +561,7 @@ void TransferItemsState::completeTransfer()
 			switch (transferRow.type)
 			{
 			case TRANSFER_SOLDIER:
-				for (auto soldierIt = _baseFrom->getSoldiers().begin(); soldierIt != _baseFrom->getSoldiers().end(); ++soldierIt)
+				for (auto soldierIt = _baseFrom->soldiers().begin(); soldierIt != _baseFrom->soldiers().end(); ++soldierIt)
 				{
 					soldier = (*soldierIt);
 					if (soldier == transferRow.rule)
@@ -575,7 +575,7 @@ void TransferItemsState::completeTransfer()
 						t = new Transfer(time);
 						t->setSoldier(soldier);
 						_baseTo->getTransfers().push_back(t);
-						_baseFrom->getSoldiers().erase(soldierIt);
+						_baseFrom->soldiers().erase(soldierIt);
 						break;
 					}
 				}
@@ -583,7 +583,7 @@ void TransferItemsState::completeTransfer()
 			case TRANSFER_CRAFT:
 				craft = (Craft*)transferRow.rule;
 				// Transfer soldiers inside craft
-				for (auto soldierIt = _baseFrom->getSoldiers().begin(); soldierIt != _baseFrom->getSoldiers().end();)
+				for (auto soldierIt = _baseFrom->soldiers().begin(); soldierIt != _baseFrom->soldiers().end();)
 				{
 					soldier = (*soldierIt);
 					if (soldier->getCraft() == craft)
@@ -596,7 +596,7 @@ void TransferItemsState::completeTransfer()
 						soldier->setTraining(false);
 						if (craft->getStatus() == "STR_OUT")
 						{
-							_baseTo->getSoldiers().push_back(soldier);
+							_baseTo->soldiers().push_back(soldier);
 						}
 						else
 						{
@@ -604,7 +604,7 @@ void TransferItemsState::completeTransfer()
 							t->setSoldier(soldier);
 							_baseTo->getTransfers().push_back(t);
 						}
-						soldierIt = _baseFrom->getSoldiers().erase(soldierIt);
+						soldierIt = _baseFrom->soldiers().erase(soldierIt);
 					}
 					else
 					{

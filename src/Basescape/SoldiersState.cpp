@@ -54,7 +54,7 @@ namespace OpenXcom
  * @param game Pointer to the core game.
  * @param base Pointer to the base to get info from.
  */
-SoldiersState::SoldiersState(Base *base) : _base(base), _origSoldierOrder(_base->getSoldiers()), _dynGetter(NULL), _mainOffset(0)
+SoldiersState::SoldiersState(Base *base) : _base(base), _origSoldierOrder(_base->soldiers()), _dynGetter(NULL), _mainOffset(0)
 {
 	bool isPsiBtnVisible = options1.anytimePsiTraining() && _base->getAvailablePsiLabs() > 0;
 	bool isTrnBtnVisible = _base->getAvailableTraining() > 0;
@@ -285,7 +285,7 @@ void SoldiersState::cbxSortByChange(Action *action)
 		{
 			if (selIdx == 2)
 			{
-				std::stable_sort(_base->getSoldiers().begin(), _base->getSoldiers().end(),
+				std::stable_sort(_base->soldiers().begin(), _base->soldiers().end(),
 					[](const Soldier* a, const Soldier* b)
 					{
 						return Unicode::naturalCompare(a->getName(), b->getName());
@@ -294,7 +294,7 @@ void SoldiersState::cbxSortByChange(Action *action)
 			}
 			else if (selIdx == 3)
 			{
-				std::stable_sort(_base->getSoldiers().begin(), _base->getSoldiers().end(),
+				std::stable_sort(_base->soldiers().begin(), _base->soldiers().end(),
 					[](const Soldier* a, const Soldier* b)
 					{
 						if (a->getCraft())
@@ -321,11 +321,11 @@ void SoldiersState::cbxSortByChange(Action *action)
 			}
 			else
 			{
-				std::stable_sort(_base->getSoldiers().begin(), _base->getSoldiers().end(), *compFunc);
+				std::stable_sort(_base->soldiers().begin(), _base->soldiers().end(), *compFunc);
 			}
 			if (_game->isShiftPressed())
 			{
-				std::reverse(_base->getSoldiers().begin(), _base->getSoldiers().end());
+				std::reverse(_base->soldiers().begin(), _base->soldiers().end());
 			}
 		}
 	}
@@ -335,12 +335,12 @@ void SoldiersState::cbxSortByChange(Action *action)
 		// soldiers that have been sacked since this state started
 		for (const auto* origSoldier : _origSoldierOrder)
 		{
-			auto soldierIt = std::find(_base->getSoldiers().begin(), _base->getSoldiers().end(), origSoldier);
-			if (soldierIt != _base->getSoldiers().end())
+			auto soldierIt = std::find(_base->soldiers().begin(), _base->soldiers().end(), origSoldier);
+			if (soldierIt != _base->soldiers().end())
 			{
 				Soldier *s = *soldierIt;
-				_base->getSoldiers().erase(soldierIt);
-				_base->getSoldiers().insert(_base->getSoldiers().end(), s);
+				_base->soldiers().erase(soldierIt);
+				_base->soldiers().insert(_base->soldiers().end(), s);
 			}
 		}
 	}
@@ -387,7 +387,7 @@ void SoldiersState::initList(size_t scrl)
 		_lstSoldiers->setArrowColumn(188, ARROW_VERTICAL);
 
 		// all soldiers in the base
-		_filteredListOfSoldiers = _base->getSoldiers();
+		_filteredListOfSoldiers = _base->soldiers();
 	}
 	else
 	{
@@ -399,7 +399,7 @@ void SoldiersState::initList(size_t scrl)
 		if (transformationRule)
 		{
 			int idx = -1;
-			for (auto* soldier : _base->getSoldiers())
+			for (auto* soldier : _base->soldiers())
 			{
 				idx++;
 				if (soldier->getCraft() && soldier->getCraft()->getStatus() == "STR_OUT")
@@ -499,16 +499,16 @@ void SoldiersState::lstItemsLeftArrowClick(Action *action)
  */
 void SoldiersState::moveSoldierUp(Action *action, unsigned int row, bool max)
 {
-	Soldier *s = _base->getSoldiers().at(row);
+	Soldier *s = _base->soldiers().at(row);
 	if (max)
 	{
-		_base->getSoldiers().erase(_base->getSoldiers().begin() + row);
-		_base->getSoldiers().insert(_base->getSoldiers().begin(), s);
+		_base->soldiers().erase(_base->soldiers().begin() + row);
+		_base->soldiers().insert(_base->soldiers().begin(), s);
 	}
 	else
 	{
-		_base->getSoldiers().at(row) = _base->getSoldiers().at(row - 1);
-		_base->getSoldiers().at(row - 1) = s;
+		_base->soldiers().at(row) = _base->soldiers().at(row - 1);
+		_base->soldiers().at(row - 1) = s;
 		if (row != _lstSoldiers->getScroll())
 		{
 			SDL_WarpMouse(action->getLeftBlackBand() + action->getXMouse(), action->getTopBlackBand() + action->getYMouse() - static_cast<Uint16>(8 * action->getYScale()));
@@ -528,7 +528,7 @@ void SoldiersState::moveSoldierUp(Action *action, unsigned int row, bool max)
 void SoldiersState::lstItemsRightArrowClick(Action *action)
 {
 	unsigned int row = _lstSoldiers->getSelectedRow();
-	size_t numSoldiers = _base->getSoldiers().size();
+	size_t numSoldiers = _base->soldiers().size();
 	if (0 < numSoldiers && INT_MAX >= numSoldiers && row < numSoldiers - 1)
 	{
 		if (action->getDetails()->button.button == SDL_BUTTON_LEFT)
@@ -552,16 +552,16 @@ void SoldiersState::lstItemsRightArrowClick(Action *action)
  */
 void SoldiersState::moveSoldierDown(Action *action, unsigned int row, bool max)
 {
-	Soldier *s = _base->getSoldiers().at(row);
+	Soldier *s = _base->soldiers().at(row);
 	if (max)
 	{
-		_base->getSoldiers().erase(_base->getSoldiers().begin() + row);
-		_base->getSoldiers().insert(_base->getSoldiers().end(), s);
+		_base->soldiers().erase(_base->soldiers().begin() + row);
+		_base->soldiers().insert(_base->soldiers().end(), s);
 	}
 	else
 	{
-		_base->getSoldiers().at(row) = _base->getSoldiers().at(row + 1);
-		_base->getSoldiers().at(row + 1) = s;
+		_base->soldiers().at(row) = _base->soldiers().at(row + 1);
+		_base->soldiers().at(row + 1) = s;
 		if (row != _lstSoldiers->getVisibleRows() - 1 + _lstSoldiers->getScroll())
 		{
 			SDL_WarpMouse(action->getLeftBlackBand() + action->getXMouse(), action->getTopBlackBand() + action->getYMouse() + static_cast<Uint16>(8 * action->getYScale()));
@@ -688,9 +688,9 @@ void SoldiersState::btnInventoryClick(Action *)
 		if (_availableOptions.empty() || _cbxScreenActions->getSelected() == 0)
 		{
 			size_t idx = _lstSoldiers->getSelectedRow();
-			if (idx < _base->getSoldiers().size())
+			if (idx < _base->soldiers().size())
 			{
-				int soldierId = _base->getSoldiers().at(idx)->getId();
+				int soldierId = _base->soldiers().at(idx)->getId();
 				for (auto* unit : *bgame->getUnits())
 				{
 					if (unit->getId() == soldierId)
@@ -770,7 +770,7 @@ void SoldiersState::lstSoldiersMousePress(Action *action)
 	if (options1.changeValueByMouseWheel() == 0)
 		return;
 	unsigned int row = _lstSoldiers->getSelectedRow();
-	size_t numSoldiers = _base->getSoldiers().size();
+	size_t numSoldiers = _base->soldiers().size();
 	if (action->getDetails()->button.button == SDL_BUTTON_WHEELUP &&
 		row > 0)
 	{

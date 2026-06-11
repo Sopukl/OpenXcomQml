@@ -3,6 +3,7 @@ import QtQuick.Controls
 import QtQuick.Window
 import OpenXcom 1.0
 import OpenXcom.MainMenu 1.0 as Main
+import "./OpenXcom/Controls" as XC
 
 Window {
     id: wnd
@@ -45,14 +46,14 @@ Window {
                     isFirst: isFirst})
             }
 
-            function onOpenPopupWindow(path) {
-                Xcom.createWindow(path, gameWindow).open()
+            function onOpenPopupWindow(path, params) {
+                Xcom.createWindow(path, gameWindow, params).open()
             }
-            function onSavedGameChanged() {
-                console.log(Game.savedGame)
-                console.log(Game.savedGame.bases)
-                console.log(Game.savedGame.bases.length)
-            }
+            // function onSavedGameChanged() {
+            //     console.log(Game.savedGame)
+            //     console.log(Game.savedGame.bases)
+            //     console.log(Game.savedGame.bases.length)
+            // }
         }
     }
 
@@ -85,4 +86,22 @@ Window {
             root.visible = !root.visible
         }
     }
+    XC.Button {
+        anchors {
+            top: parent.top
+            topMargin: 10
+            left: parent.left
+            leftMargin: 10
+        }
+        text: "1"
+        width: 30
+        height: 30
+        onClicked: {
+            let base = Game.savedGame.bases[0];
+            console.log("base: " + base.name)
+            for(let s of base.soldiers)
+                console.log(s.name)
+        }
+    }
+
 }

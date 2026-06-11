@@ -38,5 +38,6 @@
         <file>OpenXcom/Geoscape/BaseName.qml</file>
         <file>OpenXcom/Geoscape/Intercept.qml</file>
         <file>OpenXcom/Geoscape/Funding.qml</file>
+        <file>OpenXcom/Basescape/Sell.qml</file>
     </qresource>
 </RCC>

@@ -522,10 +522,10 @@ void SoldierTransformationState::performTransformation()
 		else if (_transformationRule->getTransferTime() > 0)
 		{
 			// transfer time on a live soldier already at the base (doesn't make much sense, but we need to handle it anyway)
-			auto it = find(_base->getSoldiers().begin(), _base->getSoldiers().end(), _sourceSoldier);
-			if (it != _base->getSoldiers().end())
+			auto it = find(_base->soldiers().begin(), _base->soldiers().end(), _sourceSoldier);
+			if (it != _base->soldiers().end())
 			{
-				_base->getSoldiers().erase(it);
+				_base->soldiers().erase(it);
 			}
 		}
 	}
@@ -565,11 +565,11 @@ void SoldierTransformationState::retire()
 		}
 		else
 		{
-			auto it = find(_base->getSoldiers().begin(), _base->getSoldiers().end(), _sourceSoldier);
-			if (it != _base->getSoldiers().end())
+			auto it = find(_base->soldiers().begin(), _base->soldiers().end(), _sourceSoldier);
+			if (it != _base->soldiers().end())
 			{
 				delete (*it);
-				_base->getSoldiers().erase(it);
+				_base->soldiers().erase(it);
 			}
 		}
 	}

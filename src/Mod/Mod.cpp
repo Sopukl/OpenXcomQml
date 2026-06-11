@@ -3850,7 +3850,7 @@ SavedGame *Mod::newSave(GameDifficulty diff) const
 	}
 
 	// Correct soldier IDs
-	for (auto* soldier : base->getSoldiers())
+	for (auto* soldier : base->soldiers())
 	{
 		save->getId("STR_SOLDIER");
 	}
@@ -3927,7 +3927,7 @@ SavedGame *Mod::newSave(GameDifficulty diff) const
 			RuleSoldier* ruleSoldier = getSoldier(randomTypes[i], true);
 			int nationality = save->selectSoldierNationalityByLocation(this, ruleSoldier, nullptr); // -1 (unfortunately the first base is not placed yet)
 			Soldier *soldier = genSoldier(save, ruleSoldier, nationality);
-			base->getSoldiers().push_back(soldier);
+			base->soldiers().push_back(soldier);
 			// Award soldier a special 'original eight' commendation
 			if (_commendations.find("STR_MEDAL_ORIGINAL8_NAME") != _commendations.end())
 			{
@@ -3940,7 +3940,7 @@ SavedGame *Mod::newSave(GameDifficulty diff) const
 			}
 		}
 		// Assign pilots to craft (interceptors first, transport last) and non-pilots to transports only
-		for (auto* soldier : base->getSoldiers())
+		for (auto* soldier : base->soldiers())
 		{
 			if (soldier->getArmor()->getSize() > 1)
 			{
@@ -5055,7 +5055,7 @@ Soldier *Mod::genSoldier(SavedGame *save, const RuleSoldier* ruleSoldier, int na
 		for (auto* xbase : save->bases())
 		{
 			if (duplicate) break; // loop finished
-			for (auto* xsoldier : xbase->getSoldiers())
+			for (auto* xsoldier : xbase->soldiers())
 			{
 				if (duplicate) break; // loop finished
 				if (xsoldier->getName() == soldier->getName())

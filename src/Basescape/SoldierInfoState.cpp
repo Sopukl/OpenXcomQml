@@ -73,7 +73,7 @@ SoldierInfoState::SoldierInfoState(Base *base, size_t soldierId, bool forceLimit
 	}
 	else
 	{
-		_list = &_base->getSoldiers();
+		_list = &_base->soldiers();
 	}
 
 	// Create objects

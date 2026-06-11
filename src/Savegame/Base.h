@@ -112,7 +112,9 @@ class Base : public Target
 {
 	Q_OBJECT
 
+	Q_PROPERTY(QString name READ name NOTIFY nameChanged FINAL)
 	Q_PROPERTY(std::vector<OpenXcom::Craft*> crafts READ crafts NOTIFY craftsChanged FINAL)
+	Q_PROPERTY(std::vector<OpenXcom::Soldier*> soldiers READ soldiers NOTIFY soldiersChanged FINAL)
 private:
 	static const int BASE_SIZE = 6;
 	const Mod *_mod;
@@ -155,12 +157,13 @@ public:
 	std::string getType() const override;
 	/// Gets the base's name.
 	std::string getName(Language *lang = 0) const override;
+	QString name() const;
 	/// Gets the base's marker sprite.
 	int getMarker() const override;
 	/// Gets the base's facilities.
 	std::vector<BaseFacility*>& getFacilities();
 	/// Gets the base's soldiers.
-	std::vector<Soldier*>& getSoldiers();
+	std::vector<Soldier*>& soldiers();
 	/// Pre-calculates soldier stats with various bonuses.
 	void prepareSoldierStatsWithBonuses();
 	/// Gets the base's crafts.
@@ -351,10 +354,13 @@ public:
 	/// Sets the base's globe texture.
 	void setGlobeTexture(const Texture* globeTexture) { _globeTexture = globeTexture; }
   signals:
+	void nameChanged();
 	void craftsChanged();
+	void soldiersChanged();
   public slots:
     void set_Name(QString);
 };
 
 }
 Q_DECLARE_METATYPE(std::vector<OpenXcom::Craft*>)
+Q_DECLARE_METATYPE(std::vector<OpenXcom::Soldier*>)

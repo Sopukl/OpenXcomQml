@@ -1064,7 +1064,7 @@ void BattlescapeGenerator::deployXCOM(const RuleStartingCondition* startingCondi
 	// enviro effects and starting conditions - armor transformation and replacement
 	if (startingCondition != 0 || enviro != 0)
 	{
-		for (auto* soldier : _base->getSoldiers())
+		for (auto* soldier : _base->soldiers())
 		{
 			if ((_craft != 0 && soldier->getCraft() == _craft) ||
 				(_craft == 0 && (soldier->hasFullHealth() || soldier->canDefendBase()) && (soldier->getCraft() == 0 || soldier->getCraft()->getStatus() != "STR_OUT")))
@@ -1102,7 +1102,7 @@ void BattlescapeGenerator::deployXCOM(const RuleStartingCondition* startingCondi
 
 	// add soldiers that are in the craft or base (2x2 only)
 	{
-		for (auto* soldier : _base->getSoldiers())
+		for (auto* soldier : _base->soldiers())
 		{
 			if (soldier->getArmor()->getSize() == 1)
 			{
@@ -1163,7 +1163,7 @@ void BattlescapeGenerator::deployXCOM(const RuleStartingCondition* startingCondi
 
 	// add soldiers that are in the craft or base (1x1 only)
 	{
-		for (auto* soldier : _base->getSoldiers())
+		for (auto* soldier : _base->soldiers())
 		{
 			if (soldier->getArmor()->getSize() > 1)
 			{

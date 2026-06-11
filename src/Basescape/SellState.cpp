@@ -193,7 +193,7 @@ void SellState::delayedInit()
 		_cats.push_back("STR_FILTER_RESEARCHABLE");
 	}
 
-	for (auto* soldier : _base->getSoldiers())
+	for (auto* soldier : _base->soldiers())
 	{
 		if (_debriefingState) break;
 		if (soldier->getCraft() == 0)
@@ -755,7 +755,7 @@ void SellState::btnOkClick(Action *)
 			{
 			case TRANSFER_SOLDIER:
 				tmpSoldier = (Soldier*)transferRow.rule;
-				for (auto soldierIt = _base->getSoldiers().begin(); soldierIt != _base->getSoldiers().end(); ++soldierIt)
+				for (auto soldierIt = _base->soldiers().begin(); soldierIt != _base->soldiers().end(); ++soldierIt)
 				{
 					if (*soldierIt == tmpSoldier)
 					{
@@ -763,7 +763,7 @@ void SellState::btnOkClick(Action *)
 						{
 							_base->getStorageItems().addItem(tmpSoldier->getArmor()->getStoreItem());
 						}
-						_base->getSoldiers().erase(soldierIt);
+						_base->soldiers().erase(soldierIt);
 						break;
 					}
 				}
