@@ -138,12 +138,12 @@ CraftEquipmentState::CraftEquipmentState(Base *base, size_t craft) :
 	if (options1.oxceBaseTouchButtons())
 	{
 		_txtTitle->setAlign(ALIGN_CENTER);
-		_txtTitle->setText(c->getName(_game->getLanguage()));
+		_txtTitle->setText(c->getName());
 	}
 	else
 	{
 		_txtTitle->setAlign(ALIGN_LEFT);
-		_txtTitle->setText(ltr("STR_EQUIPMENT_FOR_CRAFT").arg(c->getName(_game->getLanguage())));
+		_txtTitle->setText(ltr("STR_EQUIPMENT_FOR_CRAFT").arg(c->getName()));
 	}
 
 	_txtItem->setText(ltr("STR_ITEM"));
@@ -1085,7 +1085,7 @@ void CraftEquipmentState::loadGlobalLoadout(int index, bool onlyAddItems)
 	}
 
 	// lastly check and report what's missing
-	std::string craftName = c->getName(_game->getLanguage());
+	std::string craftName = c->getName();
 	std::vector<ReequipStat> _missingItems;
 	for (const auto& templateItem : *tmpl->getContents())
 	{

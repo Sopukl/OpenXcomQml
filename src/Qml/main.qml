@@ -101,6 +101,8 @@ Window {
             console.log("base: " + base.name)
             for(let s of base.soldiers)
                 console.log(s.name)
+            for(let c of base.crafts)
+                console.log(c)
         }
     }
 

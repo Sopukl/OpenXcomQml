@@ -114,7 +114,7 @@ public:
 	/// Sets the mission wave number that created this UFO.
 	void setMissionWaveNumber(int missionWaveNumber) { _missionWaveNumber = missionWaveNumber; }
 	/// Gets the UFO's default name.
-	std::string getDefaultName(Language *lang) const override;
+	std::string getDefaultName() const override;
 	/// Gets the UFO's marker name.
 	std::string getMarkerName() const override;
 	/// Gets the UFO's marker ID.

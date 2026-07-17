@@ -222,7 +222,7 @@ void CraftInfoState::init()
 {
 	State::init();
 
-	_edtCraft->setText(_craft->getName(_game->getLanguage()));
+	_edtCraft->setText(_craft->getName());
 
 	_sprite->clear();
 	SurfaceSet *texture = _game->getMod()->getSurfaceSet("BASEBITS.PCK");
@@ -718,7 +718,7 @@ void CraftInfoState::btnPilotsClick(Action *)
  */
 void CraftInfoState::edtCraftChange(Action *action)
 {
-	if (_edtCraft->getText() == _craft->getDefaultName(_game->getLanguage()))
+	if (_edtCraft->getText() == _craft->getDefaultName())
 	{
 		_craft->setName("");
 	}
@@ -729,7 +729,7 @@ void CraftInfoState::edtCraftChange(Action *action)
 	if (action->getDetails()->key.keysym.sym == SDLK_RETURN ||
 		action->getDetails()->key.keysym.sym == SDLK_KP_ENTER)
 	{
-		_edtCraft->setText(_craft->getName(_game->getLanguage()));
+		_edtCraft->setText(_craft->getName());
 	}
 }
 

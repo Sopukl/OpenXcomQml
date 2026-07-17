@@ -402,7 +402,7 @@ std::string Base::getType() const
  * @param lang Language to get strings from (unused).
  * @return Name.
  */
-std::string Base::getName(Language *) const
+std::string Base::getName() const
 {
 	return _name;
 }

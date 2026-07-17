@@ -25,6 +25,7 @@
 #include "AlienMission.h"
 #include "../Engine/Exception.h"
 #include "../Engine/Language.h"
+#include "../Engine/Game.h"
 #include "../Engine/RNG.h"
 #include "../Engine/ScriptBind.h"
 #include "../Mod/Mod.h"
@@ -359,8 +360,9 @@ int Ufo::getUniqueId() const
  * @param lang Language to get strings from.
  * @return Full name.
  */
-std::string Ufo::getDefaultName(Language *lang) const
+std::string Ufo::getDefaultName() const
 {
+	auto lang = game.getLanguage();
 	switch (_status)
 	{
 	case LANDED:

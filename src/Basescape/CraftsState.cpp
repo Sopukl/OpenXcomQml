@@ -138,7 +138,7 @@ void CraftsState::initList(size_t scrl)
 		ss << craft->getNumWeapons() << "/" << craft->getRules()->getWeapons();
 		ss2 << craft->getNumTotalSoldiers();
 		ss3 << craft->getNumTotalVehicles();
-		_lstCrafts->addRow(5, craft->getName(_game->getLanguage()).c_str(), ltr(craft->getStatus()).c_str(), ss.str().c_str(), ss2.str().c_str(), ss3.str().c_str());
+		_lstCrafts->addRow(5, craft->getName().c_str(), ltr(craft->getStatus()).c_str(), ss.str().c_str(), ss2.str().c_str(), ss3.str().c_str());
 	}
 
 	if (scrl)

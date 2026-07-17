@@ -74,8 +74,8 @@ CraftPatrolState::CraftPatrolState(Craft *craft, Globe *globe) : _craft(craft), 
 	_txtDestination->setAlign(ALIGN_CENTER);
 	_txtDestination->setWordWrap(true);
 	_txtDestination->setText(ltr("STR_CRAFT_HAS_REACHED_DESTINATION")
-							 .arg(_craft->getName(_game->getLanguage()))
-							 .arg(_craft->getDestination()->getName(_game->getLanguage())));
+							 .arg(_craft->getName())
+							 .arg(_craft->getDestination()->getName()));
 
 	_txtPatrolling->setBig();
 	_txtPatrolling->setAlign(ALIGN_CENTER);

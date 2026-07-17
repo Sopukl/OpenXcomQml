@@ -137,7 +137,7 @@ ConfirmDestinationState::ConfirmDestinationState(std::vector<Craft*> crafts, Tar
 	}
 	else
 	{
-		_txtTarget->setText(ltr("STR_TARGET").arg(_target->getName(_game->getLanguage())));
+		_txtTarget->setText(ltr("STR_TARGET").arg(_target->getName()));
 	}
 
 	// ETA display

@@ -70,11 +70,11 @@ public:
 	/// Sets the target's ID.
 	void setId(int id);
 	/// Gets the target's name.
-	virtual std::string getName(Language *lang) const;
+	virtual std::string getName() const;
 	/// Sets the target's name.
 	void setName(const std::string &newName);
 	/// Gets the target's default name.
-	virtual std::string getDefaultName(Language *lang) const;
+	virtual std::string getDefaultName() const;
 	/// Gets the target's marker name.
 	virtual std::string getMarkerName() const;
 	/// Gets the target's marker ID.

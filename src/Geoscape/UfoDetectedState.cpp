@@ -154,7 +154,7 @@ UfoDetectedState::UfoDetectedState(Ufo *ufo, GeoscapeState *state, bool detected
 	_txtHyperwave->setText(ltr("STR_HYPER_WAVE_TRANSMISSIONS_ARE_DECODED"));
 
 	_txtUfo->setBig();
-	_txtUfo->setText(_ufo->getName(_game->getLanguage()));
+	_txtUfo->setText(_ufo->getName());
 
 	_lstInfo->setColumns(2, 77, 140);
 	_lstInfo->setDot(true);

@@ -220,7 +220,7 @@ std::string Transfer::getName(Language *lang) const
 	}
 	else if (_craft != 0)
 	{
-		return _craft->getName(lang);
+		return _craft->getName();
 	}
 	else if (_scientists != 0)
 	{

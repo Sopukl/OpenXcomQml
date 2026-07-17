@@ -128,7 +128,7 @@ UfoTrackerState::UfoTrackerState(GeoscapeState *state, Globe *globe) : _state(st
 			continue;
 
 		_objects.push_back(site);
-		_lstObjects->addRow(1, site->getName(_game->getLanguage()).c_str());
+		_lstObjects->addRow(1, site->getName().c_str());
 		_lstObjects->setCellColor(row, 0, _lstObjects->getSecondaryColor());
 		row++;
 	}
@@ -153,7 +153,7 @@ UfoTrackerState::UfoTrackerState(GeoscapeState *state, Globe *globe) : _state(st
 		ss4 << Unicode::formatNumber(ufo->getSpeed());
 
 		_objects.push_back(ufo);
-		_lstObjects->addRow(5, ufo->getName(_game->getLanguage()).c_str(), ss1.str().c_str(), ss2.str().c_str(), ss3.str().c_str(), ss4.str().c_str());
+		_lstObjects->addRow(5, ufo->getName().c_str(), ss1.str().c_str(), ss2.str().c_str(), ss3.str().c_str(), ss4.str().c_str());
 		if (altitude == "STR_GROUNDED")
 		{
 			_lstObjects->setCellColor(row, 2, _lstObjects->getSecondaryColor());
@@ -167,7 +167,7 @@ UfoTrackerState::UfoTrackerState(GeoscapeState *state, Globe *globe) : _state(st
 			continue;
 
 		_objects.push_back(ab);
-		_lstObjects->addRow(1, ab->getName(_game->getLanguage()).c_str());
+		_lstObjects->addRow(1, ab->getName().c_str());
 		row++;
 	}
 }

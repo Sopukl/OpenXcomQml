@@ -182,7 +182,7 @@ void GlobalAlienContainmentState::fillPrisonerList()
 				}
 			}
 
-			std::string baseNameAndPrisonType = xbase->getName(_game->getLanguage());
+			std::string baseNameAndPrisonType = xbase->getName();
 			if (!noTypes)
 			{
 				baseNameAndPrisonType = baseNameAndPrisonType + " - " + std::string(ltrAlt("STR_PRISON_TYPE", prisonType));
@@ -231,7 +231,7 @@ void GlobalAlienContainmentState::fillPrisonerList()
 
 		if (!displayed && totalBaseCapacity > 0)
 		{
-			_lstPrisoners->addRow(3, xbase->getName(_game->getLanguage()).c_str(), "", "");
+			_lstPrisoners->addRow(3, xbase->getName().c_str(), "", "");
 			_lstPrisoners->setRowColor(_lstPrisoners->getLastRowIndex(), _lstPrisoners->getSecondaryColor());
 			_topics.push_back(std::make_tuple("", nullptr, 0));
 

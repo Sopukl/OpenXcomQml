@@ -69,7 +69,7 @@ DogfightErrorState::DogfightErrorState(Craft *craft, const std::string &msg) : _
 
 	_txtCraft->setAlign(ALIGN_CENTER);
 	_txtCraft->setBig();
-	_txtCraft->setText(_craft->getName(_game->getLanguage()));
+	_txtCraft->setText(_craft->getName());
 
 	_txtMessage->setAlign(ALIGN_CENTER);
 	_txtMessage->setWordWrap(true);

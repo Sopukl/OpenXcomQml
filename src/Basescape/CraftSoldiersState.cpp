@@ -119,12 +119,12 @@ CraftSoldiersState::CraftSoldiersState(Base *base, size_t craft)
 	if (options1.oxceBaseTouchButtons())
 	{
 		_txtTitle->setAlign(ALIGN_CENTER);
-		_txtTitle->setText(c->getName(_game->getLanguage()));
+		_txtTitle->setText(c->getName());
 	}
 	else
 	{
 		_txtTitle->setAlign(ALIGN_LEFT);
-		_txtTitle->setText(ltr("STR_SELECT_SQUAD_FOR_CRAFT").arg(c->getName(_game->getLanguage())));
+		_txtTitle->setText(ltr("STR_SELECT_SQUAD_FOR_CRAFT").arg(c->getName()));
 	}
 
 	_txtName->setText(ltr("STR_NAME_UC"));
@@ -546,7 +546,7 @@ void CraftSoldiersState::lstSoldiersClick(Action *action)
 			if (err == CPE_None)
 			{
 				s->setCraftAndMoveEquipment(c, _base, _game->savedGame()->getMonthsPassed() == -1, true);
-				_lstSoldiers->setCellText(row, 2, c->getName(_game->getLanguage()));
+				_lstSoldiers->setCellText(row, 2, c->getName());
 				_lstSoldiers->setRowColor(row, _lstSoldiers->getSecondaryColor());
 
 				// update the label to indicate absence of a saved craft deployment

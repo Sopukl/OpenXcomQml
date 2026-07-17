@@ -1485,7 +1485,7 @@ void Globe::drawDetail()
 
 				label->setX(x - 50);
 				label->setY(y + 2);
-				label->setText(city->getName(_game->getLanguage()));
+				label->setText(city->getName());
 				label->blit(_countries->getSurface());
 			}
 		}

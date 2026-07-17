@@ -87,7 +87,7 @@ TargetInfoState::TargetInfoState(Target *target, Globe *globe) : _target(target)
 	_edtTitle->setAlign(ALIGN_CENTER);
 	_edtTitle->setVerticalAlign(ALIGN_MIDDLE);
 	_edtTitle->setWordWrap(true);
-	_edtTitle->setText(_target->getName(_game->getLanguage()));
+	_edtTitle->setText(_target->getName());
 	_edtTitle->onChange((ActionHandler)&TargetInfoState::edtTitleChange);
 
 	_txtTargetted->setAlign(ALIGN_CENTER);
@@ -96,7 +96,7 @@ TargetInfoState::TargetInfoState(Target *target, Globe *globe) : _target(target)
 	std::ostringstream ss;
 	for (const auto* follower : *_target->getFollowers())
 	{
-		ss << follower->getName(_game->getLanguage()) << '\n';
+		ss << follower->getName() << '\n';
 	}
 	_txtFollowers->setText(ss.str());
 
@@ -174,7 +174,7 @@ void TargetInfoState::btnInfoClick(Action *)
  */
 void TargetInfoState::edtTitleChange(Action *action)
 {
-	if (_edtTitle->getText() == _target->getDefaultName(_game->getLanguage()))
+	if (_edtTitle->getText() == _target->getDefaultName())
 	{
 		_target->setName("");
 	}
@@ -185,7 +185,7 @@ void TargetInfoState::edtTitleChange(Action *action)
 	if (action->getDetails()->key.keysym.sym == SDLK_RETURN ||
 		action->getDetails()->key.keysym.sym == SDLK_KP_ENTER)
 	{
-		_edtTitle->setText(_target->getName(_game->getLanguage()));
+		_edtTitle->setText(_target->getName());
 	}
 }
 

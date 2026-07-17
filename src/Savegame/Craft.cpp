@@ -22,6 +22,7 @@
 #include "../Engine/Language.h"
 #include "../Engine/RNG.h"
 #include "../Engine/ScriptBind.h"
+#include "../Engine/Game.h"
 #include "../Mod/RuleCraft.h"
 #include "CraftWeapon.h"
 #include "../Mod/RuleCraftWeapon.h"
@@ -437,9 +438,11 @@ void Craft::changeRules(RuleCraft *rules)
  * @param lang Language to get strings from.
  * @return Full name.
  */
-std::string Craft::getDefaultName(Language *lang) const
+std::string Craft::getDefaultName() const
 {
-	return lang->getString("STR_CRAFTNAME").arg(lang->getString(getType())).arg(_id);
+	auto language = game.getLanguage();
+	return language->getString("STR_CRAFTNAME")
+				.arg(language->getString(getType())).arg(_id);
 }
 
 /**

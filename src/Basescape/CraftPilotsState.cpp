@@ -98,7 +98,7 @@ CraftPilotsState::CraftPilotsState(Base *base, size_t craft) : _base(base), _cra
 
 	_txtTitle->setBig();
 	_txtTitle->setAlign(ALIGN_CENTER);
-	_txtTitle->setText(ltr("STR_PILOTS_FOR_CRAFT").arg(c->getName(_game->getLanguage())));
+	_txtTitle->setText(ltr("STR_PILOTS_FOR_CRAFT").arg(c->getName()));
 
 	_txtFiringAcc->setText(ltr("STR_FIRING_ACCURACY"));
 	_txtFiringAcc->setAlign(ALIGN_RIGHT);

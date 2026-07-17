@@ -484,7 +484,7 @@ void CraftArmorState::lstSoldiersClick(Action *action)
 					if (err == CPE_None)
 					{
 						s->setCraftAndMoveEquipment(c, _base, _game->savedGame()->getMonthsPassed() == -1, true);
-						_lstSoldiers->setCellText(_lstSoldiers->getSelectedRow(), 1, c->getName(_game->getLanguage()));
+						_lstSoldiers->setCellText(_lstSoldiers->getSelectedRow(), 1, c->getName());
 						_lstSoldiers->setRowColor(_lstSoldiers->getSelectedRow(), _lstSoldiers->getSecondaryColor());
 					}
 					else if (err == CPE_SoldierGroupNotAllowed)

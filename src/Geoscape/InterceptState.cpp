@@ -361,7 +361,7 @@ InterceptState::InterceptState(Globe *globe, bool useCustomSound, Base *base, Ta
 				ss << 0;
 			}
 			_crafts.push_back(xcraft);
-			_lstCrafts->addRow(4, xcraft->getName(_game->getLanguage()).c_str(), ssStatus.str().c_str(), xbase->getName().c_str(), ss.str().c_str());
+			_lstCrafts->addRow(4, xcraft->getName().c_str(), ssStatus.str().c_str(), xbase->getName().c_str(), ss.str().c_str());
 			if (hasEnoughPilots && status == "STR_READY")
 			{
 				_lstCrafts->setCellColor(row, 1, _lstCrafts->getSecondaryColor());

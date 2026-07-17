@@ -136,7 +136,7 @@ public:
 	/// Sets the craft's ruleset.
 	void changeRules(RuleCraft *rules);
 	/// Gets the craft's default name.
-	std::string getDefaultName(Language *lang) const override;
+	std::string getDefaultName() const override;
 	/// Gets the craft's marker sprite.
 	int getMarker() const override;
 	/// Gets the craft's base.

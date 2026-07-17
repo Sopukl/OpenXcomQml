@@ -70,7 +70,7 @@ LowFuelState::LowFuelState(Craft *craft, GeoscapeState *state) : _craft(craft), 
 
 	_txtTitle->setAlign(ALIGN_CENTER);
 	_txtTitle->setBig();
-	_txtTitle->setText(_craft->getName(_game->getLanguage()));
+	_txtTitle->setText(_craft->getName());
 
 	_txtMessage->setAlign(ALIGN_CENTER);
 	_txtMessage->setText(ltr("STR_IS_LOW_ON_FUEL_RETURNING_TO_BASE"));

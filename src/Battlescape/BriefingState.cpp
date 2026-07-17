@@ -155,11 +155,11 @@ BriefingState::BriefingState(Craft *craft, Base *base, bool infoOnly, BriefingDa
 		{
 			if (craft->getDestination())
 			{
-				s = craft->getDestination()->getName(_game->getLanguage());
+				s = craft->getDestination()->getName();
 				battleSave->setMissionTarget(s);
 			}
 
-			s = ltr("STR_CRAFT_").arg(craft->getName(_game->getLanguage()));
+			s = ltr("STR_CRAFT_").arg(craft->getName());
 			battleSave->setMissionCraftOrBase(s);
 		}
 		else if (base)

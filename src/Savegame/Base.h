@@ -156,7 +156,7 @@ public:
 	/// Gets the base's type.
 	std::string getType() const override;
 	/// Gets the base's name.
-	std::string getName(Language *lang = 0) const override;
+	std::string getName() const override;
 	QString name() const;
 	/// Gets the base's marker sprite.
 	int getMarker() const override;

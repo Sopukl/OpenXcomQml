@@ -103,8 +103,8 @@ ConfirmLandingState::ConfirmLandingState(Craft *craft, Texture *missionTexture, 
 	_txtMessage->setAlign(ALIGN_CENTER);
 	_txtMessage->setWordWrap(true);
 	_txtMessage->setText(ltr("STR_CRAFT_READY_TO_LAND_NEAR_DESTINATION")
-						 .arg(_craft->getName(_game->getLanguage()))
-						 .arg(_craft->getDestination()->getName(_game->getLanguage())));
+						 .arg(_craft->getName())
+						 .arg(_craft->getDestination()->getName()));
 
 	_txtBegin->setBig();
 	_txtBegin->setAlign(ALIGN_CENTER);

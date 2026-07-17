@@ -205,7 +205,7 @@ void GlobalManufactureState::fillProductionList()
 		auto& baseProductions = xbase->getProductions();
 		if (!baseProductions.empty() || xbase->getEngineers() > 0)
 		{
-			std::string baseName = xbase->getName(_game->getLanguage());
+			std::string baseName = xbase->getName();
 			_lstManufacture->addRow(3, baseName.c_str(), "", "");
 			_lstManufacture->setRowColor(_lstManufacture->getLastRowIndex(), _lstManufacture->getSecondaryColor());
 

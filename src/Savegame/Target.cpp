@@ -22,6 +22,7 @@
 #include "SerializationHelper.h"
 #include "../fmath.h"
 #include "../Engine/Language.h"
+#include "../Engine/Game.h"
 
 namespace OpenXcom
 {
@@ -170,11 +171,10 @@ void Target::setId(int id)
  * @param lang Language to get strings from.
  * @return Full name.
  */
-std::string Target::getName(Language *lang) const
+std::string Target::getName() const
 {
-	if (_name.empty())
-		return getDefaultName(lang);
-	return _name;
+	return _name.empty()?getDefaultName()
+						:_name;
 }
 
 /**
@@ -191,9 +191,9 @@ void Target::setName(const std::string &newName)
  * @param lang Language to get strings from.
  * @return Full name.
  */
-std::string Target::getDefaultName(Language *lang) const
+std::string Target::getDefaultName() const
 {
-	return lang->getString(getMarkerName()).arg(_id);
+	return game.getLanguage()->getString(getMarkerName()).arg(_id);
 }
 
 /**

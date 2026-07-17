@@ -637,7 +637,7 @@ std::string Soldier::getCraftString(Language *lang, const BaseSumDailyRecovery& 
 	}
 	else
 	{
-		s = _craft->getName(lang);
+		s = _craft->getName();
 	}
 	return s;
 }

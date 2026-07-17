@@ -1053,13 +1053,13 @@ void GeoscapeState::time5Seconds()
 				mission->ufoReachedWaypoint(*ufo, *_game, *_globe);
 				if (options1.oxceUfoLandingAlert() && ufo->getStatus() == Ufo::LANDED && ufo->getDetected() && ufo->getLandId() != 0)
 				{
-					std::string msg = ltr("STR_UFO_HAS_LANDED").arg(ufo->getName(_game->getLanguage()));
+					std::string msg = ltr("STR_UFO_HAS_LANDED").arg(ufo->getName());
 					popup(new CraftErrorState(this, msg, true, ufo));
 				}
 				if (detected != ufo->getDetected() && !ufo->getFollowers()->empty())
 				{
 					if (!(ufo->getTrajectory().getID() == UfoTrajectory::RETALIATION_ASSAULT_RUN && ufo->getStatus() == Ufo::LANDED))
-						popup(new UfoLostState(ufo->getName(_game->getLanguage())));
+						popup(new UfoLostState(ufo->getName()));
 				}
 				if (count < _game->savedGame()->getMissionSites().size())
 				{
@@ -1120,7 +1120,7 @@ void GeoscapeState::time5Seconds()
 				mission->ufoLifting(*ufo, *_game->savedGame());
 				if (detected != ufo->getDetected() && !ufo->getFollowers()->empty())
 				{
-					popup(new UfoLostState(ufo->getName(_game->getLanguage())));
+					popup(new UfoLostState(ufo->getName()));
 				}
 			}
 			break;
@@ -1683,8 +1683,8 @@ void GeoscapeState::ufoHuntingAndEscorting()
 					else
 					{
 						std::string msg = ltr("STR_UFO_STARTED_HUNTING")
-							.arg(ufo->getName(_game->getLanguage()))
-							.arg(newTarget->getName(_game->getLanguage()));
+							.arg(ufo->getName())
+							.arg(newTarget->getName());
 						popup(new CraftErrorState(this, msg));
 					}
 				}
@@ -1818,7 +1818,7 @@ bool GeoscapeState::processMissionSite(MissionSite *site)
 			}
 			if (!noFollowers)
 			{
-				popup(new UfoLostState(site->getName(_game->getLanguage())));
+				popup(new UfoLostState(site->getName()));
 			}
 		}
 		else
@@ -1951,7 +1951,7 @@ void GeoscapeState::time30Minutes()
 					// notification
 					if (xcraft->getStatus() == "STR_READY" && xcraft->getRules()->notifyWhenRefueled())
 					{
-						std::string msg = ltr("STR_CRAFT_IS_READY").arg(xcraft->getName(_game->getLanguage())).arg(xbase->getName());
+						std::string msg = ltr("STR_CRAFT_IS_READY").arg(xcraft->getName()).arg(xbase->getName());
 						popup(new CraftErrorState(this, msg));
 					}
 					// auto-patrol
@@ -1976,7 +1976,7 @@ void GeoscapeState::time30Minutes()
 				{
 					std::string msg = ltr("STR_NOT_ENOUGH_ITEM_TO_REFUEL_CRAFT_AT_BASE")
 										.arg(ltr(item))
-										.arg(xcraft->getName(_game->getLanguage()))
+										.arg(xcraft->getName())
 										.arg(xbase->getName());
 					popup(new CraftErrorState(this, msg));
 				}
@@ -2133,7 +2133,7 @@ void GeoscapeState::ufoDetection(Ufo* ufo, const std::vector<Craft*>* activeCraf
 			ufo->setHyperDetected(false);
 			if (!ufo->getFollowers()->empty())
 			{
-				popup(new UfoLostState(ufo->getName(_game->getLanguage())));
+				popup(new UfoLostState(ufo->getName()));
 			}
 		}
 	}
@@ -2161,7 +2161,7 @@ void GeoscapeState::time1Hour()
 				{
 					std::string msg = ltr("STR_NOT_ENOUGH_ITEM_TO_REARM_CRAFT_AT_BASE")
 									   .arg(ltr(ammo->getType()))
-									   .arg(xcraft->getName(_game->getLanguage()))
+									   .arg(xcraft->getName())
 									   .arg(xbase->getName());
 					popup(new CraftErrorState(this, msg));
 				}

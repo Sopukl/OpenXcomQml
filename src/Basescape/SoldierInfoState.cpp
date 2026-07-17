@@ -503,7 +503,7 @@ void SoldierInfoState::init()
 	}
 	else
 	{
-		craft = _soldier->getCraft()->getName(_game->getLanguage());
+		craft = _soldier->getCraft()->getName();
 	}
 	_txtCraft->setText(ltr("STR_CRAFT_").arg(craft));
 

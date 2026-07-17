@@ -70,7 +70,7 @@ MultipleTargetsState::MultipleTargetsState(std::vector<Target*> targets, std::ve
 		for (size_t i = 0; i < _targets.size(); ++i)
 		{
 			TextButton *button = new TextButton(116, BUTTON_HEIGHT, 70, y);
-			button->setText(_targets[i]->getName(_game->getLanguage()));
+			button->setText(_targets[i]->getName());
 			button->onMouseClick((ActionHandler)&MultipleTargetsState::btnTargetClick);
 			add(button, "button", "multipleTargets");
 

@@ -141,7 +141,7 @@ GeoscapeCraftState::GeoscapeCraftState(Craft *craft, Globe *globe, Waypoint *way
 	_btnCancel->onKeyboardPress((ActionHandler)&GeoscapeCraftState::btnCancelClick, options1.keyCancel());
 
 	_txtTitle->setBig();
-	_txtTitle->setText(_craft->getName(_game->getLanguage()));
+	_txtTitle->setText(_craft->getName());
 
 	_txtStatus->setWordWrap(true);
 	std::string status;
@@ -180,12 +180,12 @@ GeoscapeCraftState::GeoscapeCraftState(Craft *craft, Globe *globe, Waypoint *way
 			}
 			else
 			{
-				status = ltr("STR_DESTINATION_UC_").arg(u->getName(_game->getLanguage()));
+				status = ltr("STR_DESTINATION_UC_").arg(u->getName());
 			}
 		}
 		else
 		{
-			status = ltr("STR_DESTINATION_UC_").arg(_craft->getDestination()->getName(_game->getLanguage()));
+			status = ltr("STR_DESTINATION_UC_").arg(_craft->getDestination()->getName());
 		}
 	}
 	_txtStatus->setText(ltr("STR_STATUS_").arg(status));

@@ -40,7 +40,7 @@ public:
 	/// Cleans up the city.
 	~City();
 	/// Gets the city's name.
-	std::string getName(Language *lang) const override;
+	std::string getName() const override;
 	/// Gets the city's marker.
 	int getMarker() const override;
 };

@@ -596,7 +596,7 @@ void BasescapeState::viewMouseOver(Action *)
 			ss << ltr(f->getRules()->getType());
 			if (f->getCraftForDrawing() != 0)
 			{
-				ss << " " << ltr("STR_CRAFT_").arg(f->getCraftForDrawing()->getName(_game->getLanguage()));
+				ss << " " << ltr("STR_CRAFT_").arg(f->getCraftForDrawing()->getName());
 			}
 		}
 	}

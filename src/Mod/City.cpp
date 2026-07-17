@@ -17,7 +17,7 @@
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "City.h"
-#include "../Engine/Language.h"
+#include "../Engine/Game.h"
 
 namespace OpenXcom
 {
@@ -47,9 +47,9 @@ City::~City()
  * @param lang Language to get strings from.
  * @return Full name.
  */
-std::string City::getName(Language *lang) const
+std::string City::getName() const
 {
-	return lang->getString(_name);
+	return game.getLanguage()->getString(_name);
 }
 
 /**

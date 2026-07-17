@@ -163,7 +163,7 @@ void GeoscapeEventState::eventLogic()
 			{
 				size_t pickCity = RNG::generate(0, cities - 1);
 				city = regionRule->getCities()->at(pickCity);
-				place = city->getName(_game->getLanguage());
+				place = city->getName();
 			}
 		}
 
