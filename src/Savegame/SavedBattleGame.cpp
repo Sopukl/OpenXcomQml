@@ -53,7 +53,7 @@
 #include "../Mod/RuleWeaponSet.h"
 #include "../fallthrough.h"
 #include "../fmath.h"
-#include "../Engine/Language.h"
+#include "../Engine/Game.h"
 
 namespace OpenXcom
 {

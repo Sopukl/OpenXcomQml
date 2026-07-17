@@ -24,7 +24,7 @@
 #include "../Engine/Surface.h"
 #include "../Engine/Script.h"
 #include "../Engine/ScriptBind.h"
-#include "../Engine/Language.h"
+#include "../Engine/Game.h"
 #include "../Engine/Exception.h"
 #include "../Engine/Options.h"
 #include "../Engine/RNG.h"
@@ -4342,8 +4342,9 @@ void BattleUnit::setName(const std::string &name)
  * @param debugAppendId Append unit ID to name for debug purposes.
  * @return name String of the unit's name.
  */
-std::string BattleUnit::getName(Language *lang, bool debugAppendId) const
+std::string BattleUnit::getName(bool debugAppendId) const
 {
+	Language *lang = game.getLanguage();
 	if (_type != "SOLDIER" && lang != 0)
 	{
 		std::string ret;

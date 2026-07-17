@@ -21,7 +21,7 @@
 #include "Ufo.h"
 #include "SerializationHelper.h"
 #include "../fmath.h"
-#include "../Engine/Language.h"
+#include "../Engine/Game.h"
 #include "../Engine/Game.h"
 
 namespace OpenXcom

@@ -37,7 +37,7 @@
 #include "Pathfinding.h"
 #include "../Mod/AlienDeployment.h"
 #include "../Engine/Game.h"
-#include "../Engine/Language.h"
+#include "../Engine/Game.h"
 #include "../Engine/Sound.h"
 #include "../Mod/Mod.h"
 #include "../Interface/Cursor.h"
@@ -1552,11 +1552,11 @@ bool BattlescapeGame::handlePanickingUnit(BattleUnit *unit)
 		getMap()->getCamera()->centerOnPosition(unit->getPosition());
 		if (status == STATUS_PANICKING)
 		{
-			game->pushState(new InfoboxState(game->getLanguage()->getString("STR_HAS_PANICKED", unit->getGender()).arg(unit->getName(game->getLanguage()))));
+			game->pushState(new InfoboxState(game->getLanguage()->getString("STR_HAS_PANICKED", unit->getGender()).arg(unit->getName())));
 		}
 		else
 		{
-			game->pushState(new InfoboxState(game->getLanguage()->getString("STR_HAS_GONE_BERSERK", unit->getGender()).arg(unit->getName(game->getLanguage()))));
+			game->pushState(new InfoboxState(game->getLanguage()->getString("STR_HAS_GONE_BERSERK", unit->getGender()).arg(unit->getName())));
 		}
 	}
 	else if (soundPlayed)
@@ -2070,7 +2070,7 @@ void BattlescapeGame::psiAttackMessage(BattleActionAttack attack, BattleUnit *vi
 		{
 			// show a little infobox with the name of the unit and "... is under alien control"
 			if (attack.type == BA_MINDCONTROL)
-				game->pushState(new InfoboxState(game->getLanguage()->getString("STR_IS_UNDER_ALIEN_CONTROL", victim->getGender()).arg(victim->getName(game->getLanguage()))));
+				game->pushState(new InfoboxState(game->getLanguage()->getString("STR_IS_UNDER_ALIEN_CONTROL", victim->getGender()).arg(victim->getName())));
 		}
 		else
 		{
@@ -3087,7 +3087,7 @@ bool BattlescapeGame::convertInfected()
 			if (options1.battleNotifyDeath() && bu->getFaction() == FACTION_PLAYER)
 			{
 				Game *game = _parentState->getGame();
-				game->pushState(new InfoboxState(game->getLanguage()->getString("STR_HAS_BEEN_KILLED", bu->getGender()).arg(bu->getName(game->getLanguage()))));
+				game->pushState(new InfoboxState(game->getLanguage()->getString("STR_HAS_BEEN_KILLED", bu->getGender()).arg(bu->getName())));
 			}
 
 			forTransform.push_back(bu);

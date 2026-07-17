@@ -20,7 +20,7 @@
 #include <sstream>
 #include "../Savegame/Soldier.h"
 #include "../Engine/RNG.h"
-#include "../Engine/Language.h"
+#include "../Engine/Game.h"
 #include "../Engine/FileMap.h"
 
 namespace OpenXcom

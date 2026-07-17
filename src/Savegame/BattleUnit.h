@@ -58,7 +58,6 @@ class RuleEnviroEffects;
 class RuleStartingCondition;
 class Soldier;
 class SavedGame;
-class Language;
 class AIModule;
 template<typename, typename...> class ScriptContainer;
 template<typename, typename...> class ScriptParser;
@@ -572,7 +571,7 @@ public:
 	/// Sets the unit's name.
 	void setName(const std::string &name);
 	/// Gets the unit's name.
-	std::string getName(Language *lang, bool debugAppendId = false) const;
+	std::string getName(bool debugAppendId = false) const;
 	/// Gets the unit's gained experience points.
 	const UnitStats* getExpStats() const { return &_exp; }
 	/// Gets the unit's stats.

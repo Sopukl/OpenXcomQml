@@ -20,7 +20,7 @@
 #include "../fmath.h"
 #include "../Engine/Font.h"
 #include "../Engine/Options.h"
-#include "../Engine/Language.h"
+#include "../Engine/Game.h"
 #include "../Engine/Unicode.h"
 #include "../Engine/ShaderDraw.h"
 #include "../Engine/ShaderMove.h"

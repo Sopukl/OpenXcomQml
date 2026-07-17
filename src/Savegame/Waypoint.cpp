@@ -17,7 +17,7 @@
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "Waypoint.h"
-#include "../Engine/Language.h"
+#include "../Engine/Game.h"
 
 namespace OpenXcom
 {

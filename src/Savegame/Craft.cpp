@@ -19,7 +19,7 @@
 #include "Craft.h"
 #include <algorithm>
 #include "../fmath.h"
-#include "../Engine/Language.h"
+#include "../Engine/Game.h"
 #include "../Engine/RNG.h"
 #include "../Engine/ScriptBind.h"
 #include "../Engine/Game.h"

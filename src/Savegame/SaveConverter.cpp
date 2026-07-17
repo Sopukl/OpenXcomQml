@@ -27,7 +27,7 @@
 #include "../Engine/Options.h"
 #include "../Engine/CrossPlatform.h"
 #include "../Engine/Exception.h"
-#include "../Engine/Language.h"
+#include "../Engine/Game.h"
 #include "../Mod/Mod.h"
 #include "../Mod/RuleItem.h"
 #include "SavedGame.h"

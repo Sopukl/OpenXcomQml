@@ -2157,7 +2157,7 @@ void BattlescapeState::updateSoldierInfo(bool checkFOV)
 		return;
 	}
 
-	_txtName->setText(battleUnit->getName(_game->getLanguage(), false));
+	_txtName->setText(battleUnit->getName(false));
 	Soldier *soldier = battleUnit->getGeoscapeSoldier();
 	if (soldier != 0)
 	{
@@ -2902,9 +2902,9 @@ inline void BattlescapeState::handle(Action *action)
 								{
 									if (!first) ss << ", ";
 									if (bu == _save->getSelectedUnit())
-										ss << Unicode::TOK_COLOR_FLIP << bu->getName(_game->getLanguage()) << Unicode::TOK_COLOR_FLIP;
+										ss << Unicode::TOK_COLOR_FLIP << bu->getName() << Unicode::TOK_COLOR_FLIP;
 									else
-										ss << bu->getName(_game->getLanguage());
+										ss << bu->getName();
 									first = false;
 								}
 							}

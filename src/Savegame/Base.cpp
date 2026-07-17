@@ -29,7 +29,7 @@
 #include "../Mod/Mod.h"
 #include "ItemContainer.h"
 #include "Soldier.h"
-#include "../Engine/Language.h"
+#include "../Engine/Game.h"
 #include "../Mod/RuleItem.h"
 #include "../Mod/Armor.h"
 #include "../Mod/RuleManufacture.h"

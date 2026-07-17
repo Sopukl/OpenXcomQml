@@ -30,7 +30,7 @@
 #include "../Mod/Mod.h"
 #include "../Mod/RuleItem.h"
 #include "../Mod/RuleCraft.h"
-#include "../Engine/Language.h"
+#include "../Engine/Game.h"
 #include "../Engine/RNG.h"
 #include <climits>
 #include "BaseFacility.h"

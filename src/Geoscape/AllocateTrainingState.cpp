@@ -21,7 +21,7 @@
 #include "TrainingState.h"
 #include "AllocateTrainingState.h"
 #include "../Engine/Game.h"
-#include "../Engine/Language.h"
+#include "../Engine/Game.h"
 #include "../Mod/RuleInterface.h"
 #include "../Interface/TextButton.h"
 #include "../Interface/ToggleTextButton.h"

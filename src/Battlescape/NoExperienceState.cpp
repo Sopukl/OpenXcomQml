@@ -84,7 +84,7 @@ NoExperienceState::NoExperienceState()
 		{
 			if (bu->getGeoscapeSoldier() && !bu->hasGainedAnyExperience())
 			{
-				_lstSoldiers->addRow(1, bu->getName(_game->getLanguage()).c_str());
+				_lstSoldiers->addRow(1, bu->getName().c_str());
 				if (row % 2 != 0)
 				{
 					_lstSoldiers->setRowColor(row, _lstSoldiers->getSecondaryColor());

@@ -21,7 +21,7 @@
 #include "../Engine/Action.h"
 #include "../Engine/Font.h"
 #include "../Engine/Game.h"
-#include "../Engine/Language.h"
+#include "../Engine/Game.h"
 #include "../Engine/Screen.h"
 #include "../Engine/SurfaceSet.h"
 #include "../Engine/Timer.h"

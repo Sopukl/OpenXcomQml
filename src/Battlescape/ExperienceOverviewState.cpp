@@ -24,7 +24,7 @@
 #include "Map.h"
 #include "../Engine/Action.h"
 #include "../Engine/Game.h"
-#include "../Engine/Language.h"
+#include "../Engine/Game.h"
 #include "../Engine/Options.h"
 #include "../Interface/TextButton.h"
 #include "../Interface/Window.h"
@@ -160,7 +160,7 @@ ExperienceOverviewState::ExperienceOverviewState(BattlescapeState* parent) : _pa
 
 		_soldiers.push_back(soldier);
 		_lstSoldiers->addRow(10,
-			soldier->getName(_game->getLanguage()).c_str(),
+			soldier->getName().c_str(),
 			bravery.str().c_str(),
 			reactions.str().c_str(),
 			firing.str().c_str(),

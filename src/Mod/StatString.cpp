@@ -19,7 +19,7 @@
 #include "StatString.h"
 #include "Unit.h"
 #include <vector>
-#include "../Engine/Language.h"
+#include "../Engine/Game.h"
 #include "../Engine/Unicode.h"
 
 namespace OpenXcom

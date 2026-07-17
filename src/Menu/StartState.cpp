@@ -24,7 +24,7 @@
 #include "../Engine/Action.h"
 #include "../Engine/Surface.h"
 #include "../Engine/Options.h"
-#include "../Engine/Language.h"
+#include "../Engine/Game.h"
 #include "../Engine/Sound.h"
 #include "../Engine/Music.h"
 #include "../Engine/Font.h"

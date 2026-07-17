@@ -457,10 +457,10 @@ void InventoryState::init()
 	}
 
 	_txtNameStatic->setBig();
-	_txtNameStatic->setText(unit->getName(_game->getLanguage()));
+	_txtNameStatic->setText(unit->getName());
 
 	_txtName->setBig();
-	_txtName->setText(unit->getName(_game->getLanguage()));
+	_txtName->setText(unit->getName());
 
 	_btnLinks->setVisible(options1.oxceLinks());
 
@@ -1923,7 +1923,7 @@ void InventoryState::invMouseOver(Action *)
 		std::string itemName;
 		if (item->getUnit() && item->getUnit()->getStatus() == STATUS_UNCONSCIOUS)
 		{
-			itemName = item->getUnit()->getName(_game->getLanguage());
+			itemName = item->getUnit()->getName();
 		}
 		else
 		{

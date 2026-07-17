@@ -502,7 +502,7 @@ void UnitInfoState::init()
 		ss << ltr(_unit->getRankString());
 		ss << " ";
 	}
-	ss << _unit->getName(_game->getLanguage(), BattlescapeGame::_debugPlay);
+	ss << _unit->getName(BattlescapeGame::_debugPlay);
 	_txtName->setBig();
 	_txtName->setText(ss.str());
 

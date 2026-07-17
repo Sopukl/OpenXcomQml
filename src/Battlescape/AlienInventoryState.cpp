@@ -116,7 +116,7 @@ AlienInventoryState::AlienInventoryState(BattleUnit *unit)
 			if (unit->getUnitRules()->getShowFullNameInAlienInventory(_game->getMod()))
 			{
 				// e.g. Sectoid Leader
-				_txtName->setText(unit->getName(_game->getLanguage()));
+				_txtName->setText(unit->getName());
 			}
 			else
 			{
@@ -127,7 +127,7 @@ AlienInventoryState::AlienInventoryState(BattleUnit *unit)
 		else
 		{
 			// Soldier names
-			_txtName->setText(unit->getName(_game->getLanguage()));
+			_txtName->setText(unit->getName());
 		}
 	}
 

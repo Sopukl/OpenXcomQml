@@ -18,7 +18,7 @@
  */
 #include "MissionSite.h"
 #include "Ufo.h"
-#include "../Engine/Language.h"
+#include "../Engine/Game.h"
 #include "../Mod/RuleAlienMission.h"
 #include "../Mod/AlienDeployment.h"
 

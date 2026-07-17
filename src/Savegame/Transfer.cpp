@@ -21,7 +21,7 @@
 #include "Soldier.h"
 #include "Craft.h"
 #include "ItemContainer.h"
-#include "../Engine/Language.h"
+#include "../Engine/Game.h"
 #include "../Mod/Mod.h"
 #include "../Engine/Logger.h"
 
@@ -212,8 +212,10 @@ void Transfer::setEngineers(int engineers)
  * @param lang Language to get strings from.
  * @return Name string.
  */
-std::string Transfer::getName(Language *lang) const
+std::string Transfer::getName() const
 {
+	Language *lang = game.getLanguage();
+		;
 	if (_soldier != 0)
 	{
 		return _soldier->getName();

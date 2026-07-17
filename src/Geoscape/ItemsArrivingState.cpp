@@ -121,7 +121,7 @@ ItemsArrivingState::ItemsArrivingState(GeoscapeState *state) : _state(state), _b
 				// Remove transfer
 				std::ostringstream ss;
 				ss << transfer->getQuantity();
-				_lstTransfers->addRow(3, transfer->getName(_game->getLanguage()).c_str(), ss.str().c_str(), xbase->getName().c_str());
+				_lstTransfers->addRow(3, transfer->getName().c_str(), ss.str().c_str(), xbase->getName().c_str());
 				delete transfer;
 				transferIt = xbase->getTransfers().erase(transferIt);
 			}

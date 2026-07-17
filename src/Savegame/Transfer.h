@@ -93,7 +93,7 @@ public:
 	/// Sets the engineers of the transfer.
 	void setEngineers(int engineers);
 	/// Gets the name of the transfer.
-	std::string getName(Language *lang) const;
+	std::string getName() const;
 	/// Gets the hours remaining of the transfer.
 	int getHours() const;
 	/// Gets the quantity of the transfer.

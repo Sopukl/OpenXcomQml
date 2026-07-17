@@ -17,7 +17,7 @@
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "OptionsVideoState.h"
-#include "../Engine/Language.h"
+#include "../Engine/Game.h"
 #include "../Interface/TextButton.h"
 #include "../Engine/Action.h"
 #include "../Interface/Text.h"
