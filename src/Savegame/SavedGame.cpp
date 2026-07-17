@@ -28,6 +28,7 @@
 #include "../Engine/Logger.h"
 #include "../Mod/Mod.h"
 #include "../Engine/RNG.h"
+#include "../Engine/Game.h"
 #include "../Engine/Exception.h"
 #include "../Engine/Options.h"
 #include "../Engine/CrossPlatform.h"
@@ -254,8 +255,9 @@ static bool _isCurrentGameType(const SaveInfo &saveInfo, const std::string &curM
  * @param autoquick Include autosaves and quicksaves.
  * @return List of saves info.
  */
-std::vector<SaveInfo> SavedGame::getList(Language *lang, bool autoquick)
+std::vector<SaveInfo> SavedGame::getList(bool autoquick)
 {
+	Language *lang = game.getLanguage();
 	std::vector<SaveInfo> info;
 	std::string curMaster = Options::getActiveMaster();
 	qDebug() << curMaster << Options::getMasterUserFolder();

@@ -247,7 +247,7 @@ void MainMenuState::init()
 		Log(LOG_INFO) << "Loading saved game passed as parameter";
 		btnLoadClick(NULL);
 	}
-	else if (Options::getLoadLastSave() && _game->savedGame()->getList(_game->getLanguage(), true).size() > 0)
+	else if (Options::getLoadLastSave() && _game->savedGame()->getList(true).size() > 0)
 	{
 		Log(LOG_INFO) << "Loading last saved game";
 		btnLoadClick(NULL);

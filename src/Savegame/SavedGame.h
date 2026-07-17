@@ -46,7 +46,6 @@ class Ufo;
 class Waypoint;
 class SavedBattleGame;
 class TextList;
-class Language;
 class RuleResearch;
 class ResearchProject;
 class Soldier;
@@ -194,7 +193,7 @@ public:
 	/// Sanitizes a mod name in a save.
 	static std::string sanitizeModName(const std::string &name);
 	/// Gets list of saves in the user directory.
-	static std::vector<SaveInfo> getList(Language *lang, bool autoquick);
+	static std::vector<SaveInfo> getList(bool autoquick);
 	/// Loads a saved game from YAML.
 	void load(const std::string &filename, Mod *mod, Language *lang);
 	void loadTemplates(const YAML::YamlNodeReader& reader, const Mod* mod);

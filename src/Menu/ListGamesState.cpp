@@ -189,7 +189,7 @@ void ListGamesState::init()
 
 	try
 	{
-		_saves = SavedGame::getList(_game->getLanguage(), _autoquick);
+		_saves = SavedGame::getList(_autoquick);
 		_lstSaves->clearList();
 		sortList(SaveSort(options1.saveOrder()));
 	}

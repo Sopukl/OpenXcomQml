@@ -870,7 +870,7 @@ void Game::setGameState(GameState newState)
 
 QVector<SaveDesc> Game::saves() const
 {
-	auto _saves = SavedGame::getList(getLanguage(), true);
+	auto _saves = SavedGame::getList(true);
 	QVector<SaveDesc> result;
 
 	SaveDesc sd;

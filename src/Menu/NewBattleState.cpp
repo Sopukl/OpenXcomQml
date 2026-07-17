@@ -610,7 +610,7 @@ void NewBattleState::btnOkClick(Action *)
 		return;
 	}
 
-	SavedBattleGame *bgame = new SavedBattleGame(_game->getMod(), _game->getLanguage());
+	SavedBattleGame *bgame = new SavedBattleGame(_game->getMod());
 	_game->savedGame()->setBattleGame(bgame);
 	bgame->setMissionType(_missionTypes[_cbxMission->getSelected()]);
 	BattlescapeGenerator bgen = BattlescapeGenerator(_game);
