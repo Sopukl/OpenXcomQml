@@ -964,7 +964,7 @@ void Game::loadGame(QString fileName)
 	auto s = new SavedGame();
 	try
 	{
-		s->load(fileName.toStdString(), getMod(), getLanguage());
+		s->load(fileName.toStdString(), getMod());
 		setSavedGame(s);
 		if (savedGame()->getEnding() != END_NONE)
 		{

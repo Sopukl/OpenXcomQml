@@ -85,7 +85,7 @@ void ConfirmCydoniaState::btnYesClick(Action *)
 	_game->popState();
 	_game->popState();
 
-	SavedBattleGame *bgame = new SavedBattleGame(_game->getMod(), _game->getLanguage());
+	SavedBattleGame *bgame = new SavedBattleGame(_game->getMod());
 	_game->savedGame()->setBattleGame(bgame);
 	BattlescapeGenerator bgen = BattlescapeGenerator(_game);
 	for (auto& ad : _game->getMod()->getDeploymentsList())

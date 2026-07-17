@@ -195,7 +195,7 @@ public:
 	/// Gets list of saves in the user directory.
 	static std::vector<SaveInfo> getList(bool autoquick);
 	/// Loads a saved game from YAML.
-	void load(const std::string &filename, Mod *mod, Language *lang);
+	void load(const std::string &filename, Mod *mod);
 	void loadTemplates(const YAML::YamlNodeReader& reader, const Mod* mod);
 	void loadUfopediaRuleStatus(const YAML::YamlNodeReader& reader);
 	/// Saves a saved game to YAML.

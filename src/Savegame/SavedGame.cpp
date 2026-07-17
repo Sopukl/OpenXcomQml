@@ -380,7 +380,7 @@ SaveInfo SavedGame::getSaveInfo(const std::string &file, Language *lang)
  * @param mod Mod for the saved game.
  * @param lang Loaded language.
  */
-void SavedGame::load(const std::string &filename, Mod *mod, Language *lang)
+void SavedGame::load(const std::string &filename, Mod *mod)
 {
 	std::string filepath = Options::getMasterUserFolder() + filename;
 	YAML::YamlRootNodeReader documents(filepath, false, false);
@@ -694,7 +694,7 @@ void SavedGame::load(const std::string &filename, Mod *mod, Language *lang)
 
 	if (const YAML::YamlNodeReader& battle = reader["battleGame"])
 	{
-		_battleGame = new SavedBattleGame(mod, lang);
+		_battleGame = new SavedBattleGame(mod);
 		_battleGame->load(battle, mod, this);
 	}
 

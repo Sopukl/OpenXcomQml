@@ -107,7 +107,7 @@ ListLoadOriginalState::ListLoadOriginalState(OptionsOrigin origin) : _origin(ori
 	_txtDate->setText(ltr("STR_DATE"));
 
 	std::string dots(80, '.');
-	SaveConverter::getList(_game->getLanguage(), _saves);
+	SaveConverter::getList(_saves);
 	for (int i = 0; i < SaveConverter::NUM_SAVES; ++i)
 	{
 		std::ostringstream ss;

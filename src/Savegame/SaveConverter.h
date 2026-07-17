@@ -119,7 +119,7 @@ public:
 	/// Cleans up the converter.
 	~SaveConverter();
 	/// Gets list of saves in the user directory.
-	static void getList(Language *lang, SaveOriginal info[NUM_SAVES]);
+	static void getList(SaveOriginal info[NUM_SAVES]);
 	/// Loads an original X-COM save.
 	SavedGame *loadOriginal();
 };

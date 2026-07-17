@@ -166,7 +166,7 @@ void LoadGameState::think()
 		SavedGame *s = new SavedGame();
 		try
 		{
-			s->load(_filename, _game->getMod(), _game->getLanguage());
+			s->load(_filename, _game->getMod());
 			_game->setSavedGame(s);
 			if (_game->savedGame()->getEnding() != END_NONE)
 			{

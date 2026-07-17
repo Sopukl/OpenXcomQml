@@ -110,8 +110,9 @@ SaveConverter::~SaveConverter()
  * @param lang Loaded language.
  * @param info Returned list of saves info.
  */
-void SaveConverter::getList(Language *lang, SaveOriginal info[NUM_SAVES])
+void SaveConverter::getList(SaveOriginal info[NUM_SAVES])
 {
+	Language *lang = game.getLanguage();
 	for (int i = 0; i < NUM_SAVES; ++i)
 	{
 		SaveOriginal &save = info[i];
