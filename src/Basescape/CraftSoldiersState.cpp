@@ -317,7 +317,7 @@ void CraftSoldiersState::btnPreviewClick(Action *)
 
 	SavedBattleGame* bgame = new SavedBattleGame(_game->getMod(), true);
 	_game->savedGame()->setBattleGame(bgame);
-	BattlescapeGenerator bgen = BattlescapeGenerator(_game);
+	BattlescapeGenerator bgen = BattlescapeGenerator();
 	bgame->setMissionType(c->getRules()->getCustomPreviewType());
 	bgame->setCraftForPreview(c);
 	bgen.setCraft(c);

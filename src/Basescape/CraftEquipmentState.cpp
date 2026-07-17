@@ -1009,7 +1009,7 @@ void CraftEquipmentState::btnInventoryClick(Action *)
 		{
 			_game->savedGame()->setDisableSoldierEquipment(true);
 		}
-		BattlescapeGenerator bgen = BattlescapeGenerator(_game);
+		BattlescapeGenerator bgen = BattlescapeGenerator();
 		bgen.runInventory(craft);
 
 		_game->getScreen()->clear();

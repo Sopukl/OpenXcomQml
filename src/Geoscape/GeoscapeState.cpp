@@ -153,7 +153,7 @@ GeoscapeState::GeoscapeState() : _pause(false), _zoomInEffectDone(false), _zoomO
 	_sideLine = new Surface(64, screenHeight, screenWidth - 64, 0);
 	_sidebar = new Surface(64, 200, screenWidth - 64, screenHeight / 2 - 100);
 
-	_globe = new Globe(_game, (screenWidth-64)/2, screenHeight/2, screenWidth-64, screenHeight, 0, 0);
+	_globe = new Globe((screenWidth-64)/2, screenHeight/2, screenWidth-64, screenHeight, 0, 0);
 	_bg->setX((_globe->getWidth() - _bg->getWidth()) / 2);
 	_bg->setY((_globe->getHeight() - _bg->getHeight()) / 2);
 
@@ -3572,7 +3572,7 @@ void GeoscapeState::handleBaseDefense(Base *base, Ufo *ufo)
 		SavedBattleGame *bgame = new SavedBattleGame(_game->getMod());
 		_game->savedGame()->setBattleGame(bgame);
 		bgame->setMissionType("STR_BASE_DEFENSE");
-		BattlescapeGenerator bgen = BattlescapeGenerator(_game);
+		BattlescapeGenerator bgen = BattlescapeGenerator();
 		bgen.setBase(base);
 		bgen.setAlienCustomDeploy(_game->getMod()->getDeployment(ufo->getCraftStats().missionCustomDeploy));
 		bgen.setAlienRace(ufo->getAlienRace());

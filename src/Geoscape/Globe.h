@@ -26,7 +26,6 @@
 namespace OpenXcom
 {
 
-class Game;
 class Polygon;
 class SurfaceSet;
 class Timer;
@@ -59,7 +58,6 @@ private:
 	double _craftLon, _craftLat, _craftRange;
 	size_t _zoom, _zoomOld, _zoomTexture;
 	SurfaceSet *_texture, *_markerSet;
-	Game *_game;
 	Surface *_markers, *_countries, *_radars;
 	bool _hover, _craft;
 	int _blink;
@@ -112,7 +110,7 @@ public:
 	static Uint8 BASE_LABEL_COLOR;
 
 	/// Creates a new globe at the specified position and size.
-	Globe(Game* game, int cenX, int cenY, int width, int height, int x = 0, int y = 0);
+	Globe(int cenX, int cenY, int width, int height, int x = 0, int y = 0);
 	/// Cleans up the globe.
 	~Globe();
 	/// Converts polar coordinates to cartesian coordinates.

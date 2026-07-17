@@ -258,7 +258,7 @@ void ConfirmLandingState::btnYesClick(Action *)
 
 	SavedBattleGame *bgame = new SavedBattleGame(_game->getMod());
 	_game->savedGame()->setBattleGame(bgame);
-	BattlescapeGenerator bgen(_game);
+	BattlescapeGenerator bgen;
 	bgen.setWorldTexture(_missionTexture, _globeTexture);
 	bgen.setWorldShade(_shade);
 	bgen.setCraft(_craft);

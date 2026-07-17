@@ -613,7 +613,7 @@ void NewBattleState::btnOkClick(Action *)
 	SavedBattleGame *bgame = new SavedBattleGame(_game->getMod());
 	_game->savedGame()->setBattleGame(bgame);
 	bgame->setMissionType(_missionTypes[_cbxMission->getSelected()]);
-	BattlescapeGenerator bgen = BattlescapeGenerator(_game);
+	BattlescapeGenerator bgen = BattlescapeGenerator();
 	Base *base = 0;
 
 	bgen.setTerrain(_game->getMod()->getTerrain(_terrainTypes[_cbxTerrain->getSelected()]));

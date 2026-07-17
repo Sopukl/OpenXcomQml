@@ -3578,7 +3578,7 @@ void BattlescapeState::finishBattle(bool abort, int inExitArea)
 		// if there is a next mission stage + we have people in exit area OR we killed all aliens, load the next stage
 		_popups.clear();
 		_save->setMissionType(nextStage);
-		BattlescapeGenerator bgen = BattlescapeGenerator(_game);
+		BattlescapeGenerator bgen = BattlescapeGenerator();
 		bgen.nextStage();
 		_game->popState();
 		_game->pushState(new BriefingState(0, 0));

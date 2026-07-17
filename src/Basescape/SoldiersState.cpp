@@ -680,7 +680,7 @@ void SoldiersState::btnInventoryClick(Action *)
 		{
 			_game->savedGame()->setDisableSoldierEquipment(true);
 		}
-		BattlescapeGenerator bgen = BattlescapeGenerator(_game);
+		BattlescapeGenerator bgen = BattlescapeGenerator();
 		bgen.setBase(_base);
 		bgen.runInventory(0);
 

@@ -40,7 +40,6 @@ class AlienRace;
 class RuleEnviroEffects;
 class RuleStartingCondition;
 class AlienDeployment;
-class Game;
 class Base;
 class MissionSite;
 class AlienBase;
@@ -54,7 +53,6 @@ class Position;
 class BattlescapeGenerator
 {
 private:
-	Game *_game;
 	SavedBattleGame *_save;
 	Mod *_mod;
 	RuleInventory *_inventorySlotGround = nullptr;
@@ -165,7 +163,7 @@ private:
 	void setMusic(const AlienDeployment* ruleDeploy, bool nextStage);
 public:
 	/// Creates a new BattlescapeGenerator class
-	BattlescapeGenerator(Game* game);
+	BattlescapeGenerator();
 	/// Cleans up the BattlescapeGenerator.
 	~BattlescapeGenerator();
 	/// Sets the XCom craft.
