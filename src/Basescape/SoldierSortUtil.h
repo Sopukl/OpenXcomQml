@@ -17,7 +17,6 @@
  * You should have received a copy of the GNU General Public License
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
-#include "../Engine/Game.h"
 #include "../Savegame/Soldier.h"
 #include "../Savegame/SavedGame.h"
 #include "../Mod/Mod.h"
@@ -25,16 +24,15 @@
 namespace OpenXcom
 {
 
-typedef int (*getStatFn_t)(const Game*, const Soldier*);
+typedef int (*getStatFn_t)(const Soldier*);
 
 struct SortFunctor
 {
-	Game *_game;
 	getStatFn_t _getStatFn;
-	SortFunctor(Game *game, getStatFn_t getStatFn) : _game(game), _getStatFn(getStatFn) { }
+	SortFunctor(getStatFn_t getStatFn) : _getStatFn(getStatFn) { }
 	bool operator()(Soldier *a, Soldier *b)
 	{
-		bool ret = _getStatFn(_game, a) < _getStatFn(_game, b);
+		bool ret = _getStatFn(a) < _getStatFn(b);
 		return ret;
 	}
 	getStatFn_t getGetter()
@@ -44,7 +42,7 @@ struct SortFunctor
 };
 
 #define GET_ATTRIB_STAT_FN(attrib) \
-	int attrib##Stat(const Game *game, const Soldier *s);
+	int attrib##Stat(const Soldier *s);
 GET_ATTRIB_STAT_FN(tu)
 GET_ATTRIB_STAT_FN(stamina)
 GET_ATTRIB_STAT_FN(health)
@@ -60,7 +58,7 @@ GET_ATTRIB_STAT_FN(melee)
 #undef GET_ATTRIB_STAT_FN
 
 #define GET_ATTRIB_STAT_FN(attrib) \
-	int attrib##StatBase(const Game *game, const Soldier *s);
+	int attrib##StatBase(const Soldier *s);
 GET_ATTRIB_STAT_FN(tu)
 GET_ATTRIB_STAT_FN(stamina)
 GET_ATTRIB_STAT_FN(health)
@@ -76,7 +74,7 @@ GET_ATTRIB_STAT_FN(melee)
 #undef GET_ATTRIB_STAT_FN
 
 #define GET_ATTRIB_STAT_FN(attrib) \
-	int attrib##StatPlus(const Game *game, const Soldier *s);
+	int attrib##StatPlus(const Soldier *s);
 GET_ATTRIB_STAT_FN(tu)
 GET_ATTRIB_STAT_FN(stamina)
 GET_ATTRIB_STAT_FN(health)
@@ -92,7 +90,7 @@ GET_ATTRIB_STAT_FN(melee)
 #undef GET_ATTRIB_STAT_FN
 
 #define GET_SOLDIER_STAT_FN(attrib, camelCaseAttrib) \
-	int attrib##Stat(const Game *game, const Soldier *s);
+	int attrib##Stat(const Soldier *s);
 GET_SOLDIER_STAT_FN(id, Id)
 GET_SOLDIER_STAT_FN(name, Name)
 GET_SOLDIER_STAT_FN(craftId, CraftId)

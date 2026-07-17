@@ -124,8 +124,8 @@ AllocatePsiTrainingState::AllocatePsiTrainingState(Base *base) : _sel(0), _base(
 
 #define PUSH_IN(strId, functor) \
 	sortOptions.push_back(ltr(strId)); \
-	_sortFunctors.push_back(new SortFunctor(_game, functor)); \
-	_sortFunctorsPlus.push_back(new SortFunctor(_game, functor));
+	_sortFunctors.push_back(new SortFunctor(functor)); \
+	_sortFunctorsPlus.push_back(new SortFunctor(functor));
 
 	PUSH_IN("STR_ID", idStat);
 	PUSH_IN("STR_NAME_UC", nameStat);
@@ -144,8 +144,8 @@ AllocatePsiTrainingState::AllocatePsiTrainingState(Base *base) : _sel(0), _base(
 
 #define PUSH_IN(strId, functor, functorPlus) \
 	sortOptions.push_back(ltr(strId)); \
-	_sortFunctors.push_back(new SortFunctor(_game, functor)); \
-	_sortFunctorsPlus.push_back(new SortFunctor(_game, functorPlus));
+	_sortFunctors.push_back(new SortFunctor(functor)); \
+	_sortFunctorsPlus.push_back(new SortFunctor(functorPlus));
 
 	PUSH_IN("STR_TIME_UNITS", tuStatBase, tuStatPlus);
 	PUSH_IN("STR_STAMINA", staminaStatBase, staminaStatPlus);

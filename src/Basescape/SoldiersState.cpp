@@ -195,7 +195,7 @@ SoldiersState::SoldiersState(Base *base) : _base(base), _origSoldierOrder(_base-
 
 #define PUSH_IN(strId, functor) \
 	sortOptions.push_back(ltr(strId)); \
-	_sortFunctors.push_back(new SortFunctor(_game, functor));
+	_sortFunctors.push_back(new SortFunctor(functor));
 
 	PUSH_IN("STR_ID", idStat);
 	PUSH_IN("STR_NAME_UC", nameStat);
@@ -443,7 +443,7 @@ void SoldiersState::initList(size_t scrl)
 		if (_dynGetter != NULL)
 		{
 			// call corresponding getter
-			int dynStat = (*_dynGetter)(_game, soldier);
+			int dynStat = (*_dynGetter)(soldier);
 			std::ostringstream ss;
 			ss << dynStat;
 			_lstSoldiers->addRow(4, soldier->getName(true).c_str(), ltr(soldier->getRankString()).c_str(), craftString.c_str(), ss.str().c_str());
