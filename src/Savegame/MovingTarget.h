@@ -28,6 +28,7 @@ namespace OpenXcom
  */
 class MovingTarget : public Target
 {
+	Q_OBJECT
 protected:
 	static const double GLOBE_RADIUS;
 

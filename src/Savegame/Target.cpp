@@ -177,13 +177,27 @@ std::string Target::getName() const
 						:_name;
 }
 
+QString Target::name() const
+{
+	return QString::fromStdString(getName());
+}
+
 /**
  * Changes the target's custom name.
  * @param newName New custom name. If set to blank, the language default is used.
  */
 void Target::setName(const std::string &newName)
 {
-	_name = newName;
+	if(newName!= _name)
+	{
+		_name = newName;
+		Q_EMIT nameChanged();
+	}
+}
+
+void Target::set_Name(const QString &newName)
+{
+	setName(newName.toStdString());
 }
 
 /**

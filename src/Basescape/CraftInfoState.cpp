@@ -720,7 +720,7 @@ void CraftInfoState::edtCraftChange(Action *action)
 {
 	if (_edtCraft->getText() == _craft->getDefaultName())
 	{
-		_craft->setName("");
+		_craft->setName(std::string(""));
 	}
 	else
 	{

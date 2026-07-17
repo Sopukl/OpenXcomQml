@@ -39,6 +39,7 @@ class Target: public QObject
 {
 	Q_OBJECT
 	QML_ELEMENT
+	Q_PROPERTY(QString name READ name WRITE set_Name NOTIFY nameChanged FINAL)
 protected:
 	double _lon, _lat;
 	int _id;
@@ -71,8 +72,12 @@ public:
 	void setId(int id);
 	/// Gets the target's name.
 	virtual std::string getName() const;
+	///property name getter
+	QString name() const;
 	/// Sets the target's name.
 	void setName(const std::string &newName);
+	/// property name setter
+	void set_Name(const QString &newName);
 	/// Gets the target's default name.
 	virtual std::string getDefaultName() const;
 	/// Gets the target's marker name.
@@ -91,6 +96,8 @@ public:
 	double getDistance(const Target *target) const { return getDistance(target->getLongitude(), target->getLatitude()); }
 	/// Gets the distance to another position.
 	double getDistance(double lon, double lat) const;
+  signals:
+	void nameChanged();
 };
 
 }

@@ -93,16 +93,20 @@ Window {
             left: parent.left
             leftMargin: 10
         }
-        text: "1"
-        width: 30
+        text: "BASE INFO"
+        palette.button: "white"
+        width: 60
         height: 30
         onClicked: {
             let base = Game.savedGame.bases[0];
             console.log("base: " + base.name)
+            console.log("soldiers")
             for(let s of base.soldiers)
                 console.log(s.name)
+
+            console.log("crafts")
             for(let c of base.crafts)
-                console.log(c)
+                console.log(c.name)
         }
     }
 
