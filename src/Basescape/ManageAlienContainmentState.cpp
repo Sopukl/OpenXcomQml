@@ -51,7 +51,6 @@ namespace OpenXcom
  * Initializes all the elements in the Manage Alien Containment screen.
  * @param game Pointer to the core game.
  * @param base Pointer to the base to get info from.
- * @param origin Game section that originated this state.
  */
 ManageAlienContainmentState::ManageAlienContainmentState(Base *base, int prisonType, OptionsOrigin origin) :
 	_base(base), _prisonType(prisonType), _origin(origin), _sel(0), _aliensSold(0), _total(0), _doNotReset(false), _threeButtons(false)

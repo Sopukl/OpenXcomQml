@@ -24,7 +24,6 @@
 #include "Map.h"
 #include "../Engine/Action.h"
 #include "../Engine/Game.h"
-#include "../Engine/Game.h"
 #include "../Engine/Options.h"
 #include "../Interface/TextButton.h"
 #include "../Interface/Window.h"

@@ -29,7 +29,6 @@
 #include "../Engine/FileMap.h"
 #include "../Engine/Logger.h"
 #include "../Interface/ComboBox.h"
-#include "../Engine/Game.h"
 #include "SetWindowedRootState.h"
 
 namespace OpenXcom

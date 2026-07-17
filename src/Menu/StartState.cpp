@@ -24,7 +24,6 @@
 #include "../Engine/Action.h"
 #include "../Engine/Surface.h"
 #include "../Engine/Options.h"
-#include "../Engine/Game.h"
 #include "../Engine/Sound.h"
 #include "../Engine/Music.h"
 #include "../Engine/Font.h"
@@ -142,11 +141,11 @@ void StartState::init()
 	}
 
 	// Load the game data in a separate thread
-	_thread = SDL_CreateThread(load, (void*)&game);
+	_thread = SDL_CreateThread(load, nullptr);
 	if (_thread == 0)
 	{
 		// If we can't create the thread, just load it as usual
-		load((void*)&game);
+		load(nullptr);
 	}
 }
 
@@ -301,17 +300,16 @@ void StartState::addLine(const std::string &str)
  * @param game_ptr Pointer to the game.
  * @return Thread status, 0 = ok
  */
-int StartState::load(void *game_ptr)
+int StartState::load(void */*game_ptr*/)
 {
-	Game *game = (Game*)game_ptr;
 	try
 	{
 		Log(LOG_INFO) << "Loading data...";
 		Options::updateMods();
-		game->loadMods();
+		game.loadMods();
 		Log(LOG_INFO) << "Data loaded successfully.";
 		Log(LOG_INFO) << "Loading language...";
-		game->loadLanguages();
+		game.loadLanguages();
 		Log(LOG_INFO) << "Language loaded successfully.";
 		loading = LOADING_SUCCESSFUL;
 	}

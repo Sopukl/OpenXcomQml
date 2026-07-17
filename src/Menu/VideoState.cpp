@@ -461,7 +461,7 @@ void VideoState::init()
 
 		flcPlayer->init(videoFileName.c_str(),
 			 _useUfoAudioSequence ? &audioHandler : NULL,
-			 &game, useInternalAudio, dx, dy);
+			 useInternalAudio, dx, dy);
 		flcPlayer->play(_useUfoAudioSequence);
 		if (_useUfoAudioSequence)
 		{

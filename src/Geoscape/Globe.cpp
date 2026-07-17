@@ -45,7 +45,6 @@
 #include "../Engine/Options.h"
 #include "../Savegame/MissionSite.h"
 #include "../Savegame/AlienBase.h"
-#include "../Engine/Game.h"
 #include "../Savegame/BaseFacility.h"
 #include "../Mod/RuleBaseFacility.h"
 #include "../Mod/RuleCraft.h"

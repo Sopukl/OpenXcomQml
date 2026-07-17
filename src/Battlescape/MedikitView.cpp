@@ -22,7 +22,6 @@
 #include "../Mod/RuleInterface.h"
 #include "../Engine/SurfaceSet.h"
 #include "../Engine/Action.h"
-#include "../Engine/Game.h"
 #include "../Savegame/BattleUnit.h"
 #include "../Interface/Text.h"
 

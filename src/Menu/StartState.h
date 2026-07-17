@@ -65,7 +65,7 @@ public:
 	/// Adds a line of text.
 	void addLine(const std::string &str);
 	/// Loads the game resources.
-	static int load(void *game_ptr);
+	static int load(void*);
 };
 
 }

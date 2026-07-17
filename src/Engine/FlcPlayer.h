@@ -28,7 +28,6 @@ namespace OpenXcom
 {
 
 class Screen;
-class Game;
 
 class FlcPlayer
 {
@@ -127,7 +126,7 @@ public:
 	~FlcPlayer();
 
 	/// Open FLC or FLI file, read header, prepare to play it
-	bool init(const char *filename, void(*frameCallBack)(), Game *game, bool useAudio, int dx, int dy);
+	bool init(const char *filename, void(*frameCallBack)(), bool useAudio, int dx, int dy);
 	/// Play the loaded file; set flc.mainScreen first!
 	void play(bool skipLastFrame);
 	/// Free memory, free love, etc.
