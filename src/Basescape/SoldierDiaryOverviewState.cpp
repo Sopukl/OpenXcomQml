@@ -246,8 +246,8 @@ void SoldierDiaryOverviewState::init()
 		std::ostringstream ss;
 		ss << missionStats->time.getYear();
 
-		_lstDiary->addRow(5, missionStats->getMissionName(_game->getLanguage()).c_str(),
-							 missionStats->getRatingString(_game->getLanguage()).c_str(),
+		_lstDiary->addRow(5, missionStats->getMissionName().c_str(),
+							 missionStats->getRatingString().c_str(),
 							 missionStats->time.getDayString().c_str(),
 							 ltr(missionStats->time.getMonthString()).c_str(),
 							 ss.str().c_str());
