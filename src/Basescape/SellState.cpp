@@ -112,7 +112,7 @@ void SellState::delayedInit()
 	// Set palette
 	setInterface("sellMenu");
 
-	_ammoColor = _game->getMod()->getInterface("sellMenu")->getElement("ammoColor")->color;
+	_ammoColor = game.getMod()->getInterface("sellMenu")->getElement("ammoColor")->color;
 
 	add(_window, "window", "sellMenu");
 	add(_btnQuickSearch, "button", "sellMenu");
@@ -157,7 +157,7 @@ void SellState::delayedInit()
 	_txtTitle->setAlign(ALIGN_CENTER);
 	_txtTitle->setText(ltr("STR_SELL_ITEMS_SACK_PERSONNEL"));
 
-	_txtFunds->setText(ltr("STR_FUNDS").arg(Unicode::formatFunding(_game->savedGame()->getFunds())));
+	_txtFunds->setText(ltr("STR_FUNDS").arg(Unicode::formatFunding(game.savedGame()->getFunds())));
 
 	_txtSpaceUsed->setVisible(options1.storageLimitsEnforced());
 
@@ -241,9 +241,9 @@ void SellState::delayedInit()
 			_cats.push_back(cat);
 		}
 	}
-	for (auto& itemType : _game->getMod()->getItemsList())
+	for (auto& itemType : game.getMod()->getItemsList())
 	{
-		const RuleItem *rule = _game->getMod()->getItem(itemType, true);
+		const RuleItem *rule = game.getMod()->getItem(itemType, true);
 		int qty = 0;
 		if (_debriefingState != 0)
 		{
@@ -273,8 +273,8 @@ void SellState::delayedInit()
 		}
 		if (qty > 0 && (options1.canSellLiveAliens() || !rule->isAlien()))
 		{
-			TransferRow row = { TRANSFER_ITEM, rule, ltr(itemType), rule->getSellCostAdjusted(_base, _game->savedGame()), qty, 0, 0, rule->getListOrder(), rule->getSize(), qty * rule->getSize(), (int64_t)qty * rule->getSellCostAdjusted(_base, _game->savedGame()) };
-			if ((_debriefingState != 0) && (_game->savedGame()->getAutosell(rule)))
+			TransferRow row = { TRANSFER_ITEM, rule, ltr(itemType), rule->getSellCostAdjusted(_base, game.savedGame()), qty, 0, 0, rule->getListOrder(), rule->getSize(), qty * rule->getSize(), (int64_t)qty * rule->getSellCostAdjusted(_base, game.savedGame()) };
+			if ((_debriefingState != 0) && (game.savedGame()->getAutosell(rule)))
 			{
 				row.amount = qty;
 				_total += row.cost * qty;
@@ -290,7 +290,7 @@ void SellState::delayedInit()
 	}
 
 	_vanillaCategories = _cats.size();
-	if (_game->getMod()->getDisplayCustomCategories() > 0)
+	if (game.getMod()->getDisplayCustomCategories() > 0)
 	{
 		bool hasUnassigned = false;
 
@@ -315,7 +315,7 @@ void SellState::delayedInit()
 			}
 		}
 		// then use them nicely in order
-		if (_game->getMod()->getDisplayCustomCategories() == 1)
+		if (game.getMod()->getDisplayCustomCategories() == 1)
 		{
 			_cats.clear();
 			_cats.push_back("STR_ALL_ITEMS");
@@ -327,7 +327,7 @@ void SellState::delayedInit()
 			}
 			_vanillaCategories = _cats.size();
 		}
-		for (auto& categoryName : _game->getMod()->getItemCategoriesList())
+		for (auto& categoryName : game.getMod()->getItemCategoriesList())
 		{
 			if (std::find(tempCats.begin(), tempCats.end(), categoryName) != tempCats.end())
 			{
@@ -377,8 +377,8 @@ void SellState::init()
 
 	if (_reset)
 	{
-		_game->popState();
-		_game->pushState(new SellState(_base, _debriefingState, _origin));
+		game.popState();
+		game.pushState(new SellState(_base, _debriefingState, _origin));
 	}
 
 	touchComponentsRefresh();
@@ -423,9 +423,9 @@ std::string SellState::getCategory(int sel) const
 		}
 		if (rule->getBattleType() == BT_NONE)
 		{
-			if (_game->getMod()->isCraftWeaponStorageItem(rule))
+			if (game.getMod()->isCraftWeaponStorageItem(rule))
 				return "STR_CRAFT_ARMAMENT";
-			if (_game->getMod()->isArmorStorageItem(rule))
+			if (game.getMod()->isArmorStorageItem(rule))
 				return "STR_ARMORS"; // OXCE: armors
 			return "STR_COMPONENTS";
 		}
@@ -482,7 +482,7 @@ bool SellState::isHidden(int sel) const
 		}
 		if (!itemName.empty())
 		{
-			auto& hiddenMap = _game->savedGame()->getHiddenPurchaseItems();
+			auto& hiddenMap = game.savedGame()->getHiddenPurchaseItems();
 			auto iter = hiddenMap.find(itemName);
 			if (iter != hiddenMap.end())
 			{
@@ -574,7 +574,7 @@ void SellState::updateList()
 			if (_items[i].type == TRANSFER_ITEM)
 			{
 				RuleItem* rule = (RuleItem*)_items[i].rule;
-				bool isResearchable = _game->savedGame()->isResearchable(rule, _game->getMod());
+				bool isResearchable = game.savedGame()->isResearchable(rule, game.getMod());
 				if (categoryResearched && isResearchable) continue;
 				if (categoryResearchable && !isResearchable) continue;
 			}
@@ -652,7 +652,7 @@ void SellState::updateList()
  */
 void SellState::btnOkClick(Action *)
 {
-	_game->savedGame()->setFunds(_game->savedGame()->getFunds() + _total);
+	game.savedGame()->setFunds(game.savedGame()->getFunds() + _total);
 
 	auto cleanUpContainer = [&](ItemContainer* container, const RuleItem* rule, int toRemove) -> int
 	{
@@ -837,7 +837,7 @@ void SellState::btnOkClick(Action *)
 					_debriefingState->decreaseRecoveredItemCount(item, transferRow.amount);
 
 					// set autosell status if we sold all of the item
-					_game->savedGame()->setAutosell(item, (transferRow.qtySrc == transferRow.amount));
+					game.savedGame()->setAutosell(item, (transferRow.qtySrc == transferRow.amount));
 				}
 
 				break;
@@ -848,7 +848,7 @@ void SellState::btnOkClick(Action *)
 			if (_debriefingState != 0 && transferRow.type == TRANSFER_ITEM)
 			{
 				// disable autosell since we haven't sold any of the item.
-				_game->savedGame()->setAutosell((RuleItem*)transferRow.rule, false);
+				game.savedGame()->setAutosell((RuleItem*)transferRow.rule, false);
 			}
 		}
 	}
@@ -856,7 +856,7 @@ void SellState::btnOkClick(Action *)
 	{
 		_debriefingState->hideSellTransferButtons();
 	}
-	_game->popState();
+	game.popState();
 }
 
 /**
@@ -865,7 +865,7 @@ void SellState::btnOkClick(Action *)
  */
 void SellState::btnCancelClick(Action *)
 {
-	_game->popState();
+	game.popState();
 }
 
 /**
@@ -876,7 +876,7 @@ void SellState::btnCancelClick(Action *)
 void SellState::btnTransferClick(Action *)
 {
 	_reset = true;
-	_game->pushState(new TransferBaseState(_base, nullptr));
+	game.pushState(new TransferBaseState(_base, nullptr));
 }
 
 /**
@@ -923,7 +923,7 @@ void SellState::btnSellAllButOneClick(Action *)
 void SellState::lstItemsLeftArrowPress(Action *action)
 {
 	_sel = _lstItems->getSelectedRow();
-	if (_game->isLeftClick(action, true) && !_timerInc->isRunning()) _timerInc->start();
+	if (game.isLeftClick(action, true) && !_timerInc->isRunning()) _timerInc->start();
 }
 
 /**
@@ -932,7 +932,7 @@ void SellState::lstItemsLeftArrowPress(Action *action)
  */
 void SellState::lstItemsLeftArrowRelease(Action *action)
 {
-	if (_game->isLeftClick(action, true))
+	if (game.isLeftClick(action, true))
 	{
 		_timerInc->stop();
 	}
@@ -945,10 +945,10 @@ void SellState::lstItemsLeftArrowRelease(Action *action)
  */
 void SellState::lstItemsLeftArrowClick(Action *action)
 {
-	if (_game->isRightClick(action, true)) changeByValue(INT_MAX, 1);
-	if (_game->isLeftClick(action, true))
+	if (game.isRightClick(action, true)) changeByValue(INT_MAX, 1);
+	if (game.isLeftClick(action, true))
 	{
-		changeByValue(_game->getScrollStep(), 1);
+		changeByValue(game.getScrollStep(), 1);
 		_timerInc->setInterval(250);
 		_timerDec->setInterval(250);
 	}
@@ -961,7 +961,7 @@ void SellState::lstItemsLeftArrowClick(Action *action)
 void SellState::lstItemsRightArrowPress(Action *action)
 {
 	_sel = _lstItems->getSelectedRow();
-	if (_game->isLeftClick(action, true) && !_timerDec->isRunning()) _timerDec->start();
+	if (game.isLeftClick(action, true) && !_timerDec->isRunning()) _timerDec->start();
 }
 
 /**
@@ -970,7 +970,7 @@ void SellState::lstItemsRightArrowPress(Action *action)
  */
 void SellState::lstItemsRightArrowRelease(Action *action)
 {
-	if (_game->isLeftClick(action, true))
+	if (game.isLeftClick(action, true))
 	{
 		_timerDec->stop();
 	}
@@ -983,10 +983,10 @@ void SellState::lstItemsRightArrowRelease(Action *action)
  */
 void SellState::lstItemsRightArrowClick(Action *action)
 {
-	if (_game->isRightClick(action, true)) changeByValue(INT_MAX, -1);
-	if (_game->isLeftClick(action, true))
+	if (game.isRightClick(action, true)) changeByValue(INT_MAX, -1);
+	if (game.isLeftClick(action, true))
 	{
-		changeByValue(_game->getScrollStep(), -1);
+		changeByValue(game.getScrollStep(), -1);
 		_timerInc->setInterval(250);
 		_timerDec->setInterval(250);
 	}
@@ -1019,7 +1019,7 @@ void SellState::lstItemsMousePress(Action *action)
 			changeByValue(options1.changeValueByMouseWheel(), -1);
 		}
 	}
-	else if (_game->isRightClick(action, true))
+	else if (game.isRightClick(action, true))
 	{
 		if (action->getAbsoluteXMouse() >= _lstItems->getArrowsLeftEdge() &&
 			action->getAbsoluteXMouse() <= _lstItems->getArrowsRightEdge())
@@ -1031,15 +1031,15 @@ void SellState::lstItemsMousePress(Action *action)
 			RuleItem *rule = (RuleItem*)getRow().rule;
 			if (rule != 0)
 			{
-				if (_game->isCtrlPressed(true))
+				if (game.isCtrlPressed(true))
 				{
-					if (_game->isShiftPressed(true))
+					if (game.isShiftPressed(true))
 					{
 						if (!rule->getType().empty())
 						{
 							bool categoryHidden = (_cats[_cbxCategory->getSelected()] == "STR_FILTER_HIDDEN");
 
-							auto& hiddenMap = _game->savedGame()->getHiddenPurchaseItems();
+							auto& hiddenMap = game.savedGame()->getHiddenPurchaseItems();
 							auto iter = hiddenMap.find(rule->getType());
 							bool hidden = false;
 							if (iter != hiddenMap.end())
@@ -1052,7 +1052,7 @@ void SellState::lstItemsMousePress(Action *action)
 								// not found = not hidden yet => mark it as hidden
 								hidden = true;
 							}
-							_game->savedGame()->setHiddenPurchaseItemsStatus(rule->getType(), hidden);
+							game.savedGame()->setHiddenPurchaseItemsStatus(rule->getType(), hidden);
 
 							if (categoryHidden)
 							{
@@ -1064,23 +1064,23 @@ void SellState::lstItemsMousePress(Action *action)
 							else
 							{
 								// no screen update, at least play a sound
-								_game->getMod()->getSound("GEO.CAT", Mod::UFO_EXPLODE)->play();
+								game.getMod()->getSound("GEO.CAT", Mod::UFO_EXPLODE)->play();
 							}
 						}
 					}
 					else
 					{
-						_game->pushState(new ItemLocationsState(rule));
+						game.pushState(new ItemLocationsState(rule));
 					}
 				}
 				else
 				{
-					_game->pushState(new ManufactureDependenciesTreeState(rule->getType()));
+					game.pushState(new ManufactureDependenciesTreeState(rule->getType()));
 				}
 			}
 		}
 	}
-	else if (_game->isMiddleClick(action, true))
+	else if (game.isMiddleClick(action, true))
 	{
 		if (getRow().type == TRANSFER_ITEM)
 		{
@@ -1088,16 +1088,16 @@ void SellState::lstItemsMousePress(Action *action)
 			if (rule != 0)
 			{
 				std::string articleId = rule->getUfopediaType();
-				if (_game->isCtrlPressed(true))
+				if (game.isCtrlPressed(true))
 				{
 					Ufopaedia::openArticle(articleId);
 				}
 				else
 				{
-					const RuleResearch* selectedTopic = _game->getMod()->getResearch(articleId, false);
+					const RuleResearch* selectedTopic = game.getMod()->getResearch(articleId, false);
 					if (selectedTopic)
 					{
-						_game->pushState(new TechTreeViewerState(selectedTopic, 0));
+						game.pushState(new TechTreeViewerState(selectedTopic, 0));
 					}
 				}
 			}
@@ -1108,13 +1108,13 @@ void SellState::lstItemsMousePress(Action *action)
 			if (rule != 0)
 			{
 				std::string articleId = rule->getRules()->getType();
-				if (_game->isCtrlPressed(true))
+				if (game.isCtrlPressed(true))
 				{
 					Ufopaedia::openArticle(articleId);
 				}
 				else
 				{
-					_game->pushState(new TechTreeViewerState(0, 0, 0, rule->getRules()));
+					game.pushState(new TechTreeViewerState(0, 0, 0, rule->getRules()));
 				}
 			}
 		}
@@ -1128,7 +1128,7 @@ void SellState::increase()
 {
 	_timerDec->setInterval(50);
 	_timerInc->setInterval(50);
-	changeByValue(_game->getScrollStep(), 1);
+	changeByValue(game.getScrollStep(), 1);
 }
 
 /**
@@ -1141,12 +1141,12 @@ void SellState::changeByValue(int change, int dir)
 	if (dir > 0 && getRow().type == TRANSFER_ITEM)
 	{
 		const RuleItem* tmpItem = (const RuleItem*)getRow().rule;;
-		if (!tmpItem->getSellActionMessage().empty() && !_game->isShiftPressed(true))
+		if (!tmpItem->getSellActionMessage().empty() && !game.isShiftPressed(true))
 		{
 			_timerInc->stop();
 			_timerDec->stop();
-			RuleInterface* menuInterface = _game->getMod()->getInterface("buyMenu");
-			_game->pushState(new ErrorMessageState(
+			RuleInterface* menuInterface = game.getMod()->getInterface("buyMenu");
+			game.pushState(new ErrorMessageState(
 				ltr(tmpItem->getSellActionMessage()),
 				_palette,
 				menuInterface->getElement("errorMessage")->color,
@@ -1209,7 +1209,7 @@ void SellState::decrease()
 {
 	_timerInc->setInterval(50);
 	_timerDec->setInterval(50);
-	changeByValue(_game->getScrollStep(), -1);
+	changeByValue(game.getScrollStep(), -1);
 }
 
 /**
@@ -1264,13 +1264,13 @@ void SellState::cbxCategoryChange(Action *)
 {
 	_previousSort = _currentSort;
 
-	if (_game->isCtrlPressed(true))
+	if (game.isCtrlPressed(true))
 	{
-		_currentSort = _game->isShiftPressed(true) ? TransferSortDirection::BY_UNIT_SIZE : TransferSortDirection::BY_TOTAL_SIZE;
+		_currentSort = game.isShiftPressed(true) ? TransferSortDirection::BY_UNIT_SIZE : TransferSortDirection::BY_TOTAL_SIZE;
 	}
-	else if (_game->isAltPressed(true))
+	else if (game.isAltPressed(true))
 	{
-		_currentSort = _game->isShiftPressed(true) ? TransferSortDirection::BY_UNIT_COST : TransferSortDirection::BY_TOTAL_COST;
+		_currentSort = game.isShiftPressed(true) ? TransferSortDirection::BY_UNIT_COST : TransferSortDirection::BY_TOTAL_COST;
 	}
 	else
 	{

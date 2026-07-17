@@ -57,7 +57,7 @@ ListLoadOriginalState::ListLoadOriginalState(OptionsOrigin origin) : _origin(ori
 	_txtDate = new Text(90, 9, 225, 24);
 
 	// Set palette
-	setInterface("geoscape", true, _game->savedGame() ? _game->savedGame()->getSavedBattle() : 0);
+	setInterface("geoscape", true, game.savedGame() ? game.savedGame()->getSavedBattle() : 0);
 
 	add(_window, "window", "saveMenus");
 	add(_btnNew, "button", "saveMenus");
@@ -148,7 +148,7 @@ void ListLoadOriginalState::init()
  */
 void ListLoadOriginalState::btnNewClick(Action *)
 {
-	_game->popState();
+	game.popState();
 }
 
 /**
@@ -157,8 +157,8 @@ void ListLoadOriginalState::btnNewClick(Action *)
  */
 void ListLoadOriginalState::btnCancelClick(Action *action)
 {
-	_game->popState();
-	_game->popState();
+	game.popState();
+	game.popState();
 	action->getDetails()->type = SDL_NOEVENT;
 }
 
@@ -183,29 +183,29 @@ void ListLoadOriginalState::btnSlotClick(Action *action)
 		{
 			std::ostringstream error;
 			error << ltr("STR_LOAD_UNSUCCESSFUL") << Unicode::TOK_NL_SMALL << "Battlescape saves aren't supported.";
-			_game->pushState(new ErrorMessageState(error.str(), _palette, _game->getMod()->getInterface("errorMessages")->getElement("geoscapeColor")->color, "BACK01.SCR", _game->getMod()->getInterface("errorMessages")->getElement("geoscapePalette")->color));
+			game.pushState(new ErrorMessageState(error.str(), _palette, game.getMod()->getInterface("errorMessages")->getElement("geoscapeColor")->color, "BACK01.SCR", game.getMod()->getInterface("errorMessages")->getElement("geoscapePalette")->color));
 
 		}
 		else
 		{
 			// Reset touch flags
-			_game->resetTouchButtonFlags();
+			game.resetTouchButtonFlags();
 
-			SaveConverter converter(_saves[n].id, _game->getMod());
-			_game->setSavedGame(converter.loadOriginal());
+			SaveConverter converter(_saves[n].id, game.getMod());
+			game.setSavedGame(converter.loadOriginal());
 			options1.baseXResolution = options1.baseXGeoscape;
 			options1.baseYResolution = options1.baseYGeoscape;
-			_game->getScreen()->resetDisplay(false);
-			_game->setState(new GeoscapeState);
-			if (_game->savedGame()->getSavedBattle() != 0)
+			game.getScreen()->resetDisplay(false);
+			game.setState(new GeoscapeState);
+			if (game.savedGame()->getSavedBattle() != 0)
 			{
-				_game->savedGame()->getSavedBattle()->loadMapResources(_game->getMod());
+				game.savedGame()->getSavedBattle()->loadMapResources(game.getMod());
 				options1.baseXResolution = options1.baseXBattlescape;
 				options1.baseYResolution = options1.baseYBattlescape;
-				_game->getScreen()->resetDisplay(false);
+				game.getScreen()->resetDisplay(false);
 				BattlescapeState *bs = new BattlescapeState;
-				_game->pushState(bs);
-				_game->savedGame()->getSavedBattle()->setBattleState(bs);
+				game.pushState(bs);
+				game.savedGame()->getSavedBattle()->setBattleState(bs);
 				// Try to reactivate the touch buttons
 				bs->toggleTouchButtons(false, true);
 			}

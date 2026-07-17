@@ -130,7 +130,7 @@ void CannotReequipState::init()
  */
 void CannotReequipState::btnOkClick(Action *)
 {
-	_game->popState();
+	game.popState();
 }
 
 /**
@@ -139,7 +139,7 @@ void CannotReequipState::btnOkClick(Action *)
  */
 void CannotReequipState::btnManufactureClick(Action *)
 {
-	_game->pushState(new ManufactureState(_base));
+	game.pushState(new ManufactureState(_base));
 }
 
 /**
@@ -148,7 +148,7 @@ void CannotReequipState::btnManufactureClick(Action *)
  */
 void CannotReequipState::btnPurchaseClick(Action *)
 {
-	_game->pushState(new PurchaseState(_base, this));
+	game.pushState(new PurchaseState(_base, this));
 }
 
 /**

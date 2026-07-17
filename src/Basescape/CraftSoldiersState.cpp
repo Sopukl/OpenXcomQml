@@ -56,7 +56,7 @@ namespace OpenXcom
 CraftSoldiersState::CraftSoldiersState(Base *base, size_t craft)
 		:  _base(base), _craft(craft), _otherCraftColor(0), _origSoldierOrder(_base->soldiers()), _dynGetter(NULL)
 {
-	bool hidePreview = _game->savedGame()->getMonthsPassed() == -1;
+	bool hidePreview = game.savedGame()->getMonthsPassed() == -1;
 	Craft *c = _base->crafts().at(_craft);
 	if (c && !c->getRules()->isForNewBattle())
 	{
@@ -96,7 +96,7 @@ CraftSoldiersState::CraftSoldiersState(Base *base, size_t craft)
 
 	touchComponentsAdd("button2", "craftSoldiers", _window);
 
-	_otherCraftColor = _game->getMod()->getInterface("craftSoldiers")->getElement("otherCraft")->color;
+	_otherCraftColor = game.getMod()->getInterface("craftSoldiers")->getElement("otherCraft")->color;
 
 	centerAllSurfaces();
 
@@ -151,7 +151,7 @@ CraftSoldiersState::CraftSoldiersState(Base *base, size_t craft)
 	PUSH_IN("STR_MISSIONS2", missionsStat);
 	PUSH_IN("STR_KILLS2", killsStat);
 	PUSH_IN("STR_WOUND_RECOVERY2", woundRecoveryStat);
-	if (_game->getMod()->isManaFeatureEnabled() && !_game->getMod()->getReplenishManaAfterMission())
+	if (game.getMod()->isManaFeatureEnabled() && !game.getMod()->getReplenishManaAfterMission())
 	{
 		PUSH_IN("STR_MANA_MISSING", manaMissingStat);
 	}
@@ -164,7 +164,7 @@ CraftSoldiersState::CraftSoldiersState(Base *base, size_t craft)
 	PUSH_IN("STR_THROWING_ACCURACY", throwingStat);
 	PUSH_IN("STR_MELEE_ACCURACY", meleeStat);
 	PUSH_IN("STR_STRENGTH", strengthStat);
-	if (_game->getMod()->isManaFeatureEnabled())
+	if (game.getMod()->isManaFeatureEnabled())
 	{
 		// "unlock" is checked later
 		PUSH_IN("STR_MANA_POOL", manaStat);
@@ -208,7 +208,7 @@ CraftSoldiersState::~CraftSoldiersState()
  */
 void CraftSoldiersState::cbxSortByChange(Action *)
 {
-	bool ctrlPressed = _game->isCtrlPressed(true);
+	bool ctrlPressed = game.isCtrlPressed(true);
 	size_t selIdx = _cbxSortBy->getSelected();
 	if (selIdx == (size_t)-1)
 	{
@@ -267,7 +267,7 @@ void CraftSoldiersState::cbxSortByChange(Action *)
 			{
 				std::stable_sort(_base->soldiers().begin(), _base->soldiers().end(), *compFunc);
 			}
-			if (_game->isShiftPressed(true))
+			if (game.isShiftPressed(true))
 			{
 				std::reverse(_base->soldiers().begin(), _base->soldiers().end());
 			}
@@ -299,7 +299,7 @@ void CraftSoldiersState::cbxSortByChange(Action *)
  */
 void CraftSoldiersState::btnOkClick(Action *)
 {
-	_game->popState();
+	game.popState();
 }
 
 /**
@@ -315,8 +315,8 @@ void CraftSoldiersState::btnPreviewClick(Action *)
 		return;
 	}
 
-	SavedBattleGame* bgame = new SavedBattleGame(_game->getMod(), true);
-	_game->savedGame()->setBattleGame(bgame);
+	SavedBattleGame* bgame = new SavedBattleGame(game.getMod(), true);
+	game.savedGame()->setBattleGame(bgame);
 	BattlescapeGenerator bgen = BattlescapeGenerator();
 	bgame->setMissionType(c->getRules()->getCustomPreviewType());
 	bgame->setCraftForPreview(c);
@@ -328,7 +328,7 @@ void CraftSoldiersState::btnPreviewClick(Action *)
 	bgame->setCraftZ(bgen.getCraftZ());
 	bgame->calculateCraftTiles();
 
-	_game->pushState(new BriefingState(c));
+	game.pushState(new BriefingState(c));
 }
 
 /**
@@ -417,11 +417,11 @@ void CraftSoldiersState::lstItemsLeftArrowClick(Action *action)
 	unsigned int row = _lstSoldiers->getSelectedRow();
 	if (row > 0)
 	{
-		if (_game->isLeftClick(action, true))
+		if (game.isLeftClick(action, true))
 		{
 			moveSoldierUp(action, row);
 		}
-		else if (_game->isRightClick(action, true))
+		else if (game.isRightClick(action, true))
 		{
 			moveSoldierUp(action, row, true);
 		}
@@ -470,11 +470,11 @@ void CraftSoldiersState::lstItemsRightArrowClick(Action *action)
 	size_t numSoldiers = _base->soldiers().size();
 	if (0 < numSoldiers && INT_MAX >= numSoldiers && row < numSoldiers - 1)
 	{
-		if (_game->isLeftClick(action, true))
+		if (game.isLeftClick(action, true))
 		{
 			moveSoldierDown(action, row);
 		}
-		else if (_game->isRightClick(action, true))
+		else if (game.isRightClick(action, true))
 		{
 			moveSoldierDown(action, row, true);
 		}
@@ -525,13 +525,13 @@ void CraftSoldiersState::lstSoldiersClick(Action *action)
 		return;
 	}
 	int row = _lstSoldiers->getSelectedRow();
-	if (_game->isLeftClick(action, true))
+	if (game.isLeftClick(action, true))
 	{
 		Craft *c = _base->crafts().at(_craft);
 		Soldier *s = _base->soldiers().at(_lstSoldiers->getSelectedRow());
 		if (s->getCraft() == c)
 		{
-			s->setCraftAndMoveEquipment(0, _base, _game->savedGame()->getMonthsPassed() == -1);
+			s->setCraftAndMoveEquipment(0, _base, game.savedGame()->getMonthsPassed() == -1);
 			_lstSoldiers->setCellText(row, 2, ltr("STR_NONE_UC"));
 			_lstSoldiers->setRowColor(row, _lstSoldiers->getColor());
 		}
@@ -545,7 +545,7 @@ void CraftSoldiersState::lstSoldiersClick(Action *action)
 			CraftPlacementErrors err = c->validateAddingSoldier(space, s);
 			if (err == CPE_None)
 			{
-				s->setCraftAndMoveEquipment(c, _base, _game->savedGame()->getMonthsPassed() == -1, true);
+				s->setCraftAndMoveEquipment(c, _base, game.savedGame()->getMonthsPassed() == -1, true);
 				_lstSoldiers->setCellText(row, 2, c->getName());
 				_lstSoldiers->setRowColor(row, _lstSoldiers->getSecondaryColor());
 
@@ -554,28 +554,28 @@ void CraftSoldiersState::lstSoldiersClick(Action *action)
 			}
 			else if (err == CPE_SoldierGroupNotAllowed)
 			{
-				_game->pushState(new ErrorMessageState(ltr("STR_SOLDIER_GROUP_NOT_ALLOWED"), _palette, _game->getMod()->getInterface("soldierInfo")->getElement("errorMessage")->color, "BACK01.SCR", _game->getMod()->getInterface("soldierInfo")->getElement("errorPalette")->color));
+				game.pushState(new ErrorMessageState(ltr("STR_SOLDIER_GROUP_NOT_ALLOWED"), _palette, game.getMod()->getInterface("soldierInfo")->getElement("errorMessage")->color, "BACK01.SCR", game.getMod()->getInterface("soldierInfo")->getElement("errorPalette")->color));
 			}
 			else if (err == CPE_SoldierGroupNotSame)
 			{
-				_game->pushState(new ErrorMessageState(ltr("STR_SOLDIER_GROUP_NOT_SAME"), _palette, _game->getMod()->getInterface("soldierInfo")->getElement("errorMessage")->color, "BACK01.SCR", _game->getMod()->getInterface("soldierInfo")->getElement("errorPalette")->color));
+				game.pushState(new ErrorMessageState(ltr("STR_SOLDIER_GROUP_NOT_SAME"), _palette, game.getMod()->getInterface("soldierInfo")->getElement("errorMessage")->color, "BACK01.SCR", game.getMod()->getInterface("soldierInfo")->getElement("errorPalette")->color));
 			}
 			else if (err == CPE_ArmorGroupNotAllowed)
 			{
-				_game->pushState(new ErrorMessageState(ltr("STR_ARMOR_GROUP_NOT_ALLOWED"), _palette, _game->getMod()->getInterface("soldierInfo")->getElement("errorMessage")->color, "BACK01.SCR", _game->getMod()->getInterface("soldierInfo")->getElement("errorPalette")->color));
+				game.pushState(new ErrorMessageState(ltr("STR_ARMOR_GROUP_NOT_ALLOWED"), _palette, game.getMod()->getInterface("soldierInfo")->getElement("errorMessage")->color, "BACK01.SCR", game.getMod()->getInterface("soldierInfo")->getElement("errorPalette")->color));
 			}
 			else if (space > 0)
 			{
-				_game->pushState(new ErrorMessageState(ltr("STR_NOT_ENOUGH_CRAFT_SPACE"), _palette, _game->getMod()->getInterface("soldierInfo")->getElement("errorMessage")->color, "BACK01.SCR", _game->getMod()->getInterface("soldierInfo")->getElement("errorPalette")->color));
+				game.pushState(new ErrorMessageState(ltr("STR_NOT_ENOUGH_CRAFT_SPACE"), _palette, game.getMod()->getInterface("soldierInfo")->getElement("errorMessage")->color, "BACK01.SCR", game.getMod()->getInterface("soldierInfo")->getElement("errorPalette")->color));
 			}
 		}
 
 		_txtAvailable->setText(ltr("STR_SPACE_AVAILABLE").arg(c->getSpaceAvailable()));
 		_txtUsed->setText(ltr("STR_SPACE_USED").arg(c->getSpaceUsed()));
 	}
-	else if (_game->isRightClick(action, true))
+	else if (game.isRightClick(action, true))
 	{
-		_game->pushState(new SoldierInfoState(_base, row, false));
+		game.pushState(new SoldierInfoState(_base, row, false));
 	}
 }
 
@@ -620,7 +620,7 @@ void CraftSoldiersState::btnDeassignAllSoldiersClick(Action *action)
 	{
 		if (soldier->getCraft() && soldier->getCraft()->getStatus() != "STR_OUT")
 		{
-			soldier->setCraftAndMoveEquipment(0, _base, _game->savedGame()->getMonthsPassed() == -1);
+			soldier->setCraftAndMoveEquipment(0, _base, game.savedGame()->getMonthsPassed() == -1);
 			_lstSoldiers->setCellText(row, 2, ltr("STR_NONE_UC"));
 			_lstSoldiers->setRowColor(row, _lstSoldiers->getColor());
 		}
@@ -644,7 +644,7 @@ void CraftSoldiersState::btnDeassignCraftSoldiersClick(Action *action)
 	{
 		if (soldier->getCraft() == c)
 		{
-			soldier->setCraftAndMoveEquipment(0, _base, _game->savedGame()->getMonthsPassed() == -1);
+			soldier->setCraftAndMoveEquipment(0, _base, game.savedGame()->getMonthsPassed() == -1);
 			_lstSoldiers->setCellText(row, 2, ltr("STR_NONE_UC"));
 			_lstSoldiers->setRowColor(row, _lstSoldiers->getColor());
 		}

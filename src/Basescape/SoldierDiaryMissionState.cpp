@@ -118,10 +118,10 @@ void SoldierDiaryMissionState::init()
 	State::init();
 	if (_soldier->getDiary()->getMissionIdList().empty())
 	{
-		_game->popState();
+		game.popState();
 		return;
 	}
-	std::vector<MissionStatistics*> *missionStatistics = _game->savedGame()->getMissionStatistics();
+	std::vector<MissionStatistics*> *missionStatistics = game.savedGame()->getMissionStatistics();
 	unsigned int missionId = _soldier->getDiary()->getMissionIdList().at(_rowEntry);
 	if (missionId > missionStatistics->size())
 	{
@@ -147,7 +147,7 @@ void SoldierDiaryMissionState::init()
 	_txtLocation->setText(ltr("STR_LOCATION").arg(ltr(ms->getLocationString())));
 	_txtRace->setText(ltr("STR_RACE_TYPE").arg(ltr(ms->alienRace)));
 	_txtRace->setVisible(ms->alienRace != "STR_UNKNOWN");
-	_txtDaylight->setText(ltr("STR_DAYLIGHT_TYPE").arg(ltr(ms->getDaylightString(_game->getMod()))));
+	_txtDaylight->setText(ltr("STR_DAYLIGHT_TYPE").arg(ltr(ms->getDaylightString(game.getMod()))));
 	_txtDaysWounded->setText(ltr("STR_DAYS_WOUNDED").arg(daysWounded));
 	_txtDaysWounded->setVisible(daysWounded != 0);
 
@@ -189,7 +189,7 @@ void SoldierDiaryMissionState::init()
  */
 void SoldierDiaryMissionState::btnOkClick(Action *)
 {
-	_game->popState();
+	game.popState();
 }
 
 /**

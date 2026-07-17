@@ -101,7 +101,7 @@ AllocateTrainingState::AllocateTrainingState(Base *base) : _sel(0), _base(base),
 
 	_btnPlus->setText("+");
 	_btnPlus->setPressed(false);
-	if (_game->getMod()->getSoldierBonusList().empty())
+	if (game.getMod()->getSoldierBonusList().empty())
 	{
 		// no soldier bonuses in the mod = button not needed
 		_btnPlus->setVisible(false);
@@ -147,7 +147,7 @@ AllocateTrainingState::AllocateTrainingState(Base *base) : _sel(0), _base(base),
 	PUSH_IN("STR_MISSIONS2", missionsStat);
 	PUSH_IN("STR_KILLS2", killsStat);
 	PUSH_IN("STR_WOUND_RECOVERY2", woundRecoveryStat);
-	if (_game->getMod()->isManaFeatureEnabled() && !_game->getMod()->getReplenishManaAfterMission())
+	if (game.getMod()->isManaFeatureEnabled() && !game.getMod()->getReplenishManaAfterMission())
 	{
 		PUSH_IN("STR_MANA_MISSING", manaMissingStat);
 	}
@@ -168,7 +168,7 @@ AllocateTrainingState::AllocateTrainingState(Base *base) : _sel(0), _base(base),
 	PUSH_IN("STR_THROWING_ACCURACY", throwingStatBase, throwingStatPlus);
 	PUSH_IN("STR_MELEE_ACCURACY", meleeStatBase, meleeStatPlus);
 	PUSH_IN("STR_STRENGTH", strengthStatBase, strengthStatPlus);
-	if (_game->getMod()->isManaFeatureEnabled())
+	if (game.getMod()->isManaFeatureEnabled())
 	{
 		// "unlock" is checked later
 		PUSH_IN("STR_MANA_POOL", manaStatBase, manaStatPlus);
@@ -234,7 +234,7 @@ void AllocateTrainingState::cbxSortByChange(Action *action)
 		{
 			std::stable_sort(_base->soldiers().begin(), _base->soldiers().end(), *compFunc);
 		}
-		if (_game->isShiftPressed())
+		if (game.isShiftPressed())
 		{
 			std::reverse(_base->soldiers().begin(), _base->soldiers().end());
 		}
@@ -266,7 +266,7 @@ void AllocateTrainingState::cbxSortByChange(Action *action)
 void AllocateTrainingState::btnOkClick(Action *)
 {
 	// Note: statString updates not necessary
-	_game->popState();
+	game.popState();
 }
 
 /**
@@ -534,7 +534,7 @@ void AllocateTrainingState::lstSoldiersClick(Action *action)
 	else if (action->getDetails()->button.button == SDL_BUTTON_RIGHT)
 	{
 		_doNotReset = true;
-		_game->pushState(new SoldierInfoState(_base, _sel, true, true));
+		game.pushState(new SoldierInfoState(_base, _sel, true, true));
 	}
 }
 

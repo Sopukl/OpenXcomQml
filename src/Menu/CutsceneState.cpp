@@ -50,19 +50,19 @@ void CutsceneState::init()
 	State::init();
 
 	// pop self off stack and replace with actual player state
-	_game->popState();
+	game.popState();
 
-	const RuleVideo *videoRule = _game->getMod()->getVideo(_cutsceneId, true);
-	if (_game->savedGame() && _game->savedGame()->getEnding() != END_NONE)
+	const RuleVideo *videoRule = game.getMod()->getVideo(_cutsceneId, true);
+	if (game.savedGame() && game.savedGame()->getEnding() != END_NONE)
 	{
-		if (_game->savedGame()->getMonthsPassed() > -1)
+		if (game.savedGame()->getMonthsPassed() > -1)
 		{
-			_game->setState(new StatisticsState);
+			game.setState(new StatisticsState);
 		}
 		else
 		{
-			_game->setSavedGame(0);
-			_game->setState(new GoToMainMenuState);
+			game.setSavedGame(0);
+			game.setState(new GoToMainMenuState);
 		}
 	}
 
@@ -78,11 +78,11 @@ void CutsceneState::init()
 
 	if (fmv && (!slide || options1.preferredVideo() == Options1::VIDEO_FMV))
 	{
-		_game->pushState(new VideoState(videoRule->getVideos(), videoRule->getAudioTracks(), videoRule->useUfoAudioSequence()));
+		game.pushState(new VideoState(videoRule->getVideos(), videoRule->getAudioTracks(), videoRule->useUfoAudioSequence()));
 	}
 	else if (slide && (!fmv || options1.preferredVideo() == Options1::VIDEO_SLIDE))
 	{
-		_game->pushState(new SlideshowState(videoRule->getSlideshowHeader(), videoRule->getSlides()));
+		game.pushState(new SlideshowState(videoRule->getSlideshowHeader(), videoRule->getSlides()));
 	}
 	else
 	{
@@ -96,7 +96,7 @@ bool CutsceneState::initDisplay()
 	options1.setkeepAspectRatio(true);
 	options1.baseXResolution = Screen::ORIGINAL_WIDTH;
 	options1.baseYResolution = Screen::ORIGINAL_HEIGHT;
-	_game->getScreen()->resetDisplay(false);
+	game.getScreen()->resetDisplay(false);
 	return letterboxed;
 }
 
@@ -104,7 +104,7 @@ void CutsceneState::resetDisplay(bool wasLetterboxed)
 {
 	options1.setkeepAspectRatio(wasLetterboxed);
 	Screen::updateScale(options1.geoscapeScale(), options1.baseXGeoscape, options1.baseYGeoscape, true);
-	_game->getScreen()->resetDisplay(false);
+	game.getScreen()->resetDisplay(false);
 }
 
 }

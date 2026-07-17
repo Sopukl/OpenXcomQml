@@ -49,12 +49,12 @@ AlienInventoryState::AlienInventoryState(BattleUnit *unit)
 	{
 		options1.baseXResolution = Screen::ORIGINAL_WIDTH;
 		options1.baseYResolution = Screen::ORIGINAL_HEIGHT;
-		_game->getScreen()->resetDisplay(false);
+		game.getScreen()->resetDisplay(false);
 	}
 
 	// Create objects
 	_bg = new Surface(320, 200, 0, 0);
-	int offsetX = _game->getMod()->getAlienInventoryOffsetX();
+	int offsetX = game.getMod()->getAlienInventoryOffsetX();
 	_soldier = new Surface(320 - offsetX, 200, offsetX, 0);
 	_txtName = new Text(308, 17, 6, 6);
 	_txtFatalWounds = new Text(100, 48, 6, 32);
@@ -78,10 +78,10 @@ AlienInventoryState::AlienInventoryState(BattleUnit *unit)
 	centerAllSurfaces();
 
 	// Set up objects
-	Surface *tmp = _game->getMod()->getSurface("AlienInventory2", false);
+	Surface *tmp = game.getMod()->getSurface("AlienInventory2", false);
 	if (!tmp || !unit->getGeoscapeSoldier())
 	{
-		tmp = _game->getMod()->getSurface("AlienInventory", false);
+		tmp = game.getMod()->getSurface("AlienInventory", false);
 	}
 	if (tmp)
 	{
@@ -113,7 +113,7 @@ AlienInventoryState::AlienInventoryState(BattleUnit *unit)
 	{
 		if (unit->getUnitRules())
 		{
-			if (unit->getUnitRules()->getShowFullNameInAlienInventory(_game->getMod()))
+			if (unit->getUnitRules()->getShowFullNameInAlienInventory(game.getMod()))
 			{
 				// e.g. Sectoid Leader
 				_txtName->setText(unit->getName());
@@ -156,7 +156,7 @@ AlienInventoryState::AlienInventoryState(BattleUnit *unit)
 		{
 			for (const auto& layer : s->getArmorLayers())
 			{
-				auto* surf = _game->getMod()->getSurface(layer, true);
+				auto* surf = game.getMod()->getSurface(layer, true);
 				surf->blitNShade(_soldier->getSurface(), 0, 0);
 			}
 		}
@@ -174,7 +174,7 @@ AlienInventoryState::AlienInventoryState(BattleUnit *unit)
 				ss << gender;
 				ss << (int)s->getLook() + (s->getLookVariant() & (RuleSoldier::LookVariantMask >> i)) * 4;
 				ss << ".SPK";
-				surf = _game->getMod()->getSurface(ss.str(), false);
+				surf = game.getMod()->getSurface(ss.str(), false);
 				if (surf)
 				{
 					break;
@@ -185,25 +185,25 @@ AlienInventoryState::AlienInventoryState(BattleUnit *unit)
 				ss.str("");
 				ss << look;
 				ss << ".SPK";
-				surf = _game->getMod()->getSurface(ss.str(), false);
+				surf = game.getMod()->getSurface(ss.str(), false);
 			}
 			if (!surf)
 			{
-				surf = _game->getMod()->getSurface(look, true);
+				surf = game.getMod()->getSurface(look, true);
 			}
 			surf->blitNShade(_soldier, 0, 0);
 		}
 	}
 	else
 	{
-		Surface *armorSurface = _game->getMod()->getSurface(unit->getArmor()->getSpriteInventory(), false);
+		Surface *armorSurface = game.getMod()->getSurface(unit->getArmor()->getSpriteInventory(), false);
 		if (!armorSurface)
 		{
-			armorSurface = _game->getMod()->getSurface(unit->getArmor()->getSpriteInventory() + ".SPK", false);
+			armorSurface = game.getMod()->getSurface(unit->getArmor()->getSpriteInventory() + ".SPK", false);
 		}
 		if (!armorSurface)
 		{
-			armorSurface = _game->getMod()->getSurface(unit->getArmor()->getSpriteInventory() + "M0.SPK", false);
+			armorSurface = game.getMod()->getSurface(unit->getArmor()->getSpriteInventory() + "M0.SPK", false);
 		}
 		if (armorSurface)
 		{
@@ -215,12 +215,12 @@ AlienInventoryState::AlienInventoryState(BattleUnit *unit)
 	_inv->draw();
 
 	// Bleeding indicator
-	tmp = _game->getMod()->getSurface("BigWoundIndicator", false);
+	tmp = game.getMod()->getSurface("BigWoundIndicator", false);
 	if (tmp && unit->getFatalWounds() > 0 && unit->indicatorsAreEnabled())
 	{
 		tmp->blitNShade(_soldier, 32, 32);
 
-		const Element* element = _game->getMod()->getInterface("inventory")->getElementOptional("textName");
+		const Element* element = game.getMod()->getInterface("inventory")->getElementOptional("textName");
 		if (element && element->custom == 0)
 		{
 			// fatally wounded body parts
@@ -229,7 +229,7 @@ AlienInventoryState::AlienInventoryState(BattleUnit *unit)
 			{
 				if (unit->getFatalWound((UnitBodyPart)i))
 				{
-					ss << _game->getLanguage()->getString(PARTS_STRING[i]);
+					ss << game.getLanguage()->getString(PARTS_STRING[i]);
 					ss << "\n";
 				}
 			}
@@ -238,7 +238,7 @@ AlienInventoryState::AlienInventoryState(BattleUnit *unit)
 	}
 
 	// Burning indicator
-	tmp = _game->getMod()->getSurface("BigBurnIndicator", false);
+	tmp = game.getMod()->getSurface("BigBurnIndicator", false);
 	if (tmp && unit->getFire() > 0 && unit->indicatorsAreEnabled())
 	{
 		tmp->blitNShade(_soldier, 112, 32);
@@ -309,7 +309,7 @@ AlienInventoryState::~AlienInventoryState()
 	if (options1.maximizeInfoScreens())
 	{
 		Screen::updateScale(options1.battlescapeScale(), options1.baseXBattlescape, options1.baseYBattlescape, true);
-		_game->getScreen()->resetDisplay(false);
+		game.getScreen()->resetDisplay(false);
 	}
 }
 
@@ -317,7 +317,7 @@ void AlienInventoryState::calculateMeleeWeapon(BattleUnit* unit, BattleItem* wea
 {
 	std::ostringstream ss;
 
-	TileEngine* tileEngine = _game->savedGame()->getSavedBattle()->getTileEngine();
+	TileEngine* tileEngine = game.savedGame()->getSavedBattle()->getTileEngine();
 
 	// Start by finding the target for the check
 	int surroundingTilePositions[8][2] = {
@@ -335,9 +335,9 @@ void AlienInventoryState::calculateMeleeWeapon(BattleUnit* unit, BattleItem* wea
 	tileToCheck.x += surroundingTilePositions[dir][0];
 	tileToCheck.y += surroundingTilePositions[dir][1];
 	BattleUnit* meleeDodgeTarget = nullptr;
-	if (_game->savedGame()->getSavedBattle()->getTile(tileToCheck)) // Make sure the tile is in bounds
+	if (game.savedGame()->getSavedBattle()->getTile(tileToCheck)) // Make sure the tile is in bounds
 	{
-		meleeDodgeTarget = _game->savedGame()->getSavedBattle()->selectUnit(tileToCheck);
+		meleeDodgeTarget = game.savedGame()->getSavedBattle()->selectUnit(tileToCheck);
 	}
 
 	ss << ltr(weapon->getRules()->getType()) << " > ";
@@ -349,7 +349,7 @@ void AlienInventoryState::calculateMeleeWeapon(BattleUnit* unit, BattleItem* wea
 		attack.weapon_item = weapon;
 		attack.damage_item = weapon;
 		attack.skill_rules = nullptr;
-		int hitChance = BattleUnit::getFiringAccuracy(attack, _game->getMod());
+		int hitChance = BattleUnit::getFiringAccuracy(attack, game.getMod());
 
 		BattleUnit* victim = meleeDodgeTarget;
 		if (victim)
@@ -375,7 +375,7 @@ void AlienInventoryState::calculateRangedWeapon(BattleUnit* unit, BattleItem* we
 {
 	std::ostringstream ss;
 
-	TileEngine* tileEngine = _game->savedGame()->getSavedBattle()->getTileEngine();
+	TileEngine* tileEngine = game.savedGame()->getSavedBattle()->getTileEngine();
 
 	// Start by finding 'targets' for the check
 	std::vector<BattleUnit*> closeQuartersTargetList;
@@ -395,15 +395,15 @@ void AlienInventoryState::calculateRangedWeapon(BattleUnit* unit, BattleItem* we
 		tileToCheck.x += surroundingTilePositions[dir][0];
 		tileToCheck.y += surroundingTilePositions[dir][1];
 
-		if (_game->savedGame()->getSavedBattle()->getTile(tileToCheck)) // Make sure the tile is in bounds
+		if (game.savedGame()->getSavedBattle()->getTile(tileToCheck)) // Make sure the tile is in bounds
 		{
-			BattleUnit* closeQuartersTarget = _game->savedGame()->getSavedBattle()->selectUnit(tileToCheck);
+			BattleUnit* closeQuartersTarget = game.savedGame()->getSavedBattle()->selectUnit(tileToCheck);
 			// Variable for LOS check
 			int checkDirection = tileEngine->getDirectionTo(tileToCheck, unit->getPosition());
 			if (closeQuartersTarget && unit->getFaction() != closeQuartersTarget->getFaction() // Unit must exist and not be same faction
 				&& closeQuartersTarget->getArmor()->getCreatesMeleeThreat() // Unit must be valid defender, 2x2 default false here
-				&& closeQuartersTarget->getTimeUnits() >= _game->getMod()->getCloseQuartersTuCostGlobal() // Unit must have enough TUs
-				&& closeQuartersTarget->getEnergy() >= _game->getMod()->getCloseQuartersEnergyCostGlobal() // Unit must have enough Energy
+				&& closeQuartersTarget->getTimeUnits() >= game.getMod()->getCloseQuartersTuCostGlobal() // Unit must have enough TUs
+				&& closeQuartersTarget->getEnergy() >= game.getMod()->getCloseQuartersEnergyCostGlobal() // Unit must have enough Energy
 				&& tileEngine->validMeleeRange(closeQuartersTarget, unit, checkDirection) // Unit must be able to see the unit attempting to fire
 				&& !(unit->getFaction() == FACTION_PLAYER && closeQuartersTarget->getFaction() == FACTION_NEUTRAL) // Civilians don't inhibit player
 				&& !(unit->getFaction() == FACTION_NEUTRAL && closeQuartersTarget->getFaction() == FACTION_PLAYER)) // Player doesn't inhibit civilians
@@ -425,7 +425,7 @@ void AlienInventoryState::calculateRangedWeapon(BattleUnit* unit, BattleItem* we
 				attack.weapon_item = weapon;
 				attack.damage_item = weapon;
 				attack.skill_rules = nullptr;
-				int hitChance = BattleUnit::getFiringAccuracy(attack, _game->getMod());
+				int hitChance = BattleUnit::getFiringAccuracy(attack, game.getMod());
 
 				if (victim)
 				{
@@ -450,7 +450,7 @@ void AlienInventoryState::calculateRangedWeapon(BattleUnit* unit, BattleItem* we
  */
 void AlienInventoryState::btnOkClick(Action *)
 {
-	_game->popState();
+	game.popState();
 }
 
 /**

@@ -89,7 +89,7 @@ TrainingFinishedState::TrainingFinishedState(Base *base, const std::vector<Soldi
  */
 void TrainingFinishedState::btnOkClick(Action *)
 {
-	_game->popState();
+	game.popState();
 }
 
 /**
@@ -98,14 +98,14 @@ void TrainingFinishedState::btnOkClick(Action *)
  */
 void TrainingFinishedState::btnOpenClick(Action *)
 {
-	_game->popState();
+	game.popState();
 	if (_psi)
 	{
-		_game->pushState(new AllocatePsiTrainingState(_base));
+		game.pushState(new AllocatePsiTrainingState(_base));
 	}
 	else
 	{
-		_game->pushState(new AllocateTrainingState(_base));
+		game.pushState(new AllocateTrainingState(_base));
 	}
 }
 

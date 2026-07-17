@@ -39,13 +39,13 @@ namespace OpenXcom
 
 	ArticleStateArmor::ArticleStateArmor(ArticleDefinitionArmor *defs, std::shared_ptr<ArticleCommonState> state) : ArticleState(defs->id, std::move(state)), _row(0)
 	{
-		Armor *armor = _game->getMod()->getArmor(defs->id, true);
+		Armor *armor = game.getMod()->getArmor(defs->id, true);
 
 		// add screen elements
 		_txtTitle = new Text(300, 17, 5, 24);
 
 		// Set palette
-		Surface* customArmorSprite = defs->image_id.empty() ? nullptr : _game->getMod()->getSurface(defs->image_id, true);
+		Surface* customArmorSprite = defs->image_id.empty() ? nullptr : game.getMod()->getSurface(defs->image_id, true);
 		if (defs->customPalette && customArmorSprite)
 		{
 			setCustomPalette(customArmorSprite->getPalette(), Mod::BATTLESCAPE_CURSOR);
@@ -55,7 +55,7 @@ namespace OpenXcom
 			setStandardPalette("PAL_BATTLEPEDIA");
 		}
 
-		RuleInterface* itf = _game->getMod()->getInterface("articleArmor");
+		RuleInterface* itf = game.getMod()->getInterface("articleArmor");
 		_buttonColor = itf->getElement("button")->color;
 		_textColor = itf->getElement("text")->color;
 		_textColor2 = itf->getElement("text")->color2;
@@ -72,7 +72,7 @@ namespace OpenXcom
 		_btnPrev->setColor(_buttonColor);
 		_btnNext->setColor(_buttonColor);
 		_btnInfo->setColor(_buttonColor);
-		_btnInfo->setVisible(_game->getMod()->getShowPediaInfoButton());
+		_btnInfo->setVisible(game.getMod()->getShowPediaInfoButton());
 
 		_txtTitle->setColor(_textColor);
 		_txtTitle->setBig();
@@ -81,10 +81,10 @@ namespace OpenXcom
 		// optional background image
 		if (!defs->customPalette)
 		{
-			auto& bgImageName = itf->getBackgroundImage(_game->getMod(), _game->savedGame());
+			auto& bgImageName = itf->getBackgroundImage(game.getMod(), game.savedGame());
 			if (!bgImageName.empty())
 			{
-				_game->getMod()->getSurface(bgImageName)->blitNShade(_bg, 0, 0);
+				game.getMod()->getSurface(bgImageName)->blitNShade(_bg, 0, 0);
 			}
 		}
 
@@ -96,14 +96,14 @@ namespace OpenXcom
 		else if (armor->hasLayersDefinition())
 		{
 			// dummy default soldier (M0)
-			Soldier *s = new Soldier(_game->getMod()->getSoldier(_game->getMod()->getSoldiersList().front(), true), armor, 0 /*nationality*/, 0 /*id*/);
+			Soldier *s = new Soldier(game.getMod()->getSoldier(game.getMod()->getSoldiersList().front(), true), armor, 0 /*nationality*/, 0 /*id*/);
 			s->setGender(GENDER_MALE);
 			s->setLook(LOOK_BLONDE);
 			s->setLookVariant(0);
 
 			for (const auto& layer : s->getArmorLayers())
 			{
-				auto* surf = _game->getMod()->getSurface(layer, true);
+				auto* surf = game.getMod()->getSurface(layer, true);
 				surf->blitNShade(_bg, 0, 0);
 			}
 			delete s;
@@ -113,15 +113,15 @@ namespace OpenXcom
 		{
 			std::string look = armor->getSpriteInventory();
 			look += "M0.SPK";
-			if (!_game->getMod()->getSurface(look, false))
+			if (!game.getMod()->getSurface(look, false))
 			{
 				look = armor->getSpriteInventory() + ".SPK";
 			}
-			if (!_game->getMod()->getSurface(look, false))
+			if (!game.getMod()->getSurface(look, false))
 			{
 				look = armor->getSpriteInventory();
 			}
-			_game->getMod()->getSurface(look, true)->blitNShade(_bg, 0, 0);
+			game.getMod()->getSurface(look, true)->blitNShade(_bg, 0, 0);
 		}
 
 

@@ -148,63 +148,63 @@ ExtendedGeoscapeLinksState::ExtendedGeoscapeLinksState(GeoscapeState* parent) : 
 
 void ExtendedGeoscapeLinksState::btnFundingClick(Action *)
 {
-	_game->popState();
-	//_game->pushState(new FundingState);
+	game.popState();
+	//game.pushState(new FundingState);
 	game.openPopupWindow("/OpenXcom/Geoscape/Funding.qml");
 }
 
 void ExtendedGeoscapeLinksState::btnTechTreeClick(Action *)
 {
-	_game->popState();
+	game.popState();
 	_parent->btnTechTreeViewerClick(nullptr);
 }
 
 void ExtendedGeoscapeLinksState::btnGlobalResearchClick(Action *)
 {
-	_game->popState();
+	game.popState();
 	_parent->btnGlobalResearchClick(nullptr);
 }
 
 void ExtendedGeoscapeLinksState::btnGlobalProductionClick(Action *)
 {
-	_game->popState();
+	game.popState();
 	_parent->btnGlobalProductionClick(nullptr);
 }
 
 void ExtendedGeoscapeLinksState::btnUfoTrackerClick(Action *)
 {
-	_game->popState();
+	game.popState();
 	_parent->btnUfoTrackerClick(nullptr);
 }
 
 void ExtendedGeoscapeLinksState::btnPilotExpClick(Action *)
 {
-	_game->popState();
+	game.popState();
 	_parent->btnDogfightExperienceClick(nullptr);
 }
 
 void ExtendedGeoscapeLinksState::btnNotesClick(Action *)
 {
-	_game->popState();
-	_game->pushState(new NotesState(OPT_GEOSCAPE));
+	game.popState();
+	game.pushState(new NotesState(OPT_GEOSCAPE));
 }
 
 void ExtendedGeoscapeLinksState::btnMusicClick(Action *)
 {
-	_game->popState();
+	game.popState();
 	_parent->btnSelectMusicTrackClick(nullptr);
 }
 
 void ExtendedGeoscapeLinksState::btnTestClick(Action *)
 {
-	_game->popState();
+	game.popState();
 	if (options1.debug())
 	{
 		_parent->btnDebugClick(nullptr);
 	}
 	else
 	{
-		_game->pushState(new TestState);
+		game.pushState(new TestState);
 	}
 }
 
@@ -214,7 +214,7 @@ void ExtendedGeoscapeLinksState::btnTestClick(Action *)
  */
 void ExtendedGeoscapeLinksState::btnOkClick(Action *)
 {
-	_game->popState();
+	game.popState();
 }
 
 }

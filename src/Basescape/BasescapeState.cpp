@@ -115,29 +115,29 @@ BasescapeState::BasescapeState(Base *base, Globe *globe) : _base(base), _globe(g
 	// Set up objects
 	if (_globe)
 	{
-		for (auto* xbase : _game->savedGame()->bases())
+		for (auto* xbase : game.savedGame()->bases())
 		{
 			int texture, shade;
 			_globe->getPolygonTextureAndShade(xbase->getLongitude(), xbase->getLatitude(), &texture, &shade);
-			auto* globeTexture = _game->getMod()->getGlobe()->getTexture(texture);
+			auto* globeTexture = game.getMod()->getGlobe()->getTexture(texture);
 			xbase->setGlobeTexture(globeTexture);
 		}
 	}
 
-	auto* itf = _game->getMod()->getInterface("basescape")->getElementOptional("trafficLights");
+	auto* itf = game.getMod()->getInterface("basescape")->getElementOptional("trafficLights");
 	if (itf)
 	{
 		_view->setOtherColors(itf->color, itf->color2, itf->border, !itf->TFTDMode);
 	}
-	_view->setTexture(_game->getMod()->getSurfaceSet("BASEBITS.PCK"));
+	_view->setTexture(game.getMod()->getSurfaceSet("BASEBITS.PCK"));
 	_view->onMouseClick((ActionHandler)&BasescapeState::viewLeftClick, SDL_BUTTON_LEFT);
 	_view->onMouseClick((ActionHandler)&BasescapeState::viewRightClick, SDL_BUTTON_RIGHT);
 	_view->onMouseClick((ActionHandler)&BasescapeState::viewMiddleClick, SDL_BUTTON_MIDDLE);
 	_view->onMouseOver((ActionHandler)&BasescapeState::viewMouseOver);
 	_view->onMouseOut((ActionHandler)&BasescapeState::viewMouseOut);
 
-	_mini->setTexture(_game->getMod()->getSurfaceSet("BASEBITS.PCK"));
-	_mini->setBases(&_game->savedGame()->bases());
+	_mini->setTexture(game.getMod()->getSurfaceSet("BASEBITS.PCK"));
+	_mini->setBases(&game.savedGame()->bases());
 	_mini->onMouseClick((ActionHandler)&BasescapeState::miniLeftClick, SDL_BUTTON_LEFT);
 	_mini->onMouseClick((ActionHandler)&BasescapeState::miniRightClick, SDL_BUTTON_RIGHT);
 	_mini->onKeyboardPress((ActionHandler)&BasescapeState::handleKeyPress);
@@ -197,7 +197,7 @@ BasescapeState::~BasescapeState()
 {
 	// Clean up any temporary bases
 	bool exists = false;
-	for (const auto* xbase : _game->savedGame()->bases())
+	for (const auto* xbase : game.savedGame()->bases())
 	{
 		if (xbase == _base)
 		{
@@ -225,7 +225,7 @@ void BasescapeState::init()
 	_edtBase->setText(_base->getName());
 
 	// Get area
-	for (const auto* region : _game->savedGame()->getRegions())
+	for (const auto* region : game.savedGame()->getRegions())
 	{
 		if (region->getRules()->insideRegion(_base->getLongitude(), _base->getLatitude()))
 		{
@@ -234,13 +234,13 @@ void BasescapeState::init()
 		}
 	}
 
-	_txtFunds->setText(ltr("STR_FUNDS").arg(Unicode::formatFunding(_game->savedGame()->getFunds())));
+	_txtFunds->setText(ltr("STR_FUNDS").arg(Unicode::formatFunding(game.savedGame()->getFunds())));
 
-	_btnNewBase->setVisible(_game->savedGame()->bases().size() < MiniBaseView::MAX_BASES);
+	_btnNewBase->setVisible(game.savedGame()->bases().size() < MiniBaseView::MAX_BASES);
 
-	if (!_game->getMod()->getNewBaseUnlockResearch().empty())
+	if (!game.getMod()->getNewBaseUnlockResearch().empty())
 	{
-		bool newBasesUnlocked = _game->savedGame()->isResearched(_game->getMod()->getNewBaseUnlockResearch(), true);
+		bool newBasesUnlocked = game.savedGame()->isResearched(game.getMod()->getNewBaseUnlockResearch(), true);
 		if (!newBasesUnlocked)
 		{
 			_btnNewBase->setVisible(false);
@@ -254,17 +254,17 @@ void BasescapeState::init()
  */
 void BasescapeState::setBase(Base *base)
 {
-	if (!_game->savedGame()->bases().empty())
+	if (!game.savedGame()->bases().empty())
 	{
 		// Check if base still exists
 		bool exists = false;
-		for (size_t i = 0; i < _game->savedGame()->bases().size(); ++i)
+		for (size_t i = 0; i < game.savedGame()->bases().size(); ++i)
 		{
-			if (_game->savedGame()->bases().at(i) == base)
+			if (game.savedGame()->bases().at(i) == base)
 			{
 				_base = base;
 				_mini->setSelectedBase(i);
-				_game->savedGame()->setSelectedBase(i);
+				game.savedGame()->setSelectedBase(i);
 				exists = true;
 				break;
 			}
@@ -272,17 +272,17 @@ void BasescapeState::setBase(Base *base)
 		// If base was removed, select first one
 		if (!exists)
 		{
-			_base = _game->savedGame()->bases().front();
+			_base = game.savedGame()->bases().front();
 			_mini->setSelectedBase(0);
-			_game->savedGame()->setSelectedBase(0);
+			game.savedGame()->setSelectedBase(0);
 		}
 	}
 	else
 	{
 		// Use a blank base for special case when player has no bases
-		_base = new Base(_game->getMod());
+		_base = new Base(game.getMod());
 		_mini->setSelectedBase(0);
-		_game->savedGame()->setSelectedBase(0);
+		game.savedGame()->setSelectedBase(0);
 	}
 }
 
@@ -292,10 +292,10 @@ void BasescapeState::setBase(Base *base)
  */
 void BasescapeState::btnNewBaseClick(Action *)
 {
-	auto base = new Base(_game->getMod());
-	_game->popState();
-	//Q_EMIT _game->createNewBase(game.getGeoscapeState(), base, false);
-	_game->pushState(new BuildNewBaseState(base, _globe, false));
+	auto base = new Base(game.getMod());
+	game.popState();
+	//Q_EMIT game.createNewBase(game.getGeoscapeState(), base, false);
+	game.pushState(new BuildNewBaseState(base, _globe, false));
 }
 
 /**
@@ -304,7 +304,7 @@ void BasescapeState::btnNewBaseClick(Action *)
  */
 void BasescapeState::btnBaseInfoClick(Action *)
 {
-	_game->pushState(new BaseInfoState(_base, this));
+	game.pushState(new BaseInfoState(_base, this));
 }
 
 /**
@@ -313,7 +313,7 @@ void BasescapeState::btnBaseInfoClick(Action *)
  */
 void BasescapeState::btnSoldiersClick(Action *)
 {
-	_game->pushState(new SoldiersState(_base));
+	game.pushState(new SoldiersState(_base));
 }
 
 /**
@@ -322,7 +322,7 @@ void BasescapeState::btnSoldiersClick(Action *)
  */
 void BasescapeState::btnCraftsClick(Action *)
 {
-	_game->pushState(new CraftsState(_base));
+	game.pushState(new CraftsState(_base));
 }
 
 /**
@@ -331,7 +331,7 @@ void BasescapeState::btnCraftsClick(Action *)
  */
 void BasescapeState::btnFacilitiesClick(Action *)
 {
-	_game->pushState(new BuildFacilitiesState(_base, this));
+	game.pushState(new BuildFacilitiesState(_base, this));
 }
 
 /**
@@ -340,7 +340,7 @@ void BasescapeState::btnFacilitiesClick(Action *)
  */
 void BasescapeState::btnResearchClick(Action *)
 {
-	_game->pushState(new ResearchState(_base));
+	game.pushState(new ResearchState(_base));
 }
 
 /**
@@ -349,7 +349,7 @@ void BasescapeState::btnResearchClick(Action *)
  */
 void BasescapeState::btnManufactureClick(Action *)
 {
-	_game->pushState(new ManufactureState(_base));
+	game.pushState(new ManufactureState(_base));
 }
 
 /**
@@ -358,7 +358,7 @@ void BasescapeState::btnManufactureClick(Action *)
  */
 void BasescapeState::btnPurchaseClick(Action *)
 {
-	_game->pushState(new PurchaseState(_base));
+	game.pushState(new PurchaseState(_base));
 }
 
 /**
@@ -367,7 +367,7 @@ void BasescapeState::btnPurchaseClick(Action *)
  */
 void BasescapeState::btnSellClick(Action *)
 {
-	//_game->pushState(new SellState(_base, 0));
+	//game.pushState(new SellState(_base, 0));
 	game.openPopupWindow("/OpenXcom/Basescape/Sell.qml", {{"base", QVariant::fromValue(_base)}});
 }
 
@@ -377,7 +377,7 @@ void BasescapeState::btnSellClick(Action *)
  */
 void BasescapeState::btnTransferClick(Action *)
 {
-	_game->pushState(new TransferBaseState(_base, nullptr));
+	game.pushState(new TransferBaseState(_base, nullptr));
 }
 
 /**
@@ -386,7 +386,7 @@ void BasescapeState::btnTransferClick(Action *)
  */
 void BasescapeState::btnGeoscapeClick(Action *)
 {
-	_game->popState();
+	game.popState();
 }
 
 /**
@@ -398,10 +398,10 @@ void BasescapeState::viewLeftClick(Action *)
 	BaseFacility *fac = _view->getSelectedFacility();
 	if (fac != 0)
 	{
-		if (_game->isCtrlPressed() && Options::isPasswordCorrect())
+		if (game.isCtrlPressed() && Options::isPasswordCorrect())
 		{
 			// Ctrl + left click on a base facility allows moving it
-			_game->pushState(new PlaceFacilityState(_base, fac->getRules(), fac));
+			game.pushState(new PlaceFacilityState(_base, fac->getRules(), fac));
 		}
 		else
 		{
@@ -412,68 +412,68 @@ void BasescapeState::viewLeftClick(Action *)
 				{
 					int texture, shade;
 					_globe->getPolygonTextureAndShade(_base->getLongitude(), _base->getLatitude(), &texture, &shade);
-					auto* globeTexture = _game->getMod()->getGlobe()->getTexture(texture);
+					auto* globeTexture = game.getMod()->getGlobe()->getTexture(texture);
 
-					auto bgame = new SavedBattleGame(_game->getMod(), true);
-					_game->savedGame()->setBattleGame(bgame);
+					auto bgame = new SavedBattleGame(game.getMod(), true);
+					game.savedGame()->setBattleGame(bgame);
 					BattlescapeGenerator bgen = BattlescapeGenerator();
 					bgame->setMissionType("STR_BASE_DEFENSE");
 					bgen.setBase(_base);
 					bgen.setWorldTexture(globeTexture, globeTexture);
 					bgen.run();
 
-					_game->pushState(new BriefingState(0, _base));
+					game.pushState(new BriefingState(0, _base));
 				}
 				return;
 			}
-			int errorColor1 = _game->getMod()->getInterface("basescape")->getElement("errorMessage")->color;
-			int errorColor2 = _game->getMod()->getInterface("basescape")->getElement("errorPalette")->color;
+			int errorColor1 = game.getMod()->getInterface("basescape")->getElement("errorMessage")->color;
+			int errorColor2 = game.getMod()->getInterface("basescape")->getElement("errorPalette")->color;
 			// Is facility in use?
 			if (BasePlacementErrors placementErrorCode = fac->inUse())
 			{
 				switch (placementErrorCode)
 				{
 				case BPE_Used_Stores:
-					_game->pushState(new ErrorMessageState(ltr("STR_FACILITY_IN_USE_STORAGE"), _palette, errorColor1, "BACK13.SCR", errorColor2));
+					game.pushState(new ErrorMessageState(ltr("STR_FACILITY_IN_USE_STORAGE"), _palette, errorColor1, "BACK13.SCR", errorColor2));
 					break;
 				case BPE_Used_Quarters:
-					_game->pushState(new ErrorMessageState(ltr("STR_FACILITY_IN_USE_QUARTERS"), _palette, errorColor1, "BACK13.SCR", errorColor2));
+					game.pushState(new ErrorMessageState(ltr("STR_FACILITY_IN_USE_QUARTERS"), _palette, errorColor1, "BACK13.SCR", errorColor2));
 					break;
 				case BPE_Used_Laboratories:
-					_game->pushState(new ErrorMessageState(ltr("STR_FACILITY_IN_USE_LABORATORIES"), _palette, errorColor1, "BACK13.SCR", errorColor2));
+					game.pushState(new ErrorMessageState(ltr("STR_FACILITY_IN_USE_LABORATORIES"), _palette, errorColor1, "BACK13.SCR", errorColor2));
 					break;
 				case BPE_Used_Workshops:
-					_game->pushState(new ErrorMessageState(ltr("STR_FACILITY_IN_USE_WORKSHOPS"), _palette, errorColor1, "BACK13.SCR", errorColor2));
+					game.pushState(new ErrorMessageState(ltr("STR_FACILITY_IN_USE_WORKSHOPS"), _palette, errorColor1, "BACK13.SCR", errorColor2));
 					break;
 				case BPE_Used_Hangars:
-					_game->pushState(new ErrorMessageState(ltr("STR_FACILITY_IN_USE_HANGARS"), _palette, errorColor1, "BACK13.SCR", errorColor2));
+					game.pushState(new ErrorMessageState(ltr("STR_FACILITY_IN_USE_HANGARS"), _palette, errorColor1, "BACK13.SCR", errorColor2));
 					break;
 				case BPE_Used_PsiLabs:
-					_game->pushState(new ErrorMessageState(ltr("STR_FACILITY_IN_USE_PSI_LABS"), _palette, errorColor1, "BACK13.SCR", errorColor2));
+					game.pushState(new ErrorMessageState(ltr("STR_FACILITY_IN_USE_PSI_LABS"), _palette, errorColor1, "BACK13.SCR", errorColor2));
 					break;
 				case BPE_Used_Gyms:
-					_game->pushState(new ErrorMessageState(ltr("STR_FACILITY_IN_USE_GYMS"), _palette, errorColor1, "BACK13.SCR", errorColor2));
+					game.pushState(new ErrorMessageState(ltr("STR_FACILITY_IN_USE_GYMS"), _palette, errorColor1, "BACK13.SCR", errorColor2));
 					break;
 				case BPE_Used_AlienContainment:
-					_game->pushState(new ErrorMessageState(ltr("STR_FACILITY_IN_USE_PRISONS"), _palette, errorColor1, "BACK13.SCR", errorColor2));
+					game.pushState(new ErrorMessageState(ltr("STR_FACILITY_IN_USE_PRISONS"), _palette, errorColor1, "BACK13.SCR", errorColor2));
 					break;
 				default:
-					_game->pushState(new ErrorMessageState(ltr("STR_FACILITY_IN_USE"), _palette, errorColor1, "BACK13.SCR", errorColor2));
+					game.pushState(new ErrorMessageState(ltr("STR_FACILITY_IN_USE"), _palette, errorColor1, "BACK13.SCR", errorColor2));
 				}
 			}
 			// Would base become disconnected?
 			else if (!_base->getDisconnectedFacilities(fac).empty() && fac->getRules()->getLeavesBehindOnSell().size() == 0)
 			{
-				_game->pushState(new ErrorMessageState(ltr("STR_CANNOT_DISMANTLE_FACILITY"), _palette, errorColor1, "BACK13.SCR", errorColor2));
+				game.pushState(new ErrorMessageState(ltr("STR_CANNOT_DISMANTLE_FACILITY"), _palette, errorColor1, "BACK13.SCR", errorColor2));
 			}
 			// Is this facility being built from a dismantled one or building over a previous building?
 			else if (fac->getBuildTime() > 0 && fac->getIfHadPreviousFacility())
 			{
-				_game->pushState(new ErrorMessageState(ltr("STR_CANNOT_DISMANTLE_FACILITY_UPGRADING"), _palette, errorColor1, "BACK13.SCR", errorColor2));
+				game.pushState(new ErrorMessageState(ltr("STR_CANNOT_DISMANTLE_FACILITY_UPGRADING"), _palette, errorColor1, "BACK13.SCR", errorColor2));
 			}
 			else
 			{
-				_game->pushState(new DismantleFacilityState(_base, _view, fac));
+				game.pushState(new DismantleFacilityState(_base, _view, fac));
 			}
 		}
 	}
@@ -488,20 +488,20 @@ void BasescapeState::viewRightClick(Action *)
 	BaseFacility *f = _view->getSelectedFacility();
 	if (f == 0)
 	{
-		_game->pushState(new BaseInfoState(_base, this));
+		game.pushState(new BaseInfoState(_base, this));
 	}
 	else if (f->getRules()->getRightClickActionType() != 0)
 	{
 		switch (f->getRules()->getRightClickActionType())
 		{
-			case 1: _game->pushState(new ManageAlienContainmentState(_base, f->getRules()->getPrisonType(), OPT_GEOSCAPE)); break;
-			case 2: _game->pushState(new ManufactureState(_base)); break;
-			case 3: _game->pushState(new ResearchState(_base)); break;
-			case 4: _game->pushState(new AllocateTrainingState(_base)); break;
-			case 5: if (options1.anytimePsiTraining()) _game->pushState(new AllocatePsiTrainingState(_base)); break;
-			case 6: _game->pushState(new SoldiersState(_base)); break;
-			case 7: _game->pushState(new SellState(_base, 0)); break;
-			default: _game->popState(); break;
+			case 1: game.pushState(new ManageAlienContainmentState(_base, f->getRules()->getPrisonType(), OPT_GEOSCAPE)); break;
+			case 2: game.pushState(new ManufactureState(_base)); break;
+			case 3: game.pushState(new ResearchState(_base)); break;
+			case 4: game.pushState(new AllocateTrainingState(_base)); break;
+			case 5: if (options1.anytimePsiTraining()) game.pushState(new AllocatePsiTrainingState(_base)); break;
+			case 6: game.pushState(new SoldiersState(_base)); break;
+			case 7: game.pushState(new SellState(_base, 0)); break;
+			default: game.popState(); break;
 		}
 	}
 	else if (f->getRules()->isMindShield())
@@ -517,49 +517,49 @@ void BasescapeState::viewRightClick(Action *)
 	{
 		if (f->getCraftForDrawing() == 0)
 		{
-			_game->pushState(new CraftsState(_base));
+			game.pushState(new CraftsState(_base));
 		}
 		else
 			for (size_t craft = 0; craft < _base->crafts().size(); ++craft)
 			{
 				if (f->getCraftForDrawing() == _base->crafts().at(craft))
 				{
-					_game->pushState(new CraftInfoState(_base, craft));
+					game.pushState(new CraftInfoState(_base, craft));
 					break;
 				}
 			}
 	}
 	else if (f->getRules()->getStorage() > 0)
 	{
-		_game->pushState(new SellState(_base, 0));
+		game.pushState(new SellState(_base, 0));
 	}
 	else if (f->getRules()->getPersonnel() > 0)
 	{
-		_game->pushState(new SoldiersState(_base));
+		game.pushState(new SoldiersState(_base));
 	}
 	else if (f->getRules()->getPsiLaboratories() > 0 && options1.anytimePsiTraining() && _base->getAvailablePsiLabs() > 0)
 	{
-		_game->pushState(new AllocatePsiTrainingState(_base));
+		game.pushState(new AllocatePsiTrainingState(_base));
 	}
 	else if (f->getRules()->getTrainingFacilities() > 0 && _base->getAvailableTraining() > 0)
 	{
-		_game->pushState(new AllocateTrainingState(_base));
+		game.pushState(new AllocateTrainingState(_base));
 	}
 	else if (f->getRules()->getLaboratories() > 0)
 	{
-		_game->pushState(new ResearchState(_base));
+		game.pushState(new ResearchState(_base));
 	}
 	else if (f->getRules()->getWorkshops() > 0)
 	{
-		_game->pushState(new ManufactureState(_base));
+		game.pushState(new ManufactureState(_base));
 	}
 	else if (f->getRules()->getAliens() > 0)
 	{
-		_game->pushState(new ManageAlienContainmentState(_base, f->getRules()->getPrisonType(), OPT_GEOSCAPE));
+		game.pushState(new ManageAlienContainmentState(_base, f->getRules()->getPrisonType(), OPT_GEOSCAPE));
 	}
 	else if (f->getRules()->isLift() || f->getRules()->getRadarRange() > 0)
 	{
-		_game->popState();
+		game.popState();
 	}
 }
 
@@ -619,9 +619,9 @@ void BasescapeState::viewMouseOut(Action *)
 void BasescapeState::miniLeftClick(Action *)
 {
 	size_t base = _mini->getHoveredBase();
-	if (base < _game->savedGame()->bases().size())
+	if (base < game.savedGame()->bases().size())
 	{
-		_base = _game->savedGame()->bases().at(base);
+		_base = game.savedGame()->bases().at(base);
 		init();
 	}
 }
@@ -634,9 +634,9 @@ void BasescapeState::miniRightClick(Action *)
 {
 	size_t baseIndex = _mini->getHoveredBase();
 
-	if (baseIndex > 0 && baseIndex < _game->savedGame()->bases().size())
+	if (baseIndex > 0 && baseIndex < game.savedGame()->bases().size())
 	{
-		auto& bases = _game->savedGame()->bases();
+		auto& bases = game.savedGame()->bases();
 
 		// only able to move the currently selected base
 		if (bases[baseIndex] == _base)
@@ -666,11 +666,11 @@ void BasescapeState::handleKeyPress(Action *action)
 			options1.keyBaseSelect8()
 		};
 		int key = action->getDetails()->key.keysym.sym;
-		for (size_t i = 0; i < _game->savedGame()->bases().size(); ++i)
+		for (size_t i = 0; i < game.savedGame()->bases().size(); ++i)
 		{
 			if (key == baseKeys[i])
 			{
-				_base = _game->savedGame()->bases().at(i);
+				_base = game.savedGame()->bases().at(i);
 				init();
 				break;
 			}

@@ -35,7 +35,7 @@ namespace OpenXcom
 
 	ArticleStateCraft::ArticleStateCraft(ArticleDefinitionCraft *defs, std::shared_ptr<ArticleCommonState> state) : ArticleState(defs->id, std::move(state))
 	{
-		RuleCraft *craft = _game->getMod()->getCraft(defs->id, true);
+		RuleCraft *craft = game.getMod()->getCraft(defs->id, true);
 
 		// add screen elements
 		_txtTitle = new Text(210, 32, 5, 24);
@@ -43,7 +43,7 @@ namespace OpenXcom
 		// Set palette
 		if (defs->customPalette)
 		{
-			setCustomPalette(_game->getMod()->getSurface(defs->image_id)->getPalette(), Mod::UFOPAEDIA_CURSOR);
+			setCustomPalette(game.getMod()->getSurface(defs->image_id)->getPalette(), Mod::UFOPAEDIA_CURSOR);
 		}
 		else
 		{
@@ -56,12 +56,12 @@ namespace OpenXcom
 		add(_txtTitle);
 
 		// Set up objects
-		_game->getMod()->getSurface(defs->image_id)->blitNShade(_bg, 0, 0);
+		game.getMod()->getSurface(defs->image_id)->blitNShade(_bg, 0, 0);
 		_btnOk->setColor(Palette::blockOffset(15)-1);
 		_btnPrev->setColor(Palette::blockOffset(15)-1);
 		_btnNext->setColor(Palette::blockOffset(15)-1);
 		_btnInfo->setColor(Palette::blockOffset(15)-1);
-		_btnInfo->setVisible(_game->getMod()->getShowPediaInfoButton());
+		_btnInfo->setVisible(game.getMod()->getShowPediaInfoButton());
 
 		_txtTitle->setColor(Palette::blockOffset(14)+15);
 		_txtTitle->setBig();
@@ -87,12 +87,12 @@ namespace OpenXcom
 		ss << ltr("STR_MAXIMUM_SPEED_UC").arg(Unicode::formatNumber(craft->getMaxSpeed())) << '\n';
 		ss << ltr("STR_ACCELERATION").arg(craft->getAcceleration()) << '\n';
 		int range;
-		switch (_game->getMod()->getPediaReplaceCraftFuelWithRangeType())
+		switch (game.getMod()->getPediaReplaceCraftFuelWithRangeType())
 		{
 			// Both max range alone and average range get rounded
 			case 0:
 			case 2:
-				range = craft->calculateRange(_game->getMod()->getPediaReplaceCraftFuelWithRangeType());
+				range = craft->calculateRange(game.getMod()->getPediaReplaceCraftFuelWithRangeType());
 				if (range == -1)
 				{
 					ss << ltr("STR_MAXIMUM_RANGE").arg(ltr("STR_INFINITE_RANGE")) << '\n';

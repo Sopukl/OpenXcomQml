@@ -101,20 +101,20 @@ MonthlyCostsState::MonthlyCostsState(Base *base) : _base(base)
 	_txtSalaries->setText(ltr("STR_SALARIES"));
 
 	std::ostringstream ss;
-	ss << ltr("STR_INCOME") << "=" << Unicode::formatFunding(_game->savedGame()->getCountryFunding());
+	ss << ltr("STR_INCOME") << "=" << Unicode::formatFunding(game.savedGame()->getCountryFunding());
 	_txtIncome->setText(ss.str());
 
 	std::ostringstream ss2;
-	ss2 << ltr("STR_MAINTENANCE") << "=" << Unicode::formatFunding(_game->savedGame()->getBaseMaintenance());
+	ss2 << ltr("STR_MAINTENANCE") << "=" << Unicode::formatFunding(game.savedGame()->getBaseMaintenance());
 	_txtMaintenance->setText(ss2.str());
 
 	_lstCrafts->setColumns(4, 125, 70, 44, 50);
 	_lstCrafts->setDot(true);
 
-	for (auto& craftType : _game->getMod()->getCraftsList())
+	for (auto& craftType : game.getMod()->getCraftsList())
 	{
-		RuleCraft *craft = _game->getMod()->getCraft(craftType);
-		if (craft->getRentCost() != 0 && _game->savedGame()->isResearched(craft->getRequirements()))
+		RuleCraft *craft = game.getMod()->getCraft(craftType);
+		if (craft->getRentCost() != 0 && game.savedGame()->isResearched(craft->getRequirements()))
 		{
 			int count = _base->getCraftCount(craft);
 			if (count > 0 || craft->forceShowInMonthlyCosts())
@@ -129,12 +129,12 @@ MonthlyCostsState::MonthlyCostsState(Base *base) : _base(base)
 	_lstSalaries->setColumns(4, 125, 70, 44, 50);
 	_lstSalaries->setDot(true);
 
-	auto& soldierTypes = _game->getMod()->getSoldiersList();
+	auto& soldierTypes = game.getMod()->getSoldiersList();
 
 	bool dynamicSalaries = false;
 	for (auto& soldierType : soldierTypes)
 	{
-		if (_game->getMod()->getSoldier(soldierType)->isSalaryDynamic())
+		if (game.getMod()->getSoldier(soldierType)->isSalaryDynamic())
 		{
 			dynamicSalaries = true;
 			break;
@@ -146,8 +146,8 @@ MonthlyCostsState::MonthlyCostsState(Base *base) : _base(base)
 		// vanilla
 		for (auto& soldierType : soldierTypes)
 		{
-			RuleSoldier *soldier = _game->getMod()->getSoldier(soldierType);
-			if (soldier->getSalaryCost(0) != 0 && _game->savedGame()->isResearched(soldier->getRequirements()))
+			RuleSoldier *soldier = game.getMod()->getSoldier(soldierType);
+			if (soldier->getSalaryCost(0) != 0 && game.savedGame()->isResearched(soldier->getRequirements()))
 			{
 				std::pair<int, int> info = _base->getSoldierCountAndSalary(soldierType);
 				std::ostringstream ss4;
@@ -182,10 +182,10 @@ MonthlyCostsState::MonthlyCostsState(Base *base) : _base(base)
 	}
 	std::ostringstream ss5;
 	ss5 << _base->getTotalEngineers();
-	_lstSalaries->addRow(4, ltr("STR_ENGINEERS").c_str(), Unicode::formatFunding(_game->getMod()->getEngineerCost()).c_str(), ss5.str().c_str(), Unicode::formatFunding(_base->getTotalEngineers() * _game->getMod()->getEngineerCost()).c_str());
+	_lstSalaries->addRow(4, ltr("STR_ENGINEERS").c_str(), Unicode::formatFunding(game.getMod()->getEngineerCost()).c_str(), ss5.str().c_str(), Unicode::formatFunding(_base->getTotalEngineers() * game.getMod()->getEngineerCost()).c_str());
 	std::ostringstream ss6;
 	ss6 << _base->getTotalScientists();
-	_lstSalaries->addRow(4, ltr("STR_SCIENTISTS").c_str(), Unicode::formatFunding(_game->getMod()->getScientistCost()).c_str(), ss6.str().c_str(), Unicode::formatFunding(_base->getTotalScientists() * _game->getMod()->getScientistCost()).c_str());
+	_lstSalaries->addRow(4, ltr("STR_SCIENTISTS").c_str(), Unicode::formatFunding(game.getMod()->getScientistCost()).c_str(), ss6.str().c_str(), Unicode::formatFunding(_base->getTotalScientists() * game.getMod()->getScientistCost()).c_str());
 	std::ostringstream ss6b;
 	int staffCount, inventoryCount;
 	int totalOtherCost = _base->getTotalOtherStaffAndInventoryCost(staffCount, inventoryCount);
@@ -217,7 +217,7 @@ MonthlyCostsState::~MonthlyCostsState()
  */
 void MonthlyCostsState::btnOkClick(Action *)
 {
-	_game->popState();
+	game.popState();
 }
 
 }

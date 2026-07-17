@@ -82,7 +82,7 @@ GeoscapeEventState::GeoscapeEventState(const RuleEvent& eventRule) : _eventRule(
 	centerAllSurfaces();
 
 	// Set up objects
-	_window->setBackground(_game->getMod()->getSurface(_eventRule.getBackground()));
+	_window->setBackground(game.getMod()->getSurface(_eventRule.getBackground()));
 
 	_txtTitle->setAlign(ALIGN_CENTER);
 	_txtTitle->setBig();
@@ -138,13 +138,13 @@ void GeoscapeEventState::eventLogic()
 {
 	if (!_eventRule.getAdhocMissionScriptTags().empty())
 	{
-		auto* geo = _game->getGeoscapeState();
+		auto* geo = game.getGeoscapeState();
 		geo->determineAlienMissions(false, &_eventRule);
 	}
 
-	SavedGame *save = _game->savedGame();
+	SavedGame *save = game.savedGame();
 	Base *hq = save->bases().front();
-	const Mod *mod = _game->getMod();
+	const Mod *mod = game.getMod();
 	const RuleEvent &rule = _eventRule;
 
 	RuleRegion *regionRule = nullptr;
@@ -153,7 +153,7 @@ void GeoscapeEventState::eventLogic()
 	{
 		size_t pickRegion = RNG::generate(0, rule.getRegionList().size() - 1);
 		auto& regionName = rule.getRegionList().at(pickRegion);
-		regionRule = _game->getMod()->getRegion(regionName, true);
+		regionRule = game.getMod()->getRegion(regionName, true);
 		std::string place = ltr(regionName);
 
 		if (rule.isCitySpecific())
@@ -191,7 +191,7 @@ void GeoscapeEventState::eventLogic()
 	// 1. give/take score points
 	if (regionRule)
 	{
-		for (auto* region : _game->savedGame()->getRegions())
+		for (auto* region : game.savedGame()->getRegions())
 		{
 			if (region->getRules() == regionRule)
 			{
@@ -232,7 +232,7 @@ void GeoscapeEventState::eventLogic()
 				for (int i = 0; i < rule.getSpawnedPersons(); ++i)
 				{
 					Transfer* t = new Transfer(24);
-					int nationality = _game->savedGame()->selectSoldierNationalityByLocation(_game->getMod(), ruleSoldier, city);
+					int nationality = game.savedGame()->selectSoldierNationalityByLocation(game.getMod(), ruleSoldier, city);
 					Soldier* s = mod->genSoldier(save, ruleSoldier, nationality);
 					YAML::YamlRootNodeReader reader(rule.getSpawnedSoldierTemplate(), "(spawned soldier template)");
 					s->load(reader, mod, save, mod->getScriptGlobal(), true); // load from soldier template
@@ -283,7 +283,7 @@ void GeoscapeEventState::eventLogic()
 			for (int i = 0; i < ts.second; ++i)
 			{
 				Transfer* t = new Transfer(24);
-				int nationality = _game->savedGame()->selectSoldierNationalityByLocation(_game->getMod(), ts.first, city);
+				int nationality = game.savedGame()->selectSoldierNationalityByLocation(game.getMod(), ts.first, city);
 				Soldier* s = mod->genSoldier(save, ts.first, nationality);
 				YAML::YamlRootNodeReader reader(rule.getSpawnedSoldierTemplate(), "(spawned soldier template)");
 				s->load(reader, mod, save, mod->getScriptGlobal(), true); // load from soldier template
@@ -534,7 +534,7 @@ void GeoscapeEventState::init()
 
 	if (!_eventRule.getMusic().empty())
 	{
-		_game->getMod()->playMusic(_eventRule.getMusic());
+		game.getMod()->playMusic(_eventRule.getMusic());
 	}
 }
 
@@ -544,26 +544,26 @@ void GeoscapeEventState::init()
  */
 void GeoscapeEventState::btnOkClick(Action *)
 {
-	_game->popState();
+	game.popState();
 
 	if (!_eventRule.getCutscene().empty())
 	{
-		_game->pushState(new CutsceneState(_eventRule.getCutscene()));
-		if (_game->savedGame()->getEnding() == END_NONE)
+		game.pushState(new CutsceneState(_eventRule.getCutscene()));
+		if (game.savedGame()->getEnding() == END_NONE)
 		{
-			const RuleVideo* videoRule = _game->getMod()->getVideo(_eventRule.getCutscene(), true);
-			if (videoRule->getWinGame()) _game->savedGame()->setEnding(END_WIN);
-			if (videoRule->getLoseGame()) _game->savedGame()->setEnding(END_LOSE);
+			const RuleVideo* videoRule = game.getMod()->getVideo(_eventRule.getCutscene(), true);
+			if (videoRule->getWinGame()) game.savedGame()->setEnding(END_WIN);
+			if (videoRule->getLoseGame()) game.savedGame()->setEnding(END_LOSE);
 		}
 	}
 
-	if (_game->savedGame()->getEnding() == END_NONE)
+	if (game.savedGame()->getEnding() == END_NONE)
 	{
-		Base* base = _game->savedGame()->bases().front();
-		if (_game->savedGame()->getMonthsPassed() > -1 && options1.storageLimitsEnforced() && base != 0 && base->storesOverfull())
+		Base* base = game.savedGame()->bases().front();
+		if (game.savedGame()->getMonthsPassed() > -1 && options1.storageLimitsEnforced() && base != 0 && base->storesOverfull())
 		{
-			_game->pushState(new SellState(base, 0));
-			_game->pushState(new ErrorMessageState(ltr("STR_STORAGE_EXCEEDED").arg(base->getName()), _palette, _game->getMod()->getInterface("debriefing")->getElement("errorMessage")->color, "BACK01.SCR", _game->getMod()->getInterface("debriefing")->getElement("errorPalette")->color));
+			game.pushState(new SellState(base, 0));
+			game.pushState(new ErrorMessageState(ltr("STR_STORAGE_EXCEEDED").arg(base->getName()), _palette, game.getMod()->getInterface("debriefing")->getElement("errorMessage")->color, "BACK01.SCR", game.getMod()->getInterface("debriefing")->getElement("errorPalette")->color));
 		}
 	}
 

@@ -88,7 +88,7 @@ CommendationLateState::CommendationLateState(std::vector<Soldier*> soldiersMedal
 
     ***/
 
-	const auto& commendationsList = _game->getMod()->getCommendationsList();
+	const auto& commendationsList = game.getMod()->getCommendationsList();
 	bool modularCommendation;
 	std::string noun;
 
@@ -201,7 +201,7 @@ void CommendationLateState::lstSoldiersMouseClick(Action *)
  */
 void CommendationLateState::btnOkClick(Action *)
 {
-	_game->popState();
+	game.popState();
 }
 
 }

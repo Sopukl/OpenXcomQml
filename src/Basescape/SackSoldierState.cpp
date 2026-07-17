@@ -103,7 +103,7 @@ void SackSoldierState::btnOkClick(Action *)
 	}
 	_base->soldiers().erase(_base->soldiers().begin() + _soldierId);
 	delete soldier;
-	_game->popState();
+	game.popState();
 }
 
 /**
@@ -112,7 +112,7 @@ void SackSoldierState::btnOkClick(Action *)
  */
 void SackSoldierState::btnCancelClick(Action *)
 {
-	_game->popState();
+	game.popState();
 }
 
 }

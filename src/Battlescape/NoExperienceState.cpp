@@ -46,7 +46,7 @@ NoExperienceState::NoExperienceState()
 	_lstSoldiers = new TextList(180, 96, 65, 52);
 
 	// Set palette
-	_game->savedGame()->getSavedBattle()->setPaletteByDepth(this);
+	game.savedGame()->getSavedBattle()->setPaletteByDepth(this);
 
 	add(_window, "messageWindowBorder", "battlescape");
 	add(_txtTitle, "messageWindows", "battlescape");
@@ -57,7 +57,7 @@ NoExperienceState::NoExperienceState()
 
 	// Set up objects
 	_window->setHighContrast(true);
-	_window->setBackground(_game->getMod()->getSurface("TAC00.SCR"));
+	_window->setBackground(game.getMod()->getSurface("TAC00.SCR"));
 
 	_txtTitle->setAlign(ALIGN_CENTER);
 	_txtTitle->setBig();
@@ -78,7 +78,7 @@ NoExperienceState::NoExperienceState()
 	_lstSoldiers->setWordWrap(true);
 
 	size_t row = 0;
-	for (auto* bu : *_game->savedGame()->getSavedBattle()->getUnits())
+	for (auto* bu : *game.savedGame()->getSavedBattle()->getUnits())
 	{
 		if (bu->getOriginalFaction() == FACTION_PLAYER && !bu->isOut())
 		{
@@ -101,7 +101,7 @@ NoExperienceState::NoExperienceState()
  */
 void NoExperienceState::btnCancelClick(Action *)
 {
-	_game->popState();
+	game.popState();
 }
 
 }

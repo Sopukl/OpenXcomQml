@@ -122,7 +122,7 @@ UfoTrackerState::UfoTrackerState(GeoscapeState *state, Globe *globe) : _state(st
 	_lstObjects->onMouseClick((ActionHandler)&UfoTrackerState::lstObjectsMiddleClick, SDL_BUTTON_MIDDLE);
 
 	int row = 0;
-	for (auto* site : _game->savedGame()->getMissionSites())
+	for (auto* site : game.savedGame()->getMissionSites())
 	{
 		if (!site->getDetected())
 			continue;
@@ -133,7 +133,7 @@ UfoTrackerState::UfoTrackerState(GeoscapeState *state, Globe *globe) : _state(st
 		row++;
 	}
 
-	for (auto* ufo : _game->savedGame()->getUfos())
+	for (auto* ufo : game.savedGame()->getUfos())
 	{
 		if (!ufo->getDetected() || ufo->getStatus() == Ufo::IGNORE_ME)
 			continue;
@@ -161,7 +161,7 @@ UfoTrackerState::UfoTrackerState(GeoscapeState *state, Globe *globe) : _state(st
 		row++;
 	}
 
-	for (auto* ab : *_game->savedGame()->getAlienBases())
+	for (auto* ab : *game.savedGame()->getAlienBases())
 	{
 		if (!ab->isDiscovered())
 			continue;
@@ -186,7 +186,7 @@ UfoTrackerState::~UfoTrackerState()
  */
 void UfoTrackerState::btnCancelClick(Action *)
 {
-	_game->popState();
+	game.popState();
 }
 
 /**
@@ -195,17 +195,17 @@ void UfoTrackerState::btnCancelClick(Action *)
 */
 void UfoTrackerState::popupTarget(Target *target)
 {
-	_game->popState();
+	game.popState();
 
 	Ufo* u = dynamic_cast<Ufo*>(target);
 
 	if (u != 0)
 	{
-		_game->pushState(new UfoDetectedState(u, _state, false, u->getHyperDetected()));
+		game.pushState(new UfoDetectedState(u, _state, false, u->getHyperDetected()));
 	}
 	else
 	{
-		_game->pushState(new TargetInfoState(target, _globe));
+		game.pushState(new TargetInfoState(target, _globe));
 	}
 }
 
@@ -232,7 +232,7 @@ void UfoTrackerState::lstObjectsRightClick(Action *)
 	if (t)
 	{
 		_globe->center(t->getLongitude(), t->getLatitude());
-		_game->popState();
+		game.popState();
 	}
 }
 

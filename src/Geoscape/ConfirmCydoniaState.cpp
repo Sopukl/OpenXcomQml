@@ -82,15 +82,15 @@ ConfirmCydoniaState::~ConfirmCydoniaState()
  */
 void ConfirmCydoniaState::btnYesClick(Action *)
 {
-	_game->popState();
-	_game->popState();
+	game.popState();
+	game.popState();
 
-	SavedBattleGame *bgame = new SavedBattleGame(_game->getMod());
-	_game->savedGame()->setBattleGame(bgame);
+	SavedBattleGame *bgame = new SavedBattleGame(game.getMod());
+	game.savedGame()->setBattleGame(bgame);
 	BattlescapeGenerator bgen = BattlescapeGenerator();
-	for (auto& ad : _game->getMod()->getDeploymentsList())
+	for (auto& ad : game.getMod()->getDeploymentsList())
 	{
-		AlienDeployment *deployment = _game->getMod()->getDeployment(ad);
+		AlienDeployment *deployment = game.getMod()->getDeployment(ad);
 		if (deployment->isFinalDestination())
 		{
 			bgame->setMissionType(ad);
@@ -101,7 +101,7 @@ void ConfirmCydoniaState::btnYesClick(Action *)
 	bgen.setCraft(_craft);
 	bgen.run();
 
-	_game->pushState(new BriefingState(_craft));
+	game.pushState(new BriefingState(_craft));
 
 }
 
@@ -111,7 +111,7 @@ void ConfirmCydoniaState::btnYesClick(Action *)
  */
 void ConfirmCydoniaState::btnNoClick(Action *)
 {
-	_game->popState();
+	game.popState();
 }
 
 }

@@ -94,9 +94,9 @@ SoldierMemorialState::SoldierMemorialState()
 
 	_txtDate->setText(ltr("STR_DATE_UC"));
 
-	size_t lost = _game->savedGame()->getDeadSoldiers().size();
+	size_t lost = game.savedGame()->getDeadSoldiers().size();
 	size_t recruited = lost;
-	for (const auto* xbase : _game->savedGame()->bases())
+	for (const auto* xbase : game.savedGame()->bases())
 	{
 		recruited += xbase->getTotalSoldiers();
 	}
@@ -142,8 +142,8 @@ void SoldierMemorialState::init()
  */
 void SoldierMemorialState::btnOkClick(Action *)
 {
-	_game->popState();
-	_game->getMod()->playMusic("GMGEO");
+	game.popState();
+	game.getMod()->playMusic("GMGEO");
 }
 
 /**
@@ -180,7 +180,7 @@ void SoldierMemorialState::btnQuickSearchApply(Action *)
 */
 void SoldierMemorialState::btnStatisticsClick(Action *)
 {
-	_game->pushState(new StatisticsState);
+	game.pushState(new StatisticsState);
 }
 
 /**
@@ -189,7 +189,7 @@ void SoldierMemorialState::btnStatisticsClick(Action *)
  */
 void SoldierMemorialState::lstSoldiersClick(Action *)
 {
-	_game->pushState(new SoldierInfoState(0, _indices[_lstSoldiers->getSelectedRow()]));
+	game.pushState(new SoldierInfoState(0, _indices[_lstSoldiers->getSelectedRow()]));
 }
 
 /**
@@ -204,7 +204,7 @@ void SoldierMemorialState::fillMemorialList()
 	_indices.clear();
 
 	int index = -1;
-	for (std::vector<Soldier *>::reverse_iterator i = _game->savedGame()->getDeadSoldiers().rbegin(); i != _game->savedGame()->getDeadSoldiers().rend(); ++i)
+	for (std::vector<Soldier *>::reverse_iterator i = game.savedGame()->getDeadSoldiers().rbegin(); i != game.savedGame()->getDeadSoldiers().rend(); ++i)
 	{
 		++index;
 		const Soldier* deadSoldier = (*i);

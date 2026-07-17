@@ -52,8 +52,8 @@ GoToMainMenuState::~GoToMainMenuState()
 void GoToMainMenuState::init()
 {
 	Screen::updateScale(options1.geoscapeScale(), options1.baseXGeoscape, options1.baseYGeoscape, true);
-	_game->getScreen()->resetDisplay(false);
-	_game->setState(new MainMenuState(_updateCheck));
+	game.getScreen()->resetDisplay(false);
+	game.setState(new MainMenuState(_updateCheck));
 }
 
 /**
@@ -247,7 +247,7 @@ void MainMenuState::init()
 		Log(LOG_INFO) << "Loading saved game passed as parameter";
 		btnLoadClick(NULL);
 	}
-	else if (Options::getLoadLastSave() && _game->savedGame()->getList(true).size() > 0)
+	else if (Options::getLoadLastSave() && game.savedGame()->getList(true).size() > 0)
 	{
 		Log(LOG_INFO) << "Loading last saved game";
 		btnLoadClick(NULL);
@@ -268,7 +268,7 @@ MainMenuState::~MainMenuState()
  */
 void MainMenuState::btnNewGameClick(Action *act)
 {
-	_game->pushState(new NewGameState);
+	game.pushState(new NewGameState);
 }
 
 /**
@@ -277,7 +277,7 @@ void MainMenuState::btnNewGameClick(Action *act)
  */
 void MainMenuState::btnNewBattleClick(Action *)
 {
-	_game->pushState(new NewBattleState);
+	game.pushState(new NewBattleState);
 }
 
 /**
@@ -286,7 +286,7 @@ void MainMenuState::btnNewBattleClick(Action *)
  */
 void MainMenuState::btnLoadClick(Action *)
 {
-	_game->pushState(new ListLoadState(OPT_MENU));
+	game.pushState(new ListLoadState(OPT_MENU));
 }
 
 /**
@@ -296,7 +296,7 @@ void MainMenuState::btnLoadClick(Action *)
 void MainMenuState::btnOptionsClick(Action *)
 {
 	Options::backupDisplay();
-	_game->pushState(new OptionsVideoState(OPT_MENU));
+	game.pushState(new OptionsVideoState(OPT_MENU));
 }
 
 /**
@@ -305,7 +305,7 @@ void MainMenuState::btnOptionsClick(Action *)
 */
 void MainMenuState::btnModsClick(Action *)
 {
-	_game->pushState(new ModListState);
+	game.pushState(new ModListState);
 }
 
 /**
@@ -314,7 +314,7 @@ void MainMenuState::btnModsClick(Action *)
  */
 void MainMenuState::btnQuitClick(Action *)
 {
-	_game->quit();
+	game.quit();
 }
 
 /**
@@ -523,8 +523,8 @@ void MainMenuState::btnUpdateClick(Action*)
 	}
 
 	Log(LOG_INFO) << "Update prepared, restarting.";
-	_game->setUpdateFlag(true);
-	_game->quit();
+	game.setUpdateFlag(true);
+	game.quit();
 #endif
 }
 

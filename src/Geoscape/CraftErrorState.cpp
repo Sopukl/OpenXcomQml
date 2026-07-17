@@ -100,7 +100,7 @@ CraftErrorState::~CraftErrorState()
  */
 void CraftErrorState::btnOkClick(Action *)
 {
-	_game->popState();
+	game.popState();
 }
 
 /**
@@ -114,7 +114,7 @@ void CraftErrorState::btnOk5SecsClick(Action *)
 	{
 		_state->getGlobe()->center(_centerOnTarget->getLongitude(), _centerOnTarget->getLatitude());
 	}
-	_game->popState();
+	game.popState();
 }
 
 }

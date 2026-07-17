@@ -72,7 +72,7 @@ ModListState::ModListState() : _curMasterIdx(0)
 
 	// how much room do we need for YES/NO
 	Text text = Text(100, 9, 0, 0);
-	text.initText(_game->getMod()->getFont("FONT_BIG"), _game->getMod()->getFont("FONT_SMALL"));
+	text.initText(game.getMod()->getFont("FONT_BIG"), game.getMod()->getFont("FONT_SMALL"));
 	text.setText(ltr("STR_YES"));
 	int yes = text.getTextWidth();
 	text.setText(ltr("STR_NO"));
@@ -494,11 +494,11 @@ void ModListState::btnOkClick(Action *)
 	Options::save();
 	if (options1.reload)
 	{
-		_game->setState(new StartState);
+		game.setState(new StartState);
 	}
 	else
 	{
-		_game->popState();
+		game.popState();
 	}
 }
 
@@ -520,7 +520,7 @@ void ModListState::btnCancelClick(Action *)
 {
 	options1.reload = false;
 	Options::load();
-	_game->popState();
+	game.popState();
 }
 
 /**

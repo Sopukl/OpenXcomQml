@@ -31,7 +31,7 @@ namespace OpenXcom
 void TouchState::touchComponentsCreate(Text* txtTitlePtr, bool hideGroup100, int horizontalOffset, int verticalOffset)
 {
 	// Reset touch flags
-	_game->resetTouchButtonFlags();
+	game.resetTouchButtonFlags();
 
 	if (!options1.oxceBaseTouchButtons())
 		return;
@@ -129,13 +129,13 @@ void TouchState::touchComponentsRefresh()
 	if (!options1.oxceBaseTouchButtons())
 		return;
 
-	_owner100 = _game->getScrollStep() == 100 ? _btn100 : (_game->getScrollStep() == 10 ? _btn10 : _btn1);
+	_owner100 = game.getScrollStep() == 100 ? _btn100 : (game.getScrollStep() == 10 ? _btn10 : _btn1);
 
-	_ownerLRM = _game->getMMBFlag() ? _btnMMB : (_game->getRMBFlag() ? _btnRMB : _btnLMB);
+	_ownerLRM = game.getMMBFlag() ? _btnMMB : (game.getRMBFlag() ? _btnRMB : _btnLMB);
 
-	_btnCtrl->setPressed(_game->getCtrlPressedFlag());
-	_btnAlt->setPressed(_game->getAltPressedFlag());
-	_btnShift->setPressed(_game->getShiftPressedFlag());
+	_btnCtrl->setPressed(game.getCtrlPressedFlag());
+	_btnAlt->setPressed(game.getAltPressedFlag());
+	_btnShift->setPressed(game.getShiftPressedFlag());
 }
 
 void TouchState::btnTouchClick(Action* action)
@@ -163,28 +163,28 @@ void TouchState::btnTouchClick(Action* action)
 void TouchState::btnGroup100Press(Action*)
 {
 	int step = (_owner100 == _btn100 ? 100 : (_owner100 == _btn10 ? 10 : 1));
-	_game->setScrollStep(step);
+	game.setScrollStep(step);
 }
 
 void TouchState::btnGroupLRMPress(Action*)
 {
-	_game->setRMBFlag(_ownerLRM == _btnRMB);
-	_game->setMMBFlag(_ownerLRM == _btnMMB);
+	game.setRMBFlag(_ownerLRM == _btnRMB);
+	game.setMMBFlag(_ownerLRM == _btnMMB);
 }
 
 void TouchState::btnCtrlClick(Action*)
 {
-	_game->setCtrlPressedFlag(_btnCtrl->getPressed());
+	game.setCtrlPressedFlag(_btnCtrl->getPressed());
 }
 
 void TouchState::btnAltClick(Action*)
 {
-	_game->setAltPressedFlag(_btnAlt->getPressed());
+	game.setAltPressedFlag(_btnAlt->getPressed());
 }
 
 void TouchState::btnShiftClick(Action*)
 {
-	_game->setShiftPressedFlag(_btnShift->getPressed());
+	game.setShiftPressedFlag(_btnShift->getPressed());
 }
 
 }

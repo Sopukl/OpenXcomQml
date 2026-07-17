@@ -94,7 +94,7 @@ ResearchCompleteState::ResearchCompleteState(const RuleResearch *newResearch, co
  */
 void ResearchCompleteState::btnOkClick(Action *)
 {
-	_game->popState();
+	game.popState();
 }
 
 /**
@@ -103,7 +103,7 @@ void ResearchCompleteState::btnOkClick(Action *)
  */
 void ResearchCompleteState::btnReportClick(Action *)
 {
-	_game->popState();
+	game.popState();
 	std::string name;
 	std::string bonusName;
 	if (_bonus)

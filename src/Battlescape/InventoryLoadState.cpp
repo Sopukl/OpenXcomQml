@@ -55,7 +55,7 @@ InventoryLoadState::InventoryLoadState(InventoryState *parent) : _parent(parent)
 
 	// Set up objects
 	_window->setHighContrast(true);
-	_window->setBackground(_game->getMod()->getSurface("TAC00.SCR"));
+	_window->setBackground(game.getMod()->getSurface("TAC00.SCR"));
 
 	_txtTitle->setHighContrast(true);
 	_txtTitle->setAlign(ALIGN_CENTER);
@@ -75,9 +75,9 @@ InventoryLoadState::InventoryLoadState(InventoryState *parent) : _parent(parent)
 
 	for (int i = 0; i < options1.oxceMaxEquipmentLayoutTemplates(); ++i)
 	{
-		std::vector<EquipmentLayoutItem*> *item = _game->savedGame()->getGlobalEquipmentLayout(i);
+		std::vector<EquipmentLayoutItem*> *item = game.savedGame()->getGlobalEquipmentLayout(i);
 		std::ostringstream ss;
-		const std::string& armorName = _game->savedGame()->getGlobalEquipmentLayoutArmor(i);
+		const std::string& armorName = game.savedGame()->getGlobalEquipmentLayoutArmor(i);
 		if (!armorName.empty())
 		{
 			ss << "[" << ltr(armorName) << "] ";
@@ -88,7 +88,7 @@ InventoryLoadState::InventoryLoadState(InventoryState *parent) : _parent(parent)
 		}
 		else
 		{
-			const std::string &itemName = _game->savedGame()->getGlobalEquipmentLayoutName(i);
+			const std::string &itemName = game.savedGame()->getGlobalEquipmentLayoutName(i);
 			if (itemName.empty())
 				ss << ltr("STR_UNNAMED_SLOT_N").arg(i + 1);
 			else
@@ -112,7 +112,7 @@ InventoryLoadState::~InventoryLoadState()
 */
 void InventoryLoadState::btnCancelClick(Action *)
 {
-	_game->popState();
+	game.popState();
 }
 
 /**
@@ -124,7 +124,7 @@ void InventoryLoadState::lstLayoutClick(Action *)
 	auto index = _lstLayout->getSelectedRow();
 	bool armorChanged = _parent->loadGlobalLayoutArmor(index);
 	_parent->setGlobalLayoutIndex(index, armorChanged);
-	_game->popState();
+	game.popState();
 }
 
 }

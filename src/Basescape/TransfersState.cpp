@@ -108,7 +108,7 @@ TransfersState::~TransfersState()
  */
 void TransfersState::btnOkClick(Action *)
 {
-	_game->popState();
+	game.popState();
 }
 
 }

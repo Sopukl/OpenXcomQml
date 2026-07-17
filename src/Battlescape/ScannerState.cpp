@@ -44,19 +44,19 @@ ScannerState::ScannerState (BattleAction *action) : _action(action)
 	{
 		options1.baseXResolution = Screen::ORIGINAL_WIDTH;
 		options1.baseYResolution = Screen::ORIGINAL_HEIGHT;
-		_game->getScreen()->resetDisplay(false);
+		game.getScreen()->resetDisplay(false);
 	}
 	_bg = new InteractiveSurface(320, 200);
 	_scan = new Surface(320, 200);
-	_scannerView = new ScannerView(152, 152, 56, 24, _game, _action->actor);
+	_scannerView = new ScannerView(152, 152, 56, 24, _action->actor);
 
-	if (_game->getScreen()->getDY() > 50)
+	if (game.getScreen()->getDY() > 50)
 	{
 		_screen = false;
 	}
 
 	// Set palette
-	_game->savedGame()->getSavedBattle()->setPaletteByDepth(this);
+	game.savedGame()->getSavedBattle()->setPaletteByDepth(this);
 
 	add(_scan);
 	add(_scannerView);
@@ -64,8 +64,8 @@ ScannerState::ScannerState (BattleAction *action) : _action(action)
 
 	centerAllSurfaces();
 
-	_game->getMod()->getSurface("DETBORD.PCK")->blitNShade(_bg, 0, 0);
-	_game->getMod()->getSurface("DETBORD2.PCK")->blitNShade(_scan, 0, 0);
+	game.getMod()->getSurface("DETBORD.PCK")->blitNShade(_bg, 0, 0);
+	game.getMod()->getSurface("DETBORD2.PCK")->blitNShade(_scan, 0, 0);
 	_bg->onMouseClick((ActionHandler)&ScannerState::exitClick);
 	_bg->onKeyboardPress((ActionHandler)&ScannerState::exitClick, options1.keyCancel());
 
@@ -88,7 +88,7 @@ ScannerState::~ScannerState()
 void ScannerState::handle(Action *action)
 {
 	State::handle(action);
-	if (action->getDetails()->type == SDL_MOUSEBUTTONDOWN && _game->isRightClick(action))
+	if (action->getDetails()->type == SDL_MOUSEBUTTONDOWN && game.isRightClick(action))
 	{
 		exitClick(action);
 	}
@@ -128,9 +128,9 @@ void ScannerState::exitClick(Action *)
 	if (options1.maximizeInfoScreens())
 	{
 		Screen::updateScale(options1.battlescapeScale(), options1.baseXBattlescape, options1.baseYBattlescape, true);
-		_game->getScreen()->resetDisplay(false);
+		game.getScreen()->resetDisplay(false);
 	}
-	_game->popState();
+	game.popState();
 }
 
 }

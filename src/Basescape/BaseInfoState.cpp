@@ -164,13 +164,13 @@ BaseInfoState::BaseInfoState(Base *base, BasescapeState *state) : _base(base), _
 		ss << "ALT";
 	}
 	ss << "BACK07.SCR";
-	_game->getMod()->getSurface(ss.str())->blitNShade(_bg, 0, 0);
+	game.getMod()->getSurface(ss.str())->blitNShade(_bg, 0, 0);
 
-	_mini->setTexture(_game->getMod()->getSurfaceSet("BASEBITS.PCK"));
-	_mini->setBases(&_game->savedGame()->bases());
-	for (size_t i = 0; i < _game->savedGame()->bases().size(); ++i)
+	_mini->setTexture(game.getMod()->getSurfaceSet("BASEBITS.PCK"));
+	_mini->setBases(&game.savedGame()->bases());
+	for (size_t i = 0; i < game.savedGame()->bases().size(); ++i)
 	{
-		if (_game->savedGame()->bases().at(i) == _base)
+		if (game.savedGame()->bases().at(i) == _base)
 		{
 			_mini->setSelectedBase(i);
 			break;
@@ -441,10 +441,10 @@ void BaseInfoState::edtBaseChange(Action *)
 void BaseInfoState::miniClick(Action *)
 {
 	size_t base = _mini->getHoveredBase();
-	if (base < _game->savedGame()->bases().size())
+	if (base < game.savedGame()->bases().size())
 	{
 		_mini->setSelectedBase(base);
-		_base = _game->savedGame()->bases().at(base);
+		_base = game.savedGame()->bases().at(base);
 		_state->setBase(_base);
 		init();
 	}
@@ -469,12 +469,12 @@ void BaseInfoState::handleKeyPress(Action *action)
 			options1.keyBaseSelect8()
 		};
 		int key = action->getDetails()->key.keysym.sym;
-		for (size_t i = 0; i < _game->savedGame()->bases().size(); ++i)
+		for (size_t i = 0; i < game.savedGame()->bases().size(); ++i)
 		{
 			if (key == baseKeys[i])
 			{
 				_mini->setSelectedBase(i);
-				_base = _game->savedGame()->bases().at(i);
+				_base = game.savedGame()->bases().at(i);
 				_state->setBase(_base);
 				init();
 				break;
@@ -489,7 +489,7 @@ void BaseInfoState::handleKeyPress(Action *action)
  */
 void BaseInfoState::btnOkClick(Action *)
 {
-	_game->popState();
+	game.popState();
 }
 
 /**
@@ -498,7 +498,7 @@ void BaseInfoState::btnOkClick(Action *)
  */
 void BaseInfoState::btnTransfersClick(Action *)
 {
-	_game->pushState(new TransfersState(_base));
+	game.pushState(new TransfersState(_base));
 }
 
 /**
@@ -507,7 +507,7 @@ void BaseInfoState::btnTransfersClick(Action *)
  */
 void BaseInfoState::btnStoresClick(Action *)
 {
-	_game->pushState(new StoresState(_base));
+	game.pushState(new StoresState(_base));
 }
 
 /**
@@ -516,7 +516,7 @@ void BaseInfoState::btnStoresClick(Action *)
  */
 void BaseInfoState::btnMonthlyCostsClick(Action *)
 {
-	_game->pushState(new MonthlyCostsState(_base));
+	game.pushState(new MonthlyCostsState(_base));
 }
 
 }

@@ -23,7 +23,6 @@
 namespace OpenXcom
 {
 
-class Game;
 class Camera;
 class SavedBattleGame;
 class SurfaceSet;
@@ -33,7 +32,6 @@ class SurfaceSet;
  */
 class MiniMapView : public InteractiveSurface
 {
-	Game * _game;
 	Camera * _camera;
 	SavedBattleGame * _battleGame;
 	int _frame;
@@ -58,7 +56,7 @@ class MiniMapView : public InteractiveSurface
 	void mouseIn(Action *action, State *state) override;
 public:
 	/// Creates the MiniMapView.
-	MiniMapView(int w, int h, int x, int y, Game * game, Camera * camera, SavedBattleGame * battleGame);
+	MiniMapView(int w, int h, int x, int y, Camera * camera, SavedBattleGame * battleGame);
 	/// Draws the minimap.
 	void draw() override;
 	/// Changes the displayed minimap level.

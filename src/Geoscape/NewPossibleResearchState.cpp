@@ -86,9 +86,9 @@ NewPossibleResearchState::NewPossibleResearchState(Base * base, const std::vecto
 			// Also ignore:
 			// 1. things that already popped before
 			// 2. things that never popped, but are researched already (can happen for topics that can be researched multiple times)
-			if (!_game->savedGame()->wasResearchPopped(rule) && !_game->savedGame()->isResearched(rule, false))
+			if (!game.savedGame()->wasResearchPopped(rule) && !game.savedGame()->isResearched(rule, false))
 			{
-				_game->savedGame()->addPoppedResearch(rule);
+				game.savedGame()->addPoppedResearch(rule);
 				_lstPossibilities->addRow(1, ltr(rule->getName()).c_str());
 				foundNew = true;
 			}
@@ -107,7 +107,7 @@ NewPossibleResearchState::NewPossibleResearchState(Base * base, const std::vecto
  */
 void NewPossibleResearchState::btnOkClick(Action *)
 {
-	_game->popState();
+	game.popState();
 }
 
 /**
@@ -116,8 +116,8 @@ void NewPossibleResearchState::btnOkClick(Action *)
  */
 void NewPossibleResearchState::btnResearchClick(Action *)
 {
-	_game->popState();
-	_game->pushState (new ResearchState(_base));
+	game.popState();
+	game.pushState (new ResearchState(_base));
 }
 
 }

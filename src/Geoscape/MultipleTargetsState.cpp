@@ -114,7 +114,7 @@ void MultipleTargetsState::init()
  */
 void MultipleTargetsState::popupTarget(Target *target)
 {
-	_game->popState();
+	game.popState();
 	if (_crafts.size() == 0)
 	{
 		Base* b = dynamic_cast<Base*>(target);
@@ -122,24 +122,24 @@ void MultipleTargetsState::popupTarget(Target *target)
 		Ufo* u = dynamic_cast<Ufo*>(target);
 		if (b != 0)
 		{
-			_game->pushState(new InterceptState(_state->getGlobe(), _useCustomSound, b));
+			game.pushState(new InterceptState(_state->getGlobe(), _useCustomSound, b));
 		}
 		else if (c != 0)
 		{
-			_game->pushState(new GeoscapeCraftState(c, _state->getGlobe(), 0, _useCustomSound));
+			game.pushState(new GeoscapeCraftState(c, _state->getGlobe(), 0, _useCustomSound));
 		}
 		else if (u != 0)
 		{
-			_game->pushState(new UfoDetectedState(u, _state, false, u->getHyperDetected()));
+			game.pushState(new UfoDetectedState(u, _state, false, u->getHyperDetected()));
 		}
 		else
 		{
-			_game->pushState(new TargetInfoState(target, _state->getGlobe()));
+			game.pushState(new TargetInfoState(target, _state->getGlobe()));
 		}
 	}
 	else
 	{
-		_game->pushState(new ConfirmDestinationState(_crafts, target));
+		game.pushState(new ConfirmDestinationState(_crafts, target));
 	}
 }
 
@@ -149,7 +149,7 @@ void MultipleTargetsState::popupTarget(Target *target)
  */
 void MultipleTargetsState::btnCancelClick(Action *)
 {
-	_game->popState();
+	game.popState();
 }
 
 /**

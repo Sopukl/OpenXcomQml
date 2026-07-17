@@ -52,7 +52,7 @@ namespace OpenXcom
 SoldierTransformationListState::SoldierTransformationListState(Base *base, ComboBox *screenActions) : _base(base), _screenActions(screenActions)
 {
 	// Calculate once
-	_game->savedGame()->getAvailableTransformations(_availableTransformations, _game->getMod(), _base);
+	game.savedGame()->getAvailableTransformations(_availableTransformations, game.getMod(), _base);
 
 	// Create objects
 	_window = new Window(this, 320, 200, 0, 0);
@@ -98,7 +98,7 @@ SoldierTransformationListState::SoldierTransformationListState(Base *base, Combo
 
 	std::vector<std::string> availableOptions;
 	availableOptions.push_back("STR_ALL_SOLDIER_TYPES");
-	for (auto& soldierType : _game->getMod()->getSoldiersList())
+	for (auto& soldierType : game.getMod()->getSoldiersList())
 	{
 		availableOptions.push_back(soldierType);
 	}
@@ -190,7 +190,7 @@ void SoldierTransformationListState::initList()
 			std::find(
 				transformationRule->getAllowedSoldierTypes().begin(),
 				transformationRule->getAllowedSoldierTypes().end(),
-				_game->getMod()->getSoldiersList().at(_cbxSoldierType->getSelected() - 1)) == transformationRule->getAllowedSoldierTypes().end())
+				game.getMod()->getSoldiersList().at(_cbxSoldierType->getSelected() - 1)) == transformationRule->getAllowedSoldierTypes().end())
 		{
 			continue;
 		}
@@ -217,12 +217,12 @@ void SoldierTransformationListState::initList()
 		int projectsPossible = 10; // max
 		if (transformationRule->getCost() > 0)
 		{
-			int byFunds = _game->savedGame()->getFunds() / transformationRule->getCost();
+			int byFunds = game.savedGame()->getFunds() / transformationRule->getCost();
 			projectsPossible = std::min(projectsPossible, byFunds);
 		}
 		for (auto& item : transformationRule->getRequiredItems())
 		{
-			RuleItem* itemRule = _game->getMod()->getItem(item.first);
+			RuleItem* itemRule = game.getMod()->getItem(item.first);
 			projectsPossible = std::min(projectsPossible, itemContainer.getItem(itemRule) / item.second);
 		}
 		if (projectsPossible <= 0)
@@ -254,7 +254,7 @@ void SoldierTransformationListState::initList()
 				++eligibleSoldiers;
 			}
 		}
-		for (const auto* deadMan : _game->savedGame()->getDeadSoldiers())
+		for (const auto* deadMan : game.savedGame()->getDeadSoldiers())
 		{
 			if (deadMan->isEligibleForTransformation(transformationRule))
 			{
@@ -349,7 +349,7 @@ void SoldierTransformationListState::btnOnlyEligibleClick(Action *)
 void SoldierTransformationListState::btnOkClick(Action *)
 {
 	_screenActions->setSelected(0);
-	_game->popState();
+	game.popState();
 }
 
 /**
@@ -368,7 +368,7 @@ void SoldierTransformationListState::lstTransformationsClick(Action *action)
 	}
 
 	_screenActions->setSelected(_screenActions->getSelected() + transformationIndex + 1);
-	_game->popState();
+	game.popState();
 }
 
 }

@@ -61,7 +61,7 @@ ExperienceOverviewState::ExperienceOverviewState(BattlescapeState* parent) : _pa
 	_txtMana = new Text(18, 10, 267 - 3, 40);
 
 	// Set palette
-	_game->savedGame()->getSavedBattle()->setPaletteByDepth(this);
+	game.savedGame()->getSavedBattle()->setPaletteByDepth(this);
 
 	add(_window, "messageWindowBorder", "battlescape");
 	add(_btnOk, "messageWindowButtons", "battlescape");
@@ -81,7 +81,7 @@ ExperienceOverviewState::ExperienceOverviewState(BattlescapeState* parent) : _pa
 
 	// Set up objects
 	_window->setHighContrast(true);
-	_window->setBackground(_game->getMod()->getSurface("TAC00.SCR"));
+	_window->setBackground(game.getMod()->getSurface("TAC00.SCR"));
 
 	_btnOk->setHighContrast(true);
 	_btnOk->setText(ltr("STR_OK"));
@@ -111,7 +111,7 @@ ExperienceOverviewState::ExperienceOverviewState(BattlescapeState* parent) : _pa
 	_txtPsiSkill->setText(ltr("STR_PSIONIC_SKILL_ABBREVIATION"));
 	_txtPsiStrength->setText(ltr("STR_PSIONIC_STRENGTH_ABBREVIATION"));
 	_txtMelee->setText(ltr("STR_MELEE_ACCURACY_ABBREVIATION"));
-	if (_game->getMod()->isManaFeatureEnabled() && _game->getMod()->isManaTrainingPrimary())
+	if (game.getMod()->isManaFeatureEnabled() && game.getMod()->isManaTrainingPrimary())
 	{
 		_txtMana->setText(ltr("STR_MANA_ABBREVIATION"));
 	}
@@ -125,7 +125,7 @@ ExperienceOverviewState::ExperienceOverviewState(BattlescapeState* parent) : _pa
 
 	_lstSoldiers->clearList();
 	int row = 0;
-	for (auto* soldier : *_game->savedGame()->getSavedBattle()->getUnits())
+	for (auto* soldier : *game.savedGame()->getSavedBattle()->getUnits())
 	{
 		if (!soldier->getGeoscapeSoldier())
 		{
@@ -153,7 +153,7 @@ ExperienceOverviewState::ExperienceOverviewState(BattlescapeState* parent) : _pa
 		std::ostringstream melee;
 		melee << stats->melee;
 		std::ostringstream mana;
-		if (_game->getMod()->isManaFeatureEnabled() && _game->getMod()->isManaTrainingPrimary())
+		if (game.getMod()->isManaFeatureEnabled() && game.getMod()->isManaTrainingPrimary())
 		{
 			mana << stats->mana;
 		}
@@ -187,7 +187,7 @@ ExperienceOverviewState::ExperienceOverviewState(BattlescapeState* parent) : _pa
  */
 void ExperienceOverviewState::btnOkClick(Action*)
 {
-	_game->popState();
+	game.popState();
 }
 
 /**
@@ -201,7 +201,7 @@ void ExperienceOverviewState::lstSoldiersClick(Action*)
 		auto index = _lstSoldiers->getSelectedRow();
 		auto* bu = _soldiers.at(index);
 
-		if (bu->isSelectable(_game->savedGame()->getSavedBattle()->getSide(), false, false))
+		if (bu->isSelectable(game.savedGame()->getSavedBattle()->getSide(), false, false))
 		{
 			// select
 			_parent->getBattleGame()->cancelAllActions();
@@ -211,7 +211,7 @@ void ExperienceOverviewState::lstSoldiersClick(Action*)
 		// center on position
 		_parent->getMap()->getCamera()->centerOnPosition(bu->getPosition());
 
-		_game->popState();
+		game.popState();
 	}
 }
 

@@ -70,7 +70,7 @@ void ErrorMessageState::create(const std::string &str, SDL_Color *palette, Uint8
 	// Set palette
 	setStatePalette(palette);
 	if (bgColor != -1)
-		setStatePalette(_game->getMod()->getPalette("BACKPALS.DAT")->getColors(Palette::blockOffset(bgColor)), Palette::backPos, 16);
+		setStatePalette(game.getMod()->getPalette("BACKPALS.DAT")->getColors(Palette::blockOffset(bgColor)), Palette::backPos, 16);
 
 	add(_window);
 	add(_btnOk);
@@ -80,7 +80,7 @@ void ErrorMessageState::create(const std::string &str, SDL_Color *palette, Uint8
 
 	// Set up objects
 	_window->setColor(color);
-	_window->setBackground(_game->getMod()->getSurface(bg));
+	_window->setBackground(game.getMod()->getSurface(bg));
 
 	_btnOk->setColor(color);
 	_btnOk->setText(ltr("STR_OK"));
@@ -113,7 +113,7 @@ void ErrorMessageState::create(const std::string &str, SDL_Color *palette, Uint8
  */
 void ErrorMessageState::btnOkClick(Action *)
 {
-	_game->popState();
+	game.popState();
 }
 
 }

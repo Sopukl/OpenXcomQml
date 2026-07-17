@@ -76,7 +76,7 @@ CommendationState::CommendationState(std::vector<Soldier*> soldiersMedalled)
 
 	int row = 0;
 	int titleRow = 0;
-	const auto& commendationsList = _game->getMod()->getCommendationsList();
+	const auto& commendationsList = game.getMod()->getCommendationsList();
 	bool modularCommendation;
 	std::string noun;
 	bool titleChosen = true;
@@ -189,7 +189,7 @@ void CommendationState::lstSoldiersMouseClick(Action *)
  */
 void CommendationState::btnOkClick(Action *)
 {
-	_game->popState();
+	game.popState();
 }
 
 }

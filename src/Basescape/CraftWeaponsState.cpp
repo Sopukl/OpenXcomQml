@@ -114,14 +114,14 @@ CraftWeaponsState::CraftWeaponsState(Base *base, size_t craft, size_t weapon) : 
 	_lstWeapons->addRow(1, ltr("STR_NONE_UC").c_str());
 	_weapons.push_back(0);
 
-	for (auto& craftWeaponType : _game->getMod()->getCraftWeaponsList())
+	for (auto& craftWeaponType : game.getMod()->getCraftWeaponsList())
 	{
-		RuleCraftWeapon *w = _game->getMod()->getCraftWeapon(craftWeaponType);
+		RuleCraftWeapon *w = game.getMod()->getCraftWeapon(craftWeaponType);
 		const RuleCraft *c = _craft->getRules();
-		bool isResearched = _game->savedGame()->isResearched(w->getLauncherItem()->getRequirements());
+		bool isResearched = game.savedGame()->isResearched(w->getLauncherItem()->getRequirements());
 		if (w->getClipItem())
 		{
-			isResearched = isResearched && _game->savedGame()->isResearched(w->getClipItem()->getRequirements());
+			isResearched = isResearched && game.savedGame()->isResearched(w->getClipItem()->getRequirements());
 		}
 		if (isResearched && _base->getStorageItems().getItem(w->getLauncherItem()) > 0 && c->isValidWeaponSlot(weapon, w->getWeaponType()))
 		{
@@ -157,7 +157,7 @@ CraftWeaponsState::~CraftWeaponsState()
  */
 void CraftWeaponsState::btnCancelClick(Action *)
 {
-	_game->popState();
+	game.popState();
 }
 
 /**
@@ -178,13 +178,13 @@ void CraftWeaponsState::lstWeaponsClick(Action *)
 		{
 			if ((_craft->getMaxUnitsRaw() - _craft->getSpaceUsed() + diff1) < 0)
 			{
-				_game->popState();
-				_game->pushState(new ErrorMessageState(
+				game.popState();
+				game.pushState(new ErrorMessageState(
 					ltr("STR_NOT_ENOUGH_CARGO_SPACE"),
 					_palette,
-					_game->getMod()->getInterface("craftWeapons")->getElement("errorMessage")->color,
+					game.getMod()->getInterface("craftWeapons")->getElement("errorMessage")->color,
 					"BACK14.SCR",
-					_game->getMod()->getInterface("craftWeapons")->getElement("errorPalette")->color)
+					game.getMod()->getInterface("craftWeapons")->getElement("errorPalette")->color)
 				);
 				return;
 			}
@@ -198,13 +198,13 @@ void CraftWeaponsState::lstWeaponsClick(Action *)
 		{
 			if ((_craft->getMaxVehiclesAndLargeSoldiersRaw() - _craft->getNumVehiclesAndLargeSoldiers() + diff2) < 0)
 			{
-				_game->popState();
-				_game->pushState(new ErrorMessageState(
+				game.popState();
+				game.pushState(new ErrorMessageState(
 					ltr("STR_NOT_ENOUGH_HWP_CAPACITY"),
 					_palette,
-					_game->getMod()->getInterface("craftWeapons")->getElement("errorMessage")->color,
+					game.getMod()->getInterface("craftWeapons")->getElement("errorMessage")->color,
 					"BACK14.SCR",
-					_game->getMod()->getInterface("craftWeapons")->getElement("errorPalette")->color)
+					game.getMod()->getInterface("craftWeapons")->getElement("errorPalette")->color)
 				);
 				return;
 			}
@@ -224,9 +224,9 @@ void CraftWeaponsState::lstWeaponsClick(Action *)
 		double totalItemStorageSize = 0.0;
 		if (diff3 || diff4_b)
 		{
-			for (auto& itemType : _game->getMod()->getItemsList())
+			for (auto& itemType : game.getMod()->getItemsList())
 			{
-				RuleItem* rule = _game->getMod()->getItem(itemType);
+				RuleItem* rule = game.getMod()->getItem(itemType);
 
 				Unit* isVehicle = rule->getVehicleUnit();
 				int cQty = 0;
@@ -246,13 +246,13 @@ void CraftWeaponsState::lstWeaponsClick(Action *)
 		{
 			if ((_craft->getMaxItemsRaw() - totalItems + diff3) < 0)
 			{
-				_game->popState();
-				_game->pushState(new ErrorMessageState(
+				game.popState();
+				game.pushState(new ErrorMessageState(
 					ltr("STR_NOT_ENOUGH_STORAGE_SPACE_1"),
 					_palette,
-					_game->getMod()->getInterface("craftWeapons")->getElement("errorMessage")->color,
+					game.getMod()->getInterface("craftWeapons")->getElement("errorMessage")->color,
 					"BACK14.SCR",
-					_game->getMod()->getInterface("craftWeapons")->getElement("errorPalette")->color)
+					game.getMod()->getInterface("craftWeapons")->getElement("errorPalette")->color)
 				);
 				return;
 			}
@@ -261,13 +261,13 @@ void CraftWeaponsState::lstWeaponsClick(Action *)
 		{
 			if ((_craft->getMaxStorageSpaceRaw() - totalItemStorageSize + diff4) < 0.0)
 			{
-				_game->popState();
-				_game->pushState(new ErrorMessageState(
+				game.popState();
+				game.pushState(new ErrorMessageState(
 					ltr("STR_NOT_ENOUGH_STORAGE_SPACE_2"),
 					_palette,
-					_game->getMod()->getInterface("craftWeapons")->getElement("errorMessage")->color,
+					game.getMod()->getInterface("craftWeapons")->getElement("errorMessage")->color,
 					"BACK14.SCR",
-					_game->getMod()->getInterface("craftWeapons")->getElement("errorPalette")->color)
+					game.getMod()->getInterface("craftWeapons")->getElement("errorPalette")->color)
 				);
 				return;
 			}
@@ -296,7 +296,7 @@ void CraftWeaponsState::lstWeaponsClick(Action *)
 	}
 
 	_craft->checkup();
-	_game->popState();
+	game.popState();
 }
 
 /**

@@ -600,7 +600,7 @@ void OptionsVideoState::btnRootWindowedModeClick(Action *)
 {
 	if (_btnRootWindowedMode->getPressed())
 	{
-		_game->pushState(new SetWindowedRootState(_origin, this));
+		game.pushState(new SetWindowedRootState(_origin, this));
 	}
 	else
 	{
@@ -649,7 +649,7 @@ void OptionsVideoState::resize(int &dX, int &dY)
 void OptionsVideoState::handle(Action *action)
 {
 	State::handle(action);
-	if (action->getDetails()->type == SDL_KEYDOWN && action->getDetails()->key.keysym.sym == SDLK_g && _game->isCtrlPressed())
+	if (action->getDetails()->type == SDL_KEYDOWN && action->getDetails()->key.keysym.sym == SDLK_g && game.isCtrlPressed())
 	{
 		_btnLockMouse->setPressed(options1.captureMouse() == SDL_GRAB_ON);
 	}

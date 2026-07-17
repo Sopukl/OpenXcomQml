@@ -96,7 +96,7 @@ CraftPatrolState::~CraftPatrolState()
  */
 void CraftPatrolState::btnOkClick(Action *)
 {
-	_game->popState();
+	game.popState();
 }
 
 /**
@@ -105,8 +105,8 @@ void CraftPatrolState::btnOkClick(Action *)
  */
 void CraftPatrolState::btnRedirectClick(Action *)
 {
-	_game->popState();
-	_game->pushState(new GeoscapeCraftState(_craft, _globe, 0, false));
+	game.popState();
+	game.pushState(new GeoscapeCraftState(_craft, _globe, 0, false));
 }
 
 }

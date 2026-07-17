@@ -132,7 +132,7 @@ ResearchState::~ResearchState()
  */
 void ResearchState::btnOkClick(Action *)
 {
-	_game->popState();
+	game.popState();
 }
 
 /**
@@ -141,8 +141,8 @@ void ResearchState::btnOkClick(Action *)
  */
 void ResearchState::btnNewClick(Action *)
 {
-	bool sortByCost = _game->isCtrlPressed() && _game->isAltPressed();
-	_game->pushState(new NewResearchListState(_base, sortByCost));
+	bool sortByCost = game.isCtrlPressed() && game.isAltPressed();
+	game.pushState(new NewResearchListState(_base, sortByCost));
 }
 
 /**
@@ -158,7 +158,7 @@ void ResearchState::onSelectProject(Action *action)
 	}
 
 	const std::vector<ResearchProject *> & baseProjects(_base->getResearch());
-	_game->pushState(new ResearchInfoState(_base, baseProjects[_lstResearch->getSelectedRow()]));
+	game.pushState(new ResearchInfoState(_base, baseProjects[_lstResearch->getSelectedRow()]));
 }
 
 /**
@@ -175,7 +175,7 @@ void ResearchState::onOpenTechTreeViewer(Action *action)
 
 	const std::vector<ResearchProject *> & baseProjects(_base->getResearch());
 	const RuleResearch *selectedTopic = baseProjects[_lstResearch->getSelectedRow()]->getRules();
-	_game->pushState(new TechTreeViewerState(selectedTopic, 0));
+	game.pushState(new TechTreeViewerState(selectedTopic, 0));
 }
 
 /**
@@ -190,7 +190,7 @@ void ResearchState::lstResearchMousePress(Action *action)
 	}
 
 	int change = options1.oxceResearchScrollSpeed();
-	if (_game->isCtrlPressed())
+	if (game.isCtrlPressed())
 		change = options1.oxceResearchScrollSpeedWithCtrl();
 
 	if (action->getDetails()->button.button == SDL_BUTTON_WHEELUP)
@@ -224,7 +224,7 @@ void ResearchState::lstResearchMousePress(Action *action)
  */
 void ResearchState::onCurrentGlobalResearchClick(Action *)
 {
-	_game->pushState(new GlobalResearchState(true));
+	game.pushState(new GlobalResearchState(true));
 }
 /**
  * Updates the research list
@@ -278,11 +278,11 @@ void ResearchState::lstResearchLeftArrowClick(Action* action)
 	unsigned int row = _lstResearch->getSelectedRow();
 	if (row > 0)
 	{
-		if (_game->isLeftClick(action, true))
+		if (game.isLeftClick(action, true))
 		{
 			moveTopicUp(action, row);
 		}
-		else if (_game->isRightClick(action, true))
+		else if (game.isRightClick(action, true))
 		{
 			moveTopicUp(action, row, true);
 		}
@@ -329,11 +329,11 @@ void ResearchState::lstResearchRightArrowClick(Action* action)
 	size_t numTopics = _base->getResearch().size();
 	if (0 < numTopics && INT_MAX >= numTopics && row < numTopics - 1)
 	{
-		if (_game->isLeftClick(action, true))
+		if (game.isLeftClick(action, true))
 		{
 			moveTopicDown(action, row);
 		}
-		else if (_game->isRightClick(action, true))
+		else if (game.isRightClick(action, true))
 		{
 			moveTopicDown(action, row, true);
 		}

@@ -111,7 +111,7 @@ MonthlyReportState::MonthlyReportState(Globe *globe) : _gameOver(0), _ratingTota
 
 	calculateChanges();
 
-	int month = _game->savedGame()->getTime()->getMonth() - 1, year = _game->savedGame()->getTime()->getYear();
+	int month = game.savedGame()->getTime()->getMonth() - 1, year = game.savedGame()->getTime()->getYear();
 	if (month == 0)
 	{
 		month = 12;
@@ -137,10 +137,10 @@ MonthlyReportState::MonthlyReportState(Globe *globe) : _gameOver(0), _ratingTota
 	_txtMonth->setText(ltr("STR_MONTH").arg(ltr(m)).arg(year));
 
 	// Calculate rating
-	int difficulty_threshold = _game->getMod()->getDefeatScore() + 100 * _game->savedGame()->getDifficultyCoefficient();
+	int difficulty_threshold = game.getMod()->getDefeatScore() + 100 * game.savedGame()->getDifficultyCoefficient();
 	{
-		int diff = _game->savedGame()->getDifficulty();
-		auto& custom = _game->getMod()->getMonthlyRatingThresholds();
+		int diff = game.savedGame()->getDifficulty();
+		auto& custom = game.getMod()->getMonthlyRatingThresholds();
 		if (custom.size() > (size_t)diff)
 		{
 			// only negative values are allowed!
@@ -168,11 +168,11 @@ MonthlyReportState::MonthlyReportState(Globe *globe) : _gameOver(0), _ratingTota
 		rating = ltr("STR_RATING_EXCELLENT");
 	}
 
-	if (!_game->getMod()->getMonthlyRatings()->empty())
+	if (!game.getMod()->getMonthlyRatings()->empty())
 	{
 		rating = "";
 		int temp = INT_MIN;
-		for (auto& pair : *_game->getMod()->getMonthlyRatings())
+		for (auto& pair : *game.getMod()->getMonthlyRatings())
 		{
 			if (pair.first > temp && pair.first <= _ratingTotal)
 			{
@@ -185,7 +185,7 @@ MonthlyReportState::MonthlyReportState(Globe *globe) : _gameOver(0), _ratingTota
 	_txtRating->setText(ltr("STR_MONTHLY_RATING").arg(_ratingTotal).arg(rating));
 
 	std::ostringstream ss;
-	ss << ltr("STR_INCOME") << "> " << Unicode::TOK_COLOR_FLIP << Unicode::formatFunding(_game->savedGame()->getCountryFunding());
+	ss << ltr("STR_INCOME") << "> " << Unicode::TOK_COLOR_FLIP << Unicode::formatFunding(game.savedGame()->getCountryFunding());
 	ss << " (";
 	if (_fundingDiff > 0)
 		ss << '+';
@@ -193,14 +193,14 @@ MonthlyReportState::MonthlyReportState(Globe *globe) : _gameOver(0), _ratingTota
 	_txtIncome->setText(ss.str());
 
 	std::ostringstream ss2;
-	ss2 << ltr("STR_MAINTENANCE") << "> " << Unicode::TOK_COLOR_FLIP << Unicode::formatFunding(_game->savedGame()->getBaseMaintenance());
+	ss2 << ltr("STR_MAINTENANCE") << "> " << Unicode::TOK_COLOR_FLIP << Unicode::formatFunding(game.savedGame()->getBaseMaintenance());
 	_txtMaintenance->setText(ss2.str());
 
-	int performanceBonus = _game->getMod()->getPerformanceBonus(_ratingTotal);
+	int performanceBonus = game.getMod()->getPerformanceBonus(_ratingTotal);
 	if (performanceBonus > 0)
 	{
 		// increase funds by performance bonus
-		_game->savedGame()->setFunds(_game->savedGame()->getFunds() + performanceBonus);
+		game.savedGame()->setFunds(game.savedGame()->getFunds() + performanceBonus);
 		// display
 		std::ostringstream ss4;
 		ss4 << ltr("STR_PERFORMANCE_BONUS") << "> " << Unicode::TOK_COLOR_FLIP << Unicode::formatFunding(performanceBonus);
@@ -220,7 +220,7 @@ MonthlyReportState::MonthlyReportState(Globe *globe) : _gameOver(0), _ratingTota
 	}
 
 	std::ostringstream ss3;
-	ss3 << ltr("STR_BALANCE") << "> " << Unicode::TOK_COLOR_FLIP << Unicode::formatFunding(_game->savedGame()->getFunds());
+	ss3 << ltr("STR_BALANCE") << "> " << Unicode::TOK_COLOR_FLIP << Unicode::formatFunding(game.savedGame()->getFunds());
 	_txtBalance->setText(ss3.str());
 
 	_txtDesc->setWordWrap(true);
@@ -252,9 +252,9 @@ MonthlyReportState::MonthlyReportState(Globe *globe) : _gameOver(0), _ratingTota
 
 	if (!_gameOver)
 	{
-		if (_game->savedGame()->getFunds() <= _game->getMod()->getDefeatFunds())
+		if (game.savedGame()->getFunds() <= game.getMod()->getDefeatFunds())
 		{
-			if (_game->savedGame()->getWarned())
+			if (game.savedGame()->getWarned())
 			{
 				ss5.str("");
 				ss5 << ltr("STR_YOU_HAVE_NOT_SUCCEEDED");
@@ -267,14 +267,14 @@ MonthlyReportState::MonthlyReportState(Globe *globe) : _gameOver(0), _ratingTota
 			else
 			{
 				ss5 << "\n\n" << ltr("STR_COUNCIL_REDUCE_DEBTS");
-				_game->savedGame()->setWarned(true);
+				game.savedGame()->setWarned(true);
 				resetWarning = false;
 			}
 		}
 	}
-	if (resetWarning && _game->savedGame()->getWarned())
+	if (resetWarning && game.savedGame()->getWarned())
 	{
-		_game->savedGame()->setWarned(false);
+		game.savedGame()->setWarned(false);
 	}
 
 	ss5 << countryList(_happyList, "STR_COUNTRY_IS_PARTICULARLY_PLEASED", "STR_COUNTRIES_ARE_PARTICULARLY_HAPPY");
@@ -287,18 +287,18 @@ MonthlyReportState::MonthlyReportState(Globe *globe) : _gameOver(0), _ratingTota
 	// Give modders some handles on political situation
 	for (const auto& traitorName : _pactList)
 	{
-		auto traitor = _game->getMod()->getCountry(traitorName, false);
+		auto traitor = game.getMod()->getCountry(traitorName, false);
 		if (traitor)
 		{
-			_game->savedGame()->spawnEvent(traitor->getSignedPactEvent());
+			game.savedGame()->spawnEvent(traitor->getSignedPactEvent());
 		}
 	}
 	for (const auto& exTraitorName : _cancelPactList)
 	{
-		auto exTraitor = _game->getMod()->getCountry(exTraitorName, false);
+		auto exTraitor = game.getMod()->getCountry(exTraitorName, false);
 		if (exTraitor)
 		{
-			_game->savedGame()->spawnEvent(exTraitor->getRejoinedXcomEvent());
+			game.savedGame()->spawnEvent(exTraitor->getRejoinedXcomEvent());
 		}
 	}
 }
@@ -318,17 +318,17 @@ void MonthlyReportState::btnOkClick(Action *)
 {
 	if (!_gameOver)
 	{
-		_game->popState();
+		game.popState();
 		// Award medals for service time
 		// Iterate through all your bases
-		for (auto* xbase : _game->savedGame()->bases())
+		for (auto* xbase : game.savedGame()->bases())
 		{
 			// Iterate through all your soldiers
 			for (auto* soldier : xbase->soldiers())
 			{
 				// Award medals to eligible soldiers
 				soldier->getDiary()->addMonthlyService();
-				if (soldier->getDiary()->manageCommendations(_game->getMod(), _game->savedGame(), soldier))
+				if (soldier->getDiary()->manageCommendations(game.getMod(), game.savedGame(), soldier))
 				{
 					_soldiersMedalled.push_back(soldier);
 				}
@@ -336,55 +336,55 @@ void MonthlyReportState::btnOkClick(Action *)
 		}
 		if (!_soldiersMedalled.empty())
 		{
-			_game->pushState(new CommendationState(_soldiersMedalled));
+			game.pushState(new CommendationState(_soldiersMedalled));
 		}
 
 		bool psi = false;
-		for (auto* xbase : _game->savedGame()->bases())
+		for (auto* xbase : game.savedGame()->bases())
 		{
 			psi = psi || xbase->getAvailablePsiLabs();
 		}
 		if (psi && !options1.anytimePsiTraining())
 		{
-			_game->pushState(new PsiTrainingState);
+			game.pushState(new PsiTrainingState);
 		}
 		// Autosave
-		if (_game->savedGame()->isIronman())
+		if (game.savedGame()->isIronman())
 		{
-			_game->pushState(new SaveGameState(OPT_GEOSCAPE, SAVE_IRONMAN, _palette));
+			game.pushState(new SaveGameState(OPT_GEOSCAPE, SAVE_IRONMAN, _palette));
 		}
 		else if (options1.autosave())
 		{
-			_game->pushState(new SaveGameState(OPT_GEOSCAPE, SAVE_AUTO_GEOSCAPE, _palette));
+			game.pushState(new SaveGameState(OPT_GEOSCAPE, SAVE_AUTO_GEOSCAPE, _palette));
 		}
 	}
 	else
 	{
 		if (_txtFailure->getVisible())
 		{
-			_game->popState(); // in case the cutscene is not marked as "game over" (by accident or not) let's return to the geoscape
+			game.popState(); // in case the cutscene is not marked as "game over" (by accident or not) let's return to the geoscape
 
 			std::string cutsceneId;
 			if (_gameOver == 1)
-				cutsceneId = _game->getMod()->getLoseRatingCutscene();
+				cutsceneId = game.getMod()->getLoseRatingCutscene();
 			else
-				cutsceneId = _game->getMod()->getLoseMoneyCutscene();
+				cutsceneId = game.getMod()->getLoseMoneyCutscene();
 
-			const RuleVideo *videoRule = _game->getMod()->getVideo(cutsceneId, true);
+			const RuleVideo *videoRule = game.getMod()->getVideo(cutsceneId, true);
 			if (videoRule->getLoseGame())
 			{
-				_game->savedGame()->setEnding(END_LOSE);
+				game.savedGame()->setEnding(END_LOSE);
 			}
 
-			_game->pushState(new CutsceneState(cutsceneId));
-			if (_game->savedGame()->isIronman())
+			game.pushState(new CutsceneState(cutsceneId));
+			if (game.savedGame()->isIronman())
 			{
-				_game->pushState(new SaveGameState(OPT_GEOSCAPE, SAVE_IRONMAN, _palette));
+				game.pushState(new SaveGameState(OPT_GEOSCAPE, SAVE_IRONMAN, _palette));
 			}
 		}
 		else
 		{
-			_window->setColor(_game->getMod()->getInterface("monthlyReport")->getElement("window")->color2);
+			_window->setColor(game.getMod()->getInterface("monthlyReport")->getElement("window")->color2);
 			_txtTitle->setVisible(false);
 			_txtMonth->setVisible(false);
 			_txtRating->setVisible(false);
@@ -396,7 +396,7 @@ void MonthlyReportState::btnOkClick(Action *)
 			_btnOk->setVisible(false);
 			_btnBigOk->setVisible(true);
 			_txtFailure->setVisible(true);
-			_game->getMod()->playMusic("GMLOSE");
+			game.getMod()->playMusic("GMLOSE");
 		}
 	}
 }
@@ -414,13 +414,13 @@ void MonthlyReportState::calculateChanges()
 	int xcomSubTotal = 0;
 	int xcomTotal = 0;
 	int alienTotal = 0;
-	int monthOffset = _game->savedGame()->getFundsList().size() - 2;
-	int lastMonthOffset = _game->savedGame()->getFundsList().size() - 3;
+	int monthOffset = game.savedGame()->getFundsList().size() - 2;
+	int lastMonthOffset = game.savedGame()->getFundsList().size() - 3;
 	if (lastMonthOffset < 0)
 		lastMonthOffset += 2;
 	// update activity meters, calculate a total score based on regional activity
 	// and gather last month's score
-	for (auto* region : _game->savedGame()->getRegions())
+	for (auto* region : game.savedGame()->getRegions())
 	{
 		region->newMonth();
 		if (region->getActivityXcom().size() > 2)
@@ -432,31 +432,31 @@ void MonthlyReportState::calculateChanges()
 	// and shouldn't influence each country's decision.
 
 	// the council is more lenient after the first month
-	if (_game->savedGame()->getMonthsPassed() > 1)
-		_game->savedGame()->getResearchScores().at(monthOffset) += 400;
+	if (game.savedGame()->getMonthsPassed() > 1)
+		game.savedGame()->getResearchScores().at(monthOffset) += 400;
 
-	xcomTotal = _game->savedGame()->getResearchScores().at(monthOffset) + xcomSubTotal;
+	xcomTotal = game.savedGame()->getResearchScores().at(monthOffset) + xcomSubTotal;
 
-	if (_game->savedGame()->getResearchScores().size() > 2)
-		_lastMonthsRating += _game->savedGame()->getResearchScores().at(lastMonthOffset);
+	if (game.savedGame()->getResearchScores().size() > 2)
+		_lastMonthsRating += game.savedGame()->getResearchScores().at(lastMonthOffset);
 
 	// now that we have our totals we can send the relevant info to the countries
 	// and have them make their decisions weighted on the council's perspective.
-	const RuleAlienMission *infiltration = _game->getMod()->getRandomMission(OBJECTIVE_INFILTRATION, _game->savedGame()->getMonthsPassed());
+	const RuleAlienMission *infiltration = game.getMod()->getRandomMission(OBJECTIVE_INFILTRATION, game.savedGame()->getMonthsPassed());
 	int pactScore = 0;
 	if (infiltration)
 	{
 		pactScore = infiltration->getPoints();
 	}
-	int averageFunding = _game->savedGame()->getCountryFunding() / _game->savedGame()->countries().size() / 1000 * 1000;
-	for (auto* country : _game->savedGame()->countries())
+	int averageFunding = game.savedGame()->getCountryFunding() / game.savedGame()->countries().size() / 1000 * 1000;
+	for (auto* country : game.savedGame()->countries())
 	{
 		// check pact status before and after, because scripting can arbitrarily form/break pacts
 		bool wasInPact = country->getPact();
 
 		// determine satisfaction level, sign pacts, adjust funding
 		// and update activity meters,
-		country->newMonth(xcomTotal, alienTotal, pactScore, averageFunding, _game->savedGame());
+		country->newMonth(xcomTotal, alienTotal, pactScore, averageFunding, game.savedGame());
 		// and after they've made their decisions, calculate the difference, and add
 		// them to the appropriate lists.
 		_fundingDiff += country->funding().back() - country->funding().at(country->funding().size()-2);

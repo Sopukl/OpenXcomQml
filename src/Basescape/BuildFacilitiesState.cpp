@@ -105,15 +105,15 @@ void BuildFacilitiesState::populateBuildList()
 	RuleBaseFacilityFunctions forbiddenBaseFunc = _base->getForbiddenBaseFunc({});
 	RuleBaseFacilityFunctions futureBaseFunc = _base->getFutureBaseFunc({});
 
-	for (auto& facilityType : _game->getMod()->getBaseFacilitiesList())
+	for (auto& facilityType : game.getMod()->getBaseFacilitiesList())
 	{
-		RuleBaseFacility *rule = _game->getMod()->getBaseFacility(facilityType);
+		RuleBaseFacility *rule = game.getMod()->getBaseFacility(facilityType);
 		if (!rule->isAllowedForBaseType(_base->isFakeUnderwater()))
 		{
 			continue;
 		}
 		if ((rule->isLift() && !rule->isUpgradeOnly())
-			|| !_game->savedGame()->isResearched(rule->getRequirements()))
+			|| !game.savedGame()->isResearched(rule->getRequirements()))
 		{
 			continue;
 		}
@@ -205,7 +205,7 @@ void BuildFacilitiesState::init()
  */
 void BuildFacilitiesState::btnOkClick(Action *)
 {
-	_game->popState();
+	game.popState();
 }
 
 /**
@@ -228,7 +228,7 @@ void BuildFacilitiesState::lstFacilitiesClick(Action *action)
 	{
 		return;
 	}
-	_game->pushState(new PlaceFacilityState(_base, _facilities[index]));
+	game.pushState(new PlaceFacilityState(_base, _facilities[index]));
 }
 
 }

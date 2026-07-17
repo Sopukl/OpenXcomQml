@@ -18,7 +18,6 @@
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "../Engine/InteractiveSurface.h"
-#include "../Engine/Options.h"
 #include "../Engine/Collections.h"
 #include "../Mod/MapData.h"
 #include "Position.h"
@@ -71,7 +70,6 @@ private:
 	bool _nightVisionOn;
 	int _debugVisionMode;
 	int _nvColor;
-	Game *_game;
 	SavedBattleGame *_save;
 	bool _isTFTD;
 	Surface *_arrow;
@@ -115,7 +113,7 @@ private:
 	bool _showInfoOnCursor;
 public:
 	/// Creates a new map at the specified position and size.
-	Map(Game* game, int width, int height, int x, int y, int visibleMapHeight);
+	Map(int width, int height, int x, int y, int visibleMapHeight);
 	/// Cleans up the map.
 	~Map();
 	/// Initializes the map.

@@ -78,7 +78,7 @@ NewResearchListState::NewResearchListState(Base *base, bool sortByCost) : _base(
 
 	_colorNormal = _lstResearch->getColor();
 	_colorNew = options1.oxceHighlightNewTopics() ? _lstResearch->getSecondaryColor() : _colorNormal;
-	_colorHidden = _game->getMod()->getInterface("selectNewResearch")->getElement("listExtended")->color;
+	_colorHidden = game.getMod()->getInterface("selectNewResearch")->getElement("listExtended")->color;
 
 	centerAllSurfaces();
 
@@ -92,7 +92,7 @@ NewResearchListState::NewResearchListState(Base *base, bool sortByCost) : _base(
 	_btnOK->onKeyboardPress((ActionHandler)&NewResearchListState::btnOKClick, options1.keyCancel());
 	_btnOK->onKeyboardPress((ActionHandler)&NewResearchListState::btnMarkAllAsSeenClick, options1.keyMarkAllAsSeen());
 
-	_isSortingEnabled = _game->getMod()->getEnableNewResearchSorting();
+	_isSortingEnabled = game.getMod()->getEnableNewResearchSorting();
 	if (_isSortingEnabled)
 	{
 		_btnShowOnlyNew->setVisible(false);
@@ -152,15 +152,15 @@ void NewResearchListState::init()
  */
 void NewResearchListState::onClick(Action* action)
 {
-	if (_game->isLeftClick(action, true))
+	if (game.isLeftClick(action, true))
 	{
 		onSelectProject(action);
 	}
-	else if (_game->isRightClick(action, true))
+	else if (game.isRightClick(action, true))
 	{
 		onToggleProjectStatus(action);
 	}
-	else if (_game->isMiddleClick(action, true))
+	else if (game.isMiddleClick(action, true))
 	{
 		onOpenTechTreeViewer(action);
 	}
@@ -173,7 +173,7 @@ void NewResearchListState::onClick(Action* action)
 void NewResearchListState::onSelectProject(Action *)
 {
 	_lstScroll = _lstResearch->getScroll();
-	_game->pushState(new ResearchInfoState(_base, _projects[_lstResearch->getSelectedRow()]));
+	game.pushState(new ResearchInfoState(_base, _projects[_lstResearch->getSelectedRow()]));
 }
 
 /**
@@ -190,7 +190,7 @@ void NewResearchListState::onToggleProjectStatus(Action *)
 
 	// change status
 	const std::string& rule = _projects[_lstResearch->getSelectedRow()]->getName();
-	int oldState = _game->savedGame()->getResearchRuleStatus(rule);
+	int oldState = game.savedGame()->getResearchRuleStatus(rule);
 	int newState = RuleResearch::RESEARCH_STATUS_NEW;
 
 	if (oldState == RuleResearch::RESEARCH_STATUS_NEW)
@@ -202,7 +202,7 @@ void NewResearchListState::onToggleProjectStatus(Action *)
 		newState = _isSortingEnabled ? RuleResearch::RESEARCH_STATUS_HIDDEN : RuleResearch::RESEARCH_STATUS_NEW;
 	}
 
-	_game->savedGame()->setResearchRuleStatus(rule, newState);
+	game.savedGame()->setResearchRuleStatus(rule, newState);
 
 	if (newState == RuleResearch::RESEARCH_STATUS_HIDDEN)
 	{
@@ -226,7 +226,7 @@ void NewResearchListState::onOpenTechTreeViewer(Action *)
 {
 	_lstScroll = _lstResearch->getScroll();
 	const RuleResearch *selectedTopic = _projects[_lstResearch->getSelectedRow()];
-	_game->pushState(new TechTreeViewerState(selectedTopic, 0));
+	game.pushState(new TechTreeViewerState(selectedTopic, 0));
 }
 
 /**
@@ -235,7 +235,7 @@ void NewResearchListState::onOpenTechTreeViewer(Action *)
  */
 void NewResearchListState::btnOKClick(Action *)
 {
-	_game->popState();
+	game.popState();
 }
 
 /**
@@ -303,7 +303,7 @@ void NewResearchListState::fillProjectList(bool markAllAsSeen)
 	_projects.clear();
 	_lstResearch->clearList();
 	// Note: this is the *only* place where this method is called with considerDebugMode = true
-	_game->savedGame()->getAvailableResearchProjects(_projects, _game->getMod() , _base, true);
+	game.savedGame()->getAvailableResearchProjects(_projects, game.getMod() , _base, true);
 	size_t selectedSort = _cbxSort->getSelected();
 	if (selectedSort == 1 || (selectedSort == 3 && _sortByCost))
 	{
@@ -326,7 +326,7 @@ void NewResearchListState::fillProjectList(bool markAllAsSeen)
 	while (researchRuleIt != _projects.end())
 	{
 		rule = (*researchRuleIt);
-		ruleStatus = _game->savedGame()->getResearchRuleStatus(rule->getName());
+		ruleStatus = game.savedGame()->getResearchRuleStatus(rule->getName());
 
 		// filter
 		if (_btnShowOnlyNew->getPressed() || selectedSort == 3)
@@ -386,7 +386,7 @@ void NewResearchListState::fillProjectList(bool markAllAsSeen)
 			if (markAllAsSeen)
 			{
 				// mark all (filtered) research items as normal
-				_game->savedGame()->setResearchRuleStatus(rule->getName(), RuleResearch::RESEARCH_STATUS_NORMAL);
+				game.savedGame()->setResearchRuleStatus(rule->getName(), RuleResearch::RESEARCH_STATUS_NORMAL);
 			}
 			else
 			{

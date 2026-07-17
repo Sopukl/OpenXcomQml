@@ -45,7 +45,7 @@ ConfirmLoadState::ConfirmLoadState(OptionsOrigin origin, const std::string &file
 	_txtText = new Text(204, 58, 58, 60);
 
 	// Set palette
-	setInterface("saveMenus", false, _game->savedGame() ? _game->savedGame()->getSavedBattle() : 0);
+	setInterface("saveMenus", false, game.savedGame() ? game.savedGame()->getSavedBattle() : 0);
 
 	add(_window, "confirmLoad", "saveMenus");
 	add(_btnYes, "confirmLoad", "saveMenus");
@@ -87,8 +87,8 @@ ConfirmLoadState::~ConfirmLoadState()
  */
 void ConfirmLoadState::btnYesClick(Action *)
 {
-	_game->popState();
-	_game->pushState(new LoadGameState(_origin, _fileName, _palette));
+	game.popState();
+	game.pushState(new LoadGameState(_origin, _fileName, _palette));
 }
 
 /**
@@ -97,7 +97,7 @@ void ConfirmLoadState::btnYesClick(Action *)
  */
 void ConfirmLoadState::btnNoClick(Action *)
 {
-	_game->popState();
+	game.popState();
 }
 
 }

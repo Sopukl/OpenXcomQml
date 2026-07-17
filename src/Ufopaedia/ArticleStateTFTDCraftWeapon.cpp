@@ -35,9 +35,9 @@ namespace OpenXcom
 	{
 		_txtInfo->setHeight(88);
 
-		_btnInfo->setVisible(_game->getMod()->getShowPediaInfoButton());
+		_btnInfo->setVisible(game.getMod()->getShowPediaInfoButton());
 
-		RuleCraftWeapon *weapon = _game->getMod()->getCraftWeapon(defs->id, true);
+		RuleCraftWeapon *weapon = game.getMod()->getCraftWeapon(defs->id, true);
 
 		CraftWeaponCategory category = CWC_WEAPON;
 		int offset = 0;

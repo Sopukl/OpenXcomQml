@@ -25,8 +25,6 @@
 
 namespace OpenXcom
 {
-
-class Game;
 class Surface;
 class InteractiveSurface;
 class Window;
@@ -50,7 +48,6 @@ class State: public QObject
 	friend class Timer;
 	Q_OBJECT
 protected:
-	static Game *_game;
 	std::vector<Surface*> _surfaces;
 	std::vector<Surface*> _surfacesOwned;
 	bool _screen;
@@ -123,8 +120,6 @@ public:
 	void lowerAllSurfaces();
 	/// switch the colours to use the battlescape palette.
 	void applyBattlescapeTheme(const std::string& category);
-	/// Sets game object pointer
-	static void setGamePtr(Game* game);
 	/// Sets a modal surface.
 	void setModal(InteractiveSurface *surface);
 

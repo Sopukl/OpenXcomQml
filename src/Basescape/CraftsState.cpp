@@ -151,12 +151,12 @@ void CraftsState::initList(size_t scrl)
  */
 void CraftsState::btnOkClick(Action *)
 {
-	_game->popState();
+	game.popState();
 
-	if (_game->savedGame()->getMonthsPassed() > -1 && options1.storageLimitsEnforced() && _base->storesOverfull())
+	if (game.savedGame()->getMonthsPassed() > -1 && options1.storageLimitsEnforced() && _base->storesOverfull())
 	{
-		_game->pushState(new SellState(_base, 0));
-		_game->pushState(new ErrorMessageState(ltr("STR_STORAGE_EXCEEDED").arg(_base->getName()), _palette, _game->getMod()->getInterface("craftSelect")->getElement("errorMessage")->color, "BACK01.SCR", _game->getMod()->getInterface("craftSelect")->getElement("errorPalette")->color));
+		game.pushState(new SellState(_base, 0));
+		game.pushState(new ErrorMessageState(ltr("STR_STORAGE_EXCEEDED").arg(_base->getName()), _palette, game.getMod()->getInterface("craftSelect")->getElement("errorMessage")->color, "BACK01.SCR", game.getMod()->getInterface("craftSelect")->getElement("errorPalette")->color));
 	}
 }
 
@@ -169,16 +169,16 @@ void CraftsState::lstCraftsClick(Action *action)
 	auto& crafts = _base->crafts();
 	auto row = _lstCrafts->getSelectedRow();
 
-	if (_game->isLeftClick(action))
+	if (game.isLeftClick(action))
 	{
 		if (crafts[row]->getStatus() != "STR_OUT")
 		{
-			_game->pushState(new CraftInfoState(_base, row));
+			game.pushState(new CraftInfoState(_base, row));
 		}
 	}
-	else if (_game->isRightClick(action))
+	else if (game.isRightClick(action))
 	{
-		bool shift = _game->isShiftPressed();
+		bool shift = game.isShiftPressed();
 		if (shift && row < (crafts.size() - 1))
 		{
 			// move craft down in the list
@@ -216,7 +216,7 @@ void CraftsState::lstCraftsClick(Action *action)
 			initList(_lstCrafts->getScroll());
 		}
 	}
-	else if (_game->isMiddleClick(action))
+	else if (game.isMiddleClick(action))
 	{
 		std::string articleId = crafts[row]->getRules()->getType();
 		Ufopaedia::openArticle(articleId);

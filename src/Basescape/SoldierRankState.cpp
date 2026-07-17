@@ -83,7 +83,7 @@ SoldierRankState::SoldierRankState(Base* base, size_t soldierId) : _base(base), 
 	_lstRanks->setBackground(_window);
 	_lstRanks->setMargin(8);
 
-	PromotionOpenings openings = PromotionOpenings(_game->savedGame()->getAllActiveSoldiers(), _game->getMod());
+	PromotionOpenings openings = PromotionOpenings(game.savedGame()->getAllActiveSoldiers(), game.getMod());
 
 	// a copy is unavoidable here because me may want to modify this set.
 	std::vector<std::string> rankStringsCopy = soldier->getRules()->getRankStrings();
@@ -135,7 +135,7 @@ SoldierRankState::~SoldierRankState()
  */
 void SoldierRankState::btnCancelClick(Action*)
 {
-	_game->popState();
+	game.popState();
 }
 
 /**
@@ -150,7 +150,7 @@ void SoldierRankState::lstRankClick(Action*)
 		Soldier* soldier = _base->soldiers().at(_soldierId);
 		soldier->setRank(selectedRank.rank);
 
-		_game->popState();
+		game.popState();
 	}
 }
 

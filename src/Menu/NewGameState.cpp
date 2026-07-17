@@ -53,7 +53,7 @@ NewGameState::NewGameState()
 	_txtTitle = new Text(192, 9, 64, 20);
 	_txtIronman = new Text(90, 24, 162, 135);
 
-	switch (_game->getMod()->getStartingDifficulty())
+	switch (game.getMod()->getStartingDifficulty())
 	{
 	case 0:
 		_difficulty = _btnBeginner;
@@ -165,18 +165,18 @@ void NewGameState::btnOkClick(Action *)
 	}
 
 	// Reset touch flags
-	_game->resetTouchButtonFlags();
+	game.resetTouchButtonFlags();
 
-	SavedGame *save = _game->getMod()->newSave(diff);
+	SavedGame *save = game.getMod()->newSave(diff);
 	save->setDifficulty(diff);
 	save->setIronman(_btnIronman->getPressed());
-	_game->setSavedGame(save);
+	game.setSavedGame(save);
 
 	GeoscapeState *gs = new GeoscapeState;
-	_game->setState(gs);
+	game.setState(gs);
 	gs->init();
 
-	auto* base = _game->savedGame()->bases().back();
+	auto* base = game.savedGame()->bases().back();
 	if (base->getMarker() != -1)
 	{
 		// location known already
@@ -188,18 +188,18 @@ void NewGameState::btnOkClick(Action *)
 		if (base->getName().empty())
 		{
 			// fixed location, custom name
-			_game->pushState(new BaseNameState(base, gs->getGlobe(), true, true));
+			game.pushState(new BaseNameState(base, gs->getGlobe(), true, true));
 		}
 		else if (options1.customInitialBase())
 		{
 			// fixed location, fixed name
-			_game->pushState(new PlaceLiftState(base, gs->getGlobe(), true));
+			game.pushState(new PlaceLiftState(base, gs->getGlobe(), true));
 		}
 	}
 	else
 	{
 		// custom location, custom name
-		_game->pushState(new BuildNewBaseState(base, gs->getGlobe(), true));
+		game.pushState(new BuildNewBaseState(base, gs->getGlobe(), true));
 	}
 }
 
@@ -209,8 +209,8 @@ void NewGameState::btnOkClick(Action *)
  */
 void NewGameState::btnCancelClick(Action *)
 {
-	_game->setSavedGame(0);
-	_game->popState();
+	game.setSavedGame(0);
+	game.popState();
 }
 
 }

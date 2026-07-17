@@ -82,7 +82,7 @@ TransferItemsState::TransferItemsState(Base *baseFrom, Base *baseTo, DebriefingS
 	// Set palette
 	setInterface("transferMenu");
 
-	_ammoColor = _game->getMod()->getInterface("transferMenu")->getElement("ammoColor")->color;
+	_ammoColor = game.getMod()->getInterface("transferMenu")->getElement("ammoColor")->color;
 
 	add(_window, "window", "transferMenu");
 	add(_btnQuickSearch, "button", "transferMenu");
@@ -195,9 +195,9 @@ TransferItemsState::TransferItemsState(Base *baseFrom, Base *baseTo, DebriefingS
 			_cats.push_back(cat);
 		}
 	}
-	for (auto& itemType : _game->getMod()->getItemsList())
+	for (auto& itemType : game.getMod()->getItemsList())
 	{
-		RuleItem *rule = _game->getMod()->getItem(itemType, true);
+		RuleItem *rule = game.getMod()->getItem(itemType, true);
 		int qty = _baseFrom->getStorageItems().getItem(rule);
 		if (_debriefingState != 0)
 		{
@@ -216,7 +216,7 @@ TransferItemsState::TransferItemsState(Base *baseFrom, Base *baseTo, DebriefingS
 	}
 
 	_vanillaCategories = _cats.size();
-	if (_game->getMod()->getDisplayCustomCategories() > 0)
+	if (game.getMod()->getDisplayCustomCategories() > 0)
 	{
 		bool hasUnassigned = false;
 
@@ -241,7 +241,7 @@ TransferItemsState::TransferItemsState(Base *baseFrom, Base *baseTo, DebriefingS
 			}
 		}
 		// then use them nicely in order
-		if (_game->getMod()->getDisplayCustomCategories() == 1)
+		if (game.getMod()->getDisplayCustomCategories() == 1)
 		{
 			_cats.clear();
 			_cats.push_back("STR_ALL_ITEMS");
@@ -253,7 +253,7 @@ TransferItemsState::TransferItemsState(Base *baseFrom, Base *baseTo, DebriefingS
 			}
 			_vanillaCategories = _cats.size();
 		}
-		for (auto& categoryName : _game->getMod()->getItemCategoriesList())
+		for (auto& categoryName : game.getMod()->getItemCategoriesList())
 		{
 			if (std::find(tempCats.begin(), tempCats.end(), categoryName) != tempCats.end())
 			{
@@ -342,9 +342,9 @@ std::string TransferItemsState::getCategory(int sel) const
 		}
 		if (rule->getBattleType() == BT_NONE)
 		{
-			if (_game->getMod()->isCraftWeaponStorageItem(rule))
+			if (game.getMod()->isCraftWeaponStorageItem(rule))
 				return "STR_CRAFT_ARMAMENT";
-			if (_game->getMod()->isArmorStorageItem(rule))
+			if (game.getMod()->isArmorStorageItem(rule))
 				return "STR_ARMORS"; // OXCE: armors
 			return "STR_COMPONENTS";
 		}
@@ -443,7 +443,7 @@ void TransferItemsState::updateList()
 			if (_items[i].type == TRANSFER_ITEM)
 			{
 				RuleItem* rule = (RuleItem*)_items[i].rule;
-				bool isResearchable = _game->savedGame()->isResearchable(rule, _game->getMod());
+				bool isResearchable = game.savedGame()->isResearchable(rule, game.getMod());
 				if (categoryResearched && isResearchable) continue;
 				if (categoryResearchable && !isResearchable) continue;
 			}
@@ -535,13 +535,13 @@ void TransferItemsState::btnOkClick(Action *)
 		double freeStoresFrom = _baseFrom->getAvailableStores() - _baseFrom->getUsedStores() + _iQty;
 		if (_iQty > 0.0 ? freeStoresTo < -0.00001 : freeStoresFrom < -0.00001)
 		{
-			RuleInterface *menuInterface = _game->getMod()->getInterface("transferMenu");
-			_game->pushState(new ErrorMessageState(ltr("STR_NOT_ENOUGH_STORE_SPACE"), _palette, menuInterface->getElement("errorMessage")->color, "BACK13.SCR", menuInterface->getElement("errorPalette")->color));
+			RuleInterface *menuInterface = game.getMod()->getInterface("transferMenu");
+			game.pushState(new ErrorMessageState(ltr("STR_NOT_ENOUGH_STORE_SPACE"), _palette, menuInterface->getElement("errorMessage")->color, "BACK13.SCR", menuInterface->getElement("errorPalette")->color));
 			return;
 		}
 	}
 
-	_game->pushState(new TransferConfirmState(_baseTo, this));
+	game.pushState(new TransferConfirmState(_baseTo, this));
 }
 
 /**
@@ -550,7 +550,7 @@ void TransferItemsState::btnOkClick(Action *)
 void TransferItemsState::completeTransfer()
 {
 	int time = (int)floor(6 + _distance / 10.0);
-	_game->savedGame()->setFunds(_game->savedGame()->getFunds() - _total);
+	game.savedGame()->setFunds(game.savedGame()->getFunds() - _total);
 	for (const auto& transferRow : _items)
 	{
 		if (transferRow.amount > 0)
@@ -677,8 +677,8 @@ void TransferItemsState::completeTransfer()
  */
 void TransferItemsState::btnCancelClick(Action *)
 {
-	_game->popState();
-	_game->popState();
+	game.popState();
+	game.popState();
 }
 
 /**
@@ -721,7 +721,7 @@ void TransferItemsState::btnTransferAllClick(Action *)
 void TransferItemsState::lstItemsLeftArrowPress(Action *action)
 {
 	_sel = _lstItems->getSelectedRow();
-	if (_game->isLeftClick(action, true) && !_timerInc->isRunning()) _timerInc->start();
+	if (game.isLeftClick(action, true) && !_timerInc->isRunning()) _timerInc->start();
 }
 
 /**
@@ -730,7 +730,7 @@ void TransferItemsState::lstItemsLeftArrowPress(Action *action)
  */
 void TransferItemsState::lstItemsLeftArrowRelease(Action *action)
 {
-	if (_game->isLeftClick(action, true))
+	if (game.isLeftClick(action, true))
 	{
 		_timerInc->stop();
 	}
@@ -743,10 +743,10 @@ void TransferItemsState::lstItemsLeftArrowRelease(Action *action)
  */
 void TransferItemsState::lstItemsLeftArrowClick(Action *action)
 {
-	if (_game->isRightClick(action, true)) increaseByValue(INT_MAX);
-	if (_game->isLeftClick(action, true))
+	if (game.isRightClick(action, true)) increaseByValue(INT_MAX);
+	if (game.isLeftClick(action, true))
 	{
-		increaseByValue(_game->getScrollStep());
+		increaseByValue(game.getScrollStep());
 		_timerInc->setInterval(250);
 		_timerDec->setInterval(250);
 	}
@@ -759,7 +759,7 @@ void TransferItemsState::lstItemsLeftArrowClick(Action *action)
 void TransferItemsState::lstItemsRightArrowPress(Action *action)
 {
 	_sel = _lstItems->getSelectedRow();
-	if (_game->isLeftClick(action, true) && !_timerDec->isRunning()) _timerDec->start();
+	if (game.isLeftClick(action, true) && !_timerDec->isRunning()) _timerDec->start();
 }
 
 /**
@@ -768,7 +768,7 @@ void TransferItemsState::lstItemsRightArrowPress(Action *action)
  */
 void TransferItemsState::lstItemsRightArrowRelease(Action *action)
 {
-	if (_game->isLeftClick(action, true))
+	if (game.isLeftClick(action, true))
 	{
 		_timerDec->stop();
 	}
@@ -781,10 +781,10 @@ void TransferItemsState::lstItemsRightArrowRelease(Action *action)
  */
 void TransferItemsState::lstItemsRightArrowClick(Action *action)
 {
-	if (_game->isRightClick(action, true)) decreaseByValue(INT_MAX);
-	if (_game->isLeftClick(action, true))
+	if (game.isRightClick(action, true)) decreaseByValue(INT_MAX);
+	if (game.isLeftClick(action, true))
 	{
-		decreaseByValue(_game->getScrollStep());
+		decreaseByValue(game.getScrollStep());
 		_timerInc->setInterval(250);
 		_timerDec->setInterval(250);
 	}
@@ -817,7 +817,7 @@ void TransferItemsState::lstItemsMousePress(Action *action)
 			decreaseByValue(options1.changeValueByMouseWheel());
 		}
 	}
-	else if (_game->isRightClick(action, true))
+	else if (game.isRightClick(action, true))
 	{
 		if (action->getAbsoluteXMouse() >= _lstItems->getArrowsLeftEdge() &&
 			action->getAbsoluteXMouse() <= _lstItems->getArrowsRightEdge())
@@ -829,18 +829,18 @@ void TransferItemsState::lstItemsMousePress(Action *action)
 			RuleItem *rule = (RuleItem*)getRow().rule;
 			if (rule != 0)
 			{
-				if (_game->isCtrlPressed(true))
+				if (game.isCtrlPressed(true))
 				{
-					_game->pushState(new ItemLocationsState(rule));
+					game.pushState(new ItemLocationsState(rule));
 				}
 				else
 				{
-					_game->pushState(new ManufactureDependenciesTreeState(rule->getType()));
+					game.pushState(new ManufactureDependenciesTreeState(rule->getType()));
 				}
 			}
 		}
 	}
-	else if (_game->isMiddleClick(action, true))
+	else if (game.isMiddleClick(action, true))
 	{
 		if (getRow().type == TRANSFER_ITEM)
 		{
@@ -848,16 +848,16 @@ void TransferItemsState::lstItemsMousePress(Action *action)
 			if (rule != 0)
 			{
 				std::string articleId = rule->getUfopediaType();
-				if (_game->isCtrlPressed(true))
+				if (game.isCtrlPressed(true))
 				{
 					Ufopaedia::openArticle(articleId);
 				}
 				else
 				{
-					const RuleResearch* selectedTopic = _game->getMod()->getResearch(articleId, false);
+					const RuleResearch* selectedTopic = game.getMod()->getResearch(articleId, false);
 					if (selectedTopic)
 					{
-						_game->pushState(new TechTreeViewerState(selectedTopic, 0));
+						game.pushState(new TechTreeViewerState(selectedTopic, 0));
 					}
 				}
 			}
@@ -868,13 +868,13 @@ void TransferItemsState::lstItemsMousePress(Action *action)
 			if (rule != 0)
 			{
 				std::string articleId = rule->getRules()->getType();
-				if (_game->isCtrlPressed(true))
+				if (game.isCtrlPressed(true))
 				{
 					Ufopaedia::openArticle(articleId);
 				}
 				else
 				{
-					_game->pushState(new TechTreeViewerState(0, 0, 0, rule->getRules()));
+					game.pushState(new TechTreeViewerState(0, 0, 0, rule->getRules()));
 				}
 			}
 		}
@@ -888,7 +888,7 @@ void TransferItemsState::increase()
 {
 	_timerDec->setInterval(50);
 	_timerInc->setInterval(50);
-	increaseByValue(_game->getScrollStep());
+	increaseByValue(game.getScrollStep());
 }
 
 /**
@@ -999,8 +999,8 @@ void TransferItemsState::increaseByValue(int change)
 	else
 	{
 		_timerInc->stop();
-		RuleInterface *menuInterface = _game->getMod()->getInterface("transferMenu");
-		_game->pushState(new ErrorMessageState(errorMessage, _palette, menuInterface->getElement("errorMessage")->color, "BACK13.SCR", menuInterface->getElement("errorPalette")->color));
+		RuleInterface *menuInterface = game.getMod()->getInterface("transferMenu");
+		game.pushState(new ErrorMessageState(errorMessage, _palette, menuInterface->getElement("errorMessage")->color, "BACK13.SCR", menuInterface->getElement("errorPalette")->color));
 		_errorShown = true;
 	}
 }
@@ -1012,7 +1012,7 @@ void TransferItemsState::decrease()
 {
 	_timerInc->setInterval(50);
 	_timerDec->setInterval(50);
-	decreaseByValue(_game->getScrollStep());
+	decreaseByValue(game.getScrollStep());
 }
 
 /**
@@ -1118,13 +1118,13 @@ void TransferItemsState::cbxCategoryChange(Action *)
 {
 	_previousSort = _currentSort;
 
-	if (_game->isCtrlPressed(true))
+	if (game.isCtrlPressed(true))
 	{
-		_currentSort = _game->isShiftPressed(true) ? TransferSortDirection::BY_UNIT_SIZE : TransferSortDirection::BY_TOTAL_SIZE;
+		_currentSort = game.isShiftPressed(true) ? TransferSortDirection::BY_UNIT_SIZE : TransferSortDirection::BY_TOTAL_SIZE;
 	}
-	else if (_game->isAltPressed(true))
+	else if (game.isAltPressed(true))
 	{
-		_currentSort = _game->isShiftPressed(true) ? TransferSortDirection::BY_UNIT_COST : TransferSortDirection::BY_TOTAL_COST;
+		_currentSort = game.isShiftPressed(true) ? TransferSortDirection::BY_UNIT_COST : TransferSortDirection::BY_TOTAL_COST;
 	}
 	else
 	{

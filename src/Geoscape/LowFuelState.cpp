@@ -92,7 +92,7 @@ LowFuelState::~LowFuelState()
  */
 void LowFuelState::btnOkClick(Action *)
 {
-	_game->popState();
+	game.popState();
 }
 
 /**
@@ -102,7 +102,7 @@ void LowFuelState::btnOkClick(Action *)
 void LowFuelState::btnOk5SecsClick(Action *)
 {
 	_state->timerReset();
-	_game->popState();
+	game.popState();
 }
 
 }

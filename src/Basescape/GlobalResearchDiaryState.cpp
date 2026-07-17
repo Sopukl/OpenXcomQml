@@ -134,7 +134,7 @@ GlobalResearchDiaryState::GlobalResearchDiaryState() : _doNotReset(false)
 	_btnOk->onKeyboardRelease((ActionHandler)&GlobalResearchDiaryState::btnQuickSearchToggle, options1.keyToggleQuickSearch());
 
 	// translate only once
-	auto& vec = _game->savedGame()->getResearchDiary();
+	auto& vec = game.savedGame()->getResearchDiary();
 	int sortOrder = vec.size();
 	for (auto it = vec.rbegin(); it != vec.rend(); ++it)
 	{
@@ -172,7 +172,7 @@ GlobalResearchDiaryState::~GlobalResearchDiaryState()
  */
 void GlobalResearchDiaryState::btnOkClick(Action *)
 {
-	_game->popState();
+	game.popState();
 }
 
 /**
@@ -346,7 +346,7 @@ void GlobalResearchDiaryState::lstItemLClick(Action* action)
 {
 	auto* selectedTopic = _filteredItemList[_lstItems->getSelectedRow()]->diaryEntry->research;
 	_doNotReset = true;
-	_game->pushState(new TechTreeViewerState(selectedTopic, 0));
+	game.pushState(new TechTreeViewerState(selectedTopic, 0));
 }
 
 /**

@@ -76,7 +76,7 @@ ConfirmNewBaseState::ConfirmNewBaseState(Base *base, Globe *globe) : _base(base)
 	_btnCancel->onKeyboardPress((ActionHandler)&ConfirmNewBaseState::btnCancelClick, options1.keyCancel());
 
 	std::string area;
-	for (const auto* region : _game->savedGame()->getRegions())
+	for (const auto* region : game.savedGame()->getRegions())
 	{
 		if (region->getRules()->insideRegion(_base->getLongitude(), _base->getLatitude()))
 		{
@@ -105,17 +105,17 @@ ConfirmNewBaseState::~ConfirmNewBaseState()
  */
 void ConfirmNewBaseState::btnOkClick(Action *)
 {
-	if (_game->savedGame()->getFunds() >= _cost)
+	if (game.savedGame()->getFunds() >= _cost)
 	{
-		_game->savedGame()->setFunds(_game->savedGame()->getFunds() - _cost);
-		_game->savedGame()->bases().push_back(_base);
-		_game->pushState(new BaseNameState(_base, _globe, false, false));
+		game.savedGame()->setFunds(game.savedGame()->getFunds() - _cost);
+		game.savedGame()->bases().push_back(_base);
+		game.pushState(new BaseNameState(_base, _globe, false, false));
 	}
 	else
 	{
-		_game->pushState(new ErrorMessageState(ltr("STR_NOT_ENOUGH_MONEY"), _palette, _game->getMod()->getInterface("geoscape")->getElement("genericWindow")->color, "BACK01.SCR", _game->getMod()->getInterface("geoscape")->getElement("palette")->color));
+		game.pushState(new ErrorMessageState(ltr("STR_NOT_ENOUGH_MONEY"), _palette, game.getMod()->getInterface("geoscape")->getElement("genericWindow")->color, "BACK01.SCR", game.getMod()->getInterface("geoscape")->getElement("palette")->color));
 	}
-	_game->closeState(this);
+	game.closeState(this);
 }
 
 /**
@@ -125,7 +125,7 @@ void ConfirmNewBaseState::btnOkClick(Action *)
 void ConfirmNewBaseState::btnCancelClick(Action *)
 {
 	_globe->onMouseOver(0);
-	_game->closeState(this);
+	game.closeState(this);
 }
 
 }

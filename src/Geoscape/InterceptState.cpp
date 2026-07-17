@@ -61,11 +61,11 @@ InterceptState::InterceptState(Globe *globe, bool useCustomSound, Base *base, Ta
 
 	if (useCustomSound)
 	{
-		auto& sounds = _game->getMod()->getSelectBaseSounds();
+		auto& sounds = game.getMod()->getSelectBaseSounds();
 		int soundId = sounds.empty() ? Mod::NO_SOUND : sounds[RNG::generate(0, sounds.size() - 1)];
 		if (soundId != Mod::NO_SOUND)
 		{
-			_customSound = _game->getMod()->getSound("GEO.CAT", soundId);
+			_customSound = game.getMod()->getSound("GEO.CAT", soundId);
 		}
 	}
 
@@ -173,7 +173,7 @@ InterceptState::InterceptState(Globe *globe, bool useCustomSound, Base *base, Ta
 	_selCrafts.clear();
 
 	std::vector< std::tuple<Craft*, double, Base*> > craftList;
-	for (auto* xbase : _game->savedGame()->bases())
+	for (auto* xbase : game.savedGame()->bases())
 	{
 		if (_base != 0 && xbase != _base)
 			continue;
@@ -203,7 +203,7 @@ InterceptState::InterceptState(Globe *globe, bool useCustomSound, Base *base, Ta
 			std::ostringstream ssStatus;
 			std::string status = xcraft->getStatus();
 
-			bool hasEnoughPilots = xcraft->arePilotsOnboard(_game->getMod());
+			bool hasEnoughPilots = xcraft->arePilotsOnboard(game.getMod());
 			if (status == "STR_OUT")
 			{
 				// QoL: let's give the player a bit more info
@@ -371,7 +371,7 @@ InterceptState::InterceptState(Globe *globe, bool useCustomSound, Base *base, Ta
 				bool craftReturning = xcraft->getLowFuel() || xcraft->getMissionComplete();
 				if (craftReturning)
 				{
-					auto disabledColor = _game->getMod()->getInterface("intercept")->getElement("disabled")->color;
+					auto disabledColor = game.getMod()->getInterface("intercept")->getElement("disabled")->color;
 					_lstCrafts->setCellColor(row, 0, disabledColor);
 				}
 				else
@@ -383,7 +383,7 @@ InterceptState::InterceptState(Globe *globe, bool useCustomSound, Base *base, Ta
 						double baseDistanceToTarget = xcraft->getBase()->getDistance(_target);
 						if (craftDistanceToTarget + baseDistanceToTarget > xcraft->getBaseRange() * 2.0)
 						{
-							auto disabledColor = _game->getMod()->getInterface("intercept")->getElement("disabled")->color;
+							auto disabledColor = game.getMod()->getInterface("intercept")->getElement("disabled")->color;
 							_lstCrafts->setCellColor(row, 0, disabledColor);
 						}
 					}
@@ -408,7 +408,7 @@ InterceptState::~InterceptState()
  */
 void InterceptState::btnCancelClick(Action *)
 {
-	_game->popState();
+	game.popState();
 }
 
 /**
@@ -417,8 +417,8 @@ void InterceptState::btnCancelClick(Action *)
  */
 void InterceptState::btnGotoBaseClick(Action *)
 {
-	_game->popState();
-	_game->pushState(new BasescapeState(_base, _globe));
+	game.popState();
+	game.pushState(new BasescapeState(_base, _globe));
 }
 
 /**
@@ -441,7 +441,7 @@ void InterceptState::lstCraftsLeftClick(Action *)
 	Craft* c = _crafts[row];
 
 	// add and remove crafts to the wing to be created
-	if (_game->isShiftPressed())
+	if (game.isShiftPressed())
 	{
 		// add craft to the list when it is not included yet
 		// limit to 4 (3+1 due to the dogfight window)
@@ -472,14 +472,14 @@ void InterceptState::lstCraftsLeftClick(Action *)
 			}
 			_selCrafts.insert(_selCrafts.begin(), c);
 
-			_game->popState();
+			game.popState();
 			if (_target == 0)
 			{
-				_game->pushState(new SelectDestinationState(_selCrafts, _globe));
+				game.pushState(new SelectDestinationState(_selCrafts, _globe));
 			}
 			else
 			{
-				_game->pushState(new ConfirmDestinationState(_selCrafts, _target));
+				game.pushState(new ConfirmDestinationState(_selCrafts, _target));
 			}
 		 }
 	}
@@ -495,14 +495,14 @@ void InterceptState::lstCraftsRightClick(Action *)
 	if (c->getStatus() == "STR_OUT")
 	{
 		_globe->center(c->getLongitude(), c->getLatitude());
-		_game->popState();
+		game.popState();
 	}
 	else
 	{
-		_game->popState();
+		game.popState();
 
 		bool found = false;
-		for (auto* xbase : _game->savedGame()->bases())
+		for (auto* xbase : game.savedGame()->bases())
 		{
 			if (_base != 0 && xbase != _base)
 				continue;
@@ -510,7 +510,7 @@ void InterceptState::lstCraftsRightClick(Action *)
 			{
 				if (c == xbase->crafts().at(ci))
 				{
-					_game->pushState(new CraftInfoState(xbase, ci));
+					game.pushState(new CraftInfoState(xbase, ci));
 					found = true;
 					break;
 				}

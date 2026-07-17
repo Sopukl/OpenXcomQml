@@ -93,7 +93,7 @@ SaveGameState::SaveGameState(OptionsOrigin origin, SaveType type, SDL_Color *pal
 		break;
 	case SAVE_IRONMAN:
 	case SAVE_IRONMAN_END:
-		_filename = CrossPlatform::sanitizeFilename(_game->savedGame()->getName()) + ".sav";
+		_filename = CrossPlatform::sanitizeFilename(game.savedGame()->getName()) + ".sav";
 		break;
 	default:
 		break;
@@ -156,28 +156,28 @@ void SaveGameState::think()
 	}
 	else
 	{
-		_game->popState();
+		game.popState();
 
 		switch (_type)
 		{
 		case SAVE_DEFAULT:
 			// manual save, close the save screen
-			_game->popState();
-			if (!_game->savedGame()->isIronman())
+			game.popState();
+			if (!game.savedGame()->isIronman())
 			{
 				// and pause screen too
-				_game->popState();
+				game.popState();
 			}
 			break;
 		case SAVE_INSTA:
 			// timestamp is visible already, no need to repeat it
-			_game->savedGame()->setName(ltr("STR_INSTA_SAVE"));
+			game.savedGame()->setName(ltr("STR_INSTA_SAVE"));
 			break;
 		case SAVE_QUICK:
 		case SAVE_AUTO_GEOSCAPE:
 		case SAVE_AUTO_BATTLESCAPE:
 			// automatic save, give it a default name
-			_game->savedGame()->setName(_filename);
+			game.savedGame()->setName(_filename);
 		default:
 			break;
 		}
@@ -186,7 +186,7 @@ void SaveGameState::think()
 		try
 		{
 			std::string backup = _filename + ".bak";
-			_game->savedGame()->save(backup, _game->getMod());
+			game.savedGame()->save(backup, game.getMod());
 			std::string fullPath = Options::getMasterUserFolder() + _filename;
 			std::string bakPath = Options::getMasterUserFolder() + backup;
 			if (!CrossPlatform::moveFile(bakPath, fullPath))
@@ -197,10 +197,10 @@ void SaveGameState::think()
 			if (_type == SAVE_IRONMAN_END)
 			{
 				Screen::updateScale(options1.geoscapeScale(), options1.baseXGeoscape, options1.baseYGeoscape, true);
-				_game->getScreen()->resetDisplay(false);
+				game.getScreen()->resetDisplay(false);
 
-				_game->setState(new MainMenuState);
-				_game->setSavedGame(0);
+				game.setState(new MainMenuState);
+				game.setSavedGame(0);
 			}
 
 			// Clear the SDL event queue (i.e. ignore input from impatient users)
@@ -231,9 +231,9 @@ void SaveGameState::error(const std::string &msg)
 	std::ostringstream error;
 	error << ltr("STR_SAVE_UNSUCCESSFUL") << Unicode::TOK_NL_SMALL << msg;
 	if (_origin != OPT_BATTLESCAPE)
-		_game->pushState(new ErrorMessageState(error.str(), _palette, _game->getMod()->getInterface("errorMessages")->getElement("geoscapeColor")->color, "BACK01.SCR", _game->getMod()->getInterface("errorMessages")->getElement("geoscapePalette")->color));
+		game.pushState(new ErrorMessageState(error.str(), _palette, game.getMod()->getInterface("errorMessages")->getElement("geoscapeColor")->color, "BACK01.SCR", game.getMod()->getInterface("errorMessages")->getElement("geoscapePalette")->color));
 	else
-		_game->pushState(new ErrorMessageState(error.str(), _palette, _game->getMod()->getInterface("errorMessages")->getElement("battlescapeColor")->color, "TAC00.SCR", _game->getMod()->getInterface("errorMessages")->getElement("battlescapePalette")->color));
+		game.pushState(new ErrorMessageState(error.str(), _palette, game.getMod()->getInterface("errorMessages")->getElement("battlescapeColor")->color, "TAC00.SCR", game.getMod()->getInterface("errorMessages")->getElement("battlescapePalette")->color));
 }
 
 }

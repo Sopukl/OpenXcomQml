@@ -104,7 +104,7 @@ T StatisticsState::sumVector(const std::vector<T> &vec) const
 
 void StatisticsState::listStats()
 {
-	SavedGame *save = _game->savedGame();
+	SavedGame *save = game.savedGame();
 
 	std::ostringstream ss;
 	GameTime *time = save->getTime();
@@ -148,7 +148,7 @@ void StatisticsState::listStats()
 		}
 		bestScore = std::max(bestScore, ms->score);
 		worstScore = std::min(worstScore, ms->score);
-		if (ms->isDarkness(_game->getMod()))
+		if (ms->isDarkness(game.getMod()))
 		{
 			nightMissions++;
 		}
@@ -262,7 +262,7 @@ void StatisticsState::listStats()
 	int ufosDetected = std::max(0, ids["STR_UFO"] - 1);
 	int terrorSites = std::max(0, ids["STR_TERROR_SITE"] - 1);
 	int totalCrafts = 0;
-	for (const auto& craftType : _game->getMod()->getCraftsList())
+	for (const auto& craftType : game.getMod()->getCraftsList())
 	{
 		totalCrafts += std::max(0, ids[craftType] - 1);
 	}
@@ -341,14 +341,14 @@ void StatisticsState::listStats()
  */
 void StatisticsState::btnOkClick(Action *)
 {
-	if (_game->savedGame()->getEnding() == END_NONE)
+	if (game.savedGame()->getEnding() == END_NONE)
 	{
-		_game->popState();
+		game.popState();
 	}
 	else
 	{
-		_game->setSavedGame(0);
-		_game->setState(new GoToMainMenuState);
+		game.setSavedGame(0);
+		game.setState(new GoToMainMenuState);
 	}
 }
 

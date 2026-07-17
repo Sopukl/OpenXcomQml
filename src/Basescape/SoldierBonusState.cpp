@@ -79,7 +79,7 @@ SoldierBonusState::SoldierBonusState(Base *base, size_t soldier) : _base(base), 
 	_btnCancel->onMouseClick((ActionHandler)&SoldierBonusState::btnCancelClick);
 	_btnCancel->onKeyboardPress((ActionHandler)&SoldierBonusState::btnCancelClick, options1.keyCancel());
 
-	Soldier *s = _base ? _base->soldiers().at(_soldier) : _game->savedGame()->getDeadSoldiers().at(_soldier);
+	Soldier *s = _base ? _base->soldiers().at(_soldier) : game.savedGame()->getDeadSoldiers().at(_soldier);
 	_txtTitle->setAlign(ALIGN_CENTER);
 	_txtTitle->setText(ltr("STR_SOLDIER_BONUSES_FOR").arg(s->getName()));
 
@@ -266,7 +266,7 @@ void SoldierBonusState::btnSummaryClick(Action*)
  */
 void SoldierBonusState::btnCancelClick(Action *)
 {
-	_game->popState();
+	game.popState();
 }
 
 /**
@@ -276,7 +276,7 @@ void SoldierBonusState::btnCancelClick(Action *)
 void SoldierBonusState::lstBonusesClick(Action *)
 {
 	std::string articleId = _bonuses[_lstBonuses->getSelectedRow()];
-	_game->pushState(new StatsForNerdsState(UFOPAEDIA_TYPE_UNKNOWN, articleId, false, false, false));
+	game.pushState(new StatsForNerdsState(UFOPAEDIA_TYPE_UNKNOWN, articleId, false, false, false));
 }
 
 }

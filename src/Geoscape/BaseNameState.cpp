@@ -77,20 +77,20 @@ BaseNameState::BaseNameState(Base *base, Globe *globe, bool first, bool fixedLoc
 	_txtTitle->setBig();
 	_txtTitle->setText(ltr("STR_BASE_NAME"));
 
-	if (!_game->getMod()->getBaseNamesFirst().empty())
+	if (!game.getMod()->getBaseNamesFirst().empty())
 	{
 		std::ostringstream ss;
-		int pickFirst = RNG::seedless(0, _game->getMod()->getBaseNamesFirst().size() - 1);
-		ss << _game->getMod()->getBaseNamesFirst().at(pickFirst);
-		if (!_game->getMod()->getBaseNamesMiddle().empty())
+		int pickFirst = RNG::seedless(0, game.getMod()->getBaseNamesFirst().size() - 1);
+		ss << game.getMod()->getBaseNamesFirst().at(pickFirst);
+		if (!game.getMod()->getBaseNamesMiddle().empty())
 		{
-			int pickMiddle = RNG::seedless(0, _game->getMod()->getBaseNamesMiddle().size() - 1);
-			ss << " " << _game->getMod()->getBaseNamesMiddle().at(pickMiddle);
+			int pickMiddle = RNG::seedless(0, game.getMod()->getBaseNamesMiddle().size() - 1);
+			ss << " " << game.getMod()->getBaseNamesMiddle().at(pickMiddle);
 		}
-		if (!_game->getMod()->getBaseNamesLast().empty())
+		if (!game.getMod()->getBaseNamesLast().empty())
 		{
-			int pickLast = RNG::seedless(0, _game->getMod()->getBaseNamesLast().size() - 1);
-			ss << " " << _game->getMod()->getBaseNamesLast().at(pickLast);
+			int pickLast = RNG::seedless(0, game.getMod()->getBaseNamesLast().size() - 1);
+			ss << " " << game.getMod()->getBaseNamesLast().at(pickLast);
 		}
 		_edtName->setText(ss.str());
 		_btnOk->setVisible(true);
@@ -143,16 +143,16 @@ void BaseNameState::btnOkClick(Action *)
 
 		// if (!_fixedLocation)
 		// {
-		// 	_game->popState(); // pop ConfirmNewBaseState or BuildNewBaseState
+		// 	game.popState(); // pop ConfirmNewBaseState or BuildNewBaseState
 		// 	if (!_first)
 		// 	{
-		// 		_game->popState(); // pop BuildNewBaseState
+		// 		game.popState(); // pop BuildNewBaseState
 		// 	}
 		// }
 
 		if (!_first || options1.customInitialBase())
 		{
-			_game->pushState(new PlaceLiftState(_base, _globe, _first));
+			game.pushState(new PlaceLiftState(_base, _globe, _first));
 		}
 	}
 }

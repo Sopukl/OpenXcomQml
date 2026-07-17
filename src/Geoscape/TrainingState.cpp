@@ -66,7 +66,7 @@ TrainingState::TrainingState()
 	_txtTitle->setText(ltr("STR_PHYSICAL_TRAINING"));
 
 	int buttons = 0;
-	for (auto* xbase : _game->savedGame()->bases())
+	for (auto* xbase : game.savedGame()->bases())
 	{
 		if (xbase->getAvailableTraining())
 		{
@@ -101,7 +101,7 @@ TrainingState::~TrainingState()
  */
 void TrainingState::btnOkClick(Action *)
 {
-	_game->popState();
+	game.popState();
 }
 
 /**
@@ -114,7 +114,7 @@ void TrainingState::btnBaseXClick(Action *action)
 	{
 		if (action->getSender() == _btnBases[i])
 		{
-			_game->pushState(new AllocateTrainingState(_bases.at(i)));
+			game.pushState(new AllocateTrainingState(_bases.at(i)));
 			break;
 		}
 	}

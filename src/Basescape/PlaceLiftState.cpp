@@ -74,24 +74,24 @@ PlaceLiftState::PlaceLiftState(Base *base, Globe *globe, bool first) : _base(bas
 	{
 		int texture, shade;
 		_globe->getPolygonTextureAndShade(_base->getLongitude(), _base->getLatitude(), &texture, &shade);
-		auto* globeTexture = _game->getMod()->getGlobe()->getTexture(texture);
+		auto* globeTexture = game.getMod()->getGlobe()->getTexture(texture);
 		_base->setGlobeTexture(globeTexture);
 	}
 
-	auto* itf = _game->getMod()->getInterface("basescape")->getElementOptional("trafficLights");
+	auto* itf = game.getMod()->getInterface("basescape")->getElementOptional("trafficLights");
 	if (itf)
 	{
 		_view->setOtherColors(itf->color, itf->color2, itf->border, !itf->TFTDMode);
 	}
-	_view->setTexture(_game->getMod()->getSurfaceSet("BASEBITS.PCK"));
+	_view->setTexture(game.getMod()->getSurfaceSet("BASEBITS.PCK"));
 	_view->setBase(_base);
 
 	_lift = nullptr;
-	for (auto& facilityType : _game->getMod()->getBaseFacilitiesList())
+	for (auto& facilityType : game.getMod()->getBaseFacilitiesList())
 	{
-		auto* facilityRule = _game->getMod()->getBaseFacility(facilityType);
+		auto* facilityRule = game.getMod()->getBaseFacility(facilityType);
 		if ((facilityRule->isLift() && !facilityRule->isUpgradeOnly())
-			&& facilityRule->isAllowedForBaseType(_base->isFakeUnderwater()) && _game->savedGame()->isResearched(facilityRule->getRequirements()))
+			&& facilityRule->isAllowedForBaseType(_base->isFakeUnderwater()) && game.savedGame()->isResearched(facilityRule->getRequirements()))
 		{
 			_accessLifts.push_back(facilityRule);
 		}
@@ -152,15 +152,15 @@ void PlaceLiftState::viewClick(Action *)
 	_base->getFacilities().push_back(fac);
 	if (fac->getRules()->getPlaceSound() != Mod::NO_SOUND)
 	{
-		_game->getMod()->getSound("GEO.CAT", fac->getRules()->getPlaceSound())->play();
+		game.getMod()->getSound("GEO.CAT", fac->getRules()->getPlaceSound())->play();
 	}
-	_game->popState();
+	game.popState();
 	BasescapeState *bState = new BasescapeState(_base, _globe);
-	_game->savedGame()->setSelectedBase(_game->savedGame()->bases().size() - 1);
-	_game->pushState(bState);
+	game.savedGame()->setSelectedBase(game.savedGame()->bases().size() - 1);
+	game.pushState(bState);
 	if (_first)
 	{
-		_game->pushState(new SelectStartFacilityState(_base, bState, _globe));
+		game.pushState(new SelectStartFacilityState(_base, bState, _globe));
 	}
 }
 

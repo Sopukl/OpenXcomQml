@@ -71,7 +71,7 @@ CraftEquipmentState::CraftEquipmentState(Base *base, size_t craft) :
 {
 	Craft *c = _base->crafts().at(_craft);
 	bool craftHasACrew = c->getNumTotalSoldiers() > 0;
-	_isNewBattle = _game->savedGame()->getMonthsPassed() == -1;
+	_isNewBattle = game.savedGame()->getMonthsPassed() == -1;
 
 	// Create objects
 	_window = new Window(this, 320, 200, 0, 0);
@@ -93,7 +93,7 @@ CraftEquipmentState::CraftEquipmentState(Base *base, size_t craft) :
 	// Set palette
 	setInterface("craftEquipment");
 
-	_ammoColor = _game->getMod()->getInterface("craftEquipment")->getElement("ammoColor")->color;
+	_ammoColor = game.getMod()->getInterface("craftEquipment")->getElement("ammoColor")->color;
 
 	add(_window, "window", "craftEquipment");
 	add(_btnQuickSearch, "button", "craftEquipment");
@@ -162,14 +162,14 @@ CraftEquipmentState::CraftEquipmentState(Base *base, size_t craft) :
 	_categoryStrings.push_back("STR_ALL");
 	_categoryStrings.push_back("STR_EQUIPPED");
 	bool hasUnassigned = false;
-	for (auto& itemType : _game->getMod()->getItemsList())
+	for (auto& itemType : game.getMod()->getItemsList())
 	{
-		RuleItem *rule = _game->getMod()->getItem(itemType);
+		RuleItem *rule = game.getMod()->getItem(itemType);
 		Unit* isVehicle = rule->getVehicleUnit();
 		int cQty = isVehicle ? c->getVehicleCount(itemType) : c->getItems()->getItem(rule);
 
 		if ((isVehicle || rule->isInventoryItem()) && rule->canBeEquippedToCraftInventory() &&
-			_game->savedGame()->isResearched(rule->getRequirements()) &&
+			game.savedGame()->isResearched(rule->getRequirements()) &&
 			(_base->getStorageItems().getItem(rule) > 0 || cQty > 0))
 		{
 			if (rule->getCategories().empty())
@@ -185,12 +185,12 @@ CraftEquipmentState::CraftEquipmentState(Base *base, size_t craft) :
 			}
 		}
 	}
-	auto& itemCategories = _game->getMod()->getItemCategoriesList();
+	auto& itemCategories = game.getMod()->getItemCategoriesList();
 	for (auto& categoryName : itemCategories)
 	{
 		if (_usedCategoryStrings[categoryName])
 		{
-			if (!_game->getMod()->getItemCategory(categoryName)->isHidden())
+			if (!game.getMod()->getItemCategory(categoryName)->isHidden())
 			{
 				_categoryStrings.push_back(categoryName);
 			}
@@ -256,7 +256,7 @@ void CraftEquipmentState::init()
 {
 	State::init();
 
-	_game->savedGame()->setBattleGame(0);
+	game.savedGame()->setBattleGame(0);
 
 	Craft *c = _base->crafts().at(_craft);
 	c->setInBattlescape(false);
@@ -337,7 +337,7 @@ void CraftEquipmentState::initList()
 	bool categoryUnassigned = (selectedCategory == "STR_UNASSIGNED");
 	bool categoryEquipped = (selectedCategory == "STR_EQUIPPED");
 	bool categoryNotEquipped = (selectedCategory == "STR_NOT_EQUIPPED");
-	bool shareAmmoCategories = _game->getMod()->getShareAmmoCategories();
+	bool shareAmmoCategories = game.getMod()->getShareAmmoCategories();
 
 	Craft *c = _base->crafts().at(_craft);
 
@@ -348,9 +348,9 @@ void CraftEquipmentState::initList()
 	_lstEquipment->clearList();
 
 	int row = 0;
-	for (auto& itemType : _game->getMod()->getItemsList())
+	for (auto& itemType : game.getMod()->getItemsList())
 	{
-		const RuleItem *rule = _game->getMod()->getItem(itemType);
+		const RuleItem *rule = game.getMod()->getItem(itemType);
 
 		Unit* isVehicle = rule->getVehicleUnit();
 		int cQty = 0;
@@ -375,7 +375,7 @@ void CraftEquipmentState::initList()
 			(bQty > 0 || cQty > 0 || reserved > 0))
 		{
 			// check research requirements
-			if (!_game->savedGame()->isResearched(rule->getRequirements()))
+			if (!game.savedGame()->isResearched(rule->getRequirements()))
 			{
 				continue;
 			}
@@ -413,7 +413,7 @@ void CraftEquipmentState::initList()
 						{
 							if (_base->getStorageItems().getItem(ammoRule) > 0 || c->getItems()->getItem(ammoRule) > 0)
 							{
-								if (ammoRule->isInventoryItem() && ammoRule->canBeEquippedToCraftInventory() && _game->savedGame()->isResearched(ammoRule->getRequirements()))
+								if (ammoRule->isInventoryItem() && ammoRule->canBeEquippedToCraftInventory() && game.savedGame()->isResearched(ammoRule->getRequirements()))
 								{
 									isOK = ammoRule->belongsToCategory(selectedCategory);
 									if (isOK) break;
@@ -533,7 +533,7 @@ void CraftEquipmentState::think()
  */
 void CraftEquipmentState::btnOkClick(Action *)
 {
-	_game->popState();
+	game.popState();
 }
 
 /**
@@ -543,7 +543,7 @@ void CraftEquipmentState::btnOkClick(Action *)
 void CraftEquipmentState::lstEquipmentLeftArrowPress(Action *action)
 {
 	_sel = _lstEquipment->getSelectedRow();
-	if (_game->isLeftClick(action, true) && !_timerLeft->isRunning()) _timerLeft->start();
+	if (game.isLeftClick(action, true) && !_timerLeft->isRunning()) _timerLeft->start();
 }
 
 /**
@@ -552,7 +552,7 @@ void CraftEquipmentState::lstEquipmentLeftArrowPress(Action *action)
  */
 void CraftEquipmentState::lstEquipmentLeftArrowRelease(Action *action)
 {
-	if (_game->isLeftClick(action, true))
+	if (game.isLeftClick(action, true))
 	{
 		_timerLeft->stop();
 	}
@@ -564,10 +564,10 @@ void CraftEquipmentState::lstEquipmentLeftArrowRelease(Action *action)
  */
 void CraftEquipmentState::lstEquipmentLeftArrowClick(Action *action)
 {
-	if (_game->isRightClick(action, true)) moveLeftByValue(INT_MAX);
-	if (_game->isLeftClick(action, true))
+	if (game.isRightClick(action, true)) moveLeftByValue(INT_MAX);
+	if (game.isLeftClick(action, true))
 	{
-		moveLeftByValue(_game->getScrollStep());
+		moveLeftByValue(game.getScrollStep());
 		_timerRight->setInterval(250);
 		_timerLeft->setInterval(250);
 	}
@@ -580,7 +580,7 @@ void CraftEquipmentState::lstEquipmentLeftArrowClick(Action *action)
 void CraftEquipmentState::lstEquipmentRightArrowPress(Action *action)
 {
 	_sel = _lstEquipment->getSelectedRow();
-	if (_game->isLeftClick(action, true) && !_timerRight->isRunning()) _timerRight->start();
+	if (game.isLeftClick(action, true) && !_timerRight->isRunning()) _timerRight->start();
 }
 
 /**
@@ -589,7 +589,7 @@ void CraftEquipmentState::lstEquipmentRightArrowPress(Action *action)
  */
 void CraftEquipmentState::lstEquipmentRightArrowRelease(Action *action)
 {
-	if (_game->isLeftClick(action, true))
+	if (game.isLeftClick(action, true))
 	{
 		_timerRight->stop();
 	}
@@ -601,10 +601,10 @@ void CraftEquipmentState::lstEquipmentRightArrowRelease(Action *action)
  */
 void CraftEquipmentState::lstEquipmentRightArrowClick(Action *action)
 {
-	if (_game->isRightClick(action, true)) moveRightByValue(INT_MAX);
-	if (_game->isLeftClick(action, true))
+	if (game.isRightClick(action, true)) moveRightByValue(INT_MAX);
+	if (game.isLeftClick(action, true))
 	{
-		moveRightByValue(_game->getScrollStep());
+		moveRightByValue(game.getScrollStep());
 		_timerRight->setInterval(250);
 		_timerLeft->setInterval(250);
 	}
@@ -637,10 +637,10 @@ void CraftEquipmentState::lstEquipmentMousePress(Action *action)
 			moveLeftByValue(options1.changeValueByMouseWheel());
 		}
 	}
-	else if (_game->isMiddleClick(action, true))
+	else if (game.isMiddleClick(action, true))
 	{
 		_lstScroll = _lstEquipment->getScroll();
-		RuleItem *rule = _game->getMod()->getItem(_items[_sel]);
+		RuleItem *rule = game.getMod()->getItem(_items[_sel]);
 		std::string articleId = rule->getUfopediaType();
 		Ufopaedia::openArticle(articleId);
 	}
@@ -653,7 +653,7 @@ void CraftEquipmentState::lstEquipmentMousePress(Action *action)
 void CraftEquipmentState::updateQuantity()
 {
 	Craft *c = _base->crafts().at(_craft);
-	RuleItem *item = _game->getMod()->getItem(_items[_sel], true);
+	RuleItem *item = game.getMod()->getItem(_items[_sel], true);
 	int cQty = 0;
 	if (item->getVehicleUnit())
 	{
@@ -720,7 +720,7 @@ void CraftEquipmentState::moveLeft()
 {
 	_timerLeft->setInterval(50);
 	_timerRight->setInterval(50);
-	moveLeftByValue(_game->getScrollStep());
+	moveLeftByValue(game.getScrollStep());
 }
 
 /**
@@ -730,7 +730,7 @@ void CraftEquipmentState::moveLeft()
 void CraftEquipmentState::moveLeftByValue(int change)
 {
 	Craft *c = _base->crafts().at(_craft);
-	const RuleItem *item = _game->getMod()->getItem(_items[_sel], true);
+	const RuleItem *item = game.getMod()->getItem(_items[_sel], true);
 	int cQty = 0;
 	if (item->getVehicleUnit()) cQty = c->getVehicleCount(_items[_sel]);
 	else cQty = c->getItems()->getItem(item);
@@ -809,7 +809,7 @@ void CraftEquipmentState::moveRight()
 {
 	_timerLeft->setInterval(50);
 	_timerRight->setInterval(50);
-	moveRightByValue(_game->getScrollStep());
+	moveRightByValue(game.getScrollStep());
 }
 
 /**
@@ -820,7 +820,7 @@ void CraftEquipmentState::moveRight()
 void CraftEquipmentState::moveRightByValue(int change, bool suppressErrors)
 {
 	Craft *c = _base->crafts().at(_craft);
-	const RuleItem *item = _game->getMod()->getItem(_items[_sel], true);
+	const RuleItem *item = game.getMod()->getItem(_items[_sel], true);
 	int bqty = _base->getStorageItems().getItem(item);
 	if (_isNewBattle)
 	{
@@ -871,7 +871,7 @@ void CraftEquipmentState::moveRightByValue(int change, bool suppressErrors)
 						// So we haven't managed to increase the count of vehicles because of the ammo
 						_timerRight->stop();
 						LocalizedText msg(ltr("STR_NOT_ENOUGH_AMMO_TO_ARM_HWP").arg(ammoPerVehicle).arg(ltr(ammo->getType())));
-						_game->pushState(new ErrorMessageState(msg, _palette, _game->getMod()->getInterface("craftEquipment")->getElement("errorMessage")->color, "BACK04.SCR", _game->getMod()->getInterface("craftEquipment")->getElement("errorPalette")->color));
+						game.pushState(new ErrorMessageState(msg, _palette, game.getMod()->getInterface("craftEquipment")->getElement("errorMessage")->color, "BACK04.SCR", game.getMod()->getInterface("craftEquipment")->getElement("errorPalette")->color));
 						_reload = false;
 					}
 				}
@@ -896,7 +896,7 @@ void CraftEquipmentState::moveRightByValue(int change, bool suppressErrors)
 			{
 				_timerRight->stop();
 				LocalizedText msg(ltr("STR_NO_MORE_EQUIPMENT_ALLOWED", c->getMaxItemsClamped()));
-				_game->pushState(new ErrorMessageState(msg, _palette, _game->getMod()->getInterface("craftEquipment")->getElement("errorMessage")->color, "BACK04.SCR", _game->getMod()->getInterface("craftEquipment")->getElement("errorPalette")->color));
+				game.pushState(new ErrorMessageState(msg, _palette, game.getMod()->getInterface("craftEquipment")->getElement("errorMessage")->color, "BACK04.SCR", game.getMod()->getInterface("craftEquipment")->getElement("errorPalette")->color));
 				_reload = false;
 			}
 			change = c->getMaxItemsClamped() - _totalItems;
@@ -921,7 +921,7 @@ void CraftEquipmentState::moveRightByValue(int change, bool suppressErrors)
 			{
 				_timerRight->stop();
 				LocalizedText msg(ltr("STR_NO_MORE_EQUIPMENT_ALLOWED_BY_SIZE").arg(c->getMaxStorageSpaceClamped()));
-				_game->pushState(new ErrorMessageState(msg, _palette, _game->getMod()->getInterface("craftEquipment")->getElement("errorMessage")->color, "BACK04.SCR", _game->getMod()->getInterface("craftEquipment")->getElement("errorPalette")->color));
+				game.pushState(new ErrorMessageState(msg, _palette, game.getMod()->getInterface("craftEquipment")->getElement("errorMessage")->color, "BACK04.SCR", game.getMod()->getInterface("craftEquipment")->getElement("errorPalette")->color));
 				_reload = false;
 			}
 		}
@@ -987,7 +987,7 @@ void CraftEquipmentState::btnInventoryClick(Action *)
 
 			for (_sel = 0; _sel != _items.size(); ++_sel)
 			{
-				RuleItem* rule = _game->getMod()->getItem(_items[_sel], true);
+				RuleItem* rule = game.getMod()->getItem(_items[_sel], true);
 				if (craft->getItems()->getItem(rule) > 0)
 				{
 					extras.addItem(rule, craft->getItems()->getItem(rule) - craft->getSoldierItems()->getItem(rule));
@@ -1002,18 +1002,18 @@ void CraftEquipmentState::btnInventoryClick(Action *)
 			craft->setMaxStorageSpaceRaw(maxStorageSpaceBackup);
 		}
 
-		SavedBattleGame *bgame = new SavedBattleGame(_game->getMod());
-		_game->savedGame()->setBattleGame(bgame);
+		SavedBattleGame *bgame = new SavedBattleGame(game.getMod());
+		game.savedGame()->setBattleGame(bgame);
 
-		if (_game->isCtrlPressed(true) && _game->isAltPressed(true))
+		if (game.isCtrlPressed(true) && game.isAltPressed(true))
 		{
-			_game->savedGame()->setDisableSoldierEquipment(true);
+			game.savedGame()->setDisableSoldierEquipment(true);
 		}
 		BattlescapeGenerator bgen = BattlescapeGenerator();
 		bgen.runInventory(craft);
 
-		_game->getScreen()->clear();
-		_game->pushState(new InventoryState(false, 0, _base));
+		game.getScreen()->clear();
+		game.pushState(new InventoryState(false, 0, _base));
 		_returningFromInventory = true;
 	}
 }
@@ -1021,14 +1021,14 @@ void CraftEquipmentState::btnInventoryClick(Action *)
 void CraftEquipmentState::saveGlobalLoadout(int index)
 {
 	// clear the template
-	ItemContainer *tmpl = _game->savedGame()->getGlobalCraftLoadout(index);
+	ItemContainer *tmpl = game.savedGame()->getGlobalCraftLoadout(index);
 	tmpl->clear();
 
 	Craft *c = _base->crafts().at(_craft);
 	// save only what is visible on the screen (can be DIFFERENT than what's really in the craft for various reasons)
 	for (const auto& itemType : _items)
 	{
-		const RuleItem *item = _game->getMod()->getItem(itemType, true);
+		const RuleItem *item = game.getMod()->getItem(itemType, true);
 		int cQty = 0;
 		if (item->getVehicleUnit())
 		{
@@ -1076,10 +1076,10 @@ void CraftEquipmentState::loadGlobalLoadout(int index, bool onlyAddItems)
 	}
 
 	// now start applying the template (consider ONLY items visible on the GUI)
-	ItemContainer *tmpl = _game->savedGame()->getGlobalCraftLoadout(index);
+	ItemContainer *tmpl = game.savedGame()->getGlobalCraftLoadout(index);
 	for (_sel = 0; _sel != _items.size(); ++_sel)
 	{
-		RuleItem *item = _game->getMod()->getItem(_items[_sel], true);
+		RuleItem *item = game.getMod()->getItem(_items[_sel], true);
 		int tQty = tmpl->getItem(item);
 		moveRightByValue(tQty, true);
 	}
@@ -1137,7 +1137,7 @@ void CraftEquipmentState::loadGlobalLoadout(int index, bool onlyAddItems)
 				return a.listOrder < b.listOrder;
 			}
 		);
-		_game->pushState(new CannotReequipState(_missingItems, _base));
+		game.pushState(new CannotReequipState(_missingItems, _base));
 	}
 
 	// turn back the original setting
@@ -1152,7 +1152,7 @@ void CraftEquipmentState::btnLoadClick(Action *)
 {
 	//if (!_isNewBattle)
 	{
-		_game->pushState(new CraftEquipmentLoadState(this));
+		game.pushState(new CraftEquipmentLoadState(this));
 		_returningFromGlobalTemplates = true;
 	}
 }
@@ -1165,7 +1165,7 @@ void CraftEquipmentState::btnSaveClick(Action *)
 {
 	if (!_isNewBattle)
 	{
-		_game->pushState(new CraftEquipmentSaveState(this));
+		game.pushState(new CraftEquipmentSaveState(this));
 		_returningFromGlobalTemplates = true;
 	}
 }

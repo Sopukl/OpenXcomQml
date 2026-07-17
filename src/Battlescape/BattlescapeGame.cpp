@@ -37,7 +37,6 @@
 #include "Pathfinding.h"
 #include "../Mod/AlienDeployment.h"
 #include "../Engine/Game.h"
-#include "../Engine/Game.h"
 #include "../Engine/Sound.h"
 #include "../Mod/Mod.h"
 #include "../Interface/Cursor.h"
@@ -50,7 +49,6 @@
 #include "../Mod/RuleInventory.h"
 #include "../Mod/RuleSoldier.h"
 #include "../Mod/Armor.h"
-#include "../Engine/Options.h"
 #include "../Engine/RNG.h"
 #include "InfoboxState.h"
 #include "InfoboxOKState.h"
@@ -510,7 +508,7 @@ bool BattlescapeGame::kneel(BattleUnit *bu)
  */
 void BattlescapeGame::endTurn()
 {
-	_debugPlay = _save->getDebugMode() && _parentState->getGame()->isCtrlPressed() && (_save->getSide() != FACTION_NEUTRAL);
+	_debugPlay = _save->getDebugMode() && game.isCtrlPressed() && (_save->getSide() != FACTION_NEUTRAL);
 	_currentAction.type = BA_NONE;
 	_currentAction.skillRules = nullptr;
 	getMap()->getWaypoints()->clear();
@@ -700,7 +698,7 @@ void BattlescapeGame::endTurn()
 	if ((_save->getSide() != FACTION_NEUTRAL || battleComplete)
 		&& _endTurnRequested)
 	{
-		_parentState->getGame()->pushState(new NextTurnState(_save, _parentState));
+		game.pushState(new NextTurnState(_save, _parentState));
 	}
 	_endTurnRequested = false;
 }
@@ -760,7 +758,7 @@ void BattlescapeGame::checkForCasualties(const RuleDamageType *damageType, Battl
 		BattleUnit *murderer = origMurderer;
 
 		BattleUnitKills killStat;
-		killStat.mission = _parentState->getGame()->savedGame()->getMissionStatistics()->size();
+		killStat.mission = game.savedGame()->getMissionStatistics()->size();
 		killStat.setTurn(_save->getTurn(), _save->getSide());
 		killStat.setUnitStats(victim);
 		killStat.faction = victim->getOriginalFaction();
@@ -937,7 +935,7 @@ void BattlescapeGame::checkForCasualties(const RuleDamageType *damageType, Battl
 						deathStat->setUnitStats(murderer);
 						deathStat->faction = murderer->getOriginalFaction();
 					}
-					_parentState->getGame()->savedGame()->killSoldier(false, victim->getGeoscapeSoldier(), deathStat);
+					game.savedGame()->killSoldier(false, victim->getGeoscapeSoldier(), deathStat);
 				}
 			}
 			else if (victim->getStunlevel() >= victim->getHealth() && victim->getStatus() != STATUS_UNCONSCIOUS)
@@ -996,7 +994,7 @@ void BattlescapeGame::showInfoBoxQueue()
 {
 	for (auto* infoboxOKState : _infoboxQueue)
 	{
-		_parentState->getGame()->pushState(infoboxOKState);
+		game.pushState(infoboxOKState);
 	}
 
 	_infoboxQueue.clear();
@@ -1007,13 +1005,12 @@ void BattlescapeGame::showInfoBoxQueue()
  */
 void BattlescapeGame::missionComplete()
 {
-	Game *game = _parentState->getGame();
-	if (game->getMod()->getDeployment(_save->getMissionType()))
+	if (game.getMod()->getDeployment(_save->getMissionType()))
 	{
-		std::string missionComplete = game->getMod()->getDeployment(_save->getMissionType())->getObjectivePopup();
+		std::string missionComplete = game.getMod()->getDeployment(_save->getMissionType())->getObjectivePopup();
 		if (!missionComplete.empty())
 		{
-			_infoboxQueue.push_back(new InfoboxOKState(game->getLanguage()->getString(missionComplete)));
+			_infoboxQueue.push_back(new InfoboxOKState(game.getLanguage()->getString(missionComplete)));
 		}
 	}
 }
@@ -1260,7 +1257,7 @@ void BattlescapeGame::popState()
 
 					cancelCurrentAction(true);
 				}
-				_parentState->getGame()->getCursor()->setVisible(true);
+				game.getCursor()->setVisible(true);
 				setupCursor();
 			}
 		}
@@ -1293,7 +1290,7 @@ void BattlescapeGame::popState()
 			}
 			else if (_debugPlay)
 			{
-				_parentState->getGame()->getCursor()->setVisible(true);
+				game.getCursor()->setVisible(true);
 				setupCursor();
 			}
 		}
@@ -1330,7 +1327,7 @@ void BattlescapeGame::popState()
 	{
 		cancelCurrentAction();
 		getMap()->setCursorType(CT_NORMAL, 1);
-		_parentState->getGame()->getCursor()->setVisible(true);
+		game.getCursor()->setVisible(true);
 		if (_save->getSide() == FACTION_PLAYER)
 			_save->setSelectedUnit(0);
 		else
@@ -1546,23 +1543,22 @@ bool BattlescapeGame::handlePanickingUnit(BattleUnit *unit)
 	}
 
 	// show a little infobox with the name of the unit and "... is panicking"
-	Game *game = _parentState->getGame();
 	if (unit->getVisible() || !options1.noAlienPanicMessages())
 	{
 		getMap()->getCamera()->centerOnPosition(unit->getPosition());
 		if (status == STATUS_PANICKING)
 		{
-			game->pushState(new InfoboxState(game->getLanguage()->getString("STR_HAS_PANICKED", unit->getGender()).arg(unit->getName())));
+			game.pushState(new InfoboxState(game.getLanguage()->getString("STR_HAS_PANICKED", unit->getGender()).arg(unit->getName())));
 		}
 		else
 		{
-			game->pushState(new InfoboxState(game->getLanguage()->getString("STR_HAS_GONE_BERSERK", unit->getGender()).arg(unit->getName())));
+			game.pushState(new InfoboxState(game.getLanguage()->getString("STR_HAS_GONE_BERSERK", unit->getGender()).arg(unit->getName())));
 		}
 	}
 	else if (soundPlayed)
 	{
 		// simulate a small pause by using an invisible infobox
-		game->pushState(new InfoboxState(""));
+		game.pushState(new InfoboxState(""));
 	}
 
 
@@ -1667,7 +1663,7 @@ bool BattlescapeGame::cancelCurrentAction(bool bForce)
 				_currentAction.skillRules = nullptr;
 				_currentAction.result = ""; // TODO
 				setupCursor();
-				_parentState->getGame()->getCursor()->setVisible(true);
+				game.getCursor()->setVisible(true);
 				return true;
 			}
 		}
@@ -1697,7 +1693,7 @@ void BattlescapeGame::cancelAllActions()
 	_currentAction.skillRules = nullptr;
 	_currentAction.result = ""; // TODO
 	setupCursor();
-	_parentState->getGame()->getCursor()->setVisible(true);
+	game.getCursor()->setVisible(true);
 }
 
 /**
@@ -1780,7 +1776,7 @@ void BattlescapeGame::primaryAction(Position pos)
 				_currentAction.target = _currentAction.waypoints.back().toTile();
 
 				getMap()->getWaypoints()->clear();
-				_parentState->getGame()->getCursor()->setVisible(false);
+				game.getCursor()->setVisible(false);
 				_currentAction.cameraPosition = getMap()->getCamera()->getMapOffset();
 				_states.push_back(new ProjectileFlyBState(this, _currentAction));
 				statePushFront(new UnitTurnBState(this, _currentAction));
@@ -1815,8 +1811,8 @@ void BattlescapeGame::primaryAction(Position pos)
 					std::string error;
 					if (_currentAction.spendTU(&error))
 					{
-						_parentState->getGame()->getMod()->getSoundByDepth(_save->getDepth(), _currentAction.weapon->getRules()->getHitSound())->play(-1, getMap()->getSoundAngle(pos));
-						_parentState->getGame()->pushState (new UnitInfoState(targetUnit, _parentState, false, true));
+						game.getMod()->getSoundByDepth(_save->getDepth(), _currentAction.weapon->getRules()->getHitSound())->play(-1, getMap()->getSoundAngle(pos));
+						game.pushState (new UnitInfoState(targetUnit, _parentState, false, true));
 						cancelCurrentAction();
 					}
 					else
@@ -1882,7 +1878,7 @@ void BattlescapeGame::primaryAction(Position pos)
 					{
 						// get the sound/animation started
 						getMap()->setCursorType(CT_NONE);
-						_parentState->getGame()->getCursor()->setVisible(false);
+						game.getCursor()->setVisible(false);
 						_currentAction.cameraPosition = getMap()->getCamera()->getMapOffset();
 						statePushBack(new PsiAttackBState(this, _currentAction));
 					}
@@ -1915,7 +1911,7 @@ void BattlescapeGame::primaryAction(Position pos)
 				getMap()->getWaypoints()->clear();
 			}
 
-			_parentState->getGame()->getCursor()->setVisible(false);
+			game.getCursor()->setVisible(false);
 			_currentAction.cameraPosition = getMap()->getCamera()->getMapOffset();
 			_states.push_back(new ProjectileFlyBState(this, _currentAction));
 			statePushFront(new UnitTurnBState(this, _currentAction)); // first of all turn towards the target
@@ -1996,7 +1992,7 @@ void BattlescapeGame::primaryAction(Position pos)
 			{
 				//  -= start walking =-
 				getMap()->setCursorType(CT_NONE);
-				_parentState->getGame()->getCursor()->setVisible(false);
+				game.getCursor()->setVisible(false);
 				statePushBack(new UnitWalkBState(this, _currentAction));
 				playUnitResponseSound(_currentAction.actor, 1); // "start moving" sound
 			}
@@ -2026,7 +2022,7 @@ void BattlescapeGame::launchAction()
 	getMap()->getWaypoints()->clear();
 	_currentAction.target = _currentAction.waypoints.front();
 	getMap()->setCursorType(CT_NONE);
-	_parentState->getGame()->getCursor()->setVisible(false);
+	game.getCursor()->setVisible(false);
 	_currentAction.cameraPosition = getMap()->getCamera()->getMapOffset();
 	_states.push_back(new ProjectileFlyBState(this, _currentAction));
 	statePushFront(new UnitTurnBState(this, _currentAction)); // first of all turn towards the target
@@ -2065,24 +2061,23 @@ void BattlescapeGame::psiAttackMessage(BattleActionAttack attack, BattleUnit *vi
 {
 	if (victim)
 	{
-		Game *game = getSave()->getBattleState()->getGame();
 		if (attack.attacker->getFaction() == FACTION_HOSTILE)
 		{
 			// show a little infobox with the name of the unit and "... is under alien control"
 			if (attack.type == BA_MINDCONTROL)
-				game->pushState(new InfoboxState(game->getLanguage()->getString("STR_IS_UNDER_ALIEN_CONTROL", victim->getGender()).arg(victim->getName())));
+				game.pushState(new InfoboxState(game.getLanguage()->getString("STR_IS_UNDER_ALIEN_CONTROL", victim->getGender()).arg(victim->getName())));
 		}
 		else
 		{
 			// show a little infobox if it's successful
 			if (attack.type == BA_PANIC)
-				game->pushState(new InfoboxState(game->getLanguage()->getString("STR_MORALE_ATTACK_SUCCESSFUL")));
+				game.pushState(new InfoboxState(game.getLanguage()->getString("STR_MORALE_ATTACK_SUCCESSFUL")));
 			else if (attack.type == BA_MINDCONTROL)
 			{
 				if (attack.weapon_item->getRules()->convertToCivilian() && victim->getOriginalFaction() == FACTION_HOSTILE)
-					game->pushState(new InfoboxState(game->getLanguage()->getString("STR_MIND_CONTROL_SUCCESSFUL_ALT")));
+					game.pushState(new InfoboxState(game.getLanguage()->getString("STR_MIND_CONTROL_SUCCESSFUL_ALT")));
 				else
-					game->pushState(new InfoboxState(game->getLanguage()->getString("STR_MIND_CONTROL_SUCCESSFUL")));
+					game.pushState(new InfoboxState(game.getLanguage()->getString("STR_MIND_CONTROL_SUCCESSFUL")));
 			}
 			getSave()->getBattleState()->updateSoldierInfo();
 		}
@@ -2107,7 +2102,7 @@ void BattlescapeGame::moveUpDown(BattleUnit *unit, int dir)
 		_currentAction.target.z--;
 	}
 	getMap()->setCursorType(CT_NONE);
-	_parentState->getGame()->getCursor()->setVisible(false);
+	game.getCursor()->setVisible(false);
 	if (_save->getSelectedUnit()->isKneeled())
 	{
 		kneel(_save->getSelectedUnit());
@@ -2139,7 +2134,7 @@ void BattlescapeGame::requestEndTurn(bool askForConfirmation)
 		if (soldiersWithFatalWounds > 0)
 		{
 			// confirm end of turn/mission
-			_parentState->getGame()->pushState(new ConfirmEndMissionState(_save, soldiersWithFatalWounds, this));
+			game.pushState(new ConfirmEndMissionState(_save, soldiersWithFatalWounds, this));
 			_endConfirmationHandled = true;
 		}
 		else
@@ -2568,7 +2563,7 @@ Pathfinding *BattlescapeGame::getPathfinding()
  */
 Mod *BattlescapeGame::getMod()
 {
-	return _parentState->getGame()->getMod();
+	return game.getMod();
 }
 
 
@@ -2839,7 +2834,7 @@ int BattlescapeGame::takeItemFromGround(BattleItem* item, BattleAction *action)
 bool BattlescapeGame::takeItem(BattleItem* item, BattleAction *action)
 {
 	bool placed = false;
-	Mod *mod = _parentState->getGame()->getMod();
+	Mod *mod = game.getMod();
 	auto* rightWeapon = action->actor->getRightHandWeapon();
 	auto* leftWeapon = action->actor->getLeftHandWeapon();
 	auto* unit = action->actor;
@@ -3086,8 +3081,7 @@ bool BattlescapeGame::convertInfected()
 			bu->setRespawn(false);
 			if (options1.battleNotifyDeath() && bu->getFaction() == FACTION_PLAYER)
 			{
-				Game *game = _parentState->getGame();
-				game->pushState(new InfoboxState(game->getLanguage()->getString("STR_HAS_BEEN_KILLED", bu->getGender()).arg(bu->getName())));
+				game.pushState(new InfoboxState(game.getLanguage()->getString("STR_HAS_BEEN_KILLED", bu->getGender()).arg(bu->getName())));
 			}
 
 			forTransform.push_back(bu);
@@ -3263,7 +3257,7 @@ void BattlescapeGame::playSound(int sound, const Position &pos)
 {
 	if (sound != Mod::NO_SOUND)
 	{
-		_parentState->getGame()->getMod()->getSoundByDepth(_save->getDepth(), sound)->play(-1, _parentState->getMap()->getSoundAngle(pos));
+		game.getMod()->getSoundByDepth(_save->getDepth(), sound)->play(-1, _parentState->getMap()->getSoundAngle(pos));
 	}
 }
 
@@ -3274,7 +3268,7 @@ void BattlescapeGame::playSound(int sound)
 {
 	if (sound != Mod::NO_SOUND)
 	{
-		_parentState->getGame()->getMod()->getSoundByDepth(_save->getDepth(), sound)->play();
+		game.getMod()->getSoundByDepth(_save->getDepth(), sound)->play();
 	}
 }
 

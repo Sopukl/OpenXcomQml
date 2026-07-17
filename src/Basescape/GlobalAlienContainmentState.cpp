@@ -132,9 +132,9 @@ void GlobalAlienContainmentState::fillPrisonerList()
 	// determine prison types used in the game
 	std::set<int> prisonTypes = { 0 };
 	bool noTypes = true;
-	for (auto& facType : _game->getMod()->getBaseFacilitiesList())
+	for (auto& facType : game.getMod()->getBaseFacilitiesList())
 	{
-		auto* facRule = _game->getMod()->getBaseFacility(facType);
+		auto* facRule = game.getMod()->getBaseFacility(facType);
 		if (facRule->getPrisonType() > 0)
 		{
 			prisonTypes.insert(facRule->getPrisonType());
@@ -142,7 +142,7 @@ void GlobalAlienContainmentState::fillPrisonerList()
 		}
 	}
 
-	for (auto* xbase : _game->savedGame()->bases())
+	for (auto* xbase : game.savedGame()->bases())
 	{
 		bool displayed = false;
 		int totalBaseCapacity = 0;
@@ -175,7 +175,7 @@ void GlobalAlienContainmentState::fillPrisonerList()
 			for (const auto* proj : xbase->getResearch())
 			{
 				const RuleResearch* research = proj->getRules();
-				const RuleItem* item = _game->getMod()->getItem(research->getName(), false); // don't use getNeededItem()
+				const RuleItem* item = game.getMod()->getItem(research->getName(), false); // don't use getNeededItem()
 				if (research->needItem() && research->destroyItem() && item && item->isAlien() && item->getPrisonType() == prisonType)
 				{
 					researchList.push_back(research->getName());
@@ -192,9 +192,9 @@ void GlobalAlienContainmentState::fillPrisonerList()
 			_topics.push_back(std::make_tuple("", nullptr, 0));
 			displayed = true;
 
-			for (auto& itemType : _game->getMod()->getItemsList())
+			for (auto& itemType : game.getMod()->getItemsList())
 			{
-				RuleItem* rule = _game->getMod()->getItem(itemType, true);
+				RuleItem* rule = game.getMod()->getItem(itemType, true);
 				if (rule->isAlien() && rule->getPrisonType() == prisonType)
 				{
 					int qty = xbase->getStorageItems().getItem(rule);
@@ -250,7 +250,7 @@ void GlobalAlienContainmentState::fillPrisonerList()
  */
 void GlobalAlienContainmentState::btnOkClick(Action*)
 {
-	_game->popState();
+	game.popState();
 }
 
 /**
@@ -266,16 +266,16 @@ void GlobalAlienContainmentState::onSelectBase(Action*)
 	if (base)
 	{
 		// close this window
-		_game->popState();
+		game.popState();
 
 		// close Manage Alien Containment UI (goes back to BaseView)
 		if (_openedFromBasescape)
 		{
-			_game->popState();
+			game.popState();
 		}
 
 		// open new window
-		_game->pushState(new ManageAlienContainmentState(base, prisonType, OPT_GEOSCAPE));
+		game.pushState(new ManageAlienContainmentState(base, prisonType, OPT_GEOSCAPE));
 	}
 }
 
@@ -286,11 +286,11 @@ void GlobalAlienContainmentState::onSelectBase(Action*)
 void GlobalAlienContainmentState::onOpenTechTreeViewer(Action*)
 {
 	auto& tuple = _topics[_lstPrisoners->getSelectedRow()];
-	const RuleResearch* selectedTopic = _game->getMod()->getResearch(std::get<0>(tuple));
+	const RuleResearch* selectedTopic = game.getMod()->getResearch(std::get<0>(tuple));
 
 	if (selectedTopic)
 	{
-		_game->pushState(new TechTreeViewerState(selectedTopic, 0));
+		game.pushState(new TechTreeViewerState(selectedTopic, 0));
 	}
 }
 

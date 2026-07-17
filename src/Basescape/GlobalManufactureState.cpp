@@ -87,7 +87,7 @@ GlobalManufactureState::GlobalManufactureState(bool openedFromBasescape) : _open
 	_txtTitle->setAlign(ALIGN_CENTER);
 	_txtTitle->setText(ltr("STR_PRODUCTION_OVERVIEW"));
 
-	_txtFunds->setText(ltr("STR_CURRENT_FUNDS").arg(Unicode::formatFunding(_game->savedGame()->getFunds())));
+	_txtFunds->setText(ltr("STR_CURRENT_FUNDS").arg(Unicode::formatFunding(game.savedGame()->getFunds())));
 
 	_txtItem->setText(ltr("STR_ITEM"));
 
@@ -128,7 +128,7 @@ GlobalManufactureState::~GlobalManufactureState()
  */
 void GlobalManufactureState::btnOkClick(Action *)
 {
-	_game->popState();
+	game.popState();
 }
 
 /**
@@ -142,16 +142,16 @@ void GlobalManufactureState::onSelectBase(Action *)
 	if (base)
 	{
 		// close this window
-		_game->popState();
+		game.popState();
 
 		// close Manufacture UI (goes back to BaseView)
 		if (_openedFromBasescape)
 		{
-			_game->popState();
+			game.popState();
 		}
 
 		// open new window
-		_game->pushState(new ManufactureState(base));
+		game.pushState(new ManufactureState(base));
 	}
 }
 
@@ -165,14 +165,14 @@ void GlobalManufactureState::onOpenTechTreeViewer(Action *)
 
 	if (selectedTopic)
 	{
-		if (_game->isCtrlPressed())
+		if (game.isCtrlPressed())
 		{
 			std::string articleId = selectedTopic->getName();
 			Ufopaedia::openArticle(articleId);
 		}
 		else
 		{
-			_game->pushState(new TechTreeViewerState(0, selectedTopic));
+			game.pushState(new TechTreeViewerState(0, selectedTopic));
 		}
 	}
 }
@@ -200,7 +200,7 @@ void GlobalManufactureState::fillProductionList()
 	int allocatedEngineers = 0;
 	int freeWorkshops = 0;
 
-	for (Base *xbase : _game->savedGame()->bases())
+	for (Base *xbase : game.savedGame()->bases())
 	{
 		auto& baseProductions = xbase->getProductions();
 		if (!baseProductions.empty() || xbase->getEngineers() > 0)

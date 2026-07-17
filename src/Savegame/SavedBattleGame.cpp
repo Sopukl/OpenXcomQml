@@ -1131,7 +1131,7 @@ bool SavedBattleGame::canUseWeapon(const BattleItem* weapon, const BattleUnit* u
 	{
 		return false;
 	}
-	if (unit->getOriginalFaction() == FACTION_PLAYER && !_battleState->getGame()->savedGame()->isResearched(rule->getRequirements()))
+	if (unit->getOriginalFaction() == FACTION_PLAYER && !game.savedGame()->isResearched(rule->getRequirements()))
 	{
 		return false;
 	}
@@ -1141,7 +1141,7 @@ bool SavedBattleGame::canUseWeapon(const BattleItem* weapon, const BattleUnit* u
 	}
 	if (rule->isManaRequired() && unit->getOriginalFaction() == FACTION_PLAYER)
 	{
-		if (!_rule->isManaFeatureEnabled() || !_battleState->getGame()->savedGame()->isManaUnlocked(_rule))
+		if (!_rule->isManaFeatureEnabled() || !game.savedGame()->isManaUnlocked(_rule))
 		{
 			return false;
 		}
@@ -1736,7 +1736,7 @@ bool SavedBattleGame::isCtrlPressed(bool considerTouchButtons) const
 {
 	if (_battleState)
 	{
-		return _battleState->getGame()->isCtrlPressed(considerTouchButtons);
+		return game.isCtrlPressed(considerTouchButtons);
 	}
 	return false;
 }
@@ -1748,7 +1748,7 @@ bool SavedBattleGame::isAltPressed(bool considerTouchButtons) const
 {
 	if (_battleState)
 	{
-		return _battleState->getGame()->isAltPressed(considerTouchButtons);
+		return game.isAltPressed(considerTouchButtons);
 	}
 	return false;
 }
@@ -1760,7 +1760,7 @@ bool SavedBattleGame::isShiftPressed(bool considerTouchButtons) const
 {
 	if (_battleState)
 	{
-		return _battleState->getGame()->isShiftPressed(considerTouchButtons);
+		return game.isShiftPressed(considerTouchButtons);
 	}
 	return false;
 }
@@ -2520,7 +2520,7 @@ void SavedBattleGame::prepareNewTurn()
 		}
 	}
 
-	Mod *mod = getBattleState()->getGame()->getMod();
+	Mod *mod = game.getMod();
 	for (auto* bu : *getUnits())
 	{
 		bu->calculateEnviDamage(mod, this);
@@ -3020,7 +3020,7 @@ void SavedBattleGame::calculateModuleMap()
  */
 SavedGame *SavedBattleGame::getGeoscapeSave() const
 {
-	return _battleState->getGame()->savedGame();
+	return game.savedGame();
 }
 
 /**

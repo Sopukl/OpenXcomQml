@@ -61,11 +61,11 @@ ActionMenuState::ActionMenuState(BattleAction *action, int x, int y) : _action(a
 	_screen = false;
 
 	// Set palette
-	_game->savedGame()->getSavedBattle()->setPaletteByDepth(this);
+	game.savedGame()->getSavedBattle()->setPaletteByDepth(this);
 
 	for (int i = 0; i < 6; ++i)
 	{
-		_actionMenu[i] = new ActionMenuItem(i, _game, x, y);
+		_actionMenu[i] = new ActionMenuItem(i, &game, x, y);
 		add(_actionMenu[i]);
 		_actionMenu[i]->setVisible(false);
 		_actionMenu[i]->onMouseClick((ActionHandler)&ActionMenuState::btnActionMenuItemClick);
@@ -88,7 +88,7 @@ ActionMenuState::ActionMenuState(BattleAction *action, int x, int y) : _action(a
 
 	if (weapon->isManaRequired() && _action->actor->getOriginalFaction() == FACTION_PLAYER)
 	{
-		if (!_game->getMod()->isManaFeatureEnabled() || !_game->savedGame()->isManaUnlocked(_game->getMod()))
+		if (!game.getMod()->isManaFeatureEnabled() || !game.savedGame()->isManaUnlocked(game.getMod()))
 		{
 			return;
 		}
@@ -207,7 +207,7 @@ void ActionMenuState::init()
 	if (!_actionMenu[0]->getVisible())
 	{
 		// Item don't have any actions, close popup.
-		_game->popState();
+		game.popState();
 	}
 }
 
@@ -220,7 +220,7 @@ void ActionMenuState::init()
 void ActionMenuState::addItem(BattleActionType ba, const std::string &name, int *id, SDLKey key)
 {
 	std::string s1, s2;
-	int acc = BattleUnit::getFiringAccuracy(BattleActionAttack::GetBeforeShoot(ba, _action->actor, _action->weapon), _game->getMod());
+	int acc = BattleUnit::getFiringAccuracy(BattleActionAttack::GetBeforeShoot(ba, _action->actor, _action->weapon), game.getMod());
 	int tu = _action->actor->getActionTUs(ba, _action->weapon).Time;
 
 	if (ba == BA_THROW || ba == BA_AIMEDSHOT || ba == BA_SNAPSHOT || ba == BA_AUTOSHOT || ba == BA_LAUNCH || ba == BA_HIT)
@@ -242,9 +242,9 @@ void ActionMenuState::addItem(BattleActionType ba, const std::string &name, int 
 void ActionMenuState::handle(Action *action)
 {
 	State::handle(action);
-	if (action->getDetails()->type == SDL_MOUSEBUTTONDOWN && _game->isRightClick(action))
+	if (action->getDetails()->type == SDL_MOUSEBUTTONDOWN && game.isRightClick(action))
 	{
-		_game->popState();
+		game.popState();
 	}
 	else if (action->getDetails()->type == SDL_KEYDOWN)
 	{
@@ -257,7 +257,7 @@ void ActionMenuState::handle(Action *action)
 				key != options1.keyBattleActionItem4() &&
 				key != options1.keyBattleActionItem5())
 			{
-				_game->popState();
+				game.popState();
 			}
 		}
 	}
@@ -269,14 +269,14 @@ void ActionMenuState::handle(Action *action)
  */
 void ActionMenuState::btnActionMenuItemClick(Action *action)
 {
-	_game->savedGame()->getSavedBattle()->getPathfinding()->removePreview();
+	game.savedGame()->getSavedBattle()->getPathfinding()->removePreview();
 
 	int btnID = -1;
 
-	if (_game->savedGame()->getSavedBattle()->isPreview())
+	if (game.savedGame()->getSavedBattle()->isPreview())
 	{
 		_action->result = "STR_UNABLE_TO_USE_ALIEN_ARTIFACT_UNTIL_RESEARCHED";
-		_game->popState();
+		game.popState();
 		return;
 	}
 
@@ -311,39 +311,39 @@ void ActionMenuState::handleAction()
 
 		if (_action->type != BA_THROW &&
 			_action->actor->getOriginalFaction() == FACTION_PLAYER &&
-			!_game->savedGame()->isResearched(weapon->getRequirements()))
+			!game.savedGame()->isResearched(weapon->getRequirements()))
 		{
 			_action->result = "STR_UNABLE_TO_USE_ALIEN_ARTIFACT_UNTIL_RESEARCHED";
-			_game->popState();
+			game.popState();
 		}
 		else if (_action->type != BA_THROW &&
-			!_game->savedGame()->getSavedBattle()->canUseWeapon(_action->weapon, _action->actor, false, _action->type, &actionResult))
+			!game.savedGame()->getSavedBattle()->canUseWeapon(_action->weapon, _action->actor, false, _action->type, &actionResult))
 		{
 			_action->result = actionResult;
-			_game->popState();
+			game.popState();
 		}
 		else if (_action->type == BA_PRIME)
 		{
 			const BattleFuseType fuseType = weapon->getFuseTimerType();
 			if (fuseType == BFT_SET)
 			{
-				_game->pushState(new PrimeGrenadeState(_action, false, 0));
+				game.pushState(new PrimeGrenadeState(_action, false, 0));
 			}
 			else
 			{
 				_action->value = weapon->getFuseTimerDefault();
-				_game->popState();
+				game.popState();
 			}
 		}
 		else if (_action->type == BA_UNPRIME)
 		{
-			_game->popState();
+			game.popState();
 		}
 		else if (_action->type == BA_USE && weapon->getBattleType() == BT_MEDIKIT)
 		{
 			BattleUnit *targetUnit = 0;
-			TileEngine *tileEngine = _game->savedGame()->getSavedBattle()->getTileEngine();
-			for (auto* bu : *_game->savedGame()->getSavedBattle()->getUnits())
+			TileEngine *tileEngine = game.savedGame()->getSavedBattle()->getTileEngine();
+			for (auto* bu : *game.savedGame()->getSavedBattle()->getUnits())
 			{
 				// we can heal a unit that is at the same position, unconscious and healable(=woundable)
 				if (bu->getPosition() == _action->actor->getPosition() &&
@@ -374,7 +374,7 @@ void ActionMenuState::handleAction()
 					_action->actor,
 					0, &_action->target, false))
 				{
-					Tile *tile = _game->savedGame()->getSavedBattle()->getTile(_action->target);
+					Tile *tile = game.savedGame()->getSavedBattle()->getTile(_action->target);
 					if (tile != 0 && tile->getUnit() && (tile->getUnit()->isWoundable() || weapon->getAllowTargetImmune()))
 					{
 						if ((weapon->getAllowTargetFriendStanding() && tile->getUnit()->getOriginalFaction() == FACTION_PLAYER) ||
@@ -392,7 +392,7 @@ void ActionMenuState::handleAction()
 			}
 			if (targetUnit)
 			{
-				_game->popState();
+				game.popState();
 				BattleMediKitType type = weapon->getMediKitType();
 				if (type)
 				{
@@ -443,13 +443,13 @@ void ActionMenuState::handleAction()
 				}
 				else
 				{
-					_game->pushState(new MedikitState(targetUnit, _action, tileEngine));
+					game.pushState(new MedikitState(targetUnit, _action, tileEngine));
 				}
 			}
 			else
 			{
 				_action->result = "STR_THERE_IS_NO_ONE_THERE";
-				_game->popState();
+				game.popState();
 			}
 		}
 		else if (_action->type == BA_USE && weapon->getBattleType() == BT_SCANNER)
@@ -457,12 +457,12 @@ void ActionMenuState::handleAction()
 			// spend TUs first, then show the scanner
 			if (_action->spendTU(&_action->result))
 			{
-				_game->popState();
-				_game->pushState (new ScannerState(_action));
+				game.popState();
+				game.pushState (new ScannerState(_action));
 			}
 			else
 			{
-				_game->popState();
+				game.popState();
 			}
 		}
 		else if (_action->type == BA_LAUNCH)
@@ -481,7 +481,7 @@ void ActionMenuState::handleAction()
 				_action->targeting = true;
 				newHitLog = true;
 			}
-			_game->popState();
+			game.popState();
 		}
 		else if (_action->type == BA_HIT)
 		{
@@ -490,13 +490,13 @@ void ActionMenuState::handleAction()
 			{
 				//nothing
 			}
-			else if (!_game->savedGame()->getSavedBattle()->getTileEngine()->validMeleeRange(
+			else if (!game.savedGame()->getSavedBattle()->getTileEngine()->validMeleeRange(
 				_action->actor->getPosition(),
 				_action->actor->getDirection(),
 				_action->actor,
 				0, &_action->target))
 			{
-				if (!_game->savedGame()->getSavedBattle()->getTileEngine()->validTerrainMeleeRange(_action))
+				if (!game.savedGame()->getSavedBattle()->getTileEngine()->validTerrainMeleeRange(_action))
 				{
 					_action->result = "STR_THERE_IS_NO_ONE_THERE";
 				}
@@ -505,13 +505,13 @@ void ActionMenuState::handleAction()
 			{
 				newHitLog = true;
 			}
-			_game->popState();
+			game.popState();
 		}
 		else
 		{
 			_action->targeting = true;
 			newHitLog = true;
-			_game->popState();
+			game.popState();
 		}
 
 		// meleeAttackBState won't be available to clear the action type, do it here instead.
@@ -522,7 +522,7 @@ void ActionMenuState::handleAction()
 
 		if (newHitLog)
 		{
-			_game->savedGame()->getSavedBattle()->appendToHitLog(HITLOG_PLAYER_FIRING, FACTION_PLAYER, ltr(weapon->getType()));
+			game.savedGame()->getSavedBattle()->appendToHitLog(HITLOG_PLAYER_FIRING, FACTION_PLAYER, ltr(weapon->getType()));
 		}
 	}
 }

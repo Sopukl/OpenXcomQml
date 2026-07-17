@@ -51,10 +51,10 @@ const int MAX_FRAME = 2;
  * @param camera The Battlescape camera.
  * @param battleGame Pointer to the SavedBattleGame.
  */
-MiniMapView::MiniMapView(int w, int h, int x, int y, Game * game, Camera * camera, SavedBattleGame * battleGame) : InteractiveSurface(w, h, x, y), _game(game), _camera(camera), _battleGame(battleGame), _frame(0), _isMouseScrolling(false), _isMouseScrolled(false), _xBeforeMouseScrolling(0), _yBeforeMouseScrolling(0), _mouseScrollX(0), _mouseScrollY(0), _mouseScrollingStartTime(0), _totalMouseMoveX(0), _totalMouseMoveY(0), _mouseMovedOverThreshold(false)
+MiniMapView::MiniMapView(int w, int h, int x, int y, Camera * camera, SavedBattleGame * battleGame) : InteractiveSurface(w, h, x, y), _camera(camera), _battleGame(battleGame), _frame(0), _isMouseScrolling(false), _isMouseScrolled(false), _xBeforeMouseScrolling(0), _yBeforeMouseScrolling(0), _mouseScrollX(0), _mouseScrollY(0), _mouseScrollingStartTime(0), _totalMouseMoveX(0), _totalMouseMoveY(0), _mouseMovedOverThreshold(false)
 {
-	_set = _game->getMod()->getSurfaceSet("SCANG.DAT");
-	_emptySpaceIndex = _game->getMod()->getInterface("minimap")->getElement("emptySpace")->color;
+	_set = game.getMod()->getSurfaceSet("SCANG.DAT");
+	_emptySpaceIndex = game.getMod()->getInterface("minimap")->getElement("emptySpace")->color;
 }
 
 /**
@@ -73,7 +73,7 @@ void MiniMapView::draw()
 	drawRect(0, 0, getWidth(), getHeight(), 15);
 	this->lock();
 	Surface * emptySpace = _set->getFrame(_emptySpaceIndex);
-	bool isAltPressed = _game->isAltPressed(true);
+	bool isAltPressed = game.isAltPressed(true);
 	if (Options::isPasswordCorrect())
 	{
 		isAltPressed = !isAltPressed;
@@ -293,12 +293,12 @@ void MiniMapView::mouseClick(Action *action, State *state)
 		if (_isMouseScrolled) return;
 	}
 
-	if (_game->isRightClick(action))
+	if (game.isRightClick(action))
 	{
 		((MiniMapState*)(state))->btnOkClick(action);
 	}
 
-	if (_game->isLeftClick(action))
+	if (game.isLeftClick(action))
 	{
 		int origX = action->getRelativeXMouse() / action->getXScale();
 		int origY = action->getRelativeYMouse() / action->getYScale();
@@ -403,8 +403,8 @@ void MiniMapView::mouseOver(Action *action, State *state)
 			else
 			{
 				Position delta(-scrollX, -scrollY, 0);
-				int barWidth = _game->getScreen()->getCursorLeftBlackBand();
-				int barHeight = _game->getScreen()->getCursorTopBlackBand();
+				int barWidth = game.getScreen()->getCursorLeftBlackBand();
+				int barHeight = game.getScreen()->getCursorTopBlackBand();
 				int cursorX = _cursorPosition.x + delta.x;
 				int cursorY =_cursorPosition.y + delta.y;
 				_cursorPosition.x = Clamp(cursorX, (int)Round(getX() * action->getXScale()) + barWidth, (int)Round((getX() + getWidth()) * action->getXScale()) + barWidth);
@@ -413,7 +413,7 @@ void MiniMapView::mouseOver(Action *action, State *state)
 				action->getDetails()->motion.y = _cursorPosition.y;
 			}
 		}
-		_game->getCursor()->handle(action);
+		game.getCursor()->handle(action);
 	}
 }
 

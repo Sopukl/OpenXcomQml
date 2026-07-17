@@ -50,7 +50,7 @@ SoldierDiaryPerformanceState::SoldierDiaryPerformanceState(Base *base, size_t so
 {
 	if (_base == 0)
 	{
-		_list = &_game->savedGame()->getDeadSoldiers();
+		_list = &game.savedGame()->getDeadSoldiers();
 	}
 	else
 	{
@@ -232,11 +232,11 @@ void SoldierDiaryPerformanceState::init()
 	_txtMedalLevel->setVisible(_display == DIARY_COMMENDATIONS);
 	_txtMedalInfo->setVisible(_display == DIARY_COMMENDATIONS);
 	_lstCommendations->setVisible(_display == DIARY_COMMENDATIONS);
-	_btnCommendations->setVisible(!_game->getMod()->getCommendationsList().empty());
+	_btnCommendations->setVisible(!game.getMod()->getCommendationsList().empty());
 
 	if (_list->empty())
 	{
-		_game->popState();
+		game.popState();
 		return;
 	}
 	if (_soldierId >= _list->size())
@@ -277,7 +277,7 @@ void SoldierDiaryPerformanceState::init()
 			}
 		}
 
-		if (_soldier->getCurrentStats()->psiSkill > 0 || (options1.psiStrengthEval() && _game->savedGame()->isResearched(_game->getMod()->getPsiRequirements())))
+		if (_soldier->getCurrentStats()->psiSkill > 0 || (options1.psiStrengthEval() && game.savedGame()->isResearched(game.getMod()->getPsiRequirements())))
 		{
 			_lstKillTotals->addRow(4, ltr("STR_KILLS").arg(_soldier->getDiary()->getKillTotal()).c_str(),
 										ltr("STR_STUNS").arg(_soldier->getDiary()->getStunTotal()).c_str(),
@@ -295,9 +295,9 @@ void SoldierDiaryPerformanceState::init()
 	else if (_display == DIARY_MISSIONS)
 	{
 		std::map<std::string, int> mapArray[] = {
-			_soldier->getDiary()->getRegionTotal(_game->savedGame()->getMissionStatistics()),
-			_soldier->getDiary()->getTypeTotal(_game->savedGame()->getMissionStatistics()),
-			_soldier->getDiary()->getUFOTotal(_game->savedGame()->getMissionStatistics())
+			_soldier->getDiary()->getRegionTotal(game.savedGame()->getMissionStatistics()),
+			_soldier->getDiary()->getTypeTotal(game.savedGame()->getMissionStatistics()),
+			_soldier->getDiary()->getUFOTotal(game.savedGame()->getMissionStatistics())
 		};
 		std::string titleArray[] = { "STR_MISSIONS_BY_LOCATION", "STR_MISSIONS_BY_TYPE", "STR_MISSIONS_BY_UFO" };
 
@@ -319,11 +319,11 @@ void SoldierDiaryPerformanceState::init()
 		}
 
 		_lstMissionTotals->addRow(4, ltr("STR_MISSIONS").arg(_soldier->getDiary()->getMissionTotal()).c_str(),
-									ltr("STR_WINS").arg(_soldier->getDiary()->getWinTotal(_game->savedGame()->getMissionStatistics())).c_str(),
-									ltr("STR_SCORE_VALUE").arg(_soldier->getDiary()->getScoreTotal(_game->savedGame()->getMissionStatistics())).c_str(),
+									ltr("STR_WINS").arg(_soldier->getDiary()->getWinTotal(game.savedGame()->getMissionStatistics())).c_str(),
+									ltr("STR_SCORE_VALUE").arg(_soldier->getDiary()->getScoreTotal(game.savedGame()->getMissionStatistics())).c_str(),
 									ltr("STR_DAYS_WOUNDED").arg(_soldier->getDiary()->getDaysWoundedTotal()).c_str());
 	}
-	else if (_display == DIARY_COMMENDATIONS && !_game->getMod()->getCommendationsList().empty())
+	else if (_display == DIARY_COMMENDATIONS && !game.getMod()->getCommendationsList().empty())
 	{
 		// pre-calc translations
 		for (auto* sc : *_soldier->getDiary()->getSoldierCommendations())
@@ -375,8 +375,8 @@ void SoldierDiaryPerformanceState::drawSprites()
 	if (_display != DIARY_COMMENDATIONS) return;
 
 	// Commendation sprites
-	SurfaceSet* commendationSprite = _game->getMod()->getSurfaceSet("Commendations");
-	SurfaceSet* commendationDecoration = _game->getMod()->getSurfaceSet("CommendationDecorations");
+	SurfaceSet* commendationSprite = game.getMod()->getSurfaceSet("Commendations");
+	SurfaceSet* commendationDecoration = game.getMod()->getSurfaceSet("CommendationDecorations");
 
 	// Clear sprites
 	for (int i = 0; i != 10; ++i)
@@ -421,7 +421,7 @@ void SoldierDiaryPerformanceState::drawSprites()
 void SoldierDiaryPerformanceState::btnOkClick(Action *)
 {
 	_soldierDiaryOverviewState->setSoldierId(_soldierId);
-	_game->popState();
+	game.popState();
 }
 
 /**

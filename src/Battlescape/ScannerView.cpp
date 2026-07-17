@@ -38,7 +38,7 @@ namespace OpenXcom
  * @param game Pointer to the core game.
  * @param unit The current unit.
  */
-ScannerView::ScannerView (int w, int h, int x, int y, Game * game, BattleUnit *unit) : InteractiveSurface(w, h, x, y), _game(game), _unit(unit), _frame(0)
+ScannerView::ScannerView (int w, int h, int x, int y, BattleUnit *unit) : InteractiveSurface(w, h, x, y), _unit(unit), _frame(0)
 {
 	_redraw = true;
 }
@@ -48,7 +48,7 @@ ScannerView::ScannerView (int w, int h, int x, int y, Game * game, BattleUnit *u
  */
 void ScannerView::draw()
 {
-	SurfaceSet *set = _game->getMod()->getSurfaceSet("DETBLOB.DAT");
+	SurfaceSet *set = game.getMod()->getSurfaceSet("DETBLOB.DAT");
 	Surface *surface = 0;
 
 	clear();
@@ -58,15 +58,15 @@ void ScannerView::draw()
 	{
 		for (int y = -9; y < 10; y++)
 		{
-			for (int z = 0; z < _game->savedGame()->getSavedBattle()->getMapSizeZ(); z++)
+			for (int z = 0; z < game.savedGame()->getSavedBattle()->getMapSizeZ(); z++)
 			{
-				Tile *t = _game->savedGame()->getSavedBattle()->getTile(Position(x,y,z) + Position(_unit->getPosition().x, _unit->getPosition().y, 0));
+				Tile *t = game.savedGame()->getSavedBattle()->getTile(Position(x,y,z) + Position(_unit->getPosition().x, _unit->getPosition().y, 0));
 				if (t && t->getUnit() && t->getUnit()->getMotionPoints())
 				{
 					int frame = (t->getUnit()->getMotionPoints() / 5);
 					if (frame >= 0)
 					{
-						t->getUnit()->setScannedTurn(_game->savedGame()->getSavedBattle()->getTurn());
+						t->getUnit()->setScannedTurn(game.savedGame()->getSavedBattle()->getTurn());
 						if (frame > 5) frame = 5;
 						surface = set->getFrame(frame + _frame);
 						surface->blitNShade(this, ((9+x)*8)-4, ((9+y)*8)-4, 0);

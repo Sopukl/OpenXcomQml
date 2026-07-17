@@ -35,9 +35,9 @@ namespace OpenXcom
 	{
 		_txtInfo->setHeight(80);
 
-		_btnInfo->setVisible(_game->getMod()->getShowPediaInfoButton());
+		_btnInfo->setVisible(game.getMod()->getShowPediaInfoButton());
 
-		RuleCraft *craft = _game->getMod()->getCraft(defs->id, true);
+		RuleCraft *craft = game.getMod()->getCraft(defs->id, true);
 		_txtStats = new Text(131, 56, 187, 116);
 		add(_txtStats);
 
@@ -48,12 +48,12 @@ namespace OpenXcom
 		ss << ltr("STR_MAXIMUM_SPEED_UC").arg(Unicode::formatNumber(craft->getMaxSpeed())) << '\n';
 		ss << ltr("STR_ACCELERATION").arg(craft->getAcceleration()) << '\n';
 		int range;
-		switch (_game->getMod()->getPediaReplaceCraftFuelWithRangeType())
+		switch (game.getMod()->getPediaReplaceCraftFuelWithRangeType())
 		{
 			// Both max range alone and average range get rounded
 			case 0:
 			case 2:
-				range = craft->calculateRange(_game->getMod()->getPediaReplaceCraftFuelWithRangeType());
+				range = craft->calculateRange(game.getMod()->getPediaReplaceCraftFuelWithRangeType());
 				if (range == -1)
 				{
 					ss << ltr("STR_MAXIMUM_RANGE").arg(ltr("STR_INFINITE_RANGE")) << '\n';

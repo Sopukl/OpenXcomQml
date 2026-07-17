@@ -67,7 +67,7 @@ PauseState::PauseState(OptionsOrigin origin) : _origin(origin)
 	_txtVersion = new Text(216, 9, x, 11);
 
 	// Set palette
-	setInterface("pauseMenu", false, _game->savedGame() ? _game->savedGame()->getSavedBattle() : 0);
+	setInterface("pauseMenu", false, game.savedGame() ? game.savedGame()->getSavedBattle() : 0);
 
 	add(_window, "window", "pauseMenu");
 	add(_btnLoad, "button", "pauseMenu");
@@ -105,7 +105,7 @@ PauseState::PauseState(OptionsOrigin origin) : _origin(origin)
 	else if (origin == OPT_BATTLESCAPE)
 	{
 		_btnCancel->onKeyboardPress((ActionHandler)&PauseState::btnCancelClick, options1.keyBattleOptions());
-		if (!_game->savedGame()->getSavedBattle()->getBattleGame()->getStates().empty())
+		if (!game.savedGame()->getSavedBattle()->getBattleGame()->getStates().empty())
 		{
 			_btnOptions->setVisible(false);
 		}
@@ -125,7 +125,7 @@ PauseState::PauseState(OptionsOrigin origin) : _origin(origin)
 		applyBattlescapeTheme("pauseMenu");
 	}
 
-	if (_game->savedGame()->isIronman())
+	if (game.savedGame()->isIronman())
 	{
 		_btnLoad->setVisible(false);
 		_btnSave->setVisible(false);
@@ -135,15 +135,15 @@ PauseState::PauseState(OptionsOrigin origin) : _origin(origin)
 	// ENOUGH! No save corruption when trying to save/exit mid-action (e.g. during alien turn)
 	if (origin == OPT_BATTLESCAPE)
 	{
-		bool playerTurn = _game->savedGame()->getSavedBattle()->getSide() == FACTION_PLAYER;
-		bool debugMode = _game->savedGame()->getSavedBattle()->getDebugMode();
-		bool busy = !_game->savedGame()->getSavedBattle()->getBattleGame()->getStates().empty();
+		bool playerTurn = game.savedGame()->getSavedBattle()->getSide() == FACTION_PLAYER;
+		bool debugMode = game.savedGame()->getSavedBattle()->getDebugMode();
+		bool busy = !game.savedGame()->getSavedBattle()->getBattleGame()->getStates().empty();
 
 		if ((!playerTurn && !debugMode) || busy)
 		{
 			_btnSave->setVisible(false); // non-ironman + ironman
 
-			if (_game->savedGame()->isIronman())
+			if (game.savedGame()->isIronman())
 			{
 				_btnAbandon->setVisible(false); // ironman only
 			}
@@ -165,7 +165,7 @@ PauseState::~PauseState()
  */
 void PauseState::btnLoadClick(Action *)
 {
-	_game->pushState(new ListLoadState(_origin));
+	game.pushState(new ListLoadState(_origin));
 }
 
 /**
@@ -174,7 +174,7 @@ void PauseState::btnLoadClick(Action *)
  */
 void PauseState::btnSaveClick(Action *)
 {
-	_game->pushState(new ListSaveState(_origin));
+	game.pushState(new ListSaveState(_origin));
 }
 
 /**
@@ -186,15 +186,15 @@ void PauseState::btnOptionsClick(Action *)
 	Options::backupDisplay();
 	if (_origin == OPT_GEOSCAPE)
 	{
-		_game->pushState(new OptionsGeoscapeState(_origin));
+		game.pushState(new OptionsGeoscapeState(_origin));
 	}
 	else if (_origin == OPT_BATTLESCAPE)
 	{
-		_game->pushState(new OptionsBattlescapeState(_origin));
+		game.pushState(new OptionsBattlescapeState(_origin));
 	}
 	else
 	{
-		_game->pushState(new OptionsVideoState(_origin));
+		game.pushState(new OptionsVideoState(_origin));
 	}
 }
 
@@ -204,7 +204,7 @@ void PauseState::btnOptionsClick(Action *)
  */
 void PauseState::btnAbandonClick(Action *)
 {
-	_game->pushState(new AbandonGameState(_origin));
+	game.pushState(new AbandonGameState(_origin));
 }
 
 /**
@@ -213,7 +213,7 @@ void PauseState::btnAbandonClick(Action *)
  */
 void PauseState::btnCancelClick(Action *)
 {
-	_game->popState();
+	game.popState();
 }
 
 }

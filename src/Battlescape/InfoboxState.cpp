@@ -42,7 +42,7 @@ InfoboxState::InfoboxState(const std::string &msg)
 	_text = new Text(251, 112, 39, 15);
 
 	// Set palette
-	_game->savedGame()->getSavedBattle()->setPaletteByDepth(this);
+	game.savedGame()->getSavedBattle()->setPaletteByDepth(this);
 
 	add(_frame, "infoBox", "battlescape");
 	add(_text, "infoBoxText", "battlescape");
@@ -107,7 +107,7 @@ void InfoboxState::think()
  */
 void InfoboxState::close()
 {
-	_game->popState();
+	game.popState();
 }
 
 }

@@ -106,7 +106,7 @@ void TechTreeSelectState::init()
  */
 void TechTreeSelectState::btnOkClick(Action *)
 {
-	_game->popState();
+	game.popState();
 }
 
 /**
@@ -164,9 +164,9 @@ void TechTreeSelectState::initLists()
 	std::unordered_set<std::string> tmpList;
 	if (searchString == "ASCRIPT")
 	{
-		for (auto& arcScriptId : *_game->getMod()->getArcScriptList())
+		for (auto& arcScriptId : *game.getMod()->getArcScriptList())
 		{
-			auto* arcScript = _game->getMod()->getArcScript(arcScriptId, false);
+			auto* arcScript = game.getMod()->getArcScript(arcScriptId, false);
 			if (arcScript)
 			{
 				for (auto& trigger : arcScript->getResearchTriggers())
@@ -178,9 +178,9 @@ void TechTreeSelectState::initLists()
 	}
 	else if (searchString == "ESCRIPT")
 	{
-		for (auto& eventScriptId : *_game->getMod()->getEventScriptList())
+		for (auto& eventScriptId : *game.getMod()->getEventScriptList())
 		{
-			auto* eventScript = _game->getMod()->getEventScript(eventScriptId, false);
+			auto* eventScript = game.getMod()->getEventScript(eventScriptId, false);
 			if (eventScript)
 			{
 				for (auto& trigger : eventScript->getResearchTriggers())
@@ -192,9 +192,9 @@ void TechTreeSelectState::initLists()
 	}
 	else if (searchString == "MSCRIPT")
 	{
-		for (auto& missionScriptId : *_game->getMod()->getMissionScriptList())
+		for (auto& missionScriptId : *game.getMod()->getMissionScriptList())
 		{
-			auto* missionScript = _game->getMod()->getMissionScript(missionScriptId, false);
+			auto* missionScript = game.getMod()->getMissionScript(missionScriptId, false);
 			if (missionScript)
 			{
 				for (auto& trigger : missionScript->getResearchTriggers())
@@ -220,7 +220,7 @@ void TechTreeSelectState::initLists()
 		return;
 	}
 
-	for (auto& res : _game->getMod()->getResearchList())
+	for (auto& res : game.getMod()->getResearchList())
 	{
 		std::string projectName = ltr(res);
 		Unicode::upperCase(projectName);
@@ -244,7 +244,7 @@ void TechTreeSelectState::initLists()
 
 	_firstManufacturingTopicIndex = row;
 
-	for (auto& manuf : _game->getMod()->getManufactureList())
+	for (auto& manuf : game.getMod()->getManufactureList())
 	{
 		std::string projectName = ltr(manuf);
 		Unicode::upperCase(projectName);
@@ -274,7 +274,7 @@ void TechTreeSelectState::initLists()
 
 	_firstFacilitiesTopicIndex = row;
 
-	for (auto& facType : _game->getMod()->getBaseFacilitiesList())
+	for (auto& facType : game.getMod()->getBaseFacilitiesList())
 	{
 		std::string facilityName = ltr(facType);
 		Unicode::upperCase(facilityName);
@@ -304,7 +304,7 @@ void TechTreeSelectState::initLists()
 
 	_firstItemTopicIndex = row;
 
-	for (auto& itemType : _game->getMod()->getItemsList())
+	for (auto& itemType : game.getMod()->getItemsList())
 	{
 		if (!_parent->isProtectedItem(itemType))
 		{
@@ -339,7 +339,7 @@ void TechTreeSelectState::initLists()
 
 	_firstCraftTopicIndex = row;
 
-	for (auto& craftType : _game->getMod()->getCraftsList())
+	for (auto& craftType : game.getMod()->getCraftsList())
 	{
 		std::string craftName = ltr(craftType);
 		Unicode::upperCase(craftName);
@@ -400,7 +400,7 @@ void TechTreeSelectState::onSelectTopic(Action *)
 
 	_parent->setSelectedTopic(selectedTopic, topicType);
 
-	_game->popState();
+	game.popState();
 }
 
 }

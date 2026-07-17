@@ -39,7 +39,7 @@ namespace OpenXcom
  * @param partTxt A pointer to a Text. Will be updated with the selected body part.
  * @param woundTxt A pointer to a Text. Will be updated with the amount of fatal wound.
  */
-MedikitView::MedikitView (int w, int h, int x, int y, Game * game, BattleUnit *unit, Text *partTxt, Text *woundTxt) : InteractiveSurface(w, h, x, y), _game(game), _selectedPart(0), _unit(unit), _partTxt(partTxt), _woundTxt(woundTxt)
+MedikitView::MedikitView (int w, int h, int x, int y, BattleUnit *unit, Text *partTxt, Text *woundTxt) : InteractiveSurface(w, h, x, y), _selectedPart(0), _unit(unit), _partTxt(partTxt), _woundTxt(woundTxt)
 {
 	updateSelectedPart();
 	_redraw = true;
@@ -50,15 +50,15 @@ MedikitView::MedikitView (int w, int h, int x, int y, Game * game, BattleUnit *u
  */
 void MedikitView::draw()
 {
-	SurfaceSet *set = _game->getMod()->getSurfaceSet("MEDIBITS.DAT");
+	SurfaceSet *set = game.getMod()->getSurfaceSet("MEDIBITS.DAT");
 	int fatal_wound = _unit->getFatalWound((UnitBodyPart)_selectedPart);
 	std::ostringstream ss, ss1;
 	int green = 0;
 	int red = 3;
-	if (_game->getMod()->getInterface("medikit", false) && _game->getMod()->getInterface("medikit")->getElementOptional("body"))
+	if (game.getMod()->getInterface("medikit", false) && game.getMod()->getInterface("medikit")->getElementOptional("body"))
 	{
-		green = _game->getMod()->getInterface("medikit")->getElement("body")->color;
-		red = _game->getMod()->getInterface("medikit")->getElement("body")->color2;
+		green = game.getMod()->getInterface("medikit")->getElement("body")->color;
+		red = game.getMod()->getInterface("medikit")->getElement("body")->color2;
 	}
 	this->lock();
 	for (unsigned int i = 0; i < set->getTotalFrames(); i++)
@@ -75,7 +75,7 @@ void MedikitView::draw()
 	{
 		return;
 	}
-	ss << _game->getLanguage()->getString(PARTS_STRING[_selectedPart]);
+	ss << game.getLanguage()->getString(PARTS_STRING[_selectedPart]);
 	ss1 << fatal_wound;
 	_partTxt->setText(ss.str());
 	_woundTxt->setText(ss1.str());
@@ -88,7 +88,7 @@ void MedikitView::draw()
  */
 void MedikitView::mouseClick (Action *action, State *)
 {
-	SurfaceSet *set = _game->getMod()->getSurfaceSet("MEDIBITS.DAT");
+	SurfaceSet *set = game.getMod()->getSurfaceSet("MEDIBITS.DAT");
 	int x = action->getRelativeXMouse() / action->getXScale();
 	int y = action->getRelativeYMouse() / action->getYScale();
 	for (unsigned int i = 0; i < set->getTotalFrames(); i++)

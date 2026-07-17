@@ -132,10 +132,10 @@ namespace OpenXcom
 		_state = std::move(state);
 
 		// remember this article as seen/normal
-		int ruleStatus = _game->savedGame()->getUfopediaRuleStatus(_id);
+		int ruleStatus = game.savedGame()->getUfopediaRuleStatus(_id);
 		if (ruleStatus != ArticleDefinition::PEDIA_STATUS_HIDDEN)
 		{
-			_game->savedGame()->setUfopediaRuleStatus(_id, ArticleDefinition::PEDIA_STATUS_NORMAL);
+			game.savedGame()->setUfopediaRuleStatus(_id, ArticleDefinition::PEDIA_STATUS_NORMAL);
 		}
 	}
 
@@ -251,7 +251,7 @@ namespace OpenXcom
 	 */
 	void ArticleState::btnOkClick(Action *)
 	{
-		_game->popState();
+		game.popState();
 	}
 
 	/**
@@ -261,7 +261,7 @@ namespace OpenXcom
 	void ArticleState::btnResetMusicClick(Action *)
 	{
 		// reset that pesky interception music!
-		_game->getMod()->playMusic("GMGEO");
+		game.getMod()->playMusic("GMGEO");
 	}
 
 	/**

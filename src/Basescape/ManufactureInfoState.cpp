@@ -263,7 +263,7 @@ void ManufactureInfoState::initProfitInfo ()
 	{
 		for (auto& pair : manuf->getProducedItems())
 		{
-			int64_t adjustedSellValue = pair.first->getSellCostAdjusted(_base, _game->savedGame());
+			int64_t adjustedSellValue = pair.first->getSellCostAdjusted(_base, game.savedGame());
 			adjustedSellValue *= pair.second;
 			_producedItemsValue += adjustedSellValue;
 		}
@@ -324,7 +324,7 @@ void ManufactureInfoState::btnStopClick(Action *)
 {
 	if (!_item && _production && _production->getRules()->getRefund())
 	{
-		_production->refundItem(_base, _game->savedGame(), _game->getMod());
+		_production->refundItem(_base, game.savedGame(), game.getMod());
 	}
 	_base->removeProduction(_production);
 	exitState();
@@ -338,7 +338,7 @@ void ManufactureInfoState::btnOkClick(Action *)
 {
 	if (_item)
 	{
-		_production->startItem(_base, _game->savedGame(), _game->getMod());
+		_production->startItem(_base, game.savedGame(), game.getMod());
 	}
 	_production->setSellItems(_btnSell->getPressed());
 	if (_btnFallback->getPressed())
@@ -357,10 +357,10 @@ void ManufactureInfoState::btnOkClick(Action *)
  */
 void ManufactureInfoState::exitState()
 {
-	_game->popState();
+	game.popState();
 	if (_item)
 	{
-		_game->popState();
+		game.popState();
 	}
 }
 
@@ -406,12 +406,12 @@ void ManufactureInfoState::moreEngineer(int change)
 	else if (availableWorkSpace <= 0 && availableEngineer > 0 && _production->isQueuedOnly() && _production->getRules()->getRequiredSpace() > 0)
 	{
 		_timerMoreEngineer->stop();
-		_game->pushState(new ErrorMessageState(
+		game.pushState(new ErrorMessageState(
 			ltr("STR_NOT_ENOUGH_WORK_SPACE"),
 			_palette,
-			_game->getMod()->getInterface("basescape")->getElement("errorMessage")->color,
+			game.getMod()->getInterface("basescape")->getElement("errorMessage")->color,
 			"BACK17.SCR",
-			_game->getMod()->getInterface("basescape")->getElement("errorPalette")->color)
+			game.getMod()->getInterface("basescape")->getElement("errorPalette")->color)
 		);
 	}
 }
@@ -507,7 +507,7 @@ void ManufactureInfoState::moreUnit(int change)
 	if (_production->getRules()->getProducedCraft() && _base->getAvailableHangars() - _base->getUsedHangars() <= 0)
 	{
 		_timerMoreUnit->stop();
-		_game->pushState(new ErrorMessageState(ltr("STR_NO_FREE_HANGARS_FOR_CRAFT_PRODUCTION"), _palette, _game->getMod()->getInterface("basescape")->getElement("errorMessage")->color, "BACK17.SCR", _game->getMod()->getInterface("basescape")->getElement("errorPalette")->color));
+		game.pushState(new ErrorMessageState(ltr("STR_NO_FREE_HANGARS_FOR_CRAFT_PRODUCTION"), _palette, game.getMod()->getInterface("basescape")->getElement("errorMessage")->color, "BACK17.SCR", game.getMod()->getInterface("basescape")->getElement("errorPalette")->color));
 	}
 	else
 	{
@@ -652,7 +652,7 @@ void ManufactureInfoState::lessUnitClick(Action *action)
 				auto* manufRule = _production->getRules();
 				if (manufRule->getManufactureCost() > 0)
 				{
-					int64_t byFunds = _game->savedGame()->getFunds() / manufRule->getManufactureCost();
+					int64_t byFunds = game.savedGame()->getFunds() / manufRule->getManufactureCost();
 					if (byFunds < 1000LL)
 					{
 						int byFundsInt = (int)byFunds;

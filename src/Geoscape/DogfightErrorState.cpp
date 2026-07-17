@@ -90,7 +90,7 @@ DogfightErrorState::~DogfightErrorState()
  */
 void DogfightErrorState::btnInterceptClick(Action *)
 {
-	_game->popState();
+	game.popState();
 }
 
 /**
@@ -100,7 +100,7 @@ void DogfightErrorState::btnInterceptClick(Action *)
 void DogfightErrorState::btnBaseClick(Action *)
 {
 	_craft->returnToBase();
-	_game->popState();
+	game.popState();
 }
 
 }

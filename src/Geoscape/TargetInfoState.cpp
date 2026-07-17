@@ -106,13 +106,13 @@ TargetInfoState::TargetInfoState(Target *target, Globe *globe) : _target(target)
 
 	if (m != 0)
 	{
-		_deploymentRule = _game->getMod()->getDeployment(m->getDeployment()->getType());
+		_deploymentRule = game.getMod()->getDeployment(m->getDeployment()->getType());
 	}
 	else if (b != 0)
 	{
-		AlienRace *race = _game->getMod()->getAlienRace(b->getAlienRace());
-		_deploymentRule = _game->getMod()->getDeployment(race->getBaseCustomMission());
-		if (!_deploymentRule) _deploymentRule = _game->getMod()->getDeployment(b->getDeployment()->getType());
+		AlienRace *race = game.getMod()->getAlienRace(b->getAlienRace());
+		_deploymentRule = game.getMod()->getDeployment(race->getBaseCustomMission());
+		if (!_deploymentRule) _deploymentRule = game.getMod()->getDeployment(b->getDeployment()->getType());
 	}
 
 	if (_deploymentRule && !_deploymentRule->getAlertDescription().empty())
@@ -147,7 +147,7 @@ TargetInfoState::~TargetInfoState()
  */
 void TargetInfoState::btnInterceptClick(Action *)
 {
-	_game->pushState(new InterceptState(_globe, false, 0, _target));
+	game.pushState(new InterceptState(_globe, false, 0, _target));
 }
 
 /**
@@ -156,7 +156,7 @@ void TargetInfoState::btnInterceptClick(Action *)
  */
 void TargetInfoState::btnOkClick(Action *)
 {
-	_game->popState();
+	game.popState();
 }
 
 /**
@@ -165,7 +165,7 @@ void TargetInfoState::btnOkClick(Action *)
  */
 void TargetInfoState::btnInfoClick(Action *)
 {
-	_game->pushState(new BriefingLightState(_deploymentRule));
+	game.pushState(new BriefingLightState(_deploymentRule));
 }
 
 /**

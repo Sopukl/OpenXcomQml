@@ -96,7 +96,7 @@ SoldierDiaryLightState::~SoldierDiaryLightState()
  */
 void SoldierDiaryLightState::btnOkClick(Action *)
 {
-	_game->popState();
+	game.popState();
 }
 
 }

@@ -100,7 +100,7 @@ TransferConfirmState::~TransferConfirmState()
  */
 void TransferConfirmState::btnCancelClick(Action *)
 {
-	_game->popState();
+	game.popState();
 }
 
 /**
@@ -110,9 +110,9 @@ void TransferConfirmState::btnCancelClick(Action *)
 void TransferConfirmState::btnOkClick(Action *)
 {
 	_state->completeTransfer();
-	_game->popState();
-	_game->popState();
-	_game->popState();
+	game.popState();
+	game.popState();
+	game.popState();
 }
 
 }

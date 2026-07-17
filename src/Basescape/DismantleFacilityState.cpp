@@ -99,7 +99,7 @@ DismantleFacilityState::DismantleFacilityState(Base *base, BaseView *view, BaseF
 	if (refundValue < 0)
 	{
 		_txtRefundValue->setText(ltr("STR_REFUND_VALUE_NEGATIVE").arg(Unicode::formatFunding(-refundValue)));
-		if (_game->savedGame()->getFunds() < -refundValue)
+		if (game.savedGame()->getFunds() < -refundValue)
 		{
 			// cannot afford dismantle, expenses too high
 			_btnOk->setVisible(false);
@@ -134,19 +134,19 @@ void DismantleFacilityState::btnOkClick(Action *)
 		if (_fac->getBuildTime() > _fac->getRules()->getBuildTime())
 		{
 			// Give full refund if this is a (not yet started) queued build.
-			_game->savedGame()->setFunds(_game->savedGame()->getFunds() + _fac->getRules()->getBuildCost());
+			game.savedGame()->setFunds(game.savedGame()->getFunds() + _fac->getRules()->getBuildCost());
 			for (auto& pair : itemCost)
 			{
-				_base->getStorageItems().addItem(_game->getMod()->getItem(pair.first, true), pair.second.first);
+				_base->getStorageItems().addItem(game.getMod()->getItem(pair.first, true), pair.second.first);
 			}
 		}
 		else
 		{
 			// Give partial refund if this is a started build or a completed facility.
-			_game->savedGame()->setFunds(_game->savedGame()->getFunds() + _fac->getRules()->getRefundValue());
+			game.savedGame()->setFunds(game.savedGame()->getFunds() + _fac->getRules()->getRefundValue());
 			for (auto& pair : itemCost)
 			{
-				_base->getStorageItems().addItem(_game->getMod()->getItem(pair.first, true), pair.second.second);
+				_base->getStorageItems().addItem(game.getMod()->getItem(pair.first, true), pair.second.second);
 			}
 		}
 		if (_fac->getAmmo() > 0)
@@ -167,7 +167,7 @@ void DismantleFacilityState::btnOkClick(Action *)
 					const auto& facList = _fac->getRules()->getLeavesBehindOnSell();
 					if (facList.at(0)->getPlaceSound() != Mod::NO_SOUND)
 					{
-						_game->getMod()->getSound("GEO.CAT", facList.at(0)->getPlaceSound())->play();
+						game.getMod()->getSound("GEO.CAT", facList.at(0)->getPlaceSound())->play();
 					}
 					// Make sure the size of the facilities left behind matches the one we removed
 					if (facList.at(0)->getSizeX() == _fac->getRules()->getSizeX() && facList.at(0)->getSizeY() == _fac->getRules()->getSizeY()) // equal size facilities
@@ -235,17 +235,17 @@ void DismantleFacilityState::btnOkClick(Action *)
 	// Remove whole base if it's the access lift
 	else
 	{
-		for (auto xbaseIt = _game->savedGame()->bases().begin(); xbaseIt != _game->savedGame()->bases().end(); ++xbaseIt)
+		for (auto xbaseIt = game.savedGame()->bases().begin(); xbaseIt != game.savedGame()->bases().end(); ++xbaseIt)
 		{
 			if (*xbaseIt == _base)
 			{
-				_game->savedGame()->bases().erase(xbaseIt);
+				game.savedGame()->bases().erase(xbaseIt);
 				delete _base;
 				break;
 			}
 		}
 	}
-	_game->popState();
+	game.popState();
 }
 
 /**
@@ -254,7 +254,7 @@ void DismantleFacilityState::btnOkClick(Action *)
  */
 void DismantleFacilityState::btnCancelClick(Action *)
 {
-	_game->popState();
+	game.popState();
 }
 
 }

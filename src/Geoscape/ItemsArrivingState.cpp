@@ -96,7 +96,7 @@ ItemsArrivingState::ItemsArrivingState(GeoscapeState *state) : _state(state), _b
 	_lstTransfers->setBackground(_window);
 	_lstTransfers->setMargin(2);
 
-	for (auto* xbase : _game->savedGame()->bases())
+	for (auto* xbase : game.savedGame()->bases())
 	{
 		for (auto transferIt = xbase->getTransfers().begin(); transferIt != xbase->getTransfers().end();)
 		{
@@ -147,7 +147,7 @@ ItemsArrivingState::~ItemsArrivingState()
  */
 void ItemsArrivingState::btnOkClick(Action *)
 {
-	_game->popState();
+	game.popState();
 }
 
 /**
@@ -157,8 +157,8 @@ void ItemsArrivingState::btnOkClick(Action *)
 void ItemsArrivingState::btnGotoBaseClick(Action *)
 {
 	_state->timerReset();
-	_game->popState();
-	_game->pushState(new BasescapeState(_base, _state->getGlobe()));
+	game.popState();
+	game.pushState(new BasescapeState(_base, _state->getGlobe()));
 }
 
 }

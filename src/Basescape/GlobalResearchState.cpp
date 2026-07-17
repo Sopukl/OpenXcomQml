@@ -117,7 +117,7 @@ GlobalResearchState::~GlobalResearchState()
  */
 void GlobalResearchState::btnDiaryClick(Action *)
 {
-	_game->pushState(new GlobalResearchDiaryState());
+	game.pushState(new GlobalResearchDiaryState());
 }
 
 /**
@@ -126,7 +126,7 @@ void GlobalResearchState::btnDiaryClick(Action *)
  */
 void GlobalResearchState::btnOkClick(Action *)
 {
-	_game->popState();
+	game.popState();
 }
 
 /**
@@ -140,16 +140,16 @@ void GlobalResearchState::onSelectBase(Action *)
 	if (base)
 	{
 		// close this window
-		_game->popState();
+		game.popState();
 
 		// close Research UI (goes back to BaseView)
 		if (_openedFromBasescape)
 		{
-			_game->popState();
+			game.popState();
 		}
 
 		// open new window
-		_game->pushState(new ResearchState(base));
+		game.pushState(new ResearchState(base));
 	}
 }
 
@@ -163,7 +163,7 @@ void GlobalResearchState::onOpenTechTreeViewer(Action *)
 
 	if (selectedTopic)
 	{
-		_game->pushState(new TechTreeViewerState(selectedTopic, 0));
+		game.pushState(new TechTreeViewerState(selectedTopic, 0));
 	}
 }
 
@@ -190,7 +190,7 @@ void GlobalResearchState::fillProjectList()
 	int allocatedScientists = 0;
 	int freeLaboratories = 0;
 
-	for (Base *xbase : _game->savedGame()->bases())
+	for (Base *xbase : game.savedGame()->bases())
 	{
 		auto& baseProjects = xbase->getResearch();
 		if (!baseProjects.empty() || xbase->getScientists() > 0)

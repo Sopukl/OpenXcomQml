@@ -57,7 +57,7 @@ StartState::StartState() : _anim(0)
 	Screen::updateScale(options1.battlescapeScale(), options1.baseXBattlescape, options1.baseYBattlescape, false);
 	options1.baseXResolution = options1.displayWidth();
 	options1.baseYResolution = options1.displayHeight();
-	_game->getScreen()->resetDisplay(false, true);
+	game.getScreen()->resetDisplay(false, true);
 
 	// Create objects
 	_thread = 0;
@@ -91,8 +91,8 @@ StartState::StartState() : _anim(0)
 	_timer->start();
 
 	// Hide UI
-	_game->getCursor()->setVisible(false);
-	_game->getFpsCounter()->setVisible(false);
+	game.getCursor()->setVisible(false);
+	game.getFpsCounter()->setVisible(false);
 
 	if (options1.reload)
 	{
@@ -138,15 +138,15 @@ void StartState::init()
 	if (!options1.mute && options1.reload)
 	{
 		Mix_CloseAudio();
-		_game->initAudio();
+		game.initAudio();
 	}
 
 	// Load the game data in a separate thread
-	_thread = SDL_CreateThread(load, (void*)_game);
+	_thread = SDL_CreateThread(load, (void*)&game);
 	if (_thread == 0)
 	{
 		// If we can't create the thread, just load it as usual
-		load((void*)_game);
+		load((void*)&game);
 	}
 }
 
@@ -174,18 +174,18 @@ void StartState::think()
 	case LOADING_SUCCESSFUL:
 		CrossPlatform::flashWindow();
 		Log(LOG_INFO) << "OpenXcom started successfully!";
-		_game->setState(new GoToMainMenuState(true));
+		game.setState(new GoToMainMenuState(true));
 		if (_oldMaster != Options::getActiveMaster() && options1.playIntro())
 		{
-			_game->pushState(new CutsceneState("intro"));
+			game.pushState(new CutsceneState("intro"));
 		}
 		if (options1.reload)
 		{
 			options1.reload = false;
 		}
-		_game->getCursor()->setVisible(true);
-		_game->getFpsCounter()->setVisible(options1.fpsCounter());
-		_game->setGameState(Game::MENU);
+		game.getCursor()->setVisible(true);
+		game.getFpsCounter()->setVisible(options1.fpsCounter());
+		game.setGameState(Game::MENU);
 		break;
 	default:
 		break;
@@ -204,7 +204,7 @@ void StartState::handle(Action *action)
 	{
 		if (action->getDetails()->type == SDL_KEYDOWN)
 		{
-			_game->quit();
+			game.quit();
 		}
 	}
 }

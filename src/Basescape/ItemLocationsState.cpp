@@ -78,7 +78,7 @@ ItemLocationsState::ItemLocationsState(const RuleItem* selectedItem)
 	_lstLocations->setMargin(2);
 	_lstLocations->setSelectable(true);
 
-	for (auto* xbase : _game->savedGame()->bases())
+	for (auto* xbase : game.savedGame()->bases())
 	{
 		std::ostringstream ssInBase, ssInTransfer;
 		ssInBase << xbase->getStorageItems().getItem(selectedItem);
@@ -101,7 +101,7 @@ ItemLocationsState::ItemLocationsState(const RuleItem* selectedItem)
  */
 void ItemLocationsState::btnOkClick(Action *)
 {
-	_game->popState();
+	game.popState();
 }
 
 }

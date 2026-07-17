@@ -48,8 +48,8 @@ namespace OpenXcom
  */
 SelectDestinationState::SelectDestinationState(std::vector<Craft*> crafts, Globe *globe) : _crafts(std::move(crafts)), _globe(globe)
 {
-	int dx = _game->getScreen()->getDX();
-	int dy = _game->getScreen()->getDY();
+	int dx = game.getScreen()->getDX();
+	int dy = game.getScreen()->getDY();
 	_screen = false;
 
 	// Create objects
@@ -132,8 +132,8 @@ SelectDestinationState::SelectDestinationState(std::vector<Craft*> crafts, Globe
 	if (_crafts.size() != 1 ||
 		_crafts.front()->getFuelPercentage() < 100 ||
 		!_crafts.front()->getRules()->getSpacecraft() ||
-		(_game->getMod()->getFinalResearch() && // if not Research specified then we look only on `getSpacecraft`
-			!_game->savedGame()->isResearched(_game->getMod()->getFinalResearch())))
+		(game.getMod()->getFinalResearch() && // if not Research specified then we look only on `getSpacecraft`
+			!game.savedGame()->isResearched(game.getMod()->getFinalResearch())))
 	{
 		_btnCydonia->setVisible(false);
 	}
@@ -143,12 +143,12 @@ SelectDestinationState::SelectDestinationState(std::vector<Craft*> crafts, Globe
 		_btnCydonia->onMouseClick((ActionHandler)&SelectDestinationState::btnCydoniaClick);
 
 		// one more check...
-		for (auto& depl : _game->getMod()->getDeploymentsList())
+		for (auto& depl : game.getMod()->getDeploymentsList())
 		{
-			AlienDeployment* deploymentRule = _game->getMod()->getDeployment(depl);
+			AlienDeployment* deploymentRule = game.getMod()->getDeployment(depl);
 			if (deploymentRule->isFinalDestination())
 			{
-				RuleStartingCondition* sc = _game->getMod()->getStartingCondition(deploymentRule->getStartingCondition());
+				RuleStartingCondition* sc = game.getMod()->getStartingCondition(deploymentRule->getStartingCondition());
 				if (sc && sc->requiresCommanderOnboard() && !_crafts.front()->isCommanderOnboard())
 				{
 					_btnCydonia->setVisible(false);
@@ -161,7 +161,7 @@ SelectDestinationState::SelectDestinationState(std::vector<Craft*> crafts, Globe
 		{
 			_btnCydonia->setVisible(false);
 		}
-		if (!_crafts.front()->arePilotsOnboard(_game->getMod()))
+		if (!_crafts.front()->arePilotsOnboard(game.getMod()))
 		{
 			_btnCydonia->setVisible(false);
 		}
@@ -238,7 +238,7 @@ void SelectDestinationState::globeClick(Action *action)
 			w->setLatitude(lat);
 			v.push_back(w);
 		}
-		_game->pushState(new MultipleTargetsState(v, _crafts, 0, false));
+		game.pushState(new MultipleTargetsState(v, _crafts, 0, false));
 	}
 }
 
@@ -356,14 +356,14 @@ void SelectDestinationState::btnZoomOutRightClick(Action *)
  */
 void SelectDestinationState::btnCancelClick(Action *)
 {
-	_game->popState();
+	game.popState();
 }
 
 void SelectDestinationState::btnCydoniaClick(Action *)
 {
 	if (_crafts.front()->getNumTotalUnits() > 0)
 	{
-		_game->pushState(new ConfirmCydoniaState(_crafts.front()));
+		game.pushState(new ConfirmCydoniaState(_crafts.front()));
 	}
 }
 

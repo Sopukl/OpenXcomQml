@@ -167,7 +167,7 @@ ProductionCompleteState::~ProductionCompleteState()
  */
 void ProductionCompleteState::btnOkClick(Action *)
 {
-	_game->popState();
+	game.popState();
 }
 
 /**
@@ -177,14 +177,14 @@ void ProductionCompleteState::btnOkClick(Action *)
 void ProductionCompleteState::btnGotoBaseClick(Action *)
 {
 	_state->timerReset();
-	_game->popState();
+	game.popState();
 	if (_endType != PROGRESS_CONSTRUCTION)
 	{
-		_game->pushState(new ManufactureState(_base));
+		game.pushState(new ManufactureState(_base));
 	}
 	else
 	{
-		_game->pushState(new BasescapeState(_base, _state->getGlobe()));
+		game.pushState(new BasescapeState(_base, _state->getGlobe()));
 	}
 }
 
@@ -216,7 +216,7 @@ void ProductionCompleteState::lstSummaryClick(Action *)
 	int itemCount = _randomProductionInfo[itemName];
 
 	// 2. deal with it
-	auto* itemRule = _game->getMod()->getItem(itemName, false);
+	auto* itemRule = game.getMod()->getItem(itemName, false);
 	if (itemRule)
 	{
 		// check if we sold something in the meantime
@@ -233,9 +233,9 @@ void ProductionCompleteState::lstSummaryClick(Action *)
 
 		if (itemCount > 0)
 		{
-			int64_t adjustedSellValue = itemRule->getSellCostAdjusted(_base, _game->savedGame());
+			int64_t adjustedSellValue = itemRule->getSellCostAdjusted(_base, game.savedGame());
 			adjustedSellValue *= itemCount;
-			_game->savedGame()->setFunds(_game->savedGame()->getFunds() + adjustedSellValue);
+			game.savedGame()->setFunds(game.savedGame()->getFunds() + adjustedSellValue);
 			_base->getStorageItems().removeItem(itemRule, itemCount);
 		}
 	}

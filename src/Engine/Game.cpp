@@ -156,7 +156,6 @@ void Game::init()
 
 	_timeOfLastFrame = 0;
 
-	State::setGamePtr(this);
 	setState(new StartState());
 }
 

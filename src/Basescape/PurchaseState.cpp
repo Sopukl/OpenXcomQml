@@ -85,7 +85,7 @@ PurchaseState::PurchaseState(Base *base, CannotReequipState *parent) : _base(bas
 		{
 			if (i.qty > 0)
 			{
-				auto* rule = _game->getMod()->getItem(i.item);
+				auto* rule = game.getMod()->getItem(i.item);
 				if (rule)
 				{
 					_missingItemsMap[rule] = i.qty;
@@ -113,7 +113,7 @@ PurchaseState::PurchaseState(Base *base, CannotReequipState *parent) : _base(bas
 	// Set palette
 	setInterface("buyMenu");
 
-	_ammoColor = _game->getMod()->getInterface("buyMenu")->getElement("ammoColor")->color;
+	_ammoColor = game.getMod()->getInterface("buyMenu")->getElement("ammoColor")->color;
 
 	add(_window, "window", "buyMenu");
 	add(_btnQuickSearch, "button", "buyMenu");
@@ -149,7 +149,7 @@ PurchaseState::PurchaseState(Base *base, CannotReequipState *parent) : _base(bas
 	_txtTitle->setAlign(ALIGN_CENTER);
 	_txtTitle->setText(ltr("STR_PURCHASE_HIRE_PERSONNEL"));
 
-	_txtFunds->setText(ltr("STR_CURRENT_FUNDS").arg(Unicode::formatFunding(_game->savedGame()->getFunds())));
+	_txtFunds->setText(ltr("STR_CURRENT_FUNDS").arg(Unicode::formatFunding(game.savedGame()->getFunds())));
 
 	_txtPurchases->setText(ltr("STR_COST_OF_PURCHASES").arg(Unicode::formatFunding(_total)));
 
@@ -192,11 +192,11 @@ PurchaseState::PurchaseState(Base *base, CannotReequipState *parent) : _base(bas
 	};
 	constexpr auto requirementsAreResearched = [](const auto* rule)
 	{
-		return _game->savedGame()->isResearched(rule->getRequirements());
+		return game.savedGame()->isResearched(rule->getRequirements());
 	};
 	constexpr auto buyRequirementsAreResearched = [](const auto* rule)
 	{
-		return _game->savedGame()->isResearched(rule->getBuyRequirements());
+		return game.savedGame()->isResearched(rule->getBuyRequirements());
 	};
 	auto necessaryBaseFunctionsPresent = [&providedBaseFunc](const auto* rule)
 	{
@@ -220,9 +220,9 @@ PurchaseState::PurchaseState(Base *base, CannotReequipState *parent) : _base(bas
 	auto craftAndSoldierFilter = allOf(costIsNotZero, requirementsAreResearched, necessaryBaseFunctionsPresent, requiredCountryAllied);
 	auto itemFilter = allOf(costIsNotZero, requirementsAreResearched, buyRequirementsAreResearched, necessaryBaseFunctionsPresent, requiredCountryAllied);
 
-	for (auto& soldierType : _game->getMod()->getSoldiersList())
+	for (auto& soldierType : game.getMod()->getSoldiersList())
 	{
-		RuleSoldier *rule = _game->getMod()->getSoldier(soldierType);
+		RuleSoldier *rule = game.getMod()->getSoldier(soldierType);
 		if (craftAndSoldierFilter(rule))
 		{
 			TransferRow row = { TRANSFER_SOLDIER, rule, ltr(rule->getType()), rule->getBuyCost(), _base->getSoldierCountAndSalary(rule->getType()).first, 0, 0, -4, 0, 0, 0 };
@@ -234,10 +234,10 @@ PurchaseState::PurchaseState(Base *base, CannotReequipState *parent) : _base(bas
 			}
 		}
 	}
-	if ((_game->getMod()->getHireScientistsUnlockResearch().empty() || _game->savedGame()->isResearched(_game->getMod()->getHireScientistsUnlockResearch(), true))
-		&& (~providedBaseFunc & _game->getMod()->getHireScientistsRequiresBaseFunc()).none())
+	if ((game.getMod()->getHireScientistsUnlockResearch().empty() || game.savedGame()->isResearched(game.getMod()->getHireScientistsUnlockResearch(), true))
+		&& (~providedBaseFunc & game.getMod()->getHireScientistsRequiresBaseFunc()).none())
 	{
-		TransferRow row = { TRANSFER_SCIENTIST, 0, ltr("STR_SCIENTIST"), _game->getMod()->getHireScientistCost(), _base->getTotalScientists(), 0, 0, -3, 0, 0, 0 };
+		TransferRow row = { TRANSFER_SCIENTIST, 0, ltr("STR_SCIENTIST"), game.getMod()->getHireScientistCost(), _base->getTotalScientists(), 0, 0, -3, 0, 0, 0 };
 		_items.push_back(row);
 		std::string cat = getCategory(_items.size() - 1);
 		if (std::find(_cats.begin(), _cats.end(), cat) == _cats.end())
@@ -245,10 +245,10 @@ PurchaseState::PurchaseState(Base *base, CannotReequipState *parent) : _base(bas
 			_cats.push_back(cat);
 		}
 	}
-	if ((_game->getMod()->getHireEngineersUnlockResearch().empty() || _game->savedGame()->isResearched(_game->getMod()->getHireEngineersUnlockResearch(), true))
-		&& (~providedBaseFunc & _game->getMod()->getHireEngineersRequiresBaseFunc()).none())
+	if ((game.getMod()->getHireEngineersUnlockResearch().empty() || game.savedGame()->isResearched(game.getMod()->getHireEngineersUnlockResearch(), true))
+		&& (~providedBaseFunc & game.getMod()->getHireEngineersRequiresBaseFunc()).none())
 	{
-		TransferRow row = { TRANSFER_ENGINEER, 0, ltr("STR_ENGINEER"), _game->getMod()->getHireEngineerCost(), _base->getTotalEngineers(), 0, 0, -2, 0, 0, 0 };
+		TransferRow row = { TRANSFER_ENGINEER, 0, ltr("STR_ENGINEER"), game.getMod()->getHireEngineerCost(), _base->getTotalEngineers(), 0, 0, -2, 0, 0, 0 };
 		_items.push_back(row);
 		std::string cat = getCategory(_items.size() - 1);
 		if (std::find(_cats.begin(), _cats.end(), cat) == _cats.end())
@@ -256,9 +256,9 @@ PurchaseState::PurchaseState(Base *base, CannotReequipState *parent) : _base(bas
 			_cats.push_back(cat);
 		}
 	}
-	for (auto& craftType : _game->getMod()->getCraftsList())
+	for (auto& craftType : game.getMod()->getCraftsList())
 	{
-		RuleCraft *rule = _game->getMod()->getCraft(craftType);
+		RuleCraft *rule = game.getMod()->getCraft(craftType);
 		if (craftAndSoldierFilter(rule))
 		{
 			TransferRow row = { TRANSFER_CRAFT, rule, ltr(rule->getType()), rule->getBuyCost(), _base->getCraftCount(rule), 0, 0, -1, 0, 0, 0 };
@@ -270,12 +270,12 @@ PurchaseState::PurchaseState(Base *base, CannotReequipState *parent) : _base(bas
 			}
 		}
 	}
-	for (auto& itemType : _game->getMod()->getItemsList())
+	for (auto& itemType : game.getMod()->getItemsList())
 	{
-		RuleItem *rule = _game->getMod()->getItem(itemType);
+		RuleItem *rule = game.getMod()->getItem(itemType);
 		if (itemFilter(rule))
 		{
-			TransferRow row = { TRANSFER_ITEM, rule, ltr(rule->getType()), rule->getBuyCostAdjusted(_base, _game->savedGame()), _base->getStorageItems().getItem(rule), 0, 0, rule->getListOrder(), 0, 0, 0 };
+			TransferRow row = { TRANSFER_ITEM, rule, ltr(rule->getType()), rule->getBuyCostAdjusted(_base, game.savedGame()), _base->getStorageItems().getItem(rule), 0, 0, rule->getListOrder(), 0, 0, 0 };
 			_items.push_back(row);
 			std::string cat = getCategory(_items.size() - 1);
 			if (std::find(_cats.begin(), _cats.end(), cat) == _cats.end())
@@ -286,7 +286,7 @@ PurchaseState::PurchaseState(Base *base, CannotReequipState *parent) : _base(bas
 	}
 
 	_vanillaCategories = _cats.size();
-	if (_game->getMod()->getDisplayCustomCategories() > 0)
+	if (game.getMod()->getDisplayCustomCategories() > 0)
 	{
 		bool hasUnassigned = false;
 
@@ -311,7 +311,7 @@ PurchaseState::PurchaseState(Base *base, CannotReequipState *parent) : _base(bas
 			}
 		}
 		// then use them nicely in order
-		if (_game->getMod()->getDisplayCustomCategories() == 1)
+		if (game.getMod()->getDisplayCustomCategories() == 1)
 		{
 			_cats.clear();
 			_cats.push_back("STR_ALL_ITEMS");
@@ -323,7 +323,7 @@ PurchaseState::PurchaseState(Base *base, CannotReequipState *parent) : _base(bas
 			}
 			_vanillaCategories = _cats.size();
 		}
-		for (auto& categoryName : _game->getMod()->getItemCategoriesList())
+		for (auto& categoryName : game.getMod()->getItemCategoriesList())
 		{
 			if (std::find(tempCats.begin(), tempCats.end(), categoryName) != tempCats.end())
 			{
@@ -432,9 +432,9 @@ std::string PurchaseState::getCategory(int sel) const
 		}
 		if (rule->getBattleType() == BT_NONE)
 		{
-			if (_game->getMod()->isCraftWeaponStorageItem(rule))
+			if (game.getMod()->isCraftWeaponStorageItem(rule))
 				return "STR_CRAFT_ARMAMENT";
-			if (_game->getMod()->isArmorStorageItem(rule))
+			if (game.getMod()->isArmorStorageItem(rule))
 				return "STR_ARMORS"; // OXCE: armors
 			return "STR_COMPONENTS";
 		}
@@ -503,7 +503,7 @@ bool PurchaseState::isHidden(int sel) const
 		}
 		if (!itemName.empty())
 		{
-			auto& hiddenMap = _game->savedGame()->getHiddenPurchaseItems();
+			auto& hiddenMap = game.savedGame()->getHiddenPurchaseItems();
 			auto iter = hiddenMap.find(itemName);
 			if (iter != hiddenMap.end())
 			{
@@ -573,7 +573,7 @@ int PurchaseState::getMissingQty(int sel) const
 			{
 				if (rule->getMonthlyBuyLimit() > 0)
 				{
-					auto& itemPurchaseLimitLog = _game->savedGame()->getMonthlyPurchaseLimitLog();
+					auto& itemPurchaseLimitLog = game.savedGame()->getMonthlyPurchaseLimitLog();
 					int maxByLimit = std::max(0, rule->getMonthlyBuyLimit() - itemPurchaseLimitLog[rule->getType()]);
 					return std::min(maxByLimit, iter->second);
 				}
@@ -760,7 +760,7 @@ void PurchaseState::btnOkClick(Action *)
 	if (!_missingItemsMap.empty())
 	{
 		std::string errorMessage;
-		if (_total > _game->savedGame()->getFunds())
+		if (_total > game.savedGame()->getFunds())
 		{
 			errorMessage = ltr("STR_NOT_ENOUGH_MONEY");
 		}
@@ -770,13 +770,13 @@ void PurchaseState::btnOkClick(Action *)
 		}
 		if (!errorMessage.empty())
 		{
-			RuleInterface* menuInterface = _game->getMod()->getInterface("buyMenu");
-			_game->pushState(new ErrorMessageState(errorMessage, _palette, menuInterface->getElement("errorMessage")->color, "BACK13.SCR", menuInterface->getElement("errorPalette")->color));
+			RuleInterface* menuInterface = game.getMod()->getInterface("buyMenu");
+			game.pushState(new ErrorMessageState(errorMessage, _palette, menuInterface->getElement("errorMessage")->color, "BACK13.SCR", menuInterface->getElement("errorPalette")->color));
 			return;
 		}
 	}
 
-	_game->savedGame()->setFunds(_game->savedGame()->getFunds() - _total);
+	game.savedGame()->setFunds(game.savedGame()->getFunds() - _total);
 	for (const auto& transferRow : _items)
 	{
 		if (transferRow.amount > 0)
@@ -791,20 +791,20 @@ void PurchaseState::btnOkClick(Action *)
 					if (rule->getMonthlyBuyLimit() > 0)
 					{
 						// remember the hire for the limit check
-						auto& soldierHireLimitLog = _game->savedGame()->getMonthlyPurchaseLimitLog();
+						auto& soldierHireLimitLog = game.savedGame()->getMonthlyPurchaseLimitLog();
 						soldierHireLimitLog[rule->getType()] += 1;
 					}
 					int time = rule->getTransferTime();
 					if (time == 0)
-						time = _game->getMod()->getPersonnelTime();
+						time = game.getMod()->getPersonnelTime();
 					t = new Transfer(time);
-					int nationality = _game->savedGame()->selectSoldierNationalityByLocation(_game->getMod(), rule, _base);
-					Soldier* soldier = _game->getMod()->genSoldier(_game->savedGame(), rule, nationality);
+					int nationality = game.savedGame()->selectSoldierNationalityByLocation(game.getMod(), rule, _base);
+					Soldier* soldier = game.getMod()->genSoldier(game.savedGame(), rule, nationality);
 					if (!rule->getSpawnedSoldierTemplate().yaml.empty())
 					{
 						YAML::YamlRootNodeReader reader(rule->getSpawnedSoldierTemplate(), "(spawned soldier template)");
 						int nationalityOrig = soldier->getNationality();
-						soldier->load(reader.toBase(), _game->getMod(), _game->savedGame(), _game->getMod()->getScriptGlobal(), true); // load from soldier template
+						soldier->load(reader.toBase(), game.getMod(), game.savedGame(), game.getMod()->getScriptGlobal(), true); // load from soldier template
 						if (soldier->getNationality() != nationalityOrig)
 						{
 							soldier->genName();
@@ -815,12 +815,12 @@ void PurchaseState::btnOkClick(Action *)
 				}
 				break;
 			case TRANSFER_SCIENTIST:
-				t = new Transfer(_game->getMod()->getPersonnelTime());
+				t = new Transfer(game.getMod()->getPersonnelTime());
 				t->setScientists(transferRow.amount);
 				_base->getTransfers().push_back(t);
 				break;
 			case TRANSFER_ENGINEER:
-				t = new Transfer(_game->getMod()->getPersonnelTime());
+				t = new Transfer(game.getMod()->getPersonnelTime());
 				t->setEngineers(transferRow.amount);
 				_base->getTransfers().push_back(t);
 				break;
@@ -831,12 +831,12 @@ void PurchaseState::btnOkClick(Action *)
 					if (rule->getMonthlyBuyLimit() > 0)
 					{
 						// remember the purchase for the limit check
-						auto& craftPurchaseLimitLog = _game->savedGame()->getMonthlyPurchaseLimitLog();
+						auto& craftPurchaseLimitLog = game.savedGame()->getMonthlyPurchaseLimitLog();
 						craftPurchaseLimitLog[rule->getType()] += 1;
 					}
 					t = new Transfer(rule->getTransferTime());
-					Craft *craft = new Craft(rule, _base, _game->savedGame()->getId(rule->getType()));
-					craft->initFixedWeapons(_game->getMod());
+					Craft *craft = new Craft(rule, _base, game.savedGame()->getId(rule->getType()));
+					craft->initFixedWeapons(game.getMod());
 					craft->setStatus("STR_REFUELLING");
 					t->setCraft(craft);
 					_base->getTransfers().push_back(t);
@@ -848,7 +848,7 @@ void PurchaseState::btnOkClick(Action *)
 					if (rule->getMonthlyBuyLimit() > 0)
 					{
 						// remember the purchase for the limit check
-						auto& itemPurchaseLimitLog = _game->savedGame()->getMonthlyPurchaseLimitLog();
+						auto& itemPurchaseLimitLog = game.savedGame()->getMonthlyPurchaseLimitLog();
 						itemPurchaseLimitLog[rule->getType()] += transferRow.amount;
 					}
 					t = new Transfer(rule->getTransferTime());
@@ -864,7 +864,7 @@ void PurchaseState::btnOkClick(Action *)
 			}
 		}
 	}
-	_game->popState();
+	game.popState();
 }
 
 /**
@@ -873,7 +873,7 @@ void PurchaseState::btnOkClick(Action *)
  */
 void PurchaseState::btnCancelClick(Action *)
 {
-	_game->popState();
+	game.popState();
 }
 
 /**
@@ -883,7 +883,7 @@ void PurchaseState::btnCancelClick(Action *)
 void PurchaseState::lstItemsLeftArrowPress(Action *action)
 {
 	_sel = _lstItems->getSelectedRow();
-	if (_game->isLeftClick(action, true) && !_timerInc->isRunning()) _timerInc->start();
+	if (game.isLeftClick(action, true) && !_timerInc->isRunning()) _timerInc->start();
 }
 
 /**
@@ -892,7 +892,7 @@ void PurchaseState::lstItemsLeftArrowPress(Action *action)
  */
 void PurchaseState::lstItemsLeftArrowRelease(Action *action)
 {
-	if (_game->isLeftClick(action, true))
+	if (game.isLeftClick(action, true))
 	{
 		_timerInc->stop();
 	}
@@ -905,10 +905,10 @@ void PurchaseState::lstItemsLeftArrowRelease(Action *action)
  */
 void PurchaseState::lstItemsLeftArrowClick(Action *action)
 {
-	if (_game->isRightClick(action, true)) increaseByValue(INT_MAX);
-	if (_game->isLeftClick(action, true))
+	if (game.isRightClick(action, true)) increaseByValue(INT_MAX);
+	if (game.isLeftClick(action, true))
 	{
-		increaseByValue(_game->getScrollStep());
+		increaseByValue(game.getScrollStep());
 		_timerInc->setInterval(250);
 		_timerDec->setInterval(250);
 	}
@@ -921,7 +921,7 @@ void PurchaseState::lstItemsLeftArrowClick(Action *action)
 void PurchaseState::lstItemsRightArrowPress(Action *action)
 {
 	_sel = _lstItems->getSelectedRow();
-	if (_game->isLeftClick(action, true) && !_timerDec->isRunning()) _timerDec->start();
+	if (game.isLeftClick(action, true) && !_timerDec->isRunning()) _timerDec->start();
 }
 
 /**
@@ -930,7 +930,7 @@ void PurchaseState::lstItemsRightArrowPress(Action *action)
  */
 void PurchaseState::lstItemsRightArrowRelease(Action *action)
 {
-	if (_game->isLeftClick(action, true))
+	if (game.isLeftClick(action, true))
 	{
 		_timerDec->stop();
 	}
@@ -943,10 +943,10 @@ void PurchaseState::lstItemsRightArrowRelease(Action *action)
  */
 void PurchaseState::lstItemsRightArrowClick(Action *action)
 {
-	if (_game->isRightClick(action, true)) decreaseByValue(INT_MAX);
-	if (_game->isLeftClick(action, true))
+	if (game.isRightClick(action, true)) decreaseByValue(INT_MAX);
+	if (game.isLeftClick(action, true))
 	{
-		decreaseByValue(_game->getScrollStep());
+		decreaseByValue(game.getScrollStep());
 		_timerInc->setInterval(250);
 		_timerDec->setInterval(250);
 	}
@@ -979,7 +979,7 @@ void PurchaseState::lstItemsMousePress(Action *action)
 			decreaseByValue(options1.changeValueByMouseWheel());
 		}
 	}
-	else if (_game->isMiddleClick(action, true))
+	else if (game.isMiddleClick(action, true))
 	{
 		if (getRow().type == TRANSFER_ITEM)
 		{
@@ -1000,7 +1000,7 @@ void PurchaseState::lstItemsMousePress(Action *action)
 			}
 		}
 	}
-	else if (_game->isRightClick(action, true))
+	else if (game.isRightClick(action, true))
 	{
 		if (action->getAbsoluteXMouse() >= _lstItems->getArrowsLeftEdge() &&
 			action->getAbsoluteXMouse() <= _lstItems->getArrowsRightEdge())
@@ -1013,9 +1013,9 @@ void PurchaseState::lstItemsMousePress(Action *action)
 			RuleItem *rule = (RuleItem*)getRow().rule;
 			if (rule != 0)
 			{
-				if (_game->isCtrlPressed(true))
+				if (game.isCtrlPressed(true))
 				{
-					_game->pushState(new ItemLocationsState(rule));
+					game.pushState(new ItemLocationsState(rule));
 				}
 				else
 				{
@@ -1033,17 +1033,17 @@ void PurchaseState::lstItemsMousePress(Action *action)
 		}
 		if (!itemName.empty())
 		{
-			auto& hiddenMap = _game->savedGame()->getHiddenPurchaseItems();
+			auto& hiddenMap = game.savedGame()->getHiddenPurchaseItems();
 			auto iter = hiddenMap.find(itemName);
 			if (iter != hiddenMap.end())
 			{
 				// found => flip it
-				_game->savedGame()->setHiddenPurchaseItemsStatus(itemName, !iter->second);
+				game.savedGame()->setHiddenPurchaseItemsStatus(itemName, !iter->second);
 			}
 			else
 			{
 				// not found = not hidden yet => hide it
-				_game->savedGame()->setHiddenPurchaseItemsStatus(itemName, true);
+				game.savedGame()->setHiddenPurchaseItemsStatus(itemName, true);
 			}
 
 			// update screen
@@ -1061,7 +1061,7 @@ void PurchaseState::increase()
 {
 	_timerDec->setInterval(50);
 	_timerInc->setInterval(50);
-	increaseByValue(_game->getScrollStep());
+	increaseByValue(game.getScrollStep());
 }
 
 /**
@@ -1073,7 +1073,7 @@ void PurchaseState::increaseByValue(int change)
 	if (0 >= change) return;
 	std::string errorMessage;
 
-	if (_total + getRow().cost > _game->savedGame()->getFunds())
+	if (_total + getRow().cost > game.savedGame()->getFunds())
 	{
 		errorMessage = ltr("STR_NOT_ENOUGH_MONEY");
 	}
@@ -1088,7 +1088,7 @@ void PurchaseState::increaseByValue(int change)
 			ruleS = (RuleSoldier*)getRow().rule;
 			if (ruleS->getMonthlyBuyLimit() > 0)
 			{
-				auto& soldierHireLimitLog = _game->savedGame()->getMonthlyPurchaseLimitLog();
+				auto& soldierHireLimitLog = game.savedGame()->getMonthlyPurchaseLimitLog();
 				int alreadyBought = soldierHireLimitLog[ruleS->getType()];
 				int maxByLimit = std::max(0, ruleS->getMonthlyBuyLimit() - alreadyBought - getRow().amount);
 				if (maxByLimit <= 0)
@@ -1116,7 +1116,7 @@ void PurchaseState::increaseByValue(int change)
 			}
 			else if (ruleC->getMonthlyBuyLimit() > 0)
 			{
-				auto& craftPurchaseLimitLog = _game->savedGame()->getMonthlyPurchaseLimitLog();
+				auto& craftPurchaseLimitLog = game.savedGame()->getMonthlyPurchaseLimitLog();
 				int alreadyBought = craftPurchaseLimitLog[ruleC->getType()];
 				int maxByLimit = std::max(0, ruleC->getMonthlyBuyLimit() - alreadyBought - getRow().amount);
 				if (maxByLimit <= 0)
@@ -1145,7 +1145,7 @@ void PurchaseState::increaseByValue(int change)
 			}
 			else if (rule->getMonthlyBuyLimit() > 0)
 			{
-				auto& itemPurchaseLimitLog = _game->savedGame()->getMonthlyPurchaseLimitLog();
+				auto& itemPurchaseLimitLog = game.savedGame()->getMonthlyPurchaseLimitLog();
 				int alreadyBought = itemPurchaseLimitLog[rule->getType()];
 				int maxByLimit = std::max(0, rule->getMonthlyBuyLimit() - alreadyBought - getRow().amount);
 				if (maxByLimit <= 0)
@@ -1163,7 +1163,7 @@ void PurchaseState::increaseByValue(int change)
 
 	if (errorMessage.empty())
 	{
-		int maxByMoney = (_game->savedGame()->getFunds() - _total) / getRow().cost;
+		int maxByMoney = (game.savedGame()->getFunds() - _total) / getRow().cost;
 		if (maxByMoney >= 0)
 			change = std::min(maxByMoney, change);
 		switch (getRow().type)
@@ -1173,7 +1173,7 @@ void PurchaseState::increaseByValue(int change)
 				RuleSoldier *ruleS = (RuleSoldier*)getRow().rule;
 				if (ruleS->getMonthlyBuyLimit() > 0)
 				{
-					auto& soldierHireLimitLog = _game->savedGame()->getMonthlyPurchaseLimitLog();
+					auto& soldierHireLimitLog = game.savedGame()->getMonthlyPurchaseLimitLog();
 					int maxByLimit = std::max(0, ruleS->getMonthlyBuyLimit() - soldierHireLimitLog[ruleS->getType()] - getRow().amount);
 					change = std::min(maxByLimit, change);
 				}
@@ -1192,7 +1192,7 @@ void PurchaseState::increaseByValue(int change)
 				RuleCraft *ruleC = (RuleCraft*)getRow().rule;
 				if (ruleC->getMonthlyBuyLimit() > 0)
 				{
-					auto& craftPurchaseLimitLog = _game->savedGame()->getMonthlyPurchaseLimitLog();
+					auto& craftPurchaseLimitLog = game.savedGame()->getMonthlyPurchaseLimitLog();
 					int maxByLimit = std::max(0, ruleC->getMonthlyBuyLimit() - craftPurchaseLimitLog[ruleC->getType()] - getRow().amount);
 					change = std::min(maxByLimit, change);
 				}
@@ -1206,7 +1206,7 @@ void PurchaseState::increaseByValue(int change)
 				RuleItem *rule = (RuleItem*)getRow().rule;
 				if (rule->getMonthlyBuyLimit() > 0)
 				{
-					auto& itemPurchaseLimitLog = _game->savedGame()->getMonthlyPurchaseLimitLog();
+					auto& itemPurchaseLimitLog = game.savedGame()->getMonthlyPurchaseLimitLog();
 					int maxByLimit = std::max(0, rule->getMonthlyBuyLimit() - itemPurchaseLimitLog[rule->getType()] - getRow().amount);
 					change = std::min(maxByLimit, change);
 				}
@@ -1242,8 +1242,8 @@ void PurchaseState::increaseByValue(int change)
 	else
 	{
 		_timerInc->stop();
-		RuleInterface *menuInterface = _game->getMod()->getInterface("buyMenu");
-		_game->pushState(new ErrorMessageState(
+		RuleInterface *menuInterface = game.getMod()->getInterface("buyMenu");
+		game.pushState(new ErrorMessageState(
 			errorMessage,
 			_palette,
 			menuInterface->getElement("errorMessage")->color,
@@ -1261,7 +1261,7 @@ void PurchaseState::decrease()
 {
 	_timerInc->setInterval(50);
 	_timerDec->setInterval(50);
-	decreaseByValue(_game->getScrollStep());
+	decreaseByValue(game.getScrollStep());
 }
 
 /**

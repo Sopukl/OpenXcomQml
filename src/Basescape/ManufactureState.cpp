@@ -160,7 +160,7 @@ void ManufactureState::init()
  */
 void ManufactureState::btnOkClick(Action *)
 {
-	_game->popState();
+	game.popState();
 }
 
 /**
@@ -169,7 +169,7 @@ void ManufactureState::btnOkClick(Action *)
  */
 void ManufactureState::onCurrentGlobalProductionClick(Action *)
 {
-	_game->pushState(new GlobalManufactureState(true));
+	game.pushState(new GlobalManufactureState(true));
 }
 
 /**
@@ -178,7 +178,7 @@ void ManufactureState::onCurrentGlobalProductionClick(Action *)
  */
 void ManufactureState::btnNewProductionClick(Action *)
 {
-	_game->pushState(new NewManufactureListState(_base));
+	game.pushState(new NewManufactureListState(_base));
 }
 
 /**
@@ -223,7 +223,7 @@ void ManufactureState::fillProductionList(size_t scrl)
 	_txtAvailable->setText(ltr("STR_ENGINEERS_AVAILABLE").arg(_base->getAvailableEngineers()));
 	_txtAllocated->setText(ltr("STR_ENGINEERS_ALLOCATED").arg(_base->getAllocatedEngineers()));
 	_txtSpace->setText(ltr("STR_WORKSHOP_SPACE_AVAILABLE").arg(_base->getFreeWorkshops()));
-	_txtFunds->setText(ltr("STR_CURRENT_FUNDS").arg(Unicode::formatFunding(_game->savedGame()->getFunds())));
+	_txtFunds->setText(ltr("STR_CURRENT_FUNDS").arg(Unicode::formatFunding(game.savedGame()->getFunds())));
 
 	if (scrl)
 		_lstManufacture->scrollTo(scrl);
@@ -236,7 +236,7 @@ void ManufactureState::fillProductionList(size_t scrl)
 void ManufactureState::lstManufactureClickLeft(Action *)
 {
 	const std::vector<Production*> productions(_base->getProductions());
-	_game->pushState(new ManufactureInfoState(_base, productions[_lstManufacture->getSelectedRow()]));
+	game.pushState(new ManufactureInfoState(_base, productions[_lstManufacture->getSelectedRow()]));
 }
 
 /**
@@ -247,14 +247,14 @@ void ManufactureState::lstManufactureClickMiddle(Action *)
 {
 	const std::vector<Production*> productions(_base->getProductions());
 	const RuleManufacture *selectedTopic = productions[_lstManufacture->getSelectedRow()]->getRules();
-	if (_game->isCtrlPressed())
+	if (game.isCtrlPressed())
 	{
 		std::string articleId = selectedTopic->getName();
 		Ufopaedia::openArticle(articleId);
 	}
 	else
 	{
-		_game->pushState(new TechTreeViewerState(0, selectedTopic));
+		game.pushState(new TechTreeViewerState(0, selectedTopic));
 	}
 }
 
@@ -270,7 +270,7 @@ void ManufactureState::lstManufactureMousePress(Action *action)
 	}
 
 	int change = options1.oxceManufactureScrollSpeed();
-	if (_game->isCtrlPressed())
+	if (game.isCtrlPressed())
 		change = options1.oxceManufactureScrollSpeedWithCtrl();
 
 	if (action->getDetails()->button.button == SDL_BUTTON_WHEELUP)
