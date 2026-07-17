@@ -223,7 +223,7 @@ void SoldierMemorialState::fillMemorialList()
 		const SoldierDeath *death = deadSoldier->getDeath();
 
 		std::ostringstream saveDay, saveMonth, saveYear;
-		saveDay << death->getTime()->getDayString(_game->getLanguage());
+		saveDay << death->getTime()->getDayString();
 		saveMonth << ltr(death->getTime()->getMonthString());
 		saveYear << death->getTime()->getYear();
 		_lstSoldiers->addRow(5, deadSoldier->getName().c_str(), ltr(deadSoldier->getRankString()).c_str(), saveDay.str().c_str(), saveMonth.str().c_str(), saveYear.str().c_str());

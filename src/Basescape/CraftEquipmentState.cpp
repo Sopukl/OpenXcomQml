@@ -1002,7 +1002,7 @@ void CraftEquipmentState::btnInventoryClick(Action *)
 			craft->setMaxStorageSpaceRaw(maxStorageSpaceBackup);
 		}
 
-		SavedBattleGame *bgame = new SavedBattleGame(_game->getMod(), _game->getLanguage());
+		SavedBattleGame *bgame = new SavedBattleGame(_game->getMod());
 		_game->savedGame()->setBattleGame(bgame);
 
 		if (_game->isCtrlPressed(true) && _game->isAltPressed(true))

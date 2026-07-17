@@ -315,7 +315,7 @@ void CraftSoldiersState::btnPreviewClick(Action *)
 		return;
 	}
 
-	SavedBattleGame* bgame = new SavedBattleGame(_game->getMod(), _game->getLanguage(), true);
+	SavedBattleGame* bgame = new SavedBattleGame(_game->getMod(), true);
 	_game->savedGame()->setBattleGame(bgame);
 	BattlescapeGenerator bgen = BattlescapeGenerator(_game);
 	bgame->setMissionType(c->getRules()->getCustomPreviewType());
@@ -358,11 +358,11 @@ void CraftSoldiersState::initList(size_t scrl)
 			int dynStat = (*_dynGetter)(_game, soldier);
 			std::ostringstream ss;
 			ss << dynStat;
-			_lstSoldiers->addRow(4, soldier->getName(true, 19).c_str(), ltr(soldier->getRankString()).c_str(), soldier->getCraftString(_game->getLanguage(), recovery).c_str(), ss.str().c_str());
+			_lstSoldiers->addRow(4, soldier->getName(true, 19).c_str(), ltr(soldier->getRankString()).c_str(), soldier->getCraftString(recovery).c_str(), ss.str().c_str());
 		}
 		else
 		{
-			_lstSoldiers->addRow(3, soldier->getName(true, 19).c_str(), ltr(soldier->getRankString()).c_str(), soldier->getCraftString(_game->getLanguage(), recovery).c_str());
+			_lstSoldiers->addRow(3, soldier->getName(true, 19).c_str(), ltr(soldier->getRankString()).c_str(), soldier->getCraftString(recovery).c_str());
 		}
 
 		Uint8 color;

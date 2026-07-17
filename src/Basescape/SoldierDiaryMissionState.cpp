@@ -172,7 +172,7 @@ void SoldierDiaryMissionState::init()
 		}
 
 		_lstKills->addRow(3, ltr(battleUnitKills->getKillStatusString()).c_str(),
-							 battleUnitKills->getUnitName(_game->getLanguage()).c_str(),
+							 battleUnitKills->getUnitName().c_str(),
 							 ltr(battleUnitKills->weapon).c_str());
 	}
 

@@ -17,7 +17,7 @@
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "GameTime.h"
-#include "../Engine/Language.h"
+#include "../Engine/Game.h"
 #include <iomanip>
 
 namespace OpenXcom
@@ -208,8 +208,9 @@ int GameTime::getDay() const
  * @param lang Pointer to current language.
  * @return Localized day string.
  */
-std::string GameTime::getDayString(Language *lang) const
+std::string GameTime::getDayString() const
 {
+	Language *lang = game.getLanguage();
 	std::string s;
 	switch (_day)
 	{

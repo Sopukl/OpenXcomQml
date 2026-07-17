@@ -204,7 +204,7 @@ void SoldierDiaryOverviewState::init()
 		{
 			deathTitleText = _game->getLanguage()->getString("STR_KILLED_IN_ACTION", _soldier->getGender());
 			deathInfoText = ltr("STR_KILLER_AND_WEAPON")
-				.arg(cause->getUnitName(_game->getLanguage()))
+				.arg(cause->getUnitName())
 				.arg(ltr(cause->weapon));
 		}
 		else
@@ -214,7 +214,7 @@ void SoldierDiaryOverviewState::init()
 
 		std::ostringstream deathDateText;
 		const GameTime *t = _soldier->getDeath()->getTime();
-		deathDateText << t->getDayString(_game->getLanguage()) << " " << _game->getLanguage()->getString(t->getMonthString()) << " " << t->getYear();
+		deathDateText << t->getDayString() << " " << _game->getLanguage()->getString(t->getMonthString()) << " " << t->getYear();
 
 		_txtDeathTitle->setText(deathTitleText);
 		_txtDeathDate->setText(deathDateText.str());
@@ -248,7 +248,7 @@ void SoldierDiaryOverviewState::init()
 
 		_lstDiary->addRow(5, missionStats->getMissionName(_game->getLanguage()).c_str(),
 							 missionStats->getRatingString(_game->getLanguage()).c_str(),
-							 missionStats->time.getDayString(_game->getLanguage()).c_str(),
+							 missionStats->time.getDayString().c_str(),
 							 ltr(missionStats->time.getMonthString()).c_str(),
 							 ss.str().c_str());
 		row++;

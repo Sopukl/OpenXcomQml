@@ -127,7 +127,7 @@ public:
 	/// Sets the soldier's craft and automatically moves the equipment (if enabled).
 	void setCraftAndMoveEquipment(Craft* craft, Base* base, bool isNewBattle, bool resetCustomDeployment = false);
 	/// Gets the soldier's craft string.
-	std::string getCraftString(Language *lang, const BaseSumDailyRecovery& recovery) const;
+	std::string getCraftString(const BaseSumDailyRecovery& recovery) const;
 	/// Gets a string version of the soldier's rank.
 	std::string getRankString() const;
 	/// Gets a sprite version of the soldier's rank. Used for BASEBITS.PCK.

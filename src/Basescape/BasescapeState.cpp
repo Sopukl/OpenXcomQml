@@ -414,7 +414,7 @@ void BasescapeState::viewLeftClick(Action *)
 					_globe->getPolygonTextureAndShade(_base->getLongitude(), _base->getLatitude(), &texture, &shade);
 					auto* globeTexture = _game->getMod()->getGlobe()->getTexture(texture);
 
-					SavedBattleGame* bgame = new SavedBattleGame(_game->getMod(), _game->getLanguage(), true);
+					auto bgame = new SavedBattleGame(_game->getMod(), true);
 					_game->savedGame()->setBattleGame(bgame);
 					BattlescapeGenerator bgen = BattlescapeGenerator(_game);
 					bgame->setMissionType("STR_BASE_DEFENSE");

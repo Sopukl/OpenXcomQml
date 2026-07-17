@@ -505,7 +505,7 @@ void StatsForNerdsState::btnPreviewClick(Action *)
 		if (max <= 0) break;
 	}
 
-	SavedBattleGame* bgame = new SavedBattleGame(_game->getMod(), _game->getLanguage(), true);
+	SavedBattleGame* bgame = new SavedBattleGame(_game->getMod(), true);
 	_game->savedGame()->setBattleGame(bgame);
 	BattlescapeGenerator bgen = BattlescapeGenerator(_game);
 	bgame->setMissionType(c->getRules()->getCustomPreviewType());

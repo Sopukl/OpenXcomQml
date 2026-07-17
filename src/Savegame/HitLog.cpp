@@ -17,14 +17,15 @@
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "HitLog.h"
-#include "../Engine/Language.h"
+#include "../Engine/Game.h"
 #include <regex>
 
 namespace OpenXcom
 {
 
-HitLog::HitLog(Language *lang) : _lastEventType(HITLOG_EMPTY), _lastFaction(FACTION_PLAYER)
+HitLog::HitLog() : _lastEventType(HITLOG_EMPTY), _lastFaction(FACTION_PLAYER)
 {
+	Language *lang = game.getLanguage();
 	// cache
 	_newTurn = lang->getString("STR_HIT_LOG_NEW_TURN");
 	_reactionFire = lang->getString("STR_HIT_LOG_REACTION_FIRE");

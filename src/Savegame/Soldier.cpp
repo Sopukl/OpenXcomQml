@@ -21,7 +21,7 @@
 #include "Soldier.h"
 #include "../Engine/Collections.h"
 #include "../Engine/RNG.h"
-#include "../Engine/Language.h"
+#include "../Engine/Game.h"
 #include "../Engine/Options.h"
 #include "../Engine/ScriptBind.h"
 #include "Craft.h"
@@ -601,8 +601,9 @@ void Soldier::setCraftAndMoveEquipment(Craft* craft, Base* base, bool isNewBattl
  * @param lang Language to get strings from.
  * @return Full name.
  */
-std::string Soldier::getCraftString(Language *lang, const BaseSumDailyRecovery& recovery) const
+std::string Soldier::getCraftString(const BaseSumDailyRecovery& recovery) const
 {
+	Language *lang = game.getLanguage();
 	std::string s;
 	if (_death)
 	{

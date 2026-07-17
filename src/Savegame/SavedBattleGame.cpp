@@ -61,7 +61,7 @@ namespace OpenXcom
 /**
  * Initializes a brand new battlescape saved game.
  */
-SavedBattleGame::SavedBattleGame(Mod *rule, Language *lang, bool isPreview) :
+SavedBattleGame::SavedBattleGame(Mod *rule, bool isPreview) :
 	_isPreview(isPreview), _craftPos(), _craftZ(0), _craftForPreview(nullptr),
 	_battleState(0), _rule(rule), _mapsize_x(0), _mapsize_y(0), _mapsize_z(0), _selectedUnit(0), _undoUnit(nullptr),
 	_lastSelectedUnit(0), _pathfinding(0), _tileEngine(0),
@@ -82,7 +82,7 @@ SavedBattleGame::SavedBattleGame(Mod *rule, Language *lang, bool isPreview) :
 		_tileSearch[i].y = ((i/11) - 5);
 	}
 	_baseItems = new ItemContainer();
-	_hitLog = new HitLog(lang);
+	_hitLog = new HitLog();
 
 	setRandomHiddenMovementBackground(_rule);
 }

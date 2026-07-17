@@ -57,7 +57,7 @@ private:
 
 public:
 	/// Creates a new hit log.
-	HitLog(Language *lang);
+	HitLog();
 	/// Appends the given text to the hit log.
 	void appendToHitLog(HitLogEntryType type, UnitFaction faction);
 	void appendToHitLog(HitLogEntryType type, UnitFaction faction, const std::string &text);

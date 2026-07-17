@@ -321,7 +321,7 @@ SaveInfo SavedGame::getSaveInfo(const std::string &file, Language *lang)
 		GameTime time = GameTime(6, 1, 1, 1999, 12, 0, 0);
 		if (reader["time"])
 			time.load(reader["time"]);
-		save.displayName = lang->getString("STR_AUTO_SAVE_GEOSCAPE_SLOT_WITH_NUMBER").arg(time.getDayString(lang));
+		save.displayName = lang->getString("STR_AUTO_SAVE_GEOSCAPE_SLOT_WITH_NUMBER").arg(time.getDayString());
 		save.reserved = true;
 	}
 	else if (save.fileName == AUTOSAVE_BATTLESCAPE)
@@ -359,7 +359,7 @@ SaveInfo SavedGame::getSaveInfo(const std::string &file, Language *lang)
 		GameTime time = GameTime(6, 1, 1, 1999, 12, 0, 0);
 		time.load(reader["time"]);
 		details << lang->getString("STR_GEOSCAPE") << ": ";
-		details << time.getDayString(lang) << " " << lang->getString(time.getMonthString()) << " " << time.getYear() << ", ";
+		details << time.getDayString() << " " << lang->getString(time.getMonthString()) << " " << time.getYear() << ", ";
 		details << time.getHour() << ":" << std::setfill('0') << std::setw(2) << time.getMinute();
 	}
 	if (reader["ironman"].readVal(false))

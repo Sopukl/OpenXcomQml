@@ -825,7 +825,7 @@ void GeoscapeState::timeDisplay()
 	_txtHour->setText(ss3.str());
 
 	std::ostringstream ss4;
-	ss4 << _game->savedGame()->getTime()->getDayString(_game->getLanguage());
+	ss4 << _game->savedGame()->getTime()->getDayString();
 	_txtDay->setText(ss4.str());
 
 	_txtWeekday->setText(ltr(_game->savedGame()->getTime()->getWeekdayString()));

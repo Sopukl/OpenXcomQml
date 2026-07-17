@@ -438,7 +438,7 @@ void SoldiersState::initList(size_t scrl)
 	unsigned int row = 0;
 	for (const auto* soldier : _filteredListOfSoldiers)
 	{
-		std::string craftString = soldier->getCraftString(_game->getLanguage(), recovery);
+		std::string craftString = soldier->getCraftString(recovery);
 
 		if (_dynGetter != NULL)
 		{

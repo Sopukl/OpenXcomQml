@@ -136,7 +136,7 @@ private:
 	void newTurnUpdateScripts();
 public:
 	/// Creates a new battle save, based on the current generic save.
-	SavedBattleGame(Mod *rule, Language *lang, bool isPreview = false);
+	SavedBattleGame(Mod *rule, bool isPreview = false);
 	/// Cleans up the saved game.
 	~SavedBattleGame();
 	/// Loads a saved battle game from YAML.

@@ -309,11 +309,11 @@ void CraftArmorState::initList(size_t scrl)
 			int dynStat = (*_dynGetter)(_game, soldier);
 			std::ostringstream ss;
 			ss << dynStat;
-			_lstSoldiers->addRow(4, soldier->getName(true).c_str(), soldier->getCraftString(_game->getLanguage(), recovery).c_str(), ltr(soldier->getArmor()->getType()).c_str(), ss.str().c_str());
+			_lstSoldiers->addRow(4, soldier->getName(true).c_str(), soldier->getCraftString(recovery).c_str(), ltr(soldier->getArmor()->getType()).c_str(), ss.str().c_str());
 		}
 		else
 		{
-			_lstSoldiers->addRow(3, soldier->getName(true).c_str(), soldier->getCraftString(_game->getLanguage(), recovery).c_str(), ltr(soldier->getArmor()->getType()).c_str());
+			_lstSoldiers->addRow(3, soldier->getName(true).c_str(), soldier->getCraftString(recovery).c_str(), ltr(soldier->getArmor()->getType()).c_str());
 		}
 
 		Uint8 color;
