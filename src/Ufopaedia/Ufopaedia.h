@@ -25,7 +25,6 @@
 
 namespace OpenXcom
 {
-	class Game;
 	class SavedGame;
 	class Mod;
 	class ArticleDefinition;
@@ -54,22 +53,22 @@ namespace OpenXcom
 		static bool isArticleAvailable(SavedGame *save, ArticleDefinition *article);
 
 		/// open Ufopaedia on a certain entry.
-		static void openArticle(Game *game, const std::string &article_id);
-		static void openArticleDetail(Game *game, const std::string &article_id);
+		static void openArticle(const std::string &article_id);
+		static void openArticleDetail(const std::string &article_id);
 
 		/// open Ufopaedia article from a given article definition.
-		static void openArticle(Game *game, ArticleDefinition *article);
+		static void openArticle(ArticleDefinition *article);
 
 		/// open Ufopaedia with selection dialog.
-		static void open(Game *game);
+		static void open();
 
 		/// article navigation to next article.
-		static void next(Game *game, std::shared_ptr<ArticleCommonState> state);
-		static void nextDetail(Game *game, std::shared_ptr<ArticleCommonState> state, bool debug, bool ids, bool defaults);
+		static void next(std::shared_ptr<ArticleCommonState> state);
+		static void nextDetail(std::shared_ptr<ArticleCommonState> state, bool debug, bool ids, bool defaults);
 
 		/// article navigation to previous article.
-		static void prev(Game *game, std::shared_ptr<ArticleCommonState> state);
-		static void prevDetail(Game *game, std::shared_ptr<ArticleCommonState> state, bool debug, bool ids, bool defaults);
+		static void prev(std::shared_ptr<ArticleCommonState> state);
+		static void prevDetail(std::shared_ptr<ArticleCommonState> state, bool debug, bool ids, bool defaults);
 
 		/// load a vector with article ids that are currently visible of a given section.
 		static void list(SavedGame *save, Mod *rule, const std::string &section, ArticleDefinitionList &data);

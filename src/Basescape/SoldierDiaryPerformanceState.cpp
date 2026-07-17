@@ -508,7 +508,7 @@ void SoldierDiaryPerformanceState::lstInfoMouseOut(Action *)
 void SoldierDiaryPerformanceState::lstInfoMouseClick(Action *)
 {
 	_doNotReset = true;
-	Ufopaedia::openArticle(_game, _commendationsNames[_lstCommendations->getSelectedRow()]);
+	Ufopaedia::openArticle(_commendationsNames[_lstCommendations->getSelectedRow()]);
 }
 
 /**

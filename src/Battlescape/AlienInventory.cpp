@@ -21,11 +21,9 @@
 #include "../Engine/Action.h"
 #include "../Engine/Font.h"
 #include "../Engine/Game.h"
-#include "../Engine/Game.h"
 #include "../Engine/Screen.h"
 #include "../Engine/SurfaceSet.h"
 #include "../Engine/Timer.h"
-#include "../Interface/Text.h"
 #include "../Mod/Mod.h"
 #include "../Mod/RuleInventory.h"
 #include "../Mod/RuleInterface.h"
@@ -44,7 +42,7 @@ namespace OpenXcom
  * @param x X position in pixels.
  * @param y Y position in pixels.
  */
-AlienInventory::AlienInventory(Game *game, int width, int height, int x, int y) : InteractiveSurface(width, height, x, y), _game(game), _selUnit(0), _dynamicOffset(0), _animFrame(0)
+AlienInventory::AlienInventory(int width, int height, int x, int y) : InteractiveSurface(width, height, x, y), _selUnit(0), _dynamicOffset(0), _animFrame(0)
 {
 	_grid = new Surface(width, height, 0, 0);
 	_items = new Surface(width, height, 0, 0);
@@ -96,7 +94,7 @@ void AlienInventory::setSelectedUnit(BattleUnit *unit)
 	_dynamicOffset = 0;
 	if (unit && unit->isBigUnit())
 	{
-		_dynamicOffset = _game->getMod()->getAlienInventoryOffsetBigUnit();
+		_dynamicOffset = game.getMod()->getAlienInventoryOffsetBigUnit();
 	}
 }
 
@@ -115,16 +113,16 @@ void AlienInventory::draw()
 void AlienInventory::drawGrid()
 {
 	_grid->clear();
-	RuleInterface *rule = _game->getMod()->getInterface("inventory");
+	RuleInterface *rule = game.getMod()->getInterface("inventory");
 	Uint8 color = rule->getElement("grid")->color;
 
-	for (const auto& pair : *_game->getMod()->getInventories())
+	for (const auto& pair : *game.getMod()->getInventories())
 	{
 		if (pair.second->getType() == INV_HAND)
 		{
 			SDL_Rect r;
 			r.x = pair.second->getX();
-			r.x += _game->getMod()->getAlienInventoryOffsetX();
+			r.x += game.getMod()->getAlienInventoryOffsetX();
 
 			if (pair.second->isRightHand())
 				r.x -= _dynamicOffset;
@@ -153,12 +151,12 @@ void AlienInventory::drawGrid()
  */
 void AlienInventory::drawItems()
 {
-	const SavedBattleGame* save = _game->savedGame()->getSavedBattle();
+	const SavedBattleGame* save = game.savedGame()->getSavedBattle();
 	ScriptWorkerBlit work;
 	_items->clear();
 	if (_selUnit != 0)
 	{
-		SurfaceSet *texture = _game->getMod()->getSurfaceSet("BIGOBS.PCK");
+		SurfaceSet *texture = game.getMod()->getSurfaceSet("BIGOBS.PCK");
 		for (const auto* item : *_selUnit->getInventory())
 		{
 			if (item->getSlot()->getType() == INV_HAND)
@@ -169,7 +167,7 @@ void AlienInventory::drawItems()
 					continue;
 
 				int x = item->getSlot()->getX() + item->getRules()->getHandSpriteOffX();
-				x += _game->getMod()->getAlienInventoryOffsetX();
+				x += game.getMod()->getAlienInventoryOffsetX();
 
 				if (item->getSlot()->isRightHand())
 					x -= _dynamicOffset;
@@ -197,7 +195,7 @@ void AlienInventory::drawItems()
  */
 RuleInventory *AlienInventory::getSlotInPosition(int *x, int *y) const
 {
-	for (const auto& pair : *_game->getMod()->getInventories())
+	for (const auto& pair : *game.getMod()->getInventories())
 	{
 		if (pair.second->checkSlotInPosition(x, y))
 		{
@@ -226,15 +224,15 @@ void AlienInventory::blit(SDL_Surface *surface)
  */
 void AlienInventory::mouseClick(Action *action, State *state)
 {
-	if (_game->isLeftClick(action))
+	if (game.isLeftClick(action))
 	{
-		_game->popState();
+		game.popState();
 	}
-	else if (_game->isRightClick(action))
+	else if (game.isRightClick(action))
 	{
-		_game->popState();
+		game.popState();
 	}
-	else if (_game->isMiddleClick(action))
+	else if (game.isMiddleClick(action))
 	{
 		if (_selUnit == 0)
 			return;
@@ -247,7 +245,7 @@ void AlienInventory::mouseClick(Action *action, State *state)
 		else
 			x += _dynamicOffset;
 
-		x -= _game->getMod()->getAlienInventoryOffsetX();
+		x -= game.getMod()->getAlienInventoryOffsetX();
 
 		RuleInventory *slot = getSlotInPosition(&x, &y);
 		if (slot != 0)
@@ -258,7 +256,7 @@ void AlienInventory::mouseClick(Action *action, State *state)
 				if (item != 0)
 				{
 					std::string articleId = item->getRules()->getUfopediaType();
-					Ufopaedia::openArticle(_game, articleId);
+					Ufopaedia::openArticle(articleId);
 				}
 			}
 		}

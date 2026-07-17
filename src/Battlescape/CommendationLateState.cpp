@@ -192,7 +192,7 @@ CommendationLateState::~CommendationLateState()
 */
 void CommendationLateState::lstSoldiersMouseClick(Action *)
 {
-	Ufopaedia::openArticle(_game, _commendationsNames[_lstSoldiers->getSelectedRow()]);
+	Ufopaedia::openArticle(_commendationsNames[_lstSoldiers->getSelectedRow()]);
 }
 
 /**

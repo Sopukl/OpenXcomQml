@@ -112,7 +112,7 @@ void ResearchCompleteState::btnReportClick(Action *)
 			bonusName = _bonus->getName();
 		else
 			bonusName = _bonus->getLookup();
-		Ufopaedia::openArticle(_game, bonusName);
+		Ufopaedia::openArticle(bonusName);
 	}
 	if (_research)
 	{
@@ -120,7 +120,7 @@ void ResearchCompleteState::btnReportClick(Action *)
 			name = _research->getName();
 		else
 			name = _research->getLookup();
-		Ufopaedia::openArticle(_game, name);
+		Ufopaedia::openArticle(name);
 	}
 }
 

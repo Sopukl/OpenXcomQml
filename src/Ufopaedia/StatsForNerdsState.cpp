@@ -527,7 +527,7 @@ void StatsForNerdsState::btnPreviewClick(Action *)
  */
 void StatsForNerdsState::btnPrevClick(Action *)
 {
-	Ufopaedia::prevDetail(_game, _state, _btnIncludeDebug->getPressed(), _btnIncludeIds->getPressed(), _btnIncludeDefaults->getPressed());
+	Ufopaedia::prevDetail(_state, _btnIncludeDebug->getPressed(), _btnIncludeIds->getPressed(), _btnIncludeDefaults->getPressed());
 }
 
 /**
@@ -536,7 +536,7 @@ void StatsForNerdsState::btnPrevClick(Action *)
  */
 void StatsForNerdsState::btnNextClick(Action *)
 {
-	Ufopaedia::nextDetail(_game, _state, _btnIncludeDebug->getPressed(), _btnIncludeIds->getPressed(), _btnIncludeDefaults->getPressed());
+	Ufopaedia::nextDetail(_state, _btnIncludeDebug->getPressed(), _btnIncludeIds->getPressed(), _btnIncludeDefaults->getPressed());
 }
 
 /**

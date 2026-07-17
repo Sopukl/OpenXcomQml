@@ -61,7 +61,7 @@ AlienInventoryState::AlienInventoryState(BattleUnit *unit)
 	_txtLeftHand = new Text(308, 17, 6, 160);
 	_txtRightHand = new Text(308, 17, 6, 180);
 	_btnArmor = new BattlescapeButton(40, 70, 140, 65);
-	_inv = new AlienInventory(_game, 320, 200, 0, 0);
+	_inv = new AlienInventory(320, 200, 0, 0);
 
 	// Set palette
 	setStandardPalette("PAL_BATTLESCAPE");
@@ -473,7 +473,7 @@ void AlienInventoryState::btnArmorClickMiddle(Action *action)
 	if (unit != 0)
 	{
 		std::string articleId = unit->getArmor()->getUfopediaType();
-		Ufopaedia::openArticle(_game, articleId);
+		Ufopaedia::openArticle(articleId);
 	}
 }
 

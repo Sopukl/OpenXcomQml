@@ -3152,7 +3152,7 @@ void GeoscapeState::btnUfopaediaClick(Action *)
 	{
 		return;
 	}
-	Ufopaedia::open(_game);
+	Ufopaedia::open();
 }
 
 /**
@@ -3803,12 +3803,12 @@ void GeoscapeState::determineAlienMissions(bool isNewMonth, const RuleEvent* eve
 				{
 					if (ruleResearchSeq->getLookup().empty())
 					{
-						Ufopaedia::openArticle(_game, ruleResearchSeq->getName());
+						Ufopaedia::openArticle(ruleResearchSeq->getName());
 					}
 					else
 					{
 						save->addFinishedResearch(mod->getResearch(ruleResearchSeq->getLookup(), true), mod, hq, true);
-						Ufopaedia::openArticle(_game, ruleResearchSeq->getLookup());
+						Ufopaedia::openArticle(ruleResearchSeq->getLookup());
 					}
 				}
 			}
@@ -3822,12 +3822,12 @@ void GeoscapeState::determineAlienMissions(bool isNewMonth, const RuleEvent* eve
 				{
 					if (ruleResearchRng->getLookup().empty())
 					{
-						Ufopaedia::openArticle(_game, ruleResearchRng->getName());
+						Ufopaedia::openArticle(ruleResearchRng->getName());
 					}
 					else
 					{
 						save->addFinishedResearch(mod->getResearch(ruleResearchRng->getLookup(), true), mod, hq, true);
-						Ufopaedia::openArticle(_game, ruleResearchRng->getLookup());
+						Ufopaedia::openArticle(ruleResearchRng->getLookup());
 					}
 				}
 			}

@@ -270,7 +270,7 @@ void SoldierTransformState::lstTransformationClickMiddle(Action*)
 
 	if (transformationRule)
 	{
-		Ufopaedia::openArticle(_game, transformationRule->getName());
+		Ufopaedia::openArticle(transformationRule->getName());
 	}
 }
 

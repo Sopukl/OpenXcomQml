@@ -33,8 +33,6 @@ class Timer;
  */
 class AlienInventory : public InteractiveSurface
 {
-private:
-	Game *_game;
 	Surface *_grid, *_items;
 	BattleUnit *_selUnit;
 	int _dynamicOffset;
@@ -44,7 +42,7 @@ private:
 	RuleInventory *getSlotInPosition(int *x, int *y) const;
 public:
 	/// Creates a new inventory view at the specified position and size.
-	AlienInventory(Game *game, int width, int height, int x = 0, int y = 0);
+	AlienInventory(int width, int height, int x = 0, int y = 0);
 	/// Cleans up the inventory.
 	~AlienInventory();
 	/// Sets the inventory's palette.

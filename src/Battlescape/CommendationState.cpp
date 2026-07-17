@@ -180,7 +180,7 @@ CommendationState::~CommendationState()
 */
 void CommendationState::lstSoldiersMouseClick(Action *)
 {
-	Ufopaedia::openArticle(_game, _commendationsNames[_lstSoldiers->getSelectedRow()]);
+	Ufopaedia::openArticle(_commendationsNames[_lstSoldiers->getSelectedRow()]);
 }
 
 /**

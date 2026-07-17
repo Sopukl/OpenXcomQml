@@ -363,7 +363,7 @@ void SoldierTransformationListState::lstTransformationsClick(Action *action)
 	if (action->getDetails()->button.button == SDL_BUTTON_MIDDLE)
 	{
 		std::string articleId = _availableTransformations.at(transformationIndex)->getName();
-		Ufopaedia::openArticle(_game, articleId);
+		Ufopaedia::openArticle(articleId);
 		return;
 	}
 

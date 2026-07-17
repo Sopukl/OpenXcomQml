@@ -1184,7 +1184,7 @@ void Inventory::mouseClick(Action *action, State *state)
 			if (item != 0)
 			{
 				std::string articleId = item->getRules()->getUfopediaType();
-				Ufopaedia::openArticle(_game, articleId);
+				Ufopaedia::openArticle(articleId);
 			}
 		}
 	}

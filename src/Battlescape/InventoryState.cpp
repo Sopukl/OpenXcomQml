@@ -897,7 +897,7 @@ void InventoryState::btnArmorClickMiddle(Action *action)
 	if (unit != 0)
 	{
 		std::string articleId = unit->getArmor()->getUfopediaType();
-		Ufopaedia::openArticle(_game, articleId);
+		Ufopaedia::openArticle(articleId);
 	}
 }
 
@@ -1135,7 +1135,7 @@ void InventoryState::btnUfopaediaClick(Action *)
 		return;
 	}
 
-	Ufopaedia::open(_game);
+	Ufopaedia::open();
 }
 
 /**
@@ -1347,7 +1347,7 @@ void InventoryState::btnLinksClick(Action *)
 	{
 		// but we can reuse this for ufopedia (as an M-click alternative)
 		std::string articleId = _inv->getSelectedItem()->getRules()->getUfopediaType();
-		Ufopaedia::openArticle(_game, articleId);
+		Ufopaedia::openArticle(articleId);
 
 		return;
 	}

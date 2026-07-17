@@ -573,7 +573,7 @@ void BasescapeState::viewMiddleClick(Action *)
 	if (f)
 	{
 		std::string articleId = f->getRules()->getUfopediaType();
-		Ufopaedia::openArticle(_game, articleId);
+		Ufopaedia::openArticle(articleId);
 	}
 }
 

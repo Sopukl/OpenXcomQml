@@ -250,7 +250,7 @@ void ManufactureState::lstManufactureClickMiddle(Action *)
 	if (_game->isCtrlPressed())
 	{
 		std::string articleId = selectedTopic->getName();
-		Ufopaedia::openArticle(_game, articleId);
+		Ufopaedia::openArticle(articleId);
 	}
 	else
 	{

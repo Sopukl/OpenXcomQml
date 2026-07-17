@@ -195,7 +195,7 @@ void BriefingLightState::lstArmorsClick(Action* action)
 	if (armor)
 	{
 		std::string articleId = armor->getUfopediaType();
-		Ufopaedia::openArticle(_game, articleId);
+		Ufopaedia::openArticle(articleId);
 	}
 }
 

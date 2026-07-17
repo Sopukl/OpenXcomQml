@@ -495,7 +495,7 @@ void StoresState::lstStoresClick(Action* action)
 		auto* rule = _itemList[_lstStores->getSelectedRow()].rule;
 
 		std::string articleId = rule->getUfopediaType();
-		Ufopaedia::openArticle(_game, articleId);
+		Ufopaedia::openArticle(articleId);
 	}
 	else if (_game->isLeftClick(action))
 	{

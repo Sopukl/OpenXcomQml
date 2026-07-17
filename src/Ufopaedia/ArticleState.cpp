@@ -270,7 +270,7 @@ namespace OpenXcom
 	 */
 	void ArticleState::btnPrevClick(Action *)
 	{
-		Ufopaedia::prev(_game, _state);
+		Ufopaedia::prev(_state);
 	}
 
 	/**
@@ -279,7 +279,7 @@ namespace OpenXcom
 	 */
 	void ArticleState::btnNextClick(Action *)
 	{
-		Ufopaedia::next(_game, _state);
+		Ufopaedia::next(_state);
 	}
 
 	/**
@@ -288,7 +288,7 @@ namespace OpenXcom
 	 */
 	void ArticleState::btnInfoClick(Action *)
 	{
-		Ufopaedia::openArticleDetail(_game, _id);
+		Ufopaedia::openArticleDetail(_id);
 	}
 
 }

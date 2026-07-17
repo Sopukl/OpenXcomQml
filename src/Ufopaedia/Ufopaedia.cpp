@@ -166,13 +166,13 @@ namespace OpenXcom
 	 * @param game Pointer to actual game.
 	 * @param article Article definition of the article to open.
 	 */
-	void Ufopaedia::openArticle(Game *game, ArticleDefinition *article)
+	void Ufopaedia::openArticle(ArticleDefinition *article)
 	{
-		auto state = createCommonArticleState(game->savedGame(), game->getMod());
+		auto state = createCommonArticleState(game.savedGame(), game.getMod());
 		state->current_index = getArticleIndex(state->articleList, article->id);
 		if (state->current_index != ArticleCommonState::invalid)
 		{
-			game->pushState(createArticleState(std::move(state)));
+			game.pushState(createArticleState(std::move(state)));
 		}
 	}
 
@@ -181,13 +181,13 @@ namespace OpenXcom
 	 * @param game Pointer to actual game.
 	 * @param article_id Article id to find.
 	 */
-	void Ufopaedia::openArticle(Game *game, const std::string &article_id)
+	void Ufopaedia::openArticle(const std::string &article_id)
 	{
-		auto state = createCommonArticleState(game->savedGame(), game->getMod());
+		auto state = createCommonArticleState(game.savedGame(), game.getMod());
 		state->current_index = getArticleIndex(state->articleList, article_id);
 		if (state->current_index != ArticleCommonState::invalid)
 		{
-			game->pushState(createArticleState(std::move(state)));
+			game.pushState(createArticleState(std::move(state)));
 		}
 	}
 
@@ -196,13 +196,13 @@ namespace OpenXcom
 	 * @param game Pointer to actual game.
 	 * @param article_id Article id to find.
 	 */
-	void Ufopaedia::openArticleDetail(Game *game, const std::string &article_id)
+	void Ufopaedia::openArticleDetail(const std::string &article_id)
 	{
-		auto state = createCommonArticleState(game->savedGame(), game->getMod());
+		auto state = createCommonArticleState(game.savedGame(), game.getMod());
 		state->current_index = getArticleIndex(state->articleList, article_id);
 		if (state->current_index != ArticleCommonState::invalid)
 		{
-			game->pushState(new StatsForNerdsState(std::move(state), false, false, false));
+			game.pushState(new StatsForNerdsState(std::move(state), false, false, false));
 		}
 	}
 
@@ -210,57 +210,57 @@ namespace OpenXcom
 	 * Open Ufopaedia start state, presenting the section selection buttons.
 	 * @param game Pointer to actual game.
 	 */
-	void Ufopaedia::open(Game *game)
+	void Ufopaedia::open()
 	{
-		game->pushState(new UfopaediaStartState);
+		game.pushState(new UfopaediaStartState);
 	}
 
 	/**
 	 * Open the next article in the list. Loops to the first.
 	 * @param game Pointer to actual game.
 	 */
-	void Ufopaedia::next(Game *game, std::shared_ptr<ArticleCommonState> state)
+	void Ufopaedia::next(std::shared_ptr<ArticleCommonState> state)
 	{
 		if (state->isCurrentArticleHidden()) return;
 		state->nextArticlePage();
-		game->popState();
-		game->pushState(createArticleState(std::move(state)));
+		game.popState();
+		game.pushState(createArticleState(std::move(state)));
 	}
 
 	/**
 	 * Open the next article detail (Stats for Nerds) in the list. Loops to the first.
 	 * @param game Pointer to actual game.
 	 */
-	void Ufopaedia::nextDetail(Game *game, std::shared_ptr<ArticleCommonState> state, bool debug, bool ids, bool defaults)
+	void Ufopaedia::nextDetail(std::shared_ptr<ArticleCommonState> state, bool debug, bool ids, bool defaults)
 	{
 		if (state->isCurrentArticleHidden()) return;
 		state->nextArticle();
-		game->popState();
-		game->pushState(new StatsForNerdsState(std::move(state), debug, ids, defaults));
+		game.popState();
+		game.pushState(new StatsForNerdsState(std::move(state), debug, ids, defaults));
 	}
 
 	/**
 	 * Open the previous article in the list. Loops to the last.
 	 * @param game Pointer to actual game.
 	 */
-	void Ufopaedia::prev(Game *game, std::shared_ptr<ArticleCommonState> state)
+	void Ufopaedia::prev(std::shared_ptr<ArticleCommonState> state)
 	{
 		if (state->isCurrentArticleHidden()) return;
 		state->prevArticlePage();
-		game->popState();
-		game->pushState(createArticleState(std::move(state)));
+		game.popState();
+		game.pushState(createArticleState(std::move(state)));
 	}
 
 	/**
 	 * Open the previous article detail (Stats for Nerds) in the list. Loops to the last.
 	 * @param game Pointer to actual game.
 	 */
-	void Ufopaedia::prevDetail(Game *game, std::shared_ptr<ArticleCommonState> state, bool debug, bool ids, bool defaults)
+	void Ufopaedia::prevDetail(std::shared_ptr<ArticleCommonState> state, bool debug, bool ids, bool defaults)
 	{
 		if (state->isCurrentArticleHidden()) return;
 		state->prevArticle();
-		game->popState();
-		game->pushState(new StatsForNerdsState(std::move(state), debug, ids, defaults));
+		game.popState();
+		game.pushState(new StatsForNerdsState(std::move(state), debug, ids, defaults));
 	}
 
 	/**

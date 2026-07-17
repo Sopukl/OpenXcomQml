@@ -568,7 +568,7 @@ void CraftArmorState::lstSoldiersClick(Action *action)
 		else if (_game->isMiddleClick(action, true))
 		{
 			std::string articleId = s->getArmor()->getUfopediaType();
-			Ufopaedia::openArticle(_game, articleId);
+			Ufopaedia::openArticle(articleId);
 		}
 	}
 }

@@ -219,7 +219,7 @@ void CraftsState::lstCraftsClick(Action *action)
 	else if (_game->isMiddleClick(action))
 	{
 		std::string articleId = crafts[row]->getRules()->getType();
-		Ufopaedia::openArticle(_game, articleId);
+		Ufopaedia::openArticle(articleId);
 	}
 }
 

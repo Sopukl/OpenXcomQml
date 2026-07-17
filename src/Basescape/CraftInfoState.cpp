@@ -497,7 +497,7 @@ void CraftInfoState::btnUfopediaClick(Action *)
 	if (_craft)
 	{
 		std::string articleId = _craft->getRules()->getType();
-		Ufopaedia::openArticle(_game, articleId);
+		Ufopaedia::openArticle(articleId);
 	}
 }
 
@@ -646,7 +646,7 @@ void CraftInfoState::btnWIconMiddleClick(Action* action)
 				if (rule)
 				{
 					std::string articleId = rule->getUfopediaType();
-					Ufopaedia::openArticle(_game, articleId);
+					Ufopaedia::openArticle(articleId);
 				}
 			}
 		}

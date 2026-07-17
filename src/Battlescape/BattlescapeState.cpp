@@ -1426,7 +1426,7 @@ void BattlescapeState::btnUfopaediaClick(Action *)
 {
 	if (allowButtons())
 	{
-		Ufopaedia::open(_game);
+		Ufopaedia::open();
 	}
 }
 
@@ -2515,7 +2515,7 @@ void BattlescapeState::handleItemClick(BattleItem *item, bool middleClick)
 		if (middleClick)
 		{
 			std::string articleId = item->getRules()->getUfopediaType();
-			Ufopaedia::openArticle(_game, articleId);
+			Ufopaedia::openArticle(articleId);
 		}
 		else
 		{

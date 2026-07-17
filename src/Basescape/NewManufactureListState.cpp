@@ -286,7 +286,7 @@ void NewManufactureListState::lstProdClickMiddle(Action *)
 	std::string articleId = _displayedStrings[_lstManufacture->getSelectedRow()];
 	if (_game->isCtrlPressed(true))
 	{
-		Ufopaedia::openArticle(_game, articleId);
+		Ufopaedia::openArticle(articleId);
 	}
 	else
 	{

@@ -132,7 +132,7 @@ namespace OpenXcom
 	void UfopaediaSelectState::lstSelectionClick(Action *)
 	{
 		_lstScroll = _lstSelection->getScroll();
-		Ufopaedia::openArticle(_game, _filtered_article_list[_lstSelection->getSelectedRow()]);
+		Ufopaedia::openArticle(_filtered_article_list[_lstSelection->getSelectedRow()]);
 	}
 
 	/**

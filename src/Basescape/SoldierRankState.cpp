@@ -161,7 +161,7 @@ void SoldierRankState::lstRankClick(Action*)
 void SoldierRankState::lstRankClickMiddle(Action* action)
 {
 	std::string articleId = _ranks[_lstRanks->getSelectedRow()].name;
-	Ufopaedia::openArticle(_game, articleId);
+	Ufopaedia::openArticle(articleId);
 }
 
 }

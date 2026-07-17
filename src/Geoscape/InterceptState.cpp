@@ -530,7 +530,7 @@ void InterceptState::lstCraftsMiddleClick(Action *)
 	if (c)
 	{
 		std::string articleId = c->getRules()->getType();
-		Ufopaedia::openArticle(_game, articleId);
+		Ufopaedia::openArticle(articleId);
 	}
 }
 

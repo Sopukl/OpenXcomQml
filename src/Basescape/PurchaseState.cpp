@@ -987,7 +987,7 @@ void PurchaseState::lstItemsMousePress(Action *action)
 			if (rule != 0)
 			{
 				std::string articleId = rule->getUfopediaType();
-				Ufopaedia::openArticle(_game, articleId);
+				Ufopaedia::openArticle(articleId);
 			}
 		}
 		else if (getRow().type == TRANSFER_CRAFT)
@@ -996,7 +996,7 @@ void PurchaseState::lstItemsMousePress(Action *action)
 			if (rule != 0)
 			{
 				std::string articleId = rule->getType();
-				Ufopaedia::openArticle(_game, articleId);
+				Ufopaedia::openArticle(articleId);
 			}
 		}
 	}

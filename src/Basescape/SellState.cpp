@@ -1090,7 +1090,7 @@ void SellState::lstItemsMousePress(Action *action)
 				std::string articleId = rule->getUfopediaType();
 				if (_game->isCtrlPressed(true))
 				{
-					Ufopaedia::openArticle(_game, articleId);
+					Ufopaedia::openArticle(articleId);
 				}
 				else
 				{
@@ -1110,7 +1110,7 @@ void SellState::lstItemsMousePress(Action *action)
 				std::string articleId = rule->getRules()->getType();
 				if (_game->isCtrlPressed(true))
 				{
-					Ufopaedia::openArticle(_game, articleId);
+					Ufopaedia::openArticle(articleId);
 				}
 				else
 				{

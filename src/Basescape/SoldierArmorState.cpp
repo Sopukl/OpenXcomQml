@@ -328,7 +328,7 @@ void SoldierArmorState::lstArmorClickMiddle(Action *action)
 {
 	Armor* armor = _game->getMod()->getArmor(_armors[_indices[_lstArmor->getSelectedRow()]].type, true);
 	std::string articleId = armor->getUfopediaType();
-	Ufopaedia::openArticle(_game, articleId);
+	Ufopaedia::openArticle(articleId);
 }
 
 /**

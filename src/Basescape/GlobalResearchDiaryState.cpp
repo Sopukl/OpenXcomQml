@@ -357,7 +357,7 @@ void GlobalResearchDiaryState::lstItemMClick(Action* action)
 {
 	auto* selectedTopic = _filteredItemList[_lstItems->getSelectedRow()]->diaryEntry->research;
 	_doNotReset = true;
-	Ufopaedia::openArticle(_game, selectedTopic->getName());
+	Ufopaedia::openArticle(selectedTopic->getName());
 }
 
 void GlobalResearchDiaryState::lstItemMouseOver(Action *)

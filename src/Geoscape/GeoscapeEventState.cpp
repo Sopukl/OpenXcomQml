@@ -569,11 +569,11 @@ void GeoscapeEventState::btnOkClick(Action *)
 
 	if (!_bonusResearchName.empty())
 	{
-		Ufopaedia::openArticle(_game, _bonusResearchName);
+		Ufopaedia::openArticle(_bonusResearchName);
 	}
 	if (!_researchName.empty())
 	{
-		Ufopaedia::openArticle(_game, _researchName);
+		Ufopaedia::openArticle(_researchName);
 	}
 }
 

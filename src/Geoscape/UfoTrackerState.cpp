@@ -250,7 +250,7 @@ void UfoTrackerState::lstObjectsMiddleClick(Action *)
 		if (u != 0 && u->getHyperDetected())
 		{
 			std::string articleId = u->getRules()->getType();
-			Ufopaedia::openArticle(_game, articleId);
+			Ufopaedia::openArticle(articleId);
 		}
 	}
 }
