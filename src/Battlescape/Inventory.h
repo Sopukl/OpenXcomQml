@@ -40,7 +40,6 @@ class Timer;
 class Inventory : public InteractiveSurface
 {
 private:
-	Game *_game;
 	Surface *_grid, *_items, *_gridLabels, *_selection;
 	Uint8 _twoHandedRed, _twoHandedGreen;
 	WarningMessage *_warning;
@@ -73,7 +72,7 @@ private:
 	void playSound(int sound);
 public:
 	/// Creates a new inventory view at the specified position and size.
-	Inventory(Game *game, int width, int height, int x = 0, int y = 0, bool base = false);
+	Inventory(int width, int height, int x = 0, int y = 0, bool base = false);
 	/// Cleans up the inventory.
 	~Inventory();
 	/// Sets the inventory's palette.

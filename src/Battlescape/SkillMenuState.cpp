@@ -57,7 +57,7 @@ SkillMenuState::SkillMenuState(BattleAction *action, int x, int y) : ActionMenuS
 
 	for (int i = 0; i < (int)std::size(_actionMenu); ++i)
 	{
-		_actionMenu[i] = new ActionMenuItem(i, &game, x, y);
+		_actionMenu[i] = new ActionMenuItem(i, x, y);
 		add(_actionMenu[i]);
 		_actionMenu[i]->setVisible(false);
 		_actionMenu[i]->onMouseClick((ActionHandler)&SkillMenuState::btnActionMenuItemClick);

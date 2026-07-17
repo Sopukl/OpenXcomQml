@@ -79,7 +79,7 @@ enum PlayingState
 	SKIPPED
 };
 
-FlcPlayer::FlcPlayer() : _fileBuf(0), _mainScreen(0), _realScreen(0), _game(0)
+FlcPlayer::FlcPlayer() : _fileBuf(0), _mainScreen(0), _realScreen(0)
 {
 	_volume = Game::volumeExponent(options1.musicVolume());
 }
@@ -108,7 +108,6 @@ bool FlcPlayer::init(const char *filename, void(*frameCallBack)(), Game *game, b
 	_frameCallBack = frameCallBack;
 	_realScreen = game->getScreen();
 	_realScreen->clear();
-	_game = game;
 	_useInternalAudio = useInternalAudio;
 	_dx = dx;
 	_dy = dy;
@@ -844,17 +843,17 @@ void FlcPlayer::initAudio(Uint16 format, Uint8 channels)
 
 void FlcPlayer::deInitAudio()
 {
-	if (_game)
+	//if (game)
 	{
 		if (!options1.mute)
 		{
 			Mix_HookMusic(NULL, NULL);
 			Mix_CloseAudio();
-			_game->initAudio();
+			game.initAudio();
 		}
 	}
-	else if (_audioData.sharedLock)
-		SDL_DestroySemaphore(_audioData.sharedLock);
+	// else if (_audioData.sharedLock)
+	// 	SDL_DestroySemaphore(_audioData.sharedLock);
 
 	if (_audioData.loadingBuffer)
 	{

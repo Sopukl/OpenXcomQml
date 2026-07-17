@@ -61,12 +61,12 @@ namespace OpenXcom
  * @param y Y position in pixels.
  * @param base Is the inventory being called from the basescape?
  */
-Inventory::Inventory(Game *game, int width, int height, int x, int y, bool base) : InteractiveSurface(width, height, x, y), _game(game), _selUnit(0), _selItem(0), _tu(true), _base(base), _mouseOverItem(0), _groundOffset(0), _animFrame(0)
+Inventory::Inventory(int width, int height, int x, int y, bool base) : InteractiveSurface(width, height, x, y), _selUnit(0), _selItem(0), _tu(true), _base(base), _mouseOverItem(0), _groundOffset(0), _animFrame(0)
 {
-	_twoHandedRed = _game->getMod()->getInterface("battlescape")->getElement("twoHandedRed")->color;
-	_twoHandedGreen = _game->getMod()->getInterface("battlescape")->getElement("twoHandedGreen")->color;
+	_twoHandedRed = game.getMod()->getInterface("battlescape")->getElement("twoHandedRed")->color;
+	_twoHandedGreen = game.getMod()->getInterface("battlescape")->getElement("twoHandedGreen")->color;
 
-	_depth = _game->savedGame()->getSavedBattle()->getDepth();
+	_depth = game.savedGame()->getSavedBattle()->getDepth();
 	_grid = new Surface(width, height, 0, 0);
 	_items = new Surface(width, height, 0, 0);
 	_gridLabels = new Surface(width, height, 0, 0);
@@ -75,20 +75,20 @@ Inventory::Inventory(Game *game, int width, int height, int x, int y, bool base)
 	_stackNumber = new NumberText(15, 15, 0, 0);
 	_stackNumber->setBordered(true);
 
-	_warning->initText(_game->getMod()->getFont("FONT_BIG"), _game->getMod()->getFont("FONT_SMALL"));
-	_warning->setColor(_game->getMod()->getInterface("battlescape")->getElement("warning")->color2);
-	_warning->setTextColor(_game->getMod()->getInterface("battlescape")->getElement("warning")->color);
+	_warning->initText(game.getMod()->getFont("FONT_BIG"), game.getMod()->getFont("FONT_SMALL"));
+	_warning->setColor(game.getMod()->getInterface("battlescape")->getElement("warning")->color2);
+	_warning->setTextColor(game.getMod()->getInterface("battlescape")->getElement("warning")->color);
 
 	_animTimer = new Timer(100);
 	_animTimer->onTimer((SurfaceHandler)&Inventory::animate);
 	_animTimer->start();
 
-	_stunIndicator = _game->getMod()->getSurface("BigStunIndicator", false);
-	_woundIndicator = _game->getMod()->getSurface("BigWoundIndicator", false);
-	_burnIndicator = _game->getMod()->getSurface("BigBurnIndicator", false);
-	_shockIndicator = _game->getMod()->getSurface("BigShockIndicator", false);
+	_stunIndicator = game.getMod()->getSurface("BigStunIndicator", false);
+	_woundIndicator = game.getMod()->getSurface("BigWoundIndicator", false);
+	_burnIndicator = game.getMod()->getSurface("BigBurnIndicator", false);
+	_shockIndicator = game.getMod()->getSurface("BigShockIndicator", false);
 
-	const SavedBattleGame *battleSave = _game->savedGame()->getSavedBattle();
+	const SavedBattleGame *battleSave = game.savedGame()->getSavedBattle();
 	if (battleSave)
 	{
 		auto* enviro = battleSave->getEnviroEffects();
@@ -96,16 +96,16 @@ Inventory::Inventory(Game *game, int width, int height, int x, int y, bool base)
 		{
 			if (!enviro->getInventoryShockIndicator().empty())
 			{
-				_shockIndicator = _game->getMod()->getSurface(enviro->getInventoryShockIndicator(), false);
+				_shockIndicator = game.getMod()->getSurface(enviro->getInventoryShockIndicator(), false);
 			}
 		}
 	}
 
-	_inventorySlotRightHand = _game->getMod()->getInventoryRightHand();
-	_inventorySlotLeftHand = _game->getMod()->getInventoryLeftHand();
-	_inventorySlotBackPack = _game->getMod()->getInventoryBackpack();
-	_inventorySlotBelt = _game->getMod()->getInventoryBelt();
-	_inventorySlotGround = _game->getMod()->getInventoryGround();
+	_inventorySlotRightHand = game.getMod()->getInventoryRightHand();
+	_inventorySlotLeftHand = game.getMod()->getInventoryLeftHand();
+	_inventorySlotBackPack = game.getMod()->getInventoryBackpack();
+	_inventorySlotBelt = game.getMod()->getInventoryBelt();
+	_inventorySlotGround = game.getMod()->getInventoryGround();
 
 	_groundSlotsX = (Screen::ORIGINAL_WIDTH - _inventorySlotGround->getX()) / RuleInventory::SLOT_W;
 	_groundSlotsY = (Screen::ORIGINAL_HEIGHT - _inventorySlotGround->getY()) / RuleInventory::SLOT_H;
@@ -193,10 +193,10 @@ void Inventory::draw()
 void Inventory::drawGrid()
 {
 	_grid->clear();
-	RuleInterface *rule = _game->getMod()->getInterface("inventory");
+	RuleInterface *rule = game.getMod()->getInterface("inventory");
 	Uint8 color = rule->getElement("grid")->color;
 
-	for (const auto& invPair : *_game->getMod()->getInventories())
+	for (const auto& invPair : *game.getMod()->getInventories())
 	{
 		RuleInventory* ruleInv = invPair.second;
 
@@ -265,31 +265,31 @@ void Inventory::drawGridLabels(bool showTuCost)
 
 	Text text = Text(90, 9, 0, 0);
 	text.setPalette(_gridLabels->getPalette());
-	text.initText(_game->getMod()->getFont("FONT_BIG"), _game->getMod()->getFont("FONT_SMALL"));
+	text.initText(game.getMod()->getFont("FONT_BIG"), game.getMod()->getFont("FONT_SMALL"));
 
-	RuleInterface *rule = _game->getMod()->getInterface("inventory");
+	RuleInterface *rule = game.getMod()->getInterface("inventory");
 
 	text.setColor(rule->getElement("textSlots")->color);
 	text.setHighContrast(true);
 
 	// Note: iterating over the (sorted) invs vector instead of invs map, because we want to consider listOrder here
-	for (auto& invName : _game->getMod()->getInvsList())
+	for (auto& invName : game.getMod()->getInvsList())
 	{
-		auto* i = _game->getMod()->getInventory(invName, true);
+		auto* i = game.getMod()->getInventory(invName, true);
 		// Draw label
 		text.setX(i->getX());
 		text.setY(i->getY() - text.getFont()->getHeight() - text.getFont()->getSpacing());
 		if (showTuCost && _selItem != 0 && _selItem->getSlot() != i)
 		{
 			std::ostringstream ss;
-			ss << _game->getLanguage()->getString(i->getId()).arg(1 + _groundOffset / _groundSlotsX).arg(1 + _xMax / _groundSlotsX);
+			ss << game.getLanguage()->getString(i->getId()).arg(1 + _groundOffset / _groundSlotsX).arg(1 + _xMax / _groundSlotsX);
 			ss << ":";
 			ss << _selItem->getMoveToCost(i);
 			text.setText(ss.str().c_str());
 		}
 		else
 		{
-			text.setText(_game->getLanguage()->getString(i->getId()).arg(1 + _groundOffset / _groundSlotsX).arg(1 + _xMax / _groundSlotsX));
+			text.setText(game.getLanguage()->getString(i->getId()).arg(1 + _groundOffset / _groundSlotsX).arg(1 + _xMax / _groundSlotsX));
 		}
 		text.blit(_gridLabels->getSurface());
 	}
@@ -301,8 +301,8 @@ void Inventory::drawGridLabels(bool showTuCost)
 void Inventory::drawItems()
 {
 	const int Pulsate[8] = { 0, 1, 2, 3, 4, 3, 2, 1 };
-	const SavedBattleGame* save = _game->savedGame()->getSavedBattle();
-	Surface *tempSurface = _game->getMod()->getSurfaceSet("SCANG.DAT")->getFrame(6);
+	const SavedBattleGame* save = game.savedGame()->getSavedBattle();
+	Surface *tempSurface = game.getMod()->getSurfaceSet("SCANG.DAT")->getFrame(6);
 	auto primers = [&](int x, int y, bool a)
 	{
 		tempSurface->blitNShade(_items, x, y, Pulsate[_animFrame % 8], false, a ? 0 : 32);
@@ -314,11 +314,11 @@ void Inventory::drawItems()
 
 	ScriptWorkerBlit work;
 	_items->clear();
-	Uint8 color = _game->getMod()->getInterface("inventory")->getElement("numStack")->color;
-	Uint8 color2 = _game->getMod()->getInterface("inventory")->getElement("numStack")->color2;
+	Uint8 color = game.getMod()->getInterface("inventory")->getElement("numStack")->color;
+	Uint8 color2 = game.getMod()->getInterface("inventory")->getElement("numStack")->color2;
 	if (_selUnit != 0)
 	{
-		SurfaceSet *texture = _game->getMod()->getSurfaceSet("BIGOBS.PCK");
+		SurfaceSet *texture = game.getMod()->getSurfaceSet("BIGOBS.PCK");
 		// Soldier items
 		for (auto* invItem : *_selUnit->getInventory())
 		{
@@ -476,7 +476,7 @@ void Inventory::drawSelectedItem()
 	if (_selItem)
 	{
 		_selection->clear();
-		_selItem->getRules()->drawHandSprite(_game->getMod()->getSurfaceSet("BIGOBS.PCK"), _selection, _selItem, _game->savedGame()->getSavedBattle(), _animFrame);
+		_selItem->getRules()->drawHandSprite(game.getMod()->getSurfaceSet("BIGOBS.PCK"), _selection, _selItem, game.savedGame()->getSavedBattle(), _animFrame);
 	}
 }
 
@@ -505,7 +505,7 @@ std::vector<std::vector<char>>* Inventory::clearOccupiedSlotsCache()
  */
 void Inventory::moveItem(BattleItem *item, const RuleInventory *slot, int x, int y)
 {
-	_game->savedGame()->getSavedBattle()->getTileEngine()->itemMoveInventory(_selUnit->getTile(), _selUnit, item, slot, x, y);
+	game.savedGame()->getSavedBattle()->getTileEngine()->itemMoveInventory(_selUnit->getTile(), _selUnit, item, slot, x, y);
 }
 
 /**
@@ -551,7 +551,7 @@ bool Inventory::overlapItems(BattleUnit *unit, BattleItem *item, const RuleInven
  */
 RuleInventory *Inventory::getSlotInPosition(int *x, int *y) const
 {
-	for (const auto& pair : *_game->getMod()->getInventories())
+	for (const auto& pair : *game.getMod()->getInventories())
 	{
 		if (pair.second->checkSlotInPosition(x, y))
 		{
@@ -690,7 +690,7 @@ void Inventory::mouseOver(Action *action, State *state)
  */
 void Inventory::mouseClick(Action *action, State *state)
 {
-	if (_game->isLeftClick(action))
+	if (game.isLeftClick(action))
 	{
 		if (_selUnit == 0)
 			return;
@@ -709,7 +709,7 @@ void Inventory::mouseClick(Action *action, State *state)
 				BattleItem *item = _selUnit->getItem(slot, x, y);
 				if (item != 0)
 				{
-					if (_game->isShiftPressed())
+					if (game.isShiftPressed())
 					{
 						bool quickUnload = false;
 						bool allowed = true;
@@ -734,7 +734,7 @@ void Inventory::mouseClick(Action *action, State *state)
 							_selItem = item; // don't worry, we'll unselect it later!
 							if (unload(quickUnload))
 							{
-								_game->getMod()->getSoundByDepth(_depth, Mod::ITEM_DROP)->play();
+								game.getMod()->getSoundByDepth(_depth, Mod::ITEM_DROP)->play();
 							}
 							_selItem = 0; // see, I told you!
 						}
@@ -743,7 +743,7 @@ void Inventory::mouseClick(Action *action, State *state)
 					{
 						// do nothing!
 					}
-					else if (_game->isCtrlPressed())
+					else if (game.isCtrlPressed())
 					{
 						const RuleInventory* newSlot = _inventorySlotGround;
 						std::string warning = "STR_NOT_ENOUGH_SPACE";
@@ -767,7 +767,7 @@ void Inventory::mouseClick(Action *action, State *state)
 							// B2 - slot order by item category
 							if (!placed)
 							{
-								auto* cat = item->getRules()->getFirstCategoryWithInvOrder(_game->getMod());
+								auto* cat = item->getRules()->getFirstCategoryWithInvOrder(game.getMod());
 								if (cat)
 								{
 									for (const auto& s : cat->getInvOrder())
@@ -776,7 +776,7 @@ void Inventory::mouseClick(Action *action, State *state)
 										{
 											break; // loop finished
 										}
-										newSlot = _game->getMod()->getInventory(s);
+										newSlot = game.getMod()->getInventory(s);
 										if (newSlot->getType() == INV_GROUND)
 										{
 											continue;
@@ -833,13 +833,13 @@ void Inventory::mouseClick(Action *action, State *state)
 								if (Mod::EXTENDED_INVENTORY_SLOT_SORTING)
 								{
 									// B3 - fallback: slot order by listOrder
-									for (const auto& s : _game->getMod()->getInvsList())
+									for (const auto& s : game.getMod()->getInvsList())
 									{
 										if (placed)
 										{
 											break; // loop finished
 										}
-										newSlot = _game->getMod()->getInventory(s);
+										newSlot = game.getMod()->getInventory(s);
 										if (newSlot->getType() == INV_GROUND)
 										{
 											continue;
@@ -850,7 +850,7 @@ void Inventory::mouseClick(Action *action, State *state)
 								else
 								{
 									// A2 - fallback: vanilla alphabetical slot order
-									for (const auto& wildCard : *_game->getMod()->getInventories())
+									for (const auto& wildCard : *game.getMod()->getInventories())
 									{
 										if (placed)
 										{
@@ -876,7 +876,7 @@ void Inventory::mouseClick(Action *action, State *state)
 							{
 								placed = true;
 								moveItem(item, newSlot, 0, 0);
-								_game->getMod()->getSoundByDepth(_depth, Mod::ITEM_DROP)->play();
+								game.getMod()->getSoundByDepth(_depth, Mod::ITEM_DROP)->play();
 								arrangeGround();
 							}
 							else
@@ -887,7 +887,7 @@ void Inventory::mouseClick(Action *action, State *state)
 
 						if (!placed)
 						{
-							_warning->showMessage(_game->getLanguage()->getString(warning));
+							_warning->showMessage(game.getLanguage()->getString(warning));
 						}
 					}
 					else
@@ -895,7 +895,7 @@ void Inventory::mouseClick(Action *action, State *state)
 						setSelectedItem(item);
 						if (item->getFuseTimer() >= 0)
 						{
-							_warning->showMessage(_game->getLanguage()->getString(item->getRules()->getPrimeActionMessage()));
+							_warning->showMessage(game.getLanguage()->getString(item->getRules()->getPrimeActionMessage()));
 						}
 					}
 				}
@@ -920,7 +920,7 @@ void Inventory::mouseClick(Action *action, State *state)
 				// Check if this inventory section supports the item
 				if (!_selItem->getRules()->canBePlacedIntoInventorySection(slot))
 				{
-					_warning->showMessage(_game->getLanguage()->getString("STR_CANNOT_PLACE_ITEM_INTO_THIS_SECTION"));
+					_warning->showMessage(game.getLanguage()->getString("STR_CANNOT_PLACE_ITEM_INTO_THIS_SECTION"));
 				}
 				// Put item in empty slot, or stack it, if possible.
 				else if (item == 0 || item == _selItem || canStack)
@@ -935,11 +935,11 @@ void Inventory::mouseClick(Action *action, State *state)
 								_stackLevel[x][y] += 1;
 							}
 							setSelectedItem(0);
-							_game->getMod()->getSoundByDepth(_depth, Mod::ITEM_DROP)->play();
+							game.getMod()->getSoundByDepth(_depth, Mod::ITEM_DROP)->play();
 						}
 						else
 						{
-							_warning->showMessage(_game->getLanguage()->getString("STR_NOT_ENOUGH_TIME_UNITS"));
+							_warning->showMessage(game.getLanguage()->getString("STR_NOT_ENOUGH_TIME_UNITS"));
 						}
 					}
 					else if (canStack)
@@ -949,11 +949,11 @@ void Inventory::mouseClick(Action *action, State *state)
 							moveItem(_selItem, slot, item->getSlotX(), item->getSlotY());
 							_stackLevel[item->getSlotX()][item->getSlotY()] += 1;
 							setSelectedItem(0);
-							_game->getMod()->getSoundByDepth(_depth, Mod::ITEM_DROP)->play();
+							game.getMod()->getSoundByDepth(_depth, Mod::ITEM_DROP)->play();
 						}
 						else
 						{
-							_warning->showMessage(_game->getLanguage()->getString("STR_NOT_ENOUGH_TIME_UNITS"));
+							_warning->showMessage(game.getLanguage()->getString("STR_NOT_ENOUGH_TIME_UNITS"));
 						}
 					}
 				}
@@ -963,7 +963,7 @@ void Inventory::mouseClick(Action *action, State *state)
 					int slotAmmo = item->getRules()->getSlotForAmmo(_selItem->getRules());
 					if (slotAmmo == -1)
 					{
-						_warning->showMessage(_game->getLanguage()->getString("STR_WRONG_AMMUNITION_FOR_THIS_WEAPON"));
+						_warning->showMessage(game.getLanguage()->getString("STR_WRONG_AMMUNITION_FOR_THIS_WEAPON"));
 					}
 					else
 					{
@@ -994,7 +994,7 @@ void Inventory::mouseClick(Action *action, State *state)
 						if (item->getAmmoForSlot(slotAmmo) != 0)
 						{
 							int tuUnload = item->getRules()->getTUUnload(slotAmmo);
-							if (_game->isShiftPressed() && (!_tu || tuUnload))
+							if (game.isShiftPressed() && (!_tu || tuUnload))
 							{
 								// Quick-swap check
 								if (!_tu)
@@ -1023,7 +1023,7 @@ void Inventory::mouseClick(Action *action, State *state)
 							else
 							{
 								canLoad = false;
-								_warning->showMessage(_game->getLanguage()->getString("STR_WEAPON_IS_ALREADY_LOADED"));
+								_warning->showMessage(game.getLanguage()->getString("STR_WEAPON_IS_ALREADY_LOADED"));
 							}
 						}
 						if (canLoad)
@@ -1052,7 +1052,7 @@ void Inventory::mouseClick(Action *action, State *state)
 								}
 
 								setSelectedItem(0);
-								_game->getMod()->getSoundByDepth(_depth, sound)->play();
+								game.getMod()->getSoundByDepth(_depth, sound)->play();
 								if (arrangeFloor || item->getSlot()->getType() == INV_GROUND)
 								{
 									arrangeGround();
@@ -1060,7 +1060,7 @@ void Inventory::mouseClick(Action *action, State *state)
 							}
 							else
 							{
-								_warning->showMessage(_game->getLanguage()->getString("STR_NOT_ENOUGH_TIME_UNITS"));
+								_warning->showMessage(game.getLanguage()->getString("STR_NOT_ENOUGH_TIME_UNITS"));
 							}
 						}
 					}
@@ -1084,18 +1084,18 @@ void Inventory::mouseClick(Action *action, State *state)
 							moveItem(_selItem, slot, item->getSlotX(), item->getSlotY());
 							_stackLevel[item->getSlotX()][item->getSlotY()] += 1;
 							setSelectedItem(0);
-							_game->getMod()->getSoundByDepth(_depth, Mod::ITEM_DROP)->play();
+							game.getMod()->getSoundByDepth(_depth, Mod::ITEM_DROP)->play();
 						}
 						else
 						{
-							_warning->showMessage(_game->getLanguage()->getString("STR_NOT_ENOUGH_TIME_UNITS"));
+							_warning->showMessage(game.getLanguage()->getString("STR_NOT_ENOUGH_TIME_UNITS"));
 						}
 					}
 				}
 			}
 		}
 	}
-	else if (_game->isRightClick(action))
+	else if (game.isRightClick(action))
 	{
 		if (_selItem == 0)
 		{
@@ -1125,11 +1125,11 @@ void Inventory::mouseClick(Action *action, State *state)
 										// Prime that grenade!
 										if (fuseType == BFT_SET)
 										{
-											_game->pushState(new PrimeGrenadeState(0, true, item));
+											game.pushState(new PrimeGrenadeState(0, true, item));
 										}
 										else
 										{
-											_warning->showMessage(_game->getLanguage()->getString(item->getRules()->getPrimeActionMessage()));
+											_warning->showMessage(game.getLanguage()->getString(item->getRules()->getPrimeActionMessage()));
 											item->setFuseTimer(item->getRules()->getFuseTimerDefault());
 											arrangeGround();
 											playSound(item->getRules()->getPrimeSound()); // prime sound
@@ -1140,7 +1140,7 @@ void Inventory::mouseClick(Action *action, State *state)
 								{
 									if (item->getRules()->getCostUnprime().Time > 0 /* && !item->getRules()->getUnprimeActionName().empty() */ )
 									{
-										_warning->showMessage(_game->getLanguage()->getString(item->getRules()->getUnprimeActionMessage()));
+										_warning->showMessage(game.getLanguage()->getString(item->getRules()->getUnprimeActionMessage()));
 										item->setFuseTimer(-1);  // Unprime the grenade
 										arrangeGround();
 										playSound(item->getRules()->getUnprimeSound()); // unprime sound
@@ -1152,7 +1152,7 @@ void Inventory::mouseClick(Action *action, State *state)
 				}
 				else
 				{
-					_game->popState(); // Closes the inventory window on right-click (if not in preBattle equip screen!)
+					game.popState(); // Closes the inventory window on right-click (if not in preBattle equip screen!)
 				}
 			}
 		}
@@ -1166,7 +1166,7 @@ void Inventory::mouseClick(Action *action, State *state)
 			setSelectedItem(0);
 		}
 	}
-	else if (_game->isMiddleClick(action))
+	else if (game.isMiddleClick(action))
 	{
 		if (_selUnit == 0)
 			return;
@@ -1207,7 +1207,7 @@ bool Inventory::quickDrop()
 		}
 		else
 		{
-			_warning->showMessage(_game->getLanguage()->getString("STR_NOT_ENOUGH_TIME_UNITS"));
+			_warning->showMessage(game.getLanguage()->getString("STR_NOT_ENOUGH_TIME_UNITS"));
 		}
 	}
 
@@ -1318,7 +1318,7 @@ bool Inventory::unload(bool quickUnload)
 		{
 			if (showError)
 			{
-				_warning->showMessage(_game->getLanguage()->getString("STR_NO_AMMUNITION_LOADED"));
+				_warning->showMessage(game.getLanguage()->getString("STR_NO_AMMUNITION_LOADED"));
 			}
 			return false;
 		}
@@ -1336,7 +1336,7 @@ bool Inventory::unload(bool quickUnload)
 		if (grenade)
 		{
 			_selItem->setFuseTimer(-1);
-			_warning->showMessage(_game->getLanguage()->getString(_selItem->getRules()->getUnprimeActionMessage()));
+			_warning->showMessage(game.getLanguage()->getString(_selItem->getRules()->getUnprimeActionMessage()));
 			playSound(_selItem->getRules()->getUnprimeSound()); // unprime sound
 			setSelectedItem(0);
 		}
@@ -1376,7 +1376,7 @@ bool Inventory::unload(bool quickUnload)
 	}
 	if (FirstFreeHand == nullptr)
 	{
-		_warning->showMessage(_game->getLanguage()->getString("STR_ONE_HAND_MUST_BE_EMPTY"));
+		_warning->showMessage(game.getLanguage()->getString("STR_ONE_HAND_MUST_BE_EMPTY"));
 		return false;
 	}
 
@@ -1411,7 +1411,7 @@ bool Inventory::unload(bool quickUnload)
 		if (grenade)
 		{
 			_selItem->setFuseTimer(-1);
-			_warning->showMessage(_game->getLanguage()->getString(_selItem->getRules()->getUnprimeActionMessage()));
+			_warning->showMessage(game.getLanguage()->getString(_selItem->getRules()->getUnprimeActionMessage()));
 			playSound(_selItem->getRules()->getUnprimeSound()); // unprime sound
 		}
 		else
@@ -1434,7 +1434,7 @@ bool Inventory::unload(bool quickUnload)
 	{
 		if (!err.empty())
 		{
-			_warning->showMessage(_game->getLanguage()->getString(err));
+			_warning->showMessage(game.getLanguage()->getString(err));
 		}
 		return false;
 	}
@@ -1454,14 +1454,14 @@ bool Inventory::isInSearchString(BattleItem *item)
 	}
 
 	std::string itemLocalName;
-	if (!_game->savedGame()->isResearched(item->getRules()->getRequirements()))
+	if (!game.savedGame()->isResearched(item->getRules()->getRequirements()))
 	{
 		// Alien artifact, shouldn't match on the real name.
-		itemLocalName = _game->getLanguage()->getString("STR_ALIEN_ARTIFACT");
+		itemLocalName = game.getLanguage()->getString("STR_ALIEN_ARTIFACT");
 	}
 	else
 	{
-		itemLocalName = _game->getLanguage()->getString(item->getRules()->getName());
+		itemLocalName = game.getLanguage()->getString(item->getRules()->getName());
 	}
 	Unicode::upperCase(itemLocalName);
 	if (itemLocalName.find(_searchString) != std::string::npos)
@@ -1471,12 +1471,12 @@ bool Inventory::isInSearchString(BattleItem *item)
 	}
 
 	// If present in the Ufopaedia, check categories for a match as well.
-	ArticleDefinition *articleID = _game->getMod()->getUfopaediaArticle(item->getRules()->getType());
-	if (articleID && Ufopaedia::isArticleAvailable(_game->savedGame(), articleID))
+	ArticleDefinition *articleID = game.getMod()->getUfopaediaArticle(item->getRules()->getType());
+	if (articleID && Ufopaedia::isArticleAvailable(game.savedGame(), articleID))
 	{
 		for (const auto& itemCategoryName : item->getRules()->getCategories())
 		{
-			std::string catLocalName = _game->getLanguage()->getString(itemCategoryName);
+			std::string catLocalName = game.getLanguage()->getString(itemCategoryName);
 			Unicode::upperCase(catLocalName);
 			if (catLocalName.find(_searchString) != std::string::npos)
 			{
@@ -1491,7 +1491,7 @@ bool Inventory::isInSearchString(BattleItem *item)
 			{
 				for (const auto& itemAmmoCategoryName : item->getAmmoForSlot(slot)->getRules()->getCategories())
 				{
-					std::string catLocalName = _game->getLanguage()->getString(itemAmmoCategoryName);
+					std::string catLocalName = game.getLanguage()->getString(itemAmmoCategoryName);
 					Unicode::upperCase(catLocalName);
 					if (catLocalName.find(_searchString) != std::string::npos)
 					{
@@ -1735,7 +1735,7 @@ bool Inventory::fitItem(const RuleInventory *newSlot, BattleItem *item, std::str
 				{
 					placed = true;
 					moveItem(item, newSlot, x2, y2);
-					_game->getMod()->getSoundByDepth(_depth, Mod::ITEM_DROP)->play();
+					game.getMod()->getSoundByDepth(_depth, Mod::ITEM_DROP)->play();
 					drawItems();
 				}
 				else
@@ -1807,7 +1807,7 @@ void Inventory::animate()
 {
 	if (_tu)
 	{
-		SavedBattleGame* save = _game->savedGame()->getSavedBattle();
+		SavedBattleGame* save = game.savedGame()->getSavedBattle();
 		save->nextAnimFrame();
 		_animFrame = save->getAnimFrame();
 	}
@@ -1827,7 +1827,7 @@ void Inventory::playSound(int sound)
 {
 	if (sound != Mod::NO_SOUND)
 	{
-		_game->getMod()->getSoundByDepth(_depth, sound)->play();
+		game.getMod()->getSoundByDepth(_depth, sound)->play();
 	}
 }
 

@@ -91,8 +91,6 @@ private:
 
 	AudioData _audioData;
 
-	Game *_game;
-
 	void readU16(Uint16 &dst, const Uint8 *const src);
 	void readU32(Uint32 &dst, const Uint8 *const src);
 	void readS16(Sint16 &dst, const Sint8 *const src);

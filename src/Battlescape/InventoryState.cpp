@@ -138,7 +138,7 @@ InventoryState::InventoryState(bool tu, BattlescapeState *parent, Base *base, bo
 		_btnLinks = new BattlescapeButton(23, 22, 213, 1);
 	}
 	_selAmmo = new Surface(RuleInventory::HAND_W * RuleInventory::SLOT_W, RuleInventory::HAND_H * RuleInventory::SLOT_H, 272, 88);
-	_inv = new Inventory(&game, 320, 200, 0, 0, _parent == 0);
+	_inv = new Inventory(320, 200, 0, 0, _parent == 0);
 	_btnQuickSearch = new TextEdit(this, 40, 9, 244, 140);
 
 	// Set palette
