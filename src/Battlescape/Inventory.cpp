@@ -75,7 +75,7 @@ Inventory::Inventory(Game *game, int width, int height, int x, int y, bool base)
 	_stackNumber = new NumberText(15, 15, 0, 0);
 	_stackNumber->setBordered(true);
 
-	_warning->initText(_game->getMod()->getFont("FONT_BIG"), _game->getMod()->getFont("FONT_SMALL"), _game->getLanguage());
+	_warning->initText(_game->getMod()->getFont("FONT_BIG"), _game->getMod()->getFont("FONT_SMALL"));
 	_warning->setColor(_game->getMod()->getInterface("battlescape")->getElement("warning")->color2);
 	_warning->setTextColor(_game->getMod()->getInterface("battlescape")->getElement("warning")->color);
 
@@ -265,7 +265,7 @@ void Inventory::drawGridLabels(bool showTuCost)
 
 	Text text = Text(90, 9, 0, 0);
 	text.setPalette(_gridLabels->getPalette());
-	text.initText(_game->getMod()->getFont("FONT_BIG"), _game->getMod()->getFont("FONT_SMALL"), _game->getLanguage());
+	text.initText(_game->getMod()->getFont("FONT_BIG"), _game->getMod()->getFont("FONT_SMALL"));
 
 	RuleInterface *rule = _game->getMod()->getInterface("inventory");
 

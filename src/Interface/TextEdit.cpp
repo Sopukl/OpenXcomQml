@@ -136,10 +136,10 @@ void TextEdit::setSmall()
  * @param small Pointer to small-size font.
  * @param lang Pointer to current language.
  */
-void TextEdit::initText(Font *big, Font *small, Language *lang)
+void TextEdit::initText(Font *big, Font *small)
 {
-	_text->initText(big, small, lang);
-	_caret->initText(big, small, lang);
+	_text->initText(big, small);
+	_caret->initText(big, small);
 }
 
 /**

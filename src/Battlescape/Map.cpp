@@ -175,7 +175,7 @@ Map::Map(Game *game, int width, int height, int x, int y, int visibleMapHeight) 
 	_txtAccuracy->setSmall();
 	_txtAccuracy->setPalette(_game->getScreen()->getPalette());
 	_txtAccuracy->setHighContrast(true);
-	_txtAccuracy->initText(_game->getMod()->getFont("FONT_BIG"), _game->getMod()->getFont("FONT_SMALL"), _game->getLanguage());
+	_txtAccuracy->initText(_game->getMod()->getFont("FONT_BIG"), _game->getMod()->getFont("FONT_SMALL"));
 	_cacheActiveWeaponUfopediaArticleUnlocked = -1;
 	_cacheIsCtrlPressed = false;
 	_cacheCursorPosition = TileEngine::invalid;
@@ -394,7 +394,7 @@ void Map::setPalette(const SDL_Color *colors, int firstcolor, int ncolors)
 	}
 	_message->setPalette(colors, firstcolor, ncolors);
 	refreshHiddenMovementBackground();
-	_message->initText(_game->getMod()->getFont("FONT_BIG"), _game->getMod()->getFont("FONT_SMALL"), _game->getLanguage());
+	_message->initText(_game->getMod()->getFont("FONT_BIG"), _game->getMod()->getFont("FONT_SMALL"));
 	_message->setText(_game->getLanguage()->getString("STR_HIDDEN_MOVEMENT"), _game->getLanguage()->getString("STR_THINKING"));
 }
 

@@ -50,7 +50,6 @@ private:
 	ActionHandler _change;
 	size_t _sel;
 	State *_state;
-	Language *_lang;
 	Uint8 _color;
 	bool _toggled;
 	bool _popupAboveButton;
@@ -69,7 +68,7 @@ public:
 	/// Sets the palette of the text list.
 	void setPalette(const SDL_Color *colors, int firstcolor = 0, int ncolors = 256) override;
 	/// Initializes the resources for the text list.
-	void initText(Font *big, Font *small, Language *lang) override;
+	void initText(Font *big, Font *small) override;
 	/// Sets the background surface.
 	void setBackground(Surface *bg);
 	/// Sets the border color.

@@ -174,7 +174,7 @@ void State::add(Surface *surface)
 
 	// Set default text resources
 	if (_game->getLanguage() && _game->getMod())
-		surface->initText(_game->getMod()->getFont("FONT_BIG"), _game->getMod()->getFont("FONT_SMALL"), _game->getLanguage());
+		surface->initText(_game->getMod()->getFont("FONT_BIG"), _game->getMod()->getFont("FONT_SMALL"));
 
 	_surfaces.push_back(surface);
 	preAdd(surface);
@@ -245,7 +245,7 @@ void State::add(Surface *surface, const std::string &id, const std::string &cate
 
 	// Set default text resources
 	if (_game->getLanguage() && _game->getMod())
-		surface->initText(_game->getMod()->getFont("FONT_BIG"), _game->getMod()->getFont("FONT_SMALL"), _game->getLanguage());
+		surface->initText(_game->getMod()->getFont("FONT_BIG"), _game->getMod()->getFont("FONT_SMALL"));
 
 	_surfaces.push_back(surface);
 	preAdd(surface);

@@ -144,7 +144,7 @@ public:
 	/// Blits this surface onto another one.
 	virtual void blit(SDL_Surface *surface);
 	/// Initializes the surface's various text resources.
-	virtual void initText(Font *, Font *, Language *) {};
+	virtual void initText(Font *, Font *) {};
 	/// Copies a portion of another surface into this one.
 	void copy(Surface *surface);
 	/// Draws a filled rectangle on the surface.

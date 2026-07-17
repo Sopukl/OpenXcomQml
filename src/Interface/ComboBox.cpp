@@ -56,7 +56,7 @@ static int getPopupWindowY(int buttonHeight, int buttonY, int popupHeight, bool 
  * @param x X position in pixels.
  * @param y Y position in pixels.
  */
-ComboBox::ComboBox(State *state, int width, int height, int x, int y, bool popupAboveButton) : InteractiveSurface(width, height, x, y), _change(0), _sel(0), _state(state), _lang(0), _toggled(false), _popupAboveButton(popupAboveButton)
+ComboBox::ComboBox(State *state, int width, int height, int x, int y, bool popupAboveButton) : InteractiveSurface(width, height, x, y), _change(0), _sel(0), _state(state), _toggled(false), _popupAboveButton(popupAboveButton)
 {
 	_button = new TextButton(width, height, x, y);
 	_button->setComboBox(this);
@@ -144,11 +144,10 @@ void ComboBox::setPalette(const SDL_Color *colors, int firstcolor, int ncolors)
  * @param small Pointer to small-size font.
  * @param lang Pointer to current language.
  */
-void ComboBox::initText(Font *big, Font *small, Language *lang)
+void ComboBox::initText(Font *big, Font *small)
 {
-	_lang = lang;
-	_button->initText(big, small, lang);
-	_list->initText(big, small, lang);
+	_button->initText(big, small);
+	_list->initText(big, small);
 }
 
 /**
@@ -324,7 +323,7 @@ void ComboBox::setOptions(const std::vector<std::string> &options, bool translat
 	for (const auto& option : options)
 	{
 		if (translate)
-			_list->addRow(1, _lang->getString(option).c_str());
+			_list->addRow(1, game.getLanguage()->getString(option).c_str());
 		else
 			_list->addRow(1, option.c_str());
 	}

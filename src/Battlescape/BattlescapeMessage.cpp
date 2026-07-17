@@ -136,11 +136,11 @@ void BattlescapeMessage::setProgressValue(int progress)
  * @param small Pointer to small-size font.
  * @param lang Pointer to current language.
  */
-void BattlescapeMessage::initText(Font *big, Font *small, Language *lang)
+void BattlescapeMessage::initText(Font *big, Font *small)
 {
-	_text->initText(big, small, lang);
+	_text->initText(big, small);
 	_text->setBig();
-	_txtThinking->initText(big, small, lang);
+	_txtThinking->initText(big, small);
 }
 
 /**

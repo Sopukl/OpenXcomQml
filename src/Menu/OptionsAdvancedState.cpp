@@ -95,7 +95,7 @@ OptionsAdvancedState::OptionsAdvancedState(OptionsOrigin origin) : OptionsBaseSt
 
 	// how much room do we need for YES/NO
 	Text text = Text(100, 9, 0, 0);
-	text.initText(_game->getMod()->getFont("FONT_BIG"), _game->getMod()->getFont("FONT_SMALL"), _game->getLanguage());
+	text.initText(_game->getMod()->getFont("FONT_BIG"), _game->getMod()->getFont("FONT_SMALL"));
 	text.setText(ltr("STR_YES"));
 	int yes = text.getTextWidth();
 	text.setText(ltr("STR_NO"));

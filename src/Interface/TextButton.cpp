@@ -133,9 +133,9 @@ Font *TextButton::getFont() const
  * @param small Pointer to small-size font.
  * @param lang Pointer to current language.
  */
-void TextButton::initText(Font *big, Font *small, Language *lang)
+void TextButton::initText(Font *big, Font *small)
 {
-	_text->initText(big, small, lang);
+	_text->initText(big, small);
 	_redraw = true;
 }
 

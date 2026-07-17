@@ -43,7 +43,6 @@ private:
 	std::vector< std::vector<Text*> > _texts;
 	std::vector<size_t> _columns, _rows;
 	Font *_big, *_small, *_font;
-	Language *_lang;
 	size_t _scroll, _visibleRows, _selRow;
 	Uint8 _color, _color2;
 	std::map<int, TextHAlign> _align;
@@ -113,7 +112,7 @@ public:
 	/// Sets the palette of the text list.
 	void setPalette(const SDL_Color *colors, int firstcolor = 0, int ncolors = 256) override;
 	/// Initializes the resources for the text list.
-	void initText(Font *big, Font *small, Language *lang) override;
+	void initText(Font *big, Font *small) override;
 	/// Sets the height of the surface.
 	void setHeight(int height) override;
 	/// Sets the text color of the text list.

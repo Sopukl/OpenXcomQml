@@ -46,7 +46,7 @@ public:
 	/// Sets the text color for the warning message.
 	void setTextColor(Uint8 color);
 	/// Initializes the warning message's resources.
-	void initText(Font *big, Font *small, Language *lang) override;
+	void initText(Font *big, Font *small) override;
 	/// Sets the warning message's palette.
 	void setPalette(const SDL_Color *colors, int firstcolor = 0, int ncolors = 256) override;
 	/// Shows the warning message.

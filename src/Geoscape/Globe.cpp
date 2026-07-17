@@ -1399,7 +1399,7 @@ void Globe::drawDetail()
 	{
 		Text *label = new Text(150, 9, 0, 0);
 		label->setPalette(getPalette());
-		label->initText(_game->getMod()->getFont("FONT_BIG"), _game->getMod()->getFont("FONT_SMALL"), _game->getLanguage());
+		label->initText(_game->getMod()->getFont("FONT_BIG"), _game->getMod()->getFont("FONT_SMALL"));
 		label->setAlign(ALIGN_CENTER);
 
 		Sint16 x, y;
@@ -1430,7 +1430,7 @@ void Globe::drawDetail()
 	{
 		Text *label = new Text(120, 18, 0, 0);
 		label->setPalette(getPalette());
-		label->initText(_game->getMod()->getFont("FONT_BIG"), _game->getMod()->getFont("FONT_SMALL"), _game->getLanguage());
+		label->initText(_game->getMod()->getFont("FONT_BIG"), _game->getMod()->getFont("FONT_SMALL"));
 		label->setAlign(ALIGN_CENTER);
 
 		Sint16 x, y;
@@ -1465,7 +1465,7 @@ void Globe::drawDetail()
 	{
 		Text *label = new Text(100, 9, 0, 0);
 		label->setPalette(getPalette());
-		label->initText(_game->getMod()->getFont("FONT_BIG"), _game->getMod()->getFont("FONT_SMALL"), _game->getLanguage());
+		label->initText(_game->getMod()->getFont("FONT_BIG"), _game->getMod()->getFont("FONT_SMALL"));
 		label->setAlign(ALIGN_CENTER);
 		label->setColor(CITY_LABEL_COLOR);
 

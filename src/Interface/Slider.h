@@ -55,7 +55,7 @@ public:
 	/// Sets the Y position of the surface.
 	void setY(int y) override;
 	/// Initializes the slider's resources.
-	void initText(Font *big, Font *small, Language *lang) override;
+	void initText(Font *big, Font *small) override;
 	/// Sets the slider's high contrast color setting.
 	void setHighContrast(bool contrast) override;
 	/// Sets the slider's color.

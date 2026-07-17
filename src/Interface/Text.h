@@ -41,7 +41,6 @@ class Text : public InteractiveSurface
 {
 private:
 	Font *_big, *_small, *_font, *_fontOrig;
-	Language *_lang;
 	std::string _text;
 	UString _processedText;
 	std::vector<int> _lineWidth, _lineHeight;
@@ -67,7 +66,7 @@ public:
 	/// Gets the text's current font.
 	Font *getFont() const;
 	/// Initializes the resources for the text.
-	void initText(Font *big, Font *small, Language *lang) override;
+	void initText(Font *big, Font *small) override;
 	/// Sets the text's string.
 	void setText(const std::string &text);
 	/// Gets the text's string.

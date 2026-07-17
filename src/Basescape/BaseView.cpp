@@ -43,7 +43,7 @@ namespace OpenXcom
  * @param y Y position in pixels.
  */
 BaseView::BaseView(int width, int height, int x, int y) : InteractiveSurface(width, height, x, y),
-	_base(0), _texture(0), _selFacility(0), _big(0), _small(0), _lang(0),
+	_base(0), _texture(0), _selFacility(0), _big(0), _small(0),
 	_gridX(0), _gridY(0), _selSizeX(0), _selSizeY(0),
 	_selector(0), _blink(true),
 	_redColor(0), _yellowColor(0), _greenColor(0), _highContrast(true),
@@ -81,11 +81,10 @@ BaseView::~BaseView()
  * @param small Pointer to small-size font.
  * @param lang Pointer to current language.
  */
-void BaseView::initText(Font *big, Font *small, Language *lang)
+void BaseView::initText(Font *big, Font *small)
 {
 	_big = big;
 	_small = small;
-	_lang = lang;
 }
 
 /**
@@ -610,7 +609,7 @@ void BaseView::draw()
 		{
 			Text *text = new Text(GRID_SIZE * fac->getRules()->getSizeX(), 16, 0, 0);
 			text->setPalette(getPalette());
-			text->initText(_big, _small, _lang);
+			text->initText(_big, _small);
 			text->setX(fac->getX() * GRID_SIZE);
 			text->setY(fac->getY() * GRID_SIZE + (GRID_SIZE * fac->getRules()->getSizeY() - 16) / 2);
 			text->setBig();
@@ -633,7 +632,7 @@ void BaseView::draw()
 		{
 			Text* text = new Text(GRID_SIZE * fac->getRules()->getSizeX(), 9, 0, 0);
 			text->setPalette(getPalette());
-			text->initText(_big, _small, _lang);
+			text->initText(_big, _small);
 			text->setX(fac->getX() * GRID_SIZE);
 			text->setY(fac->getY() * GRID_SIZE);
 			text->setHighContrast(_highContrast);

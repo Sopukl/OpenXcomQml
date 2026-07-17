@@ -64,7 +64,7 @@ public:
 	/// Sets the text size to small.
 	void setSmall();
 	/// Initializes the text edit's resources.
-	void initText(Font *big, Font *small, Language *lang) override;
+	void initText(Font *big, Font *small) override;
 	/// Sets the text's string.
 	void setText(const std::string &text);
 	/// Gets the text edit's string.

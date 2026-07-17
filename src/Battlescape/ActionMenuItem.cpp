@@ -49,20 +49,20 @@ ActionMenuItem::ActionMenuItem(int id, Game *game, int x, int y) : InteractiveSu
 	_frame->setThickness(8);
 
 	_txtDescription = new Text(200, 20, 10, 13);
-	_txtDescription->initText(big, small, lang);
+	_txtDescription->initText(big, small);
 	_txtDescription->setBig();
 	_txtDescription->setHighContrast(true);
 	_txtDescription->setColor(actionMenu->color);
 	_txtDescription->setVisible(true);
 
 	_txtAcc = new Text(100, 20, 140, 13);
-	_txtAcc->initText(big, small, lang);
+	_txtAcc->initText(big, small);
 	_txtAcc->setBig();
 	_txtAcc->setHighContrast(true);
 	_txtAcc->setColor(actionMenu->color);
 
 	_txtTU = new Text(80, 20, 210, 13);
-	_txtTU->initText(big, small, lang);
+	_txtTU->initText(big, small);
 	_txtTU->setBig();
 	_txtTU->setHighContrast(true);
 	_txtTU->setColor(actionMenu->color);

@@ -40,7 +40,7 @@ namespace OpenXcom
  * @param y Y position in pixels.
  */
 TextList::TextList(int width, int height, int x, int y) : InteractiveSurface(width, height, x, y),
-	_big(0), _small(0), _font(0), _lang(nullptr), _scroll(0), _visibleRows(0), _selRow(0), _color(0), _color2(0),
+	_big(0), _small(0), _font(0), _scroll(0), _visibleRows(0), _selRow(0), _color(0), _color2(0),
 	_dot(false), _selectable(false), _condensed(false), _contrast(false), _wrap(false), _flooding(false), _ignoreSeparators(false),
 	_bg(0), _selector(0), _margin(0), _scrolling(true), _arrowPos(-1), _scrollPos(4), _arrowType(ARROW_VERTICAL),
 	_leftClick(0), _leftPress(0), _leftRelease(0), _rightClick(0), _rightPress(0), _rightRelease(0),
@@ -314,7 +314,7 @@ void TextList::addRow(int cols, ...)
 		}
 		Text* txt = new Text(width, _font->getHeight(), _margin + rowX, rowY);
 		txt->setPalette(this->getPalette());
-		txt->initText(_big, _small, _lang);
+		txt->initText(_big, _small);
 		txt->setColor(_color);
 		txt->setSecondaryColor(_color2);
 		if (_align[i])
@@ -519,12 +519,11 @@ void TextList::setPalette(const SDL_Color *colors, int firstcolor, int ncolors)
  * @param small Pointer to small-size font.
  * @param lang Pointer to current language.
  */
-void TextList::initText(Font *big, Font *small, Language *lang)
+void TextList::initText(Font *big, Font *small)
 {
 	_big = big;
 	_small = small;
 	_font = small;
-	_lang = lang;
 
 	delete _selector;
 	_selector = new Surface(getWidth(), _font->getHeight() + _font->getSpacing(), getX(), getY());

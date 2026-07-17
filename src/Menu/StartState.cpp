@@ -79,11 +79,11 @@ StartState::StartState() : _anim(0)
 	add(_cursor);
 
 	// Set up objects
-	_text->initText(_font, _font, _lang);
+	_text->initText(_font, _font);
 	_text->setColor(0);
 	_text->setWordWrap(true);
 
-	_cursor->initText(_font, _font, _lang);
+	_cursor->initText(_font, _font);
 	_cursor->setColor(0);
 	_cursor->setText("_");
 

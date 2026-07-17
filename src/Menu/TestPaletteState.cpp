@@ -78,7 +78,7 @@ TestPaletteState::TestPaletteState(const std::string &palette, PaletteActionType
 	{
 		NumberText text = NumberText(25, 9, 0, 0);
 		text.setPalette(_bg->getPalette());
-		text.initText(_game->getMod()->getFont("FONT_BIG"), _game->getMod()->getFont("FONT_SMALL"), _game->getLanguage());
+		text.initText(_game->getMod()->getFont("FONT_BIG"), _game->getMod()->getFont("FONT_SMALL"));
 		text.setBordered((action == PAT_TINY_BORDER));
 		for (int row = 0; row < 22; ++row)
 		{
@@ -101,7 +101,7 @@ TestPaletteState::TestPaletteState(const std::string &palette, PaletteActionType
 	{
 		Text text = Text(13, 17, 0, 0);
 		text.setPalette(_bg->getPalette());
-		text.initText(_game->getMod()->getFont("FONT_BIG"), _game->getMod()->getFont("FONT_SMALL"), _game->getLanguage());
+		text.initText(_game->getMod()->getFont("FONT_BIG"), _game->getMod()->getFont("FONT_SMALL"));
 		text.setHighContrast((action == PAT_BIG_HIGH));
 		text.setBig();
 		for (int row = 0; row < 11; ++row)
@@ -125,7 +125,7 @@ TestPaletteState::TestPaletteState(const std::string &palette, PaletteActionType
 	// normal text without/with high contrast
 	Text text = Text(25, 9, 0, 0);
 	text.setPalette(_bg->getPalette());
-	text.initText(_game->getMod()->getFont("FONT_BIG"), _game->getMod()->getFont("FONT_SMALL"), _game->getLanguage());
+	text.initText(_game->getMod()->getFont("FONT_BIG"), _game->getMod()->getFont("FONT_SMALL"));
 	text.setHighContrast((action == PAT_SMALL_HIGH));
 	for (int row = 0; row < 22; ++row)
 	{

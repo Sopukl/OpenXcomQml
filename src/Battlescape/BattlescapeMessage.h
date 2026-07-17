@@ -58,7 +58,7 @@ public:
 	/// Sets the progress bar value.
 	void setProgressValue(int progress);
 	/// Initializes the Battlescape message's resources.
-	void initText(Font *big, Font *small, Language *lang) override;
+	void initText(Font *big, Font *small) override;
 	/// Sets the Battlescape message's palette.
 	void setPalette(const SDL_Color *colors, int firstcolor = 0, int ncolors = 256) override;
 	/// Blits the warning message.

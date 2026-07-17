@@ -37,7 +37,7 @@ namespace OpenXcom
  * @param y Y position in pixels.
  */
 Text::Text(int width, int height, int x, int y) : InteractiveSurface(width, height, x, y),
-	_big(0), _small(0), _font(0), _fontOrig(0), _lang(0),
+	_big(0), _small(0), _font(0), _fontOrig(0),
 	_wrap(false), _invert(false), _contrast(false), _indent(false), _scroll(false), _ignoreSeparators(false),
 	_align(ALIGN_LEFT), _valign(ALIGN_TOP), _color(0), _color2(0), _scrollY(0)
 {
@@ -89,11 +89,10 @@ Font *Text::getFont() const
  * @param small Pointer to small-size font.
  * @param lang Pointer to current language.
  */
-void Text::initText(Font *big, Font *small, Language *lang)
+void Text::initText(Font *big, Font *small)
 {
 	_big = big;
 	_small = small;
-	_lang = lang;
 	setSmall();
 }
 
@@ -311,7 +310,7 @@ int Text::getTextWidth(int line) const
  */
 void Text::processText()
 {
-	if (_font == 0 || _lang == 0)
+	if (_font == 0)
 	{
 		return;
 	}
@@ -366,11 +365,12 @@ void Text::processText()
 			width += charWidth;
 			word += charWidth;
 
+			auto textWrapping = game.getLanguage()->getTextWrapping();
 			// Wordwrap if the last word doesn't fit the line
-			if (_wrap && width >= getWidth() && (!start || _lang->getTextWrapping() == WRAP_LETTERS))
+			if (_wrap && width >= getWidth() && (!start || textWrapping == WRAP_LETTERS))
 			{
 				size_t indentLocation = c;
-				if (_lang->getTextWrapping() == WRAP_WORDS || Unicode::isSpace(str[c]))
+				if (textWrapping == WRAP_WORDS || Unicode::isSpace(str[c]))
 				{
 					// Go back to the last space and put a linebreak there
 					width -= word;
@@ -386,7 +386,7 @@ void Text::processText()
 						indentLocation++;
 					}
 				}
-				else if (_lang->getTextWrapping() == WRAP_LETTERS)
+				else if (textWrapping == WRAP_LETTERS)
 				{
 					// Go back to the last letter and put a linebreak there
 					str.insert(c, 1, '\n');
@@ -408,11 +408,11 @@ void Text::processText()
 
 				_lineWidth.push_back(width);
 				_lineHeight.push_back(font->getCharSize('\n').h);
-				if (_lang->getTextWrapping() == WRAP_WORDS)
+				if (textWrapping == WRAP_WORDS)
 				{
 					width = word;
 				}
-				else if (_lang->getTextWrapping() == WRAP_LETTERS)
+				else if (textWrapping == WRAP_LETTERS)
 				{
 					width = 0;
 				}
@@ -449,7 +449,7 @@ struct PaletteShift
 int Text::getLineX(int line) const
 {
 	int x = 0;
-	switch (_lang->getTextDirection())
+	switch (game.getLanguage()->getTextDirection())
 	{
 	case DIRECTION_LTR:
 		switch (_align)
@@ -548,7 +548,7 @@ void Text::draw()
 
 	// Set up text direction
 	int dir = 1;
-	if (_lang->getTextDirection() == DIRECTION_RTL)
+	if (game.getLanguage()->getTextDirection() == DIRECTION_RTL)
 	{
 		dir = -1;
 	}

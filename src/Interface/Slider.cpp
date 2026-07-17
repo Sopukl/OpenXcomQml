@@ -107,11 +107,11 @@ void Slider::setY(int y)
  * @param small Pointer to small-size font.
  * @param lang Pointer to current language.
  */
-void Slider::initText(Font *big, Font *small, Language *lang)
+void Slider::initText(Font *big, Font *small)
 {
-	_txtMinus->initText(big, small, lang);
-	_txtPlus->initText(big, small, lang);
-	_button->initText(big, small, lang);
+	_txtMinus->initText(big, small);
+	_txtPlus->initText(big, small);
+	_button->initText(big, small);
 }
 
 /**

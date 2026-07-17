@@ -46,7 +46,6 @@ private:
 	SurfaceSet *_texture;
 	BaseFacility *_facilities[BASE_SIZE][BASE_SIZE], *_selFacility;
 	Font *_big, *_small;
-	Language *_lang;
 	int _gridX, _gridY;
 	int _selSizeX, _selSizeY;
 	Surface *_selector;
@@ -63,7 +62,7 @@ public:
 	/// Cleans up the base view.
 	~BaseView();
 	/// Initializes the base view's various resources.
-	void initText(Font *big, Font *small, Language *lang) override;
+	void initText(Font *big, Font *small) override;
 	/// Sets the base to display.
 	void setBase(Base *base);
 	/// Sets the texture for this base view.

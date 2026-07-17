@@ -66,7 +66,7 @@ public:
 	/// Gets the text button's current font.
 	Font *getFont() const;
 	/// Initializes the text edit's resources.
-	void initText(Font *big, Font *small, Language *lang) override;
+	void initText(Font *big, Font *small) override;
 	/// Sets the text button's high contrast color setting.
 	void setHighContrast(bool contrast) override;
 	/// Sets the text button's text.

@@ -83,9 +83,9 @@ void WarningMessage::setTextColor(Uint8 color)
  * @param small Pointer to small-size font.
  * @param lang Pointer to current language.
  */
-void WarningMessage::initText(Font *big, Font *small, Language *lang)
+void WarningMessage::initText(Font *big, Font *small)
 {
-	_text->initText(big, small, lang);
+	_text->initText(big, small);
 }
 
 /**
