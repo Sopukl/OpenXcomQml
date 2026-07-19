@@ -18,6 +18,7 @@
  */
 #include "Craft.h"
 #include <algorithm>
+#include <ranges>
 #include "../fmath.h"
 #include "../Engine/Game.h"
 #include "../Engine/RNG.h"
@@ -46,6 +47,8 @@
 #include "../Mod/AlienDeployment.h"
 #include "SerializationHelper.h"
 #include "../Engine/Logger.h"
+
+namespace str = std::ranges;
 
 namespace OpenXcom
 {
@@ -171,11 +174,10 @@ void Craft::load(const YAML::YamlNodeReader& node, const ScriptGlobal *shared, c
 	for (const auto& vehiclesReader : reader["vehicles"].children())
 	{
 		std::string type = vehiclesReader["type"].readVal<std::string>();
-		auto* ruleItem = mod->getItem(type);
-		if (ruleItem)
+
+		if (auto* ruleItem = mod->getItem(type))
 		{
-			auto* ruleUnit = ruleItem->getVehicleUnit();
-			if (ruleUnit)
+			if (auto* ruleUnit = ruleItem->getVehicleUnit())
 			{
 				int size = ruleUnit->getArmor()->getTotalSize();
 				Vehicle *v = new Vehicle(ruleItem, 0, size);
@@ -859,11 +861,7 @@ int Craft::getDamage() const
  */
 void Craft::setDamage(int damage)
 {
-	_damage = damage;
-	if (_damage < 0)
-	{
-		_damage = 0;
-	}
+	_damage = std::max(damage, 0);
 }
 
 /**
@@ -901,7 +899,7 @@ int Craft::getShield() const
  */
 void Craft::setShield(int shield)
 {
-	_shield = std::max(0, std::min(_stats.shieldCapacity, shield));
+	_shield = std::clamp(shield, 0, _stats.shieldCapacity);
 }
 
 /**
@@ -1060,7 +1058,8 @@ void Craft::evacuateCrew(const Mod *mod)
 		Soldier* soldier = (*iter);
 		if (soldier->getCraft() == this)
 		{
-			int survivalChance = isPilot(soldier->getId()) ? mod->getPilotsEmergencyEvacuationSurvivalChance() : mod->getCrewEmergencyEvacuationSurvivalChance();
+			int survivalChance = isPilot(soldier->getId()) ? mod->getPilotsEmergencyEvacuationSurvivalChance()
+														   : mod->getCrewEmergencyEvacuationSurvivalChance();
 			if (RNG::percent(survivalChance))
 			{
 				// remove from craft
@@ -1596,7 +1595,7 @@ bool Craft::arePilotsOnboard(const Mod* mod)
 */
 bool Craft::isPilot(int pilotId)
 {
-	if (std::find(_pilots.begin(), _pilots.end(), pilotId) != _pilots.end())
+	if (str::find(_pilots, pilotId) != _pilots.end())
 	{
 		return true;
 	}
@@ -1609,7 +1608,7 @@ bool Craft::isPilot(int pilotId)
 */
 void Craft::addPilot(int pilotId)
 {
-	if (std::find(_pilots.begin(), _pilots.end(), pilotId) == _pilots.end())
+	if (str::find(_pilots, pilotId) == _pilots.end())
 	{
 		_pilots.push_back(pilotId);
 	}
