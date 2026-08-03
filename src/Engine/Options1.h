@@ -47,20 +47,6 @@ namespace OpenXcom
 		PATH_TU_ENERGY    = 0x06,
 		PATH_FULL         = 0x07
 	};
-	enum ScaleType
-	{
-		SCALE_ORIGINAL,
-		SCALE_15X,
-		SCALE_2X,
-		SCALE_SCREEN_DIV_3,
-		SCALE_SCREEN_DIV_2,
-		SCALE_SCREEN,
-		SCALE_SCREEN_DIV_4,
-		SCALE_SCREEN_DIV_5,
-		SCALE_SCREEN_DIV_6,
-		SCALE_SCREEN_DIV_8,
-		SCALE_SCREEN_DIV_10
-	};
 
 	class Options1: public QSettings
 	{
@@ -104,7 +90,6 @@ namespace OpenXcom
 		OPTION(bool, fpsCounter)
 		OPTION(bool, newSeedOnLoad)
 		OPTION(bool, keepAspectRatio)
-		OPTION(bool, nonSquarePixelRatio)
 		OPTION(bool, cursorInBlackBandsInFullscreen)
 		OPTION(bool, cursorInBlackBandsInWindow)
 		OPTION(bool, cursorInBlackBandsInBorderlessWindow)
@@ -482,7 +467,6 @@ Q_DECLARE_METATYPE(OpenXcom::KeyboardType)
 Q_DECLARE_METATYPE(OpenXcom::SaveSort)
 Q_DECLARE_METATYPE(OpenXcom::ScrollType)
 Q_DECLARE_METATYPE(OpenXcom::PathPreview)
-Q_DECLARE_METATYPE	(OpenXcom::ScaleType)
 Q_DECLARE_METATYPE(OpenXcom::TextDirection)
 Q_DECLARE_METATYPE(OpenXcom::TextWrapping)
 

@@ -4791,48 +4791,10 @@ void GeoscapeState::resize(int &dX, int &dY)
 {
 	if (game.savedGame()->getSavedBattle())
 		return;
-	dX = options1.baseXResolution;
-	dY = options1.baseYResolution;
-	int divisor = 1;
-	double pixelRatioY = 1.0;
-
-	if (options1.nonSquarePixelRatio())
-	{
-		pixelRatioY = 1.2;
-	}
-	switch (options1.geoscapeScale())
-	{
-	case SCALE_SCREEN_DIV_10:
-		divisor = 10;
-		break;
-	case SCALE_SCREEN_DIV_8:
-		divisor = 8;
-		break;
-	case SCALE_SCREEN_DIV_6:
-		divisor = 6;
-		break;
-	case SCALE_SCREEN_DIV_5:
-		divisor = 5;
-		break;
-	case SCALE_SCREEN_DIV_4:
-		divisor = 4;
-		break;
-	case SCALE_SCREEN_DIV_3:
-		divisor = 3;
-		break;
-	case SCALE_SCREEN_DIV_2:
-		divisor = 2;
-		break;
-	case SCALE_SCREEN:
-		break;
-	default:
-		dX = 0;
-		dY = 0;
-		return;
-	}
+	int divisor = options1.geoscapeScale();
 
 	options1.baseXResolution = std::max(Screen::ORIGINAL_WIDTH, int(options1.displayWidth() / divisor));
-	options1.baseYResolution = std::max(Screen::ORIGINAL_HEIGHT, int(options1.displayHeight() / pixelRatioY / divisor));
+	options1.baseYResolution = std::max(Screen::ORIGINAL_HEIGHT, int(options1.displayHeight() / divisor));
 
 	dX = options1.baseXResolution - dX;
 	dY = options1.baseYResolution - dY;

@@ -421,11 +421,6 @@ void Screen::resetDisplay(bool resetVideo, bool noShaders)
 	_scaleX = getWidth() / (double)_baseWidth;
 	_scaleY = getHeight() / (double)_baseHeight;
 
-	double pixelRatioY = 1.0;
-	if (options1.nonSquarePixelRatio() && !options1.allowResize())
-	{
-		pixelRatioY = 1.2;
-	}
 	bool cursorInBlackBands;
 	if (!options1.keepAspectRatio())
 	{
@@ -468,7 +463,7 @@ void Screen::resetDisplay(bool resetVideo, bool noShaders)
 	}
 	else if (_scaleY > _scaleX && options1.keepAspectRatio())
 	{
-		int targetHeight = (int)floor(_scaleX * (double)_baseHeight * pixelRatioY);
+		int targetHeight = (int)floor(_scaleX * (double)_baseHeight);
 		_topBlackBand = (getHeight() - targetHeight) / 2;
 		if (_topBlackBand < 0)
 		{
@@ -688,61 +683,8 @@ int Screen::getDY() const
  */
 void Screen::updateScale(int type, int &width, int &height, bool change)
 {
-	double pixelRatioY = 1.0;
-
-	if (options1.nonSquarePixelRatio())
-	{
-		pixelRatioY = 1.2;
-	}
-
-	switch (type)
-	{
-	case SCALE_15X:
-		width = Screen::ORIGINAL_WIDTH * 1.5;
-		height = Screen::ORIGINAL_HEIGHT * 1.5;
-		break;
-	case SCALE_2X:
-		width = Screen::ORIGINAL_WIDTH * 2;
-		height = Screen::ORIGINAL_HEIGHT * 2;
-		break;
-	case SCALE_SCREEN_DIV_10:
-		width = options1.displayWidth() / 10.0;
-		height = options1.displayHeight() / pixelRatioY / 10.0;
-		break;
-	case SCALE_SCREEN_DIV_8:
-		width = options1.displayWidth() / 8.0;
-		height = options1.displayHeight() / pixelRatioY / 8.0;
-		break;
-	case SCALE_SCREEN_DIV_6:
-		width = options1.displayWidth() / 6.0;
-		height = options1.displayHeight() / pixelRatioY / 6.0;
-		break;
-	case SCALE_SCREEN_DIV_5:
-		width = options1.displayWidth() / 5.0;
-		height = options1.displayHeight() / pixelRatioY / 5.0;
-		break;
-	case SCALE_SCREEN_DIV_4:
-		width = options1.displayWidth() / 4.0;
-		height = options1.displayHeight() / pixelRatioY / 4.0;
-		break;
-	case SCALE_SCREEN_DIV_3:
-		width = options1.displayWidth() / 3.0;
-		height = options1.displayHeight() / pixelRatioY / 3.0;
-		break;
-	case SCALE_SCREEN_DIV_2:
-		width = options1.displayWidth() / 2.0;
-		height = options1.displayHeight() / pixelRatioY  / 2.0;
-		break;
-	case SCALE_SCREEN:
-		width = options1.displayWidth();
-		height = options1.displayHeight() / pixelRatioY;
-		break;
-	case SCALE_ORIGINAL:
-	default:
-		width = Screen::ORIGINAL_WIDTH;
-		height = Screen::ORIGINAL_HEIGHT;
-		break;
-	}
+	width = options1.displayWidth() / float(type);
+	height = options1.displayHeight() / float(type);
 
 	// don't go under minimum resolution... it's bad, mmkay?
 	width = std::max(width, Screen::ORIGINAL_WIDTH);
