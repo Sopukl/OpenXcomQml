@@ -19,13 +19,11 @@
 #include "DeleteGameState.h"
 #include "../Engine/CrossPlatform.h"
 #include "../Engine/Game.h"
-#include "../Engine/LocalizedText.h"
 #include "../Interface/Text.h"
 #include "../Interface/Window.h"
 #include "../Interface/TextButton.h"
 #include "../Mod/Mod.h"
 #include "../Engine/Options.h"
-#include "ErrorMessageState.h"
 #include "../Savegame/SavedGame.h"
 #include "../Mod/RuleInterface.h"
 
@@ -101,9 +99,9 @@ void DeleteGameState::btnYesClick(Action *)
 	{
 		std::string error = ltr("STR_DELETE_UNSUCCESSFUL");
 		if (_origin != OPT_BATTLESCAPE)
-			game.pushState(new ErrorMessageState(error, _palette, game.getMod()->getInterface("errorMessages")->getElement("geoscapeColor")->color, "BACK01.SCR", game.getMod()->getInterface("errorMessages")->getElement("geoscapePalette")->color));
+			game.errorMessage(QString::fromStdString(error));
 		else
-			game.pushState(new ErrorMessageState(error, _palette, game.getMod()->getInterface("errorMessages")->getElement("battlescapeColor")->color, "TAC00.SCR", game.getMod()->getInterface("errorMessages")->getElement("battlescapePalette")->color));
+			game.errorMessage(QString::fromStdString(error));
 	}
 }
 

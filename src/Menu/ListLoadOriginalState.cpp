@@ -32,7 +32,6 @@
 #include "../Interface/Text.h"
 #include "../Geoscape/GeoscapeState.h"
 #include "../Battlescape/BattlescapeState.h"
-#include "ErrorMessageState.h"
 #include "../Mod/RuleInterface.h"
 
 namespace OpenXcom
@@ -183,7 +182,7 @@ void ListLoadOriginalState::btnSlotClick(Action *action)
 		{
 			std::ostringstream error;
 			error << ltr("STR_LOAD_UNSUCCESSFUL") << Unicode::TOK_NL_SMALL << "Battlescape saves aren't supported.";
-			game.pushState(new ErrorMessageState(error.str(), _palette, game.getMod()->getInterface("errorMessages")->getElement("geoscapeColor")->color, "BACK01.SCR", game.getMod()->getInterface("errorMessages")->getElement("geoscapePalette")->color));
+			game.errorMessage(QString::fromStdString(error.str()));
 
 		}
 		else

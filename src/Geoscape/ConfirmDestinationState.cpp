@@ -21,7 +21,6 @@
 #include "ConfirmDestinationState.h"
 #include "../fmath.h"
 #include "../Engine/Game.h"
-#include "../Menu/ErrorMessageState.h"
 #include "../Mod/Mod.h"
 #include "../Mod/AlienRace.h"
 #include "../Mod/RuleInterface.h"
@@ -478,7 +477,7 @@ void ConfirmDestinationState::btnTransferClick(Action *)
 	else
 	{
 		RuleInterface *menuInterface = game.getMod()->getInterface("errorMessages");
-		game.pushState(new ErrorMessageState(errorMessage, _palette, menuInterface->getElement("geoscapeColor")->color, "BACK13.SCR", menuInterface->getElement("geoscapePalette")->color));
+		game.errorMessage(QString::fromStdString(errorMessage));
 	}
 }
 

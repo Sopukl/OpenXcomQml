@@ -20,7 +20,6 @@
 #include "ItemLocationsState.h"
 #include "ManufactureDependenciesTreeState.h"
 #include <algorithm>
-#include <locale>
 #include <sstream>
 #include <climits>
 #include <cmath>
@@ -48,14 +47,12 @@
 #include "../Savegame/CraftWeapon.h"
 #include "../Mod/RuleCraftWeapon.h"
 #include "../Engine/Timer.h"
-#include "../Engine/Options.h"
 #include "../Engine/Unicode.h"
 #include "../Mod/RuleInterface.h"
 #include "../Battlescape/DebriefingState.h"
 #include "TransferBaseState.h"
 #include "TechTreeViewerState.h"
 #include "../Ufopaedia/Ufopaedia.h"
-#include "../Menu/ErrorMessageState.h"
 #include "../Engine/Sound.h"
 
 namespace OpenXcom
@@ -1140,19 +1137,14 @@ void SellState::changeByValue(int change, int dir)
 {
 	if (dir > 0 && getRow().type == TRANSFER_ITEM)
 	{
-		const RuleItem* tmpItem = (const RuleItem*)getRow().rule;;
+		const RuleItem* tmpItem = (const RuleItem*)getRow().rule;
 		if (!tmpItem->getSellActionMessage().empty() && !game.isShiftPressed(true))
 		{
 			_timerInc->stop();
 			_timerDec->stop();
 			RuleInterface* menuInterface = game.getMod()->getInterface("buyMenu");
-			game.pushState(new ErrorMessageState(
-				ltr(tmpItem->getSellActionMessage()),
-				_palette,
-				menuInterface->getElement("errorMessage")->color,
-				"BACK13.SCR",
-				menuInterface->getElement("errorPalette")->color)
-			);
+
+			game.errorMessage(QString::fromStdString(ltr(tmpItem->getSellActionMessage())));
 
 			return;
 		}

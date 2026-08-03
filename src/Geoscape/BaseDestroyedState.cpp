@@ -31,9 +31,7 @@
 #include "../Savegame/Ufo.h"
 #include "../Mod/RuleBaseFacility.h"
 #include "../Mod/RuleRegion.h"
-#include "../Engine/Options.h"
 #include "../Basescape/SellState.h"
-#include "../Menu/ErrorMessageState.h"
 #include "../Mod/RuleInterface.h"
 
 namespace OpenXcom
@@ -159,7 +157,7 @@ void BaseDestroyedState::btnOkClick(Action *)
 		if (game.savedGame()->getMonthsPassed() > -1 && options1.storageLimitsEnforced() && _base != 0 && _base->storesOverfull())
 		{
 			game.pushState(new SellState(_base, 0, OPT_BATTLESCAPE));
-			game.pushState(new ErrorMessageState(ltr("STR_STORAGE_EXCEEDED").arg(_base->getName()), _palette, game.getMod()->getInterface("debriefing")->getElement("errorMessage")->color, "BACK01.SCR", game.getMod()->getInterface("debriefing")->getElement("errorPalette")->color));
+			game.errorMessage(QString::fromStdString(ltr("STR_STORAGE_EXCEEDED").arg(_base->getName())));
 		}
 
 		// the base was damaged, but survived

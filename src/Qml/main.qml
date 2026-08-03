@@ -49,6 +49,11 @@ Window {
             function onOpenPopupWindow(path, params) {
                 Xcom.createWindow(path, gameWindow, params).open()
             }
+
+            function onErrorMessage(message) {
+                Xcom.createWindow("/OpenXcom/Controls/ErrorMessage.qml",
+                                  gameWindow, {"errorText": message}).open()
+            }
             // function onSavedGameChanged() {
             //     console.log(Game.savedGame)
             //     console.log(Game.savedGame.bases)

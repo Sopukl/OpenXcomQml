@@ -36,7 +36,6 @@
 #include "../Savegame/Soldier.h"
 #include "../Engine/SurfaceSet.h"
 #include "../Mod/Armor.h"
-#include "../Menu/ErrorMessageState.h"
 #include "SellState.h"
 #include "SoldierArmorState.h"
 #include "SoldierBonusState.h"
@@ -674,7 +673,7 @@ void SoldierInfoState::btnOkClick(Action *)
 			// Note: we could sell a currently opened craft here and crash the game
 			game.pushState(new SellState(_base, 0));
 		}
-		game.pushState(new ErrorMessageState(ltr("STR_STORAGE_EXCEEDED").arg(_base->getName()), _palette, game.getMod()->getInterface("soldierInfo")->getElement("errorMessage")->color, "BACK01.SCR", game.getMod()->getInterface("soldierInfo")->getElement("errorPalette")->color));
+		game.errorMessage(QString::fromStdString(ltr("STR_STORAGE_EXCEEDED").arg(_base->getName())));
 	}
 }
 

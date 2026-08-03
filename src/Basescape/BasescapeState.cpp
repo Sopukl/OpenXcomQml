@@ -33,7 +33,6 @@
 #include "../Mod/RuleBaseFacility.h"
 #include "../Savegame/Region.h"
 #include "../Mod/RuleRegion.h"
-#include "../Menu/ErrorMessageState.h"
 #include "DismantleFacilityState.h"
 #include "../Geoscape/BuildNewBaseState.h"
 #include "../Engine/Action.h"
@@ -367,8 +366,8 @@ void BasescapeState::btnPurchaseClick(Action *)
  */
 void BasescapeState::btnSellClick(Action *)
 {
-	//game.pushState(new SellState(_base, 0));
-	game.openPopupWindow("/OpenXcom/Basescape/Sell.qml", {{"base", QVariant::fromValue(_base)}});
+	game.pushState(new SellState(_base, 0));
+	//game.openPopupWindow("/OpenXcom/Basescape/Sell.qml", {{"base", QVariant::fromValue(_base)}});
 }
 
 /**
@@ -431,45 +430,49 @@ void BasescapeState::viewLeftClick(Action *)
 			// Is facility in use?
 			if (BasePlacementErrors placementErrorCode = fac->inUse())
 			{
+				std::string errorKey;
 				switch (placementErrorCode)
 				{
 				case BPE_Used_Stores:
-					game.pushState(new ErrorMessageState(ltr("STR_FACILITY_IN_USE_STORAGE"), _palette, errorColor1, "BACK13.SCR", errorColor2));
+					errorKey = "STR_FACILITY_IN_USE_STORAGE";
 					break;
 				case BPE_Used_Quarters:
-					game.pushState(new ErrorMessageState(ltr("STR_FACILITY_IN_USE_QUARTERS"), _palette, errorColor1, "BACK13.SCR", errorColor2));
+					errorKey = "STR_FACILITY_IN_USE_QUARTERS";
 					break;
 				case BPE_Used_Laboratories:
-					game.pushState(new ErrorMessageState(ltr("STR_FACILITY_IN_USE_LABORATORIES"), _palette, errorColor1, "BACK13.SCR", errorColor2));
+					errorKey = "STR_FACILITY_IN_USE_LABORATORIES";
 					break;
 				case BPE_Used_Workshops:
-					game.pushState(new ErrorMessageState(ltr("STR_FACILITY_IN_USE_WORKSHOPS"), _palette, errorColor1, "BACK13.SCR", errorColor2));
+					errorKey = "STR_FACILITY_IN_USE_WORKSHOPS";
 					break;
 				case BPE_Used_Hangars:
-					game.pushState(new ErrorMessageState(ltr("STR_FACILITY_IN_USE_HANGARS"), _palette, errorColor1, "BACK13.SCR", errorColor2));
+					errorKey = "STR_FACILITY_IN_USE_HANGARS";
 					break;
 				case BPE_Used_PsiLabs:
-					game.pushState(new ErrorMessageState(ltr("STR_FACILITY_IN_USE_PSI_LABS"), _palette, errorColor1, "BACK13.SCR", errorColor2));
+					errorKey = "STR_FACILITY_IN_USE_PSI_LABS";
 					break;
 				case BPE_Used_Gyms:
-					game.pushState(new ErrorMessageState(ltr("STR_FACILITY_IN_USE_GYMS"), _palette, errorColor1, "BACK13.SCR", errorColor2));
+					errorKey = "STR_FACILITY_IN_USE_GYMS";
 					break;
 				case BPE_Used_AlienContainment:
-					game.pushState(new ErrorMessageState(ltr("STR_FACILITY_IN_USE_PRISONS"), _palette, errorColor1, "BACK13.SCR", errorColor2));
+					errorKey = "STR_FACILITY_IN_USE_PRISONS";
 					break;
 				default:
-					game.pushState(new ErrorMessageState(ltr("STR_FACILITY_IN_USE"), _palette, errorColor1, "BACK13.SCR", errorColor2));
+					errorKey = "STR_FACILITY_IN_USE";
 				}
+
+				game.errorMessage(QString::fromStdString(ltr(errorKey)));
+
 			}
 			// Would base become disconnected?
 			else if (!_base->getDisconnectedFacilities(fac).empty() && fac->getRules()->getLeavesBehindOnSell().size() == 0)
 			{
-				game.pushState(new ErrorMessageState(ltr("STR_CANNOT_DISMANTLE_FACILITY"), _palette, errorColor1, "BACK13.SCR", errorColor2));
+				game.errorMessage(QString::fromStdString(ltr("STR_CANNOT_DISMANTLE_FACILITY")));
 			}
 			// Is this facility being built from a dismantled one or building over a previous building?
 			else if (fac->getBuildTime() > 0 && fac->getIfHadPreviousFacility())
 			{
-				game.pushState(new ErrorMessageState(ltr("STR_CANNOT_DISMANTLE_FACILITY_UPGRADING"), _palette, errorColor1, "BACK13.SCR", errorColor2));
+				game.errorMessage(QString::fromStdString(ltr("STR_CANNOT_DISMANTLE_FACILITY_UPGRADING")));
 			}
 			else
 			{

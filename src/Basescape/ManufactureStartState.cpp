@@ -24,8 +24,6 @@
 #include "../Interface/TextList.h"
 #include "../Engine/Game.h"
 #include "../Engine/LocalizedText.h"
-#include "../Engine/Options.h"
-#include "../Menu/ErrorMessageState.h"
 #include "../Engine/Unicode.h"
 #include "../Mod/Mod.h"
 #include "../Mod/RuleItem.h"
@@ -241,11 +239,11 @@ void ManufactureStartState::btnStartClick(Action *)
 {
 	if (_item->getProducedCraft() && _base->getAvailableHangars() - _base->getUsedHangars() <= 0)
 	{
-		game.pushState(new ErrorMessageState(ltr("STR_NO_FREE_HANGARS_FOR_CRAFT_PRODUCTION"), _palette, game.getMod()->getInterface("basescape")->getElement("errorMessage")->color, "BACK17.SCR", game.getMod()->getInterface("basescape")->getElement("errorPalette")->color));
+		game.errorMessage(QString::fromStdString(ltr("STR_NO_FREE_HANGARS_FOR_CRAFT_PRODUCTION")));
 	}
 	//else if (_item->getRequiredSpace() > _base->getFreeWorkshops())
 	//{
-	//	game.pushState(new ErrorMessageState(tr("STR_NOT_ENOUGH_WORK_SPACE"), _palette, game.getMod()->getInterface("basescape")->getElement("errorMessage")->color, "BACK17.SCR", game.getMod()->getInterface("basescape")->getElement("errorPalette")->color));
+	//	game.errorMessage(QString::fromStdString(ltr("STR_NOT_ENOUGH_WORK_SPACE")));
 	//}
 	else
 	{

@@ -37,7 +37,6 @@
 #include "../Savegame/SavedGame.h"
 #include "../Savegame/ItemContainer.h"
 #include "../Engine/Timer.h"
-#include "../Menu/ErrorMessageState.h"
 #include "../Mod/RuleInterface.h"
 #include <climits>
 
@@ -406,13 +405,7 @@ void ManufactureInfoState::moreEngineer(int change)
 	else if (availableWorkSpace <= 0 && availableEngineer > 0 && _production->isQueuedOnly() && _production->getRules()->getRequiredSpace() > 0)
 	{
 		_timerMoreEngineer->stop();
-		game.pushState(new ErrorMessageState(
-			ltr("STR_NOT_ENOUGH_WORK_SPACE"),
-			_palette,
-			game.getMod()->getInterface("basescape")->getElement("errorMessage")->color,
-			"BACK17.SCR",
-			game.getMod()->getInterface("basescape")->getElement("errorPalette")->color)
-		);
+		game.errorMessage(QString::fromStdString(ltr("STR_NOT_ENOUGH_WORK_SPACE")));
 	}
 }
 
@@ -507,7 +500,7 @@ void ManufactureInfoState::moreUnit(int change)
 	if (_production->getRules()->getProducedCraft() && _base->getAvailableHangars() - _base->getUsedHangars() <= 0)
 	{
 		_timerMoreUnit->stop();
-		game.pushState(new ErrorMessageState(ltr("STR_NO_FREE_HANGARS_FOR_CRAFT_PRODUCTION"), _palette, game.getMod()->getInterface("basescape")->getElement("errorMessage")->color, "BACK17.SCR", game.getMod()->getInterface("basescape")->getElement("errorPalette")->color));
+		game.errorMessage(QString::fromStdString(ltr("STR_NO_FREE_HANGARS_FOR_CRAFT_PRODUCTION")));
 	}
 	else
 	{

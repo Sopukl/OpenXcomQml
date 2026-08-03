@@ -27,7 +27,6 @@
 #include "../Engine/LocalizedText.h"
 #include "../Engine/Unicode.h"
 #include "../Interface/Text.h"
-#include "ErrorMessageState.h"
 #include "MainMenuState.h"
 #include "../Savegame/SavedGame.h"
 #include "../Mod/Mod.h"
@@ -231,9 +230,9 @@ void SaveGameState::error(const std::string &msg)
 	std::ostringstream error;
 	error << ltr("STR_SAVE_UNSUCCESSFUL") << Unicode::TOK_NL_SMALL << msg;
 	if (_origin != OPT_BATTLESCAPE)
-		game.pushState(new ErrorMessageState(error.str(), _palette, game.getMod()->getInterface("errorMessages")->getElement("geoscapeColor")->color, "BACK01.SCR", game.getMod()->getInterface("errorMessages")->getElement("geoscapePalette")->color));
+		game.errorMessage(QString::fromStdString(error.str()));
 	else
-		game.pushState(new ErrorMessageState(error.str(), _palette, game.getMod()->getInterface("errorMessages")->getElement("battlescapeColor")->color, "TAC00.SCR", game.getMod()->getInterface("errorMessages")->getElement("battlescapePalette")->color));
+		game.errorMessage(QString::fromStdString(error.str()));
 }
 
 }

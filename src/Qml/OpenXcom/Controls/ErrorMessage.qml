@@ -2,23 +2,36 @@ import QtQuick 2.15
 
 Popup {
     id: ctrl
-    width: Math.min(col.width + 10, 300)
-    height: Math.min(col.height + 10, 180)
+    width: 256
+    height: 160
     required property string errorText
-    Column {
-        id: col
-        anchors.centerIn: parent
-        Text {
-            anchors.horizontalCenter: parent.horizontalCenter
-            font.pixelSize: 10
-            color: "white"
-            text: errorText
-        }
+    bgImage.source: "image://xcom/itemsArriving"
 
-        Button {
-            anchors.horizontalCenter: parent.horizontalCenter
-            text: "Close"
-            onClicked: ctrl.destroy()
+    Text {
+        id: q12
+        anchors{
+            top: parent.top
+            bottom: closeBtn.top
+            left: parent.left
+            right: parent.right
+            margins: 2
         }
+        verticalAlignment: Text.AlignVCenter
+        horizontalAlignment: Text.AlignHCenter
+        wrapMode: Text.WordWrap
+        font.pixelSize: 10
+        elide: Text.ElideRight
+        color: "white"
+        text: errorText
+    }
+    Button {
+        id: closeBtn
+        anchors{
+            horizontalCenter: parent.horizontalCenter
+            bottom: parent.bottom
+            bottomMargin: 2
+        }
+        text: "Close"
+        onClicked: ctrl.destroy()
     }
 }

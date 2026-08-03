@@ -30,8 +30,6 @@
 #include "../Savegame/ItemContainer.h"
 #include "../Mod/RuleBaseFacility.h"
 #include "../Savegame/SavedGame.h"
-#include "../Menu/ErrorMessageState.h"
-#include "../Engine/Options.h"
 #include "../Engine/Unicode.h"
 #include "../Mod/RuleInterface.h"
 #include <algorithm>
@@ -173,7 +171,7 @@ void PlaceFacilityState::viewClick(Action *)
 		}
 		else if (_view->getPlacementError(_rule, _origFac))
 		{
-			game.pushState(new ErrorMessageState(ltr("STR_CANNOT_BUILD_HERE"), _palette, game.getMod()->getInterface("placeFacility")->getElement("errorMessage")->color, "BACK01.SCR", game.getMod()->getInterface("placeFacility")->getElement("errorPalette")->color));
+			game.errorMessage(QString::fromStdString(ltr("STR_CANNOT_BUILD_HERE")));
 		}
 		else
 		{
@@ -223,73 +221,74 @@ void PlaceFacilityState::viewClick(Action *)
 		BasePlacementErrors placementErrorCode = _view->getPlacementError(_rule);
 		if (placementErrorCode)
 		{
-			int errorColor1 = game.getMod()->getInterface("placeFacility")->getElement("errorMessage")->color;
-			int errorColor2 = game.getMod()->getInterface("placeFacility")->getElement("errorPalette")->color;
+			std::string errorKey;
 			switch (placementErrorCode)
 			{
 				case BPE_Used_Stores:
-					game.pushState(new ErrorMessageState(ltr("STR_FACILITY_IN_USE_STORAGE"), _palette, errorColor1, "BACK01.SCR", errorColor2));
+					errorKey = "STR_FACILITY_IN_USE_STORAGE";
 					break;
 				case BPE_Used_Quarters:
-					game.pushState(new ErrorMessageState(ltr("STR_FACILITY_IN_USE_QUARTERS"), _palette, errorColor1, "BACK01.SCR", errorColor2));
+					errorKey = "STR_FACILITY_IN_USE_QUARTERS";
 					break;
 				case BPE_Used_Laboratories:
-					game.pushState(new ErrorMessageState(ltr("STR_FACILITY_IN_USE_LABORATORIES"), _palette, errorColor1, "BACK01.SCR", errorColor2));
+					errorKey = "STR_FACILITY_IN_USE_LABORATORIES";
 					break;
 				case BPE_Used_Workshops:
-					game.pushState(new ErrorMessageState(ltr("STR_FACILITY_IN_USE_WORKSHOPS"), _palette, errorColor1, "BACK01.SCR", errorColor2));
+					errorKey = "STR_FACILITY_IN_USE_WORKSHOPS";
 					break;
 				case BPE_Used_Hangars:
-					game.pushState(new ErrorMessageState(ltr("STR_FACILITY_IN_USE_HANGARS"), _palette, errorColor1, "BACK01.SCR", errorColor2));
+					errorKey = "STR_FACILITY_IN_USE_HANGARS";
 					break;
 				case BPE_Used_PsiLabs:
-					game.pushState(new ErrorMessageState(ltr("STR_FACILITY_IN_USE_PSI_LABS"), _palette, errorColor1, "BACK01.SCR", errorColor2));
+					errorKey = "STR_FACILITY_IN_USE_PSI_LABS";
 					break;
 				case BPE_Used_Gyms:
-					game.pushState(new ErrorMessageState(ltr("STR_FACILITY_IN_USE_GYMS"), _palette, errorColor1, "BACK01.SCR", errorColor2));
+					errorKey = "STR_FACILITY_IN_USE_GYMS";
 					break;
 				case BPE_Used_AlienContainment:
-					game.pushState(new ErrorMessageState(ltr("STR_FACILITY_IN_USE_PRISONS"), _palette, errorColor1, "BACK01.SCR", errorColor2));
+					errorKey = "STR_FACILITY_IN_USE_PRISONS";
 					break;
 				case BPE_NotConnected:
-					game.pushState(new ErrorMessageState(ltr("STR_CANNOT_BUILD_HERE"), _palette, errorColor1, "BACK01.SCR", errorColor2));
+					errorKey = "STR_CANNOT_BUILD_HERE";
 					break;
 				case BPE_Used:
-					game.pushState(new ErrorMessageState(ltr("STR_FACILITY_IN_USE"), _palette, errorColor1, "BACK01.SCR", errorColor2));
+					errorKey = "STR_FACILITY_IN_USE";
 					break;
 				case BPE_Upgrading:
-					game.pushState(new ErrorMessageState(ltr("STR_CANNOT_UPGRADE_FACILITY_ALREADY_UPGRADING"), _palette, errorColor1, "BACK01.SCR", errorColor2));
+					errorKey = "STR_CANNOT_UPGRADE_FACILITY_ALREADY_UPGRADING";
 					break;
 				case BPE_UpgradeSizeMismatch:
-					game.pushState(new ErrorMessageState(ltr("STR_CANNOT_UPGRADE_FACILITY_WRONG_SIZE"), _palette, errorColor1, "BACK13.SCR", errorColor2));
+					errorKey = "STR_CANNOT_UPGRADE_FACILITY_WRONG_SIZE";
 					break;
 				case BPE_UpgradeRequireSpecific:
-					game.pushState(new ErrorMessageState(ltr("STR_CANNOT_UPGRADE_FACILITY_WRONG_TYPE"), _palette, errorColor1, "BACK13.SCR", errorColor2));
+					errorKey = "STR_CANNOT_UPGRADE_FACILITY_WRONG_TYPE";
 					break;
 				case BPE_UpgradeDisallowed:
-					game.pushState(new ErrorMessageState(ltr("STR_CANNOT_UPGRADE_FACILITY_DISALLOWED"), _palette, errorColor1, "BACK13.SCR", errorColor2));
+					errorKey = "STR_CANNOT_UPGRADE_FACILITY_DISALLOWED";
 					break;
 				case BPE_Queue:
-					game.pushState(new ErrorMessageState(ltr("STR_CANNOT_BUILD_QUEUE_OFF"), _palette, errorColor1, "BACK13.SCR", errorColor2));
+					errorKey = "STR_CANNOT_BUILD_QUEUE_OFF";
 					break;
 				case BPE_ForbiddenByOther:
-					game.pushState(new ErrorMessageState(ltr("STR_FACILITY_FORBIDDEN_BY_OTHER"), _palette, errorColor1, "BACK01.SCR", errorColor2));
+					errorKey = "STR_FACILITY_FORBIDDEN_BY_OTHER";
 					break;
 				case BPE_ForbiddenByThis:
-					game.pushState(new ErrorMessageState(ltr("STR_FACILITY_OTHER_FORBIDDEN_BY_THIS"), _palette, errorColor1, "BACK01.SCR", errorColor2));
+					errorKey = "STR_FACILITY_OTHER_FORBIDDEN_BY_THIS";
 					break;
 				case BPE_UpgradeOnly:
-					game.pushState(new ErrorMessageState(ltr("STR_CANNOT_BUILD_UPGRADE_ONLY"), _palette, errorColor1, "BACK13.SCR", errorColor2));
+					errorKey = "STR_CANNOT_BUILD_UPGRADE_ONLY";
 					break;
 				default:
-					game.pushState(new ErrorMessageState(ltr("STR_CANNOT_BUILD_HERE"), _palette, errorColor1, "BACK01.SCR", errorColor2));
+					errorKey = "STR_CANNOT_BUILD_HERE";
 					break;
 			}
+
+			game.errorMessage(QString::fromStdString(ltr(errorKey)));
 		}
 		else if (game.savedGame()->getFunds() < (_rule->getBuildCost() - refundValueTemp))
 		{
 			game.popState();
-			game.pushState(new ErrorMessageState(ltr("STR_NOT_ENOUGH_MONEY"), _palette, game.getMod()->getInterface("placeFacility")->getElement("errorMessage")->color, "BACK01.SCR", game.getMod()->getInterface("placeFacility")->getElement("errorPalette")->color));
+			game.errorMessage(QString::fromStdString(ltr("STR_NOT_ENOUGH_MONEY")));
 		}
 		else
 		{
@@ -299,7 +298,7 @@ void PlaceFacilityState::viewClick(Action *)
 				if (needed > 0)
 				{
 					game.popState();
-					game.pushState(new ErrorMessageState(ltr("STR_NOT_ENOUGH_ITEMS").arg(ltr(item.first)).arg(needed), _palette, game.getMod()->getInterface("placeFacility")->getElement("errorMessage")->color, "BACK01.SCR", game.getMod()->getInterface("placeFacility")->getElement("errorPalette")->color));
+					game.errorMessage(QString::fromStdString(ltr("STR_NOT_ENOUGH_ITEMS").arg(ltr(item.first)).arg(needed)));
 					return;
 				}
 			}

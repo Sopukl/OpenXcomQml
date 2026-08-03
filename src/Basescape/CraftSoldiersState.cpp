@@ -25,19 +25,16 @@
 #include "../Engine/Game.h"
 #include "../Mod/Mod.h"
 #include "../Engine/LocalizedText.h"
-#include "../Engine/Options.h"
 #include "../Interface/ComboBox.h"
 #include "../Interface/TextButton.h"
 #include "../Interface/Window.h"
 #include "../Interface/Text.h"
 #include "../Interface/TextList.h"
-#include "../Menu/ErrorMessageState.h"
 #include "../Savegame/Base.h"
 #include "../Savegame/Soldier.h"
 #include "../Savegame/Craft.h"
 #include "../Savegame/SavedGame.h"
 #include "SoldierInfoState.h"
-#include "../Mod/Armor.h"
 #include "../Mod/RuleInterface.h"
 #include "../Engine/Unicode.h"
 #include "../Battlescape/BattlescapeGenerator.h"
@@ -554,19 +551,19 @@ void CraftSoldiersState::lstSoldiersClick(Action *action)
 			}
 			else if (err == CPE_SoldierGroupNotAllowed)
 			{
-				game.pushState(new ErrorMessageState(ltr("STR_SOLDIER_GROUP_NOT_ALLOWED"), _palette, game.getMod()->getInterface("soldierInfo")->getElement("errorMessage")->color, "BACK01.SCR", game.getMod()->getInterface("soldierInfo")->getElement("errorPalette")->color));
+				game.errorMessage(QString::fromStdString(ltr("STR_SOLDIER_GROUP_NOT_ALLOWED")));
 			}
 			else if (err == CPE_SoldierGroupNotSame)
 			{
-				game.pushState(new ErrorMessageState(ltr("STR_SOLDIER_GROUP_NOT_SAME"), _palette, game.getMod()->getInterface("soldierInfo")->getElement("errorMessage")->color, "BACK01.SCR", game.getMod()->getInterface("soldierInfo")->getElement("errorPalette")->color));
+				game.errorMessage(QString::fromStdString(ltr("STR_SOLDIER_GROUP_NOT_SAME")));
 			}
 			else if (err == CPE_ArmorGroupNotAllowed)
 			{
-				game.pushState(new ErrorMessageState(ltr("STR_ARMOR_GROUP_NOT_ALLOWED"), _palette, game.getMod()->getInterface("soldierInfo")->getElement("errorMessage")->color, "BACK01.SCR", game.getMod()->getInterface("soldierInfo")->getElement("errorPalette")->color));
+				game.errorMessage(QString::fromStdString(ltr("STR_ARMOR_GROUP_NOT_ALLOWED")));
 			}
 			else if (space > 0)
 			{
-				game.pushState(new ErrorMessageState(ltr("STR_NOT_ENOUGH_CRAFT_SPACE"), _palette, game.getMod()->getInterface("soldierInfo")->getElement("errorMessage")->color, "BACK01.SCR", game.getMod()->getInterface("soldierInfo")->getElement("errorPalette")->color));
+				game.errorMessage(QString::fromStdString(ltr("STR_NOT_ENOUGH_CRAFT_SPACE")));
 			}
 		}
 

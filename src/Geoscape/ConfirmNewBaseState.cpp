@@ -28,8 +28,6 @@
 #include "../Mod/RuleRegion.h"
 #include "../Savegame/Base.h"
 #include "BaseNameState.h"
-#include "../Menu/ErrorMessageState.h"
-#include "../Engine/Options.h"
 #include "../Engine/Unicode.h"
 #include "../Mod/RuleInterface.h"
 
@@ -113,7 +111,7 @@ void ConfirmNewBaseState::btnOkClick(Action *)
 	}
 	else
 	{
-		game.pushState(new ErrorMessageState(ltr("STR_NOT_ENOUGH_MONEY"), _palette, game.getMod()->getInterface("geoscape")->getElement("genericWindow")->color, "BACK01.SCR", game.getMod()->getInterface("geoscape")->getElement("palette")->color));
+		game.errorMessage(QString::fromStdString(ltr("STR_NOT_ENOUGH_MONEY")));
 	}
 	game.closeState(this);
 }

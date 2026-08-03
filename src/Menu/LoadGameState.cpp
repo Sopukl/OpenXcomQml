@@ -28,7 +28,6 @@
 #include "../Engine/LocalizedText.h"
 #include "../Interface/Text.h"
 #include "../Geoscape/GeoscapeState.h"
-#include "ErrorMessageState.h"
 #include "../Battlescape/BattlescapeState.h"
 #include "../Mod/Mod.h"
 #include "../Engine/Sound.h"
@@ -232,9 +231,9 @@ void LoadGameState::error(const std::string &msg, SavedGame *save)
 	std::ostringstream error;
 	error << ltr("STR_LOAD_UNSUCCESSFUL") << Unicode::TOK_NL_SMALL << msg;
 	if (_origin != OPT_BATTLESCAPE)
-		game.pushState(new ErrorMessageState(error.str(), _palette, game.getMod()->getInterface("errorMessages")->getElement("geoscapeColor")->color, "BACK01.SCR", game.getMod()->getInterface("errorMessages")->getElement("geoscapePalette")->color));
+		game.errorMessage(QString::fromStdString(error.str()));
 	else
-		game.pushState(new ErrorMessageState(error.str(), _palette, game.getMod()->getInterface("errorMessages")->getElement("battlescapeColor")->color, "TAC00.SCR", game.getMod()->getInterface("errorMessages")->getElement("battlescapePalette")->color));
+		game.errorMessage(QString::fromStdString(error.str()));
 
 	if (game.savedGame() == save)
 		game.setSavedGame(0);

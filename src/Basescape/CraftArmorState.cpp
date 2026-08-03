@@ -21,14 +21,12 @@
 #include "../Engine/Game.h"
 #include "../Mod/Mod.h"
 #include "../Engine/LocalizedText.h"
-#include "../Engine/Options.h"
 #include "../Interface/ComboBox.h"
 #include "../Engine/Action.h"
 #include "../Interface/TextButton.h"
 #include "../Interface/Window.h"
 #include "../Interface/Text.h"
 #include "../Interface/TextList.h"
-#include "../Menu/ErrorMessageState.h"
 #include "../Savegame/Base.h"
 #include "../Savegame/Soldier.h"
 #include "../Savegame/SavedGame.h"
@@ -489,19 +487,19 @@ void CraftArmorState::lstSoldiersClick(Action *action)
 					}
 					else if (err == CPE_SoldierGroupNotAllowed)
 					{
-						game.pushState(new ErrorMessageState(ltr("STR_SOLDIER_GROUP_NOT_ALLOWED"), _palette, game.getMod()->getInterface("soldierInfo")->getElement("errorMessage")->color, "BACK01.SCR", game.getMod()->getInterface("soldierInfo")->getElement("errorPalette")->color));
+						game.errorMessage(QString::fromStdString(ltr("STR_SOLDIER_GROUP_NOT_ALLOWED")));
 					}
 					else if (err == CPE_SoldierGroupNotSame)
 					{
-						game.pushState(new ErrorMessageState(ltr("STR_SOLDIER_GROUP_NOT_SAME"), _palette, game.getMod()->getInterface("soldierInfo")->getElement("errorMessage")->color, "BACK01.SCR", game.getMod()->getInterface("soldierInfo")->getElement("errorPalette")->color));
+						game.errorMessage(QString::fromStdString(ltr("STR_SOLDIER_GROUP_NOT_SAME")));
 					}
 					else if (err == CPE_ArmorGroupNotAllowed)
 					{
-						game.pushState(new ErrorMessageState(ltr("STR_ARMOR_GROUP_NOT_ALLOWED"), _palette, game.getMod()->getInterface("soldierInfo")->getElement("errorMessage")->color, "BACK01.SCR", game.getMod()->getInterface("soldierInfo")->getElement("errorPalette")->color));
+						game.errorMessage(QString::fromStdString(ltr("STR_ARMOR_GROUP_NOT_ALLOWED")));
 					}
 					else if (space > 0)
 					{
-						game.pushState(new ErrorMessageState(ltr("STR_NOT_ENOUGH_CRAFT_SPACE"), _palette, game.getMod()->getInterface("soldierInfo")->getElement("errorMessage")->color, "BACK01.SCR", game.getMod()->getInterface("soldierInfo")->getElement("errorPalette")->color));
+						game.errorMessage(QString::fromStdString(ltr("STR_NOT_ENOUGH_CRAFT_SPACE")));
 					}
 				}
 			}
@@ -527,7 +525,7 @@ void CraftArmorState::lstSoldiersClick(Action *action)
 				if (craft && !craft->validateArmorChange(s->getArmor()->getSize(), a->getSize()))
 				{
 					armorUnlocked = false; // armor not valid due to craft constraints
-					game.pushState(new ErrorMessageState(ltr("STR_NOT_ENOUGH_CRAFT_SPACE"), _palette, game.getMod()->getInterface("soldierInfo")->getElement("errorMessage")->color, "BACK01.SCR", game.getMod()->getInterface("soldierInfo")->getElement("errorPalette")->color));
+					game.errorMessage(QString::fromStdString(ltr("STR_NOT_ENOUGH_CRAFT_SPACE")));
 				}
 			}
 			//if (armorUnlocked && a && a->getRequiredBonus())

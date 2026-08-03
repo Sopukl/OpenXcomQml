@@ -40,9 +40,7 @@
 #include "../Savegame/ItemContainer.h"
 #include "../Mod/RuleItem.h"
 #include "../Engine/Timer.h"
-#include "../Menu/ErrorMessageState.h"
 #include "TransferConfirmState.h"
-#include "../Engine/Options.h"
 #include "../fmath.h"
 #include "../Mod/RuleInterface.h"
 #include "../Mod/Armor.h"
@@ -536,7 +534,7 @@ void TransferItemsState::btnOkClick(Action *)
 		if (_iQty > 0.0 ? freeStoresTo < -0.00001 : freeStoresFrom < -0.00001)
 		{
 			RuleInterface *menuInterface = game.getMod()->getInterface("transferMenu");
-			game.pushState(new ErrorMessageState(ltr("STR_NOT_ENOUGH_STORE_SPACE"), _palette, menuInterface->getElement("errorMessage")->color, "BACK13.SCR", menuInterface->getElement("errorPalette")->color));
+			game.errorMessage(QString::fromStdString(ltr("STR_NOT_ENOUGH_STORE_SPACE")));
 			return;
 		}
 	}
@@ -1000,7 +998,7 @@ void TransferItemsState::increaseByValue(int change)
 	{
 		_timerInc->stop();
 		RuleInterface *menuInterface = game.getMod()->getInterface("transferMenu");
-		game.pushState(new ErrorMessageState(errorMessage, _palette, menuInterface->getElement("errorMessage")->color, "BACK13.SCR", menuInterface->getElement("errorPalette")->color));
+		game.errorMessage(QString::fromStdString(errorMessage));
 		_errorShown = true;
 	}
 }

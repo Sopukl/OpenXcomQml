@@ -23,14 +23,12 @@
 #include "../Engine/Game.h"
 #include "../Mod/Mod.h"
 #include "../Engine/LocalizedText.h"
-#include "../Engine/Options.h"
 #include "../Interface/ArrowButton.h"
 #include "../Interface/TextButton.h"
 #include "../Interface/Window.h"
 #include "../Interface/Text.h"
 #include "../Interface/TextEdit.h"
 #include "../Interface/TextList.h"
-#include "../Menu/ErrorMessageState.h"
 #include "../Mod/Armor.h"
 #include "../Mod/RuleInterface.h"
 #include "../Savegame/SavedGame.h"
@@ -299,7 +297,7 @@ void SoldierArmorState::lstArmorClick(Action *)
 	{
 		if (!craft->validateArmorChange(prev->getSize(), next->getSize()))
 		{
-			game.pushState(new ErrorMessageState(ltr("STR_NOT_ENOUGH_CRAFT_SPACE"), _palette, game.getMod()->getInterface("soldierInfo")->getElement("errorMessage")->color, "BACK01.SCR", game.getMod()->getInterface("soldierInfo")->getElement("errorPalette")->color));
+			game.errorMessage(QString::fromStdString(ltr("STR_NOT_ENOUGH_CRAFT_SPACE")));
 			return;
 		}
 	}

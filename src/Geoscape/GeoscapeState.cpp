@@ -68,7 +68,6 @@
 #include "../Basescape/GlobalResearchState.h"
 #include "../Basescape/GlobalAlienContainmentState.h"
 #include "../Menu/CutsceneState.h"
-#include "../Menu/ErrorMessageState.h"
 #include "GraphsState.h"
 #include "FundingState.h"
 #include "ExtendedGeoscapeLinksState.h"
@@ -2230,7 +2229,7 @@ void GeoscapeState::time1Hour()
 			if (xbase->storesOverfull())
 			{
 				timerReset();
-				popup(new ErrorMessageState(ltr("STR_STORAGE_EXCEEDED").arg(xbase->getName()), _palette, game.getMod()->getInterface("geoscape")->getElement("errorMessage")->color, "BACK13.SCR", game.getMod()->getInterface("geoscape")->getElement("errorPalette")->color));
+				game.errorMessage(QString::fromStdString(ltr("STR_STORAGE_EXCEEDED").arg(xbase->getName())));
 				popup(new SellState(xbase, 0));
 			}
 			if (!game.savedGame()->getAlienContainmentChecked())
@@ -2250,12 +2249,7 @@ void GeoscapeState::time1Hour()
 					if (xbase->getUsedContainment(prisonType) > xbase->getAvailableContainment(prisonType))
 					{
 						timerReset();
-						popup(new ErrorMessageState(
-							ltrAlt("STR_CONTAINMENT_EXCEEDED", prisonType).arg(xbase->getName()),
-							_palette,
-							game.getMod()->getInterface("geoscape")->getElement("errorMessage")->color,
-							"BACK01.SCR",
-							game.getMod()->getInterface("geoscape")->getElement("errorPalette")->color));
+						game.errorMessage(QString::fromStdString(ltrAlt("STR_CONTAINMENT_EXCEEDED", prisonType).arg(xbase->getName())));
 						popup(new ManageAlienContainmentState(xbase, prisonType, OPT_GEOSCAPE));
 						break;
 					}

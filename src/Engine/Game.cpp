@@ -939,10 +939,6 @@ void Game::loadGame(QString fileName)
 		Log(LOG_ERROR) << msg;
 		std::ostringstream error;
 		qDebug() << tr("STR_LOAD_UNSUCCESSFUL") << ' ' << msg;
-		// if (_origin != OPT_BATTLESCAPE)
-		// 	_game->pushState(new ErrorMessageState(error.str(), _palette, _game->getMod()->getInterface("errorMessages")->getElement("geoscapeColor")->color, "BACK01.SCR", _game->getMod()->getInterface("errorMessages")->getElement("geoscapePalette")->color));
-		// else
-		// 	_game->pushState(new ErrorMessageState(error.str(), _palette, _game->getMod()->getInterface("errorMessages")->getElement("battlescapeColor")->color, "TAC00.SCR", _game->getMod()->getInterface("errorMessages")->getElement("battlescapePalette")->color));
 
 		if (savedGame() == save)
 			setSavedGame(0);

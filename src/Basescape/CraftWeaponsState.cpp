@@ -22,14 +22,12 @@
 #include "../Engine/Game.h"
 #include "../Mod/Mod.h"
 #include "../Engine/LocalizedText.h"
-#include "../Engine/Options.h"
 #include "../Interface/TextButton.h"
 #include "../Interface/Window.h"
 #include "../Interface/Text.h"
 #include "../Interface/TextList.h"
 #include "../Savegame/Craft.h"
 #include "../Savegame/CraftWeapon.h"
-#include "../Menu/ErrorMessageState.h"
 #include "../Mod/RuleCraft.h"
 #include "../Mod/RuleCraftWeapon.h"
 #include "../Mod/RuleInterface.h"
@@ -179,13 +177,7 @@ void CraftWeaponsState::lstWeaponsClick(Action *)
 			if ((_craft->getMaxUnitsRaw() - _craft->getSpaceUsed() + diff1) < 0)
 			{
 				game.popState();
-				game.pushState(new ErrorMessageState(
-					ltr("STR_NOT_ENOUGH_CARGO_SPACE"),
-					_palette,
-					game.getMod()->getInterface("craftWeapons")->getElement("errorMessage")->color,
-					"BACK14.SCR",
-					game.getMod()->getInterface("craftWeapons")->getElement("errorPalette")->color)
-				);
+				game.errorMessage(QString::fromStdString(ltr("STR_NOT_ENOUGH_CARGO_SPACE")));
 				return;
 			}
 		}
@@ -199,13 +191,7 @@ void CraftWeaponsState::lstWeaponsClick(Action *)
 			if ((_craft->getMaxVehiclesAndLargeSoldiersRaw() - _craft->getNumVehiclesAndLargeSoldiers() + diff2) < 0)
 			{
 				game.popState();
-				game.pushState(new ErrorMessageState(
-					ltr("STR_NOT_ENOUGH_HWP_CAPACITY"),
-					_palette,
-					game.getMod()->getInterface("craftWeapons")->getElement("errorMessage")->color,
-					"BACK14.SCR",
-					game.getMod()->getInterface("craftWeapons")->getElement("errorPalette")->color)
-				);
+				game.errorMessage(QString::fromStdString(ltr("STR_NOT_ENOUGH_HWP_CAPACITY")));
 				return;
 			}
 		}
@@ -247,13 +233,7 @@ void CraftWeaponsState::lstWeaponsClick(Action *)
 			if ((_craft->getMaxItemsRaw() - totalItems + diff3) < 0)
 			{
 				game.popState();
-				game.pushState(new ErrorMessageState(
-					ltr("STR_NOT_ENOUGH_STORAGE_SPACE_1"),
-					_palette,
-					game.getMod()->getInterface("craftWeapons")->getElement("errorMessage")->color,
-					"BACK14.SCR",
-					game.getMod()->getInterface("craftWeapons")->getElement("errorPalette")->color)
-				);
+				game.errorMessage(QString::fromStdString(ltr("STR_NOT_ENOUGH_STORAGE_SPACE_1")));
 				return;
 			}
 		}
@@ -262,13 +242,7 @@ void CraftWeaponsState::lstWeaponsClick(Action *)
 			if ((_craft->getMaxStorageSpaceRaw() - totalItemStorageSize + diff4) < 0.0)
 			{
 				game.popState();
-				game.pushState(new ErrorMessageState(
-					ltr("STR_NOT_ENOUGH_STORAGE_SPACE_2"),
-					_palette,
-					game.getMod()->getInterface("craftWeapons")->getElement("errorMessage")->color,
-					"BACK14.SCR",
-					game.getMod()->getInterface("craftWeapons")->getElement("errorPalette")->color)
-				);
+				game.errorMessage(QString::fromStdString(ltr("STR_NOT_ENOUGH_STORAGE_SPACE_2")));
 				return;
 			}
 		}

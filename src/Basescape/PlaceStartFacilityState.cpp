@@ -24,7 +24,6 @@
 #include "../Savegame/Base.h"
 #include "../Savegame/BaseFacility.h"
 #include "../Mod/RuleBaseFacility.h"
-#include "../Menu/ErrorMessageState.h"
 #include "SelectStartFacilityState.h"
 #include "../Mod/Mod.h"
 #include "../Mod/RuleInterface.h"
@@ -63,7 +62,7 @@ void PlaceStartFacilityState::viewClick(Action *)
 	if (_view->getPlacementError(_rule, nullptr, true))
 	{
 		game.popState();
-		game.pushState(new ErrorMessageState(ltr("STR_CANNOT_BUILD_HERE"), _palette, game.getMod()->getInterface("basescape")->getElement("errorMessage")->color, "BACK01.SCR", game.getMod()->getInterface("basescape")->getElement("errorPalette")->color));
+		game.errorMessage(QString::fromStdString(ltr("STR_CANNOT_BUILD_HERE")));
 	}
 	else
 	{

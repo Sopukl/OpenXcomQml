@@ -43,7 +43,6 @@
 #include "../Engine/Action.h"
 #include "../Savegame/Craft.h"
 #include "../Savegame/ItemContainer.h"
-#include "../Menu/ErrorMessageState.h"
 #include "../Mod/RuleInterface.h"
 #include "../Mod/RuleSoldier.h"
 #include "../Mod/Armor.h"
@@ -771,7 +770,7 @@ void PurchaseState::btnOkClick(Action *)
 		if (!errorMessage.empty())
 		{
 			RuleInterface* menuInterface = game.getMod()->getInterface("buyMenu");
-			game.pushState(new ErrorMessageState(errorMessage, _palette, menuInterface->getElement("errorMessage")->color, "BACK13.SCR", menuInterface->getElement("errorPalette")->color));
+			game.errorMessage(QString::fromStdString(errorMessage));
 			return;
 		}
 	}
@@ -1242,15 +1241,7 @@ void PurchaseState::increaseByValue(int change)
 	else
 	{
 		_timerInc->stop();
-		RuleInterface *menuInterface = game.getMod()->getInterface("buyMenu");
-		game.pushState(new ErrorMessageState(
-			errorMessage,
-			_palette,
-			menuInterface->getElement("errorMessage")->color,
-			"BACK13.SCR",
-			menuInterface->getElement("errorPalette")->color,
-			menuInterface->getElement("errorMessage")->color2
-		));
+		game.errorMessage(QString::fromStdString(errorMessage));
 	}
 }
 

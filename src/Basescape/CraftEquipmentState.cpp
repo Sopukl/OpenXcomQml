@@ -47,7 +47,6 @@
 #include "../Mod/RuleItem.h"
 #include "../Savegame/Vehicle.h"
 #include "../Savegame/SavedGame.h"
-#include "../Menu/ErrorMessageState.h"
 #include "../Battlescape/CannotReequipState.h"
 #include "../Battlescape/DebriefingState.h"
 #include "../Battlescape/InventoryState.h"
@@ -871,7 +870,7 @@ void CraftEquipmentState::moveRightByValue(int change, bool suppressErrors)
 						// So we haven't managed to increase the count of vehicles because of the ammo
 						_timerRight->stop();
 						LocalizedText msg(ltr("STR_NOT_ENOUGH_AMMO_TO_ARM_HWP").arg(ammoPerVehicle).arg(ltr(ammo->getType())));
-						game.pushState(new ErrorMessageState(msg, _palette, game.getMod()->getInterface("craftEquipment")->getElement("errorMessage")->color, "BACK04.SCR", game.getMod()->getInterface("craftEquipment")->getElement("errorPalette")->color));
+						game.errorMessage(QString::fromStdString(msg));
 						_reload = false;
 					}
 				}
@@ -896,7 +895,7 @@ void CraftEquipmentState::moveRightByValue(int change, bool suppressErrors)
 			{
 				_timerRight->stop();
 				LocalizedText msg(ltr("STR_NO_MORE_EQUIPMENT_ALLOWED", c->getMaxItemsClamped()));
-				game.pushState(new ErrorMessageState(msg, _palette, game.getMod()->getInterface("craftEquipment")->getElement("errorMessage")->color, "BACK04.SCR", game.getMod()->getInterface("craftEquipment")->getElement("errorPalette")->color));
+				game.errorMessage(QString::fromStdString(msg));
 				_reload = false;
 			}
 			change = c->getMaxItemsClamped() - _totalItems;
@@ -921,7 +920,7 @@ void CraftEquipmentState::moveRightByValue(int change, bool suppressErrors)
 			{
 				_timerRight->stop();
 				LocalizedText msg(ltr("STR_NO_MORE_EQUIPMENT_ALLOWED_BY_SIZE").arg(c->getMaxStorageSpaceClamped()));
-				game.pushState(new ErrorMessageState(msg, _palette, game.getMod()->getInterface("craftEquipment")->getElement("errorMessage")->color, "BACK04.SCR", game.getMod()->getInterface("craftEquipment")->getElement("errorPalette")->color));
+				game.errorMessage(QString::fromStdString(msg));
 				_reload = false;
 			}
 		}

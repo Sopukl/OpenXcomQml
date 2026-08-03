@@ -20,7 +20,6 @@
 #include "Mod.h"
 #include "ModScript.h"
 #include <algorithm>
-#include <functional>
 #include <sstream>
 #include <climits>
 #include <cassert>
@@ -842,8 +841,9 @@ T *Mod::getRule(const std::string &id, const std::string &name, const std::map<s
 	{
 		return 0;
 	}
-	typename std::map<std::string, T*>::const_iterator i = map.find(id);
-	if (i != map.end() && i->second != 0)
+
+	if (auto i = map.find(id);
+			 i != map.end() && i->second != 0)
 	{
 		return i->second;
 	}

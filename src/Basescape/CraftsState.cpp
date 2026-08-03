@@ -30,7 +30,6 @@
 #include "../Savegame/Craft.h"
 #include "../Mod/RuleCraft.h"
 #include "../Savegame/Base.h"
-#include "../Menu/ErrorMessageState.h"
 #include "CraftInfoState.h"
 #include "SellState.h"
 #include "../Savegame/SavedGame.h"
@@ -156,7 +155,7 @@ void CraftsState::btnOkClick(Action *)
 	if (game.savedGame()->getMonthsPassed() > -1 && options1.storageLimitsEnforced() && _base->storesOverfull())
 	{
 		game.pushState(new SellState(_base, 0));
-		game.pushState(new ErrorMessageState(ltr("STR_STORAGE_EXCEEDED").arg(_base->getName()), _palette, game.getMod()->getInterface("craftSelect")->getElement("errorMessage")->color, "BACK01.SCR", game.getMod()->getInterface("craftSelect")->getElement("errorPalette")->color));
+		game.errorMessage(QString::fromStdString(ltr("STR_STORAGE_EXCEEDED").arg(_base->getName())));
 	}
 }
 

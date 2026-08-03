@@ -33,8 +33,6 @@
 #include "../Savegame/SavedGame.h"
 #include "BaseNameState.h"
 #include "ConfirmNewBaseState.h"
-#include "../Engine/Options.h"
-#include "../Menu/ErrorMessageState.h"
 #include "../Mod/RuleInterface.h"
 
 namespace OpenXcom
@@ -243,7 +241,7 @@ void BuildNewBaseState::globeClick(Action *action)
 			if ((_first || !fakeUnderwaterBasesUnlocked) && fakeUnderwaterTexture)
 			{
 				// first (starting) base can't be fake underwater base
-				game.pushState(new ErrorMessageState(ltr("STR_XCOM_BASE_CANNOT_BE_BUILT"), _palette, game.getMod()->getInterface("geoscape")->getElement("genericWindow")->color, "BACK01.SCR", game.getMod()->getInterface("geoscape")->getElement("palette")->color));
+				game.errorMessage(QString::fromStdString(ltr("STR_XCOM_BASE_CANNOT_BE_BUILT")));
 			}
 			else
 			{
@@ -269,7 +267,7 @@ void BuildNewBaseState::globeClick(Action *action)
 		}
 		else
 		{
-			game.pushState(new ErrorMessageState(ltr("STR_XCOM_BASE_CANNOT_BE_BUILT"), _palette, game.getMod()->getInterface("geoscape")->getElement("genericWindow")->color, "BACK01.SCR", game.getMod()->getInterface("geoscape")->getElement("palette")->color));
+			game.errorMessage(QString::fromStdString(ltr("STR_XCOM_BASE_CANNOT_BE_BUILT")));
 		}
 	}
 }

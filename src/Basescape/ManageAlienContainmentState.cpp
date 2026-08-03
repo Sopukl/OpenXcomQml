@@ -37,8 +37,6 @@
 #include "../Mod/RuleResearch.h"
 #include "../Mod/Armor.h"
 #include "../Engine/Timer.h"
-#include "../Engine/Options.h"
-#include "../Menu/ErrorMessageState.h"
 #include "SellState.h"
 #include "../Mod/RuleInterface.h"
 #include "TechTreeViewerState.h"
@@ -388,7 +386,7 @@ void ManageAlienContainmentState::dealWithSelectedAliens(bool sell)
 		else
 		{
 			game.pushState(new SellState(_base, 0, _origin));
-			game.pushState(new ErrorMessageState(ltr("STR_STORAGE_EXCEEDED").arg(_base->getName()), _palette, game.getMod()->getInterface("manageContainment")->getElement("errorMessage")->color, "BACK13.SCR", game.getMod()->getInterface("manageContainment")->getElement("errorPalette")->color));
+			game.errorMessage(QString::fromStdString(ltr("STR_STORAGE_EXCEEDED").arg(_base->getName())));
 		}
  	}
 }

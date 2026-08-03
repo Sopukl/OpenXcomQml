@@ -58,11 +58,9 @@
 #include "../Savegame/Vehicle.h"
 #include "../Savegame/BaseFacility.h"
 #include <sstream>
-#include "../Menu/ErrorMessageState.h"
 #include "../Menu/MainMenuState.h"
 #include "../Interface/Cursor.h"
 #include "../Engine/Exception.h"
-#include "../Engine/Options.h"
 #include "../Engine/RNG.h"
 #include "../Basescape/ManageAlienContainmentState.h"
 #include "../Basescape/TransferBaseState.h"
@@ -940,23 +938,18 @@ void DebriefingState::btnOkClick(Action *)
 				if (pair.second == 2)
 				{
 					game.pushState(new ManageAlienContainmentState(_base, pair.first, OPT_BATTLESCAPE));
-					game.pushState(new ErrorMessageState(ltrAlt("STR_CONTAINMENT_EXCEEDED", pair.first).arg(_base->getName()), _palette, game.getMod()->getInterface("debriefing")->getElement("errorMessage")->color, "BACK01.SCR", game.getMod()->getInterface("debriefing")->getElement("errorPalette")->color));
+					game.errorMessage(QString::fromStdString(ltrAlt("STR_CONTAINMENT_EXCEEDED", pair.first).arg(_base->getName())));
 				}
 				else if (pair.second == 1)
 				{
-					game.pushState(new ErrorMessageState(
-						ltrAlt("STR_ALIEN_DIES_NO_ALIEN_CONTAINMENT_FACILITY", pair.first),
-						_palette,
-						game.getMod()->getInterface("debriefing")->getElement("errorMessage")->color,
-						"BACK01.SCR",
-						game.getMod()->getInterface("debriefing")->getElement("errorPalette")->color));
+					game.errorMessage(QString::fromStdString(ltrAlt("STR_ALIEN_DIES_NO_ALIEN_CONTAINMENT_FACILITY", pair.first)));
 				}
 			}
 
 			if (options1.storageLimitsEnforced() && _base->storesOverfull())
 			{
 				game.pushState(new SellState(_base, 0, OPT_BATTLESCAPE));
-				game.pushState(new ErrorMessageState(ltr("STR_STORAGE_EXCEEDED").arg(_base->getName()), _palette, game.getMod()->getInterface("debriefing")->getElement("errorMessage")->color, "BACK01.SCR", game.getMod()->getInterface("debriefing")->getElement("errorPalette")->color));
+				game.errorMessage(QString::fromStdString(ltr("STR_STORAGE_EXCEEDED").arg(_base->getName())));
 			}
 		}
 	}

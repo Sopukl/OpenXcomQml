@@ -29,7 +29,6 @@
 #include "../Interface/ToggleTextButton.h"
 #include "../Interface/Window.h"
 #include "../Menu/CutsceneState.h"
-#include "../Menu/ErrorMessageState.h"
 #include "../Mod/City.h"
 #include "../Mod/Mod.h"
 #include "../Mod/RuleEvent.h"
@@ -563,7 +562,7 @@ void GeoscapeEventState::btnOkClick(Action *)
 		if (game.savedGame()->getMonthsPassed() > -1 && options1.storageLimitsEnforced() && base != 0 && base->storesOverfull())
 		{
 			game.pushState(new SellState(base, 0));
-			game.pushState(new ErrorMessageState(ltr("STR_STORAGE_EXCEEDED").arg(base->getName()), _palette, game.getMod()->getInterface("debriefing")->getElement("errorMessage")->color, "BACK01.SCR", game.getMod()->getInterface("debriefing")->getElement("errorPalette")->color));
+			game.errorMessage(QString::fromStdString(ltr("STR_STORAGE_EXCEEDED").arg(base->getName())));
 		}
 	}
 
