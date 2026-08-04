@@ -17,7 +17,7 @@
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include <cmath>
-#include <algorithm>
+
 #include "Soldier.h"
 #include "../Engine/Collections.h"
 #include "../Engine/RNG.h"

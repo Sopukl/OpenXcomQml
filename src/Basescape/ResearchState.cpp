@@ -34,7 +34,7 @@
 #include "../Mod/RuleResearch.h"
 #include "ResearchInfoState.h"
 #include "TechTreeViewerState.h"
-#include <algorithm>
+
 
 namespace OpenXcom
 {

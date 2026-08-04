@@ -17,7 +17,7 @@
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "SurfaceSet.h"
-#include <climits>
+
 #include "Surface.h"
 #include "FileMap.h"
 

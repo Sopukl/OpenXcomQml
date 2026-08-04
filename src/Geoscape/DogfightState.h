@@ -19,8 +19,8 @@
  */
 #include "../Engine/State.h"
 #include "../Mod/RuleCraft.h"
-#include <vector>
-#include <string>
+
+
 
 namespace OpenXcom
 {

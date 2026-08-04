@@ -18,7 +18,7 @@
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "Target.h"
-#include <string>
+
 #include "../Mod/AlienDeployment.h"
 #include "../Engine/Yaml.h"
 

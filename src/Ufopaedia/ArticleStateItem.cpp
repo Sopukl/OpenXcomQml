@@ -18,7 +18,7 @@
  */
 
 #include <sstream>
-#include <algorithm>
+
 #include "Ufopaedia.h"
 #include "ArticleStateItem.h"
 #include "../Mod/Mod.h"

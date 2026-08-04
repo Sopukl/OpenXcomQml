@@ -33,7 +33,7 @@
 #include "../Interface/ArrowButton.h"
 #include "../Engine/Timer.h"
 #include "../Engine/RNG.h"
-#include <climits>
+
 
 namespace OpenXcom
 {

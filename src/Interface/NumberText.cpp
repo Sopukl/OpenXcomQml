@@ -18,7 +18,7 @@
  */
 #include "NumberText.h"
 #include <sstream>
-#include <string>
+
 
 namespace OpenXcom
 {

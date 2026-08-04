@@ -17,7 +17,7 @@
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "Production.h"
-#include <algorithm>
+
 #include "../Engine/Collections.h"
 #include "../Mod/RuleManufacture.h"
 #include "../Mod/RuleSoldier.h"
@@ -32,7 +32,7 @@
 #include "../Mod/RuleCraft.h"
 #include "../Engine/Game.h"
 #include "../Engine/RNG.h"
-#include <climits>
+
 #include "BaseFacility.h"
 
 namespace OpenXcom

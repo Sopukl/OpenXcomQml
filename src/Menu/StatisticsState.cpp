@@ -17,11 +17,11 @@
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "StatisticsState.h"
-#include <algorithm>
-#include <string>
+
+
 #include <sstream>
-#include <vector>
-#include <map>
+
+
 #include "../Engine/Game.h"
 #include "../Mod/Mod.h"
 #include "../Engine/LocalizedText.h"

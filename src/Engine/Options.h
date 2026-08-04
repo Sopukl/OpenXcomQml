@@ -18,8 +18,8 @@
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "Options1.h"
-#include <string>
-#include <vector>
+
+
 #include "OptionInfo.h"
 #include "ModInfo.h"
 

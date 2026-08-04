@@ -23,7 +23,7 @@
 #include "../Engine/Sound.h"
 #include "../Engine/Action.h"
 #include "ComboBox.h"
-#include <QDebug>
+
 
 namespace OpenXcom
 {

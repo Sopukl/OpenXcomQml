@@ -18,7 +18,7 @@
  */
 #include "WarningMessage.h"
 #include <SDL.h>
-#include <string>
+
 #include "../fmath.h"
 #include "../Engine/Timer.h"
 #include "../Interface/Text.h"

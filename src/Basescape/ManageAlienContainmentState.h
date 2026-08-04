@@ -19,8 +19,8 @@
  */
 #include "../Engine/TouchState.h"
 #include "../Menu/OptionsBaseState.h"
-#include <vector>
-#include <string>
+
+
 
 namespace OpenXcom
 {

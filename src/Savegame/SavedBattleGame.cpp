@@ -17,7 +17,7 @@
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include <assert.h>
-#include <vector>
+
 #include "BattleItem.h"
 #include "ItemContainer.h"
 #include "Base.h"

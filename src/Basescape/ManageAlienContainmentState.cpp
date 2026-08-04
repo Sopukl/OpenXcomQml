@@ -18,9 +18,9 @@
  */
 #include "ManageAlienContainmentState.h"
 #include "GlobalAlienContainmentState.h"
-#include <climits>
+
 #include <sstream>
-#include <algorithm>
+
 #include "../Engine/Action.h"
 #include "../Engine/Game.h"
 #include "../Mod/Mod.h"

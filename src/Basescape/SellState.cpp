@@ -19,9 +19,9 @@
 #include "SellState.h"
 #include "ItemLocationsState.h"
 #include "ManufactureDependenciesTreeState.h"
-#include <algorithm>
+
 #include <sstream>
-#include <climits>
+
 #include <cmath>
 #include <iomanip>
 #include "../Engine/Action.h"

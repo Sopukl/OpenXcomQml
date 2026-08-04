@@ -18,7 +18,7 @@
  */
 
 #include "RuleMusic.h"
-#include <climits>
+
 
 namespace OpenXcom
 {

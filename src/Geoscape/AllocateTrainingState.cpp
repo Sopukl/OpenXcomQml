@@ -17,7 +17,7 @@
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include <sstream>
-#include <climits>
+
 #include "TrainingState.h"
 #include "AllocateTrainingState.h"
 #include "../Engine/Game.h"
@@ -36,7 +36,7 @@
 #include "../Mod/Mod.h"
 #include "../Basescape/SoldierInfoState.h"
 #include "../Basescape/SoldierSortUtil.h"
-#include <algorithm>
+
 #include "../Engine/Unicode.h"
 
 namespace OpenXcom

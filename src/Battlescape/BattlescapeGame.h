@@ -20,9 +20,9 @@
 #include "Position.h"
 #include "../Mod/RuleItem.h"
 #include "../Engine/HelperMeta.h"
-#include <string>
-#include <list>
-#include <vector>
+
+
+
 
 namespace OpenXcom
 {

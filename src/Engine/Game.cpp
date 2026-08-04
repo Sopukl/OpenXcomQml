@@ -18,7 +18,7 @@
  */
 #include "Game.h"
 #include "../resource.h"
-#include <algorithm>
+
 #include <cmath>
 #include <qguiapplication.h>
 #include <sstream>
@@ -52,7 +52,7 @@
 #include "../Menu/TestState.h"
 #include "../Menu/StartState.h"
 #include "../Menu/StatisticsState.h"
-#include <algorithm>
+
 #include "../fallthrough.h"
 #include "../version.h"
 #include <QJsonObject>

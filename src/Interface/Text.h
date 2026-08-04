@@ -18,8 +18,8 @@
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "../Engine/InteractiveSurface.h"
-#include <vector>
-#include <string>
+
+
 #include "../Engine/Unicode.h"
 
 namespace OpenXcom

@@ -17,7 +17,7 @@
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <algorithm>
+
 #include "ExtraSprites.h"
 #include "../Engine/Surface.h"
 #include "../Engine/SurfaceSet.h"

@@ -19,7 +19,7 @@
  */
 #include <SDL_rwops.h>
 #include <SDL_mixer.h>
-#include <string>
+
 #include <memory>
 
 namespace OpenXcom

@@ -19,7 +19,7 @@
 
 #include "RuleInterface.h"
 #include "Mod.h"
-#include <climits>
+
 #include "../Savegame/SavedGame.h"
 
 namespace OpenXcom

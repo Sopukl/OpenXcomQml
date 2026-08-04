@@ -82,8 +82,8 @@ source files with custom allocators.*/
 #endif
 
 #ifdef LODEPNG_COMPILE_CPP
-#include <vector>
-#include <string>
+
+
 #endif /*LODEPNG_COMPILE_CPP*/
 
 #ifdef LODEPNG_COMPILE_PNG

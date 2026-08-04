@@ -17,7 +17,7 @@
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "SaveConverter.h"
-#include <algorithm>
+
 #include "../Engine/Yaml.h"
 #include <SDL_endian.h>
 #include <fstream>

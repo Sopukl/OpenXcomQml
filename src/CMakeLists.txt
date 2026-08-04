@@ -24,6 +24,8 @@ endif()
 
 set(QML_IMPORT_PATH ${CMAKE_SOURCE_DIR}/src/Qml ${CMAKE_BINARY_DIR}/imports CACHE STRING "")
 
+
+
 set ( root_src
   lodepng.cpp
   main.cpp
@@ -94,6 +96,10 @@ add_executable (
     ${all_headers}
     Qml/XCom.qrc
     Images.qrc
+)
+
+target_precompile_headers(openxcom PRIVATE
+    "pch.h"
 )
 
 target_link_libraries(openxcom

@@ -19,10 +19,10 @@
 #include "CraftEquipmentState.h"
 #include "CraftEquipmentLoadState.h"
 #include "CraftEquipmentSaveState.h"
-#include <climits>
+
 #include <sstream>
-#include <algorithm>
-#include <locale>
+
+
 #include "../Engine/CrossPlatform.h"
 #include "../Engine/Screen.h"
 #include "../Engine/Action.h"

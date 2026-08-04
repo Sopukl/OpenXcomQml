@@ -20,7 +20,7 @@
 #include "InventoryLoadState.h"
 #include "InventorySaveState.h"
 #include "InventoryPersonalState.h"
-#include <algorithm>
+
 #include "Inventory.h"
 #include "../Basescape/SoldierArmorState.h"
 #include "../Basescape/SoldierAvatarState.h"

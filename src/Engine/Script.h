@@ -17,16 +17,16 @@
  * You should have received a copy of the GNU General Public License
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
-#include <map>
-#include <unordered_map>
+
+
 #include <limits>
-#include <vector>
-#include <string>
-#include <cstring>
+
+
+
 #include "../Engine/Yaml.h"
 #include <SDL_stdinc.h>
 #include <cassert>
-#include <unordered_set>
+
 
 #include "HelperMeta.h"
 #include "Logger.h"

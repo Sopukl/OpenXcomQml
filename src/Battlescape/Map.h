@@ -22,7 +22,7 @@
 #include "../Mod/MapData.h"
 #include "Position.h"
 #include "Particle.h"
-#include <vector>
+
 
 namespace OpenXcom
 {

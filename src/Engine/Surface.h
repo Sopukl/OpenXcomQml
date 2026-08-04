@@ -18,10 +18,10 @@
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include <SDL.h>
-#include <string>
-#include <vector>
+
+
 #include <memory>
-#include <vector>
+
 #include <assert.h>
 #include "GraphSubset.h"
 

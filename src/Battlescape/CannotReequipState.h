@@ -19,7 +19,7 @@
  */
 #include "../Engine/State.h"
 #include "DebriefingState.h"
-#include <vector>
+
 
 namespace OpenXcom
 {

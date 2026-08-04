@@ -17,7 +17,7 @@
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <algorithm>
+
 #include "RuleSoldier.h"
 #include "RuleSkill.h"
 #include "Mod.h"

@@ -19,7 +19,7 @@
 #include "CraftPilotsState.h"
 #include "CraftPilotSelectState.h"
 #include <sstream>
-#include <algorithm>
+
 #include "../Engine/Game.h"
 #include "../Mod/Mod.h"
 #include "../Engine/LocalizedText.h"

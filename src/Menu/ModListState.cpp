@@ -18,8 +18,8 @@
  */
 #include "ModListState.h"
 #include "ModConfirmExtendedState.h"
-#include <climits>
-#include <algorithm>
+
+
 #include "../Engine/Game.h"
 #include "../Mod/Mod.h"
 #include "../Engine/LocalizedText.h"

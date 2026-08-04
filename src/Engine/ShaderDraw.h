@@ -18,7 +18,7 @@
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "ShaderDrawHelper.h"
-#include <tuple>
+
 
 namespace OpenXcom
 {

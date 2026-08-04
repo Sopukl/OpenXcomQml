@@ -18,10 +18,10 @@
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "../Engine/State.h"
-#include <vector>
-#include <map>
-#include <string>
-#include <unordered_set>
+
+
+
+
 
 namespace OpenXcom
 {

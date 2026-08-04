@@ -19,10 +19,10 @@
 #include "PurchaseState.h"
 #include "ItemLocationsState.h"
 #include <sstream>
-#include <climits>
+
 #include <iomanip>
-#include <algorithm>
-#include <locale>
+
+
 #include "../fmath.h"
 #include "../Engine/Game.h"
 #include "../Mod/Mod.h"

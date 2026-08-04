@@ -23,7 +23,7 @@
 #include "../Savegame/Craft.h"
 #include "../Savegame/ItemContainer.h"
 #include "../Savegame/WeightedOptions.h"
-#include <algorithm>
+
 
 namespace OpenXcom
 {

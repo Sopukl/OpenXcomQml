@@ -36,11 +36,11 @@
  * A. somename.zip is always scanned before somename/ directory.
  */
 
-#include <string>
+
 #include <sstream>
 #include <istream>
-#include <unordered_map>
-#include <unordered_set>
+
+
 
 #include "FileMap.h"
 #include "Unicode.h"

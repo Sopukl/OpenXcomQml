@@ -19,8 +19,8 @@
 #include "Surface.h"
 #include "ShaderDraw.h"
 #include "ShaderMove.h"
-#include <vector>
-#include <algorithm>
+
+
 #include <SDL_gfxPrimitives.h>
 #include <SDL_image.h>
 #include "../lodepng.h"

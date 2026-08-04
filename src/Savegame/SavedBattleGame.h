@@ -17,9 +17,9 @@
  * You should have received a copy of the GNU General Public License
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
-#include <vector>
-#include <string>
-#include <list>
+
+
+
 #include "../Engine/Yaml.h"
 #include "Tile.h"
 #include "../Mod/AlienDeployment.h"

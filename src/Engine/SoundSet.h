@@ -18,7 +18,7 @@
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include <SDL_mixer.h>
-#include <map>
+
 
 namespace OpenXcom
 {

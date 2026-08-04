@@ -20,8 +20,8 @@
 #include <set>
 #include <sstream>
 #include <iomanip>
-#include <algorithm>
-#include <climits>
+
+
 #include <functional>
 #include "../Engine/RNG.h"
 #include "../Engine/Game.h"

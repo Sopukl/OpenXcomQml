@@ -18,7 +18,7 @@
  */
 #include "StatString.h"
 #include "Unit.h"
-#include <vector>
+
 #include "../Engine/Game.h"
 #include "../Engine/Unicode.h"
 

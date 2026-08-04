@@ -19,7 +19,7 @@
 
 #include "Yaml.h"
 #include "../Engine/CrossPlatform.h"
-#include <string>
+
 #include <c4/format.hpp>
 
 namespace OpenXcom

@@ -19,7 +19,7 @@
  */
 #include <SDL.h>
 #include <QObject>
-#include <string>
+
 #include "OpenGL.h"
 #include "Surface.h"
 

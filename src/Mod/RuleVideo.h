@@ -18,8 +18,8 @@
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "../Engine/Yaml.h"
-#include <vector>
-#include <string>
+
+
 #include "../Interface/Text.h"
 
 namespace OpenXcom

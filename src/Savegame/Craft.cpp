@@ -17,7 +17,7 @@
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "Craft.h"
-#include <algorithm>
+
 #include <ranges>
 #include "../fmath.h"
 #include "../Engine/Game.h"

@@ -17,7 +17,7 @@
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "AdlibMusic.h"
-#include <algorithm>
+
 #include "Options.h"
 #include "Logger.h"
 #include "Game.h"

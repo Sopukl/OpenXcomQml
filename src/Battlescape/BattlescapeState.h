@@ -20,8 +20,8 @@
 #include "../Engine/State.h"
 #include "Position.h"
 
-#include <vector>
-#include <string>
+
+
 
 namespace OpenXcom
 {

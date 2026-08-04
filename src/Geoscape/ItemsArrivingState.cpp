@@ -18,7 +18,7 @@
  */
 #include "ItemsArrivingState.h"
 #include <sstream>
-#include <algorithm>
+
 #include "../Engine/Game.h"
 #include "../Mod/Mod.h"
 #include "../Interface/TextButton.h"

@@ -16,8 +16,8 @@
 #include "xbrz.h"
 #include <cassert>
 #include <cmath>
-#include <algorithm>
-#include <vector>
+
+
 
 namespace
 {

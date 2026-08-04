@@ -18,8 +18,8 @@
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include <QObject>
-#include <vector>
-#include <string>
+
+
 #include <SDL.h>
 #include "LocalizedText.h"
 

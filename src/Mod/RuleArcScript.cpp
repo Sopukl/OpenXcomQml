@@ -17,7 +17,7 @@
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "RuleArcScript.h"
-#include <climits>
+
 
 namespace OpenXcom
 {

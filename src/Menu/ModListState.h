@@ -19,8 +19,8 @@
  */
 #include "../Engine/State.h"
 #include "../Engine/ModInfo.h"
-#include <vector>
-#include <string>
+
+
 #include <utility>
 
 namespace OpenXcom

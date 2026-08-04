@@ -17,7 +17,7 @@
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <algorithm>
+
 #include "ExtraSounds.h"
 #include "../Engine/SoundSet.h"
 #include "../Engine/Sound.h"

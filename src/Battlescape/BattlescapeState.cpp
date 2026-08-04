@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU General Public License
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
-#include <algorithm>
+
 #include <sstream>
 #include <iomanip>
 #include "../fmath.h"
@@ -88,7 +88,7 @@
 #include "../Mod/RuleInventory.h"
 #include "../Mod/RuleSoldier.h"
 #include "../Mod/RuleVideo.h"
-#include <algorithm>
+
 
 namespace OpenXcom
 {

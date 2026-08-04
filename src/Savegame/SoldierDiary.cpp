@@ -17,12 +17,12 @@
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "SoldierDiary.h"
-#include <algorithm>
+
 #include "../Mod/RuleCommendations.h"
 #include "../Mod/Mod.h"
 #include "BattleUnitStatistics.h"
 #include "MissionStatistics.h"
-#include <algorithm>
+
 
 namespace OpenXcom
 {

@@ -17,13 +17,13 @@
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "Screen.h"
-#include <algorithm>
+
 #include <qdebug.h>
 #include <qglobal.h>
 #include <sstream>
 #include <cmath>
 #include <iomanip>
-#include <climits>
+
 #include <cstdio>
 #include "../lodepng.h"
 #include "Exception.h"
@@ -36,7 +36,7 @@
 #include "Zoom.h"
 #include "Timer.h"
 #include <SDL.h>
-#include <algorithm>
+
 
 namespace OpenXcom
 {

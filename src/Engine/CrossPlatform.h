@@ -19,12 +19,12 @@
  */
 #include <istream>
 #include <SDL.h>
-#include <string>
-#include <vector>
+
+
 #include <array>
 #include <memory>
 #include <utility>
-#include <QString>
+
 extern QString openXComFolder();
 
 namespace OpenXcom

@@ -19,9 +19,9 @@
 #include <QElapsedTimer>
 #include "Mod.h"
 #include "ModScript.h"
-#include <algorithm>
+
 #include <sstream>
-#include <climits>
+
 #include <cassert>
 #include "../version.h"
 #include "../Engine/CrossPlatform.h"

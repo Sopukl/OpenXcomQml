@@ -21,7 +21,7 @@
 #include "BattlescapeGame.h"
 #include "Position.h"
 #include "../Savegame/BattleUnit.h"
-#include <vector>
+
 
 
 namespace OpenXcom

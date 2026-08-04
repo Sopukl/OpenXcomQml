@@ -19,7 +19,7 @@
 #include "RuleMissionScript.h"
 #include "../Engine/Exception.h"
 #include "../Engine/RNG.h"
-#include <climits>
+
 #include <set>
 
 namespace OpenXcom

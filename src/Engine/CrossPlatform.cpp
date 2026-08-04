@@ -21,11 +21,11 @@
 #endif
 #include "CrossPlatform.h"
 #include <exception>
-#include <algorithm>
+
 #include <sstream>
 #include <fstream>
-#include <string>
-#include <list>
+
+
 #include <stdint.h>
 #include <time.h>
 #include <signal.h>
@@ -66,9 +66,9 @@
 #else		/* #ifdef _WIN32 */
 #include <iostream>
 #include <fstream>
-#include <locale>
+
 #include <SDL_image.h>
-#include <cstring>
+
 #include <cstdio>
 #include <cstdlib>
 #include <unistd.h>

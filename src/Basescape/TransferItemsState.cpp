@@ -20,9 +20,9 @@
 #include "ItemLocationsState.h"
 #include "ManufactureDependenciesTreeState.h"
 #include <sstream>
-#include <climits>
-#include <algorithm>
-#include <locale>
+
+
+
 #include "../Engine/CrossPlatform.h"
 #include "../Engine/Action.h"
 #include "../Engine/Game.h"

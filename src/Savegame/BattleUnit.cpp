@@ -19,7 +19,7 @@
 #include "BattleUnit.h"
 #include "BattleItem.h"
 #include <sstream>
-#include <algorithm>
+
 #include "../Engine/Collections.h"
 #include "../Engine/Surface.h"
 #include "../Engine/Script.h"

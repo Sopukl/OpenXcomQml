@@ -32,8 +32,8 @@
 #include "../Savegame/SavedGame.h"
 #include "../Engine/Unicode.h"
 #include "../Mod/RuleInterface.h"
-#include <algorithm>
-#include <climits>
+
+
 #include <cmath>
 
 namespace OpenXcom

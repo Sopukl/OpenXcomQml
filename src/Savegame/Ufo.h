@@ -18,7 +18,7 @@
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <string>
+
 #include "../Engine/Yaml.h"
 #include "Craft.h"
 #include "MovingTarget.h"

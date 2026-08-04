@@ -18,7 +18,7 @@
  */
 #include "SoldierArmorState.h"
 #include <sstream>
-#include <algorithm>
+
 #include "../Engine/Action.h"
 #include "../Engine/Game.h"
 #include "../Mod/Mod.h"

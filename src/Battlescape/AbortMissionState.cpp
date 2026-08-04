@@ -17,7 +17,7 @@
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "AbortMissionState.h"
-#include <vector>
+
 #include "../Engine/Game.h"
 #include "../Mod/Mod.h"
 #include "../Interface/Window.h"

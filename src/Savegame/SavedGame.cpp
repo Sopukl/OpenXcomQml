@@ -20,7 +20,7 @@
 #include <sstream>
 #include <set>
 #include <iomanip>
-#include <algorithm>
+
 #include <functional>
 #include <ctime>
 #include "../Engine/Yaml.h"

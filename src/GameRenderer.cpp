@@ -1,9 +1,9 @@
 #include "GameRenderer.h"
 #include <QPainter>
-#include <QDebug>
+
 #include <QThread>
 #include "Engine/Screen.h"
-#include <QDebug>
+
 #include <QMouseEvent>
 #include "Engine/Options.h"
 

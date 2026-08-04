@@ -51,7 +51,7 @@
 #include "../Savegame/SavedBattleGame.h"
 #include "../Savegame/SavedGame.h"
 #include "../fmath.h"
-#include <algorithm>
+
 
 namespace OpenXcom
 {

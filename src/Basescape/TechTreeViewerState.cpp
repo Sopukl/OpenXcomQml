@@ -39,8 +39,8 @@
 #include "../Interface/TextButton.h"
 #include "../Interface/TextList.h"
 #include "../Savegame/SavedGame.h"
-#include <algorithm>
-#include <unordered_set>
+
+
 
 namespace OpenXcom
 {

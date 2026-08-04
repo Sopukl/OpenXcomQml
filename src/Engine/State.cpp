@@ -17,8 +17,8 @@
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "State.h"
-#include <algorithm>
-#include <climits>
+
+
 #include "InteractiveSurface.h"
 #include "Game.h"
 #include "Screen.h"

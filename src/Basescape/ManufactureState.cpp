@@ -36,7 +36,7 @@
 #include "ManufactureInfoState.h"
 #include "TechTreeViewerState.h"
 #include "../Ufopaedia/Ufopaedia.h"
-#include <algorithm>
+
 
 namespace OpenXcom
 {

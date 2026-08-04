@@ -23,10 +23,10 @@
 #include <SDL.h>
 #include <SDL_keysym.h>
 #include <SDL_mixer.h>
-#include <map>
+
 #include <sstream>
 #include <iostream>
-#include <algorithm>
+
 #include "../Engine/Yaml.h"
 #include "Exception.h"
 #include "Logger.h"

@@ -18,7 +18,7 @@
  */
 #include "SoldierTransformState.h"
 #include "SoldierTransformationState.h"
-#include <algorithm>
+
 #include "../Engine/Action.h"
 #include "../Engine/Game.h"
 #include "../Engine/LocalizedText.h"

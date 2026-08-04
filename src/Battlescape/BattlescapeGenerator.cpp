@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU General Public License
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
-#include <algorithm>
+
 #include <assert.h>
 #include <sstream>
 #include "BattlescapeGenerator.h"

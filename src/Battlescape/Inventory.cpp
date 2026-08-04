@@ -17,7 +17,7 @@
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "Inventory.h"
-#include <algorithm>
+
 #include <cmath>
 #include "../Mod/Mod.h"
 #include "../Mod/RuleInventory.h"
@@ -43,7 +43,7 @@
 #include "../Savegame/Tile.h"
 #include "PrimeGrenadeState.h"
 #include "../Ufopaedia/Ufopaedia.h"
-#include <unordered_map>
+
 #include "../Engine/Screen.h"
 #include "../Engine/CrossPlatform.h"
 #include "TileEngine.h"

@@ -19,7 +19,7 @@
 #include "TextList.h"
 #include <cstdarg>
 #include <cmath>
-#include <algorithm>
+
 #include "../Engine/Action.h"
 #include "../Engine/Font.h"
 #include "../Engine/Palette.h"

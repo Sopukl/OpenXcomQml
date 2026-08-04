@@ -43,8 +43,8 @@
 #include "../Mod/RuleItem.h"
 #include "../Mod/RuleResearch.h"
 #include "../Ufopaedia/Ufopaedia.h"
-#include <algorithm>
-#include <locale>
+
+
 
 namespace OpenXcom
 {

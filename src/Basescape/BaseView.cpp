@@ -17,7 +17,7 @@
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "BaseView.h"
-#include <algorithm>
+
 #include <sstream>
 #include <cmath>
 #include "../Engine/SurfaceSet.h"
@@ -29,7 +29,7 @@
 #include "../Interface/Text.h"
 #include "../Engine/Timer.h"
 #include "../Engine/Options.h"
-#include <climits>
+
 #include "../Mod/Texture.h"
 
 namespace OpenXcom

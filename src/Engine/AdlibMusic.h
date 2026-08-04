@@ -18,8 +18,8 @@
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "Music.h"
-#include <map>
-#include <string>
+
+
 
 namespace OpenXcom
 {

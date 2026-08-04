@@ -17,7 +17,7 @@
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "Tile.h"
-#include <algorithm>
+
 #include "../Mod/MapData.h"
 #include "../Mod/MapDataSet.h"
 #include "../Engine/SurfaceSet.h"

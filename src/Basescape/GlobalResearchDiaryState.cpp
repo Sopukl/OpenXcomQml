@@ -33,8 +33,8 @@
 #include "../Mod/RuleResearch.h"
 #include "../Ufopaedia/Ufopaedia.h"
 #include "TechTreeViewerState.h"
-#include <algorithm>
-#include <locale>
+
+
 
 namespace OpenXcom
 {

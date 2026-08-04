@@ -19,9 +19,9 @@
  */
 #include "MovingTarget.h"
 #include <utility>
-#include <map>
-#include <vector>
-#include <string>
+
+
+
 #include "../Mod/RuleCraft.h"
 #include "../Engine/Script.h"
 #include "../Battlescape/Position.h"

@@ -18,9 +18,9 @@
  */
 #include "Unicode.h"
 #include <sstream>
-#include <locale>
-#include <stdexcept>
-#include <cstring>
+
+
+
 #include <assert.h>
 #include "Logger.h"
 #include "Exception.h"
@@ -35,7 +35,7 @@
 #else
 
 #if defined(__CYGWIN__)
-#include <algorithm>
+
 #endif
 
 #include <stdio.h>

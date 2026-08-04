@@ -19,11 +19,11 @@
  */
 
 #include <set>
-#include <string>
-#include <vector>
+
+
 #include <istream>
 #include <memory>
-#include <unordered_set>
+
 #include "../Engine/Yaml.h"
 #include "../Engine/CrossPlatform.h"
 #include <SDL_rwops.h>

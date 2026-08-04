@@ -17,8 +17,8 @@
  * You should have received a copy of the GNU General Public License
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
-#include <vector>
-#include <list>
+
+
 #include "../Engine/InteractiveSurface.h"
 #include "../Engine/FastLineClip.h"
 #include "Cord.h"

@@ -19,7 +19,7 @@
  */
 #include "../Engine/State.h"
 #include "OptionsBaseState.h"
-#include <vector>
+
 #include "../Savegame/SavedGame.h"
 #include "../Engine/Options.h"
 

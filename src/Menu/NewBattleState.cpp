@@ -18,7 +18,7 @@
  */
 #include "NewBattleState.h"
 #include <cmath>
-#include <algorithm>
+
 #include "../Engine/Yaml.h"
 #include "../Engine/Game.h"
 #include "../Mod/Mod.h"

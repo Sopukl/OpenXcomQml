@@ -18,7 +18,7 @@
  */
 #include "Ufo.h"
 #include <assert.h>
-#include <algorithm>
+
 #include <functional>
 #include "../fmath.h"
 #include "Craft.h"

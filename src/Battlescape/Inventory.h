@@ -18,9 +18,9 @@
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "../Engine/InteractiveSurface.h"
-#include <locale>
-#include <map>
-#include <string>
+
+
+
 
 namespace OpenXcom
 {

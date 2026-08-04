@@ -17,10 +17,10 @@
  * You should have received a copy of the GNU General Public License
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
-#include <map>
-#include <unordered_map>
-#include <vector>
-#include <string>
+
+
+
+
 #include <bitset>
 #include <array>
 #include <SDL.h>

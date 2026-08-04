@@ -28,7 +28,7 @@
 #include "../Interface/TextList.h"
 #include "../Engine/Options.h"
 #include "../Engine/Action.h"
-#include <algorithm>
+
 
 namespace OpenXcom
 {

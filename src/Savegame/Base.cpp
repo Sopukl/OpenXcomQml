@@ -19,7 +19,7 @@
 #include "Base.h"
 #include "../fmath.h"
 #include <stack>
-#include <algorithm>
+
 #include <functional>
 #include "BaseFacility.h"
 #include "../Mod/RuleBaseFacility.h"

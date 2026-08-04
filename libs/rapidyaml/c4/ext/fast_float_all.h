@@ -90,9 +90,9 @@
 #define FASTFLOAT_FLOAT_COMMON_H
 
 #include <cfloat>
-#include <cstdint>
+
 #include <cassert>
-#include <cstring>
+
 #include <type_traits>
 #include <system_error>
 #ifdef __has_include
@@ -904,8 +904,8 @@ from_chars_result_t<UC> from_chars(UC const * first, UC const * last, T& value, 
 #define FASTFLOAT_ASCII_NUMBER_H
 
 #include <cctype>
-#include <cstdint>
-#include <cstring>
+
+
 #include <iterator>
 #include <limits>
 #include <type_traits>
@@ -1431,7 +1431,7 @@ from_chars_result_t<UC> parse_int_string(UC const* p, UC const* pend, T& value, 
 #ifndef FASTFLOAT_FAST_TABLE_H
 #define FASTFLOAT_FAST_TABLE_H
 
-#include <cstdint>
+
 
 namespace fast_float {
 
@@ -2135,9 +2135,9 @@ using powers = powers_template<>;
 #include <cfloat>
 #include <cinttypes>
 #include <cmath>
-#include <cstdint>
+
 #include <cstdlib>
-#include <cstring>
+
 
 namespace fast_float {
 
@@ -2321,10 +2321,10 @@ adjusted_mantissa compute_float(int64_t q, uint64_t w)  noexcept  {
 #ifndef FASTFLOAT_BIGINT_H
 #define FASTFLOAT_BIGINT_H
 
-#include <algorithm>
-#include <cstdint>
-#include <climits>
-#include <cstring>
+
+
+
+
 
 
 namespace fast_float {
@@ -2938,9 +2938,9 @@ struct bigint : pow5_tables<> {
 #ifndef FASTFLOAT_DIGIT_COMPARISON_H
 #define FASTFLOAT_DIGIT_COMPARISON_H
 
-#include <algorithm>
-#include <cstdint>
-#include <cstring>
+
+
+
 #include <iterator>
 
 
@@ -3364,7 +3364,7 @@ adjusted_mantissa digit_comp(parsed_number_string_t<UC>& num, adjusted_mantissa 
 
 
 #include <cmath>
-#include <cstring>
+
 #include <limits>
 #include <system_error>
 namespace fast_float {

@@ -17,7 +17,7 @@
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "MonthlyReportState.h"
-#include <climits>
+
 #include <sstream>
 #include "../Engine/Game.h"
 #include "../Mod/Mod.h"

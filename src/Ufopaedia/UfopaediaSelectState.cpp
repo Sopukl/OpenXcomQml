@@ -17,7 +17,7 @@
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <locale>
+
 #include "Ufopaedia.h"
 #include "UfopaediaSelectState.h"
 #include "../Mod/ArticleDefinition.h"

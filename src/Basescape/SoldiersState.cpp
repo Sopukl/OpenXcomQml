@@ -17,7 +17,7 @@
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "SoldiersState.h"
-#include <climits>
+
 #include "../Engine/Screen.h"
 #include "../Engine/Game.h"
 #include "../Mod/Mod.h"
@@ -43,7 +43,7 @@
 #include "../Battlescape/InventoryState.h"
 #include "../Battlescape/BattlescapeGenerator.h"
 #include "../Savegame/SavedBattleGame.h"
-#include <algorithm>
+
 #include "../Engine/Unicode.h"
 
 namespace OpenXcom

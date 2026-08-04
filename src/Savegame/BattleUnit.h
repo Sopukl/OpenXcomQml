@@ -17,9 +17,9 @@
  * You should have received a copy of the GNU General Public License
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
-#include <vector>
-#include <string>
-#include <unordered_set>
+
+
+
 #include "../Battlescape/Position.h"
 #include "../Mod/Armor.h"
 #include "../Mod/RuleItem.h"

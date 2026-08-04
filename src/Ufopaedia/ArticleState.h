@@ -19,7 +19,7 @@
  */
 #include "../Engine/State.h"
 #include "../Mod/RuleItem.h"
-#include <string>
+
 #include <memory>
 
 namespace OpenXcom

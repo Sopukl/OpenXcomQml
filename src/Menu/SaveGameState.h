@@ -19,7 +19,7 @@
  */
 #include "../Engine/State.h"
 #include <SDL.h>
-#include <string>
+
 #include "OptionsBaseState.h"
 #include "../Savegame/SavedGame.h"
 

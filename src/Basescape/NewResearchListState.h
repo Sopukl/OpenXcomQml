@@ -18,7 +18,7 @@
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "../Engine/TouchState.h"
-#include <vector>
+
 
 namespace OpenXcom
 {

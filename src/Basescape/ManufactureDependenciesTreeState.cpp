@@ -30,8 +30,8 @@
 #include "../Interface/Text.h"
 #include "../Interface/TextList.h"
 #include "../Savegame/SavedGame.h"
-#include <unordered_map>
-#include <unordered_set>
+
+
 
 namespace OpenXcom
 {

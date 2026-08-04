@@ -18,7 +18,7 @@
  */
 #include "DogfightExperienceState.h"
 #include <sstream>
-#include <algorithm>
+
 #include "../Engine/Game.h"
 #include "../Engine/Options.h"
 #include "../Interface/Text.h"

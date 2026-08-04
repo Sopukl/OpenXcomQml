@@ -19,8 +19,8 @@
  */
 #include "../Engine/TouchState.h"
 #include "../Savegame/Transfer.h"
-#include <vector>
-#include <string>
+
+
 
 namespace OpenXcom
 {

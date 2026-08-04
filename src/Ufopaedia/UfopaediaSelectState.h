@@ -19,7 +19,7 @@
  */
 #include "../Engine/State.h"
 #include "Ufopaedia.h"
-#include <string>
+
 
 namespace OpenXcom
 {

@@ -17,7 +17,7 @@
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <algorithm>
+
 #include "../Engine/RNG.h"
 #include "Particle.h"
 #include "../Mod/Mod.h"

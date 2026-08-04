@@ -16,7 +16,7 @@
 #endif
 
 #include <SDL_opengl.h>
-#include <string>
+
 
 #include "Surface.h"
 

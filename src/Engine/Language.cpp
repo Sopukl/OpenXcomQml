@@ -18,11 +18,11 @@
  */
 
 #include "Language.h"
-#include <algorithm>
+
 #include <cassert>
 #include <set>
-#include <climits>
-#include <algorithm>
+
+
 #include "CrossPlatform.h"
 #include "Logger.h"
 #include "Options.h"

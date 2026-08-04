@@ -19,7 +19,7 @@
  */
 #include "../Engine/Yaml.h"
 #include "GameTime.h"
-#include <string>
+
 #include "../Mod/Mod.h"
 #include "../Mod/RuleResearch.h"
 #include "../Mod/RuleEvent.h"

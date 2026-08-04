@@ -18,7 +18,7 @@
  */
 #include "SoldierDiaryLightState.h"
 #include <sstream>
-#include <string>
+
 #include "../Engine/Game.h"
 #include "../Engine/LocalizedText.h"
 #include "../Engine/Options.h"
