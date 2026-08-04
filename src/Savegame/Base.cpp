@@ -723,34 +723,34 @@ int Base::getTotalOtherStaffAndInventoryCost(int& staffCount, int& inventoryCoun
 			}
 		}
 	}
-	for (const auto& storeItem : *_items.getContents())
+	for (const auto& storeItem : _items.getContents())
 	{
-		auto* ruleItem = storeItem.first;
+		auto* ruleItem = storeItem.item();
 		if (ruleItem->getMonthlySalary() != 0)
 		{
-			staffCount += storeItem.second;
-			totalCost += ruleItem->getMonthlySalary() * storeItem.second;
+			staffCount += storeItem.count();
+			totalCost += ruleItem->getMonthlySalary() * storeItem.count();
 		}
 		if (ruleItem->getMonthlyMaintenance() != 0)
 		{
-			inventoryCount += storeItem.second;
-			totalCost += ruleItem->getMonthlyMaintenance() * storeItem.second;
+			inventoryCount += storeItem.count();
+			totalCost += ruleItem->getMonthlyMaintenance() * storeItem.count();
 		}
 	}
 	for (auto* xcraft : _crafts)
 	{
-		for (const auto& craftItem : *xcraft->getItems()->getContents())
+		for (const auto& craftItem : xcraft->getItems()->getContents())
 		{
-			auto* ruleItem = craftItem.first;
+			auto* ruleItem = craftItem.item();
 			if (ruleItem->getMonthlySalary() != 0)
 			{
-				staffCount += craftItem.second;
-				totalCost += ruleItem->getMonthlySalary() * craftItem.second;
+				staffCount += craftItem.count();
+				totalCost += ruleItem->getMonthlySalary() * craftItem.count();
 			}
 			if (ruleItem->getMonthlyMaintenance() != 0)
 			{
-				inventoryCount += craftItem.second;
-				totalCost += ruleItem->getMonthlyMaintenance() * craftItem.second;
+				inventoryCount += craftItem.count();
+				totalCost += ruleItem->getMonthlyMaintenance() * craftItem.count();
 			}
 		}
 		for (auto* vehicle : *xcraft->getVehicles())
@@ -1485,12 +1485,12 @@ int Base::getUsedContainment(int prisonType, bool onlyExternal) const
 		return total;
 	}
 
-	for (const auto& pair : *_items.getContents())
+	for (const auto& pair : _items.getContents())
 	{
-		rule = pair.first;
+		rule = pair.item();
 		if (rule->isAlien() && rule->getPrisonType() == prisonType)
 		{
-			total += pair.second;
+			total += pair.count();
 		}
 	}
 	return total;
@@ -1620,10 +1620,10 @@ void Base::setupDefenses(AlienMission* am)
 	}
 
 	// add vehicles left on the base
-	for (auto iter = _items.getContents()->begin(); iter != _items.getContents()->end(); )
+	for (auto iter = _items.getContents().begin(); iter != _items.getContents().end(); )
 	{
-		int itemQty = iter->second;
-		const RuleItem *rule = iter->first;
+		int itemQty = iter->count();
+		const RuleItem *rule = iter->item();
 		if (rule->getVehicleUnit())
 		{
 			int size = rule->getVehicleUnit()->getArmor()->getTotalSize();
@@ -1659,7 +1659,7 @@ void Base::setupDefenses(AlienMission* am)
 				_items.removeItem(rule, canBeAdded);
 			}
 
-			iter = _items.getContents()->begin(); // we have to start over because iterator is broken because of the removeItem
+			iter = _items.getContents().begin(); // we have to start over because iterator is broken because of the removeItem
 		}
 		else ++iter;
 	}
@@ -1900,11 +1900,11 @@ void Base::destroyFacility(BASEFACILITIESITERATOR facility)
 			}
 
 			// remove all items
-			while (!(*facility)->getCraftForDrawing()->getItems()->getContents()->empty())
+			while (!(*facility)->getCraftForDrawing()->getItems()->getContents().empty())
 			{
-				auto i = (*facility)->getCraftForDrawing()->getItems()->getContents()->begin();
-				_items.addItem(i->first, i->second);
-				(*facility)->getCraftForDrawing()->getItems()->removeItem(i->first, i->second);
+				auto i = (*facility)->getCraftForDrawing()->getItems()->getContents().begin();
+				_items.addItem(i->item(), i->count());
+				(*facility)->getCraftForDrawing()->getItems()->removeItem(i->item(), i->count());
 			}
 			Collections::deleteIf(_crafts, 1,
 				[&](Craft* c)

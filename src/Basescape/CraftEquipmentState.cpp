@@ -1086,12 +1086,10 @@ void CraftEquipmentState::loadGlobalLoadout(int index, bool onlyAddItems)
 	// lastly check and report what's missing
 	std::string craftName = c->getName();
 	std::vector<ReequipStat> _missingItems;
-	for (const auto& templateItem : *tmpl->getContents())
+	for (const auto& templateItem : tmpl->getContents())
 	{
-		const RuleItem *item = templateItem.first;
-		if (item)
+		if (const auto item = templateItem.item())
 		{
-			int tQty = templateItem.second;
 			int cQty = 0;
 			if (item->getVehicleUnit())
 			{
@@ -1120,7 +1118,7 @@ void CraftEquipmentState::loadGlobalLoadout(int index, bool onlyAddItems)
 					cQty -= craftItemsBackup.getItem(item); // i.e. only count newly added items
 				}
 			}
-			int missing = tQty - cQty;
+			int missing = templateItem.count() - cQty;
 			if (missing > 0)
 			{
 				ReequipStat stat = { item->getType(), missing, craftName, item->getListOrder() };

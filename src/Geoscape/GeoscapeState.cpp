@@ -2235,9 +2235,9 @@ void GeoscapeState::time1Hour()
 			if (!game.savedGame()->getAlienContainmentChecked())
 			{
 				std::map<int, int> prisonTypes;
-				for (const auto& item : *xbase->getStorageItems().getContents())
+				for (const auto& item : xbase->getStorageItems().getContents())
 				{
-					const RuleItem* rule = item.first;
+					const RuleItem* rule = item.item();
 					if (rule->isAlien())
 					{
 						prisonTypes[rule->getPrisonType()] += 1;

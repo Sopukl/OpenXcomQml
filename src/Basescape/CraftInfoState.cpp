@@ -325,7 +325,7 @@ void CraftInfoState::init()
 		using ArraySurfaces = std::array<const Surface *, 3>;
 		std::map<ArrayIndexes, std::tuple<ArraySurfaces, size_t>, std::greater<>> itemsBySprite;
 
-		for (auto& item : *_craft->getItems()->getContents())
+		for (const auto& item : _craft->getItems()->getContents())
 		{
 			ArrayIndexes ind = { };
 
@@ -336,7 +336,7 @@ void CraftInfoState::init()
 			}
 
 			// load values from config, zip will clip range to min length of one of arguments
-			for (auto [arr, prev] : Collections::zipTie(Collections::range(ind), Collections::range(item.first->getCustomItemPreviewIndex())))
+			for (auto [arr, prev] : Collections::zipTie(Collections::range(ind), Collections::range(item.item()->getCustomItemPreviewIndex())))
 			{
 				arr = prev;
 			}
@@ -354,7 +354,7 @@ void CraftInfoState::init()
 				surf = customItemPreviews->getFrame(arr);
 			}
 
-			std::get<size_t>(pos) += item.second;
+			std::get<size_t>(pos) += item.count();
 		}
 
 		for (const auto& pair : itemsBySprite)

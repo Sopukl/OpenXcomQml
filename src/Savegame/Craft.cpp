@@ -157,14 +157,14 @@ void Craft::load(const YAML::YamlNodeReader& node, const ScriptGlobal *shared, c
 
 	_items->load(reader["items"], mod);
 	// Some old saves have bad items, better get rid of them to avoid further bugs
-	for (auto iter = _items->getContents()->begin(); iter != _items->getContents()->end();)
+	for (auto iter = _items->getContents().begin(); iter != _items->getContents().end();)
 	{
-		auto* ruleItem = iter->first;
+		auto* ruleItem = iter->item();
 		if (!ruleItem->canBeEquippedToCraftInventory())
 		{
-			Log(LOG_WARNING) << "Item '" << iter->first->getType() << "' cannot be equipped in the craft inventory (" << _rules->getType() << ", " << _id << "). Skipping " << iter->second << " items.";
+			Log(LOG_WARNING) << "Item '" << iter->item()->getType() << "' cannot be equipped in the craft inventory (" << _rules->getType() << ", " << _id << "). Skipping " << iter->count() << " items.";
 			auto old = iter++; // avoid erase in `removeItem`
-			_items->removeItem(old->first, old->second);
+			_items->removeItem(old->item(), old->count());
 		}
 		else
 		{
@@ -1859,9 +1859,9 @@ void Craft::unload()
 	}
 
 	// Remove items
-	for (const auto& pair : *_items->getContents())
+	for (const auto& pair : _items->getContents())
 	{
-		_base->getStorageItems().addItem(pair.first, pair.second);
+		_base->getStorageItems().addItem(pair.item(), pair.count());
 	}
 
 	// Remove vehicles

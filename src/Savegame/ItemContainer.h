@@ -27,6 +27,19 @@ namespace OpenXcom
 class Mod;
 class RuleItem;
 
+class ItemCounter
+{
+	const RuleItem* m_Item = nullptr;
+	size_t m_Count = 0;
+  public:
+	ItemCounter() = default;
+	ItemCounter(const RuleItem* item, size_t count);
+
+	const RuleItem* item() const;
+	size_t count() const;
+	void setCount(size_t newCount);
+};
+
 /**
  * Represents the items contained by a certain entity,
  * like base stores, craft equipment, etc.
@@ -35,7 +48,7 @@ class RuleItem;
 class ItemContainer
 {
 private:
-	std::map<const RuleItem*, int> _qty;
+	std::vector<ItemCounter> _qty;
 public:
 	/// Creates an empty item container.
 	ItemContainer();
@@ -45,8 +58,6 @@ public:
 	void load(const YAML::YamlNodeReader& reader, const Mod* mod);
 	/// Saves the item container to YAML.
 	void save(YAML::YamlNodeWriter writer) const;
-	/// Adds an item to the container.
-	void addItem(const std::string &id, int qty = 1) = delete;
 	/// Adds an item to the container.
 	void addItem(const RuleItem* item, int qty = 1);
 	/// Removes an item from the container.
@@ -66,7 +77,10 @@ public:
 	/// Clear all content.
 	void clear() { _qty.clear(); }
 	/// Gets all the items in the container.
-	const std::map<const RuleItem*, int> *getContents() const;
+	const std::vector<ItemCounter>& getContents() const;
+  private:
+	std::vector<ItemCounter>::iterator find(const RuleItem* item);
+	std::vector<ItemCounter>::iterator find(const std::string &id);
 };
 
 }

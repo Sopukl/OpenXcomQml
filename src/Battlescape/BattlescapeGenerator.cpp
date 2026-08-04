@@ -984,9 +984,9 @@ void BattlescapeGenerator::deployXCOM(const RuleStartingCondition* startingCondi
 	if (!isPreview && _base != 0)
 	{
 		ItemContainer *rememberMe = _save->getBaseStorageItems();
-		for (const auto& pair : *_base->getStorageItems().getContents())
+		for (const auto& pair : _base->getStorageItems().getContents())
 		{
-			rememberMe->addItem(pair.first, pair.second);
+			rememberMe->addItem(pair.item(), pair.count());
 		}
 	}
 
@@ -1230,18 +1230,18 @@ void BattlescapeGenerator::deployXCOM(const RuleStartingCondition* startingCondi
 	if (_craft != 0)
 	{
 		// add items that are in the craft
-		for (const auto& pair : *_craft->getItems()->getContents())
+		for (const auto& pair : _craft->getItems()->getContents())
 		{
-			if (startingCondition != 0 && !startingCondition->isItemPermitted(pair.first->getType(), game.getMod(), _craft))
+			if (startingCondition != 0 && !startingCondition->isItemPermitted(pair.item()->getType(), game.getMod(), _craft))
 			{
 				// send disabled items back to base
-				_base->getStorageItems().addItem(pair.first, pair.second);
+				_base->getStorageItems().addItem(pair.item(), pair.count());
 			}
 			else
 			{
-				for (int count = 0; count < pair.second; count++)
+				for (int count = 0; count < pair.count(); count++)
 				{
-					_save->createItemForTile(pair.first, _craftInventoryTile);
+					_save->createItemForTile(pair.item(), _craftInventoryTile);
 				}
 			}
 		}
@@ -1252,9 +1252,9 @@ void BattlescapeGenerator::deployXCOM(const RuleStartingCondition* startingCondi
 		if (game.savedGame()->getMonthsPassed() != -1)
 		{
 			// add items that are in the base
-			for (auto i = _base->getStorageItems().getContents()->begin(); i != _base->getStorageItems().getContents()->end();)
+			for (auto i = _base->getStorageItems().getContents().begin(); i != _base->getStorageItems().getContents().end();)
 			{
-				const RuleItem *rule = i->first;
+				const RuleItem *rule = i->item();
 				if (
 					// is item allowed in base defense?
 					rule->canBeEquippedBeforeBaseDefense() &&
@@ -1266,15 +1266,15 @@ void BattlescapeGenerator::deployXCOM(const RuleStartingCondition* startingCondi
 					// we know how to use this item
 					game.savedGame()->isResearched(rule->getRequirements()))
 				{
-					for (int count = 0; count < i->second; count++)
+					for (int count = 0; count < i->count(); count++)
 					{
-						_save->createItemForTile(i->first, _craftInventoryTile);
+						_save->createItemForTile(i->item(), _craftInventoryTile);
 					}
 					auto tmp = i; // copy
 					++i;
 					if (!_baseInventory)
 					{
-						_base->getStorageItems().removeItem(tmp->first, tmp->second);
+						_base->getStorageItems().removeItem(tmp->item(), tmp->count());
 					}
 				}
 				else
@@ -1288,11 +1288,11 @@ void BattlescapeGenerator::deployXCOM(const RuleStartingCondition* startingCondi
 		{
 			if (craft->getStatus() == "STR_OUT")
 				continue;
-			for (const auto& pair : *craft->getItems()->getContents())
+			for (const auto& pair : craft->getItems()->getContents())
 			{
-				for (int count = 0; count < pair.second; count++)
+				for (int count = 0; count < pair.count(); count++)
 				{
-					_save->createItemForTile(pair.first, _craftInventoryTile);
+					_save->createItemForTile(pair.item(), _craftInventoryTile);
 				}
 			}
 		}

@@ -20,213 +20,233 @@
 #include "../Mod/Mod.h"
 #include "../Mod/RuleItem.h"
 
+namespace str = std::ranges;
+
 namespace OpenXcom
 {
-
-/**
- * Initializes an item container with no contents.
- */
-ItemContainer::ItemContainer()
-{
-}
-
-/**
- *
- */
-ItemContainer::~ItemContainer()
-{
-}
-
-/**
- * Loads the item container from a YAML file.
- * @param node YAML node.
- */
-void ItemContainer::load(const YAML::YamlNodeReader& reader, const Mod* mod)
-{
-	if (!reader || !reader.isMap())
-		return;
-	_qty.clear();
-	for (const auto& item : reader.children())
+	ItemCounter::ItemCounter(const RuleItem *item, size_t count):
+		m_Item(item),
+		m_Count(count)
 	{
-		std::string name = item.readKey<std::string>();
-		const auto* type = mod->getItem(name);
-		if (type)
+
+	}
+
+	const RuleItem *ItemCounter::item() const
+	{
+		return m_Item;
+	}
+
+	size_t ItemCounter::count() const
+	{
+		return m_Count;
+	}
+
+	void ItemCounter::setCount(size_t newCount)
+	{
+		m_Count = newCount;
+	}
+
+	/**
+	 * Initializes an item container with no contents.
+	 */
+	ItemContainer::ItemContainer()
+	{
+	}
+
+	/**
+	 *
+	 */
+	ItemContainer::~ItemContainer()
+	{
+	}
+
+	/**
+	 * Loads the item container from a YAML file.
+	 * @param node YAML node.
+	 */
+	void ItemContainer::load(const YAML::YamlNodeReader& reader, const Mod* mod)
+	{
+		if (!reader || !reader.isMap())
+			return;
+		_qty.clear();
+		for (const auto& item : reader.children())
 		{
-			_qty[type] = item.readVal<int>();
+			std::string name = item.readKey<std::string>();
+
+			if (const auto* type = mod->getItem(name))
+			{
+				_qty.emplace_back(type, item.readVal<int>());
+			}
+			else
+			{
+				Log(LOG_ERROR) << "Failed to load item " << name;
+			}
 		}
-		else
+	}
+
+	/**
+	 * Saves the item container to a YAML file.
+	 * @return YAML node.
+	 */
+	void ItemContainer::save(YAML::YamlNodeWriter writer) const
+	{
+		writer.setAsMap();
+		// item containers are sorted alphabetically in the yaml mapping
+		std::vector<std::pair<std::string, int>> sortedItems;
+		sortedItems.reserve(_qty.size());
+
+		for (auto& pair : _qty)
+			sortedItems.emplace_back(pair.item()->getType(), pair.count());
+
+		str::sort(sortedItems, [](auto& a, auto& b){ return a < b; });
+		for (auto& pair : sortedItems)
+			writer.write(writer.saveString(pair.first), pair.second);
+	}
+
+	/**
+	 * Adds an item amount to the container.
+	 * @param id Item ID.
+	 * @param qty Item quantity.
+	 */
+	void ItemContainer::addItem(const RuleItem* item, int qty)
+	{
+		if (item)
 		{
-			Log(LOG_ERROR) << "Failed to load item " << name;
+			if(auto it = find(item);
+					it == _qty.end())
+			{
+				_qty.emplace_back(item, qty);
+			}
+			else
+			{
+				it->setCount(qty);
+			}
 		}
 	}
-}
 
-/**
- * Saves the item container to a YAML file.
- * @return YAML node.
- */
-void ItemContainer::save(YAML::YamlNodeWriter writer) const
-{
-	writer.setAsMap();
-	// item containers are sorted alphabetically in the yaml mapping
-	std::vector<std::pair<std::string, int>> sortedItems;
-	sortedItems.reserve(_qty.size());
-	for (auto& pair : _qty)
-		sortedItems.push_back(std::make_pair(pair.first->getType(), pair.second));
-	std::sort(sortedItems.begin(), sortedItems.end(), [](auto& a, auto& b){ return a < b; });
-	for (auto& pair : sortedItems)
-		writer.write(writer.saveString(pair.first), pair.second);
-}
-
-/**
- * Adds an item amount to the container.
- * @param id Item ID.
- * @param qty Item quantity.
- */
-void ItemContainer::addItem(const RuleItem* item, int qty)
-{
-	if (item)
+	/**
+	 * Removes an item amount from the container.
+	 * @param id Item ID.
+	 * @param qty Item quantity.
+	 */
+	void ItemContainer::removeItem(const std::string &id, int qty)
 	{
-		_qty[item] += qty;
-	}
-}
-
-/**
- * Removes an item amount from the container.
- * @param id Item ID.
- * @param qty Item quantity.
- */
-void ItemContainer::removeItem(const std::string &id, int qty)
-{
-	if (Mod::isEmptyRuleName(id))
-	{
-		return;
-	}
-	auto it = std::find_if(_qty.begin(), _qty.end(), [&](auto& pair) { return pair.first->getType() == id; });
-	if (it == _qty.end())
-	{
-		return;
-	}
-
-	if (qty < it->second)
-	{
-		it->second -= qty;
-	}
-	else
-	{
-		_qty.erase(it);
-	}
-}
-
-/**
- * Removes an item amount from the container.
- * @param id Item ID.
- * @param qty Item quantity.
- */
-void ItemContainer::removeItem(const RuleItem* item, int qty)
-{
-	if (item)
-	{
-		auto it = _qty.find(item);
-		if (it == _qty.end())
+		if (Mod::isEmptyRuleName(id))
 		{
 			return;
 		}
 
-		if (qty < it->second)
+		if (auto it = find(id);
+				 it != _qty.end())
 		{
-			it->second -= qty;
+			if (qty < it->count())
+			{
+				it->setCount(it->count() - qty);
+			}
+			else
+			{
+				_qty.erase(it);
+			}
 		}
-		else
+	}
+
+	/**
+	 * Removes an item amount from the container.
+	 * @param id Item ID.
+	 * @param qty Item quantity.
+	 */
+	void ItemContainer::removeItem(const RuleItem* item, int qty)
+	{
+		if (item)
 		{
-			_qty.erase(it);
+			if (auto it = find(item); it != _qty.end())
+			{
+				if (qty < it->count())
+				{
+					it->setCount(it->count() - qty);
+				}
+				else
+				{
+					_qty.erase(it);
+				}
+			}
 		}
 	}
-}
 
-/**
- * Returns the quantity of an item in the container.
- * @param id Item ID.
- * @return Item quantity.
- */
-int ItemContainer::getItem(const std::string &id) const
-{
-	if (Mod::isEmptyRuleName(id))
+	/**
+	 * Returns the quantity of an item in the container.
+	 * @param id Item ID.
+	 * @return Item quantity.
+	 */
+	int ItemContainer::getItem(const std::string &id) const
 	{
-		return 0;
-	}
-
-	auto it = std::find_if(_qty.begin(), _qty.end(), [&](auto& pair) { return pair.first->getType() == id; });
-	if (it == _qty.end())
-	{
-		return 0;
-	}
-	else
-	{
-		return it->second;
-	}
-}
-
-/**
- * Returns the quantity of an item in the container.
- * @param id Item ID.
- * @return Item quantity.
- */
-int ItemContainer::getItem(const RuleItem* item) const
-{
-	if (item)
-	{
-		auto it = _qty.find(item);
-		if (it == _qty.end())
+		if (Mod::isEmptyRuleName(id))
 		{
 			return 0;
 		}
-		else
+
+		auto it = str::find_if(_qty, [&id](auto& ic) { return ic.item()->getType() == id; });
+		return (it != _qty.end())?it->count()
+								 :0;
+	}
+
+	/**
+	 * Returns the quantity of an item in the container.
+	 * @param id Item ID.
+	 * @return Item quantity.
+	 */
+	int ItemContainer::getItem(const RuleItem* item) const
+	{
+		auto it = str::find_if(_qty, [item](auto& ic) { return ic.item() == item; });
+		return (it != _qty.end())?it->count()
+								  :0;
+	}
+
+	/**
+	 * Returns the total quantity of the items in the container.
+	 * @return Total item quantity.
+	 */
+	int ItemContainer::getTotalQuantity() const
+	{
+		int total = 0;
+		for (const auto& pair : _qty)
 		{
-			return it->second;
+			total += pair.count();
 		}
+		return total;
 	}
-	else
-	{
-		return 0;
-	}
-}
 
-/**
- * Returns the total quantity of the items in the container.
- * @return Total item quantity.
- */
-int ItemContainer::getTotalQuantity() const
-{
-	int total = 0;
-	for (const auto& pair : _qty)
+	/**
+	 * Returns the total size of the items in the container.
+	 * @return Total item size.
+	 */
+	double ItemContainer::getTotalSize() const
 	{
-		total += pair.second;
+		double total = 0;
+		for (const auto& pair : _qty)
+		{
+			total += pair.item()->getSize() * pair.count();
+		}
+		return total;
 	}
-	return total;
-}
 
-/**
- * Returns the total size of the items in the container.
- * @return Total item size.
- */
-double ItemContainer::getTotalSize() const
-{
-	double total = 0;
-	for (const auto& pair : _qty)
+	std::vector<ItemCounter>::iterator ItemContainer::find(const RuleItem *item)
 	{
-		total += pair.first->getSize() * pair.second;
+		return str::find_if(_qty, [item](auto& ic) { return ic.item() == item; });
 	}
-	return total;
-}
 
-/**
- * Returns all the items currently contained within.
- * @return List of contents.
- */
-const std::map<const RuleItem*, int> *ItemContainer::getContents() const
-{
-	return &_qty;
-}
+	std::vector<ItemCounter>::iterator ItemContainer::find(const std::string &id)
+	{
+		return str::find_if(_qty, [&id](auto& ic) { return ic.item()->getType() == id; });
+	}
+
+	/**
+	 * Returns all the items currently contained within.
+	 * @return List of contents.
+	 */
+	const std::vector<ItemCounter>& ItemContainer::getContents() const
+	{
+		return _qty;
+	}
 
 }
