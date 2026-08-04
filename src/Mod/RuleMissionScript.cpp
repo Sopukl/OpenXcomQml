@@ -20,7 +20,7 @@
 #include "../Engine/Exception.h"
 #include "../Engine/RNG.h"
 
-#include <set>
+
 
 namespace OpenXcom
 {

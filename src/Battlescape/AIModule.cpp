@@ -17,7 +17,6 @@
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-
 #include "AIModule.h"
 #include "../Savegame/BattleItem.h"
 #include "../Savegame/Node.h"

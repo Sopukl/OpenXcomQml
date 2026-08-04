@@ -19,7 +19,7 @@
 
 #include "../Mod/ArticleDefinition.h"
 #include "ArticleStateVehicle.h"
-#include <sstream>
+
 #include "../Engine/Game.h"
 #include "../Engine/LocalizedText.h"
 #include "../Engine/Palette.h"

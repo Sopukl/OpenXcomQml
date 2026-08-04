@@ -18,7 +18,7 @@
  */
 #include "SerializationHelper.h"
 #include <assert.h>
-#include <sstream>
+
 #include <cfloat>
 
 namespace OpenXcom

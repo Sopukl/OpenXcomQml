@@ -2134,7 +2134,7 @@ using powers = powers_template<>;
 
 #include <cfloat>
 #include <cinttypes>
-#include <cmath>
+
 
 #include <cstdlib>
 
@@ -3363,7 +3363,7 @@ adjusted_mantissa digit_comp(parsed_number_string_t<UC>& num, adjusted_mantissa 
 #define FASTFLOAT_PARSE_NUMBER_H
 
 
-#include <cmath>
+
 
 #include <limits>
 #include <system_error>

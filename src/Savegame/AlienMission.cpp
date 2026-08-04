@@ -42,7 +42,7 @@
 #include "Waypoint.h"
 #include <assert.h>
 
-#include <functional>
+
 #include "../Mod/AlienDeployment.h"
 
 namespace OpenXcom

@@ -17,12 +17,12 @@
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "GeoscapeState.h"
-#include <set>
-#include <sstream>
+
+
 #include <iomanip>
 
 
-#include <functional>
+
 #include "../Engine/RNG.h"
 #include "../Engine/Game.h"
 #include "../Engine/Action.h"

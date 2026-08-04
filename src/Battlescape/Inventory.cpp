@@ -18,7 +18,7 @@
  */
 #include "Inventory.h"
 
-#include <cmath>
+
 #include "../Mod/Mod.h"
 #include "../Mod/RuleInventory.h"
 #include "../Mod/RuleInterface.h"

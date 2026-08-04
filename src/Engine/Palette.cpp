@@ -17,7 +17,7 @@
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "Palette.h"
-#include <sstream>
+
 #include "CrossPlatform.h"
 #include "Exception.h"
 #include "FileMap.h"

@@ -20,7 +20,7 @@
 #include "Mod.h"
 #include "ModScript.h"
 
-#include <sstream>
+
 
 #include <cassert>
 #include "../version.h"

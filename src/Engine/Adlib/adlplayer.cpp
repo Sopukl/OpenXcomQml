@@ -22,7 +22,7 @@
  */
 
 #include <stdint.h>
-#include <cmath>
+
 #include <memory.h>
 #include "fmopl.h"
 

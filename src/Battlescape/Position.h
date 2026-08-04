@@ -19,7 +19,7 @@
  */
 #include "../Engine/Yaml.h"
 #include <SDL_types.h>
-#include <cmath>
+
 #include <ostream>
 
 namespace OpenXcom

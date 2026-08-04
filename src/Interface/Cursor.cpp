@@ -17,7 +17,7 @@
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "Cursor.h"
-#include <cmath>
+
 #include <SDL.h>
 #include "../Engine/Action.h"
 

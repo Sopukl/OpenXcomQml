@@ -19,10 +19,6 @@
 #include "CraftEquipmentState.h"
 #include "CraftEquipmentLoadState.h"
 #include "CraftEquipmentSaveState.h"
-
-#include <sstream>
-
-
 #include "../Engine/CrossPlatform.h"
 #include "../Engine/Screen.h"
 #include "../Engine/Action.h"

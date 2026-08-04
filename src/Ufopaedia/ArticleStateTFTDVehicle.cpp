@@ -19,7 +19,7 @@
 
 #include "../Mod/ArticleDefinition.h"
 #include "ArticleStateTFTDVehicle.h"
-#include <sstream>
+
 #include "../Engine/Game.h"
 #include "../Engine/LocalizedText.h"
 #include "../Interface/TextList.h"

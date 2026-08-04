@@ -31,8 +31,6 @@
 #include "../Interface/TextList.h"
 #include "../Savegame/SavedGame.h"
 
-
-
 namespace OpenXcom
 {
 

@@ -19,9 +19,9 @@
 #include "Game.h"
 #include "../resource.h"
 
-#include <cmath>
+
 #include <qguiapplication.h>
-#include <sstream>
+
 #include <SDL_mixer.h>
 #include "State.h"
 #include "Screen.h"

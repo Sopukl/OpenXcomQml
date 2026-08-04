@@ -17,7 +17,6 @@
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "CraftArmorState.h"
-
 #include "../Engine/Game.h"
 #include "../Mod/Mod.h"
 #include "../Engine/LocalizedText.h"
@@ -37,7 +36,6 @@
 #include "../Mod/RuleInterface.h"
 #include "../Mod/RuleSoldier.h"
 #include "../Ufopaedia/Ufopaedia.h"
-
 #include "../Engine/Unicode.h"
 
 namespace OpenXcom

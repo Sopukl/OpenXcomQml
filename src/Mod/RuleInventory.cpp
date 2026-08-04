@@ -17,7 +17,7 @@
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "RuleInventory.h"
-#include <cmath>
+
 #include "RuleItem.h"
 #include "../Engine/Screen.h"
 #include "../Engine/ScriptBind.h"

@@ -17,7 +17,7 @@
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "SetWindowedRootState.h"
-#include <sstream>
+
 #include "../Interface/Window.h"
 #include "../Interface/TextButton.h"
 #include "../Engine/Game.h"

@@ -17,7 +17,6 @@
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "ManufactureInfoState.h"
-
 #include "../Interface/Window.h"
 #include "../Interface/TextButton.h"
 #include "../Interface/ToggleTextButton.h"

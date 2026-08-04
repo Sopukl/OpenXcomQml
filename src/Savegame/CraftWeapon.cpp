@@ -16,9 +16,9 @@
  * You should have received a copy of the GNU General Public License
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
-#include <cmath>
 
-#include <cmath>
+
+
 #include "CraftWeapon.h"
 #include "../Mod/RuleCraftWeapon.h"
 #include "../Mod/Mod.h"

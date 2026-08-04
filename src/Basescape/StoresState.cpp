@@ -18,7 +18,6 @@
  */
 #include "StoresState.h"
 #include "ItemLocationsState.h"
-#include <sstream>
 #include "../Engine/CrossPlatform.h"
 #include "../Engine/Game.h"
 #include "../Engine/LocalizedText.h"
@@ -43,7 +42,6 @@
 #include "../Mod/RuleItem.h"
 #include "../Mod/RuleResearch.h"
 #include "../Ufopaedia/Ufopaedia.h"
-
 
 
 namespace OpenXcom

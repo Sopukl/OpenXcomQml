@@ -17,7 +17,6 @@
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "MiniBaseView.h"
-#include <cmath>
 #include "../Engine/SurfaceSet.h"
 #include "../Engine/Action.h"
 #include "../Savegame/Base.h"

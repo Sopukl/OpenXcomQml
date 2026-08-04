@@ -18,7 +18,7 @@
  */
 #include "MapDataSet.h"
 #include "MapData.h"
-#include <sstream>
+
 #include <SDL_endian.h>
 #include "../Engine/Exception.h"
 #include "../Engine/SurfaceSet.h"

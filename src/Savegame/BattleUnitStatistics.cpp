@@ -1,7 +1,7 @@
 #include "BattleUnitStatistics.h"
 
 
-#include <sstream>
+
 #include "../Engine/Yaml.h"
 #include "../Engine/Game.h"
 

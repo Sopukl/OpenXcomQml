@@ -1,5 +1,5 @@
 #include "MissionStatistics.h"
-#include <sstream>
+
 #include "../Engine/Game.h"
 
 namespace OpenXcom

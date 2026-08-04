@@ -22,7 +22,7 @@
 
 #include "../Engine/Yaml.h"
 #include "../Savegame/WeightedOptions.h"
-#include <set>
+
 
 namespace OpenXcom
 {

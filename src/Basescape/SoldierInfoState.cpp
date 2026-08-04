@@ -18,8 +18,6 @@
  */
 #include "SoldierInfoState.h"
 #include "SoldierDiaryOverviewState.h"
-
-#include <sstream>
 #include "../Engine/Game.h"
 #include "../Engine/Action.h"
 #include "../Mod/Mod.h"

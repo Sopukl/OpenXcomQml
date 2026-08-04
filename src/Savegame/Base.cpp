@@ -20,7 +20,7 @@
 #include "../fmath.h"
 #include <stack>
 
-#include <functional>
+
 #include "BaseFacility.h"
 #include "../Mod/RuleBaseFacility.h"
 #include "Craft.h"

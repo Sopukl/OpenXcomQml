@@ -17,7 +17,7 @@
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "OptionsConfirmState.h"
-#include <sstream>
+
 #include <iomanip>
 #include "../Engine/Game.h"
 #include "../Mod/Mod.h"

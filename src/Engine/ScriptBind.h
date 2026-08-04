@@ -20,7 +20,7 @@
 #include "Script.h"
 #include "Exception.h"
 #include "Logger.h"
-#include <functional>
+
 #include <utility>
 
 namespace OpenXcom

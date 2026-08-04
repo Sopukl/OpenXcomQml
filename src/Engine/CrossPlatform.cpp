@@ -22,7 +22,7 @@
 #include "CrossPlatform.h"
 #include <exception>
 
-#include <sstream>
+
 #include <fstream>
 
 

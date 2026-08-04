@@ -17,11 +17,11 @@
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "SavedGame.h"
-#include <sstream>
-#include <set>
+
+
 #include <iomanip>
 
-#include <functional>
+
 #include <ctime>
 #include "../Engine/Yaml.h"
 #include "../version.h"

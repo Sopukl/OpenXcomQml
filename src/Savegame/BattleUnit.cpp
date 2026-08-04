@@ -18,7 +18,7 @@
  */
 #include "BattleUnit.h"
 #include "BattleItem.h"
-#include <sstream>
+
 
 #include "../Engine/Collections.h"
 #include "../Engine/Surface.h"

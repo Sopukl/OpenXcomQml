@@ -19,7 +19,7 @@
 #include "Ufo.h"
 #include <assert.h>
 
-#include <functional>
+
 #include "../fmath.h"
 #include "Craft.h"
 #include "AlienMission.h"

@@ -28,7 +28,7 @@
 
 #include <type_traits>
 #include <utility>
-#include <functional>
+
 #include <cstdlib>
 
 namespace stdext {

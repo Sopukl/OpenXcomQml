@@ -17,7 +17,6 @@
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "GlobalResearchDiaryState.h"
-#include <sstream>
 #include "../Engine/CrossPlatform.h"
 #include "../Engine/Game.h"
 #include "../Engine/LocalizedText.h"

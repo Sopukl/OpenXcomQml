@@ -17,7 +17,7 @@
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "NewBattleState.h"
-#include <cmath>
+
 
 #include "../Engine/Yaml.h"
 #include "../Engine/Game.h"

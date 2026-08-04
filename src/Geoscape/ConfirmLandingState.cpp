@@ -18,7 +18,7 @@
  */
 #include "CraftErrorState.h"
 #include "ConfirmLandingState.h"
-#include <sstream>
+
 #include "../Engine/Game.h"
 #include "../Engine/LocalizedText.h"
 #include "../Interface/Window.h"

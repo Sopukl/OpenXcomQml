@@ -17,7 +17,6 @@
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "SoldiersState.h"
-
 #include "../Engine/Screen.h"
 #include "../Engine/Game.h"
 #include "../Mod/Mod.h"

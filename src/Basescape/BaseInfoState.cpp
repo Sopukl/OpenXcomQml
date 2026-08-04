@@ -17,8 +17,6 @@
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "BaseInfoState.h"
-#include <sstream>
-#include <cmath>
 #include "../Engine/Game.h"
 #include "../Engine/Action.h"
 #include "../Mod/Mod.h"

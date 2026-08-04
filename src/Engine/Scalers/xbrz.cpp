@@ -15,7 +15,7 @@
 
 #include "xbrz.h"
 #include <cassert>
-#include <cmath>
+
 
 
 

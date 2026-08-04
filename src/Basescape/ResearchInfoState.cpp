@@ -34,7 +34,6 @@
 #include "../Engine/Timer.h"
 #include "../Engine/RNG.h"
 
-
 namespace OpenXcom
 {
 

@@ -19,8 +19,6 @@
 #include "GlobalAlienContainmentState.h"
 #include "ManageAlienContainmentState.h"
 #include "TechTreeViewerState.h"
-#include <sstream>
-#include <set>
 #include "../Engine/Game.h"
 #include "../Engine/LocalizedText.h"
 #include "../Engine/Options.h"

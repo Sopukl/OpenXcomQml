@@ -17,7 +17,7 @@
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "ItemsArrivingState.h"
-#include <sstream>
+
 
 #include "../Engine/Game.h"
 #include "../Mod/Mod.h"

@@ -20,8 +20,8 @@
 
 #include <qdebug.h>
 #include <qglobal.h>
-#include <sstream>
-#include <cmath>
+
+
 #include <iomanip>
 
 #include <cstdio>

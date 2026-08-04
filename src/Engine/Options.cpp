@@ -24,7 +24,7 @@
 #include <SDL_keysym.h>
 #include <SDL_mixer.h>
 
-#include <sstream>
+
 #include <iostream>
 
 #include "../Engine/Yaml.h"

@@ -21,7 +21,7 @@
 #include "../Engine/Yaml.h"
 #include <SDL_endian.h>
 #include <fstream>
-#include <sstream>
+
 #include <iomanip>
 #include <bitset>
 #include "../Engine/Options.h"

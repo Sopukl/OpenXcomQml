@@ -19,7 +19,7 @@
  */
 #include "../Engine/State.h"
 
-#include <set>
+
 
 namespace OpenXcom
 {

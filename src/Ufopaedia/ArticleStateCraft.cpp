@@ -17,7 +17,7 @@
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <sstream>
+
 #include "ArticleStateCraft.h"
 #include "../Mod/ArticleDefinition.h"
 #include "../Mod/Mod.h"

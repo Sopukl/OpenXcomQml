@@ -18,7 +18,6 @@
  */
 
 #include <assert.h>
-#include <sstream>
 #include "BattlescapeGenerator.h"
 #include "TileEngine.h"
 #include "Inventory.h"

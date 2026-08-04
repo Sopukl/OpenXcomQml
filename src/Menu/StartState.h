@@ -19,7 +19,7 @@
  */
 #include "../Engine/State.h"
 
-#include <sstream>
+
 
 namespace OpenXcom
 {

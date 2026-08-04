@@ -17,7 +17,7 @@
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <sstream>
+
 #include "../fmath.h"
 #include "ArticleStateArmor.h"
 #include "../Mod/ArticleDefinition.h"

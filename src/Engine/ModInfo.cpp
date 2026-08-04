@@ -23,7 +23,7 @@
 #include "Exception.h"
 #include "Logger.h"
 #include "../Engine/Yaml.h"
-#include <sstream>
+
 #include <assert.h>
 
 namespace OpenXcom

@@ -20,7 +20,6 @@
 #include "SoldierDiaryPerformanceState.h"
 #include "SoldierDiaryMissionState.h"
 #include "SoldierInfoState.h"
-#include <sstream>
 #include "../Mod/Mod.h"
 #include "../Engine/Game.h"
 #include "../Engine/LocalizedText.h"

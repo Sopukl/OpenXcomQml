@@ -28,7 +28,7 @@
 #include "../Savegame/BattleUnit.h"
 #include "../Mod/RuleItem.h"
 #include "../Mod/Mod.h"
-#include <sstream>
+
 #include "../Engine/Options.h"
 #include "../Savegame/SavedGame.h"
 #include "../Savegame/SavedBattleGame.h"

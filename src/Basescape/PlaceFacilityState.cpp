@@ -33,9 +33,6 @@
 #include "../Engine/Unicode.h"
 #include "../Mod/RuleInterface.h"
 
-
-#include <cmath>
-
 namespace OpenXcom
 {
 

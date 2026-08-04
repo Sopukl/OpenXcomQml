@@ -18,11 +18,7 @@
  */
 #include "PurchaseState.h"
 #include "ItemLocationsState.h"
-#include <sstream>
-
 #include <iomanip>
-
-
 #include "../fmath.h"
 #include "../Engine/Game.h"
 #include "../Mod/Mod.h"

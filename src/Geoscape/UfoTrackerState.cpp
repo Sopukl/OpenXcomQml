@@ -18,7 +18,7 @@
  */
 #include "UfoTrackerState.h"
 #include "InterceptState.h"
-#include <sstream>
+
 #include "../Engine/Game.h"
 #include "../Mod/Mod.h"
 #include "../Engine/LocalizedText.h"

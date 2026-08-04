@@ -19,10 +19,6 @@
 #include "TransferItemsState.h"
 #include "ItemLocationsState.h"
 #include "ManufactureDependenciesTreeState.h"
-#include <sstream>
-
-
-
 #include "../Engine/CrossPlatform.h"
 #include "../Engine/Action.h"
 #include "../Engine/Game.h"
