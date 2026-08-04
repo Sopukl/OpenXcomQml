@@ -26,60 +26,69 @@ namespace OpenXcom
 class Mod;
 class RuleItem;
 
-class ItemCounter
-{
-	const RuleItem* m_Item = nullptr;
-	int m_Count = 0;
-  public:
-	ItemCounter() = default;
-	ItemCounter(const RuleItem* item, int count);
+	class ItemCounter
+	{
+		Q_GADGET
+		QML_ELEMENT
+		QML_UNCREATABLE("its gadget")
+		Q_PROPERTY(RuleItem* item READ item FINAL)
+		Q_PROPERTY(int count READ count FINAL)
+		const RuleItem* m_Item = nullptr;
+		int m_Count = 0;
+	  public:
+		ItemCounter() = default;
+		ItemCounter(const RuleItem* item, int count);
 
-	const RuleItem* item() const;
-	int count() const;
-	void setCount(int newCount);
-};
+		RuleItem* item();
+		const RuleItem* item() const;
+		int count() const;
+		void setCount(int newCount);
+	};
 
-/**
- * Represents the items contained by a certain entity,
- * like base stores, craft equipment, etc.
- * Handles all necessary item management tasks.
- */
-class ItemContainer: public QObject
-{
-	Q_OBJECT
-	QML_ELEMENT
-
-	std::vector<ItemCounter> _qty;
-public:
-	/// Clone container.
-	void clone(const ItemContainer& other);
-	/// Loads the item container from YAML.
-	void load(const YAML::YamlNodeReader& reader, const Mod* mod);
-	/// Saves the item container to YAML.
-	void save(YAML::YamlNodeWriter writer) const;
-	/// Adds an item to the container.
-	void addItem(const RuleItem* item, int qty = 1);
-	/// Removes an item from the container.
-	void removeItem(const std::string &id, int qty = 1);
-	/// Removes an item from the container.
-	void removeItem(const RuleItem* item, int qty = 1);
-	/// Gets an item in the container.
-	int getItem(const std::string &id) const;
-	/// Gets an item in the container.
-	int getItem(const RuleItem* item) const;
-	/// Gets the total quantity of items in the container.
-	int getTotalQuantity() const;
-	/// Gets the total size of items in the container.
-	double getTotalSize() const;
-	/// Check if have any item
-	bool empty() const { return _qty.empty(); }
-	/// Clear all content.
-	void clear() { _qty.clear(); }
-	/// Gets all the items in the container.
-	const std::vector<ItemCounter>& getContents() const;
-  private:
-	std::vector<ItemCounter>::iterator find(const RuleItem* item);
-	std::vector<ItemCounter>::iterator find(const std::string &id);
-};
+	/**
+	 * Represents the items contained by a certain entity,
+	 * like base stores, craft equipment, etc.
+	 * Handles all necessary item management tasks.
+	 */
+	class ItemContainer: public QObject
+	{
+		Q_OBJECT
+		QML_ELEMENT
+		Q_PROPERTY(std::vector<OpenXcom::ItemCounter> content READ content CONSTANT FINAL)
+		std::vector<ItemCounter> _qty;
+	public:
+		/// Clone container.
+		void clone(const ItemContainer& other);
+		/// Loads the item container from YAML.
+		void load(const YAML::YamlNodeReader& reader, const Mod* mod);
+		/// Saves the item container to YAML.
+		void save(YAML::YamlNodeWriter writer) const;
+		/// Adds an item to the container.
+		void addItem(const RuleItem* item, int qty = 1);
+		/// Removes an item from the container.
+		void removeItem(const std::string &id, int qty = 1);
+		/// Removes an item from the container.
+		void removeItem(const RuleItem* item, int qty = 1);
+		/// Gets an item in the container.
+		int getItem(const std::string &id) const;
+		/// Gets an item in the container.
+		int getItem(const RuleItem* item) const;
+		/// Gets the total quantity of items in the container.
+		int getTotalQuantity() const;
+		/// Gets the total size of items in the container.
+		double getTotalSize() const;
+		/// Check if have any item
+		bool empty() const { return _qty.empty(); }
+		/// Clear all content.
+		void clear() { _qty.clear(); }
+		/// Gets all the items in the container.
+		const std::vector<ItemCounter>& content() const;
+	  private:
+		std::vector<ItemCounter>::iterator find(const RuleItem* item);
+		std::vector<ItemCounter>::iterator find(const std::string &id);
+	};
 
 }
+
+Q_DECLARE_METATYPE(OpenXcom::ItemCounter)
+Q_DECLARE_METATYPE(std::vector<OpenXcom::ItemCounter>)

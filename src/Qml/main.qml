@@ -113,7 +113,9 @@ Window {
             for(let c of base.crafts)
                 console.log(c.name)
             console.log("items")
-            console.log(base.storage)
+            console.log(base.storage + ':' + base.storage.content)
+            for(let it of base.storage.content)
+                console.log(it+':'+it.item+':'+it.count)
         }
     }
 

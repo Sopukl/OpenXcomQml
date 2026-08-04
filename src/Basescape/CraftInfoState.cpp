@@ -325,7 +325,7 @@ void CraftInfoState::init()
 		using ArraySurfaces = std::array<const Surface *, 3>;
 		std::map<ArrayIndexes, std::tuple<ArraySurfaces, size_t>, std::greater<>> itemsBySprite;
 
-		for (const auto& item : _craft->getItems()->getContents())
+		for (const auto& item : _craft->getItems()->content())
 		{
 			ArrayIndexes ind = { };
 

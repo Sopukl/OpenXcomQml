@@ -723,7 +723,7 @@ int Base::getTotalOtherStaffAndInventoryCost(int& staffCount, int& inventoryCoun
 			}
 		}
 	}
-	for (const auto& storeItem : _items.getContents())
+	for (const auto& storeItem : _items.content())
 	{
 		auto* ruleItem = storeItem.item();
 		if (ruleItem->getMonthlySalary() != 0)
@@ -739,7 +739,7 @@ int Base::getTotalOtherStaffAndInventoryCost(int& staffCount, int& inventoryCoun
 	}
 	for (auto* xcraft : _crafts)
 	{
-		for (const auto& craftItem : xcraft->getItems()->getContents())
+		for (const auto& craftItem : xcraft->getItems()->content())
 		{
 			auto* ruleItem = craftItem.item();
 			if (ruleItem->getMonthlySalary() != 0)
@@ -1485,7 +1485,7 @@ int Base::getUsedContainment(int prisonType, bool onlyExternal) const
 		return total;
 	}
 
-	for (const auto& pair : _items.getContents())
+	for (const auto& pair : _items.content())
 	{
 		rule = pair.item();
 		if (rule->isAlien() && rule->getPrisonType() == prisonType)
@@ -1620,7 +1620,7 @@ void Base::setupDefenses(AlienMission* am)
 	}
 
 	// add vehicles left on the base
-	for (auto iter = _items.getContents().begin(); iter != _items.getContents().end(); )
+	for (auto iter = _items.content().begin(); iter != _items.content().end(); )
 	{
 		int itemQty = iter->count();
 		const RuleItem *rule = iter->item();
@@ -1659,7 +1659,7 @@ void Base::setupDefenses(AlienMission* am)
 				_items.removeItem(rule, canBeAdded);
 			}
 
-			iter = _items.getContents().begin(); // we have to start over because iterator is broken because of the removeItem
+			iter = _items.content().begin(); // we have to start over because iterator is broken because of the removeItem
 		}
 		else ++iter;
 	}
@@ -1900,9 +1900,9 @@ void Base::destroyFacility(BASEFACILITIESITERATOR facility)
 			}
 
 			// remove all items
-			while (!(*facility)->getCraftForDrawing()->getItems()->getContents().empty())
+			while (!(*facility)->getCraftForDrawing()->getItems()->content().empty())
 			{
-				auto i = (*facility)->getCraftForDrawing()->getItems()->getContents().begin();
+				auto i = (*facility)->getCraftForDrawing()->getItems()->content().begin();
 				_items.addItem(i->item(), i->count());
 				(*facility)->getCraftForDrawing()->getItems()->removeItem(i->item(), i->count());
 			}

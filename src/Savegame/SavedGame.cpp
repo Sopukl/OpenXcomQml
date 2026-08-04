@@ -871,7 +871,7 @@ void SavedGame::save(const std::string &filename, Mod *mod) const
 	}
 	for (int j = 0; j < MAX_CRAFT_LOADOUT_TEMPLATES; ++j)
 	{
-		if (!_globalCraftLoadout[j]->getContents().empty())
+		if (!_globalCraftLoadout[j]->content().empty())
 			_globalCraftLoadout[j]->save(writer[writer.saveString("globalCraftLoadout" + std::to_string(j))]);
 		if (!_globalCraftLoadoutName[j].empty())
 			writer.write(writer.saveString("globalCraftLoadoutName" + std::to_string(j)), _globalCraftLoadoutName[j]);

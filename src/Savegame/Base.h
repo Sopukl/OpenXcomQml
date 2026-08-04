@@ -114,7 +114,7 @@ class Base : public Target
 
 	Q_PROPERTY(QString name READ name NOTIFY nameChanged FINAL)
 	Q_PROPERTY(std::vector<Craft*> crafts READ crafts NOTIFY craftsChanged FINAL)
-	Q_PROPERTY(std::vector<OpenXcom::Soldier*> soldiers READ soldiers NOTIFY soldiersChanged FINAL)
+	Q_PROPERTY(std::vector<Soldier*> soldiers READ soldiers NOTIFY soldiersChanged FINAL)
 	Q_PROPERTY(ItemContainer* storage READ storage CONSTANT FINAL)
 private:
 	static const int BASE_SIZE = 6;

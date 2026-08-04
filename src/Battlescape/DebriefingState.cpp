@@ -2198,7 +2198,7 @@ void DebriefingState::prepareDebriefing()
  */
 void DebriefingState::reequipCraft(Base *base, Craft *craft, bool vehicleItemsCanBeDestroyed)
 {
-	auto craftItemsCopy = craft->getItems()->getContents();
+	auto craftItemsCopy = craft->getItems()->content();
 	for (const auto& pair : craftItemsCopy)
 	{
 		int qty = base->getStorageItems().getItem(pair.item());
@@ -2234,7 +2234,7 @@ void DebriefingState::reequipCraft(Base *base, Craft *craft, bool vehicleItemsCa
 	craft->getVehicles()->clear();
 
 	// Ok, now read those vehicles
-	for (const auto& pair : craftVehicles.getContents())
+	for (const auto& pair : craftVehicles.content())
 	{
 		int qty = base->getStorageItems().getItem(pair.item());
 		const RuleItem *tankRule = pair.item();

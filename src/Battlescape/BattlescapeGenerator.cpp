@@ -984,7 +984,7 @@ void BattlescapeGenerator::deployXCOM(const RuleStartingCondition* startingCondi
 	if (!isPreview && _base != 0)
 	{
 		ItemContainer *rememberMe = _save->getBaseStorageItems();
-		for (const auto& pair : _base->getStorageItems().getContents())
+		for (const auto& pair : _base->getStorageItems().content())
 		{
 			rememberMe->addItem(pair.item(), pair.count());
 		}
@@ -1230,7 +1230,7 @@ void BattlescapeGenerator::deployXCOM(const RuleStartingCondition* startingCondi
 	if (_craft != 0)
 	{
 		// add items that are in the craft
-		for (const auto& pair : _craft->getItems()->getContents())
+		for (const auto& pair : _craft->getItems()->content())
 		{
 			if (startingCondition != 0 && !startingCondition->isItemPermitted(pair.item()->getType(), game.getMod(), _craft))
 			{
@@ -1252,7 +1252,7 @@ void BattlescapeGenerator::deployXCOM(const RuleStartingCondition* startingCondi
 		if (game.savedGame()->getMonthsPassed() != -1)
 		{
 			// add items that are in the base
-			for (auto i = _base->getStorageItems().getContents().begin(); i != _base->getStorageItems().getContents().end();)
+			for (auto i = _base->getStorageItems().content().begin(); i != _base->getStorageItems().content().end();)
 			{
 				const RuleItem *rule = i->item();
 				if (
@@ -1288,7 +1288,7 @@ void BattlescapeGenerator::deployXCOM(const RuleStartingCondition* startingCondi
 		{
 			if (craft->getStatus() == "STR_OUT")
 				continue;
-			for (const auto& pair : craft->getItems()->getContents())
+			for (const auto& pair : craft->getItems()->content())
 			{
 				for (int count = 0; count < pair.count(); count++)
 				{

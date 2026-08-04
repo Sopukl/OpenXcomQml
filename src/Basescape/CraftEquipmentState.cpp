@@ -1086,7 +1086,7 @@ void CraftEquipmentState::loadGlobalLoadout(int index, bool onlyAddItems)
 	// lastly check and report what's missing
 	std::string craftName = c->getName();
 	std::vector<ReequipStat> _missingItems;
-	for (const auto& templateItem : tmpl->getContents())
+	for (const auto& templateItem : tmpl->content())
 	{
 		if (const auto item = templateItem.item())
 		{

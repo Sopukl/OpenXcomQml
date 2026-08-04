@@ -157,7 +157,7 @@ void Craft::load(const YAML::YamlNodeReader& node, const ScriptGlobal *shared, c
 
 	_items->load(reader["items"], mod);
 	// Some old saves have bad items, better get rid of them to avoid further bugs
-	for (auto iter = _items->getContents().begin(); iter != _items->getContents().end();)
+	for (auto iter = _items->content().begin(); iter != _items->content().end();)
 	{
 		auto* ruleItem = iter->item();
 		if (!ruleItem->canBeEquippedToCraftInventory())
@@ -1859,7 +1859,7 @@ void Craft::unload()
 	}
 
 	// Remove items
-	for (const auto& pair : _items->getContents())
+	for (const auto& pair : _items->content())
 	{
 		_base->getStorageItems().addItem(pair.item(), pair.count());
 	}

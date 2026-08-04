@@ -31,6 +31,11 @@ namespace OpenXcom
 
 	}
 
+	RuleItem *ItemCounter::item()
+	{
+		return (RuleItem*)m_Item;
+	}
+
 	const RuleItem *ItemCounter::item() const
 	{
 		return m_Item;
@@ -52,7 +57,7 @@ namespace OpenXcom
 	 */
 	void ItemContainer::clone(const ItemContainer &other)
 	{
-		_qty = other.getContents();
+		_qty = other.content();
 	}
 
 	void ItemContainer::load(const YAML::YamlNodeReader& reader, const Mod* mod)
@@ -235,7 +240,7 @@ namespace OpenXcom
 	 * Returns all the items currently contained within.
 	 * @return List of contents.
 	 */
-	const std::vector<ItemCounter>& ItemContainer::getContents() const
+	const std::vector<ItemCounter>& ItemContainer::content() const
 	{
 		return _qty;
 	}
