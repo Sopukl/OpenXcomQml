@@ -24,7 +24,7 @@ namespace str = std::ranges;
 
 namespace OpenXcom
 {
-	ItemCounter::ItemCounter(const RuleItem *item, size_t count):
+	ItemCounter::ItemCounter(const RuleItem *item, int count):
 		m_Item(item),
 		m_Count(count)
 	{
@@ -36,12 +36,12 @@ namespace OpenXcom
 		return m_Item;
 	}
 
-	size_t ItemCounter::count() const
+	int ItemCounter::count() const
 	{
 		return m_Count;
 	}
 
-	void ItemCounter::setCount(size_t newCount)
+	void ItemCounter::setCount(int newCount)
 	{
 		m_Count = newCount;
 	}

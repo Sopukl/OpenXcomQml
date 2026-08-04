@@ -30,14 +30,14 @@ class RuleItem;
 class ItemCounter
 {
 	const RuleItem* m_Item = nullptr;
-	size_t m_Count = 0;
+	int m_Count = 0;
   public:
 	ItemCounter() = default;
-	ItemCounter(const RuleItem* item, size_t count);
+	ItemCounter(const RuleItem* item, int count);
 
 	const RuleItem* item() const;
-	size_t count() const;
-	void setCount(size_t newCount);
+	int count() const;
+	void setCount(int newCount);
 };
 
 /**

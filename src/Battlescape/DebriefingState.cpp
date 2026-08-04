@@ -2236,7 +2236,7 @@ void DebriefingState::reequipCraft(Base *base, Craft *craft, bool vehicleItemsCa
 	// Ok, now read those vehicles
 	for (const auto& pair : craftVehicles.getContents())
 	{
-		size_t qty = base->getStorageItems().getItem(pair.item());
+		int qty = base->getStorageItems().getItem(pair.item());
 		const RuleItem *tankRule = pair.item();
 		int size = tankRule->getVehicleUnit()->getArmor()->getTotalSize();
 		int canBeAdded = std::min(qty, pair.count());
