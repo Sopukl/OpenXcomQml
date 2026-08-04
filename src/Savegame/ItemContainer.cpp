@@ -57,21 +57,21 @@ namespace OpenXcom
 	 */
 	void ItemContainer::clone(const ItemContainer &other)
 	{
-		_qty = other.content();
+		m_Content = other.content();
 	}
 
 	void ItemContainer::load(const YAML::YamlNodeReader& reader, const Mod* mod)
 	{
 		if (!reader || !reader.isMap())
 			return;
-		_qty.clear();
+		m_Content.clear();
 		for (const auto& item : reader.children())
 		{
 			std::string name = item.readKey<std::string>();
 
 			if (const auto* type = mod->getItem(name))
 			{
-				_qty.emplace_back(type, item.readVal<int>());
+				m_Content.emplace_back(type, item.readVal<int>());
 			}
 			else
 			{
@@ -89,9 +89,9 @@ namespace OpenXcom
 		writer.setAsMap();
 		// item containers are sorted alphabetically in the yaml mapping
 		std::vector<std::pair<std::string, int>> sortedItems;
-		sortedItems.reserve(_qty.size());
+		sortedItems.reserve(m_Content.size());
 
-		for (auto& pair : _qty)
+		for (auto& pair : m_Content)
 			sortedItems.emplace_back(pair.item()->getType(), pair.count());
 
 		str::sort(sortedItems, [](auto& a, auto& b){ return a < b; });
@@ -109,9 +109,9 @@ namespace OpenXcom
 		if (item)
 		{
 			if(auto it = find(item);
-					it == _qty.end())
+					it == m_Content.end())
 			{
-				_qty.emplace_back(item, qty);
+				m_Content.emplace_back(item, qty);
 			}
 			else
 			{
@@ -133,7 +133,7 @@ namespace OpenXcom
 		}
 
 		if (auto it = find(id);
-				 it != _qty.end())
+				 it != m_Content.end())
 		{
 			if (qty < it->count())
 			{
@@ -141,7 +141,7 @@ namespace OpenXcom
 			}
 			else
 			{
-				_qty.erase(it);
+				m_Content.erase(it);
 			}
 		}
 	}
@@ -155,7 +155,7 @@ namespace OpenXcom
 	{
 		if (item)
 		{
-			if (auto it = find(item); it != _qty.end())
+			if (auto it = find(item); it != m_Content.end())
 			{
 				if (qty < it->count())
 				{
@@ -163,7 +163,7 @@ namespace OpenXcom
 				}
 				else
 				{
-					_qty.erase(it);
+					m_Content.erase(it);
 				}
 			}
 		}
@@ -181,8 +181,8 @@ namespace OpenXcom
 			return 0;
 		}
 
-		auto it = str::find_if(_qty, [&id](auto& ic) { return ic.item()->getType() == id; });
-		return (it != _qty.end())?it->count()
+		auto it = str::find_if(m_Content, [&id](auto& ic) { return ic.item()->getType() == id; });
+		return (it != m_Content.end())?it->count()
 								 :0;
 	}
 
@@ -193,8 +193,8 @@ namespace OpenXcom
 	 */
 	int ItemContainer::getItem(const RuleItem* item) const
 	{
-		auto it = str::find_if(_qty, [item](auto& ic) { return ic.item() == item; });
-		return (it != _qty.end())?it->count()
+		auto it = str::find_if(m_Content, [item](auto& ic) { return ic.item() == item; });
+		return (it != m_Content.end())?it->count()
 								  :0;
 	}
 
@@ -205,7 +205,7 @@ namespace OpenXcom
 	int ItemContainer::getTotalQuantity() const
 	{
 		int total = 0;
-		for (const auto& pair : _qty)
+		for (const auto& pair : m_Content)
 		{
 			total += pair.count();
 		}
@@ -219,7 +219,7 @@ namespace OpenXcom
 	double ItemContainer::getTotalSize() const
 	{
 		double total = 0;
-		for (const auto& pair : _qty)
+		for (const auto& pair : m_Content)
 		{
 			total += pair.item()->getSize() * pair.count();
 		}
@@ -228,12 +228,12 @@ namespace OpenXcom
 
 	std::vector<ItemCounter>::iterator ItemContainer::find(const RuleItem *item)
 	{
-		return str::find_if(_qty, [item](auto& ic) { return ic.item() == item; });
+		return str::find_if(m_Content, [item](auto& ic) { return ic.item() == item; });
 	}
 
 	std::vector<ItemCounter>::iterator ItemContainer::find(const std::string &id)
 	{
-		return str::find_if(_qty, [&id](auto& ic) { return ic.item()->getType() == id; });
+		return str::find_if(m_Content, [&id](auto& ic) { return ic.item()->getType() == id; });
 	}
 
 	/**
@@ -242,7 +242,7 @@ namespace OpenXcom
 	 */
 	const std::vector<ItemCounter>& ItemContainer::content() const
 	{
-		return _qty;
+		return m_Content;
 	}
 
 }

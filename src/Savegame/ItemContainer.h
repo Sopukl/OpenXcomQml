@@ -30,7 +30,7 @@ class RuleItem;
 	{
 		Q_GADGET
 		QML_ELEMENT
-		QML_UNCREATABLE("its gadget")
+
 		Q_PROPERTY(RuleItem* item READ item FINAL)
 		Q_PROPERTY(int count READ count FINAL)
 		const RuleItem* m_Item = nullptr;
@@ -54,8 +54,8 @@ class RuleItem;
 	{
 		Q_OBJECT
 		QML_ELEMENT
-		Q_PROPERTY(std::vector<OpenXcom::ItemCounter> content READ content CONSTANT FINAL)
-		std::vector<ItemCounter> _qty;
+		Q_PROPERTY(std::vector<ItemCounter> content READ content CONSTANT FINAL)
+		std::vector<ItemCounter> m_Content;
 	public:
 		/// Clone container.
 		void clone(const ItemContainer& other);
@@ -78,9 +78,9 @@ class RuleItem;
 		/// Gets the total size of items in the container.
 		double getTotalSize() const;
 		/// Check if have any item
-		bool empty() const { return _qty.empty(); }
+		bool empty() const { return m_Content.empty(); }
 		/// Clear all content.
-		void clear() { _qty.clear(); }
+		void clear() { m_Content.clear(); }
 		/// Gets all the items in the container.
 		const std::vector<ItemCounter>& content() const;
 	  private:
