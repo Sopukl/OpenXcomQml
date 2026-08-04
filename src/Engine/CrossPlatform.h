@@ -22,7 +22,7 @@
 
 
 #include <array>
-#include <memory>
+
 #include <utility>
 
 extern QString openXComFolder();

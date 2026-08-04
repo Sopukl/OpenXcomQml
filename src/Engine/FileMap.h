@@ -22,7 +22,7 @@
 
 
 #include <istream>
-#include <memory>
+
 
 #include "../Engine/Yaml.h"
 #include "../Engine/CrossPlatform.h"

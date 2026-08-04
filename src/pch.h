@@ -16,6 +16,7 @@
 #include <stdexcept>
 #include <cstdint>
 #include <climits>
+#include <memory>
 #include <cstring>
 #include <functional>
 #include <QString>

@@ -42,7 +42,7 @@
 
 
 
-#include <memory>
+
 
 #include <optional>
 #include <c4/format.hpp>

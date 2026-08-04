@@ -18,7 +18,7 @@
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <memory>
+
 #include "../Engine/Surface.h"
 #include "../Battlescape/Position.h"
 #include "../Mod/MapData.h"

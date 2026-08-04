@@ -20,7 +20,7 @@
 #include "../Engine/State.h"
 #include "../Mod/RuleItem.h"
 
-#include <memory>
+
 
 namespace OpenXcom
 {

@@ -19,7 +19,7 @@
  */
 
 
-#include <memory>
+
 
 #include "ArticleState.h"
 

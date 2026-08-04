@@ -24,7 +24,6 @@
 #include <QImage>
 #include <QJsonArray>
 #include <QJsonObject>
-#include "SavesManager.h"
 #include "../Savegame/SavedGame.h"
 #include "../Savegame/Base.h"
 
