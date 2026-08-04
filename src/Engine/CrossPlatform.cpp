@@ -26,11 +26,11 @@
 #include <fstream>
 
 
-#include <stdint.h>
+
 #include <time.h>
 #include <signal.h>
 #include <sys/stat.h>
-#include <assert.h>
+
 #include "Logger.h"
 #include "Exception.h"
 #include "Options.h"

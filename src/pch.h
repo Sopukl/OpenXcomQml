@@ -19,6 +19,10 @@
 #include <memory>
 #include <cstring>
 #include <functional>
+#include <utility>
+#include <stdint.h>
+#include <cfloat>
+#include <cassert>
 #include <QString>
 #include <QVector>
 #include <QDebug>

@@ -25,7 +25,7 @@
 
 #include "../Engine/Yaml.h"
 #include <SDL_stdinc.h>
-#include <cassert>
+
 
 
 #include "HelperMeta.h"

@@ -89,9 +89,6 @@
 #ifndef FASTFLOAT_FLOAT_COMMON_H
 #define FASTFLOAT_FLOAT_COMMON_H
 
-#include <cfloat>
-
-#include <cassert>
 
 #include <type_traits>
 #include <system_error>
@@ -2132,10 +2129,8 @@ using powers = powers_template<>;
 #ifndef FASTFLOAT_DECIMAL_TO_BINARY_H
 #define FASTFLOAT_DECIMAL_TO_BINARY_H
 
-#include <cfloat>
+
 #include <cinttypes>
-
-
 #include <cstdlib>
 
 

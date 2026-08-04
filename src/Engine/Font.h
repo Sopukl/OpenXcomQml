@@ -19,11 +19,9 @@
  */
 
 
-#include <utility>
 #include <SDL.h>
 #include "../Engine/Yaml.h"
 #include "Unicode.h"
-
 #include "Surface.h"
 
 namespace OpenXcom

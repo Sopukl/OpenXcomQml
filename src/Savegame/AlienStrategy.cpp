@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU General Public License
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
-#include <assert.h>
+
 #include "AlienStrategy.h"
 #include "WeightedOptions.h"
 #include "../Mod/Mod.h"

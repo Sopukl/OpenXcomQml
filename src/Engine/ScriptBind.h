@@ -21,7 +21,7 @@
 #include "Exception.h"
 #include "Logger.h"
 
-#include <utility>
+
 
 namespace OpenXcom
 {

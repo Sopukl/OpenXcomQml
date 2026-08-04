@@ -22,7 +22,7 @@
 #include "Logger.h"
 #include "SDL2Helpers.h"
 
-#include <cassert>
+
 
 namespace OpenXcom
 {

@@ -34,7 +34,7 @@
 #include <alloca.h>
 #endif
 
-#include <assert.h>
+
 #include <stdlib.h>
 
 #define SSDST(bits, num) (scale2x_uint##bits *)dst##num

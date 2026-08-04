@@ -17,9 +17,9 @@
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "SerializationHelper.h"
-#include <assert.h>
 
-#include <cfloat>
+
+
 
 namespace OpenXcom
 {

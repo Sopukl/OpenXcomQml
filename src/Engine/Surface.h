@@ -19,7 +19,7 @@
  */
 #include <SDL.h>
 
-#include <assert.h>
+
 #include "GraphSubset.h"
 
 namespace OpenXcom

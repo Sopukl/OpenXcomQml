@@ -677,7 +677,7 @@ void write(ryml::NodeRef* n, bool const& v)
 
 #ifndef NDEBUG
 
-#include <cassert>
+
 
 static auto createRootReader(std::string s)
 {

@@ -28,7 +28,7 @@
 
 #include "scale2x.h"
 
-#include <assert.h>
+
 
 #if (_MSC_VER >= 1400)
 #define restrict __restrict

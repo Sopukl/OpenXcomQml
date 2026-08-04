@@ -23,7 +23,7 @@
 
 #include <array>
 
-#include <utility>
+
 
 extern QString openXComFolder();
 

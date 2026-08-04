@@ -17,7 +17,7 @@
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "GeoscapeEvent.h"
-#include <assert.h>
+
 #include "../Mod/RuleEvent.h"
 
 namespace OpenXcom

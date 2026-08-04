@@ -22,7 +22,7 @@
 
 
 
-#include <cassert>
+
 #include "../version.h"
 #include "../Engine/CrossPlatform.h"
 #include "../Engine/FileMap.h"

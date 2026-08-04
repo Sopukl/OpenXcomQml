@@ -21,7 +21,7 @@
  * X-COM Adlib Player by Volutar
  */
 
-#include <stdint.h>
+
 
 #include <memory.h>
 #include "fmopl.h"

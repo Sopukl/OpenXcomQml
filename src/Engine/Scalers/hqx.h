@@ -21,7 +21,7 @@
 #ifndef __HQX_H_
 #define __HQX_H_
 
-#include <stdint.h>
+
 
 #if 0 /*defined( __GNUC__ )*/
 #ifdef __MINGW32__

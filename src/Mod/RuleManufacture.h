@@ -20,7 +20,7 @@
 
 
 #include "../Engine/Yaml.h"
-#include <stdint.h>
+
 #include "RuleBaseFacilityFunctions.h"
 
 namespace OpenXcom

@@ -20,7 +20,7 @@
 
 
 
-#include <utility>
+
 
 namespace OpenXcom
 {

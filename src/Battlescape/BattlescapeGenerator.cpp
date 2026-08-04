@@ -17,7 +17,7 @@
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <assert.h>
+
 #include "BattlescapeGenerator.h"
 #include "TileEngine.h"
 #include "Inventory.h"

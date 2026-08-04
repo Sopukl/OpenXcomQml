@@ -24,7 +24,7 @@
 #include "Logger.h"
 #include "../Engine/Yaml.h"
 
-#include <assert.h>
+
 
 namespace OpenXcom
 {

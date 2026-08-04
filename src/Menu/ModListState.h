@@ -21,7 +21,7 @@
 #include "../Engine/ModInfo.h"
 
 
-#include <utility>
+
 
 namespace OpenXcom
 {

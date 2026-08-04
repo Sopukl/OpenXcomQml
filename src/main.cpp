@@ -18,7 +18,7 @@
  */
 
 #include <exception>
-#include <cassert>
+
 #include "version.h"
 #include "Engine/Exception.h"
 #include "Engine/Logger.h"

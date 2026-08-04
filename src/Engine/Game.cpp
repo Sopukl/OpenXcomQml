@@ -18,10 +18,7 @@
  */
 #include "Game.h"
 #include "../resource.h"
-
-
 #include <qguiapplication.h>
-
 #include <SDL_mixer.h>
 #include "State.h"
 #include "Screen.h"
@@ -52,10 +49,10 @@
 #include "../Menu/TestState.h"
 #include "../Menu/StartState.h"
 #include "../Menu/StatisticsState.h"
-
 #include "../fallthrough.h"
 #include "../version.h"
 #include <QJsonObject>
+
 namespace OpenXcom
 {
 

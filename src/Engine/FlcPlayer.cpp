@@ -28,7 +28,7 @@
 #endif
 #include "FlcPlayer.h"
 
-#include <cassert>
+
 #include <string.h>
 #include <SDL_mixer.h>
 #include "FileMap.h"

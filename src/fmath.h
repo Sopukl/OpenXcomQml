@@ -18,10 +18,10 @@
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <cfloat>
+
 #define _USE_MATH_DEFINES
 
-#include <assert.h>
+
 
 #ifndef M_PI
 #define M_PI       3.14159265358979323846

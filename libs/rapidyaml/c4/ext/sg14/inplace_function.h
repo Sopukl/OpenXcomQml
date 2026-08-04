@@ -27,7 +27,7 @@
 #define _C4_EXT_SG14_INPLACE_FUNCTION_H_
 
 #include <type_traits>
-#include <utility>
+
 
 #include <cstdlib>
 
