@@ -112,6 +112,8 @@ Window {
             console.log("crafts")
             for(let c of base.crafts)
                 console.log(c.name)
+            console.log("items")
+            console.log(base.storage)
         }
     }
 

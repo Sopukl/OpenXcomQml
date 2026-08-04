@@ -17,8 +17,7 @@
  * You should have received a copy of the GNU General Public License
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
-#include <string>
-#include <map>
+#include <qqml.h>
 #include "../Engine/Yaml.h"
 
 namespace OpenXcom
@@ -45,15 +44,15 @@ class ItemCounter
  * like base stores, craft equipment, etc.
  * Handles all necessary item management tasks.
  */
-class ItemContainer
+class ItemContainer: public QObject
 {
-private:
+	Q_OBJECT
+	QML_ELEMENT
+
 	std::vector<ItemCounter> _qty;
 public:
-	/// Creates an empty item container.
-	ItemContainer();
-	/// Cleans up the item container.
-	~ItemContainer();
+	/// Clone container.
+	void clone(const ItemContainer& other);
 	/// Loads the item container from YAML.
 	void load(const YAML::YamlNodeReader& reader, const Mod* mod);
 	/// Saves the item container to YAML.

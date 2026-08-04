@@ -113,8 +113,9 @@ class Base : public Target
 	Q_OBJECT
 
 	Q_PROPERTY(QString name READ name NOTIFY nameChanged FINAL)
-	Q_PROPERTY(std::vector<OpenXcom::Craft*> crafts READ crafts NOTIFY craftsChanged FINAL)
+	Q_PROPERTY(std::vector<Craft*> crafts READ crafts NOTIFY craftsChanged FINAL)
 	Q_PROPERTY(std::vector<OpenXcom::Soldier*> soldiers READ soldiers NOTIFY soldiersChanged FINAL)
+	Q_PROPERTY(ItemContainer* storage READ storage CONSTANT FINAL)
 private:
 	static const int BASE_SIZE = 6;
 	const Mod *_mod;
@@ -176,6 +177,7 @@ public:
 	const std::vector<Transfer*>& getTransfers() const { return _transfers; }
 	/// Gets the base's items.
 	ItemContainer& getStorageItems() { return _items; }
+	ItemContainer* storage() { return &_items; }
 	/// Gets the base's items.
 	const ItemContainer& getStorageItems() const { return _items; }
 	/// Gets the base's scientists.

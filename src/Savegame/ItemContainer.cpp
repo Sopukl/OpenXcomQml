@@ -47,23 +47,14 @@ namespace OpenXcom
 	}
 
 	/**
-	 * Initializes an item container with no contents.
-	 */
-	ItemContainer::ItemContainer()
-	{
-	}
-
-	/**
-	 *
-	 */
-	ItemContainer::~ItemContainer()
-	{
-	}
-
-	/**
 	 * Loads the item container from a YAML file.
 	 * @param node YAML node.
 	 */
+	void ItemContainer::clone(const ItemContainer &other)
+	{
+		_qty = other.getContents();
+	}
+
 	void ItemContainer::load(const YAML::YamlNodeReader& reader, const Mod* mod)
 	{
 		if (!reader || !reader.isMap())

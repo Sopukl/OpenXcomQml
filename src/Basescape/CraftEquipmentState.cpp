@@ -1062,7 +1062,7 @@ void CraftEquipmentState::loadGlobalLoadout(int index, bool onlyAddItems)
 	if (onlyAddItems)
 	{
 		// remember for later, make copies
-		craftItemsBackup = *c->getItems();
+		craftItemsBackup.clone(*c->getItems());
 		craftVehiclesBackup = *c->getVehicles();
 	}
 	else
