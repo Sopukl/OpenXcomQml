@@ -18,11 +18,9 @@
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-
 #include "../Engine/Surface.h"
 #include "../Battlescape/Position.h"
 #include "../Mod/MapData.h"
-
 #include <SDL_types.h> // for Uint8
 
 namespace OpenXcom

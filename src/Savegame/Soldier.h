@@ -18,7 +18,6 @@
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include <QObject>
-
 #include "../Engine/Yaml.h"
 #include "../Mod/Unit.h"
 #include "../Mod/StatString.h"

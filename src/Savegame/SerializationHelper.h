@@ -19,7 +19,6 @@
  */
 #include <SDL_types.h>
 
-
 namespace OpenXcom
 {
 

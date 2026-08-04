@@ -19,7 +19,6 @@
  */
 
 #include <time.h>
-
 #include "GameTime.h"
 #include "../Mod/RuleAlienMission.h"
 #include "../Mod/RuleEvent.h"

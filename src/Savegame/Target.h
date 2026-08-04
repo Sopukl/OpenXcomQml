@@ -19,8 +19,6 @@
  */
 #include <QObject>
 #include <qqmlintegration.h>
-
-
 #include "../Engine/Yaml.h"
 
 namespace OpenXcom
