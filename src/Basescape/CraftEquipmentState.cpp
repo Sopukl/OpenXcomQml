@@ -88,7 +88,7 @@ CraftEquipmentState::CraftEquipmentState(Base *base, size_t craft) :
 	// Set palette
 	setInterface("craftEquipment");
 
-	_ammoColor = game.getMod()->getInterface("craftEquipment")->getElement("ammoColor")->color;
+	_ammoColor = game.mod()->getInterface("craftEquipment")->getElement("ammoColor")->color;
 
 	add(_window, "window", "craftEquipment");
 	add(_btnQuickSearch, "button", "craftEquipment");
@@ -157,9 +157,9 @@ CraftEquipmentState::CraftEquipmentState(Base *base, size_t craft) :
 	_categoryStrings.push_back("STR_ALL");
 	_categoryStrings.push_back("STR_EQUIPPED");
 	bool hasUnassigned = false;
-	for (auto& itemType : game.getMod()->getItemsList())
+	for (auto& itemType : game.mod()->getItemsList())
 	{
-		RuleItem *rule = game.getMod()->getItem(itemType);
+		RuleItem *rule = game.mod()->getItem(itemType);
 		Unit* isVehicle = rule->getVehicleUnit();
 		int cQty = isVehicle ? c->getVehicleCount(itemType) : c->getItems()->countOf(rule);
 
@@ -180,12 +180,12 @@ CraftEquipmentState::CraftEquipmentState(Base *base, size_t craft) :
 			}
 		}
 	}
-	auto& itemCategories = game.getMod()->getItemCategoriesList();
+	auto& itemCategories = game.mod()->getItemCategoriesList();
 	for (auto& categoryName : itemCategories)
 	{
 		if (_usedCategoryStrings[categoryName])
 		{
-			if (!game.getMod()->getItemCategory(categoryName)->isHidden())
+			if (!game.mod()->getItemCategory(categoryName)->isHidden())
 			{
 				_categoryStrings.push_back(categoryName);
 			}
@@ -332,7 +332,7 @@ void CraftEquipmentState::initList()
 	bool categoryUnassigned = (selectedCategory == "STR_UNASSIGNED");
 	bool categoryEquipped = (selectedCategory == "STR_EQUIPPED");
 	bool categoryNotEquipped = (selectedCategory == "STR_NOT_EQUIPPED");
-	bool shareAmmoCategories = game.getMod()->getShareAmmoCategories();
+	bool shareAmmoCategories = game.mod()->getShareAmmoCategories();
 
 	Craft *c = _base->crafts().at(_craft);
 
@@ -343,9 +343,9 @@ void CraftEquipmentState::initList()
 	_lstEquipment->clearList();
 
 	int row = 0;
-	for (auto& itemType : game.getMod()->getItemsList())
+	for (auto& itemType : game.mod()->getItemsList())
 	{
-		const RuleItem *rule = game.getMod()->getItem(itemType);
+		const RuleItem *rule = game.mod()->getItem(itemType);
 
 		Unit* isVehicle = rule->getVehicleUnit();
 		int cQty = 0;
@@ -635,7 +635,7 @@ void CraftEquipmentState::lstEquipmentMousePress(Action *action)
 	else if (game.isMiddleClick(action, true))
 	{
 		_lstScroll = _lstEquipment->getScroll();
-		RuleItem *rule = game.getMod()->getItem(_items[_sel]);
+		RuleItem *rule = game.mod()->getItem(_items[_sel]);
 		std::string articleId = rule->getUfopediaType();
 		Ufopaedia::openArticle(articleId);
 	}
@@ -648,7 +648,7 @@ void CraftEquipmentState::lstEquipmentMousePress(Action *action)
 void CraftEquipmentState::updateQuantity()
 {
 	Craft *c = _base->crafts().at(_craft);
-	RuleItem *item = game.getMod()->getItem(_items[_sel], true);
+	RuleItem *item = game.mod()->getItem(_items[_sel], true);
 	int cQty = 0;
 	if (item->getVehicleUnit())
 	{
@@ -725,7 +725,7 @@ void CraftEquipmentState::moveLeft()
 void CraftEquipmentState::moveLeftByValue(int change)
 {
 	Craft *c = _base->crafts().at(_craft);
-	const RuleItem *item = game.getMod()->getItem(_items[_sel], true);
+	const RuleItem *item = game.mod()->getItem(_items[_sel], true);
 	int cQty = 0;
 	if (item->getVehicleUnit()) cQty = c->getVehicleCount(_items[_sel]);
 	else cQty = c->getItems()->countOf(item);
@@ -815,7 +815,7 @@ void CraftEquipmentState::moveRight()
 void CraftEquipmentState::moveRightByValue(int change, bool suppressErrors)
 {
 	Craft *c = _base->crafts().at(_craft);
-	const RuleItem *item = game.getMod()->getItem(_items[_sel], true);
+	const RuleItem *item = game.mod()->getItem(_items[_sel], true);
 	int bqty = _base->getStorageItems().countOf(item);
 	if (_isNewBattle)
 	{
@@ -982,7 +982,7 @@ void CraftEquipmentState::btnInventoryClick(Action *)
 
 			for (_sel = 0; _sel != _items.size(); ++_sel)
 			{
-				RuleItem* rule = game.getMod()->getItem(_items[_sel], true);
+				RuleItem* rule = game.mod()->getItem(_items[_sel], true);
 				if (craft->getItems()->countOf(rule) > 0)
 				{
 					extras.addItem(rule, craft->getItems()->countOf(rule) - craft->getSoldierItems()->countOf(rule));
@@ -997,7 +997,7 @@ void CraftEquipmentState::btnInventoryClick(Action *)
 			craft->setMaxStorageSpaceRaw(maxStorageSpaceBackup);
 		}
 
-		SavedBattleGame *bgame = new SavedBattleGame(game.getMod());
+		SavedBattleGame *bgame = new SavedBattleGame(game.mod());
 		game.savedGame()->setBattleGame(bgame);
 
 		if (game.isCtrlPressed(true) && game.isAltPressed(true))
@@ -1023,7 +1023,7 @@ void CraftEquipmentState::saveGlobalLoadout(int index)
 	// save only what is visible on the screen (can be DIFFERENT than what's really in the craft for various reasons)
 	for (const auto& itemType : _items)
 	{
-		const RuleItem *item = game.getMod()->getItem(itemType, true);
+		const RuleItem *item = game.mod()->getItem(itemType, true);
 		int cQty = 0;
 		if (item->getVehicleUnit())
 		{
@@ -1074,7 +1074,7 @@ void CraftEquipmentState::loadGlobalLoadout(int index, bool onlyAddItems)
 	ItemContainer *tmpl = game.savedGame()->getGlobalCraftLoadout(index);
 	for (_sel = 0; _sel != _items.size(); ++_sel)
 	{
-		RuleItem *item = game.getMod()->getItem(_items[_sel], true);
+		RuleItem *item = game.mod()->getItem(_items[_sel], true);
 		int tQty = tmpl->countOf(item);
 		moveRightByValue(tQty, true);
 	}

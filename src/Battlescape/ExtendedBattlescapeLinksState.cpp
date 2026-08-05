@@ -222,7 +222,7 @@ void ExtendedBattlescapeLinksState::btnKillAllClick(Action *)
 		{
 			if (unit->getOriginalFaction() == FACTION_HOSTILE && !unit->isOut())
 			{
-				unit->damage(Position(0, 0, 0), 1000, game.getMod()->getDamageType(DT_MELEE), _save, { });
+				unit->damage(Position(0, 0, 0), 1000, game.mod()->getDamageType(DT_MELEE), _save, { });
 			}
 		}
 		_save->getBattleGame()->checkForCasualties(nullptr, BattleActionAttack{}, true, false);

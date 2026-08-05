@@ -100,7 +100,7 @@ AllocateTrainingState::AllocateTrainingState(Base *base) : _sel(0), _base(base),
 
 	_btnPlus->setText("+");
 	_btnPlus->setPressed(false);
-	if (game.getMod()->getSoldierBonusList().empty())
+	if (game.mod()->getSoldierBonusList().empty())
 	{
 		// no soldier bonuses in the mod = button not needed
 		_btnPlus->setVisible(false);
@@ -146,7 +146,7 @@ AllocateTrainingState::AllocateTrainingState(Base *base) : _sel(0), _base(base),
 	PUSH_IN("STR_MISSIONS2", missionsStat);
 	PUSH_IN("STR_KILLS2", killsStat);
 	PUSH_IN("STR_WOUND_RECOVERY2", woundRecoveryStat);
-	if (game.getMod()->isManaFeatureEnabled() && !game.getMod()->getReplenishManaAfterMission())
+	if (game.mod()->isManaFeatureEnabled() && !game.mod()->getReplenishManaAfterMission())
 	{
 		PUSH_IN("STR_MANA_MISSING", manaMissingStat);
 	}
@@ -167,7 +167,7 @@ AllocateTrainingState::AllocateTrainingState(Base *base) : _sel(0), _base(base),
 	PUSH_IN("STR_THROWING_ACCURACY", throwingStatBase, throwingStatPlus);
 	PUSH_IN("STR_MELEE_ACCURACY", meleeStatBase, meleeStatPlus);
 	PUSH_IN("STR_STRENGTH", strengthStatBase, strengthStatPlus);
-	if (game.getMod()->isManaFeatureEnabled())
+	if (game.mod()->isManaFeatureEnabled())
 	{
 		// "unlock" is checked later
 		PUSH_IN("STR_MANA_POOL", manaStatBase, manaStatPlus);

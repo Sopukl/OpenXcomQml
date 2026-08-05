@@ -67,7 +67,7 @@ namespace OpenXcom
 
 		_colorNormal = _lstSelection->getColor();
 		_colorNew = options1.oxceHighlightNewTopics() ? _lstSelection->getSecondaryColor() : _colorNormal;
-		_colorHidden = game.getMod()->getInterface("ufopaedia")->getElement("listExtended")->color;
+		_colorHidden = game.mod()->getInterface("ufopaedia")->getElement("listExtended")->color;
 
 		centerAllSurfaces();
 
@@ -219,7 +219,7 @@ namespace OpenXcom
 
 		_lstSelection->clearList();
 		_article_list.clear();
-		Ufopaedia::list(game.savedGame(), game.getMod(), _section, _article_list);
+		Ufopaedia::list(game.savedGame(), game.mod(), _section, _article_list);
 		_filtered_article_list.clear();
 		size_t selectedFilter = _cbxFilter->getSelected();
 

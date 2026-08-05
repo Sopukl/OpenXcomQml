@@ -71,10 +71,10 @@ BriefingState::BriefingState(Craft *craft, Base *base, bool infoOnly, BriefingDa
 	auto* battleSave = game.savedGame()->getSavedBattle();
 
 	std::string mission = battleSave->getMissionType();
-	AlienDeployment *deployment = game.getMod()->getDeployment(mission);
+	AlienDeployment *deployment = game.mod()->getDeployment(mission);
 	if (mission == "STR_BASE_DEFENSE")
 	{
-		AlienDeployment* customDeployment = game.getMod()->getDeployment(battleSave->getAlienCustomDeploy());
+		AlienDeployment* customDeployment = game.mod()->getDeployment(battleSave->getAlienCustomDeploy());
 		if (customDeployment && !customDeployment->getBriefingData().desc.empty())
 		{
 			deployment = customDeployment;
@@ -94,7 +94,7 @@ BriefingState::BriefingState(Craft *craft, Base *base, bool infoOnly, BriefingDa
 					// fake underwater UFO
 					ufoMissionName = battleSave->getAlienCustomMission();
 				}
-				deployment = game.getMod()->getDeployment(ufoMissionName);
+				deployment = game.mod()->getDeployment(ufoMissionName);
 			}
 		}
 	}
@@ -105,13 +105,13 @@ BriefingState::BriefingState(Craft *craft, Base *base, bool infoOnly, BriefingDa
 	{
 		setStandardPalette("PAL_GEOSCAPE", 0);
 		_musicId = "GMDEFEND";
-		_window->setBackground(game.getMod()->getSurface("BACK16.SCR"));
+		_window->setBackground(game.mod()->getSurface("BACK16.SCR"));
 	}
 	else
 	{
 		BriefingData data = customBriefing ? *customBriefing : deployment->getBriefingData();
 		setStandardPalette("PAL_GEOSCAPE", data.palette);
-		_window->setBackground(game.getMod()->getSurface(data.background));
+		_window->setBackground(game.mod()->getSurface(data.background));
 		_txtCraft->setY(56 + data.textOffset);
 		_txtBriefing->setY(72 + data.textOffset);
 		_txtTarget->setVisible(data.showTarget);
@@ -171,15 +171,15 @@ BriefingState::BriefingState(Craft *craft, Base *base, bool infoOnly, BriefingDa
 		// random operation names
 		if (craft || base)
 		{
-			if (!game.getMod()->getOperationNamesFirst().empty())
+			if (!game.mod()->getOperationNamesFirst().empty())
 			{
 				std::ostringstream ss;
-				int pickFirst = RNG::seedless(0, game.getMod()->getOperationNamesFirst().size() - 1);
-				ss << game.getMod()->getOperationNamesFirst().at(pickFirst);
-				if (!game.getMod()->getOperationNamesLast().empty())
+				int pickFirst = RNG::seedless(0, game.mod()->getOperationNamesFirst().size() - 1);
+				ss << game.mod()->getOperationNamesFirst().at(pickFirst);
+				if (!game.mod()->getOperationNamesLast().empty())
 				{
-					int pickLast = RNG::seedless(0, game.getMod()->getOperationNamesLast().size() - 1);
-					ss << " " << game.getMod()->getOperationNamesLast().at(pickLast);
+					int pickLast = RNG::seedless(0, game.mod()->getOperationNamesLast().size() - 1);
+					ss << " " << game.mod()->getOperationNamesLast().at(pickLast);
 				}
 				s = ss.str();
 				battleSave->setMissionTarget(s);
@@ -187,7 +187,7 @@ BriefingState::BriefingState(Craft *craft, Base *base, bool infoOnly, BriefingDa
 		}
 	}
 
-	if (!game.getMod()->getOperationNamesFirst().empty())
+	if (!game.mod()->getOperationNamesFirst().empty())
 		_txtTarget->setText(ltr("STR_OPERATION_UC").arg(battleSave->getMissionTarget()));
 	else
 		_txtTarget->setText(battleSave->getMissionTarget());
@@ -259,7 +259,7 @@ void BriefingState::init()
 	}
 	else
 	{
-		game.getMod()->playMusic(_musicId);
+		game.mod()->playMusic(_musicId);
 	}
 }
 

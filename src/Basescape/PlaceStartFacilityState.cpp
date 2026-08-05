@@ -72,7 +72,7 @@ void PlaceStartFacilityState::viewClick(Action *)
 		_base->getFacilities().push_back(fac);
 		if (fac->getRules()->getPlaceSound() != Mod::NO_SOUND)
 		{
-			game.getMod()->getSound("GEO.CAT", fac->getRules()->getPlaceSound())->play();
+			game.mod()->getSound("GEO.CAT", fac->getRules()->getPlaceSound())->play();
 		}
 		game.popState();
 		_select->facilityBuilt();

@@ -38,7 +38,7 @@ namespace OpenXcom
 
 	ArticleStateSoldier::ArticleStateSoldier(ArticleDefinitionSoldier *defs, std::shared_ptr<ArticleCommonState> state) : ArticleState(defs->id, std::move(state))
 	{
-		const RuleSoldier *soldier = game.getMod()->getSoldier(defs->id, true);
+		const RuleSoldier *soldier = game.mod()->getSoldier(defs->id, true);
 
 		// add screen elements
 		_txtTitle = new Text(310, 17, 5, 23);
@@ -46,14 +46,14 @@ namespace OpenXcom
 		// Set palette
 		if (defs->customPalette)
 		{
-			setCustomPalette(game.getMod()->getSurface(defs->image_id)->getPalette(), Mod::UFOPAEDIA_CURSOR);
+			setCustomPalette(game.mod()->getSurface(defs->image_id)->getPalette(), Mod::UFOPAEDIA_CURSOR);
 		}
 		else
 		{
 			setStandardPalette("PAL_UFOPAEDIA");
 		}
 
-		RuleInterface* itf = game.getMod()->getInterface("articleSoldier");
+		RuleInterface* itf = game.mod()->getInterface("articleSoldier");
 		int buttonColor = itf->getElement("button")->color;
 		int titleColor1 = itf->getElement("title")->color;
 		int titleColor2 = itf->getElement("title")->color2;
@@ -68,12 +68,12 @@ namespace OpenXcom
 		add(_txtTitle);
 
 		// Set up objects
-		game.getMod()->getSurface(defs->image_id)->blitNShade(_bg, 0, 0);
+		game.mod()->getSurface(defs->image_id)->blitNShade(_bg, 0, 0);
 		_btnOk->setColor(buttonColor);
 		_btnPrev->setColor(buttonColor);
 		_btnNext->setColor(buttonColor);
 		_btnInfo->setColor(buttonColor);
-		_btnInfo->setVisible(game.getMod()->getShowPediaInfoButton());
+		_btnInfo->setVisible(game.mod()->getShowPediaInfoButton());
 
 		_txtTitle->setColor(titleColor1);
 		_txtTitle->setSecondaryColor(titleColor2);
@@ -111,7 +111,7 @@ namespace OpenXcom
 		_lstStats->addRow(4, ltr("STR_THROWING_ACCURACY").c_str(), std::to_string(min.throwing).c_str(), std::to_string(max.throwing).c_str(), std::to_string(cap.throwing).c_str());
 		_lstStats->addRow(4, ltr("STR_MELEE_ACCURACY").c_str(), std::to_string(min.melee).c_str(), std::to_string(max.melee).c_str(), std::to_string(cap.melee).c_str());
 		_lstStats->addRow(4, ltr("STR_STRENGTH").c_str(), std::to_string(min.strength).c_str(), std::to_string(max.strength).c_str(), std::to_string(cap.strength).c_str());
-		if (game.getMod()->isManaFeatureEnabled())
+		if (game.mod()->isManaFeatureEnabled())
 		{
 			_lstStats->addRow(4, ltr("STR_MANA_POOL").c_str(), std::to_string(min.mana).c_str(), std::to_string(max.mana).c_str(), std::to_string(cap.mana).c_str());
 		}

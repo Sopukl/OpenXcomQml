@@ -270,11 +270,11 @@ DogfightState::DogfightState(GeoscapeState *state, Craft *craft, Ufo *ufo, bool 
 	}
 
 	// pilot modifiers
-	const std::vector<Soldier*> pilots = _craft->getPilotList(false, game.getMod()); // refresh soldier bonuses
+	const std::vector<Soldier*> pilots = _craft->getPilotList(false, game.mod()); // refresh soldier bonuses
 
-	_pilotAccuracyBonus = _craft->getPilotAccuracyBonus(pilots, game.getMod());
-	_pilotDodgeBonus = _craft->getPilotDodgeBonus(pilots, game.getMod());
-	_pilotApproachSpeedModifier = _craft->getPilotApproachSpeedModifier(pilots, game.getMod());
+	_pilotAccuracyBonus = _craft->getPilotAccuracyBonus(pilots, game.mod());
+	_pilotDodgeBonus = _craft->getPilotDodgeBonus(pilots, game.mod());
+	_pilotApproachSpeedModifier = _craft->getPilotApproachSpeedModifier(pilots, game.mod());
 
 	_craftAccelerationBonus = 2; // vanilla
 	if (!pilots.empty())
@@ -402,9 +402,9 @@ DogfightState::DogfightState(GeoscapeState *state, Craft *craft, Ufo *ufo, bool 
 	_btnUfo->invalidate(false);
 
 	// Set up objects
-	RuleInterface *dogfightInterface = game.getMod()->getInterface("dogfight");
+	RuleInterface *dogfightInterface = game.mod()->getInterface("dogfight");
 
-	SurfaceCrop crop = game.getMod()->getSurface("INTERWIN.DAT")->getCrop();
+	SurfaceCrop crop = game.mod()->getSurface("INTERWIN.DAT")->getCrop();
 	crop.setX(0);
 	crop.setY(0);
 	crop.getCrop()->x = 0;
@@ -465,7 +465,7 @@ DogfightState::DogfightState(GeoscapeState *state, Craft *craft, Ufo *ufo, bool 
 	}
 	else
 	{
-		crop = game.getMod()->getSurface(ufo->getRules()->getModSprite())->getCrop();
+		crop = game.mod()->getSurface(ufo->getRules()->getModSprite())->getCrop();
 	}
 	crop.setX(dogfightInterface->getElement("previewTop")->x);
 	crop.setY(dogfightInterface->getElement("previewTop")->h);
@@ -522,7 +522,7 @@ DogfightState::DogfightState(GeoscapeState *state, Craft *craft, Ufo *ufo, bool 
 	else
 		_txtStatus->setText(ltr("STR_STANDOFF"));
 
-	SurfaceSet *set = game.getMod()->getSurfaceSet("INTICON.PCK");
+	SurfaceSet *set = game.mod()->getSurfaceSet("INTICON.PCK");
 
 	// Create the minimized dogfight icon.
 	Surface *frame = set->getFrame(_craft->getSkinSprite());
@@ -667,7 +667,7 @@ DogfightState::DogfightState(GeoscapeState *state, Craft *craft, Ufo *ufo, bool 
 		int escapeCountdown = _ufo->getRules()->getBreakOffTime() + RNG::generate(0, _ufo->getRules()->getBreakOffTime()) - 30 * game.savedGame()->getDifficultyCoefficient();
 		{
 			int diff = game.savedGame()->getDifficulty();
-			auto& custom = game.getMod()->getUfoEscapeCountdownCoefficients();
+			auto& custom = game.mod()->getUfoEscapeCountdownCoefficients();
 			if (custom.size() > (size_t)diff)
 			{
 				escapeCountdown = _ufo->getRules()->getBreakOffTime() + RNG::generate(0, _ufo->getRules()->getBreakOffTime());
@@ -761,11 +761,11 @@ void DogfightState::think()
 
 		// Note: init() is never called for DogfightState, so we'll do it here instead
 		{
-			auto& sounds = game.getMod()->getStartDogfightSounds();
+			auto& sounds = game.mod()->getStartDogfightSounds();
 			int soundId = sounds.empty() ? Mod::NO_SOUND : sounds[RNG::generate(0, sounds.size() - 1)];
 			if (soundId != Mod::NO_SOUND)
 			{
-				auto* customSound = game.getMod()->getSound("GEO.CAT", soundId);
+				auto* customSound = game.mod()->getSound("GEO.CAT", soundId);
 				customSound->play();
 			}
 		}
@@ -1077,7 +1077,7 @@ void DogfightState::update()
 
 		_currentDist += distanceChange;
 
-		if (game.getMod()->getShowDogfightDistanceInKm())
+		if (game.mod()->getShowDogfightDistanceInKm())
 		{
 			_txtDistance->setText(ltr("STR_KILOMETERS").arg(_currentDist / 8));
 		}
@@ -1139,7 +1139,7 @@ void DogfightState::update()
 					_ufo->setShield(_ufo->getShield() - shieldDamage);
 				}
 				damage = std::max(0, damage - _ufo->getCraftStats().armor);
-				_ufo->setDamage(_ufo->getDamage() + damage, game.getMod());
+				_ufo->setDamage(_ufo->getDamage() + damage, game.mod());
 				_state->handleDogfightExperience(); // called after setDamage
 				if (_ufo->isCrashed())
 				{
@@ -1172,13 +1172,13 @@ void DogfightState::update()
 					}
 					else
 					{
-						if (damage < _ufo->getCraftStats().damageMax / 2 * game.getMod()->getUfoGlancingHitThreshold() / 100)
+						if (damage < _ufo->getCraftStats().damageMax / 2 * game.mod()->getUfoGlancingHitThreshold() / 100)
 							setStatus("STR_UFO_HIT_GLANCING");
 						else
 							setStatus("STR_UFO_HIT");
 					}
 				}
-				game.getMod()->getSound("GEO.CAT", Mod::UFO_HIT)->play();
+				game.mod()->getSound("GEO.CAT", Mod::UFO_HIT)->play();
 			}
 		}
 
@@ -1231,7 +1231,7 @@ void DogfightState::update()
 						}
 
 						damage = std::max(0, damage - _ufo->getCraftStats().armor);
-						_ufo->setDamage(_ufo->getDamage() + damage, game.getMod());
+						_ufo->setDamage(_ufo->getDamage() + damage, game.mod());
 						_state->handleDogfightExperience(); // called after setDamage
 						if (_ufo->isCrashed())
 						{
@@ -1269,7 +1269,7 @@ void DogfightState::update()
 							}
 							else
 							{
-								if (damage < _ufo->getCraftStats().damageMax / 2 * game.getMod()->getUfoGlancingHitThreshold() / 100)
+								if (damage < _ufo->getCraftStats().damageMax / 2 * game.mod()->getUfoGlancingHitThreshold() / 100)
 								{
 									setStatus("STR_UFO_HIT_GLANCING");
 								}
@@ -1280,7 +1280,7 @@ void DogfightState::update()
 							}
 						}
 
-						game.getMod()->getSound("GEO.CAT", Mod::UFO_HIT)->play();
+						game.mod()->getSound("GEO.CAT", Mod::UFO_HIT)->play();
 						p->remove();
 					}
 					// Missed.
@@ -1352,7 +1352,7 @@ void DogfightState::update()
 								setStatus("STR_MISSILE_DAMAGED");
 							else
 								setStatus("STR_INTERCEPTOR_DAMAGED");
-							game.getMod()->getSound("GEO.CAT", Mod::INTERCEPTOR_HIT)->play(); //10
+							game.mod()->getSound("GEO.CAT", Mod::INTERCEPTOR_HIT)->play(); //10
 							if (_mode == _btnCautious && _craft->getDamagePercentage() >= 50 && !_ufoIsAttacking)
 							{
 								_targetDist = STANDOFF_DIST;
@@ -1392,7 +1392,7 @@ void DogfightState::update()
 					_craftIsDefenseless = true;
 
 					// self-destruct button
-					int offset = game.getMod()->getInterface("dogfight")->getElement("minimizeButtonDummy")->TFTDMode ? 1 : 0;
+					int offset = game.mod()->getInterface("dogfight")->getElement("minimizeButtonDummy")->TFTDMode ? 1 : 0;
 					_btnMinimize->drawRect(1 + offset, 1, _btnMinimize->getWidth() - 2 - offset, _btnMinimize->getHeight() - 2, _colors[DAMAGE_MAX]);
 					_btnMinimize->setVisible(true);
 				}
@@ -1435,7 +1435,7 @@ void DogfightState::update()
 					{
 						_tractorLockedOn[i] = true;
 						int tractorBeamSlowdown = _ufo->getTractorBeamSlowdown();
-						tractorBeamSlowdown += w->getRules()->getTractorBeamPower() * game.getMod()->getUfoTractorBeamSizeModifier(_ufoSize) / 100;
+						tractorBeamSlowdown += w->getRules()->getTractorBeamPower() * game.mod()->getUfoTractorBeamSizeModifier(_ufoSize) / 100;
 						_ufo->setTractorBeamSlowdown(tractorBeamSlowdown);
 						setStatus("STR_TRACTOR_BEAM_ENGAGED");
 					}
@@ -1446,7 +1446,7 @@ void DogfightState::update()
 					{
 						_tractorLockedOn[i] = false;
 						int tractorBeamSlowdown = _ufo->getTractorBeamSlowdown();
-						tractorBeamSlowdown -= w->getRules()->getTractorBeamPower() * game.getMod()->getUfoTractorBeamSizeModifier(_ufoSize) / 100;
+						tractorBeamSlowdown -= w->getRules()->getTractorBeamPower() * game.mod()->getUfoTractorBeamSizeModifier(_ufoSize) / 100;
 						_ufo->setTractorBeamSlowdown(tractorBeamSlowdown);
 						setStatus("STR_TRACTOR_BEAM_DISENGAGED");
 					}
@@ -1569,7 +1569,7 @@ void DogfightState::update()
 				//_craft->evacuateCrew(game.getMod());
 			}
 			_timeout += 30;
-			game.getMod()->getSound("GEO.CAT", Mod::INTERCEPTOR_EXPLODE)->play();
+			game.mod()->getSound("GEO.CAT", Mod::INTERCEPTOR_EXPLODE)->play();
 			finalRun = true;
 			_destroyCraft = true;
 			_endCraftHandled = true;
@@ -1587,7 +1587,7 @@ void DogfightState::update()
 
 			if (_ufo->getShotDownByCraftId() == _craft->getUniqueId())
 			{
-				AlienRace *race = game.getMod()->getAlienRace(_ufo->getAlienRace());
+				AlienRace *race = game.mod()->getAlienRace(_ufo->getAlienRace());
 				AlienMission *mission = _ufo->getMission();
 				mission->ufoShotDown(*_ufo);
 				// Check for retaliation trigger.
@@ -1597,7 +1597,7 @@ void DogfightState::update()
 					retaliationOdds = 100 - (4 * (24 - game.savedGame()->getDifficultyCoefficient()) - race->getRetaliationAggression());
 					{
 						int diff = game.savedGame()->getDifficulty();
-						auto& custom = game.getMod()->getRetaliationTriggerOdds();
+						auto& custom = game.mod()->getRetaliationTriggerOdds();
 						if (custom.size() > (size_t)diff)
 						{
 							retaliationOdds = custom[diff] + race->getRetaliationAggression();
@@ -1617,7 +1617,7 @@ void DogfightState::update()
 					int retaliationUfoMissionRegionOdds = 50 - 6 * game.savedGame()->getDifficultyCoefficient();
 					{
 						int diff = game.savedGame()->getDifficulty();
-						auto& custom = game.getMod()->getRetaliationBaseRegionOdds();
+						auto& custom = game.mod()->getRetaliationBaseRegionOdds();
 						if (custom.size() > (size_t)diff)
 						{
 							retaliationUfoMissionRegionOdds = 100 - custom[diff];
@@ -1639,17 +1639,17 @@ void DogfightState::update()
 					{
 						auto* retalWeights = race->retaliationMissionWeights(game.savedGame()->getMonthsPassed());
 						std::string retalMission = retalWeights ? retalWeights->choose() : "";
-						const RuleAlienMission *rule = game.getMod()->getAlienMission(retalMission, false);
+						const RuleAlienMission *rule = game.mod()->getAlienMission(retalMission, false);
 						if (!rule)
 						{
-							rule = game.getMod()->getRandomMission(OBJECTIVE_RETALIATION, game.savedGame()->getMonthsPassed());
+							rule = game.mod()->getRandomMission(OBJECTIVE_RETALIATION, game.savedGame()->getMonthsPassed());
 						}
 
 						if (rule)
 						{
 							AlienMission *newMission = new AlienMission(*rule);
 							newMission->setId(game.savedGame()->getId("ALIEN_MISSIONS"));
-							newMission->setRegion(targetRegion, *game.getMod());
+							newMission->setRegion(targetRegion, *game.mod());
 							newMission->setRace(_ufo->getAlienRace());
 							newMission->start(game, *_state->getGlobe(), newMission->getRules().getWave(0).spawnTimer); // fixed delay for first scout
 							game.savedGame()->getAlienMissions().push_back(newMission);
@@ -1679,7 +1679,7 @@ void DogfightState::update()
 						}
 					}
 					setStatus("STR_UFO_DESTROYED");
-					game.getMod()->getSound("GEO.CAT", Mod::UFO_EXPLODE)->play(); //11
+					game.mod()->getSound("GEO.CAT", Mod::UFO_EXPLODE)->play(); //11
 				}
 				_destroyUfo = true;
 			}
@@ -1688,7 +1688,7 @@ void DogfightState::update()
 				if (_ufo->getShotDownByCraftId() == _craft->getUniqueId())
 				{
 					setStatus("STR_UFO_CRASH_LANDS");
-					game.getMod()->getSound("GEO.CAT", Mod::UFO_CRASH)->play(); //10
+					game.mod()->getSound("GEO.CAT", Mod::UFO_CRASH)->play(); //10
 					for (auto* country : game.savedGame()->countries())
 					{
 						if (country->getRules()->insideCountry(_ufo->getLongitude(), _ufo->getLatitude()))
@@ -1784,7 +1784,7 @@ void DogfightState::update()
 			if (!survived) // Brought it down over water (and didn't survive splashdown)
 			{
 				finalRun = true;
-				_ufo->setDamage(_ufo->getCraftStats().damageMax, game.getMod());
+				_ufo->setDamage(_ufo->getCraftStats().damageMax, game.mod());
 				_state->handleDogfightExperience(); // called after setDamage
 				_ufo->setShotDownByCraftId(_craft->getUniqueId());
 				_ufo->setSpeed(0);
@@ -1850,7 +1850,7 @@ void DogfightState::fireWeapon(int i)
 		p->setHorizontalPosition((i % 2 ? HP_RIGHT : HP_LEFT) * (1 + 2 * (i / 2)));
 		_projectiles.push_back(p);
 
-		game.getMod()->getSound("GEO.CAT", w1->getRules()->getSound())->play();
+		game.mod()->getSound("GEO.CAT", w1->getRules()->getSound())->play();
 		_firedAtLeastOnce = true;
 	}
 }
@@ -1865,7 +1865,7 @@ void DogfightState::ufoFireWeapon()
 	int fireCountdown = std::max(1, (_ufo->getRules()->getWeaponReload() - 2 * game.savedGame()->getDifficultyCoefficient()));
 	{
 		int diff = game.savedGame()->getDifficulty();
-		auto& custom = game.getMod()->getUfoFiringRateCoefficients();
+		auto& custom = game.mod()->getUfoFiringRateCoefficients();
 		if (custom.size() > (size_t)diff)
 		{
 			fireCountdown = std::max(1, _ufo->getRules()->getWeaponReload() * custom[diff] / 100);
@@ -1889,11 +1889,11 @@ void DogfightState::ufoFireWeapon()
 
 	if (_ufo->getRules()->getFireSound() == -1)
 	{
-		game.getMod()->getSound("GEO.CAT", Mod::UFO_FIRE)->play();
+		game.mod()->getSound("GEO.CAT", Mod::UFO_FIRE)->play();
 	}
 	else
 	{
-		game.getMod()->getSound("GEO.CAT", _ufo->getRules()->getFireSound())->play();
+		game.mod()->getSound("GEO.CAT", _ufo->getRules()->getFireSound())->play();
 	}
 }
 
@@ -1993,7 +1993,7 @@ void DogfightState::btnMinimizeClick(Action *)
 			setStatus("STR_SELF_DESTRUCT_ACTIVATED");
 		else
 			setStatus("STR_SELF_DESTRUCT_CANCELLED");
-		int offset = game.getMod()->getInterface("dogfight")->getElement("minimizeButtonDummy")->TFTDMode ? 1 : 0;
+		int offset = game.mod()->getInterface("dogfight")->getElement("minimizeButtonDummy")->TFTDMode ? 1 : 0;
 		int color = _selfDestructPressed ? DAMAGE_MIN : DAMAGE_MAX;
 		_btnMinimize->drawRect(1 + offset, 1, _btnMinimize->getWidth() - 2 - offset, _btnMinimize->getHeight() - 2, _colors[color]);
 		return;
@@ -2339,7 +2339,7 @@ void DogfightState::drawProjectile(const CraftWeaponProjectile* p)
 			int beamPower = 0;
 			if (p->getType() == CWPT_PLASMA_BEAM)
 			{
-				beamPower = _ufo->getRules()->getWeaponPower() / game.getMod()->getUfoBeamWidthParameter();
+				beamPower = _ufo->getRules()->getWeaponPower() / game.mod()->getUfoBeamWidthParameter();
 			}
 
 			for (int x = 0; x <= std::min(beamPower, 3); x++)
@@ -2711,7 +2711,7 @@ void DogfightState::awardExperienceToPilots()
 {
 	if (_firedAtLeastOnce && !_experienceAwarded && _craft && _ufo && (_ufo->isCrashed() || _ufo->isDestroyed()))
 	{
-		bool psiStrengthEval = (options1.psiStrengthEval() && game.savedGame()->isResearched(game.getMod()->getPsiRequirements()));
+		bool psiStrengthEval = (options1.psiStrengthEval() && game.savedGame()->isResearched(game.mod()->getPsiRequirements()));
 		for (auto* pilot : _craft->getPilotList(false, nullptr)) // refresh already done in the constructor
 		{
 			if (pilot->getCurrentStats()->firing < pilot->getRules()->getStatCaps().firing)
@@ -2738,7 +2738,7 @@ void DogfightState::awardExperienceToPilots()
 					pilot->getDailyDogfightExperienceCache()->bravery += 10;
 				}
 			}
-			pilot->calcStatString(game.getMod()->getStatStrings(), psiStrengthEval);
+			pilot->calcStatString(game.mod()->getStatStrings(), psiStrengthEval);
 		}
 		_experienceAwarded = true;
 	}

@@ -145,8 +145,10 @@ struct LoadRuleException : Exception
  * Contains all the game-specific static data that never changes
  * throughout the game, like rulesets and resources.
  */
-class Mod
+class Mod: public QObject
 {
+	Q_OBJECT
+	QML_ELEMENT
 public:
 	/// Number of color per opacity level.
 	constexpr static int TransparenciesPaletteColors = 256;

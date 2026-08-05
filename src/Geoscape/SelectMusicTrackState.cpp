@@ -86,9 +86,9 @@ SelectMusicTrackState::SelectMusicTrackState(SelectMusicTrackOrigin origin) : _o
 	_lstTracks->onMouseClick((ActionHandler)&SelectMusicTrackState::lstTrackClick);
 
 	const std::string search = _origin == SMT_BATTLESCAPE ? "GMTAC" : "GMGEO";
-	const std::string& currentName = game.getMod()->getCurrentMusicTrack();
+	const std::string& currentName = game.mod()->getCurrentMusicTrack();
 	int currentTrackIndex = -1;
-	for (auto& pair : game.getMod()->getMusicTrackList())
+	for (auto& pair : game.mod()->getMusicTrackList())
 	{
 		if (pair.first == currentName || pair.first.find(search) != std::string::npos)
 		{
@@ -109,7 +109,7 @@ SelectMusicTrackState::SelectMusicTrackState(SelectMusicTrackOrigin origin) : _o
 		applyBattlescapeTheme("selectMusicTrack");
 		if (currentTrackIndex > -1)
 		{
-			const Element* element = game.getMod()->getInterface("battlescape")->getElement("optionLists");
+			const Element* element = game.mod()->getInterface("battlescape")->getElement("optionLists");
 			_lstTracks->setRowColor(currentTrackIndex, element->color2);
 		}
 	}
@@ -140,7 +140,7 @@ void SelectMusicTrackState::lstTrackClick(Action *)
 {
 	Music *selected = _tracks[_lstTracks->getSelectedRow()];
 	selected->play();
-	game.getMod()->setCurrentMusicTrack(_trackNames[_lstTracks->getSelectedRow()]);
+	game.mod()->setCurrentMusicTrack(_trackNames[_lstTracks->getSelectedRow()]);
 
 	game.popState();
 }

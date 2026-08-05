@@ -82,8 +82,8 @@ NewManufactureListState::NewManufactureListState(Base *base) : _base(base), _sho
 
 	_colorNormal = _lstManufacture->getColor();
 	_colorNew = options1.oxceHighlightNewTopics() ? _lstManufacture->getSecondaryColor() : _colorNormal;
-	_colorHidden = game.getMod()->getInterface("selectNewManufacture")->getElement("listExtended")->color;
-	_colorFacilityRequired = game.getMod()->getInterface("selectNewManufacture")->getElement("listExtended")->color2;
+	_colorHidden = game.mod()->getInterface("selectNewManufacture")->getElement("listExtended")->color;
+	_colorFacilityRequired = game.mod()->getInterface("selectNewManufacture")->getElement("listExtended")->color2;
 
 	centerAllSurfaces();
 
@@ -197,7 +197,7 @@ void NewManufactureListState::lstProdClickLeft(Action *)
 	if (basicFilter == MANU_FILTER_FACILITY_REQUIRED)
 		return;
 
-	RuleManufacture* rule = game.getMod()->getManufacture(_displayedStrings[_lstManufacture->getSelectedRow()]);
+	RuleManufacture* rule = game.mod()->getManufacture(_displayedStrings[_lstManufacture->getSelectedRow()]);
 
 	// check and display error messages only further down the chain
 	_refreshCategories = false;
@@ -219,14 +219,14 @@ void NewManufactureListState::lstProdClickRight(Action *)
 
 		for (size_t row = 0; row < _lstManufacture->getTexts(); ++row)
 		{
-			RuleManufacture *info = game.getMod()->getManufacture(_displayedStrings[row]);
+			RuleManufacture *info = game.mod()->getManufacture(_displayedStrings[row]);
 			if (info)
 			{
 				if (_showRequirements)
 				{
 					std::ostringstream ss;
 					int count = 0;
-					std::vector<std::string> missed = game.getMod()->getBaseFunctionNames(~baseFunc & info->getRequireBaseFunc());
+					std::vector<std::string> missed = game.mod()->getBaseFunctionNames(~baseFunc & info->getRequireBaseFunc());
 					for (const auto& name : missed)
 					{
 						if (count > 0)
@@ -288,7 +288,7 @@ void NewManufactureListState::lstProdClickMiddle(Action *)
 	}
 	else
 	{
-		const RuleManufacture* selectedTopic = game.getMod()->getManufacture(articleId);
+		const RuleManufacture* selectedTopic = game.mod()->getManufacture(articleId);
 		game.pushState(new TechTreeViewerState(0, selectedTopic));
 	}
 }
@@ -389,7 +389,7 @@ void NewManufactureListState::fillProductionList(bool refreshCategories)
 	_lstManufacture->clearList();
 	_possibleProductions.clear();
 	ManufacturingFilterType basicFilter = (ManufacturingFilterType)(_cbxFilter->getSelected());
-	game.savedGame()->getAvailableProductions(_possibleProductions, game.getMod(), _base, basicFilter);
+	game.savedGame()->getAvailableProductions(_possibleProductions, game.mod(), _base, basicFilter);
 	_displayedStrings.clear();
 
 	ItemContainer& itemContainer = _base->getStorageItems();
@@ -505,7 +505,7 @@ void NewManufactureListState::fillProductionList(bool refreshCategories)
 
 		for (size_t r = 0; r < _lstManufacture->getTexts(); ++r)
 		{
-			RuleManufacture *info = game.getMod()->getManufacture(_displayedStrings[r]);
+			RuleManufacture *info = game.mod()->getManufacture(_displayedStrings[r]);
 			if (info)
 			{
 				bool addCategory = true;

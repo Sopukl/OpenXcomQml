@@ -85,12 +85,12 @@ void ConfirmCydoniaState::btnYesClick(Action *)
 	game.popState();
 	game.popState();
 
-	SavedBattleGame *bgame = new SavedBattleGame(game.getMod());
+	SavedBattleGame *bgame = new SavedBattleGame(game.mod());
 	game.savedGame()->setBattleGame(bgame);
 	BattlescapeGenerator bgen = BattlescapeGenerator();
-	for (auto& ad : game.getMod()->getDeploymentsList())
+	for (auto& ad : game.mod()->getDeploymentsList())
 	{
-		AlienDeployment *deployment = game.getMod()->getDeployment(ad);
+		AlienDeployment *deployment = game.mod()->getDeployment(ad);
 		if (deployment->isFinalDestination())
 		{
 			bgame->setMissionType(ad);

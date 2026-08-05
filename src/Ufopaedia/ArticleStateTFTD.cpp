@@ -35,31 +35,31 @@ namespace OpenXcom
 		switch (defs->getType())
 		{
 			case UFOPAEDIA_TYPE_TFTD:
-				ruleInterface = game.getMod()->getInterface("articleTFTD");
+				ruleInterface = game.mod()->getInterface("articleTFTD");
 				break;
 			case UFOPAEDIA_TYPE_TFTD_CRAFT:
-				ruleInterface = game.getMod()->getInterface("articleCraftTFTD");
+				ruleInterface = game.mod()->getInterface("articleCraftTFTD");
 				break;
 			case UFOPAEDIA_TYPE_TFTD_CRAFT_WEAPON:
-				ruleInterface = game.getMod()->getInterface("articleCraftWeaponTFTD");
+				ruleInterface = game.mod()->getInterface("articleCraftWeaponTFTD");
 				break;
 			case UFOPAEDIA_TYPE_TFTD_VEHICLE:
-				ruleInterface = game.getMod()->getInterface("articleVehicleTFTD");
+				ruleInterface = game.mod()->getInterface("articleVehicleTFTD");
 				break;
 			case UFOPAEDIA_TYPE_TFTD_ITEM:
-				ruleInterface = game.getMod()->getInterface("articleItemTFTD");
+				ruleInterface = game.mod()->getInterface("articleItemTFTD");
 				break;
 			case UFOPAEDIA_TYPE_TFTD_ARMOR:
-				ruleInterface = game.getMod()->getInterface("articleArmorTFTD");
+				ruleInterface = game.mod()->getInterface("articleArmorTFTD");
 				break;
 			case UFOPAEDIA_TYPE_TFTD_BASE_FACILITY:
-				ruleInterface = game.getMod()->getInterface("articleBaseFacilityTFTD");
+				ruleInterface = game.mod()->getInterface("articleBaseFacilityTFTD");
 				break;
 			case UFOPAEDIA_TYPE_TFTD_USO:
-				ruleInterface = game.getMod()->getInterface("articleUsoTFTD");
+				ruleInterface = game.mod()->getInterface("articleUsoTFTD");
 				break;
 			default:
-				ruleInterface = game.getMod()->getInterface("articleTFTD");
+				ruleInterface = game.mod()->getInterface("articleTFTD");
 				break;
 		}
 
@@ -77,7 +77,7 @@ namespace OpenXcom
 			else
 				_cursorColor = Mod::BATTLESCAPE_CURSOR;
 
-			setCustomPalette(game.getMod()->getSurface(defs->image_id)->getPalette(), _cursorColor);
+			setCustomPalette(game.mod()->getSurface(defs->image_id)->getPalette(), _cursorColor);
 		}
 		else
 		{
@@ -123,22 +123,22 @@ namespace OpenXcom
 		ArticleState::initLayout();
 
 		// Step 1: background image
-		auto& bgImageName = ruleInterface->getBackgroundImage(game.getMod(), game.savedGame());
+		auto& bgImageName = ruleInterface->getBackgroundImage(game.mod(), game.savedGame());
 		if (!defs->customPalette)
 		{
-			game.getMod()->getSurface(bgImageName)->blitNShade(_bg, 0, 0);
+			game.mod()->getSurface(bgImageName)->blitNShade(_bg, 0, 0);
 		}
 
 		// Step 2: article image (optional)
-		Surface *image = game.getMod()->getSurface(defs->image_id, false);
+		Surface *image = game.mod()->getSurface(defs->image_id, false);
 		if (image)
 		{
 			image->blitNShade(_bg, 0, 0);
 		}
 
 		// Step 3: info button image
-		Surface *button = game.getMod()->getSurface(bgImageName + "-InfoButton", false);
-		if (!defs->customPalette && button && game.getMod()->getShowPediaInfoButton())
+		Surface *button = game.mod()->getSurface(bgImageName + "-InfoButton", false);
+		if (!defs->customPalette && button && game.mod()->getShowPediaInfoButton())
 		{
 			switch (defs->getType())
 			{

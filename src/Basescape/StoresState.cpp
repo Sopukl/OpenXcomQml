@@ -228,7 +228,7 @@ void StoresState::initList()
 	_itemList.clear();
 
 	// find relevant items
-	for (auto& itemType : game.getMod()->getItemsList())
+	for (auto& itemType : game.mod()->getItemsList())
 	{
 		// quick search
 		if (!searchString.empty())
@@ -242,7 +242,7 @@ void StoresState::initList()
 		}
 
 		int qty = 0;
-		auto* rule = game.getMod()->getItem(itemType, true);
+		auto* rule = game.mod()->getItem(itemType, true);
 		if (!grandTotal)
 		{
 			// items in stores from this base only

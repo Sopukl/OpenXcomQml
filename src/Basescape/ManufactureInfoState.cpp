@@ -322,7 +322,7 @@ void ManufactureInfoState::btnStopClick(Action *)
 {
 	if (!_item && _production && _production->getRules()->getRefund())
 	{
-		_production->refundItem(_base, game.savedGame(), game.getMod());
+		_production->refundItem(_base, game.savedGame(), game.mod());
 	}
 	_base->removeProduction(_production);
 	exitState();
@@ -336,7 +336,7 @@ void ManufactureInfoState::btnOkClick(Action *)
 {
 	if (_item)
 	{
-		_production->startItem(_base, game.savedGame(), game.getMod());
+		_production->startItem(_base, game.savedGame(), game.mod());
 	}
 	_production->setSellItems(_btnSell->getPressed());
 	if (_btnFallback->getPressed())

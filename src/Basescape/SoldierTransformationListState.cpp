@@ -50,7 +50,7 @@ namespace OpenXcom
 SoldierTransformationListState::SoldierTransformationListState(Base *base, ComboBox *screenActions) : _base(base), _screenActions(screenActions)
 {
 	// Calculate once
-	game.savedGame()->getAvailableTransformations(_availableTransformations, game.getMod(), _base);
+	game.savedGame()->getAvailableTransformations(_availableTransformations, game.mod(), _base);
 
 	// Create objects
 	_window = new Window(this, 320, 200, 0, 0);
@@ -96,7 +96,7 @@ SoldierTransformationListState::SoldierTransformationListState(Base *base, Combo
 
 	std::vector<std::string> availableOptions;
 	availableOptions.push_back("STR_ALL_SOLDIER_TYPES");
-	for (auto& soldierType : game.getMod()->getSoldiersList())
+	for (auto& soldierType : game.mod()->getSoldiersList())
 	{
 		availableOptions.push_back(soldierType);
 	}
@@ -188,7 +188,7 @@ void SoldierTransformationListState::initList()
 			std::find(
 				transformationRule->getAllowedSoldierTypes().begin(),
 				transformationRule->getAllowedSoldierTypes().end(),
-				game.getMod()->getSoldiersList().at(_cbxSoldierType->getSelected() - 1)) == transformationRule->getAllowedSoldierTypes().end())
+				game.mod()->getSoldiersList().at(_cbxSoldierType->getSelected() - 1)) == transformationRule->getAllowedSoldierTypes().end())
 		{
 			continue;
 		}
@@ -220,7 +220,7 @@ void SoldierTransformationListState::initList()
 		}
 		for (auto& item : transformationRule->getRequiredItems())
 		{
-			RuleItem* itemRule = game.getMod()->getItem(item.first);
+			RuleItem* itemRule = game.mod()->getItem(item.first);
 			projectsPossible = std::min(projectsPossible, itemContainer.countOf(itemRule) / item.second);
 		}
 		if (projectsPossible <= 0)

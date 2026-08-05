@@ -92,7 +92,7 @@ SoldierAvatarState::SoldierAvatarState(Base *base, size_t soldier) : _base(base)
 	_lstAvatar->setMargin(8);
 
 	std::string prefix = "STR_AVATAR_NAME_";
-	for (int variant = 0; variant <= game.getMod()->getMaxLookVariant(); ++variant)
+	for (int variant = 0; variant <= game.mod()->getMaxLookVariant(); ++variant)
 	{
 		if (!game.isAltPressed())
 		{
@@ -137,7 +137,7 @@ void SoldierAvatarState::initPreview(Soldier *s)
 	{
 		for (const auto& layer : s->getArmorLayers())
 		{
-			auto* surf = game.getMod()->getSurface(layer, true);
+			auto* surf = game.mod()->getSurface(layer, true);
 			surf->blitNShade(_soldierSurface, 0, 0);
 		}
 	}
@@ -156,7 +156,7 @@ void SoldierAvatarState::initPreview(Soldier *s)
 			ss << (int)s->getLook() + (s->getLookVariant() & (RuleSoldier::LookVariantMask >> i)) * 4;
 			ss << ".SPK";
 			std::string debug = ss.str();
-			surf = game.getMod()->getSurface(ss.str(), false);
+			surf = game.mod()->getSurface(ss.str(), false);
 			if (surf)
 			{
 				break;
@@ -167,11 +167,11 @@ void SoldierAvatarState::initPreview(Soldier *s)
 			ss.str("");
 			ss << look;
 			ss << ".SPK";
-			surf = game.getMod()->getSurface(ss.str(), false);
+			surf = game.mod()->getSurface(ss.str(), false);
 		}
 		if (!surf)
 		{
-			surf = game.getMod()->getSurface(look, true);
+			surf = game.mod()->getSurface(look, true);
 		}
 		surf->blitNShade(_soldierSurface, 0, 0);
 	}

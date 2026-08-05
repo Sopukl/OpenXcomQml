@@ -107,7 +107,7 @@ void AbandonGameState::btnYesClick(Action *)
 	game.resetTouchButtonFlags();
 
 	if (_origin == OPT_BATTLESCAPE && game.savedGame()->getSavedBattle()->getAmbientSound() != Mod::NO_SOUND)
-		game.getMod()->getSoundByDepth(0, game.savedGame()->getSavedBattle()->getAmbientSound())->stopLoop();
+		game.mod()->getSoundByDepth(0, game.savedGame()->getSavedBattle()->getAmbientSound())->stopLoop();
 	if (!game.savedGame()->isIronman())
 	{
 		Screen::updateScale(options1.geoscapeScale(), options1.baseXGeoscape, options1.baseYGeoscape, true);

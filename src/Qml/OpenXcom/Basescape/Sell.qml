@@ -194,11 +194,9 @@ XC.Popup {
     Shortcut {
         sequence: "Q"
         onActivated: {
-            console.log("qqq")
+            console.log(base.soldiers)
+            for(let s of base.soldiers)
+                console.log(s.name + ':' + s.craft)
         }
-    }
-
-    Component.onCompleted: {
-
     }
 }

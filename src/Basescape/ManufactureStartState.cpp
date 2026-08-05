@@ -173,7 +173,7 @@ ManufactureStartState::ManufactureStartState(Base *base, RuleManufacture *item) 
 	bool hasVanillaOutput = false;
 	if (_item->getProducedItems().size() == 1)
 	{
-		const RuleItem* match = game.getMod()->getItem(_item->getName(), false);
+		const RuleItem* match = game.mod()->getItem(_item->getName(), false);
 		if (match)
 		{
 			auto iter = _item->getProducedItems().find(match);

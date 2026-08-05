@@ -80,12 +80,12 @@ PlaceFacilityState::PlaceFacilityState(Base *base, const RuleBaseFacility *rule,
 	// Set up objects
 	setWindowBackground(_window, "placeFacility");
 
-	auto* itf = game.getMod()->getInterface("basescape")->getElementOptional("trafficLights");
+	auto* itf = game.mod()->getInterface("basescape")->getElementOptional("trafficLights");
 	if (itf)
 	{
 		_view->setOtherColors(itf->color, itf->color2, itf->border, !itf->TFTDMode);
 	}
-	_view->setTexture(game.getMod()->getSurfaceSet("BASEBITS.PCK"));
+	_view->setTexture(game.mod()->getSurfaceSet("BASEBITS.PCK"));
 	_view->setBase(_base);
 	_view->setSelectable(rule->getSizeX(), rule->getSizeY());
 	_view->onMouseClick((ActionHandler)&PlaceFacilityState::viewClick);
@@ -317,7 +317,7 @@ void PlaceFacilityState::viewClick(Action *)
 						game.savedGame()->setFunds(game.savedGame()->getFunds() + checkFacility->getRules()->getBuildCost());
 						for (auto& item : itemCost)
 						{
-							_base->getStorageItems().addItem(game.getMod()->getItem(item.first, true), item.second.first);
+							_base->getStorageItems().addItem(game.mod()->getItem(item.first, true), item.second.first);
 						}
 					}
 					else
@@ -326,7 +326,7 @@ void PlaceFacilityState::viewClick(Action *)
 						game.savedGame()->setFunds(game.savedGame()->getFunds() + checkFacility->getRules()->getRefundValue());
 						for (auto& item : itemCost)
 						{
-							_base->getStorageItems().addItem(game.getMod()->getItem(item.first, true), item.second.second);
+							_base->getStorageItems().addItem(game.mod()->getItem(item.first, true), item.second.second);
 						}
 
 						// Reduce the build time of the new facility
@@ -359,14 +359,14 @@ void PlaceFacilityState::viewClick(Action *)
 			if (buildingOver)
 			{
 				fac->setIfHadPreviousFacility(true);
-				reducedBuildTime = reducedBuildTime * game.getMod()->getBuildTimeReductionScaling() / 100.0;
+				reducedBuildTime = reducedBuildTime * game.mod()->getBuildTimeReductionScaling() / 100.0;
 				int reducedBuildTimeRounded = (int)std::round(reducedBuildTime);
 				fac->setBuildTime(std::max(1, fac->getBuildTime() - reducedBuildTimeRounded));
 			}
 			_base->getFacilities().push_back(fac);
 			if (fac->getRules()->getPlaceSound() != Mod::NO_SOUND)
 			{
-				game.getMod()->getSound("GEO.CAT", fac->getRules()->getPlaceSound())->play();
+				game.mod()->getSound("GEO.CAT", fac->getRules()->getPlaceSound())->play();
 			}
 			if (options1.allowBuildingQueue())
 			{

@@ -53,7 +53,7 @@ NewGameState::NewGameState()
 	_txtTitle = new Text(192, 9, 64, 20);
 	_txtIronman = new Text(90, 24, 162, 135);
 
-	switch (game.getMod()->getStartingDifficulty())
+	switch (game.mod()->getStartingDifficulty())
 	{
 	case 0:
 		_difficulty = _btnBeginner;
@@ -167,7 +167,7 @@ void NewGameState::btnOkClick(Action *)
 	// Reset touch flags
 	game.resetTouchButtonFlags();
 
-	SavedGame *save = game.getMod()->newSave(diff);
+	SavedGame *save = game.mod()->newSave(diff);
 	save->setDifficulty(diff);
 	save->setIronman(_btnIronman->getPressed());
 	game.setSavedGame(save);

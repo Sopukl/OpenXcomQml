@@ -105,7 +105,7 @@ void SellState::delayedInit()
 	// Set palette
 	setInterface("sellMenu");
 
-	_ammoColor = game.getMod()->getInterface("sellMenu")->getElement("ammoColor")->color;
+	_ammoColor = game.mod()->getInterface("sellMenu")->getElement("ammoColor")->color;
 
 	add(_window, "window", "sellMenu");
 	add(_btnQuickSearch, "button", "sellMenu");
@@ -186,7 +186,7 @@ void SellState::delayedInit()
 		_cats.push_back("STR_FILTER_RESEARCHABLE");
 	}
 
-	for (auto* soldier : _base->soldiers())
+	for (auto soldier : _base->soldiers())//ok
 	{
 		if (_debriefingState) break;
 		if (soldier->getCraft() == 0)
@@ -201,7 +201,7 @@ void SellState::delayedInit()
 			}
 		}
 	}
-	for (auto* craft : _base->crafts())
+	for (auto craft : _base->crafts())//ok
 	{
 		if (_debriefingState) break;
 		if (craft->getStatus() != "STR_OUT")
@@ -216,7 +216,7 @@ void SellState::delayedInit()
 			}
 		}
 	}
-	if (_base->getAvailableScientists() > 0 && _debriefingState == 0)
+	if (_base->getAvailableScientists() > 0 && _debriefingState == 0)//ok
 	{
 		TransferRow row = { TRANSFER_SCIENTIST, 0, ltr("STR_SCIENTIST"), 0, _base->getAvailableScientists(), 0, 0, -2, 0, 0, 0 };
 		_items.push_back(row);
@@ -227,7 +227,7 @@ void SellState::delayedInit()
 			_cats.push_back(cat);
 		}
 	}
-	if (_base->getAvailableEngineers() > 0 && _debriefingState == 0)
+	if (_base->getAvailableEngineers() > 0 && _debriefingState == 0)//ok
 	{
 		TransferRow row = { TRANSFER_ENGINEER, 0, ltr("STR_ENGINEER"), 0, _base->getAvailableEngineers(), 0, 0, -1, 0, 0, 0 };
 		_items.push_back(row);
@@ -238,9 +238,9 @@ void SellState::delayedInit()
 			_cats.push_back(cat);
 		}
 	}
-	for (auto& itemType : game.getMod()->getItemsList())
+	for (auto& itemType : game.mod()->getItemsList())
 	{
-		const RuleItem *rule = game.getMod()->getItem(itemType, true);
+		const RuleItem *rule = game.mod()->getItem(itemType, true);
 		int qty = 0;
 		if (_debriefingState != 0)
 		{
@@ -288,7 +288,7 @@ void SellState::delayedInit()
 	}
 
 	_vanillaCategories = _cats.size();
-	if (game.getMod()->getDisplayCustomCategories() > 0)
+	if (game.mod()->getDisplayCustomCategories() > 0)
 	{
 		bool hasUnassigned = false;
 
@@ -313,7 +313,7 @@ void SellState::delayedInit()
 			}
 		}
 		// then use them nicely in order
-		if (game.getMod()->getDisplayCustomCategories() == 1)
+		if (game.mod()->getDisplayCustomCategories() == 1)
 		{
 			_cats.clear();
 			_cats.push_back("STR_ALL_ITEMS");
@@ -325,7 +325,7 @@ void SellState::delayedInit()
 			}
 			_vanillaCategories = _cats.size();
 		}
-		for (auto& categoryName : game.getMod()->getItemCategoriesList())
+		for (auto& categoryName : game.mod()->getItemCategoriesList())
 		{
 			if (str::find(tempCats, categoryName) != tempCats.end())
 			{
@@ -421,9 +421,9 @@ std::string SellState::getCategory(const TransferRow &tr) const
 		}
 		if (rule->getBattleType() == BT_NONE)
 		{
-			if (game.getMod()->isCraftWeaponStorageItem(rule))
+			if (game.mod()->isCraftWeaponStorageItem(rule))
 				return "STR_CRAFT_ARMAMENT";
-			if (game.getMod()->isArmorStorageItem(rule))
+			if (game.mod()->isArmorStorageItem(rule))
 				return "STR_ARMORS"; // OXCE: armors
 			return "STR_COMPONENTS";
 		}
@@ -455,9 +455,9 @@ std::string SellState::getCategory(int sel) const
 		}
 		if (rule->getBattleType() == BT_NONE)
 		{
-			if (game.getMod()->isCraftWeaponStorageItem(rule))
+			if (game.mod()->isCraftWeaponStorageItem(rule))
 				return "STR_CRAFT_ARMAMENT";
-			if (game.getMod()->isArmorStorageItem(rule))
+			if (game.mod()->isArmorStorageItem(rule))
 				return "STR_ARMORS"; // OXCE: armors
 			return "STR_COMPONENTS";
 		}
@@ -606,7 +606,7 @@ void SellState::updateList()
 			if (_items[i].type == TRANSFER_ITEM)
 			{
 				RuleItem* rule = (RuleItem*)_items[i].rule;
-				bool isResearchable = game.savedGame()->isResearchable(rule, game.getMod());
+				bool isResearchable = game.savedGame()->isResearchable(rule, game.mod());
 				if (categoryResearched && isResearchable) continue;
 				if (categoryResearchable && !isResearchable) continue;
 			}
@@ -1096,7 +1096,7 @@ void SellState::lstItemsMousePress(Action *action)
 							else
 							{
 								// no screen update, at least play a sound
-								game.getMod()->getSound("GEO.CAT", Mod::UFO_EXPLODE)->play();
+								game.mod()->getSound("GEO.CAT", Mod::UFO_EXPLODE)->play();
 							}
 						}
 					}
@@ -1126,7 +1126,7 @@ void SellState::lstItemsMousePress(Action *action)
 				}
 				else
 				{
-					const RuleResearch* selectedTopic = game.getMod()->getResearch(articleId, false);
+					const RuleResearch* selectedTopic = game.mod()->getResearch(articleId, false);
 					if (selectedTopic)
 					{
 						game.pushState(new TechTreeViewerState(selectedTopic, 0));
@@ -1177,7 +1177,7 @@ void SellState::changeByValue(int change, int dir)
 		{
 			_timerInc->stop();
 			_timerDec->stop();
-			RuleInterface* menuInterface = game.getMod()->getInterface("buyMenu");
+			RuleInterface* menuInterface = game.mod()->getInterface("buyMenu");
 
 			game.errorMessage(QString::fromStdString(ltr(tmpItem->getSellActionMessage())));
 

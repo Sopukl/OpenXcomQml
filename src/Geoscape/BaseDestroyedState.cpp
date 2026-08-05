@@ -45,7 +45,7 @@ BaseDestroyedState::BaseDestroyedState(Base *base, const Ufo* ufo, bool missiles
 	int soundId = ufo->getRules()->getHitSound();
 	if (soundId != Mod::NO_SOUND)
 	{
-		_customSound = game.getMod()->getSound("GEO.CAT", soundId);
+		_customSound = game.mod()->getSound("GEO.CAT", soundId);
 	}
 
 	// Create objects

@@ -147,7 +147,7 @@ void SoldierDiaryMissionState::init()
 	_txtLocation->setText(ltr("STR_LOCATION").arg(ltr(ms->getLocationString())));
 	_txtRace->setText(ltr("STR_RACE_TYPE").arg(ltr(ms->alienRace)));
 	_txtRace->setVisible(ms->alienRace != "STR_UNKNOWN");
-	_txtDaylight->setText(ltr("STR_DAYLIGHT_TYPE").arg(ltr(ms->getDaylightString(game.getMod()))));
+	_txtDaylight->setText(ltr("STR_DAYLIGHT_TYPE").arg(ltr(ms->getDaylightString(game.mod()))));
 	_txtDaysWounded->setText(ltr("STR_DAYS_WOUNDED").arg(daysWounded));
 	_txtDaysWounded->setVisible(daysWounded != 0);
 

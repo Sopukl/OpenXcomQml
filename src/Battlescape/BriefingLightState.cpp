@@ -60,7 +60,7 @@ BriefingLightState::BriefingLightState(AlienDeployment *deployment)
 
 	BriefingData data = deployment->getBriefingData();
 	setStandardPalette("PAL_GEOSCAPE", data.palette);
-	_window->setBackground(game.getMod()->getSurface(data.background));
+	_window->setBackground(game.mod()->getSurface(data.background));
 
 	add(_window, "window", "briefing");
 	add(_btnOk, "button", "briefing");
@@ -107,7 +107,7 @@ BriefingLightState::BriefingLightState(AlienDeployment *deployment)
 */
 void BriefingLightState::checkStartingCondition(AlienDeployment *deployment)
 {
-	const RuleStartingCondition *startingCondition = game.getMod()->getStartingCondition(deployment->getStartingCondition());
+	const RuleStartingCondition *startingCondition = game.mod()->getStartingCondition(deployment->getStartingCondition());
 	if (startingCondition != 0)
 	{
 		auto& list = startingCondition->getForbiddenArmors().empty() ? startingCondition->getAllowedArmors() : startingCondition->getForbiddenArmors();
@@ -119,8 +119,8 @@ void BriefingLightState::checkStartingCondition(AlienDeployment *deployment)
 
 			for (auto& armorType : list)
 			{
-				Armor* armor = game.getMod()->getArmor(armorType, false);
-				ArticleDefinition* article = game.getMod()->getUfopaediaArticle(armor ? armor->getUfopediaType() : armorType, false);
+				Armor* armor = game.mod()->getArmor(armorType, false);
+				ArticleDefinition* article = game.mod()->getUfopaediaArticle(armor ? armor->getUfopediaType() : armorType, false);
 				if (article && Ufopaedia::isArticleAvailable(game.savedGame(), article))
 				{
 					std::string translation = ltr(armorType);
@@ -191,7 +191,7 @@ void BriefingLightState::lstArmorsClick(Action* action)
 
 	auto idx = halfSize + _lstArmors->getSelectedRow();
 	const std::string& armorType = _armorNameList[idx].first;
-	Armor* armor = game.getMod()->getArmor(armorType, false);
+	Armor* armor = game.mod()->getArmor(armorType, false);
 	if (armor)
 	{
 		std::string articleId = armor->getUfopediaType();

@@ -129,7 +129,7 @@ CraftPilotsState::CraftPilotsState(Base *base, size_t craft) : _base(base), _cra
 	{
 		if (soldier->getCraft() == c)
 		{
-			soldier->prepareStatsWithBonuses(game.getMod()); // refresh soldier bonuses
+			soldier->prepareStatsWithBonuses(game.mod()); // refresh soldier bonuses
 		}
 	}
 }
@@ -173,17 +173,17 @@ void CraftPilotsState::updateUI()
 	}
 
 	std::ostringstream ss1;
-	int accBonus = c->getPilotAccuracyBonus(pilots, game.getMod());
+	int accBonus = c->getPilotAccuracyBonus(pilots, game.mod());
 	ss1 << (accBonus > 0 ? "+" : "") << accBonus << "%";
 	_txtAccuracyBonusValue->setText(ss1.str().c_str());
 
 	std::ostringstream ss2;
-	int dodgeBonus = c->getPilotDodgeBonus(pilots, game.getMod());
+	int dodgeBonus = c->getPilotDodgeBonus(pilots, game.mod());
 	ss2 << (dodgeBonus > 0 ? "+" : "") << dodgeBonus << "%";
 	_txtDodgeBonusValue->setText(ss2.str().c_str());
 
 	std::ostringstream ss3;
-	int approachSpeed = c->getPilotApproachSpeedModifier(pilots, game.getMod());
+	int approachSpeed = c->getPilotApproachSpeedModifier(pilots, game.mod());
 	switch (approachSpeed)
 	{
 	case 1:

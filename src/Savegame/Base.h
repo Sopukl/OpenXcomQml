@@ -193,13 +193,13 @@ public:
 	/// Gets the base's total soldiers.
 	int getTotalSoldiers() const;
 	/// Gets the base's available scientists.
-	int getAvailableScientists() const;
+	Q_INVOKABLE int getAvailableScientists() const;
 	/// Gets the base's total scientists.
-	int getTotalScientists() const;
+	Q_INVOKABLE int getTotalScientists() const;
 	/// Gets the base's available engineers.
-	int getAvailableEngineers() const;
+	Q_INVOKABLE int getAvailableEngineers() const;
 	/// Gets the base's total engineers.
-	int getTotalEngineers() const;
+	Q_INVOKABLE int getTotalEngineers() const;
 	/// Gets the base's total number and cost of other staff & inventory.
 	int getTotalOtherStaffAndInventoryCost(int& staffCount, int& inventoryCount) const;
 	/// Gets the base's used living quarters.

@@ -35,10 +35,10 @@ namespace OpenXcom
  */
 ActionMenuItem::ActionMenuItem(int id, int x, int y) : InteractiveSurface(272, 40, x + 24, y - (id*40)), _highlighted(false), _action(BA_NONE), _skill(nullptr), _tu(0)
 {
-	Font *big   = game.getMod()->getFont("FONT_BIG"),
-		 *small = game.getMod()->getFont("FONT_SMALL");
+	Font *big   = game.mod()->getFont("FONT_BIG"),
+		 *small = game.mod()->getFont("FONT_SMALL");
 
-	const Element *actionMenu = game.getMod()->getInterface("battlescape")->getElement("actionMenu");
+	const Element *actionMenu = game.mod()->getInterface("battlescape")->getElement("actionMenu");
 
 	_highlightModifier = actionMenu->TFTDMode ? 12 : 3;
 

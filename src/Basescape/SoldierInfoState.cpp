@@ -97,7 +97,7 @@ SoldierInfoState::SoldierInfoState(Base *base, size_t soldierId, bool forceLimit
 
 	int yPos = 80;
 	int step = 11;
-	if (game.getMod()->isManaFeatureEnabled())
+	if (game.mod()->isManaFeatureEnabled())
 	{
 		yPos = 81;
 		step = 10;
@@ -148,7 +148,7 @@ SoldierInfoState::SoldierInfoState(Base *base, size_t soldierId, bool forceLimit
 	_barStrength = new Bar(170, 7, 150, yPos);
 	yPos += step;
 
-	if (game.getMod()->isManaFeatureEnabled())
+	if (game.mod()->isManaFeatureEnabled())
 	{
 		_txtMana = new Text(120, 9, 6, yPos);
 		_numMana = new Text(18, 9, 131, yPos);
@@ -225,7 +225,7 @@ SoldierInfoState::SoldierInfoState(Base *base, size_t soldierId, bool forceLimit
 	add(_numStrength, "numbers", "soldierInfo");
 	add(_barStrength, "barStrength", "soldierInfo");
 
-	if (game.getMod()->isManaFeatureEnabled())
+	if (game.mod()->isManaFeatureEnabled())
 	{
 		add(_txtMana, "text2", "soldierInfo");
 		add(_numMana, "numbers", "soldierInfo");
@@ -243,7 +243,7 @@ SoldierInfoState::SoldierInfoState(Base *base, size_t soldierId, bool forceLimit
 	centerAllSurfaces();
 
 	// Set up objects
-	game.getMod()->getSurface("BACK06.SCR")->blitNShade(_bg, 0, 0);
+	game.mod()->getSurface("BACK06.SCR")->blitNShade(_bg, 0, 0);
 
 	_btnOk->setText(ltr("STR_OK"));
 	_btnOk->onMouseClick((ActionHandler)&SoldierInfoState::btnOkClick);
@@ -289,7 +289,7 @@ SoldierInfoState::SoldierInfoState(Base *base, size_t soldierId, bool forceLimit
 	std::vector<RuleSoldierTransformation*> availableTransformations;
 	if (_base)
 	{
-		game.savedGame()->getAvailableTransformations(availableTransformations, game.getMod(), _base);
+		game.savedGame()->getAvailableTransformations(availableTransformations, game.mod(), _base);
 	}
 	if (availableTransformations.empty())
 	{
@@ -304,7 +304,7 @@ SoldierInfoState::SoldierInfoState(Base *base, size_t soldierId, bool forceLimit
 	if (_base != 0)
 	{
 		// Ignore also if flags are used to indicate number of kills
-		if (game.getMod()->getFlagByKills().empty())
+		if (game.mod()->getFlagByKills().empty())
 		{
 			_flag->onMouseClick((ActionHandler)&SoldierInfoState::btnFlagClick, SDL_BUTTON_LEFT);
 			_flag->onMouseClick((ActionHandler)&SoldierInfoState::btnFlagClick, SDL_BUTTON_RIGHT);
@@ -358,7 +358,7 @@ SoldierInfoState::SoldierInfoState(Base *base, size_t soldierId, bool forceLimit
 
 	_barStrength->setScale(1.0);
 
-	if (game.getMod()->isManaFeatureEnabled())
+	if (game.mod()->isManaFeatureEnabled())
 	{
 		_txtMana->setText(ltr("STR_MANA_POOL"));
 		_barMana->setScale(1.0);
@@ -404,11 +404,11 @@ void SoldierInfoState::init()
 	const UnitStats *current = _soldier->getCurrentStats();
 	const UnitStats max = _soldier->getRules()->getStatCaps();
 
-	bool hasBonus = _soldier->prepareStatsWithBonuses(game.getMod()); // refresh all bonuses
+	bool hasBonus = _soldier->prepareStatsWithBonuses(game.mod()); // refresh all bonuses
 	UnitStats withArmor = *_soldier->getStatsWithAllBonuses();
 	_btnBonuses->setVisible(hasBonus);
 
-	SurfaceSet *texture = game.getMod()->getSurfaceSet("BASEBITS.PCK");
+	SurfaceSet *texture = game.mod()->getSurfaceSet("BASEBITS.PCK");
 	auto* frame = texture->getFrame(_soldier->getRankSprite());
 	if (frame)
 	{
@@ -417,7 +417,7 @@ void SoldierInfoState::init()
 
 	std::ostringstream flagId;
 	flagId << "Flag";
-	const std::vector<int> mapping = game.getMod()->getFlagByKills();
+	const std::vector<int> mapping = game.mod()->getFlagByKills();
 	if (mapping.empty())
 	{
 		flagId << _soldier->getNationality() + _soldier->getRules()->getFlagOffset();
@@ -435,7 +435,7 @@ void SoldierInfoState::init()
 		}
 		flagId << index + _soldier->getRules()->getFlagOffset();
 	}
-	Surface *flagTexture = game.getMod()->getSurface(flagId.str().c_str(), false);
+	Surface *flagTexture = game.mod()->getSurface(flagId.str().c_str(), false);
 	_flag->clear();
 	if (flagTexture != 0)
 	{
@@ -538,9 +538,9 @@ void SoldierInfoState::init()
 
 	_txtPsionic->setVisible(_soldier->isInPsiTraining());
 
-	if (game.getMod()->isManaFeatureEnabled())
+	if (game.mod()->isManaFeatureEnabled())
 	{
-		if (game.savedGame()->isManaUnlocked(game.getMod()))
+		if (game.savedGame()->isManaUnlocked(game.mod()))
 		{
 			formatStat(current->mana, max.mana, withArmor.mana, initial->mana, _numMana, _barMana);
 
@@ -556,7 +556,7 @@ void SoldierInfoState::init()
 		}
 	}
 
-	if (current->psiSkill > 0 || (options1.psiStrengthEval() && game.savedGame()->isResearched(game.getMod()->getPsiRequirements())))
+	if (current->psiSkill > 0 || (options1.psiStrengthEval() && game.savedGame()->isResearched(game.mod()->getPsiRequirements())))
 	{
 		formatStat(current->psiStrength, max.psiStrength, withArmor.psiStrength, initial->psiStrength, _numPsiStrength, _barPsiStrength);
 

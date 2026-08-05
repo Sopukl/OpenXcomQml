@@ -37,9 +37,9 @@ namespace OpenXcom
 	{
 		_txtInfo->setHeight(72);
 
-		_btnInfo->setVisible(game.getMod()->getShowPediaInfoButton());
+		_btnInfo->setVisible(game.mod()->getShowPediaInfoButton());
 
-		Armor *armor = game.getMod()->getArmor(defs->id, true);
+		Armor *armor = game.mod()->getArmor(defs->id, true);
 
 		_lstInfo = new TextList(150, 64, 168, 110);
 		add(_lstInfo);

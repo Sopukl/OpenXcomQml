@@ -2520,7 +2520,7 @@ void SavedBattleGame::prepareNewTurn()
 		}
 	}
 
-	Mod *mod = game.getMod();
+	Mod *mod = game.mod();
 	for (auto* bu : *getUnits())
 	{
 		bu->calculateEnviDamage(mod, this);

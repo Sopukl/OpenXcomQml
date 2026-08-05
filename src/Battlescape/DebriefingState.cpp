@@ -137,7 +137,7 @@ DebriefingState::DebriefingState() :
 	// Set palette
 	setInterface("debriefing");
 
-	_ammoColor = game.getMod()->getInterface("debriefing")->getElement("totals")->color;
+	_ammoColor = game.mod()->getInterface("debriefing")->getElement("totals")->color;
 
 	add(_window, "window", "debriefing");
 	add(_btnOk, "button", "debriefing");
@@ -264,7 +264,7 @@ DebriefingState::DebriefingState() :
 	_txtStrength->onMouseOut((ActionHandler)&DebriefingState::txtTooltipOut);
 
 	_txtPsiStrength->setAlign(ALIGN_CENTER);
-	if (game.getMod()->isManaFeatureEnabled())
+	if (game.mod()->isManaFeatureEnabled())
 	{
 		_txtPsiStrength->setText(ltr("STR_MANA_ABBREVIATION"));
 		_txtPsiStrength->setTooltip("STR_MANA_POOL");
@@ -289,7 +289,7 @@ DebriefingState::DebriefingState() :
 	_lstSoldierStats->setDot(true);
 
 	// Third page
-	int firstColumnWidth = Clamp(game.getMod()->getInterface("debriefing")->getElement("list")->custom, 90, 254);
+	int firstColumnWidth = Clamp(game.mod()->getInterface("debriefing")->getElement("list")->custom, 90, 254);
 	_lstRecoveredItems->setColumns(2, firstColumnWidth, 18);
 	_lstRecoveredItems->setAlign(ALIGN_LEFT);
 	_lstRecoveredItems->setDot(true);
@@ -392,7 +392,7 @@ void DebriefingState::init()
 	for (const auto& sse : _soldierStats)
 	{
 		auto tmp = sse.second.psiStrength;
-		if (game.getMod()->isManaFeatureEnabled())
+		if (game.mod()->isManaFeatureEnabled())
 		{
 			tmp = sse.second.mana;
 		}
@@ -417,9 +417,9 @@ void DebriefingState::init()
 	{
 		int row = 0;
 		ItemContainer *origBaseItems = game.savedGame()->getSavedBattle()->getBaseStorageItems();
-		for (auto& itemType : game.getMod()->getItemsList())
+		for (auto& itemType : game.mod()->getItemsList())
 		{
-			RuleItem *rule = game.getMod()->getItem(itemType);
+			RuleItem *rule = game.mod()->getItem(itemType);
 
 			int qty = _base->getStorageItems().countOf(rule);
 			if (qty > 0 && (options1.canSellLiveAliens() || !rule->isAlien()))
@@ -569,11 +569,11 @@ void DebriefingState::init()
 		rating = "STR_RATING_EXCELLENT";
 	}
 
-	if (!game.getMod()->getMissionRatings()->empty())
+	if (!game.mod()->getMissionRatings()->empty())
 	{
 		rating = "";
 		int temp = INT_MIN;
-		for (auto& pair : *game.getMod()->getMissionRatings())
+		for (auto& pair : *game.mod()->getMissionRatings())
 		{
 			if (pair.first > temp && pair.first <= total)
 			{
@@ -753,15 +753,15 @@ void DebriefingState::init()
 			// Set the UnitStats delta
 			bu->getStatistics()->delta = *bu->getGeoscapeSoldier()->getCurrentStats() - *bu->getGeoscapeSoldier()->getInitStats();
 
-			bu->getGeoscapeSoldier()->getDiary()->updateDiary(bu->getStatistics(), game.savedGame()->getMissionStatistics(), game.getMod());
+			bu->getGeoscapeSoldier()->getDiary()->updateDiary(bu->getStatistics(), game.savedGame()->getMissionStatistics(), game.mod());
 			if (!bu->getStatistics()->MIA && !bu->getStatistics()->KIA &&
-				bu->getGeoscapeSoldier()->getDiary()->manageCommendations(game.getMod(), game.savedGame(), bu->getGeoscapeSoldier()))
+				bu->getGeoscapeSoldier()->getDiary()->manageCommendations(game.mod(), game.savedGame(), bu->getGeoscapeSoldier()))
 			{
 				_soldiersCommended.push_back(bu->getGeoscapeSoldier());
 			}
 			else if (bu->getStatistics()->MIA || bu->getStatistics()->KIA)
 			{
-				bu->getGeoscapeSoldier()->getDiary()->manageCommendations(game.getMod(), game.savedGame(), bu->getGeoscapeSoldier());
+				bu->getGeoscapeSoldier()->getDiary()->manageCommendations(game.mod(), game.savedGame(), bu->getGeoscapeSoldier());
 				_deadSoldiersCommended.push_back(bu->getGeoscapeSoldier());
 			}
 		}
@@ -785,18 +785,18 @@ void DebriefingState::init()
 
 	if (options1.oxceAutomaticPromotions())
 	{
-		_promotions = game.savedGame()->handlePromotions(participants, game.getMod());
+		_promotions = game.savedGame()->handlePromotions(participants, game.mod());
 	}
 
 	game.savedGame()->setBattleGame(0);
 
 	if (_positiveScore)
 	{
-		game.getMod()->playMusic(Mod::DEBRIEF_MUSIC_GOOD);
+		game.mod()->playMusic(Mod::DEBRIEF_MUSIC_GOOD);
 	}
 	else
 	{
-		game.getMod()->playMusic(Mod::DEBRIEF_MUSIC_BAD);
+		game.mod()->playMusic(Mod::DEBRIEF_MUSIC_BAD);
 	}
 }
 
@@ -982,9 +982,9 @@ void DebriefingState::addStat(const std::string &name, int quantity, int score)
  */
 void DebriefingState::prepareDebriefing()
 {
-	for (auto& itemType : game.getMod()->getItemsList())
+	for (auto& itemType : game.mod()->getItemsList())
 	{
-		RuleItem *rule = game.getMod()->getItem(itemType);
+		RuleItem *rule = game.mod()->getItem(itemType);
 		if (rule->getSpecialType() > 1 && rule->getSpecialType() < DEATH_TRAPS)
 		{
 			RecoveryItem *item = new RecoveryItem();
@@ -998,9 +998,9 @@ void DebriefingState::prepareDebriefing()
 	SavedGame *save = game.savedGame();
 	SavedBattleGame *battle = save->getSavedBattle();
 
-	AlienDeployment *ruleDeploy = game.getMod()->getDeployment(battle->getMissionType());
+	AlienDeployment *ruleDeploy = game.mod()->getDeployment(battle->getMissionType());
 	// OXCE: Don't forget custom mission overrides
-	AlienDeployment* alienCustomMission = game.getMod()->getDeployment(battle->getAlienCustomMission());
+	AlienDeployment* alienCustomMission = game.mod()->getDeployment(battle->getAlienCustomMission());
 	if (alienCustomMission)
 	{
 		ruleDeploy = alienCustomMission;
@@ -1013,7 +1013,7 @@ void DebriefingState::prepareDebriefing()
 			if (ufo->isInBattlescape())
 			{
 				// Note: fake underwater UFO deployment was already considered above (via alienCustomMission)
-				ruleDeploy = game.getMod()->getDeployment(ufo->getRules()->getType());
+				ruleDeploy = game.mod()->getDeployment(ufo->getRules()->getType());
 				break;
 			}
 		}
@@ -1078,7 +1078,7 @@ void DebriefingState::prepareDebriefing()
 
 	_missionStatistics->time = *save->getTime();
 	_missionStatistics->type = battle->getMissionType();
-	_stats.push_back(new DebriefingStat(game.getMod()->getAlienFuelName(), true));
+	_stats.push_back(new DebriefingStat(game.mod()->getAlienFuelName(), true));
 
 	for (auto* xbase : save->bases())
 	{
@@ -1340,7 +1340,7 @@ void DebriefingState::prepareDebriefing()
 				{
 					if (ufo->getStatus() == Ufo::LANDED)
 					{
-						ufo->setDamage(ufo->getCraftStats().damageMax, game.getMod());
+						ufo->setDamage(ufo->getCraftStats().damageMax, game.mod());
 					}
 				}
 				delete ufo;
@@ -1410,7 +1410,7 @@ void DebriefingState::prepareDebriefing()
 				{
 					addStat(objectiveCompleteText, 1, objectiveCompleteScore);
 				}
-				save->clearLinksForAlienBase(ab, game.getMod());
+				save->clearLinksForAlienBase(ab, game.mod());
 				delete ab;
 				save->getAlienBases()->erase(abIt);
 				break;
@@ -1463,7 +1463,7 @@ void DebriefingState::prepareDebriefing()
 	}
 
 	// time to care for units.
-	bool psiStrengthEval = (options1.psiStrengthEval() && save->isResearched(game.getMod()->getPsiRequirements()));
+	bool psiStrengthEval = (options1.psiStrengthEval() && save->isResearched(game.mod()->getPsiRequirements()));
 	bool ignoreLivingCivilians = false;
 	if (ruleDeploy)
 	{
@@ -1562,7 +1562,7 @@ void DebriefingState::prepareDebriefing()
 					|| (aborted && bunit->isInExitArea(END_POINT)))
 				{ // so game is not aborted or aborted and unit is on exit area
 					StatAdjustment statIncrease;
-					bunit->postMissionProcedures(game.getMod(), save, battle, statIncrease);
+					bunit->postMissionProcedures(game.mod(), save, battle, statIncrease);
 					if (bunit->getGeoscapeSoldier())
 						_soldierStats.push_back(std::pair<std::string, UnitStats>(bunit->getGeoscapeSoldier()->getName(), statIncrease.statGrowth));
 					playersInExitArea2++;
@@ -1572,7 +1572,7 @@ void DebriefingState::prepareDebriefing()
 					if (soldier != 0)
 					{
 						// calculate new statString
-						soldier->calcStatString(game.getMod()->getStatStrings(), psiStrengthEval);
+						soldier->calcStatString(game.mod()->getStatStrings(), psiStrengthEval);
 					}
 					else
 					{ // non soldier player = tank
@@ -1937,7 +1937,7 @@ void DebriefingState::prepareDebriefing()
 				aadivider = (target == "STR_UFO") ? 10 : 150;
 			}
 
-			const RuleItem *itemRule = game.getMod()->getItem(ds->item, false);
+			const RuleItem *itemRule = game.mod()->getItem(ds->item, false);
 			if (itemRule)
 			{
 				const auto& recoveryDividers = itemRule->getRecoveryDividers();
@@ -2000,7 +2000,7 @@ void DebriefingState::prepareDebriefing()
 	for (const auto& pair : _rounds)
 	{
 		int total_clips = 0;
-		if (game.getMod()->getStatisticalBulletConservation())
+		if (game.mod()->getStatisticalBulletConservation())
 		{
 			total_clips = (pair.second + RNG::generate(0, (pair.first->getClipSize() - 1))) / pair.first->getClipSize();
 		}
@@ -2018,7 +2018,7 @@ void DebriefingState::prepareDebriefing()
 	for (const auto& pair : _roundsPainKiller)
 	{
 		int totalRecovered = INT_MAX;
-		if (game.getMod()->getStatisticalBulletConservation())
+		if (game.mod()->getStatisticalBulletConservation())
 		{
 			if (pair.first->getPainKillerQuantity() > 0)
 				totalRecovered = std::min(totalRecovered, (pair.second + RNG::generate(0, (pair.first->getPainKillerQuantity() - 1))) / pair.first->getPainKillerQuantity());
@@ -2126,11 +2126,11 @@ void DebriefingState::prepareDebriefing()
 	if (success && ruleDeploy && base)
 	{
 		// Unlock research defined in alien deployment, if the mission was a success
-		const RuleResearch *research = game.getMod()->getResearch(ruleDeploy->getUnlockedResearchOnSuccess());
-		save->handleResearchUnlockedByMissions(research, game.getMod(), ruleDeploy);
+		const RuleResearch *research = game.mod()->getResearch(ruleDeploy->getUnlockedResearchOnSuccess());
+		save->handleResearchUnlockedByMissions(research, game.mod(), ruleDeploy);
 
 		// Give bounty item defined in alien deployment, if the mission was a success
-		const RuleItem *bountyItem = game.getMod()->getItem(ruleDeploy->getMissionBountyItem());
+		const RuleItem *bountyItem = game.mod()->getItem(ruleDeploy->getMissionBountyItem());
 		if (bountyItem)
 		{
 			int bountyQty = std::max(1, ruleDeploy->getMissionBountyItemCount());
@@ -2153,13 +2153,13 @@ void DebriefingState::prepareDebriefing()
 		save->decreaseCustomCounter(ruleDeploy->getDecreaseCounterAll());
 
 		// Generate a success event
-		_eventToSpawn = game.getMod()->getEvent(ruleDeploy->chooseSuccessEvent());
+		_eventToSpawn = game.mod()->getEvent(ruleDeploy->chooseSuccessEvent());
 	}
 	else if (!success && ruleDeploy)
 	{
 		// Unlock research defined in alien deployment, if the mission was a failure
-		const RuleResearch* research = game.getMod()->getResearch(ruleDeploy->getUnlockedResearchOnFailure());
-		save->handleResearchUnlockedByMissions(research, game.getMod(), ruleDeploy);
+		const RuleResearch* research = game.mod()->getResearch(ruleDeploy->getUnlockedResearchOnFailure());
+		save->handleResearchUnlockedByMissions(research, game.mod(), ruleDeploy);
 
 		// Increase counters
 		save->increaseCustomCounter(ruleDeploy->getCounterFailure());
@@ -2169,7 +2169,7 @@ void DebriefingState::prepareDebriefing()
 		save->decreaseCustomCounter(ruleDeploy->getDecreaseCounterAll());
 
 		// Generate a failure event
-		_eventToSpawn = game.getMod()->getEvent(ruleDeploy->chooseFailureEvent());
+		_eventToSpawn = game.mod()->getEvent(ruleDeploy->chooseFailureEvent());
 	}
 
 	if (ignoredUfo)
@@ -2348,7 +2348,7 @@ void DebriefingState::addItemsToBaseStores(const RuleItem *ruleItem, Base *base,
  */
 void DebriefingState::addItemsToBaseStores(const std::string &itemType, Base *base, int quantity, bool considerTransformations)
 {
-	const RuleItem *ruleItem = game.getMod()->getItem(itemType, false);
+	const RuleItem *ruleItem = game.mod()->getItem(itemType, false);
 	if (ruleItem == nullptr)
 	{
 		Log(LOG_ERROR) << "Failed to add unknown item " << itemType;
@@ -2408,10 +2408,10 @@ void DebriefingState::recoverItems(std::vector<BattleItem*> *from, Base *base, C
 	for (auto* bi : *from)
 	{
 		const RuleItem *rule = bi->getRules();
-		if (rule->getName() == game.getMod()->getAlienFuelName())
+		if (rule->getName() == game.mod()->getAlienFuelName())
 		{
 			// special case of an item counted as a stat
-			addStat(game.getMod()->getAlienFuelName(), game.getMod()->getAlienFuelQuantity(), rule->getRecoveryPoints());
+			addStat(game.mod()->getAlienFuelName(), game.mod()->getAlienFuelQuantity(), rule->getRecoveryPoints());
 		}
 		else
 		{
@@ -2446,7 +2446,7 @@ void DebriefingState::recoverItems(std::vector<BattleItem*> *from, Base *base, C
 				{
 					addStat("STR_ALIEN_ARTIFACTS_RECOVERED", 1, rule->getRecoveryPoints());
 				}
-				else if (game.getMod()->getGiveScoreAlsoForResearchedArtifacts())
+				else if (game.mod()->getGiveScoreAlsoForResearchedArtifacts())
 				{
 					addStat("STR_ALIEN_ARTIFACTS_RECOVERED", 1, rule->getRecoveryPoints());
 				}
@@ -2593,10 +2593,10 @@ void DebriefingState::recoverCivilian(BattleUnit *from, Base *base, Craft* craft
 			{
 				target = base;
 			}
-			int nationality = game.savedGame()->selectSoldierNationalityByLocation(game.getMod(), ruleSoldier, target);
-			Soldier *s = game.getMod()->genSoldier(game.savedGame(), ruleSoldier, nationality);
+			int nationality = game.savedGame()->selectSoldierNationalityByLocation(game.mod(), ruleSoldier, target);
+			Soldier *s = game.mod()->genSoldier(game.savedGame(), ruleSoldier, nationality);
 			YAML::YamlRootNodeReader reader(from->getUnitRules()->getSpawnedSoldierTemplate(), "(spawned soldier template)");
-			s->load(reader.toBase(), game.getMod(), game.savedGame(), game.getMod()->getScriptGlobal(), true); // load from soldier template
+			s->load(reader.toBase(), game.mod(), game.savedGame(), game.mod()->getScriptGlobal(), true); // load from soldier template
 			if (!from->getUnitRules()->getSpawnedPersonName().empty())
 			{
 				s->setName(ltr(from->getUnitRules()->getSpawnedPersonName()));
@@ -2729,7 +2729,7 @@ void DebriefingState::recoverAlien(BattleUnit *from, Base *base, Craft* craft)
 	}
 	else
 	{
-		RuleResearch *research = game.getMod()->getResearch(from->getUnitRules()->getType());
+		RuleResearch *research = game.mod()->getResearch(from->getUnitRules()->getType());
 		bool surrendered = (!from->isOut() || from->isIgnored())
 			&& (from->isSurrendering() || game.savedGame()->getSavedBattle()->getChronoTrigger() == FORCE_WIN_SURRENDER);
 		if (research != 0 && !game.savedGame()->isResearched(research))
@@ -2737,7 +2737,7 @@ void DebriefingState::recoverAlien(BattleUnit *from, Base *base, Craft* craft)
 			// more points if it's not researched
 			addStat(surrendered ? "STR_LIVE_ALIENS_SURRENDERED" : "STR_LIVE_ALIENS_RECOVERED", 1, from->getValue() * 2);
 		}
-		else if (game.getMod()->getGiveScoreAlsoForResearchedArtifacts())
+		else if (game.mod()->getGiveScoreAlsoForResearchedArtifacts())
 		{
 			addStat(surrendered ? "STR_LIVE_ALIENS_SURRENDERED" : "STR_LIVE_ALIENS_RECOVERED", 1, from->getValue() * 2);
 		}

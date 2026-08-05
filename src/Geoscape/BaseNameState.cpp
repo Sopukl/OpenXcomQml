@@ -77,20 +77,20 @@ BaseNameState::BaseNameState(Base *base, Globe *globe, bool first, bool fixedLoc
 	_txtTitle->setBig();
 	_txtTitle->setText(ltr("STR_BASE_NAME"));
 
-	if (!game.getMod()->getBaseNamesFirst().empty())
+	if (!game.mod()->getBaseNamesFirst().empty())
 	{
 		std::ostringstream ss;
-		int pickFirst = RNG::seedless(0, game.getMod()->getBaseNamesFirst().size() - 1);
-		ss << game.getMod()->getBaseNamesFirst().at(pickFirst);
-		if (!game.getMod()->getBaseNamesMiddle().empty())
+		int pickFirst = RNG::seedless(0, game.mod()->getBaseNamesFirst().size() - 1);
+		ss << game.mod()->getBaseNamesFirst().at(pickFirst);
+		if (!game.mod()->getBaseNamesMiddle().empty())
 		{
-			int pickMiddle = RNG::seedless(0, game.getMod()->getBaseNamesMiddle().size() - 1);
-			ss << " " << game.getMod()->getBaseNamesMiddle().at(pickMiddle);
+			int pickMiddle = RNG::seedless(0, game.mod()->getBaseNamesMiddle().size() - 1);
+			ss << " " << game.mod()->getBaseNamesMiddle().at(pickMiddle);
 		}
-		if (!game.getMod()->getBaseNamesLast().empty())
+		if (!game.mod()->getBaseNamesLast().empty())
 		{
-			int pickLast = RNG::seedless(0, game.getMod()->getBaseNamesLast().size() - 1);
-			ss << " " << game.getMod()->getBaseNamesLast().at(pickLast);
+			int pickLast = RNG::seedless(0, game.mod()->getBaseNamesLast().size() - 1);
+			ss << " " << game.mod()->getBaseNamesLast().at(pickLast);
 		}
 		_edtName->setText(ss.str());
 		_btnOk->setVisible(true);

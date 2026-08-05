@@ -117,7 +117,7 @@ SoldierDiaryOverviewState::SoldierDiaryOverviewState(Base *base, size_t soldierI
 
 	_btnCommendations->setText(ltr("STR_AWARDS"));
 	_btnCommendations->onMouseClick((ActionHandler)&SoldierDiaryOverviewState::btnCommendationsClick);
-	_btnCommendations->setVisible(!game.getMod()->getCommendationsList().empty());
+	_btnCommendations->setVisible(!game.mod()->getCommendationsList().empty());
 
 	_btnPrev->setText("<<");
 	if (_base == 0)

@@ -231,7 +231,7 @@ void SoldierDiaryPerformanceState::init()
 	_txtMedalLevel->setVisible(_display == DIARY_COMMENDATIONS);
 	_txtMedalInfo->setVisible(_display == DIARY_COMMENDATIONS);
 	_lstCommendations->setVisible(_display == DIARY_COMMENDATIONS);
-	_btnCommendations->setVisible(!game.getMod()->getCommendationsList().empty());
+	_btnCommendations->setVisible(!game.mod()->getCommendationsList().empty());
 
 	if (_list->empty())
 	{
@@ -276,7 +276,7 @@ void SoldierDiaryPerformanceState::init()
 			}
 		}
 
-		if (_soldier->getCurrentStats()->psiSkill > 0 || (options1.psiStrengthEval() && game.savedGame()->isResearched(game.getMod()->getPsiRequirements())))
+		if (_soldier->getCurrentStats()->psiSkill > 0 || (options1.psiStrengthEval() && game.savedGame()->isResearched(game.mod()->getPsiRequirements())))
 		{
 			_lstKillTotals->addRow(4, ltr("STR_KILLS").arg(_soldier->getDiary()->getKillTotal()).c_str(),
 										ltr("STR_STUNS").arg(_soldier->getDiary()->getStunTotal()).c_str(),
@@ -322,7 +322,7 @@ void SoldierDiaryPerformanceState::init()
 									ltr("STR_SCORE_VALUE").arg(_soldier->getDiary()->getScoreTotal(game.savedGame()->getMissionStatistics())).c_str(),
 									ltr("STR_DAYS_WOUNDED").arg(_soldier->getDiary()->getDaysWoundedTotal()).c_str());
 	}
-	else if (_display == DIARY_COMMENDATIONS && !game.getMod()->getCommendationsList().empty())
+	else if (_display == DIARY_COMMENDATIONS && !game.mod()->getCommendationsList().empty())
 	{
 		// pre-calc translations
 		for (auto* sc : *_soldier->getDiary()->getSoldierCommendations())
@@ -374,8 +374,8 @@ void SoldierDiaryPerformanceState::drawSprites()
 	if (_display != DIARY_COMMENDATIONS) return;
 
 	// Commendation sprites
-	SurfaceSet* commendationSprite = game.getMod()->getSurfaceSet("Commendations");
-	SurfaceSet* commendationDecoration = game.getMod()->getSurfaceSet("CommendationDecorations");
+	SurfaceSet* commendationSprite = game.mod()->getSurfaceSet("Commendations");
+	SurfaceSet* commendationDecoration = game.mod()->getSurfaceSet("CommendationDecorations");
 
 	// Clear sprites
 	for (int i = 0; i != 10; ++i)

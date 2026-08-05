@@ -112,7 +112,7 @@ ConfirmLandingState::ConfirmLandingState(Craft *craft, Texture *missionTexture, 
 	ss << Unicode::TOK_COLOR_FLIP << ltr("STR_BEGIN_MISSION");
 	_txtBegin->setText(ss.str());
 
-	SurfaceSet *sprites = game.getMod()->getSurfaceSet("DayNightIndicator", false);
+	SurfaceSet *sprites = game.mod()->getSurfaceSet("DayNightIndicator", false);
 	if (sprites != 0)
 	{
 		if (_shade <= 0)
@@ -120,7 +120,7 @@ ConfirmLandingState::ConfirmLandingState(Craft *craft, Texture *missionTexture, 
 			// day (0)
 			sprites->getFrame(0)->blitNShade(_sprite, 0, 0);
 		}
-		else if (_shade > game.getMod()->getMaxDarknessToSeeUnits())
+		else if (_shade > game.mod()->getMaxDarknessToSeeUnits())
 		{
 			// night (10-15); note: this is configurable in the ruleset (in OXCE only)
 			sprites->getFrame(1)->blitNShade(_sprite, 0, 0);
@@ -174,17 +174,17 @@ std::string ConfirmLandingState::checkStartingCondition()
 		{
 			ufoMissionName = u->getRules()->getType() + "_UNDERWATER";
 		}
-		ruleDeploy = game.getMod()->getDeployment(ufoMissionName);
+		ruleDeploy = game.mod()->getDeployment(ufoMissionName);
 	}
 	else if (m != 0)
 	{
-		ruleDeploy = game.getMod()->getDeployment(m->getDeployment()->getType());
+		ruleDeploy = game.mod()->getDeployment(m->getDeployment()->getType());
 	}
 	else if (b != 0)
 	{
-		AlienRace *race = game.getMod()->getAlienRace(b->getAlienRace());
-		ruleDeploy = game.getMod()->getDeployment(race->getBaseCustomMission());
-		if (!ruleDeploy) ruleDeploy = game.getMod()->getDeployment(b->getDeployment()->getType());
+		AlienRace *race = game.mod()->getAlienRace(b->getAlienRace());
+		ruleDeploy = game.mod()->getDeployment(race->getBaseCustomMission());
+		if (!ruleDeploy) ruleDeploy = game.mod()->getDeployment(b->getDeployment()->getType());
 	}
 	else
 	{
@@ -198,10 +198,10 @@ std::string ConfirmLandingState::checkStartingCondition()
 		return "";
 	}
 
-	RuleStartingCondition *rule = game.getMod()->getStartingCondition(ruleDeploy->getStartingCondition());
+	RuleStartingCondition *rule = game.mod()->getStartingCondition(ruleDeploy->getStartingCondition());
 	if (!rule && _missionTexture)
 	{
-		rule = game.getMod()->getStartingCondition(_missionTexture->getStartingCondition());
+		rule = game.mod()->getStartingCondition(_missionTexture->getStartingCondition());
 	}
 	if (rule != 0)
 	{
@@ -256,7 +256,7 @@ void ConfirmLandingState::btnYesClick(Action *)
 	MissionSite* m = dynamic_cast<MissionSite*>(_craft->getDestination());
 	AlienBase* b = dynamic_cast<AlienBase*>(_craft->getDestination());
 
-	SavedBattleGame *bgame = new SavedBattleGame(game.getMod());
+	SavedBattleGame *bgame = new SavedBattleGame(game.mod());
 	game.savedGame()->setBattleGame(bgame);
 	BattlescapeGenerator bgen;
 	bgen.setWorldTexture(_missionTexture, _globeTexture);
@@ -269,11 +269,11 @@ void ConfirmLandingState::btnYesClick(Action *)
 		else
 			bgame->setMissionType("STR_UFO_GROUND_ASSAULT");
 		bgen.setUfo(u);
-		const AlienDeployment *customWeaponDeploy = game.getMod()->getDeployment(u->getCraftStats().craftCustomDeploy);
+		const AlienDeployment *customWeaponDeploy = game.mod()->getDeployment(u->getCraftStats().craftCustomDeploy);
 		if (_missionTexture && _missionTexture->isFakeUnderwater())
 		{
 			const std::string ufoUnderwaterMissionName = u->getRules()->getType() + "_UNDERWATER";
-			const AlienDeployment *ufoUnderwaterMission = game.getMod()->getDeployment(ufoUnderwaterMissionName, true);
+			const AlienDeployment *ufoUnderwaterMission = game.mod()->getDeployment(ufoUnderwaterMissionName, true);
 			bgen.setAlienCustomDeploy(customWeaponDeploy, ufoUnderwaterMission);
 		}
 		else
@@ -291,11 +291,11 @@ void ConfirmLandingState::btnYesClick(Action *)
 	}
 	else if (b != 0)
 	{
-		AlienRace *race = game.getMod()->getAlienRace(b->getAlienRace());
+		AlienRace *race = game.mod()->getAlienRace(b->getAlienRace());
 		bgame->setMissionType(b->getDeployment()->getType());
 		bgen.setAlienBase(b);
 		bgen.setAlienRace(b->getAlienRace());
-		bgen.setAlienCustomDeploy(game.getMod()->getDeployment(race->getBaseCustomDeploy()), game.getMod()->getDeployment(race->getBaseCustomMission()));
+		bgen.setAlienCustomDeploy(game.mod()->getDeployment(race->getBaseCustomDeploy()), game.mod()->getDeployment(race->getBaseCustomMission()));
 		bgen.setWorldTexture(0, _globeTexture);
 	}
 	else

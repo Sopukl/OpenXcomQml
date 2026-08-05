@@ -437,9 +437,9 @@ void VideoState::init()
 	for (const auto& videoFileName : *_videos)
 	{
 		bool useInternalAudio = true;
-		if (!_tracks->empty() && _tracks->size() > audioCounter && game.getMod()->getMusic(_tracks->at(audioCounter)))
+		if (!_tracks->empty() && _tracks->size() > audioCounter && game.mod()->getMusic(_tracks->at(audioCounter)))
 		{
-			game.getMod()->getMusic(_tracks->at(audioCounter))->play(0);
+			game.mod()->getMusic(_tracks->at(audioCounter))->play(0);
 			useInternalAudio = false;
 		}
 		audioCounter++;
@@ -456,7 +456,7 @@ void VideoState::init()
 
 		if (_useUfoAudioSequence)
 		{
-			audioSequence = new AudioSequence(game.getMod(), flcPlayer);
+			audioSequence = new AudioSequence(game.mod(), flcPlayer);
 		}
 
 		flcPlayer->init(videoFileName.c_str(),

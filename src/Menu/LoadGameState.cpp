@@ -106,7 +106,7 @@ void LoadGameState::buildUi(SDL_Color *palette)
 		_txtStatus->setHighContrast(true);
 		if (game.savedGame()->getSavedBattle()->getAmbientSound() != Mod::NO_SOUND)
 		{
-			game.getMod()->getSoundByDepth(0, game.savedGame()->getSavedBattle()->getAmbientSound())->stopLoop();
+			game.mod()->getSoundByDepth(0, game.savedGame()->getSavedBattle()->getAmbientSound())->stopLoop();
 		}
 	}
 	else
@@ -165,7 +165,7 @@ void LoadGameState::think()
 		SavedGame *s = new SavedGame();
 		try
 		{
-			s->load(_filename, game.getMod());
+			s->load(_filename, game.mod());
 			game.setSavedGame(s);
 			if (game.savedGame()->getEnding() != END_NONE)
 			{
@@ -187,7 +187,7 @@ void LoadGameState::think()
 				game.setState(new GeoscapeState);
 				if (game.savedGame()->getSavedBattle() != 0)
 				{
-					game.savedGame()->getSavedBattle()->loadMapResources(game.getMod());
+					game.savedGame()->getSavedBattle()->loadMapResources(game.mod());
 					options1.baseXResolution = options1.baseXBattlescape;
 					options1.baseYResolution = options1.baseYBattlescape;
 					game.getScreen()->resetDisplay(false);

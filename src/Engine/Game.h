@@ -78,6 +78,7 @@ struct SaveDesc
         Q_PROPERTY(GameState state READ state WRITE setGameState NOTIFY stateChanged FINAL)
 		Q_PROPERTY(SavedGame* savedGame READ savedGame WRITE setSavedGame NOTIFY savedGameChanged FINAL)
 		Q_PROPERTY(Language* language READ language CONSTANT FINAL)
+		Q_PROPERTY(Mod* mod READ mod NOTIFY modChanged FINAL)
     private:
         enum ApplicationState { RUNNING = 0, SLOWED = 1, PAUSED = 2 } runningState = RUNNING;
         ApplicationState kbFocusRun[4] = { RUNNING, RUNNING, SLOWED, PAUSED };
@@ -141,7 +142,7 @@ struct SaveDesc
         /// Sets a new saved game for the game.
         void setSavedGame(SavedGame *save);
         /// Gets the currently loaded mod.
-        Mod *getMod() const { return _mod; }
+		Mod *mod() const { return _mod; }
         /// Loads the mods specified in the game options.
         void loadMods();
         /// Sets whether the mouse cursor is activated.
@@ -235,6 +236,7 @@ struct SaveDesc
 		void openPopupWindow(QString url, QVariantMap params = {});
 		void errorMessage(QString message);
 		void savedGameChanged();
+		void modChanged();
 	};
 	inline Game game;
 }

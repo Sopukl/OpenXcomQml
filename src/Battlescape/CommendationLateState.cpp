@@ -88,7 +88,7 @@ CommendationLateState::CommendationLateState(std::vector<Soldier*> soldiersMedal
 
     ***/
 
-	const auto& commendationsList = game.getMod()->getCommendationsList();
+	const auto& commendationsList = game.mod()->getCommendationsList();
 	bool modularCommendation;
 	std::string noun;
 

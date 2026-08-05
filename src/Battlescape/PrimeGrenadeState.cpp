@@ -69,7 +69,7 @@ PrimeGrenadeState::PrimeGrenadeState(BattleAction *action, bool inInventoryView,
 		game.savedGame()->getSavedBattle()->setPaletteByDepth(this);
 	}
 
-	const Element *grenadeBackground = game.getMod()->getInterface("battlescape")->getElement("grenadeBackground");
+	const Element *grenadeBackground = game.mod()->getInterface("battlescape")->getElement("grenadeBackground");
 
 	// Set up objects
 	add(_bg);
@@ -182,7 +182,7 @@ void PrimeGrenadeState::btnClick(Action *action)
 			int sound = _grenadeInInventory->getRules()->getPrimeSound();
 			if (sound != Mod::NO_SOUND)
 			{
-				game.getMod()->getSoundByDepth(game.savedGame()->getSavedBattle()->getDepth(), sound)->play();
+				game.mod()->getSoundByDepth(game.savedGame()->getSavedBattle()->getDepth(), sound)->play();
 			}
 		}
 		else

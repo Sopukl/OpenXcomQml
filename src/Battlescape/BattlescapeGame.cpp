@@ -1005,9 +1005,9 @@ void BattlescapeGame::showInfoBoxQueue()
  */
 void BattlescapeGame::missionComplete()
 {
-	if (game.getMod()->getDeployment(_save->getMissionType()))
+	if (game.mod()->getDeployment(_save->getMissionType()))
 	{
-		std::string missionComplete = game.getMod()->getDeployment(_save->getMissionType())->getObjectivePopup();
+		std::string missionComplete = game.mod()->getDeployment(_save->getMissionType())->getObjectivePopup();
 		if (!missionComplete.empty())
 		{
 			_infoboxQueue.push_back(new InfoboxOKState(game.language()->getString(missionComplete)));
@@ -1811,7 +1811,7 @@ void BattlescapeGame::primaryAction(Position pos)
 					std::string error;
 					if (_currentAction.spendTU(&error))
 					{
-						game.getMod()->getSoundByDepth(_save->getDepth(), _currentAction.weapon->getRules()->getHitSound())->play(-1, getMap()->getSoundAngle(pos));
+						game.mod()->getSoundByDepth(_save->getDepth(), _currentAction.weapon->getRules()->getHitSound())->play(-1, getMap()->getSoundAngle(pos));
 						game.pushState (new UnitInfoState(targetUnit, _parentState, false, true));
 						cancelCurrentAction();
 					}
@@ -2563,7 +2563,7 @@ Pathfinding *BattlescapeGame::getPathfinding()
  */
 Mod *BattlescapeGame::getMod()
 {
-	return game.getMod();
+	return game.mod();
 }
 
 
@@ -2834,7 +2834,7 @@ int BattlescapeGame::takeItemFromGround(BattleItem* item, BattleAction *action)
 bool BattlescapeGame::takeItem(BattleItem* item, BattleAction *action)
 {
 	bool placed = false;
-	Mod *mod = game.getMod();
+	Mod *mod = game.mod();
 	auto* rightWeapon = action->actor->getRightHandWeapon();
 	auto* leftWeapon = action->actor->getLeftHandWeapon();
 	auto* unit = action->actor;
@@ -3257,7 +3257,7 @@ void BattlescapeGame::playSound(int sound, const Position &pos)
 {
 	if (sound != Mod::NO_SOUND)
 	{
-		game.getMod()->getSoundByDepth(_save->getDepth(), sound)->play(-1, _parentState->getMap()->getSoundAngle(pos));
+		game.mod()->getSoundByDepth(_save->getDepth(), sound)->play(-1, _parentState->getMap()->getSoundAngle(pos));
 	}
 }
 
@@ -3268,7 +3268,7 @@ void BattlescapeGame::playSound(int sound)
 {
 	if (sound != Mod::NO_SOUND)
 	{
-		game.getMod()->getSoundByDepth(_save->getDepth(), sound)->play();
+		game.mod()->getSoundByDepth(_save->getDepth(), sound)->play();
 	}
 }
 

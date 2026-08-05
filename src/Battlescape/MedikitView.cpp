@@ -49,15 +49,15 @@ MedikitView::MedikitView (int w, int h, int x, int y, BattleUnit *unit, Text *pa
  */
 void MedikitView::draw()
 {
-	SurfaceSet *set = game.getMod()->getSurfaceSet("MEDIBITS.DAT");
+	SurfaceSet *set = game.mod()->getSurfaceSet("MEDIBITS.DAT");
 	int fatal_wound = _unit->getFatalWound((UnitBodyPart)_selectedPart);
 	std::ostringstream ss, ss1;
 	int green = 0;
 	int red = 3;
-	if (game.getMod()->getInterface("medikit", false) && game.getMod()->getInterface("medikit")->getElementOptional("body"))
+	if (game.mod()->getInterface("medikit", false) && game.mod()->getInterface("medikit")->getElementOptional("body"))
 	{
-		green = game.getMod()->getInterface("medikit")->getElement("body")->color;
-		red = game.getMod()->getInterface("medikit")->getElement("body")->color2;
+		green = game.mod()->getInterface("medikit")->getElement("body")->color;
+		red = game.mod()->getInterface("medikit")->getElement("body")->color2;
 	}
 	this->lock();
 	for (unsigned int i = 0; i < set->getTotalFrames(); i++)
@@ -87,7 +87,7 @@ void MedikitView::draw()
  */
 void MedikitView::mouseClick (Action *action, State *)
 {
-	SurfaceSet *set = game.getMod()->getSurfaceSet("MEDIBITS.DAT");
+	SurfaceSet *set = game.mod()->getSurfaceSet("MEDIBITS.DAT");
 	int x = action->getRelativeXMouse() / action->getXScale();
 	int y = action->getRelativeYMouse() / action->getYScale();
 	for (unsigned int i = 0; i < set->getTotalFrames(); i++)

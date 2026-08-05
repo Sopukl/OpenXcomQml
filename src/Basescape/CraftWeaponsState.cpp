@@ -111,9 +111,9 @@ CraftWeaponsState::CraftWeaponsState(Base *base, size_t craft, size_t weapon) : 
 	_lstWeapons->addRow(1, ltr("STR_NONE_UC").c_str());
 	_weapons.push_back(0);
 
-	for (auto& craftWeaponType : game.getMod()->getCraftWeaponsList())
+	for (auto& craftWeaponType : game.mod()->getCraftWeaponsList())
 	{
-		RuleCraftWeapon *w = game.getMod()->getCraftWeapon(craftWeaponType);
+		RuleCraftWeapon *w = game.mod()->getCraftWeapon(craftWeaponType);
 		const RuleCraft *c = _craft->getRules();
 		bool isResearched = game.savedGame()->isResearched(w->getLauncherItem()->getRequirements());
 		if (w->getClipItem())
@@ -209,9 +209,9 @@ void CraftWeaponsState::lstWeaponsClick(Action *)
 		double totalItemStorageSize = 0.0;
 		if (diff3 || diff4_b)
 		{
-			for (auto& itemType : game.getMod()->getItemsList())
+			for (auto& itemType : game.mod()->getItemsList())
 			{
-				RuleItem* rule = game.getMod()->getItem(itemType);
+				RuleItem* rule = game.mod()->getItem(itemType);
 
 				Unit* isVehicle = rule->getVehicleUnit();
 				int cQty = 0;

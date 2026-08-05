@@ -74,22 +74,22 @@ PlaceLiftState::PlaceLiftState(Base *base, Globe *globe, bool first) : _base(bas
 	{
 		int texture, shade;
 		_globe->getPolygonTextureAndShade(_base->getLongitude(), _base->getLatitude(), &texture, &shade);
-		auto* globeTexture = game.getMod()->getGlobe()->getTexture(texture);
+		auto* globeTexture = game.mod()->getGlobe()->getTexture(texture);
 		_base->setGlobeTexture(globeTexture);
 	}
 
-	auto* itf = game.getMod()->getInterface("basescape")->getElementOptional("trafficLights");
+	auto* itf = game.mod()->getInterface("basescape")->getElementOptional("trafficLights");
 	if (itf)
 	{
 		_view->setOtherColors(itf->color, itf->color2, itf->border, !itf->TFTDMode);
 	}
-	_view->setTexture(game.getMod()->getSurfaceSet("BASEBITS.PCK"));
+	_view->setTexture(game.mod()->getSurfaceSet("BASEBITS.PCK"));
 	_view->setBase(_base);
 
 	_lift = nullptr;
-	for (auto& facilityType : game.getMod()->getBaseFacilitiesList())
+	for (auto& facilityType : game.mod()->getBaseFacilitiesList())
 	{
-		auto* facilityRule = game.getMod()->getBaseFacility(facilityType);
+		auto* facilityRule = game.mod()->getBaseFacility(facilityType);
 		if ((facilityRule->isLift() && !facilityRule->isUpgradeOnly())
 			&& facilityRule->isAllowedForBaseType(_base->isFakeUnderwater()) && game.savedGame()->isResearched(facilityRule->getRequirements()))
 		{
@@ -152,7 +152,7 @@ void PlaceLiftState::viewClick(Action *)
 	_base->getFacilities().push_back(fac);
 	if (fac->getRules()->getPlaceSound() != Mod::NO_SOUND)
 	{
-		game.getMod()->getSound("GEO.CAT", fac->getRules()->getPlaceSound())->play();
+		game.mod()->getSound("GEO.CAT", fac->getRules()->getPlaceSound())->play();
 	}
 	game.popState();
 	BasescapeState *bState = new BasescapeState(_base, _globe);

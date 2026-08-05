@@ -92,8 +92,8 @@ GraphsState::GraphsState() : _butRegionsOffset(0), _butCountriesOffset(0), _zoom
 		_txtScale.push_back(new Text(42, 16, 80, 171 - (scaleText*14)));
 		add(_txtScale.at(scaleText), "scale", "graphs");
 	}
-	Uint8 regionTotalColor = game.getMod()->getInterface("graphs")->getElement("regionTotal")->color;
-	Uint8 countryTotalColor = game.getMod()->getInterface("graphs")->getElement("countryTotal")->color;
+	Uint8 regionTotalColor = game.mod()->getInterface("graphs")->getElement("regionTotal")->color;
+	Uint8 countryTotalColor = game.mod()->getInterface("graphs")->getElement("countryTotal")->color;
 
 	//create buttons (sooooo many buttons)
 	size_t offset = 0;
@@ -221,7 +221,7 @@ GraphsState::GraphsState() : _butRegionsOffset(0), _butCountriesOffset(0), _zoom
 		_financeToggles[i] = ('0'==graphFinanceToggles[i]) ? false : true;
 		_btnFinances.at(i)->setPressed(_financeToggles[i]);
 	}
-	Uint8 gridColor = game.getMod()->getInterface("graphs")->getElement("graph")->color;
+	Uint8 gridColor = game.mod()->getInterface("graphs")->getElement("graph")->color;
 	// set up the grid
 	_bg->drawRect(125, 49, 188, 127, gridColor);
 
@@ -278,13 +278,13 @@ GraphsState::GraphsState() : _butRegionsOffset(0), _butCountriesOffset(0), _zoom
 	btnUfoRegionClick(0);
 
 	// Set up object
-	if (game.getMod()->getSurface("GRAPH.BDY", false))
+	if (game.mod()->getSurface("GRAPH.BDY", false))
 	{
-		game.getMod()->getSurface("GRAPH.BDY")->blitNShade(_bg, 0, 0);
+		game.mod()->getSurface("GRAPH.BDY")->blitNShade(_bg, 0, 0);
 	}
 	else
 	{
-		game.getMod()->getSurface("GRAPHS.SPK")->blitNShade(_bg, 0, 0);
+		game.mod()->getSurface("GRAPHS.SPK")->blitNShade(_bg, 0, 0);
 	}
 
 	_txtTitle->setAlign(ALIGN_CENTER);
@@ -853,7 +853,7 @@ void GraphsState::drawCountryLines()
 
 	// set up the "total" line
 	std::vector<Sint16> newLineVector;
-	Uint8 color = game.getMod()->getInterface("graphs")->getElement("countryTotal")->color2;
+	Uint8 color = game.mod()->getInterface("graphs")->getElement("countryTotal")->color2;
 	for (int iter = 0; iter != 12; ++iter)
 	{
 		int x = 312 - (iter*17);
@@ -1028,7 +1028,7 @@ void GraphsState::drawRegionLines()
 	else
 		_xcomRegionLines.back()->clear();
 
-	Uint8 color = game.getMod()->getInterface("graphs")->getElement("regionTotal")->color2;
+	Uint8 color = game.mod()->getInterface("graphs")->getElement("regionTotal")->color2;
 	std::vector<Sint16> newLineVector;
 	for (int iter = 0; iter != 12; ++iter)
 	{

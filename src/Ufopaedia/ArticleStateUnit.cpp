@@ -40,7 +40,7 @@ namespace OpenXcom
 
 	ArticleStateUnit::ArticleStateUnit(ArticleDefinitionUnit *defs, std::shared_ptr<ArticleCommonState> state) : ArticleState(defs->id, std::move(state))
 	{
-		Unit *unit = game.getMod()->getUnit(defs->id, true);
+		Unit *unit = game.mod()->getUnit(defs->id, true);
 
 		// add screen elements
 		_txtTitle = new Text(310, 17, 5, 23);
@@ -48,14 +48,14 @@ namespace OpenXcom
 		// Set palette
 		if (defs->customPalette)
 		{
-			setCustomPalette(game.getMod()->getSurface(defs->image_id)->getPalette(), Mod::UFOPAEDIA_CURSOR);
+			setCustomPalette(game.mod()->getSurface(defs->image_id)->getPalette(), Mod::UFOPAEDIA_CURSOR);
 		}
 		else
 		{
 			setStandardPalette("PAL_UFOPAEDIA");
 		}
 
-		RuleInterface* itf = game.getMod()->getInterface("articleUnit");
+		RuleInterface* itf = game.mod()->getInterface("articleUnit");
 		int buttonColor = itf->getElement("button")->color;
 		int titleColor1 = itf->getElement("title")->color;
 		int titleColor2 = itf->getElement("title")->color2;
@@ -70,12 +70,12 @@ namespace OpenXcom
 		add(_txtTitle);
 
 		// Set up objects
-		game.getMod()->getSurface(defs->image_id)->blitNShade(_bg, 0, 0);
+		game.mod()->getSurface(defs->image_id)->blitNShade(_bg, 0, 0);
 		_btnOk->setColor(buttonColor);
 		_btnPrev->setColor(buttonColor);
 		_btnNext->setColor(buttonColor);
 		_btnInfo->setColor(buttonColor);
-		_btnInfo->setVisible(game.getMod()->getShowPediaInfoButton());
+		_btnInfo->setVisible(game.mod()->getShowPediaInfoButton());
 
 		_txtTitle->setColor(titleColor1);
 		_txtTitle->setSecondaryColor(titleColor2);
@@ -154,7 +154,7 @@ namespace OpenXcom
 			}
 
 			// FACTION_HOSTILE scales with difficulty
-			auto* adjustment = game.getMod()->getStatAdjustment(game.savedGame()->getDifficulty());
+			auto* adjustment = game.mod()->getStatAdjustment(game.savedGame()->getDifficulty());
 
 			alien += UnitStats::percent(alien, adjustment->statGrowth, adjustment->growthMultiplier);
 
@@ -192,7 +192,7 @@ namespace OpenXcom
 		_lstStats->addRow(columns, ltr("STR_THROWING_ACCURACY").c_str(), std::to_string(civ.throwing).c_str(), std::to_string(alien.throwing).c_str());
 		_lstStats->addRow(columns, ltr("STR_MELEE_ACCURACY").c_str(), std::to_string(civ.melee).c_str(), std::to_string(alien.melee).c_str());
 		_lstStats->addRow(columns, ltr("STR_STRENGTH").c_str(), std::to_string(civ.strength).c_str(), std::to_string(alien.strength).c_str());
-		if (game.getMod()->isManaFeatureEnabled())
+		if (game.mod()->isManaFeatureEnabled())
 		{
 			_lstStats->addRow(columns, ltr("STR_MANA_POOL").c_str(), std::to_string(civ.mana).c_str(), std::to_string(alien.mana).c_str());
 		}

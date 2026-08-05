@@ -148,7 +148,7 @@ void StatisticsState::listStats()
 		}
 		bestScore = std::max(bestScore, ms->score);
 		worstScore = std::min(worstScore, ms->score);
-		if (ms->isDarkness(game.getMod()))
+		if (ms->isDarkness(game.mod()))
 		{
 			nightMissions++;
 		}
@@ -262,7 +262,7 @@ void StatisticsState::listStats()
 	int ufosDetected = std::max(0, ids["STR_UFO"] - 1);
 	int terrorSites = std::max(0, ids["STR_TERROR_SITE"] - 1);
 	int totalCrafts = 0;
-	for (const auto& craftType : game.getMod()->getCraftsList())
+	for (const auto& craftType : game.mod()->getCraftsList())
 	{
 		totalCrafts += std::max(0, ids[craftType] - 1);
 	}

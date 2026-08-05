@@ -57,7 +57,7 @@ UfoDetectedState::UfoDetectedState(Ufo *ufo, GeoscapeState *state, bool detected
 		int soundId = _ufo->getRules()->getAlertSound();
 		if (soundId != Mod::NO_SOUND)
 		{
-			_customSound = game.getMod()->getSound("GEO.CAT", soundId);
+			_customSound = game.mod()->getSound("GEO.CAT", soundId);
 		}
 
 	}
@@ -167,13 +167,13 @@ UfoDetectedState::UfoDetectedState(Ufo *ufo, GeoscapeState *state, bool detected
 	std::string altitude = _ufo->getAltitude() == "STR_GROUND" ? "STR_GROUNDED" : _ufo->getAltitude();
 	// Let's assume if there's any underwater craft, the UFO are underwater too
 	bool underwater = false;
-	for (auto& craftType : game.getMod()->getCraftsList())
+	for (auto& craftType : game.mod()->getCraftsList())
 	{
 		if (underwater)
 		{
 			break; // loop finished
 		}
-		underwater = game.getMod()->getCraft(craftType)->isWaterOnly();
+		underwater = game.mod()->getCraft(craftType)->isWaterOnly();
 	}
 	if (underwater && !_state->getGlobe()->insideLand(_ufo->getLongitude(), _ufo->getLatitude()))
 	{

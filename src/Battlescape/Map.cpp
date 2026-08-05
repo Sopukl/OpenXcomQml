@@ -122,11 +122,11 @@ Map::Map(int width, int height, int x, int y, int visibleMapHeight) : Interactiv
 		}
 	}
 
-	_iconHeight = game.getMod()->getInterface("battlescape")->getElement("icons")->h;
-	_iconWidth = game.getMod()->getInterface("battlescape")->getElement("icons")->w;
-	_messageColor = game.getMod()->getInterface("battlescape")->getElement("messageWindows")->color;
+	_iconHeight = game.mod()->getInterface("battlescape")->getElement("icons")->h;
+	_iconWidth = game.mod()->getInterface("battlescape")->getElement("icons")->w;
+	_messageColor = game.mod()->getInterface("battlescape")->getElement("messageWindows")->color;
 
-	auto* itf = game.getMod()->getInterface("battlescape")->getElement("thinkingProgressBar");
+	auto* itf = game.mod()->getInterface("battlescape")->getElement("thinkingProgressBar");
 	_hostileBarColor = itf->color;
 	_neutralBarColor = itf->color2;
 	_borderBarColor = itf->border;
@@ -143,9 +143,9 @@ Map::Map(int width, int height, int x, int y, int visibleMapHeight) : Interactiv
 	_previewSettingEnergy = previewSetting & PATH_ENERGY_COST;
 
 	_save = game.savedGame()->getSavedBattle();
-	if ((int)(game.getMod()->getLUTs()->size()) > _save->getDepth())
+	if ((int)(game.mod()->getLUTs()->size()) > _save->getDepth())
 	{
-		_transparencies = &game.getMod()->getLUTs()->at(_save->getDepth());
+		_transparencies = &game.mod()->getLUTs()->at(_save->getDepth());
 	}
 	else
 	{
@@ -153,8 +153,8 @@ Map::Map(int width, int height, int x, int y, int visibleMapHeight) : Interactiv
 		_transparencies = &dummy;
 	}
 
-	_spriteWidth = game.getMod()->getSurfaceSet("BLANKS.PCK")->getFrame(0)->getWidth();
-	_spriteHeight = game.getMod()->getSurfaceSet("BLANKS.PCK")->getFrame(0)->getHeight();
+	_spriteWidth = game.mod()->getSurfaceSet("BLANKS.PCK")->getFrame(0)->getWidth();
+	_spriteHeight = game.mod()->getSurfaceSet("BLANKS.PCK")->getFrame(0)->getHeight();
 	_message = new BattlescapeMessage(320, (visibleMapHeight < 200)? visibleMapHeight : 200, 0, 0);
 	_message->setX(game.getScreen()->getDX());
 	_message->setY((visibleMapHeight - _message->getHeight()) / 2);
@@ -174,7 +174,7 @@ Map::Map(int width, int height, int x, int y, int visibleMapHeight) : Interactiv
 	_txtAccuracy->setSmall();
 	_txtAccuracy->setPalette(game.getScreen()->getPalette());
 	_txtAccuracy->setHighContrast(true);
-	_txtAccuracy->initText(game.getMod()->getFont("FONT_BIG"), game.getMod()->getFont("FONT_SMALL"));
+	_txtAccuracy->initText(game.mod()->getFont("FONT_BIG"), game.mod()->getFont("FONT_SMALL"));
 	_cacheActiveWeaponUfopediaArticleUnlocked = -1;
 	_cacheIsCtrlPressed = false;
 	_cacheCursorPosition = TileEngine::invalid;
@@ -220,17 +220,17 @@ Map::Map(int width, int height, int x, int y, int visibleMapHeight) : Interactiv
 		_bgColor = enviro->getMapBackgroundColor();
 	}
 
-	_stunIndicator = game.getMod()->getSurface("FloorStunIndicator", false);
-	_woundIndicator = game.getMod()->getSurface("FloorWoundIndicator", false);
-	_burnIndicator = game.getMod()->getSurface("FloorBurnIndicator", false);
-	_shockIndicator = game.getMod()->getSurface("FloorShockIndicator", false);
+	_stunIndicator = game.mod()->getSurface("FloorStunIndicator", false);
+	_woundIndicator = game.mod()->getSurface("FloorWoundIndicator", false);
+	_burnIndicator = game.mod()->getSurface("FloorBurnIndicator", false);
+	_shockIndicator = game.mod()->getSurface("FloorShockIndicator", false);
 	_anyIndicator = _stunIndicator || _woundIndicator || _burnIndicator || _shockIndicator;
 
 	if (enviro)
 	{
 		if (!enviro->getMapShockIndicator().empty())
 		{
-			_shockIndicator = game.getMod()->getSurface(enviro->getMapShockIndicator(), false);
+			_shockIndicator = game.mod()->getSurface(enviro->getMapShockIndicator(), false);
 		}
 	}
 
@@ -282,11 +282,11 @@ void Map::init()
 	_projectile = 0;
 	if (_save->getDepth() == 0)
 	{
-		_projectileSet = game.getMod()->getSurfaceSet("Projectiles");
+		_projectileSet = game.mod()->getSurfaceSet("Projectiles");
 	}
 	else
 	{
-		_projectileSet = game.getMod()->getSurfaceSet("UnderwaterProjectiles");
+		_projectileSet = game.mod()->getSurfaceSet("UnderwaterProjectiles");
 	}
 }
 
@@ -393,13 +393,13 @@ void Map::setPalette(const SDL_Color *colors, int firstcolor, int ncolors)
 	}
 	_message->setPalette(colors, firstcolor, ncolors);
 	refreshHiddenMovementBackground();
-	_message->initText(game.getMod()->getFont("FONT_BIG"), game.getMod()->getFont("FONT_SMALL"));
+	_message->initText(game.mod()->getFont("FONT_BIG"), game.mod()->getFont("FONT_SMALL"));
 	_message->setText(game.language()->getString("STR_HIDDEN_MOVEMENT"), game.language()->getString("STR_THINKING"));
 }
 
 void Map::refreshHiddenMovementBackground()
 {
-	_message->setBackground(game.getMod()->getSurface(_save->getHiddenMovementBackground()));
+	_message->setBackground(game.mod()->getSurface(_save->getHiddenMovementBackground()));
 }
 
 /**
@@ -748,9 +748,9 @@ void Map::drawTerrain(Surface *surface)
 	int dummy;
 	BattleUnit *movingUnit = _save->getTileEngine()->getMovingUnit();
 	int tileShade, tileColor, obstacleShade;
-	UnitSprite unitSprite(surface, game.getMod(), _save, _animFrame, _save->getDepth() != 0,
+	UnitSprite unitSprite(surface, game.mod(), _save, _animFrame, _save->getDepth() != 0,
 		_isTFTD ? ArrowColorsTFTD[1] : ArrowColorsUFO[1], _isTFTD ? ArrowColorsTFTD[2] : ArrowColorsUFO[2]);
-	ItemSprite itemSprite(surface, game.getMod(), _save, _animFrame);
+	ItemSprite itemSprite(surface, game.mod(), _save, _animFrame);
 
 	const int halfAnimFrame = (_animFrame / 2) % 4;
 	const int halfAnimFrameRest = (_animFrame % 2);
@@ -965,13 +965,13 @@ void Map::drawTerrain(Surface *surface)
 								else
 									frameNumber = 6; // red static crosshairs
 							}
-							tmpSurface = game.getMod()->getSurfaceSet("CURSOR.PCK")->getFrame(frameNumber);
+							tmpSurface = game.mod()->getSurfaceSet("CURSOR.PCK")->getFrame(frameNumber);
 							Surface::blitRaw(surface, tmpSurface, screenPosition.x, screenPosition.y, 0);
 						}
 						else if (_camera->getViewLevel() > itZ)
 						{
 							frameNumber = 2; // blue box
-							tmpSurface = game.getMod()->getSurfaceSet("CURSOR.PCK")->getFrame(frameNumber);
+							tmpSurface = game.mod()->getSurfaceSet("CURSOR.PCK")->getFrame(frameNumber);
 							Surface::blitRaw(surface, tmpSurface, screenPosition.x, screenPosition.y, 0);
 						}
 					}
@@ -1257,7 +1257,7 @@ void Map::drawTerrain(Surface *surface)
 						{
 							frameNumber += halfAnimFrame + tile->getAnimationOffset();
 						}
-						tmpSurface = game.getMod()->getSurfaceSet("SMOKE.PCK")->getFrame(frameNumber);
+						tmpSurface = game.mod()->getSurfaceSet("SMOKE.PCK")->getFrame(frameNumber);
 						Surface::blitRaw(surface, tmpSurface, screenPosition.x, screenPosition.y, shade, false, _nvColor);
 					}
 
@@ -1288,13 +1288,13 @@ void Map::drawTerrain(Surface *surface)
 					{
 						if (itZ > 0 && tile->hasNoFloor(_save))
 						{
-							tmpSurface = game.getMod()->getSurfaceSet("Pathfinding")->getFrame(11);
+							tmpSurface = game.mod()->getSurfaceSet("Pathfinding")->getFrame(11);
 							if (tmpSurface)
 							{
 								Surface::blitRaw(surface, tmpSurface, screenPosition.x, screenPosition.y+2, 0, false, tile->getMarkerColor());
 							}
 						}
-						tmpSurface = game.getMod()->getSurfaceSet("Pathfinding")->getFrame(tile->getPreview());
+						tmpSurface = game.mod()->getSurfaceSet("Pathfinding")->getFrame(tile->getPreview());
 						if (tmpSurface)
 						{
 							Surface::blitRaw(surface, tmpSurface, screenPosition.x, screenPosition.y + tile->getTerrainLevel(), 0, false, tileColor);
@@ -1334,7 +1334,7 @@ void Map::drawTerrain(Surface *surface)
 								else
 									frameNumber = 6; // red static crosshairs
 							}
-							tmpSurface = game.getMod()->getSurfaceSet("CURSOR.PCK")->getFrame(frameNumber);
+							tmpSurface = game.mod()->getSurfaceSet("CURSOR.PCK")->getFrame(frameNumber);
 							Surface::blitRaw(surface, tmpSurface, screenPosition.x, screenPosition.y, 0);
 
 							// UFO extender accuracy: display adjusted accuracy value on crosshair in real-time.
@@ -1349,7 +1349,7 @@ void Map::drawTerrain(Surface *surface)
 
 								if (_cursorType == CT_AIM || _cursorType == CT_THROW)
 								{
-									int accuracy = BattleUnit::getFiringAccuracy(attack, game.getMod());
+									int accuracy = BattleUnit::getFiringAccuracy(attack, game.mod());
 
 									{
 										int upperLimit, lowerLimit;
@@ -1375,7 +1375,7 @@ void Map::drawTerrain(Surface *surface)
 
 									// Include LOS penalty for tiles in the unit's current view range
 									// Don't recalculate LOS for outside of the current FOV
-									int noLOSAccuracyPenalty = action->weapon->getRules()->getNoLOSAccuracyPenalty(game.getMod());
+									int noLOSAccuracyPenalty = action->weapon->getRules()->getNoLOSAccuracyPenalty(game.mod());
 									if (noLOSAccuracyPenalty != -1)
 									{
 										bool hasLOS = false;
@@ -1460,14 +1460,14 @@ void Map::drawTerrain(Surface *surface)
 										else if (rule)
 										{
 											_cacheActiveWeaponUfopediaArticleUnlocked = 1; // assume unlocked
-											ArticleDefinition *article = game.getMod()->getUfopaediaArticle(rule->getType(), false);
+											ArticleDefinition *article = game.mod()->getUfopaediaArticle(rule->getType(), false);
 											if (article && !Ufopaedia::isArticleAvailable(game.savedGame(), article))
 											{
 												_cacheActiveWeaponUfopediaArticleUnlocked = 0; // ammo/weapon locked
 											}
 											if (rule->getType() != weapon->getType())
 											{
-												article = game.getMod()->getUfopaediaArticle(weapon->getType(), false);
+												article = game.mod()->getUfopaediaArticle(weapon->getType(), false);
 												if (article && !Ufopaedia::isArticleAvailable(game.savedGame(), article))
 												{
 													_cacheActiveWeaponUfopediaArticleUnlocked = 0; // weapon locked
@@ -1533,7 +1533,7 @@ void Map::drawTerrain(Surface *surface)
 						else if (_camera->getViewLevel() > itZ)
 						{
 							frameNumber = 5; // blue box
-							tmpSurface = game.getMod()->getSurfaceSet("CURSOR.PCK")->getFrame(frameNumber);
+							tmpSurface = game.mod()->getSurfaceSet("CURSOR.PCK")->getFrame(frameNumber);
 							Surface::blitRaw(surface, tmpSurface, screenPosition.x, screenPosition.y, 0);
 						}
 						if (!_isAltPressed && _cursorType > CT_AIM && _camera->getViewLevel() == itZ)
@@ -1556,7 +1556,7 @@ void Map::drawTerrain(Surface *surface)
 							if (!ignore)
 							{
 								int frame[6] = { 0, 0, 0, 11, 13, 15 };
-								tmpSurface = game.getMod()->getSurfaceSet("CURSOR.PCK")->getFrame(frame[_cursorType] + (_animFrame / 4) % 2);
+								tmpSurface = game.mod()->getSurfaceSet("CURSOR.PCK")->getFrame(frame[_cursorType] + (_animFrame / 4) % 2);
 								Surface::blitRaw(surface, tmpSurface, screenPosition.x, screenPosition.y, 0);
 							}
 						}
@@ -1573,7 +1573,7 @@ void Map::drawTerrain(Surface *surface)
 						{
 							if (waypXOff == 2 && waypYOff == 2)
 							{
-								tmpSurface = game.getMod()->getSurfaceSet("CURSOR.PCK")->getFrame(7);
+								tmpSurface = game.mod()->getSurfaceSet("CURSOR.PCK")->getFrame(7);
 								Surface::blitRaw(surface, tmpSurface, screenPosition.x, screenPosition.y, 0);
 							}
 							if (_save->getBattleGame()->getCurrentAction()->type == BA_LAUNCH || _save->getBattleGame()->getCurrentAction()->sprayTargeting)
@@ -1624,14 +1624,14 @@ void Map::drawTerrain(Surface *surface)
 						{
 							if (itZ > 0 && tile->hasNoFloor(_save))
 							{
-								tmpSurface = game.getMod()->getSurfaceSet("Pathfinding")->getFrame(23);
+								tmpSurface = game.mod()->getSurfaceSet("Pathfinding")->getFrame(23);
 								if (tmpSurface)
 								{
 									Surface::blitRaw(surface, tmpSurface, screenPosition.x, screenPosition.y+2, 0, false, tile->getMarkerColor());
 								}
 							}
 							int overlay = tile->getPreview() + 12;
-							tmpSurface = game.getMod()->getSurfaceSet("Pathfinding")->getFrame(overlay);
+							tmpSurface = game.mod()->getSurfaceSet("Pathfinding")->getFrame(overlay);
 							if (tmpSurface)
 							{
 								Surface::blitRaw(surface, tmpSurface, screenPosition.x, screenPosition.y - adjustment, 0, false, tile->getMarkerColor());
@@ -1814,18 +1814,18 @@ void Map::drawTerrain(Surface *surface)
 				{
 					if (explosion->getCurrentFrame() >= 0)
 					{
-						tmpSurface = game.getMod()->getSurfaceSet("X1.PCK")->getFrame(explosion->getCurrentFrame());
+						tmpSurface = game.mod()->getSurfaceSet("X1.PCK")->getFrame(explosion->getCurrentFrame());
 						Surface::blitRaw(surface, tmpSurface, bulletPositionScreen.x - (tmpSurface.getWidth() / 2), bulletPositionScreen.y - (tmpSurface.getHeight() / 2), 0, false, _nvColor);
 					}
 				}
 				else if (explosion->isHit())
 				{
-					tmpSurface = game.getMod()->getSurfaceSet("HIT.PCK")->getFrame(explosion->getCurrentFrame());
+					tmpSurface = game.mod()->getSurfaceSet("HIT.PCK")->getFrame(explosion->getCurrentFrame());
 					Surface::blitRaw(surface, tmpSurface, bulletPositionScreen.x - 15, bulletPositionScreen.y - 25, 0, false, _nvColor);
 				}
 				else
 				{
-					tmpSurface = game.getMod()->getSurfaceSet("SMOKE.PCK")->getFrame(explosion->getCurrentFrame());
+					tmpSurface = game.mod()->getSurfaceSet("SMOKE.PCK")->getFrame(explosion->getCurrentFrame());
 					Surface::blitRaw(surface, tmpSurface, bulletPositionScreen.x - 15, bulletPositionScreen.y - 15, 0, false, _nvColor);
 				}
 			}

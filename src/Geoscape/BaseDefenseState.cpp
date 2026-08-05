@@ -53,7 +53,7 @@ namespace OpenXcom
  */
 BaseDefenseState::BaseDefenseState(Base *base, Ufo *ufo, GeoscapeState *state, bool instaHyper) : _state(state)
 {
-	bool showUfo = game.getMod()->showUfoPreviewInBaseDefense();
+	bool showUfo = game.mod()->showUfoPreviewInBaseDefense();
 
 	_base = base;
 	_action = BDA_NONE;
@@ -113,9 +113,9 @@ BaseDefenseState::BaseDefenseState(Base *base, Ufo *ufo, GeoscapeState *state, b
 
 	if (showUfo)
 	{
-		RuleInterface* dogfightInterface = game.getMod()->getInterface("dogfight");
+		RuleInterface* dogfightInterface = game.mod()->getInterface("dogfight");
 
-		SurfaceCrop crop = game.getMod()->getSurface("INTERWIN.DAT")->getCrop();
+		SurfaceCrop crop = game.mod()->getSurface("INTERWIN.DAT")->getCrop();
 		crop.setX(0);
 		crop.setY(0);
 		crop.getCrop()->x = 0;
@@ -142,7 +142,7 @@ BaseDefenseState::BaseDefenseState(Base *base, Ufo *ufo, GeoscapeState *state, b
 		}
 		else
 		{
-			crop = game.getMod()->getSurface(ufo->getRules()->getModSprite())->getCrop();
+			crop = game.mod()->getSurface(ufo->getRules()->getModSprite())->getCrop();
 		}
 		crop.setX(dogfightInterface->getElement("previewTop")->x);
 		crop.setY(dogfightInterface->getElement("previewTop")->h);
@@ -247,7 +247,7 @@ bool BaseDefenseState::applyDamage(const RuleBaseFacility* rule)
 		}
 
 		damage = std::max(0, damage - _ufo->getCraftStats().armor);
-		_ufo->setDamage(_ufo->getDamage() + damage, game.getMod());
+		_ufo->setDamage(_ufo->getDamage() + damage, game.mod());
 	}
 	else
 	{
@@ -274,7 +274,7 @@ bool BaseDefenseState::applyDamage(const RuleBaseFacility* rule)
 				shieldDown = true;
 			}
 		}
-		_ufo->setDamage(_ufo->getDamage() + dmg, game.getMod());
+		_ufo->setDamage(_ufo->getDamage() + dmg, game.mod());
 	}
 
 	return shieldDown;
@@ -307,7 +307,7 @@ void BaseDefenseState::nextStep()
 					_lstDefenses->scrollDown(true);
 				}
 			}
-			game.getMod()->getSound("GEO.CAT", Mod::UFO_EXPLODE)->play();
+			game.mod()->getSound("GEO.CAT", Mod::UFO_EXPLODE)->play();
 			if (++_explosionCount == 3)
 			{
 				_action = BDA_END;
@@ -372,7 +372,7 @@ void BaseDefenseState::nextStep()
 			else
 			{
 				_lstDefenses->setCellText(_row, 1, ltr("STR_FIRING"));
-				game.getMod()->getSound("GEO.CAT", (def)->getRules()->getFireSound())->play();
+				game.mod()->getSound("GEO.CAT", (def)->getRules()->getFireSound())->play();
 			}
 			_timer->setInterval(333);
 			_action = BDA_RESOLVE;
@@ -395,7 +395,7 @@ void BaseDefenseState::nextStep()
 			{
 				spendAmmo = true;
 				_lstDefenses->setCellText(_row, 2, ltr("STR_HIT"));
-				game.getMod()->getSound("GEO.CAT", (def)->getRules()->getHitSound())->play();
+				game.mod()->getSound("GEO.CAT", (def)->getRules()->getHitSound())->play();
 
 				bool shieldDown = applyDamage(def->getRules());
 
@@ -471,7 +471,7 @@ void BaseDefenseState::btnOkClick(Action *)
 		}
 
 		// aliens are not stupid and should stop trying eventually
-		if (_ufo->getMission()->getRules().getObjective() == OBJECTIVE_RETALIATION && RNG::percent(game.getMod()->getChanceToStopRetaliation()))
+		if (_ufo->getMission()->getRules().getObjective() == OBJECTIVE_RETALIATION && RNG::percent(game.mod()->getChanceToStopRetaliation()))
 		{
 			// unmark base...
 			_base->setRetaliationTarget(false);

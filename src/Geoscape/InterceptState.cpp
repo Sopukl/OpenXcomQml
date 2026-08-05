@@ -61,11 +61,11 @@ InterceptState::InterceptState(Globe *globe, bool useCustomSound, Base *base, Ta
 
 	if (useCustomSound)
 	{
-		auto& sounds = game.getMod()->getSelectBaseSounds();
+		auto& sounds = game.mod()->getSelectBaseSounds();
 		int soundId = sounds.empty() ? Mod::NO_SOUND : sounds[RNG::generate(0, sounds.size() - 1)];
 		if (soundId != Mod::NO_SOUND)
 		{
-			_customSound = game.getMod()->getSound("GEO.CAT", soundId);
+			_customSound = game.mod()->getSound("GEO.CAT", soundId);
 		}
 	}
 
@@ -203,7 +203,7 @@ InterceptState::InterceptState(Globe *globe, bool useCustomSound, Base *base, Ta
 			std::ostringstream ssStatus;
 			std::string status = xcraft->getStatus();
 
-			bool hasEnoughPilots = xcraft->arePilotsOnboard(game.getMod());
+			bool hasEnoughPilots = xcraft->arePilotsOnboard(game.mod());
 			if (status == "STR_OUT")
 			{
 				// QoL: let's give the player a bit more info
@@ -371,7 +371,7 @@ InterceptState::InterceptState(Globe *globe, bool useCustomSound, Base *base, Ta
 				bool craftReturning = xcraft->getLowFuel() || xcraft->getMissionComplete();
 				if (craftReturning)
 				{
-					auto disabledColor = game.getMod()->getInterface("intercept")->getElement("disabled")->color;
+					auto disabledColor = game.mod()->getInterface("intercept")->getElement("disabled")->color;
 					_lstCrafts->setCellColor(row, 0, disabledColor);
 				}
 				else
@@ -383,7 +383,7 @@ InterceptState::InterceptState(Globe *globe, bool useCustomSound, Base *base, Ta
 						double baseDistanceToTarget = xcraft->getBase()->getDistance(_target);
 						if (craftDistanceToTarget + baseDistanceToTarget > xcraft->getBaseRange() * 2.0)
 						{
-							auto disabledColor = game.getMod()->getInterface("intercept")->getElement("disabled")->color;
+							auto disabledColor = game.mod()->getInterface("intercept")->getElement("disabled")->color;
 							_lstCrafts->setCellColor(row, 0, disabledColor);
 						}
 					}

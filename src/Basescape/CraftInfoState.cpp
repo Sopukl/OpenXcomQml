@@ -223,7 +223,7 @@ void CraftInfoState::init()
 	_edtCraft->setText(_craft->getName());
 
 	_sprite->clear();
-	SurfaceSet *texture = game.getMod()->getSurfaceSet("BASEBITS.PCK");
+	SurfaceSet *texture = game.mod()->getSurfaceSet("BASEBITS.PCK");
 	texture->getFrame(_craft->getSkinSprite() + 33)->blitNShade(_sprite, 0, 0);
 
 	std::ostringstream firlsLine;
@@ -270,7 +270,7 @@ void CraftInfoState::init()
 
 		Surface *frame1 = texture->getFrame(38);
 
-		SurfaceSet *customArmorPreviews = game.getMod()->getSurfaceSet("CustomArmorPreviews");
+		SurfaceSet *customArmorPreviews = game.mod()->getSurfaceSet("CustomArmorPreviews");
 		int x = 0;
 		for (const auto* soldier : _base->soldiers())
 		{
@@ -296,7 +296,7 @@ void CraftInfoState::init()
 
 		Surface *frame2 = texture->getFrame(40);
 
-		SurfaceSet *customItemPreviews = game.getMod()->getSurfaceSet("CustomItemPreviews");
+		SurfaceSet *customItemPreviews = game.mod()->getSurfaceSet("CustomItemPreviews");
 		x = 0;
 		for (const auto* vehicle : *_craft->getVehicles())
 		{
@@ -541,9 +541,9 @@ void CraftInfoState::btnNewBattleClick(Action *)
 
 	// index of the craft type in the New Battle combobox
 	size_t idx = 0;
-	for (auto& craftType : game.getMod()->getCraftsList())
+	for (auto& craftType : game.mod()->getCraftsList())
 	{
-		const RuleCraft* rule = game.getMod()->getCraft(craftType);
+		const RuleCraft* rule = game.mod()->getCraft(craftType);
 		if (rule->isForNewBattle())
 		{
 			if (rule == _craft->getRules())
@@ -669,7 +669,7 @@ void CraftInfoState::btnCraftIconClick(Action *action)
 		_txtSkin->setText(ltr("STR_CRAFT_SKIN_ID").arg(_craft->getSkinIndex()));
 
 		_sprite->clear();
-		SurfaceSet* texture = game.getMod()->getSurfaceSet("BASEBITS.PCK");
+		SurfaceSet* texture = game.mod()->getSurfaceSet("BASEBITS.PCK");
 		texture->getFrame(_craft->getSkinSprite() + 33)->blitNShade(_sprite, 0, 0);
 	}
 }

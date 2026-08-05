@@ -53,8 +53,8 @@ const int MAX_FRAME = 2;
  */
 MiniMapView::MiniMapView(int w, int h, int x, int y, Camera * camera, SavedBattleGame * battleGame) : InteractiveSurface(w, h, x, y), _camera(camera), _battleGame(battleGame), _frame(0), _isMouseScrolling(false), _isMouseScrolled(false), _xBeforeMouseScrolling(0), _yBeforeMouseScrolling(0), _mouseScrollX(0), _mouseScrollY(0), _mouseScrollingStartTime(0), _totalMouseMoveX(0), _totalMouseMoveY(0), _mouseMovedOverThreshold(false)
 {
-	_set = game.getMod()->getSurfaceSet("SCANG.DAT");
-	_emptySpaceIndex = game.getMod()->getInterface("minimap")->getElement("emptySpace")->color;
+	_set = game.mod()->getSurfaceSet("SCANG.DAT");
+	_emptySpaceIndex = game.mod()->getInterface("minimap")->getElement("emptySpace")->color;
 }
 
 /**

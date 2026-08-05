@@ -190,7 +190,7 @@ void ListLoadOriginalState::btnSlotClick(Action *action)
 			// Reset touch flags
 			game.resetTouchButtonFlags();
 
-			SaveConverter converter(_saves[n].id, game.getMod());
+			SaveConverter converter(_saves[n].id, game.mod());
 			game.setSavedGame(converter.loadOriginal());
 			options1.baseXResolution = options1.baseXGeoscape;
 			options1.baseYResolution = options1.baseYGeoscape;
@@ -198,7 +198,7 @@ void ListLoadOriginalState::btnSlotClick(Action *action)
 			game.setState(new GeoscapeState);
 			if (game.savedGame()->getSavedBattle() != 0)
 			{
-				game.savedGame()->getSavedBattle()->loadMapResources(game.getMod());
+				game.savedGame()->getSavedBattle()->loadMapResources(game.mod());
 				options1.baseXResolution = options1.baseXBattlescape;
 				options1.baseYResolution = options1.baseYBattlescape;
 				game.getScreen()->resetDisplay(false);

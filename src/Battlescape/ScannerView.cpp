@@ -48,7 +48,7 @@ ScannerView::ScannerView (int w, int h, int x, int y, BattleUnit *unit) : Intera
  */
 void ScannerView::draw()
 {
-	SurfaceSet *set = game.getMod()->getSurfaceSet("DETBLOB.DAT");
+	SurfaceSet *set = game.mod()->getSurfaceSet("DETBLOB.DAT");
 	Surface *surface = 0;
 
 	clear();

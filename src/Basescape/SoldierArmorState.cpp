@@ -117,7 +117,7 @@ SoldierArmorState::SoldierArmorState(Base *base, size_t soldier, SoldierArmorOri
 		//s->getBonuses(game.getMod());
 	}
 
-	for (auto* a : game.getMod()->getArmorsForSoldiers())
+	for (auto* a : game.mod()->getArmorsForSoldiers())
 	{
 		if (a->getRequiredResearch() && !game.savedGame()->isResearched(a->getRequiredResearch()))
 			continue;
@@ -289,7 +289,7 @@ void SoldierArmorState::lstArmorClick(Action *)
 {
 	Soldier *soldier = _base->soldiers().at(_soldier);
 	Armor *prev = soldier->getArmor();
-	Armor *next = game.getMod()->getArmor(_armors[_indices[_lstArmor->getSelectedRow()]].type);
+	Armor *next = game.mod()->getArmor(_armors[_indices[_lstArmor->getSelectedRow()]].type);
 	Craft *craft = soldier->getCraft();
 	if (craft)
 	{
@@ -322,7 +322,7 @@ void SoldierArmorState::lstArmorClick(Action *)
 */
 void SoldierArmorState::lstArmorClickMiddle(Action *action)
 {
-	Armor* armor = game.getMod()->getArmor(_armors[_indices[_lstArmor->getSelectedRow()]].type, true);
+	Armor* armor = game.mod()->getArmor(_armors[_indices[_lstArmor->getSelectedRow()]].type, true);
 	std::string articleId = armor->getUfopediaType();
 	Ufopaedia::openArticle(articleId);
 }

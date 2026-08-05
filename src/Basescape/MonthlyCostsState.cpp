@@ -110,9 +110,9 @@ MonthlyCostsState::MonthlyCostsState(Base *base) : _base(base)
 	_lstCrafts->setColumns(4, 125, 70, 44, 50);
 	_lstCrafts->setDot(true);
 
-	for (auto& craftType : game.getMod()->getCraftsList())
+	for (auto& craftType : game.mod()->getCraftsList())
 	{
-		RuleCraft *craft = game.getMod()->getCraft(craftType);
+		RuleCraft *craft = game.mod()->getCraft(craftType);
 		if (craft->getRentCost() != 0 && game.savedGame()->isResearched(craft->getRequirements()))
 		{
 			int count = _base->getCraftCount(craft);
@@ -128,12 +128,12 @@ MonthlyCostsState::MonthlyCostsState(Base *base) : _base(base)
 	_lstSalaries->setColumns(4, 125, 70, 44, 50);
 	_lstSalaries->setDot(true);
 
-	auto& soldierTypes = game.getMod()->getSoldiersList();
+	auto& soldierTypes = game.mod()->getSoldiersList();
 
 	bool dynamicSalaries = false;
 	for (auto& soldierType : soldierTypes)
 	{
-		if (game.getMod()->getSoldier(soldierType)->isSalaryDynamic())
+		if (game.mod()->getSoldier(soldierType)->isSalaryDynamic())
 		{
 			dynamicSalaries = true;
 			break;
@@ -145,7 +145,7 @@ MonthlyCostsState::MonthlyCostsState(Base *base) : _base(base)
 		// vanilla
 		for (auto& soldierType : soldierTypes)
 		{
-			RuleSoldier *soldier = game.getMod()->getSoldier(soldierType);
+			RuleSoldier *soldier = game.mod()->getSoldier(soldierType);
 			if (soldier->getSalaryCost(0) != 0 && game.savedGame()->isResearched(soldier->getRequirements()))
 			{
 				std::pair<int, int> info = _base->getSoldierCountAndSalary(soldierType);
@@ -181,10 +181,10 @@ MonthlyCostsState::MonthlyCostsState(Base *base) : _base(base)
 	}
 	std::ostringstream ss5;
 	ss5 << _base->getTotalEngineers();
-	_lstSalaries->addRow(4, ltr("STR_ENGINEERS").c_str(), Unicode::formatFunding(game.getMod()->getEngineerCost()).c_str(), ss5.str().c_str(), Unicode::formatFunding(_base->getTotalEngineers() * game.getMod()->getEngineerCost()).c_str());
+	_lstSalaries->addRow(4, ltr("STR_ENGINEERS").c_str(), Unicode::formatFunding(game.mod()->getEngineerCost()).c_str(), ss5.str().c_str(), Unicode::formatFunding(_base->getTotalEngineers() * game.mod()->getEngineerCost()).c_str());
 	std::ostringstream ss6;
 	ss6 << _base->getTotalScientists();
-	_lstSalaries->addRow(4, ltr("STR_SCIENTISTS").c_str(), Unicode::formatFunding(game.getMod()->getScientistCost()).c_str(), ss6.str().c_str(), Unicode::formatFunding(_base->getTotalScientists() * game.getMod()->getScientistCost()).c_str());
+	_lstSalaries->addRow(4, ltr("STR_SCIENTISTS").c_str(), Unicode::formatFunding(game.mod()->getScientistCost()).c_str(), ss6.str().c_str(), Unicode::formatFunding(_base->getTotalScientists() * game.mod()->getScientistCost()).c_str());
 	std::ostringstream ss6b;
 	int staffCount, inventoryCount;
 	int totalOtherCost = _base->getTotalOtherStaffAndInventoryCost(staffCount, inventoryCount);

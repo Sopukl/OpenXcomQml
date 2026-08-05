@@ -547,6 +547,7 @@ void Game::loadMods()
 	delete _mod;
 	_mod = new Mod();
 	_mod->loadAll();
+	Q_EMIT modChanged();
 }
 
 /**
@@ -715,9 +716,9 @@ void Game::loadLanguages()
 		if (twoLangs && sliceTechnical2[i]) { _lang->loadFile(sliceTechnical2[i]); }
 	}
 
-	_lang->loadRule(_mod->getExtraStrings(), defaultLang);
+	_lang->loadRule(mod()->getExtraStrings(), defaultLang);
 	if (twoLangs)
-		_lang->loadRule(_mod->getExtraStrings(), currentLang);
+		_lang->loadRule(mod()->getExtraStrings(), currentLang);
 }
 
 /**
@@ -891,7 +892,7 @@ void Game::newGame(int difficulty, bool ironMan)
 	// Reset touch flags
 	resetTouchButtonFlags();
 
-	auto save = getMod()->newSave(diff);
+	auto save = mod()->newSave(diff);
 	save->setDifficulty(diff);
 	save->setIronman(ironMan);
 	setSavedGame(save);
@@ -956,7 +957,7 @@ void Game::loadGame(QString fileName)
 	auto s = new SavedGame();
 	try
 	{
-		s->load(fileName.toStdString(), getMod());
+		s->load(fileName.toStdString(), mod());
 		setSavedGame(s);
 		if (savedGame()->getEnding() != END_NONE)
 		{
@@ -978,7 +979,7 @@ void Game::loadGame(QString fileName)
 			setState(new GeoscapeState);
 			if (savedGame()->getSavedBattle() != 0)
 			{
-				savedGame()->getSavedBattle()->loadMapResources(getMod());
+				savedGame()->getSavedBattle()->loadMapResources(mod());
 				options1.baseXResolution = options1.baseXBattlescape;
 				options1.baseYResolution = options1.baseYBattlescape;
 				getScreen()->resetDisplay(false);

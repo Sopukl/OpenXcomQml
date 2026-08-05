@@ -112,26 +112,26 @@ BattlescapeState::BattlescapeState() :
 
 	const int screenWidth = options1.baseXResolution;
 	const int screenHeight = options1.baseYResolution;
-	const int iconsWidth = game.getMod()->getInterface("battlescape")->getElement("icons")->w;
-	const int iconsHeight = game.getMod()->getInterface("battlescape")->getElement("icons")->h;
+	const int iconsWidth = game.mod()->getInterface("battlescape")->getElement("icons")->w;
+	const int iconsHeight = game.mod()->getInterface("battlescape")->getElement("icons")->h;
 	const int visibleMapHeight = screenHeight - iconsHeight;
 	const int x = screenWidth/2 - iconsWidth/2;
 	const int y = screenHeight - iconsHeight;
 
-	_indicatorTextColor = game.getMod()->getInterface("battlescape")->getElement("visibleUnits")->color;
-	_indicatorGreen = game.getMod()->getInterface("battlescape")->getElement("squadsightUnits")->color;
-	_indicatorBlue = game.getMod()->getInterface("battlescape")->getElement("woundedUnits")->color;
-	_indicatorPurple = game.getMod()->getInterface("battlescape")->getElement("passingOutUnits")->color;
+	_indicatorTextColor = game.mod()->getInterface("battlescape")->getElement("visibleUnits")->color;
+	_indicatorGreen = game.mod()->getInterface("battlescape")->getElement("squadsightUnits")->color;
+	_indicatorBlue = game.mod()->getInterface("battlescape")->getElement("woundedUnits")->color;
+	_indicatorPurple = game.mod()->getInterface("battlescape")->getElement("passingOutUnits")->color;
 
-	_twoHandedRed = game.getMod()->getInterface("battlescape")->getElement("twoHandedRed")->color;
-	_twoHandedGreen = game.getMod()->getInterface("battlescape")->getElement("twoHandedGreen")->color;
+	_twoHandedRed = game.mod()->getInterface("battlescape")->getElement("twoHandedRed")->color;
+	_twoHandedGreen = game.mod()->getInterface("battlescape")->getElement("twoHandedGreen")->color;
 
-	_tooltipDefaultColor = game.getMod()->getInterface("battlescape")->getElement("textTooltip")->color;
+	_tooltipDefaultColor = game.mod()->getInterface("battlescape")->getElement("textTooltip")->color;
 
-	_medikitRed = game.getMod()->getInterface("battlescape")->getElement("medikitRed")->color;
-	_medikitGreen = game.getMod()->getInterface("battlescape")->getElement("medikitGreen")->color;
-	_medikitBlue = game.getMod()->getInterface("battlescape")->getElement("medikitBlue")->color;
-	_medikitOrange = game.getMod()->getInterface("battlescape")->getElement("medikitOrange")->color;
+	_medikitRed = game.mod()->getInterface("battlescape")->getElement("medikitRed")->color;
+	_medikitGreen = game.mod()->getInterface("battlescape")->getElement("medikitGreen")->color;
+	_medikitBlue = game.mod()->getInterface("battlescape")->getElement("medikitBlue")->color;
+	_medikitOrange = game.mod()->getInterface("battlescape")->getElement("medikitOrange")->color;
 
 	// Create buttonbar - this should be on the centerbottom of the screen
 	_icons = new InteractiveSurface(iconsWidth, iconsHeight, x, y);
@@ -183,8 +183,8 @@ BattlescapeState::BattlescapeState() :
 	}
 	_numTwoHandedIndicatorLeft = new NumberText(10, 5, x + 36, y + 46);
 	_numTwoHandedIndicatorRight = new NumberText(10, 5, x + 308, y + 46);
-	const int visibleUnitX = game.getMod()->getInterface("battlescape")->getElement("visibleUnits")->x;
-	const int visibleUnitY = game.getMod()->getInterface("battlescape")->getElement("visibleUnits")->y;
+	const int visibleUnitX = game.mod()->getInterface("battlescape")->getElement("visibleUnits")->x;
+	const int visibleUnitY = game.mod()->getInterface("battlescape")->getElement("visibleUnits")->y;
 	for (int i = 0; i < VISIBLE_MAX; ++i)
 	{
 		_btnVisibleUnit[i] = new InteractiveSurface(15, 12, x + visibleUnitX, y + visibleUnitY - (i * 13));
@@ -224,9 +224,9 @@ BattlescapeState::BattlescapeState() :
 	_rankTiny = new Surface(7, 7, x + 135, y + 33);
 	_txtName = new Text(136, 10, x + 135, y + 32);
 
-	_manaBarVisible = game.getMod()->isManaFeatureEnabled()
-		&& game.getMod()->isManaBarEnabled()
-		&& game.savedGame()->isManaUnlocked(game.getMod());
+	_manaBarVisible = game.mod()->isManaFeatureEnabled()
+		&& game.mod()->isManaBarEnabled()
+		&& game.savedGame()->isManaUnlocked(game.mod());
 	int step = _manaBarVisible ? 3 : 4;
 
 	_numTimeUnits = new NumberText(15, 5, x + 136, y + 42);
@@ -255,8 +255,8 @@ BattlescapeState::BattlescapeState() :
 	{
 		for (auto& change : enviro->getPaletteTransformations())
 		{
-			Palette *origPal = game.getMod()->getPalette(change.first, false);
-			Palette *newPal = game.getMod()->getPalette(change.second, false);
+			Palette *origPal = game.mod()->getPalette(change.first, false);
+			Palette *newPal = game.mod()->getPalette(change.second, false);
 			if (origPal && newPal)
 			{
 				origPal->copyFrom(newPal);
@@ -268,9 +268,9 @@ BattlescapeState::BattlescapeState() :
 	// Set palette
 	_save->setPaletteByDepth(this);
 
-	if (game.getMod()->getInterface("battlescape")->getElementOptional("pathfinding"))
+	if (game.mod()->getInterface("battlescape")->getElementOptional("pathfinding"))
 	{
-		const Element *pathing = game.getMod()->getInterface("battlescape")->getElement("pathfinding");
+		const Element *pathing = game.mod()->getInterface("battlescape")->getElement("pathfinding");
 
 		Pathfinding::green = pathing->color;
 		Pathfinding::yellow = pathing->color2;
@@ -281,10 +281,10 @@ BattlescapeState::BattlescapeState() :
 	add(_icons);
 
 	// Add in custom reserve buttons
-	Surface *icons = game.getMod()->getSurface("ICONS.PCK");
-	if (game.getMod()->getSurface("TFTDReserve", false))
+	Surface *icons = game.mod()->getSurface("ICONS.PCK");
+	if (game.mod()->getSurface("TFTDReserve", false))
 	{
-		Surface *tftdIcons = game.getMod()->getSurface("TFTDReserve");
+		Surface *tftdIcons = game.mod()->getSurface("TFTDReserve");
 		tftdIcons->blitNShade(icons, 48, 176);
 	}
 
@@ -298,15 +298,15 @@ BattlescapeState::BattlescapeState() :
 	crop.blit(_icons);
 
 	// this is a hack to fix the single transparent pixel on TFTD's icon panel.
-	if (game.getMod()->getInterface("battlescape")->getElement("icons")->TFTDMode)
+	if (game.mod()->getInterface("battlescape")->getElement("icons")->TFTDMode)
 	{
 		_icons->setPixel(46, 44, 8);
 	}
 
 	// custom OXCE links button
-	if (options1.oxceLinks() && game.getMod()->getSurface("oxceLinks", false))
+	if (options1.oxceLinks() && game.mod()->getSurface("oxceLinks", false))
 	{
-		Surface* oxceLinks = game.getMod()->getSurface("oxceLinks");
+		Surface* oxceLinks = game.mod()->getSurface("oxceLinks");
 		oxceLinks->blitNShade(_icons, 208, 0);
 
 		_numLayers->setVisible(false);
@@ -332,7 +332,7 @@ BattlescapeState::BattlescapeState() :
 	add(_btnStats, "buttonStats", "battlescape", _icons);
 	add(_txtName, "textName", "battlescape", _icons);
 	// need to do this here, because of TFTD
-	if (game.getMod()->getSurface("AvatarBackground", false))
+	if (game.mod()->getSurface("AvatarBackground", false))
 	{
 		// put tiny rank icon where name used to be
 		_rankTiny->setX(_txtName->getX());
@@ -382,13 +382,13 @@ BattlescapeState::BattlescapeState() :
 	add(_txtDebug);
 	add(_txtTooltip, "textTooltip", "battlescape", _icons);
 	add(_btnLaunch);
-	game.getMod()->getSurfaceSet("SPICONS.DAT")->getFrame(0)->blitNShade(_btnLaunch, 0, 0);
+	game.mod()->getSurfaceSet("SPICONS.DAT")->getFrame(0)->blitNShade(_btnLaunch, 0, 0);
 	add(_btnPsi);
-	game.getMod()->getSurfaceSet("SPICONS.DAT")->getFrame(1)->blitNShade(_btnPsi, 0, 0);
+	game.mod()->getSurfaceSet("SPICONS.DAT")->getFrame(1)->blitNShade(_btnPsi, 0, 0);
 	add(_btnSpecial);
-	game.getMod()->getSurfaceSet("SPICONS.DAT")->getFrame(1)->blitNShade(_btnSpecial, 0, 0); // use psi button for default
+	game.mod()->getSurfaceSet("SPICONS.DAT")->getFrame(1)->blitNShade(_btnSpecial, 0, 0); // use psi button for default
 	add(_btnSkills);
-	game.getMod()->getSurfaceSet("SPICONS.DAT")->getFrame(1)->blitNShade(_btnSkills, 0, 0); // use psi button for default
+	game.mod()->getSurfaceSet("SPICONS.DAT")->getFrame(1)->blitNShade(_btnSkills, 0, 0); // use psi button for default
 
 	add(_btnCtrl);
 	add(_btnAlt);
@@ -396,17 +396,17 @@ BattlescapeState::BattlescapeState() :
 	add(_btnRMB);
 	add(_btnMMB);
 
-	game.getMod()->getSurfaceSet("Touch")->getFrame(0)->blitNShade(_btnCtrl, 0, 0);
-	game.getMod()->getSurfaceSet("Touch")->getFrame(2)->blitNShade(_btnAlt, 0, 0);
-	game.getMod()->getSurfaceSet("Touch")->getFrame(4)->blitNShade(_btnShift, 0, 0);
-	game.getMod()->getSurfaceSet("Touch")->getFrame(6)->blitNShade(_btnRMB, 0, 0);
-	game.getMod()->getSurfaceSet("Touch")->getFrame(8)->blitNShade(_btnMMB, 0, 0);
+	game.mod()->getSurfaceSet("Touch")->getFrame(0)->blitNShade(_btnCtrl, 0, 0);
+	game.mod()->getSurfaceSet("Touch")->getFrame(2)->blitNShade(_btnAlt, 0, 0);
+	game.mod()->getSurfaceSet("Touch")->getFrame(4)->blitNShade(_btnShift, 0, 0);
+	game.mod()->getSurfaceSet("Touch")->getFrame(6)->blitNShade(_btnRMB, 0, 0);
+	game.mod()->getSurfaceSet("Touch")->getFrame(8)->blitNShade(_btnMMB, 0, 0);
 
-	_btnCtrl->initSurfaces(game.getMod()->getSurfaceSet("Touch")->getFrame(1));
-	_btnAlt->initSurfaces(game.getMod()->getSurfaceSet("Touch")->getFrame(3));
-	_btnShift->initSurfaces(game.getMod()->getSurfaceSet("Touch")->getFrame(5));
-	_btnRMB->initSurfaces(game.getMod()->getSurfaceSet("Touch")->getFrame(7));
-	_btnMMB->initSurfaces(game.getMod()->getSurfaceSet("Touch")->getFrame(9));
+	_btnCtrl->initSurfaces(game.mod()->getSurfaceSet("Touch")->getFrame(1));
+	_btnAlt->initSurfaces(game.mod()->getSurfaceSet("Touch")->getFrame(3));
+	_btnShift->initSurfaces(game.mod()->getSurfaceSet("Touch")->getFrame(5));
+	_btnRMB->initSurfaces(game.mod()->getSurfaceSet("Touch")->getFrame(7));
+	_btnMMB->initSurfaces(game.mod()->getSurfaceSet("Touch")->getFrame(9));
 
 	// Set up objects
 	_map->init();
@@ -649,8 +649,8 @@ BattlescapeState::BattlescapeState() :
 	_txtVisibleUnitTooltip[VISIBLE_MAX] = "STR_CENTER_ON_WOUNDED_FRIEND";
 	_txtVisibleUnitTooltip[VISIBLE_MAX+1] = "STR_CENTER_ON_DIZZY_FRIEND";
 
-	_warning->setColor(game.getMod()->getInterface("battlescape")->getElement("warning")->color2);
-	_warning->setTextColor(game.getMod()->getInterface("battlescape")->getElement("warning")->color);
+	_warning->setColor(game.mod()->getInterface("battlescape")->getElement("warning")->color2);
+	_warning->setTextColor(game.mod()->getInterface("battlescape")->getElement("warning")->color);
 	_btnLaunch->onMouseClick((ActionHandler)&BattlescapeState::btnLaunchClick);
 	_btnPsi->onMouseClick((ActionHandler)&BattlescapeState::btnPsiClick);
 
@@ -708,11 +708,11 @@ BattlescapeState::BattlescapeState() :
 	{
 		if (_save->getMusic().empty())
 		{
-			game.getMod()->playMusic("GMTACTIC");
+			game.mod()->playMusic("GMTACTIC");
 		}
 		else
 		{
-			game.getMod()->playMusic(_save->getMusic());
+			game.mod()->playMusic(_save->getMusic());
 		}
 	}
 
@@ -744,12 +744,12 @@ void BattlescapeState::resetPalettes()
 {
 	if (_paletteResetNeeded)
 	{
-		for (auto& origPal : game.getMod()->getPalettes())
+		for (auto& origPal : game.mod()->getPalettes())
 		{
 			if (origPal.first.find("PAL_") == 0)
 			{
 				std::string backupName = "BACKUP_" + origPal.first;
-				Palette *backupPal = game.getMod()->getPalette(backupName, false);
+				Palette *backupPal = game.mod()->getPalette(backupName, false);
 				if (backupPal)
 				{
 					origPal.second->copyFrom(backupPal);
@@ -779,7 +779,7 @@ void BattlescapeState::init()
 
 	if (_save->getAmbientSound() != Mod::NO_SOUND)
 	{
-		game.getMod()->getSoundByDepth(_save->getDepth(), _save->getAmbientSound())->loop();
+		game.mod()->getSoundByDepth(_save->getDepth(), _save->getAmbientSound())->loop();
 		game.setVolume(options1.soundVolume(), options1.musicVolume(), options1.uiVolume());
 	}
 
@@ -813,11 +813,11 @@ void BattlescapeState::init()
 		{
 			if (_save->getMusic() == "")
 			{
-				game.getMod()->playMusic("GMTACTIC");
+				game.mod()->playMusic("GMTACTIC");
 			}
 			else
 			{
-				game.getMod()->playMusic(_save->getMusic());
+				game.mod()->playMusic(_save->getMusic());
 			}
 		}
 
@@ -1200,7 +1200,7 @@ void BattlescapeState::toggleKneelButton(BattleUnit* unit)
 	}
 	else
 	{
-		game.getMod()->getSurfaceSet("KneelButton")->getFrame((unit && unit->isKneeled()) ? 1 : 0)->blitNShade(_btnKneel, 0, 0);
+		game.mod()->getSurfaceSet("KneelButton")->getFrame((unit && unit->isKneeled()) ? 1 : 0)->blitNShade(_btnKneel, 0, 0);
 	}
 }
 
@@ -1930,7 +1930,7 @@ void BattlescapeState::btnReloadClick(Action *)
 {
 	if (playableUnitSelected() && _save->getSelectedUnit()->reloadAmmo())
 	{
-		game.getMod()->getSoundByDepth(_save->getDepth(), _save->getSelectedUnit()->getReloadSound())->play(-1, getMap()->getSoundAngle(_save->getSelectedUnit()->getPosition()));
+		game.mod()->getSoundByDepth(_save->getDepth(), _save->getSelectedUnit()->getReloadSound())->play(-1, getMap()->getSoundAngle(_save->getSelectedUnit()->getPosition()));
 		updateSoldierInfo();
 	}
 }
@@ -1995,7 +1995,7 @@ void BattlescapeState::drawItem(BattleItem* item, Surface* hand, std::vector<Num
 	if (item)
 	{
 		const RuleItem *rule = item->getRules();
-		rule->drawHandSprite(game.getMod()->getSurfaceSet("BIGOBS.PCK"), hand, item, _save, _save->getAnimFrame());
+		rule->drawHandSprite(game.mod()->getSurfaceSet("BIGOBS.PCK"), hand, item, _save, _save->getAnimFrame());
 		for (int slot = 0; slot < RuleItem::AmmoSlotMax; ++slot)
 		{
 			if (item->isAmmoVisibleForSlot(slot))
@@ -2039,7 +2039,7 @@ void BattlescapeState::drawItem(BattleItem* item, Surface* hand, std::vector<Num
 		if (item->getFuseTimer() >= 0)
 		{
 			const int Pulsate[8] = { 0, 1, 2, 3, 4, 3, 2, 1 };
-			Surface *tempSurface = game.getMod()->getSurfaceSet("SCANG.DAT")->getFrame(6);
+			Surface *tempSurface = game.mod()->getSurfaceSet("SCANG.DAT")->getFrame(6);
 			int x = (RuleInventory::HAND_W - rule->getInventoryWidth()) * RuleInventory::SLOT_W / 2;
 			int y = (RuleInventory::HAND_H - rule->getInventoryHeight()) * RuleInventory::SLOT_H / 2;
 			tempSurface->blitNShade(hand, x, y, Pulsate[_save->getAnimFrame() % 8], false, item->isFuseEnabled() ? 0 : 32);
@@ -2047,25 +2047,25 @@ void BattlescapeState::drawItem(BattleItem* item, Surface* hand, std::vector<Num
 	}
 	if (drawReactionIndicator)
 	{
-		if (Surface* reactionIndicator = game.getMod()->getSurface("reactionIndicator", false))
+		if (Surface* reactionIndicator = game.mod()->getSurface("reactionIndicator", false))
 		{
 			reactionIndicator->blitNShade(hand, 0, 0);
 		}
 		else
 		{
-			Surface* tempSurface = game.getMod()->getSurfaceSet("SCANG.DAT")->getFrame(0);
+			Surface* tempSurface = game.mod()->getSurfaceSet("SCANG.DAT")->getFrame(0);
 			tempSurface->blitNShade(hand, 28, 0);
 		}
 	}
 	if (drawNoReactionIndicator)
 	{
-		if (Surface* noReactionIndicator = game.getMod()->getSurface("noReactionIndicator", false))
+		if (Surface* noReactionIndicator = game.mod()->getSurface("noReactionIndicator", false))
 		{
 			noReactionIndicator->blitNShade(hand, 0, 0);
 		}
 		else
 		{
-			Surface* tempSurface = game.getMod()->getSurfaceSet("SCANG.DAT")->getFrame(6); // red dot
+			Surface* tempSurface = game.mod()->getSurfaceSet("SCANG.DAT")->getFrame(6); // red dot
 			tempSurface->blitNShade(hand, 28, 0);
 		}
 	}
@@ -2166,11 +2166,11 @@ void BattlescapeState::updateSoldierInfo(bool checkFOV)
 			_txtName->setText(soldier->getCallsign());
 		}
 		// presence of custom background determines what should happen
-		Surface *customBg = game.getMod()->getSurface("AvatarBackground", false);
+		Surface *customBg = game.mod()->getSurface("AvatarBackground", false);
 		if (customBg == 0)
 		{
 			// show rank (vanilla behaviour)
-			SurfaceSet *texture = game.getMod()->getSurfaceSet("SMOKE.PCK");
+			SurfaceSet *texture = game.mod()->getSurfaceSet("SMOKE.PCK");
 			auto* frame = texture->getFrame(soldier->getRankSpriteBattlescape());
 			if (frame)
 			{
@@ -2180,7 +2180,7 @@ void BattlescapeState::updateSoldierInfo(bool checkFOV)
 		else
 		{
 			// show tiny rank (modded)
-			SurfaceSet *texture = game.getMod()->getSurfaceSet("TinyRanks");
+			SurfaceSet *texture = game.mod()->getSurfaceSet("TinyRanks");
 			Surface *spr = texture->getFrame(soldier->getRankSpriteTiny());
 			if (spr)
 			{
@@ -2194,13 +2194,13 @@ void BattlescapeState::updateSoldierInfo(bool checkFOV)
 			Armor *customArmor = soldier->getArmor();
 			if (!soldier->getRules()->getArmorForAvatar().empty())
 			{
-				customArmor = game.getMod()->getArmor(soldier->getRules()->getArmorForAvatar());
+				customArmor = game.mod()->getArmor(soldier->getRules()->getArmorForAvatar());
 			}
 			if (customArmor->hasLayersDefinition())
 			{
 				for (const auto& layer : soldier->getArmorLayers(customArmor))
 				{
-					Surface* surf = game.getMod()->getSurface(layer, true);
+					Surface* surf = game.mod()->getSurface(layer, true);
 
 					SurfaceCrop crop = surf->getCrop();
 					crop.getCrop()->x = soldier->getRules()->getAvatarOffsetX();
@@ -2216,7 +2216,7 @@ void BattlescapeState::updateSoldierInfo(bool checkFOV)
 				std::string look = soldier->getArmor()->getSpriteInventory();
 				if (!soldier->getRules()->getArmorForAvatar().empty())
 				{
-					look = game.getMod()->getArmor(soldier->getRules()->getArmorForAvatar())->getSpriteInventory();
+					look = game.mod()->getArmor(soldier->getRules()->getArmorForAvatar())->getSpriteInventory();
 				}
 				const std::string gender = soldier->getGender() == GENDER_MALE ? "M" : "F";
 				std::stringstream ss;
@@ -2229,7 +2229,7 @@ void BattlescapeState::updateSoldierInfo(bool checkFOV)
 					ss << gender;
 					ss << (int)soldier->getLook() + (soldier->getLookVariant() & (RuleSoldier::LookVariantMask >> i)) * 4;
 					ss << ".SPK";
-					surf = game.getMod()->getSurface(ss.str(), false);
+					surf = game.mod()->getSurface(ss.str(), false);
 					if (surf)
 					{
 						break;
@@ -2240,11 +2240,11 @@ void BattlescapeState::updateSoldierInfo(bool checkFOV)
 					ss.str("");
 					ss << look;
 					ss << ".SPK";
-					surf = game.getMod()->getSurface(ss.str(), false);
+					surf = game.mod()->getSurface(ss.str(), false);
 				}
 				if (!surf)
 				{
-					surf = game.getMod()->getSurface(look, true);
+					surf = game.mod()->getSurface(look, true);
 				}
 
 				// crop
@@ -2412,7 +2412,7 @@ void BattlescapeState::updateUiButton(const BattleUnit *battleUnit)
 	{
 		if (offset < SPECIAL_BUTTONS_MAX)
 		{
-			game.getMod()->getSurfaceSet("SPICONS.DAT")->getFrame(spriteIndex)->blitNShade(btn, 0, 0);
+			game.mod()->getSurfaceSet("SPICONS.DAT")->getFrame(spriteIndex)->blitNShade(btn, 0, 0);
 			btn->setVisible(true);
 			btn->setX(_posSpecialActions[offset]);
 			++offset;
@@ -2638,7 +2638,7 @@ std::string BattlescapeState::getMeleeDamagePreview(BattleUnit *actor, BattleIte
 	}
 	else
 	{
-		ArticleDefinition *article = game.getMod()->getUfopaediaArticle(weapon->getRules()->getType(), false);
+		ArticleDefinition *article = game.mod()->getUfopaediaArticle(weapon->getRules()->getType(), false);
 		if (article && Ufopaedia::isArticleAvailable(game.savedGame(), article))
 		{
 			discovered = true; // pedia article unlocked
@@ -2863,7 +2863,7 @@ inline void BattlescapeState::handle(Action *action)
 				// "ctrl-x" - mute/unmute unit response sounds
 				else if (key == SDLK_x && ctrlPressed)
 				{
-					if (game.getMod()->getEnableUnitResponseSounds())
+					if (game.mod()->getEnableUnitResponseSounds())
 					{
 						options1.setoxceEnableUnitResponseSounds(!options1.oxceEnableUnitResponseSounds());
 					}
@@ -3038,7 +3038,7 @@ inline void BattlescapeState::handle(Action *action)
 							if (unitUnderTheCursor && !unitUnderTheCursor->isOut())
 							{
 								debug("Bingo!");
-								unitUnderTheCursor->damage(Position(0, 0, 0), 1000, game.getMod()->getDamageType(stunOnly ? DT_STUN : DT_MELEE), _save, {});
+								unitUnderTheCursor->damage(Position(0, 0, 0), 1000, game.mod()->getDamageType(stunOnly ? DT_STUN : DT_MELEE), _save, {});
 							}
 						}
 						else
@@ -3062,7 +3062,7 @@ inline void BattlescapeState::handle(Action *action)
 								}
 								if (bu->getOriginalFaction() == FACTION_HOSTILE && !bu->isOut())
 								{
-									bu->damage(Position(0, 0, 0), 1000, game.getMod()->getDamageType(stunOnly ? DT_STUN : DT_MELEE), _save, { });
+									bu->damage(Position(0, 0, 0), 1000, game.mod()->getDamageType(stunOnly ? DT_STUN : DT_MELEE), _save, { });
 								}
 							}
 						}
@@ -3505,7 +3505,7 @@ void BattlescapeState::finishBattle(bool abort, int inExitArea)
 	game.getCursor()->setVisible(true);
 	if (_save->getAmbientSound() != Mod::NO_SOUND)
 	{
-		game.getMod()->getSoundByDepth(0, _save->getAmbientSound())->stopLoop();
+		game.mod()->getSoundByDepth(0, _save->getAmbientSound())->stopLoop();
 	}
 
 	// reset touch flags
@@ -3540,7 +3540,7 @@ void BattlescapeState::finishBattle(bool abort, int inExitArea)
 	// this removes player-controlled VIPs (not civilian VIPs)
 	_battleGame->removeSummonedPlayerUnits();
 
-	AlienDeployment *ruleDeploy = game.getMod()->getDeployment(_save->getMissionType());
+	AlienDeployment *ruleDeploy = game.mod()->getDeployment(_save->getMissionType());
 	if (!ruleDeploy)
 	{
 		for (auto* ufo : game.savedGame()->getUfos())
@@ -3553,7 +3553,7 @@ void BattlescapeState::finishBattle(bool abort, int inExitArea)
 					// fake underwater UFO
 					ufoMissionName = _save->getAlienCustomMission();
 				}
-				ruleDeploy = game.getMod()->getDeployment(ufoMissionName);
+				ruleDeploy = game.mod()->getDeployment(ufoMissionName);
 				break;
 			}
 		}
@@ -3604,7 +3604,7 @@ void BattlescapeState::finishBattle(bool abort, int inExitArea)
 			}
 
 			// reset the music
-			game.getMod()->playMusic("GMGEO");
+			game.mod()->playMusic("GMGEO");
 			return;
 		}
 		game.pushState(new DebriefingState);
@@ -3631,7 +3631,7 @@ void BattlescapeState::finishBattle(bool abort, int inExitArea)
 			// it will get shown after the cutscene.
 			game.pushState(new CutsceneState(cutscene));
 
-			const RuleVideo *videoRule = game.getMod()->getVideo(cutscene, true);
+			const RuleVideo *videoRule = game.mod()->getVideo(cutscene, true);
 			if (videoRule->getWinGame())
 			{
 				game.savedGame()->setEnding(END_WIN);

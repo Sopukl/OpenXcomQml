@@ -15,7 +15,7 @@ GET_ATTRIB_STAT_FN(strength)
 int OpenXcom::manaStat(const Soldier* s)
 {
 	// don't reveal mana before it would otherwise be known
-	if (game.savedGame()->isManaUnlocked(game.getMod()))
+	if (game.savedGame()->isManaUnlocked(game.mod()))
 	{
 		return s->getStatsWithAllBonuses()->mana;
 	}
@@ -26,7 +26,7 @@ int OpenXcom::psiStrengthStat(const Soldier *s)
 	// don't reveal psi strength before it would otherwise be known
 	if (s->getCurrentStats()->psiSkill > 0
 		|| (options1.psiStrengthEval()
-		&& game.savedGame()->isResearched(game.getMod()->getPsiRequirements())))
+		&& game.savedGame()->isResearched(game.mod()->getPsiRequirements())))
 	{
 		return s->getStatsWithAllBonuses()->psiStrength;
 	}
@@ -57,7 +57,7 @@ GET_ATTRIB_STAT_FN(strength)
 int OpenXcom::manaStatBase(const Soldier* s)
 {
 	// don't reveal mana before it would otherwise be known
-	if (game.savedGame()->isManaUnlocked(game.getMod()))
+	if (game.savedGame()->isManaUnlocked(game.mod()))
 	{
 		return s->getCurrentStats()->mana;
 	}
@@ -68,7 +68,7 @@ int OpenXcom::psiStrengthStatBase(const Soldier *s)
 	// don't reveal psi strength before it would otherwise be known
 	if (s->getCurrentStats()->psiSkill > 0
 		|| (options1.psiStrengthEval()
-		&& game.savedGame()->isResearched(game.getMod()->getPsiRequirements())))
+		&& game.savedGame()->isResearched(game.mod()->getPsiRequirements())))
 	{
 		return s->getCurrentStats()->psiStrength;
 	}
@@ -99,7 +99,7 @@ GET_ATTRIB_STAT_FN(strength)
 int OpenXcom::manaStatPlus(const Soldier* s)
 {
 	// don't reveal mana before it would otherwise be known
-	if (game.savedGame()->isManaUnlocked(game.getMod()))
+	if (game.savedGame()->isManaUnlocked(game.mod()))
 	{
 		return s->getStatsWithSoldierBonusesOnly()->mana;
 	}
@@ -110,7 +110,7 @@ int OpenXcom::psiStrengthStatPlus(const Soldier *s)
 	// don't reveal psi strength before it would otherwise be known
 	if (s->getCurrentStats()->psiSkill > 0
 		|| (options1.psiStrengthEval()
-		&& game.savedGame()->isResearched(game.getMod()->getPsiRequirements())))
+		&& game.savedGame()->isResearched(game.mod()->getPsiRequirements())))
 	{
 		return s->getStatsWithSoldierBonusesOnly()->psiStrength;
 	}

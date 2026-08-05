@@ -50,7 +50,7 @@ AliensCrashState::AliensCrashState()
 
 	// Set up objects
 	_window->setHighContrast(true);
-	_window->setBackground(game.getMod()->getSurface("TAC00.SCR"));
+	_window->setBackground(game.mod()->getSurface("TAC00.SCR"));
 
 	_btnOk->setHighContrast(true);
 	_btnOk->setText(ltr("STR_OK"));

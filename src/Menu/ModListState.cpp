@@ -72,7 +72,7 @@ ModListState::ModListState() : _curMasterIdx(0)
 
 	// how much room do we need for YES/NO
 	Text text = Text(100, 9, 0, 0);
-	text.initText(game.getMod()->getFont("FONT_BIG"), game.getMod()->getFont("FONT_SMALL"));
+	text.initText(game.mod()->getFont("FONT_BIG"), game.mod()->getFont("FONT_SMALL"));
 	text.setText(ltr("STR_YES"));
 	int yes = text.getTextWidth();
 	text.setText(ltr("STR_NO"));

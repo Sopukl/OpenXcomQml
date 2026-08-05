@@ -142,7 +142,7 @@ void SoldierMemorialState::init()
 void SoldierMemorialState::btnOkClick(Action *)
 {
 	game.popState();
-	game.getMod()->playMusic("GMGEO");
+	game.mod()->playMusic("GMGEO");
 }
 
 /**

@@ -41,10 +41,10 @@ namespace OpenXcom
 
 	ArticleStateItem::ArticleStateItem(ArticleDefinitionItem *defs, std::shared_ptr<ArticleCommonState> state) : ArticleState(defs->id, std::move(state))
 	{
-		RuleItem *item = game.getMod()->getItem(defs->weapon, false);
+		RuleItem *item = game.mod()->getItem(defs->weapon, false);
 		if (!item)
 		{
-			item = game.getMod()->getItem(defs->id, true);
+			item = game.mod()->getItem(defs->id, true);
 		}
 
 		int bottomOffset = 20;
@@ -68,7 +68,7 @@ namespace OpenXcom
 			bottomOffset = 9;
 		}
 
-		if (game.getMod()->getExtraNerdyPediaInfoType() == 0)
+		if (game.mod()->getExtraNerdyPediaInfoType() == 0)
 		{
 			// feature turned off
 			bottomOffset = 0;
@@ -144,17 +144,17 @@ namespace OpenXcom
 		// Set palette
 		setStandardPalette("PAL_BATTLEPEDIA");
 
-		_buttonColor = game.getMod()->getInterface("articleItem")->getElement("button")->color;
+		_buttonColor = game.mod()->getInterface("articleItem")->getElement("button")->color;
 		_arrowColor = _buttonColor;
-		if (game.getMod()->getInterface("articleItem")->getElementOptional("arrow"))
+		if (game.mod()->getInterface("articleItem")->getElementOptional("arrow"))
 		{
-			_arrowColor = game.getMod()->getInterface("articleItem")->getElement("arrow")->color;
+			_arrowColor = game.mod()->getInterface("articleItem")->getElement("arrow")->color;
 		}
-		_textColor = game.getMod()->getInterface("articleItem")->getElement("text")->color;
-		_textColor2 = game.getMod()->getInterface("articleItem")->getElement("text")->color2;
-		_listColor1 = game.getMod()->getInterface("articleItem")->getElement("list")->color;
-		_listColor2 = game.getMod()->getInterface("articleItem")->getElement("list")->color2;
-		_ammoColor = game.getMod()->getInterface("articleItem")->getElement("ammoColor")->color;
+		_textColor = game.mod()->getInterface("articleItem")->getElement("text")->color;
+		_textColor2 = game.mod()->getInterface("articleItem")->getElement("text")->color2;
+		_listColor1 = game.mod()->getInterface("articleItem")->getElement("list")->color;
+		_listColor2 = game.mod()->getInterface("articleItem")->getElement("list")->color2;
+		_ammoColor = game.mod()->getInterface("articleItem")->getElement("ammoColor")->color;
 
 		ArticleState::initLayout();
 
@@ -163,12 +163,12 @@ namespace OpenXcom
 		add(_txtWeight, "weightText", "articleItem", _bg);
 
 		// Set up objects
-		game.getMod()->getSurface("BACK08.SCR")->blitNShade(_bg, 0, 0);
+		game.mod()->getSurface("BACK08.SCR")->blitNShade(_bg, 0, 0);
 		_btnOk->setColor(_buttonColor);
 		_btnPrev->setColor(_buttonColor);
 		_btnNext->setColor(_buttonColor);
 		_btnInfo->setColor(_buttonColor);
-		_btnInfo->setVisible(game.getMod()->getShowPediaInfoButton());
+		_btnInfo->setVisible(game.mod()->getShowPediaInfoButton());
 
 		_txtTitle->setColor(_textColor);
 		_txtTitle->setBig();
@@ -182,7 +182,7 @@ namespace OpenXcom
 		_image = new Surface(32, 48, 157, 5);
 		add(_image, "image", "articleItem", _bg);
 
-		item->drawHandSprite(game.getMod()->getSurfaceSet("BIGOBS.PCK"), _image);
+		item->drawHandSprite(game.mod()->getSurfaceSet("BIGOBS.PCK"), _image);
 
 		_txtWeaponClipSize = new NumberText(30, 5, 157, 5);
 		add(_txtWeaponClipSize, "image", "articleItem", _bg);
@@ -394,7 +394,7 @@ namespace OpenXcom
 					int currShow = 0;
 					for (auto* type : *ammo_data)
 					{
-						ArticleDefinition *ammo_article = game.getMod()->getUfopaediaArticle(type->getType(), true);
+						ArticleDefinition *ammo_article = game.mod()->getUfopaediaArticle(type->getType(), true);
 						if (Ufopaedia::isArticleAvailable(game.savedGame(), ammo_article))
 						{
 							if (skipShow > 0)
@@ -405,7 +405,7 @@ namespace OpenXcom
 
 							addAmmoDamagePower(currShow, type, item);
 
-							type->drawHandSprite(game.getMod()->getSurfaceSet("BIGOBS.PCK"), _imageAmmo[currShow]);
+							type->drawHandSprite(game.mod()->getSurfaceSet("BIGOBS.PCK"), _imageAmmo[currShow]);
 							_txtAmmoClipSize[currShow]->setValue(type->getClipSize());
 							_txtAmmoClipSize[currShow]->setVisible(options1.oxcePediaShowClipSize() && type->getClipSize() > 0);
 
@@ -490,7 +490,7 @@ namespace OpenXcom
 							ss << numberAbs << "*";
 						}
 
-						if (game.getMod()->getExtraNerdyPediaInfoType() > 1)
+						if (game.mod()->getExtraNerdyPediaInfoType() > 1)
 						{
 							ss << ltr(StatsForNerdsState::shortTranslationMap.at(item.first));
 						}
@@ -518,83 +518,83 @@ namespace OpenXcom
 		switch (dt)
 		{
 			case DT_NONE:
-				interfaceElement = game.getMod()->getInterface("articleItem")->getElementOptional("ammoColorDTNone");
+				interfaceElement = game.mod()->getInterface("articleItem")->getElementOptional("ammoColorDTNone");
 				break;
 
 			case DT_AP:
-				interfaceElement = game.getMod()->getInterface("articleItem")->getElementOptional("ammoColorDTAP");
+				interfaceElement = game.mod()->getInterface("articleItem")->getElementOptional("ammoColorDTAP");
 				break;
 
 			case DT_IN:
-				interfaceElement = game.getMod()->getInterface("articleItem")->getElementOptional("ammoColorDTIN");
+				interfaceElement = game.mod()->getInterface("articleItem")->getElementOptional("ammoColorDTIN");
 				break;
 
 			case DT_HE:
-				interfaceElement = game.getMod()->getInterface("articleItem")->getElementOptional("ammoColorDTHE");
+				interfaceElement = game.mod()->getInterface("articleItem")->getElementOptional("ammoColorDTHE");
 				break;
 
 			case DT_LASER:
-				interfaceElement = game.getMod()->getInterface("articleItem")->getElementOptional("ammoColorDTLaser");
+				interfaceElement = game.mod()->getInterface("articleItem")->getElementOptional("ammoColorDTLaser");
 				break;
 
 			case DT_PLASMA:
-				interfaceElement = game.getMod()->getInterface("articleItem")->getElementOptional("ammoColorDTPlasma");
+				interfaceElement = game.mod()->getInterface("articleItem")->getElementOptional("ammoColorDTPlasma");
 				break;
 
 			case DT_STUN:
-				interfaceElement = game.getMod()->getInterface("articleItem")->getElementOptional("ammoColorDTStun");
+				interfaceElement = game.mod()->getInterface("articleItem")->getElementOptional("ammoColorDTStun");
 				break;
 
 			case DT_MELEE:
-				interfaceElement = game.getMod()->getInterface("articleItem")->getElementOptional("ammoColorDTMelee");
+				interfaceElement = game.mod()->getInterface("articleItem")->getElementOptional("ammoColorDTMelee");
 				break;
 
 			case DT_ACID:
-				interfaceElement = game.getMod()->getInterface("articleItem")->getElementOptional("ammoColorDTAcid");
+				interfaceElement = game.mod()->getInterface("articleItem")->getElementOptional("ammoColorDTAcid");
 				break;
 
 			case DT_SMOKE:
-				interfaceElement = game.getMod()->getInterface("articleItem")->getElementOptional("ammoColorDTSmoke");
+				interfaceElement = game.mod()->getInterface("articleItem")->getElementOptional("ammoColorDTSmoke");
 				break;
 
 			case DT_10:
-				interfaceElement = game.getMod()->getInterface("articleItem")->getElementOptional("ammoColorDT10");
+				interfaceElement = game.mod()->getInterface("articleItem")->getElementOptional("ammoColorDT10");
 				break;
 
 			case DT_11:
-				interfaceElement = game.getMod()->getInterface("articleItem")->getElementOptional("ammoColorDT11");
+				interfaceElement = game.mod()->getInterface("articleItem")->getElementOptional("ammoColorDT11");
 				break;
 
 			case DT_12:
-				interfaceElement = game.getMod()->getInterface("articleItem")->getElementOptional("ammoColorDT12");
+				interfaceElement = game.mod()->getInterface("articleItem")->getElementOptional("ammoColorDT12");
 				break;
 
 			case DT_13:
-				interfaceElement = game.getMod()->getInterface("articleItem")->getElementOptional("ammoColorDT13");
+				interfaceElement = game.mod()->getInterface("articleItem")->getElementOptional("ammoColorDT13");
 				break;
 
 			case DT_14:
-				interfaceElement = game.getMod()->getInterface("articleItem")->getElementOptional("ammoColorDT14");
+				interfaceElement = game.mod()->getInterface("articleItem")->getElementOptional("ammoColorDT14");
 				break;
 
 			case DT_15:
-				interfaceElement = game.getMod()->getInterface("articleItem")->getElementOptional("ammoColorDT15");
+				interfaceElement = game.mod()->getInterface("articleItem")->getElementOptional("ammoColorDT15");
 				break;
 
 			case DT_16:
-				interfaceElement = game.getMod()->getInterface("articleItem")->getElementOptional("ammoColorDT16");
+				interfaceElement = game.mod()->getInterface("articleItem")->getElementOptional("ammoColorDT16");
 				break;
 
 			case DT_17:
-				interfaceElement = game.getMod()->getInterface("articleItem")->getElementOptional("ammoColorDT17");
+				interfaceElement = game.mod()->getInterface("articleItem")->getElementOptional("ammoColorDT17");
 				break;
 
 			case DT_18:
-				interfaceElement = game.getMod()->getInterface("articleItem")->getElementOptional("ammoColorDT18");
+				interfaceElement = game.mod()->getInterface("articleItem")->getElementOptional("ammoColorDT18");
 				break;
 
 			case DT_19:
-				interfaceElement = game.getMod()->getInterface("articleItem")->getElementOptional("ammoColorDT19");
+				interfaceElement = game.mod()->getInterface("articleItem")->getElementOptional("ammoColorDT19");
 				break;
 
 			default :

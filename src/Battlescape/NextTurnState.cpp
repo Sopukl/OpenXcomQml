@@ -79,7 +79,7 @@ NextTurnState::NextTurnState(SavedBattleGame *battleGame, BattlescapeState *stat
 		}
 		if (change)
 		{
-			_battleGame->setRandomHiddenMovementBackground(game.getMod());
+			_battleGame->setRandomHiddenMovementBackground(game.mod());
 			state->getMap()->refreshHiddenMovementBackground();
 		}
 	}
@@ -155,7 +155,7 @@ NextTurnState::NextTurnState(SavedBattleGame *battleGame, BattlescapeState *stat
 	// Set up objects
 	_window->setColor(Palette::blockOffset(0)-1);
 	_window->setHighContrast(true);
-	_window->setBackground(game.getMod()->getSurface(_battleGame->getHiddenMovementBackground()));
+	_window->setBackground(game.mod()->getSurface(_battleGame->getHiddenMovementBackground()));
 
 
 	_txtMessageReinforcements->setBig();
@@ -163,7 +163,7 @@ NextTurnState::NextTurnState(SavedBattleGame *battleGame, BattlescapeState *stat
 	_txtMessageReinforcements->setVerticalAlign(ALIGN_BOTTOM);
 	_txtMessageReinforcements->setWordWrap(true);
 	_txtMessageReinforcements->setHighContrast(true);
-	_txtMessageReinforcements->setColor(game.getMod()->getInterface("inventory")->getElement("weight")->color2); // red
+	_txtMessageReinforcements->setColor(game.mod()->getInterface("inventory")->getElement("weight")->color2); // red
 
 	_btnBriefingReinforcements->setText(ltr("STR_TELL_ME_MORE"));
 	_btnBriefingReinforcements->setHighContrast(true);
@@ -187,7 +187,7 @@ NextTurnState::NextTurnState(SavedBattleGame *battleGame, BattlescapeState *stat
 		if (battleGame->getTurnLimit() - _currentTurn <= 3)
 		{
 			// gonna borrow the inventory's "over weight" colour when we're down to the last three turns
-			_txtTurn->setColor(game.getMod()->getInterface("inventory")->getElement("weight")->color2);
+			_txtTurn->setColor(game.mod()->getInterface("inventory")->getElement("weight")->color2);
 		}
 	}
 	_txtTurn->setText(ss.str());
@@ -373,15 +373,15 @@ void NextTurnState::checkBugHuntMode()
 				if (bu->getVisible()) return;
 
 				// VIPs are still in the game
-				if (bu->getRankInt() <= game.getMod()->getBughuntRank()) return; // AR_COMMANDER = 0, AR_LEADER = 1, ...
+				if (bu->getRankInt() <= game.mod()->getBughuntRank()) return; // AR_COMMANDER = 0, AR_LEADER = 1, ...
 
 				count++;
 				// too many enemies are still in the game
-				if (count > game.getMod()->getBughuntMaxEnemies()) return;
+				if (count > game.mod()->getBughuntMaxEnemies()) return;
 
 				bool hasWeapon = bu->getLeftHandWeapon() || bu->getRightHandWeapon();
-				bool hasLowMorale = bu->getMorale() < game.getMod()->getBughuntLowMorale();
-				bool hasTooManyTUsLeft = bu->getTimeUnits() > (bu->getUnitRules()->getStats()->tu * game.getMod()->getBughuntTimeUnitsLeft() / 100);
+				bool hasLowMorale = bu->getMorale() < game.mod()->getBughuntLowMorale();
+				bool hasTooManyTUsLeft = bu->getTimeUnits() > (bu->getUnitRules()->getStats()->tu * game.mod()->getBughuntTimeUnitsLeft() / 100);
 				if (!hasWeapon || hasLowMorale || hasTooManyTUsLeft)
 				{
 					continue; // this unit is powerless, check next unit...
@@ -426,7 +426,7 @@ bool NextTurnState::applyEnvironmentalConditionToFaction(UnitFaction faction, En
 
 	if (condition.chancePerTurn > 0 && condition.firstTurn <= _currentTurn && _currentTurn <= condition.lastTurn)
 	{
-		const RuleItem *weaponOrAmmo = game.getMod()->getItem(condition.weaponOrAmmo);
+		const RuleItem *weaponOrAmmo = game.mod()->getItem(condition.weaponOrAmmo);
 		const RuleDamageType *type = weaponOrAmmo->getDamageType();
 		const int power = weaponOrAmmo->getPower(); // no power bonus, no power range reduction
 
@@ -593,7 +593,7 @@ void NextTurnState::btnBriefingReinforcementsClick(Action*)
  */
 bool NextTurnState::determineReinforcements()
 {
-	const AlienDeployment* deployment = game.getMod()->getDeployment(_battleGame->getReinforcementsDeployment(), true);
+	const AlienDeployment* deployment = game.mod()->getDeployment(_battleGame->getReinforcementsDeployment(), true);
 
 	int currentTurnReinforcements = _battleGame->getTurn();
 
@@ -728,10 +728,10 @@ bool NextTurnState::determineReinforcements()
 					{
 						if (checkGroups)
 						{
-							auto* terrain = game.getMod()->getTerrain(_battleGame->getFlattenedMapTerrainNames()[x][y], false);
+							auto* terrain = game.mod()->getTerrain(_battleGame->getFlattenedMapTerrainNames()[x][y], false);
 							if (!terrain)
 							{
-								auto* craft = game.getMod()->getCraft(_battleGame->getFlattenedMapTerrainNames()[x][y], false);
+								auto* craft = game.mod()->getCraft(_battleGame->getFlattenedMapTerrainNames()[x][y], false);
 								if (craft)
 								{
 									terrain = craft->getBattlescapeTerrainData();
@@ -739,7 +739,7 @@ bool NextTurnState::determineReinforcements()
 							}
 							if (!terrain)
 							{
-								auto* ufo = game.getMod()->getUfo(_battleGame->getFlattenedMapTerrainNames()[x][y], false);
+								auto* ufo = game.mod()->getUfo(_battleGame->getFlattenedMapTerrainNames()[x][y], false);
 								if (ufo)
 								{
 									terrain = ufo->getBattlescapeTerrainData();
@@ -878,7 +878,7 @@ bool NextTurnState::determineReinforcements()
  */
 bool NextTurnState::deployReinforcements(const ReinforcementsData &wave)
 {
-	const AlienRace* race = game.getMod()->getAlienRace(_battleGame->getReinforcementsRace(), true);
+	const AlienRace* race = game.mod()->getAlienRace(_battleGame->getReinforcementsRace(), true);
 	const int month = _battleGame->getReinforcementsItemLevel();
 	bool success = false;
 
@@ -911,10 +911,10 @@ bool NextTurnState::deployReinforcements(const ReinforcementsData &wave)
 		for (int i = 0; i < quantity; ++i)
 		{
 			std::string alienName = dd.customUnitType.empty() ? race->getMember(dd.alienRank) : dd.customUnitType;
-			Unit* rule = game.getMod()->getUnit(alienName, true);
+			Unit* rule = game.mod()->getUnit(alienName, true);
 			bool civilian = dd.percentageOutsideUfo != 0; // small misuse of an unused attribute ;) pls don't kill me
 			BattleUnit* unit = addReinforcement(wave, rule, dd.alienRank, civilian);
-			size_t itemLevel = (size_t)(game.getMod()->getAlienItemLevels().at(month).at(RNG::generate(0, 9)));
+			size_t itemLevel = (size_t)(game.mod()->getAlienItemLevels().at(month).at(RNG::generate(0, 9)));
 			if (unit)
 			{
 				success = true;
@@ -931,7 +931,7 @@ bool NextTurnState::deployReinforcements(const ReinforcementsData &wave)
 					}
 					for (auto& itemType : dd.itemSets.at(itemLevel).items)
 					{
-						RuleItem* ruleItem = game.getMod()->getItem(itemType);
+						RuleItem* ruleItem = game.mod()->getItem(itemType);
 						if (ruleItem)
 						{
 							_battleGame->createItemForUnit(ruleItem, unit);
@@ -942,7 +942,7 @@ bool NextTurnState::deployReinforcements(const ReinforcementsData &wave)
 						if (iset.items.empty())
 							continue;
 						int pick = RNG::generate(0, iset.items.size() - 1);
-						RuleItem* ruleItem = game.getMod()->getItem(iset.items[pick]);
+						RuleItem* ruleItem = game.mod()->getItem(iset.items[pick]);
 						if (ruleItem)
 						{
 							_battleGame->createItemForUnit(ruleItem, unit);

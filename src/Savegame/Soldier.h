@@ -55,6 +55,7 @@ class Soldier: public QObject
 {
 	Q_OBJECT
 	Q_PROPERTY(QString name READ name WRITE setName NOTIFY nameChanged FINAL)
+	Q_PROPERTY(Craft* craft READ getCraft NOTIFY craftChanged FINAL)
 public:
 
 	/// Name of class used in script.
@@ -312,6 +313,7 @@ public:
 	bool hasAllPilotingRequirements(const Craft* newCraft = nullptr) const;
   signals:
 	void nameChanged();
+	void craftChanged();
 private:
 	std::string generateCallsign(const std::vector<SoldierNamePool*> &names);
 	/// Automatically move equipment between the craft and the base when assigning/deassigning/reassigning soldiers.

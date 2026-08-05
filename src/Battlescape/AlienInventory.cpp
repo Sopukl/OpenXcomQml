@@ -93,7 +93,7 @@ void AlienInventory::setSelectedUnit(BattleUnit *unit)
 	_dynamicOffset = 0;
 	if (unit && unit->isBigUnit())
 	{
-		_dynamicOffset = game.getMod()->getAlienInventoryOffsetBigUnit();
+		_dynamicOffset = game.mod()->getAlienInventoryOffsetBigUnit();
 	}
 }
 
@@ -112,16 +112,16 @@ void AlienInventory::draw()
 void AlienInventory::drawGrid()
 {
 	_grid->clear();
-	RuleInterface *rule = game.getMod()->getInterface("inventory");
+	RuleInterface *rule = game.mod()->getInterface("inventory");
 	Uint8 color = rule->getElement("grid")->color;
 
-	for (const auto& pair : *game.getMod()->getInventories())
+	for (const auto& pair : *game.mod()->getInventories())
 	{
 		if (pair.second->getType() == INV_HAND)
 		{
 			SDL_Rect r;
 			r.x = pair.second->getX();
-			r.x += game.getMod()->getAlienInventoryOffsetX();
+			r.x += game.mod()->getAlienInventoryOffsetX();
 
 			if (pair.second->isRightHand())
 				r.x -= _dynamicOffset;
@@ -155,7 +155,7 @@ void AlienInventory::drawItems()
 	_items->clear();
 	if (_selUnit != 0)
 	{
-		SurfaceSet *texture = game.getMod()->getSurfaceSet("BIGOBS.PCK");
+		SurfaceSet *texture = game.mod()->getSurfaceSet("BIGOBS.PCK");
 		for (const auto* item : *_selUnit->getInventory())
 		{
 			if (item->getSlot()->getType() == INV_HAND)
@@ -166,7 +166,7 @@ void AlienInventory::drawItems()
 					continue;
 
 				int x = item->getSlot()->getX() + item->getRules()->getHandSpriteOffX();
-				x += game.getMod()->getAlienInventoryOffsetX();
+				x += game.mod()->getAlienInventoryOffsetX();
 
 				if (item->getSlot()->isRightHand())
 					x -= _dynamicOffset;
@@ -194,7 +194,7 @@ void AlienInventory::drawItems()
  */
 RuleInventory *AlienInventory::getSlotInPosition(int *x, int *y) const
 {
-	for (const auto& pair : *game.getMod()->getInventories())
+	for (const auto& pair : *game.mod()->getInventories())
 	{
 		if (pair.second->checkSlotInPosition(x, y))
 		{
@@ -244,7 +244,7 @@ void AlienInventory::mouseClick(Action *action, State *state)
 		else
 			x += _dynamicOffset;
 
-		x -= game.getMod()->getAlienInventoryOffsetX();
+		x -= game.mod()->getAlienInventoryOffsetX();
 
 		RuleInventory *slot = getSlotInPosition(&x, &y);
 		if (slot != 0)

@@ -81,7 +81,7 @@ NewPossibleCraftState::NewPossibleCraftState(Base * base, const std::vector<Rule
 		}
 		std::ostringstream ss;
 		int i = 0;
-		for (const auto& serviceName : game.getMod()->getBaseFunctionNames(requiredServices))
+		for (const auto& serviceName : game.mod()->getBaseFunctionNames(requiredServices))
 		{
 			if (i > 0)
 				ss << ", ";

@@ -88,7 +88,7 @@ ActionMenuState::ActionMenuState(BattleAction *action, int x, int y) : _action(a
 
 	if (weapon->isManaRequired() && _action->actor->getOriginalFaction() == FACTION_PLAYER)
 	{
-		if (!game.getMod()->isManaFeatureEnabled() || !game.savedGame()->isManaUnlocked(game.getMod()))
+		if (!game.mod()->isManaFeatureEnabled() || !game.savedGame()->isManaUnlocked(game.mod()))
 		{
 			return;
 		}
@@ -220,7 +220,7 @@ void ActionMenuState::init()
 void ActionMenuState::addItem(BattleActionType ba, const std::string &name, int *id, SDLKey key)
 {
 	std::string s1, s2;
-	int acc = BattleUnit::getFiringAccuracy(BattleActionAttack::GetBeforeShoot(ba, _action->actor, _action->weapon), game.getMod());
+	int acc = BattleUnit::getFiringAccuracy(BattleActionAttack::GetBeforeShoot(ba, _action->actor, _action->weapon), game.mod());
 	int tu = _action->actor->getActionTUs(ba, _action->weapon).Time;
 
 	if (ba == BA_THROW || ba == BA_AIMEDSHOT || ba == BA_SNAPSHOT || ba == BA_AUTOSHOT || ba == BA_LAUNCH || ba == BA_HIT)

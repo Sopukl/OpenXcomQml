@@ -65,7 +65,7 @@ GeoscapeCraftState::GeoscapeCraftState(Craft *craft, Globe *globe, Waypoint *way
 		int soundId = craft->getRules()->getSelectSound();
 		if (soundId != Mod::NO_SOUND)
 		{
-			_customSound = game.getMod()->getSound("GEO.CAT", soundId);
+			_customSound = game.mod()->getSound("GEO.CAT", soundId);
 		}
 	}
 

@@ -37,17 +37,17 @@ namespace OpenXcom
 		// Set palette
 		if (defs->customPalette)
 		{
-			setCustomPalette(game.getMod()->getSurface(defs->image_id)->getPalette(), Mod::UFOPAEDIA_CURSOR);
+			setCustomPalette(game.mod()->getSurface(defs->image_id)->getPalette(), Mod::UFOPAEDIA_CURSOR);
 		}
 		else
 		{
 			setStandardPalette("PAL_UFOPAEDIA");
 		}
 
-		_buttonColor = game.getMod()->getInterface("articleTextImage")->getElement("button")->color;
-		_titleColor = game.getMod()->getInterface("articleTextImage")->getElement("title")->color;
-		_textColor1 = game.getMod()->getInterface("articleTextImage")->getElement("text")->color;
-		_textColor2 = game.getMod()->getInterface("articleTextImage")->getElement("text")->color2;
+		_buttonColor = game.mod()->getInterface("articleTextImage")->getElement("button")->color;
+		_titleColor = game.mod()->getInterface("articleTextImage")->getElement("title")->color;
+		_textColor1 = game.mod()->getInterface("articleTextImage")->getElement("text")->color;
+		_textColor2 = game.mod()->getInterface("articleTextImage")->getElement("text")->color2;
 
 		ArticleState::initLayout();
 
@@ -55,7 +55,7 @@ namespace OpenXcom
 		add(_txtTitle);
 
 		// Set up objects
-		game.getMod()->getSurface(defs->image_id)->blitNShade(_bg, 0, 0);
+		game.mod()->getSurface(defs->image_id)->blitNShade(_bg, 0, 0);
 		_btnOk->setColor(_buttonColor);
 		_btnPrev->setColor(_buttonColor);
 		_btnNext->setColor(_buttonColor);

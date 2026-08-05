@@ -136,9 +136,9 @@ void ManufactureDependenciesTreeState::initList()
 	// dependency map (item -> vector of items that needs this item)
 	std::unordered_map< std::string, std::vector<std::string> > deps;
 
-	for (auto& manufName : game.getMod()->getManufactureList())
+	for (auto& manufName : game.mod()->getManufactureList())
 	{
-		RuleManufacture *rule = game.getMod()->getManufacture(manufName);
+		RuleManufacture *rule = game.mod()->getManufacture(manufName);
 		for (auto& pair : rule->getRequiredItems())
 		{
 			deps[pair.first->getType()].push_back(manufName);
@@ -161,9 +161,9 @@ void ManufactureDependenciesTreeState::initList()
 	}
 
 	std::vector<const RuleBaseFacility*> facilitiesLevel;
-	for (auto& facilityType : game.getMod()->getBaseFacilitiesList())
+	for (auto& facilityType : game.mod()->getBaseFacilitiesList())
 	{
-		RuleBaseFacility* facilityRule = game.getMod()->getBaseFacility(facilityType);
+		RuleBaseFacility* facilityRule = game.mod()->getBaseFacility(facilityType);
 		for (auto& itemRequired : facilityRule->getBuildCostItems())
 		{
 			if (itemRequired.first == _selectedItem)
@@ -203,7 +203,7 @@ void ManufactureDependenciesTreeState::initList()
 
 	for (const auto& name : firstLevel)
 	{
-		if (_showAll || game.savedGame()->isResearched(game.getMod()->getManufacture(name)->getRequirements()))
+		if (_showAll || game.savedGame()->isResearched(game.mod()->getManufacture(name)->getRequirements()))
 		{
 			_lstTopics->addRow(1, ltr(name).c_str());
 		}
@@ -240,7 +240,7 @@ void ManufactureDependenciesTreeState::initList()
 
 	for (const auto& name : secondLevel)
 	{
-		if (_showAll || game.savedGame()->isResearched(game.getMod()->getManufacture(name)->getRequirements()))
+		if (_showAll || game.savedGame()->isResearched(game.mod()->getManufacture(name)->getRequirements()))
 		{
 			_lstTopics->addRow(1, ltr(name).c_str());
 		}
@@ -277,7 +277,7 @@ void ManufactureDependenciesTreeState::initList()
 
 	for (const auto& name : thirdLevel)
 	{
-		if (_showAll || game.savedGame()->isResearched(game.getMod()->getManufacture(name)->getRequirements()))
+		if (_showAll || game.savedGame()->isResearched(game.mod()->getManufacture(name)->getRequirements()))
 		{
 			_lstTopics->addRow(1, ltr(name).c_str());
 		}
@@ -314,7 +314,7 @@ void ManufactureDependenciesTreeState::initList()
 
 	for (const auto& name : fourthLevel)
 	{
-		if (_showAll || game.savedGame()->isResearched(game.getMod()->getManufacture(name)->getRequirements()))
+		if (_showAll || game.savedGame()->isResearched(game.mod()->getManufacture(name)->getRequirements()))
 		{
 			_lstTopics->addRow(1, ltr(name).c_str());
 		}

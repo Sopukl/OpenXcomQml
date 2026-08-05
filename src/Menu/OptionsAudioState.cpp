@@ -182,9 +182,9 @@ OptionsAudioState::OptionsAudioState(OptionsOrigin origin) : OptionsBaseState(or
 	_txtCurrentMusic->setVisible(_origin == OPT_MENU);
 
 	// These options only apply to UFO
-	_txtSoundFormat->setVisible(_origin == OPT_MENU && game.getMod()->getSoundDefinitions()->empty());
-	_cbxSoundFormat->setVisible(_origin == OPT_MENU && game.getMod()->getSoundDefinitions()->empty());
-	_txtCurrentSound->setVisible(_origin == OPT_MENU && game.getMod()->getSoundDefinitions()->empty());
+	_txtSoundFormat->setVisible(_origin == OPT_MENU && game.mod()->getSoundDefinitions()->empty());
+	_cbxSoundFormat->setVisible(_origin == OPT_MENU && game.mod()->getSoundDefinitions()->empty());
+	_txtCurrentSound->setVisible(_origin == OPT_MENU && game.mod()->getSoundDefinitions()->empty());
 
 	_txtOptions->setText(ltr("STR_SOUND_OPTIONS"));
 
@@ -230,7 +230,7 @@ void OptionsAudioState::slrSoundVolumeChange(Action *)
  */
 void OptionsAudioState::slrSoundVolumeRelease(Action *)
 {
-	game.getMod()->getSound("GEO.CAT", Mod::UFO_FIRE)->play();
+	game.mod()->getSound("GEO.CAT", Mod::UFO_FIRE)->play();
 }
 
 /**

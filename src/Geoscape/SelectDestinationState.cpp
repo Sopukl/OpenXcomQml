@@ -132,8 +132,8 @@ SelectDestinationState::SelectDestinationState(std::vector<Craft*> crafts, Globe
 	if (_crafts.size() != 1 ||
 		_crafts.front()->getFuelPercentage() < 100 ||
 		!_crafts.front()->getRules()->getSpacecraft() ||
-		(game.getMod()->getFinalResearch() && // if not Research specified then we look only on `getSpacecraft`
-			!game.savedGame()->isResearched(game.getMod()->getFinalResearch())))
+		(game.mod()->getFinalResearch() && // if not Research specified then we look only on `getSpacecraft`
+			!game.savedGame()->isResearched(game.mod()->getFinalResearch())))
 	{
 		_btnCydonia->setVisible(false);
 	}
@@ -143,12 +143,12 @@ SelectDestinationState::SelectDestinationState(std::vector<Craft*> crafts, Globe
 		_btnCydonia->onMouseClick((ActionHandler)&SelectDestinationState::btnCydoniaClick);
 
 		// one more check...
-		for (auto& depl : game.getMod()->getDeploymentsList())
+		for (auto& depl : game.mod()->getDeploymentsList())
 		{
-			AlienDeployment* deploymentRule = game.getMod()->getDeployment(depl);
+			AlienDeployment* deploymentRule = game.mod()->getDeployment(depl);
 			if (deploymentRule->isFinalDestination())
 			{
-				RuleStartingCondition* sc = game.getMod()->getStartingCondition(deploymentRule->getStartingCondition());
+				RuleStartingCondition* sc = game.mod()->getStartingCondition(deploymentRule->getStartingCondition());
 				if (sc && sc->requiresCommanderOnboard() && !_crafts.front()->isCommanderOnboard())
 				{
 					_btnCydonia->setVisible(false);
@@ -161,7 +161,7 @@ SelectDestinationState::SelectDestinationState(std::vector<Craft*> crafts, Globe
 		{
 			_btnCydonia->setVisible(false);
 		}
-		if (!_crafts.front()->arePilotsOnboard(game.getMod()))
+		if (!_crafts.front()->arePilotsOnboard(game.mod()))
 		{
 			_btnCydonia->setVisible(false);
 		}

@@ -78,7 +78,7 @@ NewResearchListState::NewResearchListState(Base *base, bool sortByCost) : _base(
 
 	_colorNormal = _lstResearch->getColor();
 	_colorNew = options1.oxceHighlightNewTopics() ? _lstResearch->getSecondaryColor() : _colorNormal;
-	_colorHidden = game.getMod()->getInterface("selectNewResearch")->getElement("listExtended")->color;
+	_colorHidden = game.mod()->getInterface("selectNewResearch")->getElement("listExtended")->color;
 
 	centerAllSurfaces();
 
@@ -92,7 +92,7 @@ NewResearchListState::NewResearchListState(Base *base, bool sortByCost) : _base(
 	_btnOK->onKeyboardPress((ActionHandler)&NewResearchListState::btnOKClick, options1.keyCancel());
 	_btnOK->onKeyboardPress((ActionHandler)&NewResearchListState::btnMarkAllAsSeenClick, options1.keyMarkAllAsSeen());
 
-	_isSortingEnabled = game.getMod()->getEnableNewResearchSorting();
+	_isSortingEnabled = game.mod()->getEnableNewResearchSorting();
 	if (_isSortingEnabled)
 	{
 		_btnShowOnlyNew->setVisible(false);
@@ -303,7 +303,7 @@ void NewResearchListState::fillProjectList(bool markAllAsSeen)
 	_projects.clear();
 	_lstResearch->clearList();
 	// Note: this is the *only* place where this method is called with considerDebugMode = true
-	game.savedGame()->getAvailableResearchProjects(_projects, game.getMod() , _base, true);
+	game.savedGame()->getAvailableResearchProjects(_projects, game.mod() , _base, true);
 	size_t selectedSort = _cbxSort->getSelected();
 	if (selectedSort == 1 || (selectedSort == 3 && _sortByCost))
 	{

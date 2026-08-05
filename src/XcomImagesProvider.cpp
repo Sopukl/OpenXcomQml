@@ -12,7 +12,7 @@ namespace OpenXcom
 
 	QImage XcomImagesProvider::requestImage(const QString &id, QSize *size, const QSize &requestedSize)
 	{
-		auto mod = game.getMod();
+		auto mod = game.mod();
 		auto& bgImageName = mod->getInterface(id.toStdString())->getBackgroundImage(mod, game.savedGame());
 		auto* bgImage = mod->getSurface(bgImageName);
 

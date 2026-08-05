@@ -175,7 +175,7 @@ void AlienMission::think(Game &engine, const Globe &globe)
 		return;
 	}
 
-	const Mod &mod = *engine.getMod();
+	const Mod &mod = *engine.mod();
 	SavedGame &game = *engine.savedGame();
 	if (_nextWave >= _rule.getWaveCount())
 		return;
@@ -734,7 +734,7 @@ void AlienMission::start(Game &engine, const Globe &globe, size_t initialCount)
 	// Earth-based alien operations
 	if (_rule.getOperationType() != AMOT_SPACE && !_base)
 	{
-		const Mod &mod = *engine.getMod();
+		const Mod &mod = *engine.mod();
 		SavedGame &game = *engine.savedGame();
 
 		std::vector<AlienBase*> possibilities;
@@ -849,7 +849,7 @@ void AlienMission::ufoReachedWaypoint(Ufo &ufo, Game &engine, const Globe &globe
 		return;
 	}
 
-	const Mod &mod = *engine.getMod();
+	const Mod &mod = *engine.mod();
 	SavedGame &game = *engine.savedGame();
 	const size_t curWaypoint = ufo.getTrajectoryPoint();
 	const size_t nextWaypoint = curWaypoint + 1;

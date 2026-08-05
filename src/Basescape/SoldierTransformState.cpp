@@ -99,7 +99,7 @@ SoldierTransformState::SoldierTransformState(Base* base, size_t soldier) : _base
 	_sortName->onMouseClick((ActionHandler)&SoldierTransformState::sortNameClick);
 
 	std::vector<RuleSoldierTransformation*> availableTransformations;
-	game.savedGame()->getAvailableTransformations(availableTransformations, game.getMod(), _base);
+	game.savedGame()->getAvailableTransformations(availableTransformations, game.mod(), _base);
 
 	for (auto* trRule : availableTransformations)
 	{
@@ -247,7 +247,7 @@ void SoldierTransformState::btnQuickSearchApply(Action*)
 void SoldierTransformState::lstTransformationClick(Action *)
 {
 	std::string trType = _transformations[_indices[_lstTransformations->getSelectedRow()]].type;
-	RuleSoldierTransformation* transformationRule = game.getMod()->getSoldierTransformation(trType, false);
+	RuleSoldierTransformation* transformationRule = game.mod()->getSoldierTransformation(trType, false);
 
 	if (transformationRule)
 	{
@@ -265,7 +265,7 @@ void SoldierTransformState::lstTransformationClick(Action *)
 void SoldierTransformState::lstTransformationClickMiddle(Action*)
 {
 	std::string trType = _transformations[_indices[_lstTransformations->getSelectedRow()]].type;
-	RuleSoldierTransformation* transformationRule = game.getMod()->getSoldierTransformation(trType, false);
+	RuleSoldierTransformation* transformationRule = game.mod()->getSoldierTransformation(trType, false);
 
 	if (transformationRule)
 	{

@@ -89,7 +89,7 @@ CraftSoldiersState::CraftSoldiersState(Base *base, size_t craft)
 
 	touchComponentsAdd("button2", "craftSoldiers", _window);
 
-	_otherCraftColor = game.getMod()->getInterface("craftSoldiers")->getElement("otherCraft")->color;
+	_otherCraftColor = game.mod()->getInterface("craftSoldiers")->getElement("otherCraft")->color;
 
 	centerAllSurfaces();
 
@@ -144,7 +144,7 @@ CraftSoldiersState::CraftSoldiersState(Base *base, size_t craft)
 	PUSH_IN("STR_MISSIONS2", missionsStat);
 	PUSH_IN("STR_KILLS2", killsStat);
 	PUSH_IN("STR_WOUND_RECOVERY2", woundRecoveryStat);
-	if (game.getMod()->isManaFeatureEnabled() && !game.getMod()->getReplenishManaAfterMission())
+	if (game.mod()->isManaFeatureEnabled() && !game.mod()->getReplenishManaAfterMission())
 	{
 		PUSH_IN("STR_MANA_MISSING", manaMissingStat);
 	}
@@ -157,7 +157,7 @@ CraftSoldiersState::CraftSoldiersState(Base *base, size_t craft)
 	PUSH_IN("STR_THROWING_ACCURACY", throwingStat);
 	PUSH_IN("STR_MELEE_ACCURACY", meleeStat);
 	PUSH_IN("STR_STRENGTH", strengthStat);
-	if (game.getMod()->isManaFeatureEnabled())
+	if (game.mod()->isManaFeatureEnabled())
 	{
 		// "unlock" is checked later
 		PUSH_IN("STR_MANA_POOL", manaStat);
@@ -308,7 +308,7 @@ void CraftSoldiersState::btnPreviewClick(Action *)
 		return;
 	}
 
-	SavedBattleGame* bgame = new SavedBattleGame(game.getMod(), true);
+	SavedBattleGame* bgame = new SavedBattleGame(game.mod(), true);
 	game.savedGame()->setBattleGame(bgame);
 	BattlescapeGenerator bgen = BattlescapeGenerator();
 	bgame->setMissionType(c->getRules()->getCustomPreviewType());

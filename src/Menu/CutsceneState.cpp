@@ -52,7 +52,7 @@ void CutsceneState::init()
 	// pop self off stack and replace with actual player state
 	game.popState();
 
-	const RuleVideo *videoRule = game.getMod()->getVideo(_cutsceneId, true);
+	const RuleVideo *videoRule = game.mod()->getVideo(_cutsceneId, true);
 	if (game.savedGame() && game.savedGame()->getEnding() != END_NONE)
 	{
 		if (game.savedGame()->getMonthsPassed() > -1)

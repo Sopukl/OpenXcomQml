@@ -80,7 +80,7 @@ PurchaseState::PurchaseState(Base *base, CannotReequipState *parent) : _base(bas
 		{
 			if (i.qty > 0)
 			{
-				auto* rule = game.getMod()->getItem(i.item);
+				auto* rule = game.mod()->getItem(i.item);
 				if (rule)
 				{
 					_missingItemsMap[rule] = i.qty;
@@ -108,7 +108,7 @@ PurchaseState::PurchaseState(Base *base, CannotReequipState *parent) : _base(bas
 	// Set palette
 	setInterface("buyMenu");
 
-	_ammoColor = game.getMod()->getInterface("buyMenu")->getElement("ammoColor")->color;
+	_ammoColor = game.mod()->getInterface("buyMenu")->getElement("ammoColor")->color;
 
 	add(_window, "window", "buyMenu");
 	add(_btnQuickSearch, "button", "buyMenu");
@@ -215,9 +215,9 @@ PurchaseState::PurchaseState(Base *base, CannotReequipState *parent) : _base(bas
 	auto craftAndSoldierFilter = allOf(costIsNotZero, requirementsAreResearched, necessaryBaseFunctionsPresent, requiredCountryAllied);
 	auto itemFilter = allOf(costIsNotZero, requirementsAreResearched, buyRequirementsAreResearched, necessaryBaseFunctionsPresent, requiredCountryAllied);
 
-	for (auto& soldierType : game.getMod()->getSoldiersList())
+	for (auto& soldierType : game.mod()->getSoldiersList())
 	{
-		RuleSoldier *rule = game.getMod()->getSoldier(soldierType);
+		RuleSoldier *rule = game.mod()->getSoldier(soldierType);
 		if (craftAndSoldierFilter(rule))
 		{
 			TransferRow row = { TRANSFER_SOLDIER, rule, ltr(rule->getType()), rule->buyCost(), _base->getSoldierCountAndSalary(rule->getType()).first, 0, 0, -4, 0, 0, 0 };
@@ -229,10 +229,10 @@ PurchaseState::PurchaseState(Base *base, CannotReequipState *parent) : _base(bas
 			}
 		}
 	}
-	if ((game.getMod()->getHireScientistsUnlockResearch().empty() || game.savedGame()->isResearched(game.getMod()->getHireScientistsUnlockResearch(), true))
-		&& (~providedBaseFunc & game.getMod()->getHireScientistsRequiresBaseFunc()).none())
+	if ((game.mod()->getHireScientistsUnlockResearch().empty() || game.savedGame()->isResearched(game.mod()->getHireScientistsUnlockResearch(), true))
+		&& (~providedBaseFunc & game.mod()->getHireScientistsRequiresBaseFunc()).none())
 	{
-		TransferRow row = { TRANSFER_SCIENTIST, 0, ltr("STR_SCIENTIST"), game.getMod()->getHireScientistCost(), _base->getTotalScientists(), 0, 0, -3, 0, 0, 0 };
+		TransferRow row = { TRANSFER_SCIENTIST, 0, ltr("STR_SCIENTIST"), game.mod()->getHireScientistCost(), _base->getTotalScientists(), 0, 0, -3, 0, 0, 0 };
 		_items.push_back(row);
 		std::string cat = getCategory(_items.size() - 1);
 		if (std::find(_cats.begin(), _cats.end(), cat) == _cats.end())
@@ -240,10 +240,10 @@ PurchaseState::PurchaseState(Base *base, CannotReequipState *parent) : _base(bas
 			_cats.push_back(cat);
 		}
 	}
-	if ((game.getMod()->getHireEngineersUnlockResearch().empty() || game.savedGame()->isResearched(game.getMod()->getHireEngineersUnlockResearch(), true))
-		&& (~providedBaseFunc & game.getMod()->getHireEngineersRequiresBaseFunc()).none())
+	if ((game.mod()->getHireEngineersUnlockResearch().empty() || game.savedGame()->isResearched(game.mod()->getHireEngineersUnlockResearch(), true))
+		&& (~providedBaseFunc & game.mod()->getHireEngineersRequiresBaseFunc()).none())
 	{
-		TransferRow row = { TRANSFER_ENGINEER, 0, ltr("STR_ENGINEER"), game.getMod()->getHireEngineerCost(), _base->getTotalEngineers(), 0, 0, -2, 0, 0, 0 };
+		TransferRow row = { TRANSFER_ENGINEER, 0, ltr("STR_ENGINEER"), game.mod()->getHireEngineerCost(), _base->getTotalEngineers(), 0, 0, -2, 0, 0, 0 };
 		_items.push_back(row);
 		std::string cat = getCategory(_items.size() - 1);
 		if (std::find(_cats.begin(), _cats.end(), cat) == _cats.end())
@@ -251,9 +251,9 @@ PurchaseState::PurchaseState(Base *base, CannotReequipState *parent) : _base(bas
 			_cats.push_back(cat);
 		}
 	}
-	for (auto& craftType : game.getMod()->getCraftsList())
+	for (auto& craftType : game.mod()->getCraftsList())
 	{
-		RuleCraft *rule = game.getMod()->getCraft(craftType);
+		RuleCraft *rule = game.mod()->getCraft(craftType);
 		if (craftAndSoldierFilter(rule))
 		{
 			TransferRow row = { TRANSFER_CRAFT, rule, ltr(rule->getType()), rule->buyCost(), _base->getCraftCount(rule), 0, 0, -1, 0, 0, 0 };
@@ -265,9 +265,9 @@ PurchaseState::PurchaseState(Base *base, CannotReequipState *parent) : _base(bas
 			}
 		}
 	}
-	for (auto& itemType : game.getMod()->getItemsList())
+	for (auto& itemType : game.mod()->getItemsList())
 	{
-		RuleItem *rule = game.getMod()->getItem(itemType);
+		RuleItem *rule = game.mod()->getItem(itemType);
 		if (itemFilter(rule))
 		{
 			TransferRow row = { TRANSFER_ITEM, rule, ltr(rule->getType()), rule->getBuyCostAdjusted(_base, game.savedGame()), _base->getStorageItems().countOf(rule), 0, 0, rule->getListOrder(), 0, 0, 0 };
@@ -281,7 +281,7 @@ PurchaseState::PurchaseState(Base *base, CannotReequipState *parent) : _base(bas
 	}
 
 	_vanillaCategories = _cats.size();
-	if (game.getMod()->getDisplayCustomCategories() > 0)
+	if (game.mod()->getDisplayCustomCategories() > 0)
 	{
 		bool hasUnassigned = false;
 
@@ -306,7 +306,7 @@ PurchaseState::PurchaseState(Base *base, CannotReequipState *parent) : _base(bas
 			}
 		}
 		// then use them nicely in order
-		if (game.getMod()->getDisplayCustomCategories() == 1)
+		if (game.mod()->getDisplayCustomCategories() == 1)
 		{
 			_cats.clear();
 			_cats.push_back("STR_ALL_ITEMS");
@@ -318,7 +318,7 @@ PurchaseState::PurchaseState(Base *base, CannotReequipState *parent) : _base(bas
 			}
 			_vanillaCategories = _cats.size();
 		}
-		for (auto& categoryName : game.getMod()->getItemCategoriesList())
+		for (auto& categoryName : game.mod()->getItemCategoriesList())
 		{
 			if (std::find(tempCats.begin(), tempCats.end(), categoryName) != tempCats.end())
 			{
@@ -427,9 +427,9 @@ std::string PurchaseState::getCategory(int sel) const
 		}
 		if (rule->getBattleType() == BT_NONE)
 		{
-			if (game.getMod()->isCraftWeaponStorageItem(rule))
+			if (game.mod()->isCraftWeaponStorageItem(rule))
 				return "STR_CRAFT_ARMAMENT";
-			if (game.getMod()->isArmorStorageItem(rule))
+			if (game.mod()->isArmorStorageItem(rule))
 				return "STR_ARMORS"; // OXCE: armors
 			return "STR_COMPONENTS";
 		}
@@ -765,7 +765,7 @@ void PurchaseState::btnOkClick(Action *)
 		}
 		if (!errorMessage.empty())
 		{
-			RuleInterface* menuInterface = game.getMod()->getInterface("buyMenu");
+			RuleInterface* menuInterface = game.mod()->getInterface("buyMenu");
 			game.errorMessage(QString::fromStdString(errorMessage));
 			return;
 		}
@@ -791,15 +791,15 @@ void PurchaseState::btnOkClick(Action *)
 					}
 					int time = rule->getTransferTime();
 					if (time == 0)
-						time = game.getMod()->getPersonnelTime();
+						time = game.mod()->getPersonnelTime();
 					t = new Transfer(time);
-					int nationality = game.savedGame()->selectSoldierNationalityByLocation(game.getMod(), rule, _base);
-					Soldier* soldier = game.getMod()->genSoldier(game.savedGame(), rule, nationality);
+					int nationality = game.savedGame()->selectSoldierNationalityByLocation(game.mod(), rule, _base);
+					Soldier* soldier = game.mod()->genSoldier(game.savedGame(), rule, nationality);
 					if (!rule->getSpawnedSoldierTemplate().yaml.empty())
 					{
 						YAML::YamlRootNodeReader reader(rule->getSpawnedSoldierTemplate(), "(spawned soldier template)");
 						int nationalityOrig = soldier->getNationality();
-						soldier->load(reader.toBase(), game.getMod(), game.savedGame(), game.getMod()->getScriptGlobal(), true); // load from soldier template
+						soldier->load(reader.toBase(), game.mod(), game.savedGame(), game.mod()->getScriptGlobal(), true); // load from soldier template
 						if (soldier->getNationality() != nationalityOrig)
 						{
 							soldier->genName();
@@ -810,12 +810,12 @@ void PurchaseState::btnOkClick(Action *)
 				}
 				break;
 			case TRANSFER_SCIENTIST:
-				t = new Transfer(game.getMod()->getPersonnelTime());
+				t = new Transfer(game.mod()->getPersonnelTime());
 				t->setScientists(transferRow.amount);
 				_base->getTransfers().push_back(t);
 				break;
 			case TRANSFER_ENGINEER:
-				t = new Transfer(game.getMod()->getPersonnelTime());
+				t = new Transfer(game.mod()->getPersonnelTime());
 				t->setEngineers(transferRow.amount);
 				_base->getTransfers().push_back(t);
 				break;
@@ -831,7 +831,7 @@ void PurchaseState::btnOkClick(Action *)
 					}
 					t = new Transfer(rule->getTransferTime());
 					Craft *craft = new Craft(rule, _base, game.savedGame()->getId(rule->getType()));
-					craft->initFixedWeapons(game.getMod());
+					craft->initFixedWeapons(game.mod());
 					craft->setStatus("STR_REFUELLING");
 					t->setCraft(craft);
 					_base->getTransfers().push_back(t);

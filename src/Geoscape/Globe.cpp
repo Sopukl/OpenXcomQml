@@ -335,9 +335,9 @@ Globe::Globe(int cenX, int cenY, int width, int height, int x, int y) : Interact
 	_cenX(cenX), _cenY(cenY), _rotLon(0.0), _rotLat(0.0), _hoverLon(0.0), _hoverLat(0.0), _craftLon(0.0), _craftLat(0.0), _craftRange(0.0), _hover(false), _craft(false), _blink(-1),
 	_isMouseScrolling(false), _isMouseScrolled(false), _xBeforeMouseScrolling(0), _yBeforeMouseScrolling(0), _lonBeforeMouseScrolling(0.0), _latBeforeMouseScrolling(0.0), _mouseScrollingStartTime(0), _totalMouseMoveX(0), _totalMouseMoveY(0), _mouseMovedOverThreshold(false)
 {
-	_rules = game.getMod()->getGlobe();
-	_texture = new SurfaceSet(*game.getMod()->getSurfaceSet("TEXTURE.DAT"));
-	_markerSet = game.getMod()->getSurfaceSet("GlobeMarkers");
+	_rules = game.mod()->getGlobe();
+	_texture = new SurfaceSet(*game.mod()->getSurfaceSet("TEXTURE.DAT"));
+	_markerSet = game.mod()->getSurfaceSet("GlobeMarkers");
 
 	_countries = new Surface(width, height, x, y);
 	_markers = new Surface(width, height, x, y);
@@ -1188,9 +1188,9 @@ void Globe::drawRadars()
 
 	if (_hover)
 	{
-		for (auto& facType : game.getMod()->getBaseFacilitiesList())
+		for (auto& facType : game.mod()->getBaseFacilitiesList())
 		{
-			range = Nautical(game.getMod()->getBaseFacility(facType)->getRadarRange());
+			range = Nautical(game.mod()->getBaseFacility(facType)->getRadarRange());
 			drawGlobeCircle(_hoverLat,_hoverLon,range,48);
 			if (options1.globeAllRadarsOnBaseBuild()) ranges.push_back(range);
 		}
@@ -1240,14 +1240,14 @@ void Globe::drawRadars()
 		}
 	}
 
-	if (game.getMod()->getDrawEnemyRadarCircles() > 0)
+	if (game.mod()->getDrawEnemyRadarCircles() > 0)
 	{
 		// Draw radars around UFO hunter-killers
 		for (auto* ufo : game.savedGame()->getUfos())
 		{
 			if (ufo->isHunterKiller() && ufo->getDetected() && ufo->getStatus() != Ufo::IGNORE_ME)
 			{
-				if (game.getMod()->getDrawEnemyRadarCircles() == 1 && !ufo->getHyperDetected())
+				if (game.mod()->getDrawEnemyRadarCircles() == 1 && !ufo->getHyperDetected())
 				{
 					continue;
 				}
@@ -1399,7 +1399,7 @@ void Globe::drawDetail()
 	{
 		Text *label = new Text(150, 9, 0, 0);
 		label->setPalette(getPalette());
-		label->initText(game.getMod()->getFont("FONT_BIG"), game.getMod()->getFont("FONT_SMALL"));
+		label->initText(game.mod()->getFont("FONT_BIG"), game.mod()->getFont("FONT_SMALL"));
 		label->setAlign(ALIGN_CENTER);
 
 		Sint16 x, y;
@@ -1430,13 +1430,13 @@ void Globe::drawDetail()
 	{
 		Text *label = new Text(120, 18, 0, 0);
 		label->setPalette(getPalette());
-		label->initText(game.getMod()->getFont("FONT_BIG"), game.getMod()->getFont("FONT_SMALL"));
+		label->initText(game.mod()->getFont("FONT_BIG"), game.mod()->getFont("FONT_SMALL"));
 		label->setAlign(ALIGN_CENTER);
 
 		Sint16 x, y;
-		for (auto& extraLabelType : game.getMod()->getExtraGlobeLabelsList())
+		for (auto& extraLabelType : game.mod()->getExtraGlobeLabelsList())
 		{
-			RuleCountry *rule = game.getMod()->getExtraGlobeLabel(extraLabelType, true);
+			RuleCountry *rule = game.mod()->getExtraGlobeLabel(extraLabelType, true);
 			if ((int)(_zoom) >= rule->getZoomLevel())
 			{
 				// Don't draw if label is facing back
@@ -1465,7 +1465,7 @@ void Globe::drawDetail()
 	{
 		Text *label = new Text(100, 9, 0, 0);
 		label->setPalette(getPalette());
-		label->initText(game.getMod()->getFont("FONT_BIG"), game.getMod()->getFont("FONT_SMALL"));
+		label->initText(game.mod()->getFont("FONT_BIG"), game.mod()->getFont("FONT_SMALL"));
 		label->setAlign(ALIGN_CENTER);
 		label->setColor(CITY_LABEL_COLOR);
 

@@ -216,16 +216,16 @@ void ManageAlienContainmentState::resetListAndTotals()
 	for (const auto* proj : _base->getResearch())
 	{
 		const RuleResearch *research = proj->getRules();
-		const RuleItem *item = game.getMod()->getItem(research->getName(), false); // don't use getNeededItem()
+		const RuleItem *item = game.mod()->getItem(research->getName(), false); // don't use getNeededItem()
 		if (research->needItem() && research->destroyItem() && item && item->isAlien() && item->getPrisonType() == _prisonType)
 		{
 			researchList.push_back(research->getName());
 		}
 	}
 
-	for (auto& itemType : game.getMod()->getItemsList())
+	for (auto& itemType : game.mod()->getItemsList())
 	{
-		RuleItem *rule = game.getMod()->getItem(itemType, true);
+		RuleItem *rule = game.mod()->getItem(itemType, true);
 
 		int qty = _base->getStorageItems().countOf(rule);
 		if (qty > 0 && rule->isAlien() && rule->getPrisonType() == _prisonType)
@@ -353,14 +353,14 @@ void ManageAlienContainmentState::dealWithSelectedAliens(bool sell)
 
 			if (sell)
 			{
-				int64_t adjustedCost = game.getMod()->getItem(_aliens[i], true)->getSellCostAdjusted(_base, game.savedGame());
+				int64_t adjustedCost = game.mod()->getItem(_aliens[i], true)->getSellCostAdjusted(_base, game.savedGame());
 				adjustedCost = adjustedCost * _qtys[i];
 				game.savedGame()->setFunds(game.savedGame()->getFunds() + adjustedCost);
 			}
 			else
 			{
 				// add the corpses
-				Unit* ruleUnit = game.getMod()->getUnit(_aliens[i], false);
+				Unit* ruleUnit = game.mod()->getUnit(_aliens[i], false);
 				if (ruleUnit)
 				{
 					auto* ruleCorpse = ruleUnit->getArmor()->getCorpseGeoscape();
@@ -527,7 +527,7 @@ void ManageAlienContainmentState::lstItemsMousePress(Action *action)
 	}
 	else if (game.isMiddleClick(action, true))
 	{
-		RuleResearch *selectedTopic = game.getMod()->getResearch(_aliens[_sel]);
+		RuleResearch *selectedTopic = game.mod()->getResearch(_aliens[_sel]);
 		if (selectedTopic != 0)
 		{
 			_doNotReset = true;
@@ -626,7 +626,7 @@ void ManageAlienContainmentState::updateStrings()
 		{
 			if (_qtys[i] > 0)
 			{
-				int64_t adjustedCost = game.getMod()->getItem(_aliens[i])->getSellCostAdjusted(_base, game.savedGame());
+				int64_t adjustedCost = game.mod()->getItem(_aliens[i])->getSellCostAdjusted(_base, game.savedGame());
 				adjustedCost *= _qtys[i];
 				_total += adjustedCost;
 			}

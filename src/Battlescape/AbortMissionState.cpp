@@ -67,7 +67,7 @@ AbortMissionState::AbortMissionState(SavedBattleGame *battleGame, BattlescapeSta
 
 	// Check available areas (maybe should be cached somewhere)
 	bool exit = false, craft = true;
-	AlienDeployment *deployment = game.getMod()->getDeployment(_battleGame->getMissionType());
+	AlienDeployment *deployment = game.mod()->getDeployment(_battleGame->getMissionType());
 	if (deployment != 0)
 	{
 		exit = !deployment->getNextStage().empty() || deployment->getEscapeType() == ESCAPE_EXIT || deployment->getEscapeType() == ESCAPE_EITHER;
@@ -76,7 +76,7 @@ AbortMissionState::AbortMissionState(SavedBattleGame *battleGame, BattlescapeSta
 		{
 			lastUsedMapScript = deployment->getRandomMapScript(); // don't crash on old saves
 		}
-		const std::vector<MapScript*> *mapScriptEntries = game.getMod()->getMapScript(lastUsedMapScript);
+		const std::vector<MapScript*> *mapScriptEntries = game.mod()->getMapScript(lastUsedMapScript);
 		if (mapScriptEntries != 0)
 		{
 			craft = false;
@@ -118,7 +118,7 @@ AbortMissionState::AbortMissionState(SavedBattleGame *battleGame, BattlescapeSta
 
 	// Set up objects
 	_window->setHighContrast(true);
-	_window->setBackground(game.getMod()->getSurface("TAC00.SCR"));
+	_window->setBackground(game.mod()->getSurface("TAC00.SCR"));
 
 	_txtInEntrance->setBig();
 	_txtInEntrance->setHighContrast(true);

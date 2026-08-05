@@ -147,7 +147,7 @@ GeoscapeState::GeoscapeState() : _pause(false), _zoomInEffectDone(false), _zoomO
 	int screenHeight = options1.baseYGeoscape;
 
 	// Create objects
-	Surface *hd = game.getMod()->getSurface("ALTGEOBORD.SCR");
+	Surface *hd = game.mod()->getSurface("ALTGEOBORD.SCR");
 	_bg = new Surface(hd->getWidth(), hd->getHeight(), 0, 0);
 	_sideLine = new Surface(64, screenHeight, screenWidth - 64, 0);
 	_sidebar = new Surface(64, 200, screenWidth - 64, screenHeight / 2 - 100);
@@ -192,9 +192,9 @@ GeoscapeState::GeoscapeState() : _pause(false), _zoomInEffectDone(false), _zoomO
 	_txtYear = new Text(59, 8, screenWidth-61, screenHeight/2+1);
 	_txtFunds = new Text(59, 8, screenWidth-61, screenHeight/2-27);
 
-	int slackingIndicatorOffset = game.getMod()->getInterface("geoscape")->getElement("slackingIndicator")->custom;
+	int slackingIndicatorOffset = game.mod()->getInterface("geoscape")->getElement("slackingIndicator")->custom;
 	_txtSlacking = new Text(59, 17, screenWidth - 61, screenHeight / 2 - 100 + slackingIndicatorOffset);
-	int trainingIndicatorOffset = game.getMod()->getInterface("geoscape")->getElement("trainingIndicator")->custom;
+	int trainingIndicatorOffset = game.mod()->getInterface("geoscape")->getElement("trainingIndicator")->custom;
 	_txtTraining = new Text(59, 17, screenWidth - 61, screenHeight / 2 + 100 + trainingIndicatorOffset);
 
 	_timeSpeed = _btn5Secs;
@@ -263,15 +263,15 @@ GeoscapeState::GeoscapeState() : _pause(false), _zoomInEffectDone(false), _zoomO
 	add(_cbxCountry, "button", "geoscape");
 
 	// Set up objects
-	Surface *geobord = game.getMod()->getSurface("GEOBORD.SCR");
+	Surface *geobord = game.mod()->getSurface("GEOBORD.SCR");
 	geobord->setX(_sidebar->getX() - geobord->getWidth() + _sidebar->getWidth());
 	geobord->setY(_sidebar->getY());
 	_sidebar->copy(geobord);
-	game.getMod()->getSurface("ALTGEOBORD.SCR")->blitNShade(_bg, 0, 0);
+	game.mod()->getSurface("ALTGEOBORD.SCR")->blitNShade(_bg, 0, 0);
 
 	_sideLine->drawRect(0, 0, _sideLine->getWidth(), _sideLine->getHeight(), 15);
 
-	_btnIntercept->initText(game.getMod()->getFont("FONT_GEO_BIG"), game.getMod()->getFont("FONT_GEO_SMALL"));
+	_btnIntercept->initText(game.mod()->getFont("FONT_GEO_BIG"), game.mod()->getFont("FONT_GEO_SMALL"));
 	_btnIntercept->setText(ltr("STR_INTERCEPT"));
 	_btnIntercept->onMouseClick((ActionHandler)&GeoscapeState::btnInterceptClick);
 	_btnIntercept->onKeyboardPress((ActionHandler)&GeoscapeState::btnInterceptClick, options1.keyGeoIntercept());
@@ -284,72 +284,72 @@ GeoscapeState::GeoscapeState() : _pause(false), _zoomInEffectDone(false), _zoomO
 	_btnIntercept->onKeyboardPress((ActionHandler)&GeoscapeState::btnDogfightExperienceClick, options1.keyGeoDailyPilotExperience());
 	_btnIntercept->setGeoscapeButton(true);
 
-	_btnBases->initText(game.getMod()->getFont("FONT_GEO_BIG"), game.getMod()->getFont("FONT_GEO_SMALL"));
+	_btnBases->initText(game.mod()->getFont("FONT_GEO_BIG"), game.mod()->getFont("FONT_GEO_SMALL"));
 	_btnBases->setText(ltr("STR_BASES"));
 	_btnBases->onMouseClick((ActionHandler)&GeoscapeState::btnBasesClick);
 	_btnBases->onKeyboardPress((ActionHandler)&GeoscapeState::btnBasesClick, options1.keyGeoBases());
 	_btnBases->setGeoscapeButton(true);
 
-	_btnGraphs->initText(game.getMod()->getFont("FONT_GEO_BIG"), game.getMod()->getFont("FONT_GEO_SMALL"));
+	_btnGraphs->initText(game.mod()->getFont("FONT_GEO_BIG"), game.mod()->getFont("FONT_GEO_SMALL"));
 	_btnGraphs->setText(ltr("STR_GRAPHS"));
 	_btnGraphs->onMouseClick((ActionHandler)&GeoscapeState::btnGraphsClick);
 	_btnGraphs->onKeyboardPress((ActionHandler)&GeoscapeState::btnGraphsClick, options1.keyGeoGraphs());
 	_btnGraphs->setGeoscapeButton(true);
 
-	_btnUfopaedia->initText(game.getMod()->getFont("FONT_GEO_BIG"), game.getMod()->getFont("FONT_GEO_SMALL"));
+	_btnUfopaedia->initText(game.mod()->getFont("FONT_GEO_BIG"), game.mod()->getFont("FONT_GEO_SMALL"));
 	_btnUfopaedia->setText(ltr("STR_UFOPAEDIA_UC"));
 	_btnUfopaedia->onMouseClick((ActionHandler)&GeoscapeState::btnUfopaediaClick);
 	_btnUfopaedia->onKeyboardPress((ActionHandler)&GeoscapeState::btnUfopaediaClick, options1.keyGeoUfopedia());
 	_btnUfopaedia->setGeoscapeButton(true);
 
-	_btnOptions->initText(game.getMod()->getFont("FONT_GEO_BIG"), game.getMod()->getFont("FONT_GEO_SMALL"));
+	_btnOptions->initText(game.mod()->getFont("FONT_GEO_BIG"), game.mod()->getFont("FONT_GEO_SMALL"));
 	_btnOptions->setText(ltr("STR_OPTIONS_UC"));
 	_btnOptions->onMouseClick((ActionHandler)&GeoscapeState::btnOptionsClick);
 	_btnOptions->onKeyboardPress((ActionHandler)&GeoscapeState::btnOptionsClick, options1.keyGeoOptions());
 	_btnOptions->setGeoscapeButton(true);
 
-	_btnFunding->initText(game.getMod()->getFont("FONT_GEO_BIG"), game.getMod()->getFont("FONT_GEO_SMALL"));
+	_btnFunding->initText(game.mod()->getFont("FONT_GEO_BIG"), game.mod()->getFont("FONT_GEO_SMALL"));
 	_btnFunding->setText(options1.oxceLinks() ? ltr("STR_EXTENDED_UC") : ltr("STR_FUNDING_UC"));
 	_btnFunding->onMouseClick((ActionHandler)&GeoscapeState::btnFundingClick);
 	_btnFunding->onKeyboardPress((ActionHandler)&GeoscapeState::btnFundingClick, options1.keyGeoFunding());
 	_btnFunding->setGeoscapeButton(true);
 
-	_btn5Secs->initText(game.getMod()->getFont("FONT_GEO_BIG"), game.getMod()->getFont("FONT_GEO_SMALL"));
+	_btn5Secs->initText(game.mod()->getFont("FONT_GEO_BIG"), game.mod()->getFont("FONT_GEO_SMALL"));
 	_btn5Secs->setBig();
 	_btn5Secs->setText(ltr("STR_5_SECONDS"));
 	_btn5Secs->setGroup(&_timeSpeed);
 	_btn5Secs->onKeyboardPress((ActionHandler)&GeoscapeState::btnTimerClick, options1.keyGeoSpeed1());
 	_btn5Secs->setGeoscapeButton(true);
 
-	_btn1Min->initText(game.getMod()->getFont("FONT_GEO_BIG"), game.getMod()->getFont("FONT_GEO_SMALL"));
+	_btn1Min->initText(game.mod()->getFont("FONT_GEO_BIG"), game.mod()->getFont("FONT_GEO_SMALL"));
 	_btn1Min->setBig();
 	_btn1Min->setText(ltr("STR_1_MINUTE"));
 	_btn1Min->setGroup(&_timeSpeed);
 	_btn1Min->onKeyboardPress((ActionHandler)&GeoscapeState::btnTimerClick, options1.keyGeoSpeed2());
 	_btn1Min->setGeoscapeButton(true);
 
-	_btn5Mins->initText(game.getMod()->getFont("FONT_GEO_BIG"), game.getMod()->getFont("FONT_GEO_SMALL"));
+	_btn5Mins->initText(game.mod()->getFont("FONT_GEO_BIG"), game.mod()->getFont("FONT_GEO_SMALL"));
 	_btn5Mins->setBig();
 	_btn5Mins->setText(ltr("STR_5_MINUTES"));
 	_btn5Mins->setGroup(&_timeSpeed);
 	_btn5Mins->onKeyboardPress((ActionHandler)&GeoscapeState::btnTimerClick, options1.keyGeoSpeed3());
 	_btn5Mins->setGeoscapeButton(true);
 
-	_btn30Mins->initText(game.getMod()->getFont("FONT_GEO_BIG"), game.getMod()->getFont("FONT_GEO_SMALL"));
+	_btn30Mins->initText(game.mod()->getFont("FONT_GEO_BIG"), game.mod()->getFont("FONT_GEO_SMALL"));
 	_btn30Mins->setBig();
 	_btn30Mins->setText(ltr("STR_30_MINUTES"));
 	_btn30Mins->setGroup(&_timeSpeed);
 	_btn30Mins->onKeyboardPress((ActionHandler)&GeoscapeState::btnTimerClick, options1.keyGeoSpeed4());
 	_btn30Mins->setGeoscapeButton(true);
 
-	_btn1Hour->initText(game.getMod()->getFont("FONT_GEO_BIG"), game.getMod()->getFont("FONT_GEO_SMALL"));
+	_btn1Hour->initText(game.mod()->getFont("FONT_GEO_BIG"), game.mod()->getFont("FONT_GEO_SMALL"));
 	_btn1Hour->setBig();
 	_btn1Hour->setText(ltr("STR_1_HOUR"));
 	_btn1Hour->setGroup(&_timeSpeed);
 	_btn1Hour->onKeyboardPress((ActionHandler)&GeoscapeState::btnTimerClick, options1.keyGeoSpeed5());
 	_btn1Hour->setGeoscapeButton(true);
 
-	_btn1Day->initText(game.getMod()->getFont("FONT_GEO_BIG"), game.getMod()->getFont("FONT_GEO_SMALL"));
+	_btn1Day->initText(game.mod()->getFont("FONT_GEO_BIG"), game.mod()->getFont("FONT_GEO_SMALL"));
 	_btn1Day->setBig();
 	_btn1Day->setText(ltr("STR_1_DAY"));
 	_btn1Day->setGroup(&_timeSpeed);
@@ -588,9 +588,9 @@ void GeoscapeState::handle(Action *action)
 				_txtDebug->setText("+2 ALL ITEMS");
 				for (auto* xbase : game.savedGame()->bases())
 				{
-					for (auto& itemType : game.getMod()->getItemsList())
+					for (auto& itemType : game.mod()->getItemsList())
 					{
-						auto* item = game.getMod()->getItem(itemType);
+						auto* item = game.mod()->getItem(itemType);
 						if (item && item->isRecoverable() && !item->isAlien() && item->sellCost() > 0)
 						{
 							xbase->getStorageItems().addItem(item, 2);
@@ -604,9 +604,9 @@ void GeoscapeState::handle(Action *action)
 				_txtDebug->setText("+2 ALL LIVE ALIENS");
 				for (auto* xbase : game.savedGame()->bases())
 				{
-					for (auto& itemType : game.getMod()->getItemsList())
+					for (auto& itemType : game.mod()->getItemsList())
 					{
-						auto* item = game.getMod()->getItem(itemType);
+						auto* item = game.mod()->getItem(itemType);
 						if (item && item->isRecoverable() && item->isAlien() && item->sellCost() > 0)
 						{
 							xbase->getStorageItems().addItem(item, 2);
@@ -727,16 +727,16 @@ void GeoscapeState::init()
 	{
 		if (game.savedGame()->getMonthsPassed() == -1)
 		{
-			game.getMod()->playMusic("GMGEO", 1);
+			game.mod()->playMusic("GMGEO", 1);
 		}
 		else
 		{
-			game.getMod()->playMusic("GMGEO");
+			game.mod()->playMusic("GMGEO");
 		}
 	}
 	else
 	{
-		game.getMod()->playMusic("GMINTER");
+		game.mod()->playMusic("GMINTER");
 	}
 	_globe->setNewBaseHover(false);
 
@@ -948,7 +948,7 @@ const std::vector<Craft*>* GeoscapeState::updateActiveCrafts()
 void GeoscapeState::time5Seconds()
 {
 	// If in "slow mode", handle UFO hunting and escorting logic every 5 seconds, not only every 10 minutes
-	if ((_timeSpeed == _btn5Secs || _timeSpeed == _btn1Min) && game.getMod()->getHunterKillerFastRetarget())
+	if ((_timeSpeed == _btn5Secs || _timeSpeed == _btn1Min) && game.mod()->getHunterKillerFastRetarget())
 	{
 		ufoHuntingAndEscorting();
 	}
@@ -960,7 +960,7 @@ void GeoscapeState::time5Seconds()
 	}
 	if (game.savedGame()->getEnding() == END_LOSE)
 	{
-		game.pushState(new CutsceneState(game.getMod()->getLoseDefeatCutscene()));
+		game.pushState(new CutsceneState(game.mod()->getLoseDefeatCutscene()));
 		if (game.savedGame()->isIronman())
 		{
 			game.pushState(new SaveGameState(OPT_GEOSCAPE, SAVE_IRONMAN, _palette));
@@ -1007,7 +1007,7 @@ void GeoscapeState::time5Seconds()
 						_dogfightsToBeStarted.push_back(new DogfightState(this, c, ufo, true));
 
 						// Start fighting escorts and other craft as well (if they are in escort range)
-						if (game.getMod()->getEscortsJoinFightAgainstHK())
+						if (game.mod()->getEscortsJoinFightAgainstHK())
 						{
 							int secondaryTargets = 0;
 							for (auto* craft : *activeCrafts)
@@ -1015,7 +1015,7 @@ void GeoscapeState::time5Seconds()
 								if (!craft->isIgnoredByHK() && craft != c)
 								{
 									// craft is close enough and has at least one loaded weapon
-									if (craft->getNumWeapons(true) > 0 && craft->getDistance(c) < Nautical(game.getMod()->getEscortRange()))
+									if (craft->getNumWeapons(true) > 0 && craft->getDistance(c) < Nautical(game.mod()->getEscortRange()))
 									{
 										// only up to 4 dogfights = 1 main + 3 secondary
 										if (secondaryTargets < 3)
@@ -1037,7 +1037,7 @@ void GeoscapeState::time5Seconds()
 							startDogfight();
 							_dogfightStartTimer->start();
 						}
-						game.getMod()->playMusic("GMINTER");
+						game.mod()->playMusic("GMINTER");
 
 						// Don't process certain craft logic (moving and reaching destination)
 						ufoIsAttacking = true;
@@ -1165,7 +1165,7 @@ void GeoscapeState::time5Seconds()
 				//if (_ufoIsAttacking)
 				{
 					// Note: this was moved from DogfightState.cpp, as it was not 100% reliable there
-					xcraft->evacuateCrew(game.getMod());
+					xcraft->evacuateCrew(game.mod());
 				}
 				// if a transport craft has been shot down, kill all the soldiers on board.
 				if (xcraft->getRules()->getMaxUnitsLimit() > 0)
@@ -1306,7 +1306,7 @@ void GeoscapeState::time5Seconds()
 							DogfightState* dogfight = new DogfightState(this, xcraft, u, u->isHunterKiller());
 							_dogfightsToBeStarted.push_back(dogfight);
 
-							if (u->isHunterKiller() && game.getMod()->getEscortsJoinFightAgainstHK())
+							if (u->isHunterKiller() && game.mod()->getEscortsJoinFightAgainstHK())
 							{
 								// Start fighting escorts and other craft as well (if they are in escort range)
 								int secondaryTargets = 0;
@@ -1315,7 +1315,7 @@ void GeoscapeState::time5Seconds()
 									if (!craft->isIgnoredByHK() && craft != xcraft)
 									{
 										// craft is close enough and has at least one loaded weapon
-										if (craft->getNumWeapons(true) > 0 && craft->getDistance(xcraft) < Nautical(game.getMod()->getEscortRange()))
+										if (craft->getNumWeapons(true) > 0 && craft->getDistance(xcraft) < Nautical(game.mod()->getEscortRange()))
 										{
 											// only up to 4 dogfights = 1 main + 3 secondary
 											if (secondaryTargets < 3)
@@ -1354,7 +1354,7 @@ void GeoscapeState::time5Seconds()
 								startDogfight();
 								_dogfightStartTimer->start();
 							}
-							game.getMod()->playMusic("GMINTER");
+							game.mod()->playMusic("GMINTER");
 						}
 						break;
 					case Ufo::LANDED:
@@ -1368,7 +1368,7 @@ void GeoscapeState::time5Seconds()
 								int texture, shade;
 								_globe->getPolygonTextureAndShade(u->getLongitude(), u->getLatitude(), &texture, &shade);
 								timerReset();
-								Texture* globeTexture = game.getMod()->getGlobe()->getTexture(texture);
+								Texture* globeTexture = game.mod()->getGlobe()->getTexture(texture);
 								popup(new ConfirmLandingState(xcraft, globeTexture, globeTexture, shade));
 							}
 						}
@@ -1397,15 +1397,15 @@ void GeoscapeState::time5Seconds()
 						int texture, shade;
 						_globe->getPolygonTextureAndShade(m->getLongitude(), m->getLatitude(), &texture, &shade);
 						timerReset();
-						Texture* globeTexture = game.getMod()->getGlobe()->getTexture(texture);
+						Texture* globeTexture = game.mod()->getGlobe()->getTexture(texture);
 						if (globeTexture->isCosmeticOcean())
 						{
 							// Unlike xcom bases, alien bases and ufo crash/land sites, mission sites can actually happen on ocean (=non-polygon part of the globe)
 							// e.g. TFTD surface attacks
 							// For backwards-compatibility, let's use texture = -1 instead of any cosmetic ocean texture
-							globeTexture = game.getMod()->getGlobe()->getTexture(-1);
+							globeTexture = game.mod()->getGlobe()->getTexture(-1);
 						}
-						Texture* missionTexture = game.getMod()->getGlobe()->getTexture(m->getTexture());
+						Texture* missionTexture = game.mod()->getGlobe()->getTexture(m->getTexture());
 						if (!missionTexture)
 						{
 							missionTexture = globeTexture;
@@ -1426,7 +1426,7 @@ void GeoscapeState::time5Seconds()
 							int texture, shade;
 							_globe->getPolygonTextureAndShade(b->getLongitude(), b->getLatitude(), &texture, &shade);
 							timerReset();
-							Texture* globeTexture = game.getMod()->getGlobe()->getTexture(texture);
+							Texture* globeTexture = game.mod()->getGlobe()->getTexture(texture);
 							popup(new ConfirmLandingState(xcraft, globeTexture, globeTexture, shade));
 						}
 						else
@@ -1543,7 +1543,7 @@ void GeoscapeState::time10Minutes()
 					Craft *escortee = dynamic_cast<Craft*>(xcraft->getDestination());
 					if (escortee != 0)
 					{
-						if (xcraft->getDistance(escortee) < Nautical(game.getMod()->getEscortRange()))
+						if (xcraft->getDistance(escortee) < Nautical(game.mod()->getEscortRange()))
 						{
 							escortSpeed = escortee->getSpeed();
 						}
@@ -1672,7 +1672,7 @@ void GeoscapeState::ufoHuntingAndEscorting()
 					// inform the player
 					if (ufo->getRules()->getHuntAlertSound() != Mod::NO_SOUND)
 					{
-						game.getMod()->getSound("GEO.CAT", ufo->getRules()->getHuntAlertSound())->play();
+						game.mod()->getSound("GEO.CAT", ufo->getRules()->getHuntAlertSound())->play();
 					}
 					if (options1.oxceGeoSuppressRedundantHKAlert() && newTarget->getDestination() == ufo)
 					{
@@ -1742,12 +1742,12 @@ void GeoscapeState::baseHunting()
 						{
 							// Generate a hunt mission
 							const std::string huntMission = ab->getDeployment()->generateHuntMission(game.savedGame()->getMonthsPassed());
-							if (game.getMod()->getAlienMission(huntMission))
+							if (game.mod()->getAlienMission(huntMission))
 							{
 								// Spawn hunt mission for this base.
-								const RuleAlienMission &rule = *game.getMod()->getAlienMission(huntMission);
+								const RuleAlienMission &rule = *game.mod()->getAlienMission(huntMission);
 								AlienMission *mission = new AlienMission(rule);
-								mission->setRegion(game.savedGame()->locateRegion(*ab)->getRules()->getType(), *game.getMod());
+								mission->setRegion(game.savedGame()->locateRegion(*ab)->getRules()->getType(), *game.mod());
 								mission->setId(game.savedGame()->getId("ALIEN_MISSIONS"));
 								if (!ab->getDeployment()->isHuntMissionRaceFromAlienBase() && rule.hasRaceWeights())
 								{
@@ -1762,7 +1762,7 @@ void GeoscapeState::baseHunting()
 								if (mission->getRules().getObjective() == OBJECTIVE_SITE)
 								{
 									int missionZone = mission->getRules().getSpawnZone();
-									RuleRegion *regionRules = game.getMod()->getRegion(mission->getRegion());
+									RuleRegion *regionRules = game.mod()->getRegion(mission->getRegion());
 									const std::vector<MissionArea> areas = regionRules->getMissionZones().at(missionZone).areas;
 									if (!areas.empty())
 									{
@@ -1828,8 +1828,8 @@ bool GeoscapeState::processMissionSite(MissionSite *site)
 	if (removeSite)
 	{
 		// Unlock research defined in alien deployment, if the mission site despawned
-		const RuleResearch* research = game.getMod()->getResearch(site->getDeployment()->getUnlockedResearchOnDespawn());
-		game.savedGame()->handleResearchUnlockedByMissions(research, game.getMod(), site->getDeployment());
+		const RuleResearch* research = game.mod()->getResearch(site->getDeployment()->getUnlockedResearchOnDespawn());
+		game.savedGame()->handleResearchUnlockedByMissions(research, game.mod(), site->getDeployment());
 
 		// Increase counters
 		game.savedGame()->increaseCustomCounter(site->getDeployment()->getCounterDespawn());
@@ -1841,7 +1841,7 @@ bool GeoscapeState::processMissionSite(MissionSite *site)
 		game.savedGame()->decreaseCustomCounter(site->getDeployment()->getDecreaseCounterAll());
 
 		// Generate a despawn event
-		auto* eventRules = game.getMod()->getEvent(site->getDeployment()->chooseDespawnEvent());
+		auto* eventRules = game.mod()->getEvent(site->getDeployment()->chooseDespawnEvent());
 		bool canSpawn = game.savedGame()->canSpawnInstantEvent(eventRules);
 		if (canSpawn)
 		{
@@ -2213,7 +2213,7 @@ void GeoscapeState::time1Hour()
 		std::map<Production*, productionProgress_e> toRemove;
 		for (auto* prod : xbase->getProductions())
 		{
-			toRemove[prod] = prod->step(xbase, game.savedGame(), game.getMod(), game.language());
+			toRemove[prod] = prod->step(xbase, game.savedGame(), game.mod(), game.language());
 		}
 		for (const auto& pair : toRemove)
 		{
@@ -2311,7 +2311,7 @@ private:
  */
 void GenerateSupplyMission::operator()(AlienBase *base) const
 {
-	const Mod &_mod = *_engine.getMod();
+	const Mod &_mod = *_engine.mod();
 	SavedGame &_save = *_engine.savedGame();
 
 	std::string missionName = base->getDeployment()->chooseGenMissionType();
@@ -2386,7 +2386,7 @@ void GeoscapeState::time1Day()
 	game.savedGame()->increaseDaysPassed();
 
 	SavedGame *saveGame = game.savedGame();
-	Mod *mod = game.getMod();
+	Mod *mod = game.mod();
 	bool psiStrengthEval = (options1.psiStrengthEval() && saveGame->isResearched(mod->getPsiRequirements()));
 
 	auto addResearchDiaryEntryForBase = [&](const RuleResearch* discoveredResearch, DiscoverySourceType sourceType, const Base* sourceBase, const RuleResearch* sourceResearch)
@@ -2523,7 +2523,7 @@ void GeoscapeState::time1Day()
 				popup(new CutsceneState(research->getCutscene()));
 				if (saveGame->getEnding() == END_NONE)
 				{
-					const RuleVideo* videoRule = game.getMod()->getVideo(research->getCutscene(), true);
+					const RuleVideo* videoRule = game.mod()->getVideo(research->getCutscene(), true);
 					if (videoRule->getWinGame()) saveGame->setEnding(END_WIN);
 					if (videoRule->getLoseGame()) saveGame->setEnding(END_LOSE);
 				}
@@ -2533,7 +2533,7 @@ void GeoscapeState::time1Day()
 				popup(new CutsceneState(bonus->getCutscene()));
 				if (saveGame->getEnding() == END_NONE)
 				{
-					const RuleVideo* videoRule = game.getMod()->getVideo(bonus->getCutscene(), true);
+					const RuleVideo* videoRule = game.mod()->getVideo(bonus->getCutscene(), true);
 					if (videoRule->getWinGame()) saveGame->setEnding(END_WIN);
 					if (videoRule->getLoseGame()) saveGame->setEnding(END_LOSE);
 				}
@@ -2580,10 +2580,10 @@ void GeoscapeState::time1Day()
 				popup(new NewPossibleManufactureState(xbase, newPossibleManufacture));
 			}
 			std::vector<RuleItem *> newPossiblePurchase;
-			game.savedGame()->getDependablePurchase(newPossiblePurchase, research, game.getMod());
+			game.savedGame()->getDependablePurchase(newPossiblePurchase, research, game.mod());
 			if (bonus)
 			{
-				game.savedGame()->getDependablePurchase(newPossiblePurchase, bonus, game.getMod());
+				game.savedGame()->getDependablePurchase(newPossiblePurchase, bonus, game.mod());
 			}
 			if (!newPossiblePurchase.empty())
 			{
@@ -2592,10 +2592,10 @@ void GeoscapeState::time1Day()
 				popup(new NewPossiblePurchaseState(xbase, newPossiblePurchase));
 			}
 			std::vector<RuleCraft *> newPossibleCraft;
-			game.savedGame()->getDependableCraft(newPossibleCraft, research, game.getMod());
+			game.savedGame()->getDependableCraft(newPossibleCraft, research, game.mod());
 			if (bonus)
 			{
-				game.savedGame()->getDependableCraft(newPossibleCraft, bonus, game.getMod());
+				game.savedGame()->getDependableCraft(newPossibleCraft, bonus, game.mod());
 			}
 			if (!newPossibleCraft.empty())
 			{
@@ -2604,10 +2604,10 @@ void GeoscapeState::time1Day()
 				popup(new NewPossibleCraftState(xbase, newPossibleCraft));
 			}
 			std::vector<RuleBaseFacility *> newPossibleFacilities;
-			game.savedGame()->getDependableFacilities(newPossibleFacilities, research, game.getMod());
+			game.savedGame()->getDependableFacilities(newPossibleFacilities, research, game.mod());
 			if (bonus)
 			{
-				game.savedGame()->getDependableFacilities(newPossibleFacilities, bonus, game.getMod());
+				game.savedGame()->getDependableFacilities(newPossibleFacilities, bonus, game.mod());
 			}
 			if (!newPossibleFacilities.empty())
 			{
@@ -2630,7 +2630,7 @@ void GeoscapeState::time1Day()
 			// 1. remove obsolete research projects from all bases
 			// 2. handle items spawned by research
 			// 3. handle events spawned by research
-			saveGame->handlePrimaryResearchSideEffects(topicsToCheck, game.getMod(), xbase);
+			saveGame->handlePrimaryResearchSideEffects(topicsToCheck, game.mod(), xbase);
 		}
 
 		// Handle soldier wounds and martial training
@@ -2642,8 +2642,8 @@ void GeoscapeState::time1Day()
 
 			if (soldier->isInTraining())
 			{
-				soldier->trainPhys(game.getMod()->getCustomTrainingFactor());
-				soldier->calcStatString(game.getMod()->getStatStrings(), psiStrengthEval);
+				soldier->trainPhys(game.mod()->getCustomTrainingFactor());
+				soldier->calcStatString(game.mod()->getStatStrings(), psiStrengthEval);
 				if (soldier->isFullyTrained())
 				{
 					soldier->setTraining(false);
@@ -2674,7 +2674,7 @@ void GeoscapeState::time1Day()
 			for (auto* s : xbase->soldiers())
 			{
 				s->trainPsi1Day();
-				s->calcStatString(game.getMod()->getStatStrings(), psiStrengthEval);
+				s->calcStatString(game.mod()->getStatStrings(), psiStrengthEval);
 				if (s->isInPsiTraining() && s->isFullyPsiTrained())
 				{
 					s->setPsiTraining(false);
@@ -2730,7 +2730,7 @@ void GeoscapeState::time1Day()
 			auto* research = mod->getResearch(selfDestructCode, true);
 			if (saveGame->isResearched(research, false)) // ignore debug mode
 			{
-				saveGame->clearLinksForAlienBase(ab, game.getMod());
+				saveGame->clearLinksForAlienBase(ab, game.mod());
 				delete ab;
 				abIt = saveGame->getAlienBases()->erase(abIt);
 			}
@@ -2877,7 +2877,7 @@ void GeoscapeState::time1Month()
 	// Handle Psi-Training and initiate a new retaliation mission, if applicable
 	if (!options1.anytimePsiTraining())
 	{
-		bool psiStrengthEval = (options1.psiStrengthEval() && game.savedGame()->isResearched(game.getMod()->getPsiRequirements()));
+		bool psiStrengthEval = (options1.psiStrengthEval() && game.savedGame()->isResearched(game.mod()->getPsiRequirements()));
 		for (auto* xbase : game.savedGame()->bases())
 		{
 			if (xbase->getAvailablePsiLabs() > 0)
@@ -2887,7 +2887,7 @@ void GeoscapeState::time1Month()
 					if (soldier->isInPsiTraining())
 					{
 						soldier->trainPsi();
-						soldier->calcStatString(game.getMod()->getStatStrings(), psiStrengthEval);
+						soldier->calcStatString(game.mod()->getStatStrings(), psiStrengthEval);
 					}
 				}
 			}
@@ -2900,7 +2900,7 @@ void GeoscapeState::time1Month()
 	popup(new MonthlyReportState(_globe));
 
 	// Handle Xcom Operatives discovering bases
-	if (!game.savedGame()->getAlienBases()->empty() && RNG::percent(game.getMod()->getChanceToDetectAlienBaseEachMonth()))
+	if (!game.savedGame()->getAlienBases()->empty() && RNG::percent(game.mod()->getChanceToDetectAlienBaseEachMonth()))
 	{
 		for (auto* ab : *game.savedGame()->getAlienBases())
 		{
@@ -3519,7 +3519,7 @@ void GeoscapeState::handleBaseDefense(Base *base, Ufo *ufo)
 	_globe->getPolygonTextureAndShade(baseLon, baseLat, &texture, &shade);
 
 	int ufoDamagePercentage = 0;
-	if (game.getMod()->getLessAliensDuringBaseDefense())
+	if (game.mod()->getLessAliensDuringBaseDefense())
 	{
 		ufoDamagePercentage = ufo->getDamagePercentage();
 	}
@@ -3563,15 +3563,15 @@ void GeoscapeState::handleBaseDefense(Base *base, Ufo *ufo)
 	}
 	else if (base->getAvailableSoldiers(true, true) > 0 || !base->getVehicles()->empty())
 	{
-		SavedBattleGame *bgame = new SavedBattleGame(game.getMod());
+		SavedBattleGame *bgame = new SavedBattleGame(game.mod());
 		game.savedGame()->setBattleGame(bgame);
 		bgame->setMissionType("STR_BASE_DEFENSE");
 		BattlescapeGenerator bgen = BattlescapeGenerator();
 		bgen.setBase(base);
-		bgen.setAlienCustomDeploy(game.getMod()->getDeployment(ufo->getCraftStats().missionCustomDeploy));
+		bgen.setAlienCustomDeploy(game.mod()->getDeployment(ufo->getCraftStats().missionCustomDeploy));
 		bgen.setAlienRace(ufo->getAlienRace());
 		bgen.setWorldShade(shade);
-		Texture* globeTexture = game.getMod()->getGlobe()->getTexture(texture);
+		Texture* globeTexture = game.mod()->getGlobe()->getTexture(texture);
 		bgen.setWorldTexture(globeTexture, globeTexture);
 		bgen.setUfoDamagePercentage(ufoDamagePercentage);
 		bgen.run();
@@ -3592,7 +3592,7 @@ void GeoscapeState::determineAlienMissions(bool isNewMonth, const RuleEvent* eve
 {
 	SavedGame *save = game.savedGame();
 	AlienStrategy &strategy = save->getAlienStrategy();
-	Mod *mod = game.getMod();
+	Mod *mod = game.mod();
 	int month = game.savedGame()->getMonthsPassed();
 	int currentScore = save->getCurrentScore(month); // _monthsPassed was already increased by 1
 	int performanceBonus = mod->getPerformanceBonus(currentScore);
@@ -4314,7 +4314,7 @@ bool GeoscapeState::buildNewBaseAt(int mouseX, int mouseY, Base* base, bool isFi
 	if (!_globe->insideLand(lon, lat))
 		return false;
 
-    auto mod = game.getMod();
+    auto mod = game.mod();
     auto savedGame = game.savedGame();
 
     auto underwaterBaseResearch = mod->getFakeUnderwaterBaseUnlockResearch();
@@ -4349,7 +4349,7 @@ bool GeoscapeState::attemptAlienRaceEvolution(int month, AlienBase* ab) const
 	{
 		if (std::get<0>(tuple) <= month && std::get<1>(tuple) == ab->getAlienRace())
 		{
-			auto* newRace = game.getMod()->getAlienRace(std::get<2>(tuple), false);
+			auto* newRace = game.mod()->getAlienRace(std::get<2>(tuple), false);
 			if (newRace)
 			{
 				ab->setAlienRace(newRace->getId());
@@ -4369,7 +4369,7 @@ bool GeoscapeState::processCommand(RuleMissionScript *command)
 {
 	SavedGame *save = game.savedGame();
 	AlienStrategy &strategy = save->getAlienStrategy();
-	Mod *mod = game.getMod();
+	Mod *mod = game.mod();
 	int month = game.savedGame()->getMonthsPassed();
 	std::string targetRegion;
 	const RuleAlienMission *missionRules;
@@ -4739,7 +4739,7 @@ bool GeoscapeState::processCommand(RuleMissionScript *command)
 	AlienMission *mission = new AlienMission(*missionRules);
 	mission->setRace(missionRace);
 	mission->setId(game.savedGame()->getId("ALIEN_MISSIONS"));
-	mission->setRegion(targetRegion, *game.getMod());
+	mission->setRegion(targetRegion, *game.mod());
 	mission->setMissionSiteZoneArea(targetAreaNumber);
 	strategy.addMissionRun(command->getVarName());
 	mission->start(game, *_globe, command->getDelay());

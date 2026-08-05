@@ -59,7 +59,7 @@ MiniMapState::MiniMapState (Camera * camera, SavedBattleGame * battleGame)
 	battleGame->setPaletteByDepth(this);
 
 	add(_bg);
-	game.getMod()->getSurface("SCANBORD.PCK")->blitNShade(_bg, 0, 0);
+	game.mod()->getSurface("SCANBORD.PCK")->blitNShade(_bg, 0, 0);
 	add(_miniMapView);
 	add(_btnLvlUp, "buttonUp", "minimap", _bg);
 	add(_btnLvlDwn, "buttonDown", "minimap", _bg);

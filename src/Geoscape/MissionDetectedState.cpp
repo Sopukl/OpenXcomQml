@@ -45,7 +45,7 @@ MissionDetectedState::MissionDetectedState(MissionSite *mission, GeoscapeState *
 	int soundId = mission->getDeployment()->getAlertSound();
 	if (soundId != Mod::NO_SOUND)
 	{
-		_customSound = game.getMod()->getSound("GEO.CAT", soundId);
+		_customSound = game.mod()->getSound("GEO.CAT", soundId);
 	}
 
 	// Create objects
@@ -69,7 +69,7 @@ MissionDetectedState::MissionDetectedState(MissionSite *mission, GeoscapeState *
 	centerAllSurfaces();
 
 	// Set up objects
-	_window->setBackground(game.getMod()->getSurface(mission->getDeployment()->getAlertBackground()));
+	_window->setBackground(game.mod()->getSurface(mission->getDeployment()->getAlertBackground()));
 
 	_btnIntercept->setText(ltr("STR_INTERCEPT"));
 	_btnIntercept->onMouseClick((ActionHandler)&MissionDetectedState::btnInterceptClick);

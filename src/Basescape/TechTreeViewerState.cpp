@@ -84,12 +84,12 @@ TechTreeViewerState::TechTreeViewerState(const RuleResearch *r, const RuleManufa
 	// Set palette
 	setInterface("techTreeViewer");
 
-	_purple = game.getMod()->getInterface("techTreeViewer")->getElement("list")->color;
-	_pink = game.getMod()->getInterface("techTreeViewer")->getElement("list")->color2;
-	_blue = game.getMod()->getInterface("techTreeViewer")->getElement("list")->border;
-	_white = game.getMod()->getInterface("techTreeViewer")->getElement("listExtended")->color;
-	_gold = game.getMod()->getInterface("techTreeViewer")->getElement("listExtended")->color2;
-	_grey = game.getMod()->getInterface("techTreeViewer")->getElement("listExtended")->border;
+	_purple = game.mod()->getInterface("techTreeViewer")->getElement("list")->color;
+	_pink = game.mod()->getInterface("techTreeViewer")->getElement("list")->color2;
+	_blue = game.mod()->getInterface("techTreeViewer")->getElement("list")->border;
+	_white = game.mod()->getInterface("techTreeViewer")->getElement("listExtended")->color;
+	_gold = game.mod()->getInterface("techTreeViewer")->getElement("listExtended")->color2;
+	_grey = game.mod()->getInterface("techTreeViewer")->getElement("listExtended")->border;
 
 	add(_window, "window", "techTreeViewer");
 	add(_txtTitle, "text", "techTreeViewer");
@@ -166,7 +166,7 @@ TechTreeViewerState::TechTreeViewerState(const RuleResearch *r, const RuleManufa
 	{
 		if (info.second == RuleResearch::RESEARCH_STATUS_DISABLED)
 		{
-			auto* rr = game.getMod()->getResearch(info.first, false);
+			auto* rr = game.mod()->getResearch(info.first, false);
 			if (rr)
 			{
 				_disabledResearch.insert(rr->getName());
@@ -176,9 +176,9 @@ TechTreeViewerState::TechTreeViewerState(const RuleResearch *r, const RuleManufa
 
 	int totalSum = 0;
 	RuleResearch *resRule = 0;
-	for (auto& resType : game.getMod()->getResearchList())
+	for (auto& resType : game.mod()->getResearchList())
 	{
-		resRule = game.getMod()->getResearch(resType);
+		resRule = game.mod()->getResearch(resType);
 		if (resRule != 0)
 		{
 			totalSum += resRule->getCost();
@@ -186,9 +186,9 @@ TechTreeViewerState::TechTreeViewerState(const RuleResearch *r, const RuleManufa
 	}
 
 	RuleManufacture *manRule = 0;
-	for (auto& manuf : game.getMod()->getManufactureList())
+	for (auto& manuf : game.mod()->getManufactureList())
 	{
-		manRule = game.getMod()->getManufacture(manuf);
+		manRule = game.mod()->getManufacture(manuf);
 		if (game.savedGame()->isResearched(manRule->getRequirements()))
 		{
 			_alreadyAvailableManufacture.insert(manRule->getName());
@@ -196,9 +196,9 @@ TechTreeViewerState::TechTreeViewerState(const RuleResearch *r, const RuleManufa
 	}
 
 	RuleBaseFacility *facRule = 0;
-	for (auto& facType : game.getMod()->getBaseFacilitiesList())
+	for (auto& facType : game.mod()->getBaseFacilitiesList())
 	{
-		facRule = game.getMod()->getBaseFacility(facType);
+		facRule = game.mod()->getBaseFacility(facType);
 		if (game.savedGame()->isResearched(facRule->getRequirements()))
 		{
 			_alreadyAvailableFacilities.insert(facRule->getType());
@@ -206,9 +206,9 @@ TechTreeViewerState::TechTreeViewerState(const RuleResearch *r, const RuleManufa
 	}
 
 	RuleItem *itemRule = 0;
-	for (auto& itemType : game.getMod()->getItemsList())
+	for (auto& itemType : game.mod()->getItemsList())
 	{
-		itemRule = game.getMod()->getItem(itemType);
+		itemRule = game.mod()->getItem(itemType);
 		if (!itemRule->getRequirements().empty() || !itemRule->getBuyRequirements().empty())
 		{
 			_protectedItems.insert(itemRule->getType());
@@ -220,9 +220,9 @@ TechTreeViewerState::TechTreeViewerState(const RuleResearch *r, const RuleManufa
 	}
 
 	RuleCraft *craftRule = 0;
-	for (auto& craftType : game.getMod()->getCraftsList())
+	for (auto& craftType : game.mod()->getCraftsList())
 	{
-		craftRule = game.getMod()->getCraft(craftType);
+		craftRule = game.mod()->getCraft(craftType);
 		if (game.savedGame()->isResearched(craftRule->getRequirements()))
 		{
 			_alreadyAvailableCrafts.insert(craftRule->getType());
@@ -334,7 +334,7 @@ void TechTreeViewerState::initLists()
 	else if (_selectedFlag == TTV_RESEARCH)
 	{
 		int row = 0;
-		RuleResearch *rule = game.getMod()->getResearch(_selectedTopic);
+		RuleResearch *rule = game.mod()->getResearch(_selectedTopic);
 		if (rule == 0)
 			return;
 
@@ -365,8 +365,8 @@ void TechTreeViewerState::initLists()
 		}
 		//
 
-		const std::vector<std::string> &researchList = game.getMod()->getResearchList();
-		const std::vector<std::string> &manufactureList = game.getMod()->getManufactureList();
+		const std::vector<std::string> &researchList = game.mod()->getResearchList();
+		const std::vector<std::string> &manufactureList = game.mod()->getManufactureList();
 
 		// 0. common pre-calculation
 		const std::vector<const RuleResearch*>& reqs = rule->getRequirements();
@@ -391,7 +391,7 @@ void TechTreeViewerState::initLists()
 
 		for (auto& j : manufactureList)
 		{
-			RuleManufacture *temp = game.getMod()->getManufacture(j);
+			RuleManufacture *temp = game.mod()->getManufacture(j);
 			for (auto& i : temp->getRequirements())
 			{
 				if (i == rule)
@@ -401,9 +401,9 @@ void TechTreeViewerState::initLists()
 			}
 		}
 
-		for (auto& f : game.getMod()->getBaseFacilitiesList())
+		for (auto& f : game.mod()->getBaseFacilitiesList())
 		{
-			RuleBaseFacility *temp = game.getMod()->getBaseFacility(f);
+			RuleBaseFacility *temp = game.mod()->getBaseFacility(f);
 			for (auto& i : temp->getRequirements())
 			{
 				if (i == rule->getName())
@@ -413,9 +413,9 @@ void TechTreeViewerState::initLists()
 			}
 		}
 
-		for (auto& item : game.getMod()->getItemsList())
+		for (auto& item : game.mod()->getItemsList())
 		{
-			RuleItem *temp = game.getMod()->getItem(item);
+			RuleItem *temp = game.mod()->getItem(item);
 			for (auto& i : temp->getRequirements())
 			{
 				if (i == rule)
@@ -432,9 +432,9 @@ void TechTreeViewerState::initLists()
 			}
 		}
 
-		for (auto& transf : game.getMod()->getSoldierTransformationList())
+		for (auto& transf : game.mod()->getSoldierTransformationList())
 		{
-			RuleSoldierTransformation* temp = game.getMod()->getSoldierTransformation(transf);
+			RuleSoldierTransformation* temp = game.mod()->getSoldierTransformation(transf);
 			for (auto& i : temp->getRequiredResearch())
 			{
 				if (i == rule->getName())
@@ -444,9 +444,9 @@ void TechTreeViewerState::initLists()
 			}
 		}
 
-		for (auto& c : game.getMod()->getCraftsList())
+		for (auto& c : game.mod()->getCraftsList())
 		{
-			RuleCraft *temp = game.getMod()->getCraft(c);
+			RuleCraft *temp = game.mod()->getCraft(c);
 			for (auto& i : temp->getRequirements())
 			{
 				if (i == rule->getName())
@@ -458,7 +458,7 @@ void TechTreeViewerState::initLists()
 
 		for (auto& j : researchList)
 		{
-			RuleResearch *temp = game.getMod()->getResearch(j);
+			RuleResearch *temp = game.mod()->getResearch(j);
 			for (auto& i : temp->getUnlocked())
 			{
 				if (i == rule)
@@ -563,7 +563,7 @@ void TechTreeViewerState::initLists()
 			_leftTopics.push_back("-");
 			_leftFlags.push_back(TTV_NONE);
 			++row;
-			for (const auto& reqServiceType : game.getMod()->getBaseFunctionNames(rule->getRequireBaseFunc()))
+			for (const auto& reqServiceType : game.mod()->getBaseFunctionNames(rule->getRequireBaseFunc()))
 			{
 				std::string name = ltr(reqServiceType);
 				name.insert(0, "  ");
@@ -925,7 +925,7 @@ void TechTreeViewerState::initLists()
 			++row;
 			for (const auto& res : leadsTo)
 			{
-				const RuleResearch *iTemp = game.getMod()->getResearch(res);
+				const RuleResearch *iTemp = game.mod()->getResearch(res);
 				if (std::find(unlocks.begin(), unlocks.end(), iTemp) != unlocks.end())
 				{
 					// if the same topic is also in the "Unlocks" section, skip it
@@ -1079,9 +1079,9 @@ void TechTreeViewerState::initLists()
 		std::unordered_set<std::string> unlocksMissions, disablesMissions;
 		bool affectsGameProgression = false;
 
-		for (auto& arcScriptId : *game.getMod()->getArcScriptList())
+		for (auto& arcScriptId : *game.mod()->getArcScriptList())
 		{
-			auto* arcScript = game.getMod()->getArcScript(arcScriptId, false);
+			auto* arcScript = game.mod()->getArcScript(arcScriptId, false);
 			if (arcScript)
 			{
 				for (auto& trigger : arcScript->getResearchTriggers())
@@ -1096,9 +1096,9 @@ void TechTreeViewerState::initLists()
 				}
 			}
 		}
-		for (auto& eventScriptId : *game.getMod()->getEventScriptList())
+		for (auto& eventScriptId : *game.mod()->getEventScriptList())
 		{
-			auto* eventScript = game.getMod()->getEventScript(eventScriptId, false);
+			auto* eventScript = game.mod()->getEventScript(eventScriptId, false);
 			if (eventScript)
 			{
 				for (auto& trigger : eventScript->getResearchTriggers())
@@ -1114,9 +1114,9 @@ void TechTreeViewerState::initLists()
 				}
 			}
 		}
-		for (auto& missionScriptId : *game.getMod()->getMissionScriptList())
+		for (auto& missionScriptId : *game.mod()->getMissionScriptList())
 		{
-			auto* missionScript = game.getMod()->getMissionScript(missionScriptId, false);
+			auto* missionScript = game.mod()->getMissionScript(missionScriptId, false);
 			if (missionScript)
 			{
 				for (auto& trigger : missionScript->getResearchTriggers())
@@ -1203,7 +1203,7 @@ void TechTreeViewerState::initLists()
 	else if (_selectedFlag == TTV_MANUFACTURING)
 	{
 		int row = 0;
-		RuleManufacture *rule = game.getMod()->getManufacture(_selectedTopic);
+		RuleManufacture *rule = game.mod()->getManufacture(_selectedTopic);
 		if (rule == 0)
 			return;
 
@@ -1236,7 +1236,7 @@ void TechTreeViewerState::initLists()
 			_leftTopics.push_back("-");
 			_leftFlags.push_back(TTV_NONE);
 			++row;
-			for (const auto& requiredServiceType : game.getMod()->getBaseFunctionNames(rule->getRequireBaseFunc()))
+			for (const auto& requiredServiceType : game.mod()->getBaseFunctionNames(rule->getRequireBaseFunc()))
 			{
 				std::string name = ltr(requiredServiceType);
 				name.insert(0, "  ");
@@ -1467,7 +1467,7 @@ void TechTreeViewerState::initLists()
 	else if (_selectedFlag == TTV_FACILITIES)
 	{
 		int row = 0;
-		RuleBaseFacility *rule = game.getMod()->getBaseFacility(_selectedTopic);
+		RuleBaseFacility *rule = game.mod()->getBaseFacility(_selectedTopic);
 		if (rule == 0)
 			return;
 
@@ -1500,7 +1500,7 @@ void TechTreeViewerState::initLists()
 			_leftTopics.push_back("-");
 			_leftFlags.push_back(TTV_NONE);
 			++row;
-			for (const auto& requiredServiceType : game.getMod()->getBaseFunctionNames(rule->getRequireBaseFunc()))
+			for (const auto& requiredServiceType : game.mod()->getBaseFunctionNames(rule->getRequireBaseFunc()))
 			{
 				std::string name = ltr(requiredServiceType);
 				name.insert(0, "  ");
@@ -1522,7 +1522,7 @@ void TechTreeViewerState::initLists()
 			_rightTopics.push_back("-");
 			_rightFlags.push_back(TTV_NONE);
 			++row;
-			for (const auto& providedServiceType : game.getMod()->getBaseFunctionNames(rule->getProvidedBaseFunc()))
+			for (const auto& providedServiceType : game.mod()->getBaseFunctionNames(rule->getProvidedBaseFunc()))
 			{
 				std::string name = ltr(providedServiceType);
 				name.insert(0, "  ");
@@ -1542,7 +1542,7 @@ void TechTreeViewerState::initLists()
 			_rightTopics.push_back("-");
 			_rightFlags.push_back(TTV_NONE);
 			++row;
-			for (const auto& forbiddenServiceType : game.getMod()->getBaseFunctionNames(rule->getForbiddenBaseFunc()))
+			for (const auto& forbiddenServiceType : game.mod()->getBaseFunctionNames(rule->getForbiddenBaseFunc()))
 			{
 				std::string name = ltr(forbiddenServiceType);
 				name.insert(0, "  ");
@@ -1561,7 +1561,7 @@ void TechTreeViewerState::initLists()
 		_lstFull->setVisible(true);
 
 		int row = 0;
-		RuleItem *rule = game.getMod()->getItem(_selectedTopic);
+		RuleItem *rule = game.mod()->getItem(_selectedTopic);
 		if (rule == 0)
 			return;
 
@@ -1610,7 +1610,7 @@ void TechTreeViewerState::initLists()
 		// 3. services (from base facilities) required to buy
 		if (rule->getRequiresBuyBaseFunc().any())
 		{
-			const std::vector<std::string> servicesBuy = game.getMod()->getBaseFunctionNames(rule->getRequiresBuyBaseFunc());
+			const std::vector<std::string> servicesBuy = game.mod()->getBaseFunctionNames(rule->getRequiresBuyBaseFunc());
 			_lstFull->addRow(1, ltr("STR_SERVICES_REQUIRED_BUY").c_str());
 			_lstFull->setRowColor(row, _blue);
 			_leftTopics.push_back("-");
@@ -1630,9 +1630,9 @@ void TechTreeViewerState::initLists()
 
 		// 4. produced by
 		std::vector<std::string> producedBy;
-		for (auto& j : game.getMod()->getManufactureList())
+		for (auto& j : game.mod()->getManufactureList())
 		{
-			RuleManufacture* temp = game.getMod()->getManufacture(j);
+			RuleManufacture* temp = game.mod()->getManufacture(j);
 			bool found = false;
 			for (auto& i : temp->getProducedItems())
 			{
@@ -1685,9 +1685,9 @@ void TechTreeViewerState::initLists()
 
 		// 5. spawned by
 		std::vector<std::string> spawnedBy;
-		for (auto& j : game.getMod()->getResearchList())
+		for (auto& j : game.mod()->getResearchList())
 		{
-			RuleResearch* temp = game.getMod()->getResearch(j);
+			RuleResearch* temp = game.mod()->getResearch(j);
 			if (temp->getSpawnedItem() == rule->getType())
 			{
 				spawnedBy.push_back(j);
@@ -1751,7 +1751,7 @@ void TechTreeViewerState::initLists()
 	else if (_selectedFlag == TTV_CRAFTS)
 	{
 		int row = 0;
-		RuleCraft *rule = game.getMod()->getCraft(_selectedTopic);
+		RuleCraft *rule = game.mod()->getCraft(_selectedTopic);
 		if (rule == 0)
 			return;
 
@@ -1784,7 +1784,7 @@ void TechTreeViewerState::initLists()
 			_leftTopics.push_back("-");
 			_leftFlags.push_back(TTV_NONE);
 			++row;
-			for (const auto& serviceReqToBuy : game.getMod()->getBaseFunctionNames(rule->getRequiresBuyBaseFunc()))
+			for (const auto& serviceReqToBuy : game.mod()->getBaseFunctionNames(rule->getRequiresBuyBaseFunc()))
 			{
 				std::string name = ltr(serviceReqToBuy);
 				name.insert(0, "  ");
@@ -1798,9 +1798,9 @@ void TechTreeViewerState::initLists()
 
 		// 3. produced by
 		std::vector<std::string> producedBy;
-		for (auto& j : game.getMod()->getManufactureList())
+		for (auto& j : game.mod()->getManufactureList())
 		{
-			RuleManufacture* temp = game.getMod()->getManufacture(j);
+			RuleManufacture* temp = game.mod()->getManufacture(j);
 			if (temp->getProducedCraft() == rule)
 			{
 				producedBy.push_back(j);

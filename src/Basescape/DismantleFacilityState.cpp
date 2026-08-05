@@ -137,7 +137,7 @@ void DismantleFacilityState::btnOkClick(Action *)
 			game.savedGame()->setFunds(game.savedGame()->getFunds() + _fac->getRules()->getBuildCost());
 			for (auto& pair : itemCost)
 			{
-				_base->getStorageItems().addItem(game.getMod()->getItem(pair.first, true), pair.second.first);
+				_base->getStorageItems().addItem(game.mod()->getItem(pair.first, true), pair.second.first);
 			}
 		}
 		else
@@ -146,7 +146,7 @@ void DismantleFacilityState::btnOkClick(Action *)
 			game.savedGame()->setFunds(game.savedGame()->getFunds() + _fac->getRules()->getRefundValue());
 			for (auto& pair : itemCost)
 			{
-				_base->getStorageItems().addItem(game.getMod()->getItem(pair.first, true), pair.second.second);
+				_base->getStorageItems().addItem(game.mod()->getItem(pair.first, true), pair.second.second);
 			}
 		}
 		if (_fac->getAmmo() > 0)
@@ -167,7 +167,7 @@ void DismantleFacilityState::btnOkClick(Action *)
 					const auto& facList = _fac->getRules()->getLeavesBehindOnSell();
 					if (facList.at(0)->getPlaceSound() != Mod::NO_SOUND)
 					{
-						game.getMod()->getSound("GEO.CAT", facList.at(0)->getPlaceSound())->play();
+						game.mod()->getSound("GEO.CAT", facList.at(0)->getPlaceSound())->play();
 					}
 					// Make sure the size of the facilities left behind matches the one we removed
 					if (facList.at(0)->getSizeX() == _fac->getRules()->getSizeX() && facList.at(0)->getSizeY() == _fac->getRules()->getSizeY()) // equal size facilities

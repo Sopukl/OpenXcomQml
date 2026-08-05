@@ -76,7 +76,7 @@ TransferItemsState::TransferItemsState(Base *baseFrom, Base *baseTo, DebriefingS
 	// Set palette
 	setInterface("transferMenu");
 
-	_ammoColor = game.getMod()->getInterface("transferMenu")->getElement("ammoColor")->color;
+	_ammoColor = game.mod()->getInterface("transferMenu")->getElement("ammoColor")->color;
 
 	add(_window, "window", "transferMenu");
 	add(_btnQuickSearch, "button", "transferMenu");
@@ -189,9 +189,9 @@ TransferItemsState::TransferItemsState(Base *baseFrom, Base *baseTo, DebriefingS
 			_cats.push_back(cat);
 		}
 	}
-	for (auto& itemType : game.getMod()->getItemsList())
+	for (auto& itemType : game.mod()->getItemsList())
 	{
-		RuleItem *rule = game.getMod()->getItem(itemType, true);
+		RuleItem *rule = game.mod()->getItem(itemType, true);
 		int qty = _baseFrom->getStorageItems().countOf(rule);
 		if (_debriefingState != 0)
 		{
@@ -210,7 +210,7 @@ TransferItemsState::TransferItemsState(Base *baseFrom, Base *baseTo, DebriefingS
 	}
 
 	_vanillaCategories = _cats.size();
-	if (game.getMod()->getDisplayCustomCategories() > 0)
+	if (game.mod()->getDisplayCustomCategories() > 0)
 	{
 		bool hasUnassigned = false;
 
@@ -235,7 +235,7 @@ TransferItemsState::TransferItemsState(Base *baseFrom, Base *baseTo, DebriefingS
 			}
 		}
 		// then use them nicely in order
-		if (game.getMod()->getDisplayCustomCategories() == 1)
+		if (game.mod()->getDisplayCustomCategories() == 1)
 		{
 			_cats.clear();
 			_cats.push_back("STR_ALL_ITEMS");
@@ -247,7 +247,7 @@ TransferItemsState::TransferItemsState(Base *baseFrom, Base *baseTo, DebriefingS
 			}
 			_vanillaCategories = _cats.size();
 		}
-		for (auto& categoryName : game.getMod()->getItemCategoriesList())
+		for (auto& categoryName : game.mod()->getItemCategoriesList())
 		{
 			if (std::find(tempCats.begin(), tempCats.end(), categoryName) != tempCats.end())
 			{
@@ -336,9 +336,9 @@ std::string TransferItemsState::getCategory(int sel) const
 		}
 		if (rule->getBattleType() == BT_NONE)
 		{
-			if (game.getMod()->isCraftWeaponStorageItem(rule))
+			if (game.mod()->isCraftWeaponStorageItem(rule))
 				return "STR_CRAFT_ARMAMENT";
-			if (game.getMod()->isArmorStorageItem(rule))
+			if (game.mod()->isArmorStorageItem(rule))
 				return "STR_ARMORS"; // OXCE: armors
 			return "STR_COMPONENTS";
 		}
@@ -437,7 +437,7 @@ void TransferItemsState::updateList()
 			if (_items[i].type == TRANSFER_ITEM)
 			{
 				RuleItem* rule = (RuleItem*)_items[i].rule;
-				bool isResearchable = game.savedGame()->isResearchable(rule, game.getMod());
+				bool isResearchable = game.savedGame()->isResearchable(rule, game.mod());
 				if (categoryResearched && isResearchable) continue;
 				if (categoryResearchable && !isResearchable) continue;
 			}
@@ -529,7 +529,7 @@ void TransferItemsState::btnOkClick(Action *)
 		double freeStoresFrom = _baseFrom->getAvailableStores() - _baseFrom->getUsedStores() + _iQty;
 		if (_iQty > 0.0 ? freeStoresTo < -0.00001 : freeStoresFrom < -0.00001)
 		{
-			RuleInterface *menuInterface = game.getMod()->getInterface("transferMenu");
+			RuleInterface *menuInterface = game.mod()->getInterface("transferMenu");
 			game.errorMessage(QString::fromStdString(ltr("STR_NOT_ENOUGH_STORE_SPACE")));
 			return;
 		}
@@ -848,7 +848,7 @@ void TransferItemsState::lstItemsMousePress(Action *action)
 				}
 				else
 				{
-					const RuleResearch* selectedTopic = game.getMod()->getResearch(articleId, false);
+					const RuleResearch* selectedTopic = game.mod()->getResearch(articleId, false);
 					if (selectedTopic)
 					{
 						game.pushState(new TechTreeViewerState(selectedTopic, 0));
@@ -993,7 +993,7 @@ void TransferItemsState::increaseByValue(int change)
 	else
 	{
 		_timerInc->stop();
-		RuleInterface *menuInterface = game.getMod()->getInterface("transferMenu");
+		RuleInterface *menuInterface = game.mod()->getInterface("transferMenu");
 		game.errorMessage(QString::fromStdString(errorMessage));
 		_errorShown = true;
 	}

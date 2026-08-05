@@ -219,11 +219,11 @@ void StatsForNerdsState::buildUI(bool debug, bool ids, bool defaults)
 	// Set palette
 	setInterface("statsForNerds");
 
-	_purple = game.getMod()->getInterface("statsForNerds")->getElement("list")->color;
-	_pink = game.getMod()->getInterface("statsForNerds")->getElement("list")->color2;
-	_blue = game.getMod()->getInterface("statsForNerds")->getElement("list")->border;
-	_white = game.getMod()->getInterface("statsForNerds")->getElement("listExtended")->color;
-	_gold = game.getMod()->getInterface("statsForNerds")->getElement("listExtended")->color2;
+	_purple = game.mod()->getInterface("statsForNerds")->getElement("list")->color;
+	_pink = game.mod()->getInterface("statsForNerds")->getElement("list")->color2;
+	_blue = game.mod()->getInterface("statsForNerds")->getElement("list")->border;
+	_white = game.mod()->getInterface("statsForNerds")->getElement("listExtended")->color;
+	_gold = game.mod()->getInterface("statsForNerds")->getElement("listExtended")->color2;
 
 	add(_window, "window", "statsForNerds");
 	add(_txtTitle, "text", "statsForNerds");
@@ -350,7 +350,7 @@ void StatsForNerdsState::init()
 				// and allow the preview only if the ufopedia was opened from the main geoscape menu
 				return;
 			}
-			RuleCraft* craftRule = game.getMod()->getCraft(_topicId);
+			RuleCraft* craftRule = game.mod()->getCraft(_topicId);
 			if (craftRule->isForNewBattle())
 			{
 				auto& data = game.savedGame()->getCustomRuleCraftDeployments();
@@ -382,10 +382,10 @@ void StatsForNerdsState::cbxAmmoSelect(Action *)
 		{
 			// perform same checks as in ArticleStateItem.cpp
 			const auto& ammoId = _filterOptions.at(selIdx);
-			auto* ammo_article = game.getMod()->getUfopaediaArticle(ammoId, true);
+			auto* ammo_article = game.mod()->getUfopaediaArticle(ammoId, true);
 			if (Ufopaedia::isArticleAvailable(game.savedGame(), ammo_article))
 			{
-				auto* ammo_rule = game.getMod()->getItem(ammoId, true);
+				auto* ammo_rule = game.mod()->getItem(ammoId, true);
 				game.pushState(new StatsForNerdsState(UFOPAEDIA_TYPE_ITEM, ammo_rule->getType(), _btnIncludeDebug->getPressed(), _btnIncludeIds->getPressed(), _btnIncludeDefaults->getPressed()));
 			}
 		}
@@ -393,10 +393,10 @@ void StatsForNerdsState::cbxAmmoSelect(Action *)
 		{
 			// perform similar checks as above, but don't crash if article is not found
 			const auto& builtInItemId = _filterOptions.at(selIdx);
-			auto* builtInItem_article = game.getMod()->getUfopaediaArticle(builtInItemId, false);
+			auto* builtInItem_article = game.mod()->getUfopaediaArticle(builtInItemId, false);
 			if (builtInItem_article && Ufopaedia::isArticleAvailable(game.savedGame(), builtInItem_article))
 			{
-				auto* builtInItem_rule = game.getMod()->getItem(builtInItemId, true);
+				auto* builtInItem_rule = game.mod()->getItem(builtInItemId, true);
 				game.pushState(new StatsForNerdsState(UFOPAEDIA_TYPE_ITEM, builtInItem_rule->getType(), _btnIncludeDebug->getPressed(), _btnIncludeIds->getPressed(), _btnIncludeDefaults->getPressed()));
 			}
 		}
@@ -438,7 +438,7 @@ void StatsForNerdsState::btnOkClick(Action *)
  */
 void StatsForNerdsState::btnPreviewClick(Action *)
 {
-	const Mod* mod = game.getMod();
+	const Mod* mod = game.mod();
 	SavedGame* save = game.savedGame();
 	Base* base = save->getPreviewBase();
 	if (!base)
@@ -505,7 +505,7 @@ void StatsForNerdsState::btnPreviewClick(Action *)
 		if (max <= 0) break;
 	}
 
-	SavedBattleGame* bgame = new SavedBattleGame(game.getMod(), true);
+	SavedBattleGame* bgame = new SavedBattleGame(game.mod(), true);
 	game.savedGame()->setBattleGame(bgame);
 	BattlescapeGenerator bgen = BattlescapeGenerator();
 	bgame->setMissionType(c->getRules()->getCustomPreviewType());
@@ -869,7 +869,7 @@ void StatsForNerdsState::addScriptTags(std::ostringstream &ss, const ScriptValue
 {
 	auto& tagValues = values.getValuesRaw();
 	ArgEnum index = ScriptParserBase::getArgType<ScriptTag<T, I>>();
-	auto& tagNames = game.getMod()->getScriptGlobal()->getTagNames().at(index);
+	auto& tagNames = game.mod()->getScriptGlobal()->getTagNames().at(index);
 	for (size_t i = 0; i < tagValues.size(); ++i)
 	{
 		auto nameAsString = tagNames.values[i].name.toString().substr(4);
@@ -1864,7 +1864,7 @@ void StatsForNerdsState::initItemList()
 
 	_txtArticle->setText(ltr("STR_ARTICLE").arg(ssTopic.str()));
 
-	Mod *mod = game.getMod();
+	Mod *mod = game.mod();
 	RuleItem *itemRule = mod->getItem(_topicId);
 	if (!itemRule)
 		return;
@@ -2767,7 +2767,7 @@ void StatsForNerdsState::initArmorList()
 
 	_txtArticle->setText(ltr("STR_ARTICLE").arg(ssTopic.str()));
 
-	Mod *mod = game.getMod();
+	Mod *mod = game.mod();
 	Armor *armorRule = mod->getArmor(_topicId);
 	if (!armorRule)
 		return;
@@ -3026,7 +3026,7 @@ void StatsForNerdsState::initSoldierBonusList()
 
 	_txtArticle->setText(ltr("STR_ARTICLE").arg(ssTopic.str()));
 
-	Mod *mod = game.getMod();
+	Mod *mod = game.mod();
 	RuleSoldierBonus *bonusRule = mod->getSoldierBonus(_topicId);
 	if (!bonusRule)
 		return;
@@ -3175,7 +3175,7 @@ void StatsForNerdsState::initFacilityList()
 
 	_txtArticle->setText(ltr("STR_ARTICLE").arg(ssTopic.str()));
 
-	Mod *mod = game.getMod();
+	Mod *mod = game.mod();
 	RuleBaseFacility *facilityRule = mod->getBaseFacility(_topicId);
 	if (!facilityRule)
 		return;
@@ -3347,7 +3347,7 @@ void StatsForNerdsState::initCraftList()
 
 	_txtArticle->setText(ltr("STR_ARTICLE").arg(ssTopic.str()));
 
-	Mod *mod = game.getMod();
+	Mod *mod = game.mod();
 	RuleCraft *craftRule = mod->getCraft(_topicId);
 	if (!craftRule)
 		return;
@@ -3674,7 +3674,7 @@ void StatsForNerdsState::initUfoList()
 
 	_txtArticle->setText(ltr("STR_ARTICLE").arg(ssTopic.str()));
 
-	Mod *mod = game.getMod();
+	Mod *mod = game.mod();
 	RuleUfo *ufoRule = mod->getUfo(_topicId);
 	if (!ufoRule)
 		return;
@@ -3728,7 +3728,7 @@ void StatsForNerdsState::initUfoList()
 		int escapeCountdownMax = escapeCountdown + ufoRule->getBreakOffTime();
 		{
 			int diff = game.savedGame()->getDifficulty();
-			auto& custom = game.getMod()->getUfoEscapeCountdownCoefficients();
+			auto& custom = game.mod()->getUfoEscapeCountdownCoefficients();
 			if (custom.size() > (size_t)diff)
 			{
 				escapeCountdown = ufoRule->getBreakOffTime() * custom[diff] / 100;
@@ -3740,7 +3740,7 @@ void StatsForNerdsState::initUfoList()
 		int fireCountdown = std::max(1, (ufoRule->getWeaponReload() - 2 * game.savedGame()->getDifficultyCoefficient()));
 		{
 			int diff = game.savedGame()->getDifficulty();
-			auto& custom = game.getMod()->getUfoFiringRateCoefficients();
+			auto& custom = game.mod()->getUfoFiringRateCoefficients();
 			if (custom.size() > (size_t)diff)
 			{
 				fireCountdown = std::max(1, ufoRule->getWeaponReload() * custom[diff] / 100);
@@ -3877,7 +3877,7 @@ void StatsForNerdsState::initCraftWeaponList()
 
 	_txtArticle->setText(ltr("STR_ARTICLE").arg(ssTopic.str()));
 
-	Mod *mod = game.getMod();
+	Mod *mod = game.mod();
 	RuleCraftWeapon *craftWeaponRule = mod->getCraftWeapon(_topicId);
 	if (!craftWeaponRule)
 		return;
@@ -4015,7 +4015,7 @@ void StatsForNerdsState::initSoldierList()
 
 	_txtArticle->setText(ltr("STR_ARTICLE").arg(ssTopic.str()));
 
-	Mod* mod = game.getMod();
+	Mod* mod = game.mod();
 	RuleSoldier* soldierRule = mod->getSoldier(_topicId);
 	if (!soldierRule)
 		return;
@@ -4039,7 +4039,7 @@ void StatsForNerdsState::initSoldierList()
 
 	int time = soldierRule->getTransferTime();
 	if (time == 0)
-		time = game.getMod()->getPersonnelTime();
+		time = game.mod()->getPersonnelTime();
 
 	addInteger(ss, time, "transferTime"); // not raw!
 
@@ -4158,7 +4158,7 @@ void StatsForNerdsState::initUnitList()
 
 	_txtArticle->setText(ltr("STR_ARTICLE").arg(ssTopic.str()));
 
-	Mod* mod = game.getMod();
+	Mod* mod = game.mod();
 	Unit* unitRule = mod->getUnit(_topicId);
 	if (!unitRule)
 		return;

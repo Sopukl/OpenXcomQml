@@ -80,7 +80,7 @@ ExperienceOverviewState::ExperienceOverviewState(BattlescapeState* parent) : _pa
 
 	// Set up objects
 	_window->setHighContrast(true);
-	_window->setBackground(game.getMod()->getSurface("TAC00.SCR"));
+	_window->setBackground(game.mod()->getSurface("TAC00.SCR"));
 
 	_btnOk->setHighContrast(true);
 	_btnOk->setText(ltr("STR_OK"));
@@ -110,7 +110,7 @@ ExperienceOverviewState::ExperienceOverviewState(BattlescapeState* parent) : _pa
 	_txtPsiSkill->setText(ltr("STR_PSIONIC_SKILL_ABBREVIATION"));
 	_txtPsiStrength->setText(ltr("STR_PSIONIC_STRENGTH_ABBREVIATION"));
 	_txtMelee->setText(ltr("STR_MELEE_ACCURACY_ABBREVIATION"));
-	if (game.getMod()->isManaFeatureEnabled() && game.getMod()->isManaTrainingPrimary())
+	if (game.mod()->isManaFeatureEnabled() && game.mod()->isManaTrainingPrimary())
 	{
 		_txtMana->setText(ltr("STR_MANA_ABBREVIATION"));
 	}
@@ -152,7 +152,7 @@ ExperienceOverviewState::ExperienceOverviewState(BattlescapeState* parent) : _pa
 		std::ostringstream melee;
 		melee << stats->melee;
 		std::ostringstream mana;
-		if (game.getMod()->isManaFeatureEnabled() && game.getMod()->isManaTrainingPrimary())
+		if (game.mod()->isManaFeatureEnabled() && game.mod()->isManaTrainingPrimary())
 		{
 			mana << stats->mana;
 		}

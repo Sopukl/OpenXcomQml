@@ -118,24 +118,24 @@ BasescapeState::BasescapeState(Base *base, Globe *globe) : _base(base), _globe(g
 		{
 			int texture, shade;
 			_globe->getPolygonTextureAndShade(xbase->getLongitude(), xbase->getLatitude(), &texture, &shade);
-			auto* globeTexture = game.getMod()->getGlobe()->getTexture(texture);
+			auto* globeTexture = game.mod()->getGlobe()->getTexture(texture);
 			xbase->setGlobeTexture(globeTexture);
 		}
 	}
 
-	auto* itf = game.getMod()->getInterface("basescape")->getElementOptional("trafficLights");
+	auto* itf = game.mod()->getInterface("basescape")->getElementOptional("trafficLights");
 	if (itf)
 	{
 		_view->setOtherColors(itf->color, itf->color2, itf->border, !itf->TFTDMode);
 	}
-	_view->setTexture(game.getMod()->getSurfaceSet("BASEBITS.PCK"));
+	_view->setTexture(game.mod()->getSurfaceSet("BASEBITS.PCK"));
 	_view->onMouseClick((ActionHandler)&BasescapeState::viewLeftClick, SDL_BUTTON_LEFT);
 	_view->onMouseClick((ActionHandler)&BasescapeState::viewRightClick, SDL_BUTTON_RIGHT);
 	_view->onMouseClick((ActionHandler)&BasescapeState::viewMiddleClick, SDL_BUTTON_MIDDLE);
 	_view->onMouseOver((ActionHandler)&BasescapeState::viewMouseOver);
 	_view->onMouseOut((ActionHandler)&BasescapeState::viewMouseOut);
 
-	_mini->setTexture(game.getMod()->getSurfaceSet("BASEBITS.PCK"));
+	_mini->setTexture(game.mod()->getSurfaceSet("BASEBITS.PCK"));
 	_mini->setBases(&game.savedGame()->bases());
 	_mini->onMouseClick((ActionHandler)&BasescapeState::miniLeftClick, SDL_BUTTON_LEFT);
 	_mini->onMouseClick((ActionHandler)&BasescapeState::miniRightClick, SDL_BUTTON_RIGHT);
@@ -237,9 +237,9 @@ void BasescapeState::init()
 
 	_btnNewBase->setVisible(game.savedGame()->bases().size() < MiniBaseView::MAX_BASES);
 
-	if (!game.getMod()->getNewBaseUnlockResearch().empty())
+	if (!game.mod()->getNewBaseUnlockResearch().empty())
 	{
-		bool newBasesUnlocked = game.savedGame()->isResearched(game.getMod()->getNewBaseUnlockResearch(), true);
+		bool newBasesUnlocked = game.savedGame()->isResearched(game.mod()->getNewBaseUnlockResearch(), true);
 		if (!newBasesUnlocked)
 		{
 			_btnNewBase->setVisible(false);
@@ -279,7 +279,7 @@ void BasescapeState::setBase(Base *base)
 	else
 	{
 		// Use a blank base for special case when player has no bases
-		_base = new Base(game.getMod());
+		_base = new Base(game.mod());
 		_mini->setSelectedBase(0);
 		game.savedGame()->setSelectedBase(0);
 	}
@@ -291,7 +291,7 @@ void BasescapeState::setBase(Base *base)
  */
 void BasescapeState::btnNewBaseClick(Action *)
 {
-	auto base = new Base(game.getMod());
+	auto base = new Base(game.mod());
 	game.popState();
 	//Q_EMIT game.createNewBase(game.getGeoscapeState(), base, false);
 	game.pushState(new BuildNewBaseState(base, _globe, false));
@@ -411,9 +411,9 @@ void BasescapeState::viewLeftClick(Action *)
 				{
 					int texture, shade;
 					_globe->getPolygonTextureAndShade(_base->getLongitude(), _base->getLatitude(), &texture, &shade);
-					auto* globeTexture = game.getMod()->getGlobe()->getTexture(texture);
+					auto* globeTexture = game.mod()->getGlobe()->getTexture(texture);
 
-					auto bgame = new SavedBattleGame(game.getMod(), true);
+					auto bgame = new SavedBattleGame(game.mod(), true);
 					game.savedGame()->setBattleGame(bgame);
 					BattlescapeGenerator bgen = BattlescapeGenerator();
 					bgame->setMissionType("STR_BASE_DEFENSE");
@@ -425,8 +425,8 @@ void BasescapeState::viewLeftClick(Action *)
 				}
 				return;
 			}
-			int errorColor1 = game.getMod()->getInterface("basescape")->getElement("errorMessage")->color;
-			int errorColor2 = game.getMod()->getInterface("basescape")->getElement("errorPalette")->color;
+			int errorColor1 = game.mod()->getInterface("basescape")->getElement("errorMessage")->color;
+			int errorColor2 = game.mod()->getInterface("basescape")->getElement("errorPalette")->color;
 			// Is facility in use?
 			if (BasePlacementErrors placementErrorCode = fac->inUse())
 			{

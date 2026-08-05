@@ -261,7 +261,7 @@ namespace OpenXcom
 	void ArticleState::btnResetMusicClick(Action *)
 	{
 		// reset that pesky interception music!
-		game.getMod()->playMusic("GMGEO");
+		game.mod()->playMusic("GMGEO");
 	}
 
 	/**

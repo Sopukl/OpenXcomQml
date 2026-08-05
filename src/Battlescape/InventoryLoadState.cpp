@@ -55,7 +55,7 @@ InventoryLoadState::InventoryLoadState(InventoryState *parent) : _parent(parent)
 
 	// Set up objects
 	_window->setHighContrast(true);
-	_window->setBackground(game.getMod()->getSurface("TAC00.SCR"));
+	_window->setBackground(game.mod()->getSurface("TAC00.SCR"));
 
 	_txtTitle->setHighContrast(true);
 	_txtTitle->setAlign(ALIGN_CENTER);

@@ -78,10 +78,10 @@ void State::setInterface(const std::string& category, bool alterPal, SavedBattle
 	int backPal = -1;
 	std::string pal = "PAL_GEOSCAPE";
 
-	_ruleInterface = game.getMod()->getInterface(category);
+	_ruleInterface = game.mod()->getInterface(category);
 	if (_ruleInterface)
 	{
-		_ruleInterfaceParent = game.getMod()->getInterface(_ruleInterface->getParent());
+		_ruleInterfaceParent = game.mod()->getInterface(_ruleInterface->getParent());
 		pal = _ruleInterface->getPalette();
 		const Element *element = _ruleInterface->getElementOptional("palette");
 		if (_ruleInterfaceParent)
@@ -126,7 +126,7 @@ void State::setInterface(const std::string& category, bool alterPal, SavedBattle
  */
 void State::setWindowBackground(Window *window, const std::string &s)
 {
-	auto& bgImageName = game.getMod()->getInterface(s)->getBackgroundImage(game.getMod(), game.savedGame());
+	auto& bgImageName = game.mod()->getInterface(s)->getBackgroundImage(game.mod(), game.savedGame());
 	setWindowBackgroundImage(window, bgImageName);
 }
 
@@ -137,7 +137,7 @@ void State::setWindowBackground(Window *window, const std::string &s)
  */
 void State::setWindowBackgroundImage(Window* window, const std::string& bgImageName)
 {
-	const auto* bgImage = game.getMod()->getSurface(bgImageName);
+	const auto* bgImage = game.mod()->getSurface(bgImageName);
 	window->setBackground(bgImage);
 }
 
@@ -170,8 +170,8 @@ void State::add(Surface *surface)
 	surface->setPalette(_palette);
 
 	// Set default text resources
-	if (game.language() && game.getMod())
-		surface->initText(game.getMod()->getFont("FONT_BIG"), game.getMod()->getFont("FONT_SMALL"));
+	if (game.language() && game.mod())
+		surface->initText(game.mod()->getFont("FONT_BIG"), game.mod()->getFont("FONT_SMALL"));
 
 	_surfaces.push_back(surface);
 	preAdd(surface);
@@ -195,9 +195,9 @@ void State::add(Surface *surface, const std::string &id, const std::string &cate
 	// this only works if we're dealing with a battlescape button
 	BattlescapeButton *bsbtn = dynamic_cast<BattlescapeButton*>(surface);
 
-	if (game.getMod()->getInterface(category, false))
+	if (game.mod()->getInterface(category, false))
 	{
-		const Element *element = game.getMod()->getInterface(category)->getElementOptional(id);
+		const Element *element = game.mod()->getInterface(category)->getElementOptional(id);
 		if (element)
 		{
 			if (parent && element->w != INT_MAX && element->h != INT_MAX)
@@ -241,8 +241,8 @@ void State::add(Surface *surface, const std::string &id, const std::string &cate
 	}
 
 	// Set default text resources
-	if (game.language() && game.getMod())
-		surface->initText(game.getMod()->getFont("FONT_BIG"), game.getMod()->getFont("FONT_SMALL"));
+	if (game.language() && game.mod())
+		surface->initText(game.mod()->getFont("FONT_BIG"), game.mod()->getFont("FONT_SMALL"));
 
 	_surfaces.push_back(surface);
 	preAdd(surface);
@@ -298,7 +298,7 @@ void State::init()
 		_soundPlayed = true;
 		if (!_customSound && _ruleInterface && _ruleInterface->getSound() != Mod::NO_SOUND)
 		{
-			_customSound = game.getMod()->getSound("GEO.CAT", _ruleInterface->getSound());
+			_customSound = game.mod()->getSound("GEO.CAT", _ruleInterface->getSound());
 		}
 		if (_customSound)
 		{
@@ -321,7 +321,7 @@ void State::init()
 	}
 	if (_ruleInterface != 0 && !_ruleInterface->getMusic().empty())
 	{
-		game.getMod()->playMusic(_ruleInterface->getMusic());
+		game.mod()->playMusic(_ruleInterface->getMusic());
 	}
 }
 
@@ -492,8 +492,8 @@ void State::lowerAllSurfaces()
  */
 void State::applyBattlescapeTheme(const std::string& category)
 {
-	const Element * element = game.getMod()->getInterface("mainMenu")->getElement("battlescapeTheme");
-	std::string altBg = game.getMod()->getInterface(category)->getAltBackgroundImage();
+	const Element * element = game.mod()->getInterface("mainMenu")->getElement("battlescapeTheme");
+	std::string altBg = game.mod()->getInterface(category)->getAltBackgroundImage();
 	if (altBg.empty())
 	{
 		altBg = "TAC00.SCR";
@@ -505,7 +505,7 @@ void State::applyBattlescapeTheme(const std::string& category)
 		Window* window = dynamic_cast<Window*>(surface);
 		if (window)
 		{
-			window->setBackground(game.getMod()->getSurface(altBg));
+			window->setBackground(game.mod()->getSurface(altBg));
 		}
 		TextList* list = dynamic_cast<TextList*>(surface);
 		if (list)
@@ -601,7 +601,7 @@ void State::setModPalette()
  */
 void State::setStandardPalette(const std::string &palette, int backpals)
 {
-	setStatePalette(game.getMod()->getPalette(palette)->getColors(), 0, 256);
+	setStatePalette(game.mod()->getPalette(palette)->getColors(), 0, 256);
 	if (palette == "PAL_GEOSCAPE")
 	{
 		_cursorColor = Mod::GEOSCAPE_CURSOR;
@@ -623,7 +623,7 @@ void State::setStandardPalette(const std::string &palette, int backpals)
 		_cursorColor = Mod::BATTLESCAPE_CURSOR;
 	}
 	if (backpals != -1)
-		setStatePalette(game.getMod()->getPalette("BACKPALS.DAT")->getColors(Palette::blockOffset(backpals)), Palette::backPos, 16);
+		setStatePalette(game.mod()->getPalette("BACKPALS.DAT")->getColors(Palette::blockOffset(backpals)), Palette::backPos, 16);
 	setModPalette(); // delay actual update to the end
 }
 

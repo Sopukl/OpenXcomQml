@@ -105,9 +105,9 @@ void BuildFacilitiesState::populateBuildList()
 	RuleBaseFacilityFunctions forbiddenBaseFunc = _base->getForbiddenBaseFunc({});
 	RuleBaseFacilityFunctions futureBaseFunc = _base->getFutureBaseFunc({});
 
-	for (auto& facilityType : game.getMod()->getBaseFacilitiesList())
+	for (auto& facilityType : game.mod()->getBaseFacilitiesList())
 	{
-		RuleBaseFacility *rule = game.getMod()->getBaseFacility(facilityType);
+		RuleBaseFacility *rule = game.mod()->getBaseFacility(facilityType);
 		if (!rule->isAllowedForBaseType(_base->isFakeUnderwater()))
 		{
 			continue;

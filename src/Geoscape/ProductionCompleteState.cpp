@@ -216,7 +216,7 @@ void ProductionCompleteState::lstSummaryClick(Action *)
 	int itemCount = _randomProductionInfo[itemName];
 
 	// 2. deal with it
-	auto* itemRule = game.getMod()->getItem(itemName, false);
+	auto* itemRule = game.mod()->getItem(itemName, false);
 	if (itemRule)
 	{
 		// check if we sold something in the meantime

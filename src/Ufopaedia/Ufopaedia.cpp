@@ -168,7 +168,7 @@ namespace OpenXcom
 	 */
 	void Ufopaedia::openArticle(ArticleDefinition *article)
 	{
-		auto state = createCommonArticleState(game.savedGame(), game.getMod());
+		auto state = createCommonArticleState(game.savedGame(), game.mod());
 		state->current_index = getArticleIndex(state->articleList, article->id);
 		if (state->current_index != ArticleCommonState::invalid)
 		{
@@ -183,7 +183,7 @@ namespace OpenXcom
 	 */
 	void Ufopaedia::openArticle(const std::string &article_id)
 	{
-		auto state = createCommonArticleState(game.savedGame(), game.getMod());
+		auto state = createCommonArticleState(game.savedGame(), game.mod());
 		state->current_index = getArticleIndex(state->articleList, article_id);
 		if (state->current_index != ArticleCommonState::invalid)
 		{
@@ -198,7 +198,7 @@ namespace OpenXcom
 	 */
 	void Ufopaedia::openArticleDetail(const std::string &article_id)
 	{
-		auto state = createCommonArticleState(game.savedGame(), game.getMod());
+		auto state = createCommonArticleState(game.savedGame(), game.mod());
 		state->current_index = getArticleIndex(state->articleList, article_id);
 		if (state->current_index != ArticleCommonState::invalid)
 		{

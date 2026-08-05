@@ -162,9 +162,9 @@ BaseInfoState::BaseInfoState(Base *base, BasescapeState *state) : _base(base), _
 		ss << "ALT";
 	}
 	ss << "BACK07.SCR";
-	game.getMod()->getSurface(ss.str())->blitNShade(_bg, 0, 0);
+	game.mod()->getSurface(ss.str())->blitNShade(_bg, 0, 0);
 
-	_mini->setTexture(game.getMod()->getSurfaceSet("BASEBITS.PCK"));
+	_mini->setTexture(game.mod()->getSurfaceSet("BASEBITS.PCK"));
 	_mini->setBases(&game.savedGame()->bases());
 	for (size_t i = 0; i < game.savedGame()->bases().size(); ++i)
 	{

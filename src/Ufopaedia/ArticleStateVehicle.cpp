@@ -37,7 +37,7 @@ namespace OpenXcom
 
 	ArticleStateVehicle::ArticleStateVehicle(ArticleDefinitionVehicle *defs, std::shared_ptr<ArticleCommonState> state) : ArticleState(defs->id, std::move(state))
 	{
-		RuleItem *item = game.getMod()->getItem(defs->id, true);
+		RuleItem *item = game.mod()->getItem(defs->id, true);
 		Unit *unit = item->getVehicleUnit();
 		if (!unit)
 		{
@@ -53,7 +53,7 @@ namespace OpenXcom
 		// Set palette
 		if (defs->customPalette)
 		{
-			setCustomPalette(game.getMod()->getSurface(defs->image_id)->getPalette(), Mod::UFOPAEDIA_CURSOR);
+			setCustomPalette(game.mod()->getSurface(defs->image_id)->getPalette(), Mod::UFOPAEDIA_CURSOR);
 		}
 		else
 		{
@@ -70,11 +70,11 @@ namespace OpenXcom
 		// Set up objects
 		if (!defs->image_id.empty())
 		{
-			game.getMod()->getSurface(defs->image_id)->blitNShade(_bg, 0, 0);
+			game.mod()->getSurface(defs->image_id)->blitNShade(_bg, 0, 0);
 		}
 		else
 		{
-			game.getMod()->getSurface("BACK10.SCR")->blitNShade(_bg, 0, 0);
+			game.mod()->getSurface("BACK10.SCR")->blitNShade(_bg, 0, 0);
 		}
 		_btnOk->setColor(Palette::blockOffset(5));
 		_btnPrev->setColor(Palette::blockOffset(5));

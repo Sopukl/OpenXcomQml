@@ -91,7 +91,7 @@ AllocatePsiTrainingState::AllocatePsiTrainingState(Base *base) : _sel(0), _base(
 
 	_btnPlus->setText("+");
 	_btnPlus->setPressed(false);
-	if (game.getMod()->getSoldierBonusList().empty())
+	if (game.mod()->getSoldierBonusList().empty())
 	{
 		// no soldier bonuses in the mod = button not needed
 		_btnPlus->setVisible(false);
@@ -135,7 +135,7 @@ AllocatePsiTrainingState::AllocatePsiTrainingState(Base *base) : _sel(0), _base(
 	PUSH_IN("STR_MISSIONS2", missionsStat);
 	PUSH_IN("STR_KILLS2", killsStat);
 	PUSH_IN("STR_WOUND_RECOVERY2", woundRecoveryStat);
-	if (game.getMod()->isManaFeatureEnabled() && !game.getMod()->getReplenishManaAfterMission())
+	if (game.mod()->isManaFeatureEnabled() && !game.mod()->getReplenishManaAfterMission())
 	{
 		PUSH_IN("STR_MANA_MISSING", manaMissingStat);
 	}
@@ -156,7 +156,7 @@ AllocatePsiTrainingState::AllocatePsiTrainingState(Base *base) : _sel(0), _base(
 	PUSH_IN("STR_THROWING_ACCURACY", throwingStatBase, throwingStatPlus);
 	PUSH_IN("STR_MELEE_ACCURACY", meleeStatBase, meleeStatPlus);
 	PUSH_IN("STR_STRENGTH", strengthStatBase, strengthStatPlus);
-	if (game.getMod()->isManaFeatureEnabled())
+	if (game.mod()->isManaFeatureEnabled())
 	{
 		// "unlock" is checked later
 		PUSH_IN("STR_MANA_POOL", manaStatBase, manaStatPlus);
@@ -253,10 +253,10 @@ void AllocatePsiTrainingState::cbxSortByChange(Action *action)
 void AllocatePsiTrainingState::btnOkClick(Action *)
 {
 	// Note: statString updates are needed only because of the potential "psiTraining" attribute change
-	bool psiStrengthEval = (options1.psiStrengthEval() && game.savedGame()->isResearched(game.getMod()->getPsiRequirements()));
+	bool psiStrengthEval = (options1.psiStrengthEval() && game.savedGame()->isResearched(game.mod()->getPsiRequirements()));
 	for (auto* soldier : _base->soldiers())
 	{
-		soldier->calcStatString(game.getMod()->getStatStrings(), psiStrengthEval);
+		soldier->calcStatString(game.mod()->getStatStrings(), psiStrengthEval);
 	}
 	game.popState();
 }
@@ -312,7 +312,7 @@ void AllocatePsiTrainingState::initList(size_t scrl)
 		std::ostringstream ssStr;
 		std::ostringstream ssSkl;
 		_soldiers.push_back(soldier);
-		if (soldier->getCurrentStats()->psiSkill > 0 || (options1.psiStrengthEval() && game.savedGame()->isResearched(game.getMod()->getPsiRequirements())))
+		if (soldier->getCurrentStats()->psiSkill > 0 || (options1.psiStrengthEval() && game.savedGame()->isResearched(game.mod()->getPsiRequirements())))
 		{
 			ssStr << "   " << stats->psiStrength;
 			if (options1.allowPsiStrengthImprovement()) ssStr << "/+" << soldier->getPsiStrImprovement();

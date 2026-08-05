@@ -168,11 +168,11 @@ MedikitState::MedikitState (BattleUnit *targetUnit, BattleAction *action, TileEn
 	Surface *backgroundSprite = 0;
 	if (!_item->getRules()->getMediKitCustomBackground().empty())
 	{
-		backgroundSprite = game.getMod()->getSurface(_item->getRules()->getMediKitCustomBackground(), false);
+		backgroundSprite = game.mod()->getSurface(_item->getRules()->getMediKitCustomBackground(), false);
 	}
 	if (!backgroundSprite)
 	{
-		backgroundSprite = game.getMod()->getSurface("MEDIBORD.PCK");
+		backgroundSprite = game.mod()->getSurface("MEDIBORD.PCK");
 	}
 
 	backgroundSprite->blitNShade(_bg, 0, 0);

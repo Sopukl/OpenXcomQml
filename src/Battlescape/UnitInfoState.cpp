@@ -64,7 +64,7 @@ UnitInfoState::UnitInfoState(BattleUnit *unit, BattlescapeState *parent, bool fr
 
 	int yPos = 38;
 	int step = 9;
-	if (game.getMod()->isManaFeatureEnabled())
+	if (game.mod()->isManaFeatureEnabled())
 	{
 		yPos = 30;
 	}
@@ -83,7 +83,7 @@ UnitInfoState::UnitInfoState(BattleUnit *unit, BattlescapeState *parent, bool fr
 	_numHealth = new Text(18, 9, 150, yPos);
 	_barHealth = new Bar(150, 5, 170, yPos + 1);
 	{
-		int numMaxHealthPosX = game.getMod()->getInterface("stats")->getElement("numMaxHealth")->x;
+		int numMaxHealthPosX = game.mod()->getInterface("stats")->getElement("numMaxHealth")->x;
 		_numMaxHealth = new Text(40, 9, numMaxHealthPosX, yPos);
 	}
 	yPos += step;
@@ -128,7 +128,7 @@ UnitInfoState::UnitInfoState(BattleUnit *unit, BattlescapeState *parent, bool fr
 	_barStrength = new Bar(150, 5, 170, yPos + 1);
 	yPos += step;
 
-	if (game.getMod()->isManaFeatureEnabled())
+	if (game.mod()->isManaFeatureEnabled())
 	{
 		_txtMana = new Text(140, 9, 8, yPos);
 		_numMana = new Text(18, 9, 150, yPos);
@@ -228,7 +228,7 @@ UnitInfoState::UnitInfoState(BattleUnit *unit, BattlescapeState *parent, bool fr
 	add(_numStrength);
 	add(_barStrength, "barStrength", "stats", 0);
 
-	if (game.getMod()->isManaFeatureEnabled())
+	if (game.mod()->isManaFeatureEnabled())
 	{
 		add(_txtMana);
 		add(_numMana);
@@ -272,14 +272,14 @@ UnitInfoState::UnitInfoState(BattleUnit *unit, BattlescapeState *parent, bool fr
 	centerAllSurfaces();
 
 	// Set up objects
-	game.getMod()->getSurface("UNIBORD.PCK")->blitNShade(_bg, 0, 0);
+	game.mod()->getSurface("UNIBORD.PCK")->blitNShade(_bg, 0, 0);
 
 	_exit->onMouseClick((ActionHandler)&UnitInfoState::exitClick);
 	_exit->onKeyboardPress((ActionHandler)&UnitInfoState::exitClick, options1.keyCancel());
 	_exit->onKeyboardPress((ActionHandler)&UnitInfoState::exitClick, options1.keyBattleStats());
 
-	Uint8 color = game.getMod()->getInterface("stats")->getElement("text")->color;
-	Uint8 color2 = game.getMod()->getInterface("stats")->getElement("text")->color2;
+	Uint8 color = game.mod()->getInterface("stats")->getElement("text")->color;
+	Uint8 color2 = game.mod()->getInterface("stats")->getElement("text")->color2;
 
 	_txtName->setAlign(ALIGN_CENTER);
 	_txtName->setBig();
@@ -387,7 +387,7 @@ UnitInfoState::UnitInfoState(BattleUnit *unit, BattlescapeState *parent, bool fr
 
 	_barStrength->setScale(1.0);
 
-	if (game.getMod()->isManaFeatureEnabled())
+	if (game.mod()->isManaFeatureEnabled())
 	{
 		_txtMana->setColor(color);
 		_txtMana->setHighContrast(true);
@@ -522,7 +522,7 @@ void UnitInfoState::init()
 	_numMaxHealth->setText("");
 	if (_unit->getBaseStats()->health >= 147)
 	{
-		auto* numMaxHealthElement = game.getMod()->getInterface("stats")->getElement("numMaxHealth");
+		auto* numMaxHealthElement = game.mod()->getInterface("stats")->getElement("numMaxHealth");
 		if ((numMaxHealthElement->custom & 1) || _unit->getHealth() != _unit->getBaseStats()->health)
 		{
 			ss.str("");
@@ -587,9 +587,9 @@ void UnitInfoState::init()
 	_barStrength->setMax(_unit->getBaseStats()->strength);
 	_barStrength->setValue(_unit->getBaseStats()->strength);
 
-	if (game.getMod()->isManaFeatureEnabled())
+	if (game.mod()->isManaFeatureEnabled())
 	{
-		if (game.savedGame()->isManaUnlocked(game.getMod()))
+		if (game.savedGame()->isManaUnlocked(game.mod()))
 		{
 			ss.str("");
 			ss << _unit->getMana();
@@ -614,7 +614,7 @@ void UnitInfoState::init()
 	{
 		psiSkillWithoutAnyBonuses = _unit->getGeoscapeSoldier()->getCurrentStats()->psiSkill;
 	}
-	if (psiSkillWithoutAnyBonuses > 0 || (options1.psiStrengthEval() && game.savedGame()->isResearched(game.getMod()->getPsiRequirements())))
+	if (psiSkillWithoutAnyBonuses > 0 || (options1.psiStrengthEval() && game.savedGame()->isResearched(game.mod()->getPsiRequirements())))
 	{
 		ss.str("");
 		ss << _unit->getBaseStats()->psiStrength;

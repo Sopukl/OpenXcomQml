@@ -81,7 +81,7 @@ GeoscapeEventState::GeoscapeEventState(const RuleEvent& eventRule) : _eventRule(
 	centerAllSurfaces();
 
 	// Set up objects
-	_window->setBackground(game.getMod()->getSurface(_eventRule.getBackground()));
+	_window->setBackground(game.mod()->getSurface(_eventRule.getBackground()));
 
 	_txtTitle->setAlign(ALIGN_CENTER);
 	_txtTitle->setBig();
@@ -143,7 +143,7 @@ void GeoscapeEventState::eventLogic()
 
 	SavedGame *save = game.savedGame();
 	Base *hq = save->bases().front();
-	const Mod *mod = game.getMod();
+	const Mod *mod = game.mod();
 	const RuleEvent &rule = _eventRule;
 
 	RuleRegion *regionRule = nullptr;
@@ -152,7 +152,7 @@ void GeoscapeEventState::eventLogic()
 	{
 		size_t pickRegion = RNG::generate(0, rule.getRegionList().size() - 1);
 		auto& regionName = rule.getRegionList().at(pickRegion);
-		regionRule = game.getMod()->getRegion(regionName, true);
+		regionRule = game.mod()->getRegion(regionName, true);
 		std::string place = ltr(regionName);
 
 		if (rule.isCitySpecific())
@@ -231,7 +231,7 @@ void GeoscapeEventState::eventLogic()
 				for (int i = 0; i < rule.getSpawnedPersons(); ++i)
 				{
 					Transfer* t = new Transfer(24);
-					int nationality = game.savedGame()->selectSoldierNationalityByLocation(game.getMod(), ruleSoldier, city);
+					int nationality = game.savedGame()->selectSoldierNationalityByLocation(game.mod(), ruleSoldier, city);
 					Soldier* s = mod->genSoldier(save, ruleSoldier, nationality);
 					YAML::YamlRootNodeReader reader(rule.getSpawnedSoldierTemplate(), "(spawned soldier template)");
 					s->load(reader, mod, save, mod->getScriptGlobal(), true); // load from soldier template
@@ -282,7 +282,7 @@ void GeoscapeEventState::eventLogic()
 			for (int i = 0; i < ts.second; ++i)
 			{
 				Transfer* t = new Transfer(24);
-				int nationality = game.savedGame()->selectSoldierNationalityByLocation(game.getMod(), ts.first, city);
+				int nationality = game.savedGame()->selectSoldierNationalityByLocation(game.mod(), ts.first, city);
 				Soldier* s = mod->genSoldier(save, ts.first, nationality);
 				YAML::YamlRootNodeReader reader(rule.getSpawnedSoldierTemplate(), "(spawned soldier template)");
 				s->load(reader, mod, save, mod->getScriptGlobal(), true); // load from soldier template
@@ -533,7 +533,7 @@ void GeoscapeEventState::init()
 
 	if (!_eventRule.getMusic().empty())
 	{
-		game.getMod()->playMusic(_eventRule.getMusic());
+		game.mod()->playMusic(_eventRule.getMusic());
 	}
 }
 
@@ -550,7 +550,7 @@ void GeoscapeEventState::btnOkClick(Action *)
 		game.pushState(new CutsceneState(_eventRule.getCutscene()));
 		if (game.savedGame()->getEnding() == END_NONE)
 		{
-			const RuleVideo* videoRule = game.getMod()->getVideo(_eventRule.getCutscene(), true);
+			const RuleVideo* videoRule = game.mod()->getVideo(_eventRule.getCutscene(), true);
 			if (videoRule->getWinGame()) game.savedGame()->setEnding(END_WIN);
 			if (videoRule->getLoseGame()) game.savedGame()->setEnding(END_LOSE);
 		}

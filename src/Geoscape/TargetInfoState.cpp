@@ -106,13 +106,13 @@ TargetInfoState::TargetInfoState(Target *target, Globe *globe) : _target(target)
 
 	if (m != 0)
 	{
-		_deploymentRule = game.getMod()->getDeployment(m->getDeployment()->getType());
+		_deploymentRule = game.mod()->getDeployment(m->getDeployment()->getType());
 	}
 	else if (b != 0)
 	{
-		AlienRace *race = game.getMod()->getAlienRace(b->getAlienRace());
-		_deploymentRule = game.getMod()->getDeployment(race->getBaseCustomMission());
-		if (!_deploymentRule) _deploymentRule = game.getMod()->getDeployment(b->getDeployment()->getType());
+		AlienRace *race = game.mod()->getAlienRace(b->getAlienRace());
+		_deploymentRule = game.mod()->getDeployment(race->getBaseCustomMission());
+		if (!_deploymentRule) _deploymentRule = game.mod()->getDeployment(b->getDeployment()->getType());
 	}
 
 	if (_deploymentRule && !_deploymentRule->getAlertDescription().empty())

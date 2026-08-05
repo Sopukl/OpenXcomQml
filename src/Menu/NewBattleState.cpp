@@ -208,14 +208,14 @@ NewBattleState::NewBattleState() :
 
 	if (options1.debug())
 	{
-		_missionTypes = game.getMod()->getDeploymentsList();
+		_missionTypes = game.mod()->getDeploymentsList();
 	}
 	else
 	{
-		_missionTypes.reserve(game.getMod()->getDeploymentsList().size());
-		for (auto& deploymentName : game.getMod()->getDeploymentsList())
+		_missionTypes.reserve(game.mod()->getDeploymentsList().size());
+		for (auto& deploymentName : game.mod()->getDeploymentsList())
 		{
-			auto* depl = game.getMod()->getDeployment(deploymentName);
+			auto* depl = game.mod()->getDeployment(deploymentName);
 			if (depl && !depl->isHidden())
 			{
 				_missionTypes.push_back(deploymentName);
@@ -233,9 +233,9 @@ NewBattleState::NewBattleState() :
 	_cbxMission->setOptions(_missionTypes, true);
 	_cbxMission->onChange((ActionHandler)&NewBattleState::cbxMissionChange);
 
-	for (auto& craftType : game.getMod()->getCraftsList())
+	for (auto& craftType : game.mod()->getCraftsList())
 	{
-		RuleCraft *rule = game.getMod()->getCraft(craftType);
+		RuleCraft *rule = game.mod()->getCraft(craftType);
 		if (rule->isForNewBattle())
 		{
 			_crafts.push_back(craftType);
@@ -250,7 +250,7 @@ NewBattleState::NewBattleState() :
 
 	_cbxTerrain->onChange((ActionHandler)&NewBattleState::cbxTerrainChange);
 
-	for (auto& pair : game.getMod()->getGlobe()->getTexturesRaw())
+	for (auto& pair : game.mod()->getGlobe()->getTexturesRaw())
 	{
 		if (pair.first >= 0 && !pair.second->isCosmeticOcean())
 		{
@@ -276,8 +276,8 @@ NewBattleState::NewBattleState() :
 	difficulty.push_back(ltr("STR_5_SUPERHUMAN"));
 	_cbxDifficulty->setOptions(difficulty);
 
-	_slrAlienTech->setRange(0, game.getMod()->getAlienItemLevels().size()-1);
-	if (game.getMod()->getAlienItemLevels().size() <= 1)
+	_slrAlienTech->setRange(0, game.mod()->getAlienItemLevels().size()-1);
+	if (game.mod()->getAlienItemLevels().size() <= 1)
 	{
 		_slrAlienTech->setVisible(false);
 		_txtAlienTech->setVisible(false);
@@ -413,7 +413,7 @@ void NewBattleState::load(const std::string &filename)
 
 			if (cfgReader["base"])
 			{
-				const Mod *mod = game.getMod();
+				const Mod *mod = game.mod();
 				SavedGame *save = new SavedGame();
 
 				Base *base = new Base(mod);
@@ -427,7 +427,7 @@ void NewBattleState::load(const std::string &filename)
 				base->getStorageItems().clear();
 				for (auto& itemType : mod->getItemsList())
 				{
-					RuleItem *rule = game.getMod()->getItem(itemType);
+					RuleItem *rule = game.mod()->getItem(itemType);
 					if (rule->getBattleType() != BT_CORPSE && rule->isRecoverable())
 					{
 						base->getStorageItems().addItem(rule, 1);
@@ -438,7 +438,7 @@ void NewBattleState::load(const std::string &filename)
 				if (base->crafts().empty())
 				{
 					std::string craftType = _crafts[_cbxCraft->getSelected()];
-					_craft = new Craft(game.getMod()->getCraft(craftType), base, save->getId(craftType));
+					_craft = new Craft(game.mod()->getCraft(craftType), base, save->getId(craftType));
 					base->crafts().push_back(_craft);
 				}
 				else
@@ -460,10 +460,10 @@ void NewBattleState::load(const std::string &filename)
 		}
 	}
 
-	YAML::YamlRootNodeReader starterBaseReader(game.getMod()->getDefaultStartingBase(), "(starting base template)");
+	YAML::YamlRootNodeReader starterBaseReader(game.mod()->getDefaultStartingBase(), "(starting base template)");
 	if (const auto& globalTemplates = starterBaseReader["globalTemplates"])
 	{
-		game.savedGame()->loadTemplates(globalTemplates, game.getMod());
+		game.savedGame()->loadTemplates(globalTemplates, game.mod());
 	}
 	if (const auto& ufopediaRuleStatus = starterBaseReader["ufopediaRuleStatus"])
 	{
@@ -504,10 +504,10 @@ void NewBattleState::save(const std::string &filename)
  */
 void NewBattleState::initSave()
 {
-	const Mod *mod = game.getMod();
+	const Mod *mod = game.mod();
 	SavedGame *save = new SavedGame();
 	Base *base = new Base(mod);
-	YAML::YamlRootNodeReader startingBaseReader(game.getMod()->getDefaultStartingBase(), "(starting base template)");
+	YAML::YamlRootNodeReader startingBaseReader(game.mod()->getDefaultStartingBase(), "(starting base template)");
 	base->load(startingBaseReader, save, true, true);
 	save->bases().push_back(base);
 
@@ -574,7 +574,7 @@ void NewBattleState::initSave()
 	// Generate items
 	for (auto& itemType : mod->getItemsList())
 	{
-		const RuleItem *rule = game.getMod()->getItem(itemType);
+		const RuleItem *rule = game.mod()->getItem(itemType);
 		if (rule->getBattleType() != BT_CORPSE && rule->isRecoverable())
 		{
 			int howMany = rule->getBattleType() == BT_AMMO ? 2 : 1;
@@ -610,18 +610,18 @@ void NewBattleState::btnOkClick(Action *)
 		return;
 	}
 
-	SavedBattleGame *bgame = new SavedBattleGame(game.getMod());
+	SavedBattleGame *bgame = new SavedBattleGame(game.mod());
 	game.savedGame()->setBattleGame(bgame);
 	bgame->setMissionType(_missionTypes[_cbxMission->getSelected()]);
 	BattlescapeGenerator bgen = BattlescapeGenerator();
 	Base *base = 0;
 
-	bgen.setTerrain(game.getMod()->getTerrain(_terrainTypes[_cbxTerrain->getSelected()]));
+	bgen.setTerrain(game.mod()->getTerrain(_terrainTypes[_cbxTerrain->getSelected()]));
 
 	if (_globeTextureVisible)
 	{
 		int textureId = _globeTextureIDs[_selectedGlobeTexture];
-		auto* globeTexture = game.getMod()->getGlobe()->getTexture(textureId);
+		auto* globeTexture = game.mod()->getGlobe()->getTexture(textureId);
 		bgen.setWorldTexture(nullptr, globeTexture);
 	}
 
@@ -633,9 +633,9 @@ void NewBattleState::btnOkClick(Action *)
 		_craft = 0;
 	}
 	// alien base
-	else if (game.getMod()->getDeployment(bgame->getMissionType())->isAlienBase())
+	else if (game.mod()->getDeployment(bgame->getMissionType())->isAlienBase())
 	{
-		AlienBase *b = new AlienBase(game.getMod()->getDeployment(bgame->getMissionType()), -1);
+		AlienBase *b = new AlienBase(game.mod()->getDeployment(bgame->getMissionType()), -1);
 		b->setId(1);
 		b->setAlienRace(_alienRaces[_cbxAlienRace->getSelected()]);
 		_craft->setDestination(b);
@@ -643,9 +643,9 @@ void NewBattleState::btnOkClick(Action *)
 		game.savedGame()->getAlienBases()->push_back(b);
 	}
 	// ufo assault
-	else if (_craft && game.getMod()->getUfo(_missionTypes[_cbxMission->getSelected()]))
+	else if (_craft && game.mod()->getUfo(_missionTypes[_cbxMission->getSelected()]))
 	{
-		Ufo *u = new Ufo(game.getMod()->getUfo(_missionTypes[_cbxMission->getSelected()]), 1);
+		Ufo *u = new Ufo(game.mod()->getUfo(_missionTypes[_cbxMission->getSelected()]), 1);
 		u->setId(1);
 		_craft->setDestination(u);
 		bgen.setUfo(u);
@@ -666,8 +666,8 @@ void NewBattleState::btnOkClick(Action *)
 	// mission site
 	else
 	{
-		const AlienDeployment *deployment = game.getMod()->getDeployment(bgame->getMissionType());
-		const RuleAlienMission *mission = game.getMod()->getAlienMission(game.getMod()->getAlienMissionList().front()); // doesn't matter
+		const AlienDeployment *deployment = game.mod()->getDeployment(bgame->getMissionType());
+		const RuleAlienMission *mission = game.mod()->getAlienMission(game.mod()->getAlienMissionList().front()); // doesn't matter
 		MissionSite *m = new MissionSite(mission, deployment, nullptr);
 		m->setId(1);
 		m->setAlienRace(_alienRaces[_cbxAlienRace->getSelected()]);
@@ -731,7 +731,7 @@ void NewBattleState::btnRandomClick(Action *)
 	cbxTerrainChange(0);
 	_cbxAlienRace->setSelected(RNG::generate(0, _alienRaces.size()-1));
 	_cbxDifficulty->setSelected(RNG::generate(0, 4));
-	_slrAlienTech->setValue(RNG::generate(0, game.getMod()->getAlienItemLevels().size()-1));
+	_slrAlienTech->setValue(RNG::generate(0, game.mod()->getAlienItemLevels().size()-1));
 }
 
 /**
@@ -750,7 +750,7 @@ void NewBattleState::btnEquipClick(Action *)
  */
 void NewBattleState::cbxMissionChange(Action *)
 {
-	AlienDeployment *ruleDeploy = game.getMod()->getDeployment(_missionTypes[_cbxMission->getSelected()]);
+	AlienDeployment *ruleDeploy = game.mod()->getDeployment(_missionTypes[_cbxMission->getSelected()]);
 	std::set<std::string> terrains;
 
 	// Get terrains associated with this mission
@@ -758,11 +758,11 @@ void NewBattleState::cbxMissionChange(Action *)
 	deployTerrains = ruleDeploy->getTerrains();
 	if (deployTerrains.empty())
 	{
-		globeTerrains = game.getMod()->getGlobe()->getTerrains("");
+		globeTerrains = game.mod()->getGlobe()->getTerrains("");
 	}
 	else
 	{
-		globeTerrains = game.getMod()->getGlobe()->getTerrains(ruleDeploy->getType());
+		globeTerrains = game.mod()->getGlobe()->getTerrains(ruleDeploy->getType());
 	}
 	for (const auto& terrain : deployTerrains)
 	{
@@ -797,7 +797,7 @@ void NewBattleState::cbxMissionChange(Action *)
  */
 void NewBattleState::cbxCraftChange(Action *)
 {
-	_craft->changeRules(game.getMod()->getCraft(_crafts[_cbxCraft->getSelected()]));
+	_craft->changeRules(game.mod()->getCraft(_crafts[_cbxCraft->getSelected()]));
 
 	int count = 0;
 	Craft* tmpCraft = new Craft(_craft->getRules(), _craft->getBase(), 0);
@@ -843,11 +843,11 @@ void NewBattleState::cbxCraftChange(Action *)
  */
 void NewBattleState::cbxTerrainChange(Action *)
 {
-	AlienDeployment *ruleDeploy = game.getMod()->getDeployment(_missionTypes[_cbxMission->getSelected()]);
+	AlienDeployment *ruleDeploy = game.mod()->getDeployment(_missionTypes[_cbxMission->getSelected()]);
 	int minDepth = 0;
 	int maxDepth = 0;
-	if (ruleDeploy->getMaxDepth() > 0 || game.getMod()->getTerrain(_terrainTypes.at(_cbxTerrain->getSelected()))->getMaxDepth() > 0 ||
-		(!ruleDeploy->getTerrains().empty() && game.getMod()->getTerrain(ruleDeploy->getTerrains().front())->getMaxDepth() > 0))
+	if (ruleDeploy->getMaxDepth() > 0 || game.mod()->getTerrain(_terrainTypes.at(_cbxTerrain->getSelected()))->getMaxDepth() > 0 ||
+		(!ruleDeploy->getTerrains().empty() && game.mod()->getTerrain(ruleDeploy->getTerrains().front())->getMaxDepth() > 0))
 	{
 		minDepth = 1;
 		maxDepth = 3;
@@ -859,12 +859,12 @@ void NewBattleState::cbxTerrainChange(Action *)
 	_slrDepth->setValue(minDepth);
 
 	{
-		int found = ruleDeploy->hasTextureBasedScript(game.getMod());
+		int found = ruleDeploy->hasTextureBasedScript(game.mod());
 		if (found == -1)
 		{
 			// there is no map script on the alien deployment at all, perform the check on the terrain
-			auto* ruleTerrain = game.getMod()->getTerrain(_terrainTypes[_cbxTerrain->getSelected()]);
-			found = ruleTerrain->hasTextureBasedScript(game.getMod());
+			auto* ruleTerrain = game.mod()->getTerrain(_terrainTypes[_cbxTerrain->getSelected()]);
+			found = ruleTerrain->hasTextureBasedScript(game.mod());
 		}
 		_globeTextureVisible = (found == 1);
 
@@ -888,7 +888,7 @@ void NewBattleState::cbxTerrainChange(Action *)
 	}
 
 	// Get races "supported" by this mission
-	_alienRaces = game.getMod()->getAlienRacesList();
+	_alienRaces = game.mod()->getAlienRacesList();
 	int maxAlienRank = ruleDeploy->getMaxAlienRank();
 	for (auto iter = _alienRaces.begin(); iter != _alienRaces.end();)
 	{
@@ -900,7 +900,7 @@ void NewBattleState::cbxTerrainChange(Action *)
 		else
 		{
 			std::string raceName = (minDepth != maxDepth) ? alienRace + "_UNDERWATER" : alienRace;
-			auto* raceRules = game.getMod()->getAlienRace(raceName);
+			auto* raceRules = game.mod()->getAlienRace(raceName);
 			if (!raceRules || maxAlienRank >= raceRules->getMembers())
 			{
 				// not enough members or race doesn't exist

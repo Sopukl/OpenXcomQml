@@ -69,12 +69,12 @@ OptionsAdvancedState::OptionsAdvancedState(OptionsOrigin origin) : OptionsBaseSt
 
 	if (origin != OPT_BATTLESCAPE)
 	{
-		_greyedOutColor = game.getMod()->getInterface("advancedMenu")->getElement("disabledUserOption")->color;
+		_greyedOutColor = game.mod()->getInterface("advancedMenu")->getElement("disabledUserOption")->color;
 		add(_lstOptions, "optionLists", "advancedMenu");
 	}
 	else
 	{
-		_greyedOutColor = game.getMod()->getInterface("battlescape")->getElement("disabledUserOption")->color;
+		_greyedOutColor = game.mod()->getInterface("battlescape")->getElement("disabledUserOption")->color;
 		add(_lstOptions, "optionLists", "battlescape");
 	}
 
@@ -95,7 +95,7 @@ OptionsAdvancedState::OptionsAdvancedState(OptionsOrigin origin) : OptionsBaseSt
 
 	// how much room do we need for YES/NO
 	Text text = Text(100, 9, 0, 0);
-	text.initText(game.getMod()->getFont("FONT_BIG"), game.getMod()->getFont("FONT_SMALL"));
+	text.initText(game.mod()->getFont("FONT_BIG"), game.mod()->getFont("FONT_SMALL"));
 	text.setText(ltr("STR_YES"));
 	int yes = text.getTextWidth();
 	text.setText(ltr("STR_NO"));
@@ -246,7 +246,7 @@ void OptionsAdvancedState::updateList()
  */
 void OptionsAdvancedState::addSettings(const std::vector<OptionInfo> &settings)
 {
-	auto& fixeduserOptions = game.getMod()->getFixedUserOptions();
+	auto& fixeduserOptions = game.mod()->getFixedUserOptions();
 	for (const auto& optionInfo : settings)
 	{
 		std::string name = ltr(optionInfo.description());
@@ -323,7 +323,7 @@ void OptionsAdvancedState::lstOptionsClick(Action *action)
 	if (!setting) return;
 
 	// greyed out options are fixed, cannot be changed by the user
-	auto& fixeduserOptions = game.getMod()->getFixedUserOptions();
+	auto& fixeduserOptions = game.mod()->getFixedUserOptions();
 	auto it = fixeduserOptions.find(setting->id());
 	if (it != fixeduserOptions.end())
 	{

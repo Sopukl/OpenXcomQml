@@ -64,8 +64,8 @@ ScannerState::ScannerState (BattleAction *action) : _action(action)
 
 	centerAllSurfaces();
 
-	game.getMod()->getSurface("DETBORD.PCK")->blitNShade(_bg, 0, 0);
-	game.getMod()->getSurface("DETBORD2.PCK")->blitNShade(_scan, 0, 0);
+	game.mod()->getSurface("DETBORD.PCK")->blitNShade(_bg, 0, 0);
+	game.mod()->getSurface("DETBORD2.PCK")->blitNShade(_scan, 0, 0);
 	_bg->onMouseClick((ActionHandler)&ScannerState::exitClick);
 	_bg->onKeyboardPress((ActionHandler)&ScannerState::exitClick, options1.keyCancel());
 

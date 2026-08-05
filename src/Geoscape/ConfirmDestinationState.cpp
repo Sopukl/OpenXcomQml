@@ -65,7 +65,7 @@ ConfirmDestinationState::ConfirmDestinationState(std::vector<Craft*> crafts, Tar
 
 	if (_crafts.size() == 1)
 	{
-		transferAvailable = (options1.canTransferCraftsWhileAirborne() && base != 0 && base != _crafts.front()->getBase() && _crafts.front()->arePilotsOnboard(game.getMod()));
+		transferAvailable = (options1.canTransferCraftsWhileAirborne() && base != 0 && base != _crafts.front()->getBase() && _crafts.front()->arePilotsOnboard(game.mod()));
 	}
 
 	int btnOkX = transferAvailable ? 29 : 68;
@@ -196,17 +196,17 @@ std::string ConfirmDestinationState::checkStartingCondition()
 	AlienDeployment *ruleDeploy = 0;
 	if (u != 0)
 	{
-		ruleDeploy = game.getMod()->getDeployment(u->getRules()->getType()); // no need to check for fake underwater UFOs here
+		ruleDeploy = game.mod()->getDeployment(u->getRules()->getType()); // no need to check for fake underwater UFOs here
 	}
 	else if (m != 0)
 	{
-		ruleDeploy = game.getMod()->getDeployment(m->getDeployment()->getType());
+		ruleDeploy = game.mod()->getDeployment(m->getDeployment()->getType());
 	}
 	else if (b != 0)
 	{
-		AlienRace *race = game.getMod()->getAlienRace(b->getAlienRace());
-		ruleDeploy = game.getMod()->getDeployment(race->getBaseCustomMission());
-		if (!ruleDeploy) ruleDeploy = game.getMod()->getDeployment(b->getDeployment()->getType());
+		AlienRace *race = game.mod()->getAlienRace(b->getAlienRace());
+		ruleDeploy = game.mod()->getDeployment(race->getBaseCustomMission());
+		if (!ruleDeploy) ruleDeploy = game.mod()->getDeployment(b->getDeployment()->getType());
 	}
 	else
 	{
@@ -220,7 +220,7 @@ std::string ConfirmDestinationState::checkStartingCondition()
 		return "";
 	}
 
-	RuleStartingCondition *rule = game.getMod()->getStartingCondition(ruleDeploy->getStartingCondition());
+	RuleStartingCondition *rule = game.mod()->getStartingCondition(ruleDeploy->getStartingCondition());
 	if (rule == 0)
 	{
 		// rule doesn't exist (mod upgrades?)
@@ -266,7 +266,7 @@ std::string ConfirmDestinationState::checkStartingCondition()
 		int i = 0;
 		for (auto& soldierType : list)
 		{
-			RuleSoldier* soldierTypeRule = game.getMod()->getSoldier(soldierType, false);
+			RuleSoldier* soldierTypeRule = game.mod()->getSoldier(soldierType, false);
 			if (soldierTypeRule && game.savedGame()->isResearched(soldierTypeRule->getRequirements()))
 			{
 				if (i > 0)
@@ -298,7 +298,7 @@ std::string ConfirmDestinationState::checkStartingCondition()
 	int i = 0;
 	for (auto& articleName : list)
 	{
-		ArticleDefinition *article = game.getMod()->getUfopaediaArticle(articleName, false);
+		ArticleDefinition *article = game.mod()->getUfopaediaArticle(articleName, false);
 		if (article && Ufopaedia::isArticleAvailable(game.savedGame(), article))
 		{
 			if (i > 0)
@@ -345,7 +345,7 @@ void ConfirmDestinationState::btnOkClick(Action *)
 
 	for (auto* craft : _crafts)
 	{
-		if (!craft->arePilotsOnboard(game.getMod()))
+		if (!craft->arePilotsOnboard(game.mod()))
 		{
 			game.popState();
 			game.popState();
@@ -374,7 +374,7 @@ void ConfirmDestinationState::btnOkClick(Action *)
 		{
 			if (!_crafts.front()->getRules()->getTakeoffSoundRaw().empty())
 			{
-				game.getMod()->getSound("GEO.CAT", _crafts.front()->getRules()->getTakeoffSound())->play();
+				game.mod()->getSound("GEO.CAT", _crafts.front()->getRules()->getTakeoffSound())->play();
 			}
 		}
 	}
@@ -476,7 +476,7 @@ void ConfirmDestinationState::btnTransferClick(Action *)
 	}
 	else
 	{
-		RuleInterface *menuInterface = game.getMod()->getInterface("errorMessages");
+		RuleInterface *menuInterface = game.mod()->getInterface("errorMessages");
 		game.errorMessage(QString::fromStdString(errorMessage));
 	}
 }

@@ -42,7 +42,7 @@ namespace OpenXcom
  */
 SelectStartFacilityState::SelectStartFacilityState(Base *base, State *state, Globe *globe) : BuildFacilitiesState(base, state), _globe(globe)
 {
-	_facilities = game.getMod()->getCustomBaseFacilities(game.savedGame()->getDifficulty());
+	_facilities = game.mod()->getCustomBaseFacilities(game.savedGame()->getDifficulty());
 
 	_btnOk->setText(ltr("STR_RESET"));
 	_btnOk->onMouseClick((ActionHandler)&SelectStartFacilityState::btnOkClick);

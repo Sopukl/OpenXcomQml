@@ -58,7 +58,7 @@ SoldiersState::SoldiersState(Base *base) : _base(base), _origSoldierOrder(_base-
 	bool isPsiBtnVisible = options1.anytimePsiTraining() && _base->getAvailablePsiLabs() > 0;
 	bool isTrnBtnVisible = _base->getAvailableTraining() > 0;
 	std::vector<RuleSoldierTransformation* > availableTransformations;
-	game.savedGame()->getAvailableTransformations(availableTransformations, game.getMod(), _base);
+	game.savedGame()->getAvailableTransformations(availableTransformations, game.mod(), _base);
 	bool isTransformationAvailable = availableTransformations.size() > 0;
 
 	// if both training buttons would be displayed, or if there are any transformations, switch to combobox
@@ -168,7 +168,7 @@ SoldiersState::SoldiersState(Base *base) : _base(base), _origSoldierOrder(_base-
 		{
 			for (auto* deadMan : game.savedGame()->getDeadSoldiers())
 			{
-				deadMan->prepareStatsWithBonuses(game.getMod()); // refresh stats for sorting
+				deadMan->prepareStatsWithBonuses(game.mod()); // refresh stats for sorting
 			}
 		}
 
@@ -205,7 +205,7 @@ SoldiersState::SoldiersState(Base *base) : _base(base), _origSoldierOrder(_base-
 	PUSH_IN("STR_MISSIONS2", missionsStat);
 	PUSH_IN("STR_KILLS2", killsStat);
 	PUSH_IN("STR_WOUND_RECOVERY2", woundRecoveryStat);
-	if (game.getMod()->isManaFeatureEnabled() && !game.getMod()->getReplenishManaAfterMission())
+	if (game.mod()->isManaFeatureEnabled() && !game.mod()->getReplenishManaAfterMission())
 	{
 		PUSH_IN("STR_MANA_MISSING", manaMissingStat);
 	}
@@ -218,7 +218,7 @@ SoldiersState::SoldiersState(Base *base) : _base(base), _origSoldierOrder(_base-
 	PUSH_IN("STR_THROWING_ACCURACY", throwingStat);
 	PUSH_IN("STR_MELEE_ACCURACY", meleeStat);
 	PUSH_IN("STR_STRENGTH", strengthStat);
-	if (game.getMod()->isManaFeatureEnabled())
+	if (game.mod()->isManaFeatureEnabled())
 	{
 		// "unlock" is checked later
 		PUSH_IN("STR_MANA_POOL", manaStat);
@@ -394,7 +394,7 @@ void SoldiersState::initList(size_t scrl)
 		_lstSoldiers->setArrowColumn(-1, ARROW_VERTICAL);
 
 		// filtered list of soldiers eligible for transformation
-		RuleSoldierTransformation *transformationRule = game.getMod()->getSoldierTransformation(selAction);
+		RuleSoldierTransformation *transformationRule = game.mod()->getSoldierTransformation(selAction);
 		if (transformationRule)
 		{
 			int idx = -1;
@@ -671,7 +671,7 @@ void SoldiersState::btnInventoryClick(Action *)
 {
 	if (_base->getAvailableSoldiers(true, true) > 0)
 	{
-		SavedBattleGame *bgame = new SavedBattleGame(game.getMod());
+		SavedBattleGame *bgame = new SavedBattleGame(game.mod());
 		game.savedGame()->setBattleGame(bgame);
 		bgame->setMissionType("STR_BASE_DEFENSE");
 
@@ -748,7 +748,7 @@ void SoldiersState::lstSoldiersClick(Action *action)
 	}
 	else
 	{
-		RuleSoldierTransformation *transformationRule = game.getMod()->getSoldierTransformation(selAction);
+		RuleSoldierTransformation *transformationRule = game.mod()->getSoldierTransformation(selAction);
 		if (transformationRule)
 		{
 			game.pushState(new SoldierTransformationState(

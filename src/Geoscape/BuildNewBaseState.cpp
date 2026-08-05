@@ -233,9 +233,9 @@ void BuildNewBaseState::globeClick(Action *action)
 		if (_globe->insideLand(lon, lat))
 		{
 			bool fakeUnderwaterBasesUnlocked = true;
-			if (!game.getMod()->getFakeUnderwaterBaseUnlockResearch().empty())
+			if (!game.mod()->getFakeUnderwaterBaseUnlockResearch().empty())
 			{
-				fakeUnderwaterBasesUnlocked = game.savedGame()->isResearched(game.getMod()->getFakeUnderwaterBaseUnlockResearch(), true);
+				fakeUnderwaterBasesUnlocked = game.savedGame()->isResearched(game.mod()->getFakeUnderwaterBaseUnlockResearch(), true);
 			}
 			bool fakeUnderwaterTexture = _globe->insideFakeUnderwaterTexture(lon, lat);
 			if ((_first || !fakeUnderwaterBasesUnlocked) && fakeUnderwaterTexture)

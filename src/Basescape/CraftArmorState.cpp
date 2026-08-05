@@ -115,7 +115,7 @@ CraftArmorState::CraftArmorState(Base *base, size_t craft) : _base(base), _craft
 	PUSH_IN("STR_MISSIONS2", missionsStat);
 	PUSH_IN("STR_KILLS2", killsStat);
 	PUSH_IN("STR_WOUND_RECOVERY2", woundRecoveryStat);
-	if (game.getMod()->isManaFeatureEnabled() && !game.getMod()->getReplenishManaAfterMission())
+	if (game.mod()->isManaFeatureEnabled() && !game.mod()->getReplenishManaAfterMission())
 	{
 		PUSH_IN("STR_MANA_MISSING", manaMissingStat);
 	}
@@ -128,7 +128,7 @@ CraftArmorState::CraftArmorState(Base *base, size_t craft) : _base(base), _craft
 	PUSH_IN("STR_THROWING_ACCURACY", throwingStat);
 	PUSH_IN("STR_MELEE_ACCURACY", meleeStat);
 	PUSH_IN("STR_STRENGTH", strengthStat);
-	if (game.getMod()->isManaFeatureEnabled())
+	if (game.mod()->isManaFeatureEnabled())
 	{
 		// "unlock" is checked later
 		PUSH_IN("STR_MANA_POOL", manaStat);
@@ -280,7 +280,7 @@ void CraftArmorState::init()
  */
 void CraftArmorState::initList(size_t scrl)
 {
-	Uint8 otherCraftColor = game.getMod()->getInterface("craftArmor")->getElement("otherCraft")->color;
+	Uint8 otherCraftColor = game.mod()->getInterface("craftArmor")->getElement("otherCraft")->color;
 	int row = 0;
 	_lstSoldiers->clearList();
 
@@ -511,7 +511,7 @@ void CraftArmorState::lstSoldiersClick(Action *action)
 		{
 			SavedGame *save;
 			save = game.savedGame();
-			Armor *a = game.isCtrlPressed(true) ? s->getRules()->getDefaultArmor() : game.getMod()->getArmor(save->getLastSelectedArmor());
+			Armor *a = game.isCtrlPressed(true) ? s->getRules()->getDefaultArmor() : game.mod()->getArmor(save->getLastSelectedArmor());
 			bool armorUnlocked = true;
 			if (a && a->getRequiredResearch() && !game.savedGame()->isResearched(a->getRequiredResearch()))
 			{
@@ -549,14 +549,14 @@ void CraftArmorState::lstSoldiersClick(Action *action)
 						}
 
 						s->setArmor(a, true);
-						s->prepareStatsWithBonuses(game.getMod()); // refresh stats for sorting
+						s->prepareStatsWithBonuses(game.mod()); // refresh stats for sorting
 						_lstSoldiers->setCellText(_lstSoldiers->getSelectedRow(), 2, ltr(a->getType()));
 					}
 				}
 				else
 				{
 					s->setArmor(a, true);
-					s->prepareStatsWithBonuses(game.getMod()); // refresh stats for sorting
+					s->prepareStatsWithBonuses(game.mod()); // refresh stats for sorting
 					_lstSoldiers->setCellText(_lstSoldiers->getSelectedRow(), 2, ltr(a->getType()));
 				}
 			}
@@ -630,7 +630,7 @@ void CraftArmorState::btnDeequipAllArmorClick(Action *action)
 				}
 
 				soldier->setArmor(a, true);
-				soldier->prepareStatsWithBonuses(game.getMod()); // refresh stats for sorting
+				soldier->prepareStatsWithBonuses(game.mod()); // refresh stats for sorting
 				_lstSoldiers->setCellText(row, 2, ltr(a->getType()));
 			}
 		}
@@ -670,7 +670,7 @@ void CraftArmorState::btnDeequipCraftArmorClick(Action *action)
 				}
 
 				s->setArmor(a, true);
-				s->prepareStatsWithBonuses(game.getMod()); // refresh stats for sorting
+				s->prepareStatsWithBonuses(game.mod()); // refresh stats for sorting
 				_lstSoldiers->setCellText(row, 2, ltr(a->getType()));
 			}
 		}

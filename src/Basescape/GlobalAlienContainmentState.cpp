@@ -130,9 +130,9 @@ void GlobalAlienContainmentState::fillPrisonerList()
 	// determine prison types used in the game
 	std::set<int> prisonTypes = { 0 };
 	bool noTypes = true;
-	for (auto& facType : game.getMod()->getBaseFacilitiesList())
+	for (auto& facType : game.mod()->getBaseFacilitiesList())
 	{
-		auto* facRule = game.getMod()->getBaseFacility(facType);
+		auto* facRule = game.mod()->getBaseFacility(facType);
 		if (facRule->getPrisonType() > 0)
 		{
 			prisonTypes.insert(facRule->getPrisonType());
@@ -173,7 +173,7 @@ void GlobalAlienContainmentState::fillPrisonerList()
 			for (const auto* proj : xbase->getResearch())
 			{
 				const RuleResearch* research = proj->getRules();
-				const RuleItem* item = game.getMod()->getItem(research->getName(), false); // don't use getNeededItem()
+				const RuleItem* item = game.mod()->getItem(research->getName(), false); // don't use getNeededItem()
 				if (research->needItem() && research->destroyItem() && item && item->isAlien() && item->getPrisonType() == prisonType)
 				{
 					researchList.push_back(research->getName());
@@ -190,9 +190,9 @@ void GlobalAlienContainmentState::fillPrisonerList()
 			_topics.push_back(std::make_tuple("", nullptr, 0));
 			displayed = true;
 
-			for (auto& itemType : game.getMod()->getItemsList())
+			for (auto& itemType : game.mod()->getItemsList())
 			{
-				RuleItem* rule = game.getMod()->getItem(itemType, true);
+				RuleItem* rule = game.mod()->getItem(itemType, true);
 				if (rule->isAlien() && rule->getPrisonType() == prisonType)
 				{
 					int qty = xbase->getStorageItems().countOf(rule);
@@ -284,7 +284,7 @@ void GlobalAlienContainmentState::onSelectBase(Action*)
 void GlobalAlienContainmentState::onOpenTechTreeViewer(Action*)
 {
 	auto& tuple = _topics[_lstPrisoners->getSelectedRow()];
-	const RuleResearch* selectedTopic = game.getMod()->getResearch(std::get<0>(tuple));
+	const RuleResearch* selectedTopic = game.mod()->getResearch(std::get<0>(tuple));
 
 	if (selectedTopic)
 	{
