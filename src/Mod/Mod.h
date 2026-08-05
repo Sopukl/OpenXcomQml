@@ -149,6 +149,7 @@ class Mod: public QObject
 {
 	Q_OBJECT
 	QML_ELEMENT
+	Q_PROPERTY(QStringList itemsList READ itemsList CONSTANT FINAL)
 public:
 	/// Number of color per opacity level.
 	constexpr static int TransparenciesPaletteColors = 256;
@@ -699,6 +700,7 @@ public:
 	/// Gets the ruleset for an item type.
 	RuleItem *getItem(const std::string &id, bool error = false) const;
 	/// Gets the available items.
+	QStringList itemsList() const;
 	const std::vector<std::string> &getItemsList() const;
 	/// Gets the ruleset for a weapon set type.
 	RuleWeaponSet* getWeaponSet(const std::string& type, bool error = false) const;

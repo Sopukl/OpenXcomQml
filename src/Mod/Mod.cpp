@@ -4146,6 +4146,14 @@ RuleItem *Mod::getItem(const std::string &id, bool error) const
 	return getRule(id, "Item", _items, error);
 }
 
+QStringList Mod::itemsList() const
+{
+	QStringList res;
+	for(const std::string& it: getItemsList())
+		res << QString::fromStdString(it);
+	return res;
+}
+
 /**
  * Returns the list of all items
  * provided by the mod.

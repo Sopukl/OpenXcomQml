@@ -19,8 +19,6 @@
 #include "Base.h"
 #include "../fmath.h"
 #include <stack>
-
-
 #include "BaseFacility.h"
 #include "../Mod/RuleBaseFacility.h"
 #include "Craft.h"

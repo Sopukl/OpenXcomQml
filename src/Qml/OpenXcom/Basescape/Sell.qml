@@ -194,6 +194,7 @@ XC.Popup {
     Shortcut {
         sequence: "Q"
         onActivated: {
+            console.log(Game.mod.itemsList.length)
             console.log(base.soldiers)
             for(let s of base.soldiers)
                 console.log(s.name + ':' + s.craft)
