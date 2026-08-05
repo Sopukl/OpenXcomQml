@@ -170,7 +170,7 @@ void State::add(Surface *surface)
 	surface->setPalette(_palette);
 
 	// Set default text resources
-	if (game.getLanguage() && game.getMod())
+	if (game.language() && game.getMod())
 		surface->initText(game.getMod()->getFont("FONT_BIG"), game.getMod()->getFont("FONT_SMALL"));
 
 	_surfaces.push_back(surface);
@@ -241,7 +241,7 @@ void State::add(Surface *surface, const std::string &id, const std::string &cate
 	}
 
 	// Set default text resources
-	if (game.getLanguage() && game.getMod())
+	if (game.language() && game.getMod())
 		surface->initText(game.getMod()->getFont("FONT_BIG"), game.getMod()->getFont("FONT_SMALL"));
 
 	_surfaces.push_back(surface);
@@ -418,7 +418,7 @@ void State::resetAll()
  */
 LocalizedText State::ltr(const std::string &id) const
 {
-	return game.getLanguage()->getString(id);
+	return game.language()->getString(id);
 }
 
 /**
@@ -437,7 +437,7 @@ LocalizedText State::ltrAlt(const std::string &id, int alt) const
 	{
 		ss << "_" << alt;
 	}
-	return game.getLanguage()->getString(ss.str());
+	return game.language()->getString(ss.str());
 }
 
 /**
@@ -449,7 +449,7 @@ LocalizedText State::ltrAlt(const std::string &id, int alt) const
  */
 LocalizedText State::ltr(const std::string &id, unsigned n) const
 {
-	return game.getLanguage()->getString(id, n);
+	return game.language()->getString(id, n);
 }
 
 /**
@@ -461,7 +461,7 @@ LocalizedText State::ltr(const std::string &id, unsigned n) const
  */
 LocalizedText State::ltr(const std::string &id, SoldierGender gender) const
 {
-	return game.getLanguage()->getString(id, gender);
+	return game.language()->getString(id, gender);
 }
 
 /**

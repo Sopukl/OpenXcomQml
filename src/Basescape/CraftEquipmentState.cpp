@@ -357,7 +357,7 @@ void CraftEquipmentState::initList()
 		{
 			cQty = c->getItems()->getItem(rule);
 			_totalItems += cQty;
-			_totalItemStorageSize += cQty * rule->getSize();
+			_totalItemStorageSize += cQty * rule->size();
 		}
 
 		int bQty = _base->getStorageItems().getItem(rule);
@@ -448,7 +448,7 @@ void CraftEquipmentState::initList()
 						c->getItems()->addItem(rule, itemsToAdd);
 						cQty += itemsToAdd;
 						_totalItems += itemsToAdd;
-						_totalItemStorageSize += itemsToAdd * rule->getSize();
+						_totalItemStorageSize += itemsToAdd * rule->size();
 					}
 				}
 				if (isVehicle)
@@ -788,7 +788,7 @@ void CraftEquipmentState::moveLeftByValue(int change)
 	{
 		c->getItems()->removeItem(item, change);
 		_totalItems -= change;
-		_totalItemStorageSize -= change * item->getSize();
+		_totalItemStorageSize -= change * item->size();
 		if (!_isNewBattle)
 		{
 			_base->getStorageItems().addItem(item, change);
@@ -901,11 +901,11 @@ void CraftEquipmentState::moveRightByValue(int change, bool suppressErrors)
 				change = 0;
 			}
 		}
-		if (_totalItemStorageSize + (change * item->getSize()) > c->getMaxStorageSpaceClamped() + 0.05)
+		if (_totalItemStorageSize + (change * item->size()) > c->getMaxStorageSpaceClamped() + 0.05)
 		{
-			if (item->getSize() > 0.0)
+			if (item->size() > 0.0)
 			{
-				change = (int)floor((c->getMaxStorageSpaceClamped() + 0.05 - _totalItemStorageSize) / item->getSize());
+				change = (int)floor((c->getMaxStorageSpaceClamped() + 0.05 - _totalItemStorageSize) / item->size());
 			}
 			if (change < 0)
 			{
@@ -922,7 +922,7 @@ void CraftEquipmentState::moveRightByValue(int change, bool suppressErrors)
 		}
 		c->getItems()->addItem(item, change);
 		_totalItems += change;
-		_totalItemStorageSize += change * item->getSize();
+		_totalItemStorageSize += change * item->size();
 		if (!_isNewBattle)
 		{
 			_base->getStorageItems().removeItem(item, change);

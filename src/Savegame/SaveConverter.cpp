@@ -112,7 +112,7 @@ SaveConverter::~SaveConverter()
  */
 void SaveConverter::getList(SaveOriginal info[NUM_SAVES])
 {
-	Language *lang = game.getLanguage();
+	Language *lang = game.language();
 	for (int i = 0; i < NUM_SAVES; ++i)
 	{
 		SaveOriginal &save = info[i];

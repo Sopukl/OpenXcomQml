@@ -591,7 +591,7 @@ void GeoscapeState::handle(Action *action)
 					for (auto& itemType : game.getMod()->getItemsList())
 					{
 						auto* item = game.getMod()->getItem(itemType);
-						if (item && item->isRecoverable() && !item->isAlien() && item->getSellCost() > 0)
+						if (item && item->isRecoverable() && !item->isAlien() && item->sellCost() > 0)
 						{
 							xbase->getStorageItems().addItem(item, 2);
 						}
@@ -607,7 +607,7 @@ void GeoscapeState::handle(Action *action)
 					for (auto& itemType : game.getMod()->getItemsList())
 					{
 						auto* item = game.getMod()->getItem(itemType);
-						if (item && item->isRecoverable() && item->isAlien() && item->getSellCost() > 0)
+						if (item && item->isRecoverable() && item->isAlien() && item->sellCost() > 0)
 						{
 							xbase->getStorageItems().addItem(item, 2);
 						}
@@ -2213,7 +2213,7 @@ void GeoscapeState::time1Hour()
 		std::map<Production*, productionProgress_e> toRemove;
 		for (auto* prod : xbase->getProductions())
 		{
-			toRemove[prod] = prod->step(xbase, game.savedGame(), game.getMod(), game.getLanguage());
+			toRemove[prod] = prod->step(xbase, game.savedGame(), game.getMod(), game.language());
 		}
 		for (const auto& pair : toRemove)
 		{

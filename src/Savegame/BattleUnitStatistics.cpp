@@ -126,7 +126,7 @@ namespace OpenXcom
 
 	std::string BattleUnitKills::getUnitName() const
 	{
-		Language *lang = game.getLanguage();
+		Language *lang = game.language();
 		if (!name.empty())
 		{
 			return name;

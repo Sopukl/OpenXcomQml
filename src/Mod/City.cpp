@@ -49,7 +49,7 @@ City::~City()
  */
 std::string City::getName() const
 {
-	return game.getLanguage()->getString(_name);
+	return game.language()->getString(_name);
 }
 
 /**

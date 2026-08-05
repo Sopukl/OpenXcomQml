@@ -281,14 +281,14 @@ void Inventory::drawGridLabels(bool showTuCost)
 		if (showTuCost && _selItem != 0 && _selItem->getSlot() != i)
 		{
 			std::ostringstream ss;
-			ss << game.getLanguage()->getString(i->getId()).arg(1 + _groundOffset / _groundSlotsX).arg(1 + _xMax / _groundSlotsX);
+			ss << game.language()->getString(i->getId()).arg(1 + _groundOffset / _groundSlotsX).arg(1 + _xMax / _groundSlotsX);
 			ss << ":";
 			ss << _selItem->getMoveToCost(i);
 			text.setText(ss.str().c_str());
 		}
 		else
 		{
-			text.setText(game.getLanguage()->getString(i->getId()).arg(1 + _groundOffset / _groundSlotsX).arg(1 + _xMax / _groundSlotsX));
+			text.setText(game.language()->getString(i->getId()).arg(1 + _groundOffset / _groundSlotsX).arg(1 + _xMax / _groundSlotsX));
 		}
 		text.blit(_gridLabels->getSurface());
 	}
@@ -886,7 +886,7 @@ void Inventory::mouseClick(Action *action, State *state)
 
 						if (!placed)
 						{
-							_warning->showMessage(game.getLanguage()->getString(warning));
+							_warning->showMessage(game.language()->getString(warning));
 						}
 					}
 					else
@@ -894,7 +894,7 @@ void Inventory::mouseClick(Action *action, State *state)
 						setSelectedItem(item);
 						if (item->getFuseTimer() >= 0)
 						{
-							_warning->showMessage(game.getLanguage()->getString(item->getRules()->getPrimeActionMessage()));
+							_warning->showMessage(game.language()->getString(item->getRules()->getPrimeActionMessage()));
 						}
 					}
 				}
@@ -919,7 +919,7 @@ void Inventory::mouseClick(Action *action, State *state)
 				// Check if this inventory section supports the item
 				if (!_selItem->getRules()->canBePlacedIntoInventorySection(slot))
 				{
-					_warning->showMessage(game.getLanguage()->getString("STR_CANNOT_PLACE_ITEM_INTO_THIS_SECTION"));
+					_warning->showMessage(game.language()->getString("STR_CANNOT_PLACE_ITEM_INTO_THIS_SECTION"));
 				}
 				// Put item in empty slot, or stack it, if possible.
 				else if (item == 0 || item == _selItem || canStack)
@@ -938,7 +938,7 @@ void Inventory::mouseClick(Action *action, State *state)
 						}
 						else
 						{
-							_warning->showMessage(game.getLanguage()->getString("STR_NOT_ENOUGH_TIME_UNITS"));
+							_warning->showMessage(game.language()->getString("STR_NOT_ENOUGH_TIME_UNITS"));
 						}
 					}
 					else if (canStack)
@@ -952,7 +952,7 @@ void Inventory::mouseClick(Action *action, State *state)
 						}
 						else
 						{
-							_warning->showMessage(game.getLanguage()->getString("STR_NOT_ENOUGH_TIME_UNITS"));
+							_warning->showMessage(game.language()->getString("STR_NOT_ENOUGH_TIME_UNITS"));
 						}
 					}
 				}
@@ -962,7 +962,7 @@ void Inventory::mouseClick(Action *action, State *state)
 					int slotAmmo = item->getRules()->getSlotForAmmo(_selItem->getRules());
 					if (slotAmmo == -1)
 					{
-						_warning->showMessage(game.getLanguage()->getString("STR_WRONG_AMMUNITION_FOR_THIS_WEAPON"));
+						_warning->showMessage(game.language()->getString("STR_WRONG_AMMUNITION_FOR_THIS_WEAPON"));
 					}
 					else
 					{
@@ -1022,7 +1022,7 @@ void Inventory::mouseClick(Action *action, State *state)
 							else
 							{
 								canLoad = false;
-								_warning->showMessage(game.getLanguage()->getString("STR_WEAPON_IS_ALREADY_LOADED"));
+								_warning->showMessage(game.language()->getString("STR_WEAPON_IS_ALREADY_LOADED"));
 							}
 						}
 						if (canLoad)
@@ -1059,7 +1059,7 @@ void Inventory::mouseClick(Action *action, State *state)
 							}
 							else
 							{
-								_warning->showMessage(game.getLanguage()->getString("STR_NOT_ENOUGH_TIME_UNITS"));
+								_warning->showMessage(game.language()->getString("STR_NOT_ENOUGH_TIME_UNITS"));
 							}
 						}
 					}
@@ -1087,7 +1087,7 @@ void Inventory::mouseClick(Action *action, State *state)
 						}
 						else
 						{
-							_warning->showMessage(game.getLanguage()->getString("STR_NOT_ENOUGH_TIME_UNITS"));
+							_warning->showMessage(game.language()->getString("STR_NOT_ENOUGH_TIME_UNITS"));
 						}
 					}
 				}
@@ -1128,7 +1128,7 @@ void Inventory::mouseClick(Action *action, State *state)
 										}
 										else
 										{
-											_warning->showMessage(game.getLanguage()->getString(item->getRules()->getPrimeActionMessage()));
+											_warning->showMessage(game.language()->getString(item->getRules()->getPrimeActionMessage()));
 											item->setFuseTimer(item->getRules()->getFuseTimerDefault());
 											arrangeGround();
 											playSound(item->getRules()->getPrimeSound()); // prime sound
@@ -1139,7 +1139,7 @@ void Inventory::mouseClick(Action *action, State *state)
 								{
 									if (item->getRules()->getCostUnprime().Time > 0 /* && !item->getRules()->getUnprimeActionName().empty() */ )
 									{
-										_warning->showMessage(game.getLanguage()->getString(item->getRules()->getUnprimeActionMessage()));
+										_warning->showMessage(game.language()->getString(item->getRules()->getUnprimeActionMessage()));
 										item->setFuseTimer(-1);  // Unprime the grenade
 										arrangeGround();
 										playSound(item->getRules()->getUnprimeSound()); // unprime sound
@@ -1206,7 +1206,7 @@ bool Inventory::quickDrop()
 		}
 		else
 		{
-			_warning->showMessage(game.getLanguage()->getString("STR_NOT_ENOUGH_TIME_UNITS"));
+			_warning->showMessage(game.language()->getString("STR_NOT_ENOUGH_TIME_UNITS"));
 		}
 	}
 
@@ -1317,7 +1317,7 @@ bool Inventory::unload(bool quickUnload)
 		{
 			if (showError)
 			{
-				_warning->showMessage(game.getLanguage()->getString("STR_NO_AMMUNITION_LOADED"));
+				_warning->showMessage(game.language()->getString("STR_NO_AMMUNITION_LOADED"));
 			}
 			return false;
 		}
@@ -1335,7 +1335,7 @@ bool Inventory::unload(bool quickUnload)
 		if (grenade)
 		{
 			_selItem->setFuseTimer(-1);
-			_warning->showMessage(game.getLanguage()->getString(_selItem->getRules()->getUnprimeActionMessage()));
+			_warning->showMessage(game.language()->getString(_selItem->getRules()->getUnprimeActionMessage()));
 			playSound(_selItem->getRules()->getUnprimeSound()); // unprime sound
 			setSelectedItem(0);
 		}
@@ -1375,7 +1375,7 @@ bool Inventory::unload(bool quickUnload)
 	}
 	if (FirstFreeHand == nullptr)
 	{
-		_warning->showMessage(game.getLanguage()->getString("STR_ONE_HAND_MUST_BE_EMPTY"));
+		_warning->showMessage(game.language()->getString("STR_ONE_HAND_MUST_BE_EMPTY"));
 		return false;
 	}
 
@@ -1410,7 +1410,7 @@ bool Inventory::unload(bool quickUnload)
 		if (grenade)
 		{
 			_selItem->setFuseTimer(-1);
-			_warning->showMessage(game.getLanguage()->getString(_selItem->getRules()->getUnprimeActionMessage()));
+			_warning->showMessage(game.language()->getString(_selItem->getRules()->getUnprimeActionMessage()));
 			playSound(_selItem->getRules()->getUnprimeSound()); // unprime sound
 		}
 		else
@@ -1433,7 +1433,7 @@ bool Inventory::unload(bool quickUnload)
 	{
 		if (!err.empty())
 		{
-			_warning->showMessage(game.getLanguage()->getString(err));
+			_warning->showMessage(game.language()->getString(err));
 		}
 		return false;
 	}
@@ -1456,11 +1456,11 @@ bool Inventory::isInSearchString(BattleItem *item)
 	if (!game.savedGame()->isResearched(item->getRules()->getRequirements()))
 	{
 		// Alien artifact, shouldn't match on the real name.
-		itemLocalName = game.getLanguage()->getString("STR_ALIEN_ARTIFACT");
+		itemLocalName = game.language()->getString("STR_ALIEN_ARTIFACT");
 	}
 	else
 	{
-		itemLocalName = game.getLanguage()->getString(item->getRules()->getName());
+		itemLocalName = game.language()->getString(item->getRules()->getName());
 	}
 	Unicode::upperCase(itemLocalName);
 	if (itemLocalName.find(_searchString) != std::string::npos)
@@ -1475,7 +1475,7 @@ bool Inventory::isInSearchString(BattleItem *item)
 	{
 		for (const auto& itemCategoryName : item->getRules()->getCategories())
 		{
-			std::string catLocalName = game.getLanguage()->getString(itemCategoryName);
+			std::string catLocalName = game.language()->getString(itemCategoryName);
 			Unicode::upperCase(catLocalName);
 			if (catLocalName.find(_searchString) != std::string::npos)
 			{
@@ -1490,7 +1490,7 @@ bool Inventory::isInSearchString(BattleItem *item)
 			{
 				for (const auto& itemAmmoCategoryName : item->getAmmoForSlot(slot)->getRules()->getCategories())
 				{
-					std::string catLocalName = game.getLanguage()->getString(itemAmmoCategoryName);
+					std::string catLocalName = game.language()->getString(itemAmmoCategoryName);
 					Unicode::upperCase(catLocalName);
 					if (catLocalName.find(_searchString) != std::string::npos)
 					{

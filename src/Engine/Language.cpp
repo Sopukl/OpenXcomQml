@@ -272,6 +272,20 @@ LocalizedText Language::getString(const std::string &id) const
 	}
 }
 
+QString Language::string(QString id)
+{
+	if (id.isEmpty())
+	{
+		return id;
+	}
+	auto s = _strings.find(id.toStdString());
+
+	auto locText = (s == _strings.end())?getString(id.toStdString(), UINT_MAX)
+										:s->second;
+
+	return QString::fromStdString(locText.text());
+}
+
 /**
  * Returns the localized text with the specified ID, in the proper form for @a n.
  * The substitution of @a n has already happened in the returned LocalizedText.

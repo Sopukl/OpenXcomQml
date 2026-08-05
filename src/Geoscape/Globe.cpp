@@ -1414,7 +1414,7 @@ void Globe::drawDetail()
 
 			label->setX(x - 75);
 			label->setY(y);
-			label->setText(game.getLanguage()->getString(country->getRules()->getType()));
+			label->setText(game.language()->getString(country->getRules()->getType()));
 			label->setColor(COUNTRY_LABEL_COLOR);
 			if (country->getRules()->getLabelColor() > 0)
 			{
@@ -1448,7 +1448,7 @@ void Globe::drawDetail()
 
 				label->setX(x - 60);
 				label->setY(y);
-				label->setText(game.getLanguage()->getString(rule->getType()));
+				label->setText(game.language()->getString(rule->getType()));
 				label->setColor(COUNTRY_LABEL_COLOR);
 				if (rule->getLabelColor() > 0)
 				{

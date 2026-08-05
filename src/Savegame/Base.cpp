@@ -839,7 +839,7 @@ double Base::getUsedStores(bool excludeNormalItems) const
 	{
 		if (transfer->getType() == TRANSFER_ITEM)
 		{
-			total += transfer->getQuantity() * transfer->getItems()->getSize();
+			total += transfer->getQuantity() * transfer->getItems()->size();
 		}
 		else if (transfer->getType() == TRANSFER_CRAFT)
 		{

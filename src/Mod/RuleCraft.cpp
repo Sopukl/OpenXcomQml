@@ -376,7 +376,7 @@ int RuleCraft::getMaxVehiclesAndLargeSoldiers() const
  * purchase/rent (0 if not purchasable).
  * @return The cost.
  */
-int RuleCraft::getBuyCost() const
+int RuleCraft::buyCost() const
 {
 	return _costBuy;
 }

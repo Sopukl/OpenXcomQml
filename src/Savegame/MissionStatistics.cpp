@@ -52,7 +52,7 @@ void MissionStatistics::save(YAML::YamlNodeWriter writer) const
 
 std::string MissionStatistics::getMissionName() const
 {
-	Language *lang = game.getLanguage();
+	Language *lang = game.language();
 	if (!markerName.empty())
 	{
 		return lang->getString(markerName).arg(markerId);
@@ -65,7 +65,7 @@ std::string MissionStatistics::getMissionName() const
 
 std::string MissionStatistics::getRatingString() const
 {
-	Language *lang = game.getLanguage();
+	Language *lang = game.language();
 	std::ostringstream ss;
 	if (success)
 	{

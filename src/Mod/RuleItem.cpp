@@ -26,6 +26,7 @@
 #include "RuleInventory.h"
 #include "RuleDamageType.h"
 #include "RuleSoldier.h"
+#include "../Engine/Game.h"
 #include "../Savegame/SavedGame.h"
 #include "../Savegame/BattleUnit.h"
 #include "../Engine/Exception.h"
@@ -832,6 +833,11 @@ const std::string &RuleItem::getType() const
 	return _type;
 }
 
+QString RuleItem::name() const
+{
+	return QString::fromStdString(_name);
+}
+
 /**
  * Gets the language string that names
  * this item. This is not necessarily unique.
@@ -938,7 +944,7 @@ Unit* RuleItem::getVehicleUnit() const
  * takes up in a storage facility.
  * @return The storage size.
  */
-double RuleItem::getSize() const
+double RuleItem::size() const
 {
 	return _size;
 }
@@ -948,7 +954,7 @@ double RuleItem::getSize() const
  * costs to purchase (0 if not purchasable).
  * @return The buy cost.
  */
-int RuleItem::getBuyCost() const
+int RuleItem::buyCost() const
 {
 	return _costBuy;
 }
@@ -964,7 +970,7 @@ int RuleItem::getBuyCostAdjusted(const Base* base, const SavedGame* save) const
 	(void)base; //TODO: not exposed to scripts yet
 
 	int buyPriceCoefficient = save->getBuyPriceCoefficient();
-	int cost = getBuyCost();
+	int cost = buyCost();
 	int adjusted = ((int64_t)cost) * buyPriceCoefficient / 100;
 
 	adjusted = ModScript::scriptFunc2<ModScript::BuyCostItem>(this, adjusted, cost, this, save, buyPriceCoefficient);
@@ -977,7 +983,7 @@ int RuleItem::getBuyCostAdjusted(const Base* base, const SavedGame* save) const
  * is worth to sell.
  * @return The sell cost.
  */
-int RuleItem::getSellCost() const
+int RuleItem::sellCost() const
 {
 	return _costSell;
 }
@@ -993,7 +999,7 @@ int RuleItem::getSellCostAdjusted(const Base* base, const SavedGame* save) const
 	(void)base; //TODO: not exposed to scripts yet
 
 	int sellPriceCoefficient = save->getSellPriceCoefficient();
-	int cost = getSellCost();
+	int cost = sellCost();
 	int adjusted = ((int64_t)cost) * sellPriceCoefficient / 100;
 
 	adjusted = ModScript::scriptFunc2<ModScript::SellCostItem>(this, adjusted, cost, this, save, sellPriceCoefficient);

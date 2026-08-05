@@ -1010,7 +1010,7 @@ void BattlescapeGame::missionComplete()
 		std::string missionComplete = game.getMod()->getDeployment(_save->getMissionType())->getObjectivePopup();
 		if (!missionComplete.empty())
 		{
-			_infoboxQueue.push_back(new InfoboxOKState(game.getLanguage()->getString(missionComplete)));
+			_infoboxQueue.push_back(new InfoboxOKState(game.language()->getString(missionComplete)));
 		}
 	}
 }
@@ -1548,11 +1548,11 @@ bool BattlescapeGame::handlePanickingUnit(BattleUnit *unit)
 		getMap()->getCamera()->centerOnPosition(unit->getPosition());
 		if (status == STATUS_PANICKING)
 		{
-			game.pushState(new InfoboxState(game.getLanguage()->getString("STR_HAS_PANICKED", unit->getGender()).arg(unit->getName())));
+			game.pushState(new InfoboxState(game.language()->getString("STR_HAS_PANICKED", unit->getGender()).arg(unit->getName())));
 		}
 		else
 		{
-			game.pushState(new InfoboxState(game.getLanguage()->getString("STR_HAS_GONE_BERSERK", unit->getGender()).arg(unit->getName())));
+			game.pushState(new InfoboxState(game.language()->getString("STR_HAS_GONE_BERSERK", unit->getGender()).arg(unit->getName())));
 		}
 	}
 	else if (soundPlayed)
@@ -2065,19 +2065,19 @@ void BattlescapeGame::psiAttackMessage(BattleActionAttack attack, BattleUnit *vi
 		{
 			// show a little infobox with the name of the unit and "... is under alien control"
 			if (attack.type == BA_MINDCONTROL)
-				game.pushState(new InfoboxState(game.getLanguage()->getString("STR_IS_UNDER_ALIEN_CONTROL", victim->getGender()).arg(victim->getName())));
+				game.pushState(new InfoboxState(game.language()->getString("STR_IS_UNDER_ALIEN_CONTROL", victim->getGender()).arg(victim->getName())));
 		}
 		else
 		{
 			// show a little infobox if it's successful
 			if (attack.type == BA_PANIC)
-				game.pushState(new InfoboxState(game.getLanguage()->getString("STR_MORALE_ATTACK_SUCCESSFUL")));
+				game.pushState(new InfoboxState(game.language()->getString("STR_MORALE_ATTACK_SUCCESSFUL")));
 			else if (attack.type == BA_MINDCONTROL)
 			{
 				if (attack.weapon_item->getRules()->convertToCivilian() && victim->getOriginalFaction() == FACTION_HOSTILE)
-					game.pushState(new InfoboxState(game.getLanguage()->getString("STR_MIND_CONTROL_SUCCESSFUL_ALT")));
+					game.pushState(new InfoboxState(game.language()->getString("STR_MIND_CONTROL_SUCCESSFUL_ALT")));
 				else
-					game.pushState(new InfoboxState(game.getLanguage()->getString("STR_MIND_CONTROL_SUCCESSFUL")));
+					game.pushState(new InfoboxState(game.language()->getString("STR_MIND_CONTROL_SUCCESSFUL")));
 			}
 			getSave()->getBattleState()->updateSoldierInfo();
 		}
@@ -3081,7 +3081,7 @@ bool BattlescapeGame::convertInfected()
 			bu->setRespawn(false);
 			if (options1.battleNotifyDeath() && bu->getFaction() == FACTION_PLAYER)
 			{
-				game.pushState(new InfoboxState(game.getLanguage()->getString("STR_HAS_BEEN_KILLED", bu->getGender()).arg(bu->getName())));
+				game.pushState(new InfoboxState(game.language()->getString("STR_HAS_BEEN_KILLED", bu->getGender()).arg(bu->getName())));
 			}
 
 			forTransform.push_back(bu);

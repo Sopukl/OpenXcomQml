@@ -1730,7 +1730,7 @@ void TechTreeViewerState::initLists()
 		++row;
 
 		// cost to buy
-		if (rule->getBuyCost() > 0)
+		if (rule->buyCost() > 0)
 		{
 			_lstFull->addRow(1, ltr("STR_TTV_COST_PER_UNIT").c_str());
 			_lstFull->setRowColor(row, _blue);
@@ -1740,7 +1740,7 @@ void TechTreeViewerState::initLists()
 
 			std::ostringstream txt;
 			txt << "  ";
-			txt << Unicode::formatFunding(rule->getBuyCost());
+			txt << Unicode::formatFunding(rule->buyCost());
 			_lstFull->addRow(1, txt.str().c_str());
 			_lstFull->setRowColor(row, _white);
 			_leftTopics.push_back("-");
@@ -1837,7 +1837,7 @@ void TechTreeViewerState::initLists()
 		++row;
 
 		// cost to buy
-		if (rule->getBuyCost() > 0)
+		if (rule->buyCost() > 0)
 		{
 			_lstLeft->addRow(1, ltr("STR_TTV_COST_PER_UNIT").c_str());
 			_lstLeft->setRowColor(row, _blue);
@@ -1847,7 +1847,7 @@ void TechTreeViewerState::initLists()
 
 			std::ostringstream txt;
 			txt << "  ";
-			txt << Unicode::formatFunding(rule->getBuyCost());
+			txt << Unicode::formatFunding(rule->buyCost());
 			_lstLeft->addRow(1, txt.str().c_str());
 			_lstLeft->setRowColor(row, _white);
 			_leftTopics.push_back("-");

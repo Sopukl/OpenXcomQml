@@ -322,7 +322,7 @@ void StoresState::initList()
 
 		if (qty > 0)
 		{
-			_itemList.push_back(StoredItem(rule, ltr(itemType), qty, rule->getSize(), qty * rule->getSize()));
+			_itemList.push_back(StoredItem(rule, ltr(itemType), qty, rule->size(), qty * rule->size()));
 		}
 	}
 

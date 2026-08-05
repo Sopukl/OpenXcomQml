@@ -417,7 +417,7 @@ ModScript::NewMonthCountryParser::NewMonthCountryParser(ScriptGlobal* shared, co
 
 QString Country::name() const
 {
-	const auto& stdName = game.getLanguage()->getString(_rules->getType());
+	const auto& stdName = game.language()->getString(_rules->getType());
 	return QString::fromStdString(stdName);
 }
 

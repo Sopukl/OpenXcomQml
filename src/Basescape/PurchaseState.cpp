@@ -183,7 +183,7 @@ PurchaseState::PurchaseState(Base *base, CannotReequipState *parent) : _base(bas
 	// setup the filter methods to be used in various situations (craft, soldiers, items).
 	constexpr auto costIsNotZero = [](const auto* rule)
 	{
-		return rule->getBuyCost() != 0;
+		return rule->buyCost() != 0;
 	};
 	constexpr auto requirementsAreResearched = [](const auto* rule)
 	{
@@ -220,7 +220,7 @@ PurchaseState::PurchaseState(Base *base, CannotReequipState *parent) : _base(bas
 		RuleSoldier *rule = game.getMod()->getSoldier(soldierType);
 		if (craftAndSoldierFilter(rule))
 		{
-			TransferRow row = { TRANSFER_SOLDIER, rule, ltr(rule->getType()), rule->getBuyCost(), _base->getSoldierCountAndSalary(rule->getType()).first, 0, 0, -4, 0, 0, 0 };
+			TransferRow row = { TRANSFER_SOLDIER, rule, ltr(rule->getType()), rule->buyCost(), _base->getSoldierCountAndSalary(rule->getType()).first, 0, 0, -4, 0, 0, 0 };
 			_items.push_back(row);
 			std::string cat = getCategory(_items.size() - 1);
 			if (std::find(_cats.begin(), _cats.end(), cat) == _cats.end())
@@ -256,7 +256,7 @@ PurchaseState::PurchaseState(Base *base, CannotReequipState *parent) : _base(bas
 		RuleCraft *rule = game.getMod()->getCraft(craftType);
 		if (craftAndSoldierFilter(rule))
 		{
-			TransferRow row = { TRANSFER_CRAFT, rule, ltr(rule->getType()), rule->getBuyCost(), _base->getCraftCount(rule), 0, 0, -1, 0, 0, 0 };
+			TransferRow row = { TRANSFER_CRAFT, rule, ltr(rule->getType()), rule->buyCost(), _base->getCraftCount(rule), 0, 0, -1, 0, 0, 0 };
 			_items.push_back(row);
 			std::string cat = getCategory(_items.size() - 1);
 			if (std::find(_cats.begin(), _cats.end(), cat) == _cats.end())
@@ -652,7 +652,7 @@ void PurchaseState::updateList()
 					{
 						_items[i].amount += missingQty; // buy automatically
 
-						_iQty  += missingQty * rule->getSize(); // update total size
+						_iQty  += missingQty * rule->size(); // update total size
 						_total += missingQty * _items[i].cost;  // update total cost
 					}
 				}
@@ -1126,7 +1126,7 @@ void PurchaseState::increaseByValue(int change)
 			break;
 		case TRANSFER_ITEM:
 			rule = (RuleItem*)getRow().rule;
-			if (_base->storesOverfull(_iQty + rule->getSize()))
+			if (_base->storesOverfull(_iQty + rule->size()))
 			{
 				errorMessage = ltr("STR_NOT_ENOUGH_STORE_SPACE");
 			}
@@ -1213,7 +1213,7 @@ void PurchaseState::increaseByValue(int change)
 				}
 				// both aliens and items
 				{
-					double storesNeededPerItem = rule->getSize();
+					double storesNeededPerItem = rule->size();
 					double freeStores = _base->getAvailableStores() - _base->getUsedStores() - _iQty;
 					double maxByStores = (double)(INT_MAX);
 					if (!AreSame(storesNeededPerItem, 0.0) && storesNeededPerItem > 0.0)
@@ -1273,7 +1273,7 @@ void PurchaseState::decreaseByValue(int change)
 		break;
 	case TRANSFER_ITEM:
 		rule = (RuleItem*)getRow().rule;
-		_iQty -= rule->getSize() * change;
+		_iQty -= rule->size() * change;
 		if (rule->isAlien())
 		{
 			_iPrisonQty[rule->getPrisonType()] -= change;

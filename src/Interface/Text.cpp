@@ -365,7 +365,7 @@ void Text::processText()
 			width += charWidth;
 			word += charWidth;
 
-			auto textWrapping = game.getLanguage()->getTextWrapping();
+			auto textWrapping = game.language()->getTextWrapping();
 			// Wordwrap if the last word doesn't fit the line
 			if (_wrap && width >= getWidth() && (!start || textWrapping == WRAP_LETTERS))
 			{
@@ -449,7 +449,7 @@ struct PaletteShift
 int Text::getLineX(int line) const
 {
 	int x = 0;
-	switch (game.getLanguage()->getTextDirection())
+	switch (game.language()->getTextDirection())
 	{
 	case DIRECTION_LTR:
 		switch (_align)
@@ -548,7 +548,7 @@ void Text::draw()
 
 	// Set up text direction
 	int dir = 1;
-	if (game.getLanguage()->getTextDirection() == DIRECTION_RTL)
+	if (game.language()->getTextDirection() == DIRECTION_RTL)
 	{
 		dir = -1;
 	}

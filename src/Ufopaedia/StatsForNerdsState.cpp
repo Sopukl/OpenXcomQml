@@ -2254,16 +2254,16 @@ void StatsForNerdsState::initItemList()
 	addVectorOfStrings(ss, itemRule->getCategories(), "categories");
 	addVectorOfRulesId(ss, itemRule->getSupportedInventorySections(), "supportedInventorySections");
 
-	addDouble(ss, itemRule->getSize(), "size");
+	addDouble(ss, itemRule->size(), "size");
 	if (game.savedGame()->getBuyPriceCoefficient() == 100)
 	{
-		addInteger(ss, itemRule->getBuyCost(), "costBuy", 0, true);
+		addInteger(ss, itemRule->buyCost(), "costBuy", 0, true);
 	}
 	else
 	{
 		addHeading("_calculatedValues", "STR_FOR_DIFFICULTY", true);
 		{
-			int adjustedCost = itemRule->getBuyCost() * game.savedGame()->getBuyPriceCoefficient() / 100;
+			int adjustedCost = itemRule->buyCost() * game.savedGame()->getBuyPriceCoefficient() / 100;
 			addInteger(ss, adjustedCost, "costBuy", 0, true);
 
 			endHeading();
@@ -2275,13 +2275,13 @@ void StatsForNerdsState::initItemList()
 	addInteger(ss, itemRule->getMonthlyMaintenance(), "monthlyMaintenance", 0, true);
 	if (game.savedGame()->getSellPriceCoefficient() == 100)
 	{
-		addInteger(ss, itemRule->getSellCost(), "costSell", 0, true);
+		addInteger(ss, itemRule->sellCost(), "costSell", 0, true);
 	}
 	else
 	{
 		addHeading("_calculatedValues", "STR_FOR_DIFFICULTY", true);
 		{
-			int adjustedCost = itemRule->getSellCost() * game.savedGame()->getSellPriceCoefficient() / 100;
+			int adjustedCost = itemRule->sellCost() * game.savedGame()->getSellPriceCoefficient() / 100;
 			addInteger(ss, adjustedCost, "costSell", 0, true);
 
 			endHeading();
@@ -3361,7 +3361,7 @@ void StatsForNerdsState::initCraftList()
 	addVectorOfStrings(ss, mod->getBaseFunctionNames(craftRule->getRequiresBuyBaseFunc()), "requiresBuyBaseFunc");
 	addSingleString(ss, craftRule->getRequiresBuyCountry(), "requiresBuyCountry");
 
-	addInteger(ss, craftRule->getBuyCost(), "costBuy", 0, true);
+	addInteger(ss, craftRule->buyCost(), "costBuy", 0, true);
 	addInteger(ss, craftRule->getMonthlyBuyLimit(), "monthlyBuyLimit");
 	addInteger(ss, craftRule->getRentCost(), "costRent", 0, true);
 	addInteger(ss, craftRule->getSellCost(), "costSell", 0, true);
@@ -4034,7 +4034,7 @@ void StatsForNerdsState::initSoldierList()
 	addVectorOfStrings(ss, mod->getBaseFunctionNames(soldierRule->getRequiresBuyBaseFunc()), "requiresBuyBaseFunc");
 	addSingleString(ss, soldierRule->getRequiresBuyCountry(), "requiresBuyCountry");
 
-	addInteger(ss, soldierRule->getBuyCost(), "costBuy", 0, true);
+	addInteger(ss, soldierRule->buyCost(), "costBuy", 0, true);
 	addInteger(ss, soldierRule->getMonthlyBuyLimit(), "monthlyBuyLimit");
 
 	int time = soldierRule->getTransferTime();

@@ -4344,7 +4344,7 @@ void BattleUnit::setName(const std::string &name)
  */
 std::string BattleUnit::getName(bool debugAppendId) const
 {
-	Language *lang = game.getLanguage();
+	Language *lang = game.language();
 	if (_type != "SOLDIER" && lang != 0)
 	{
 		std::string ret;

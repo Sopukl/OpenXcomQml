@@ -3431,7 +3431,7 @@ void flashMessageVariadicScriptImpl(SavedBattleGame* sbg, ScriptText message, Ar
 	{
 		return;
 	}
-	const Language *lang = game.getLanguage();
+	const Language *lang = game.language();
 	LocalizedText translated = lang->getString(message);
 	(translated.arg(args), ...);
 	sbg->getBattleState()->warningRaw(translated);
@@ -3444,7 +3444,7 @@ void flashLongMessageVariadicScriptImpl(SavedBattleGame* sbg, ScriptText message
 	{
 		return;
 	}
-	const Language *lang = game.getLanguage();
+	const Language *lang = game.language();
 	LocalizedText translated = lang->getString(message);
 	(translated.arg(args), ...);
 	sbg->getBattleState()->warningLongRaw(translated);

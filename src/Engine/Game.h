@@ -77,7 +77,7 @@ struct SaveDesc
         Q_ENUM(GameState)
         Q_PROPERTY(GameState state READ state WRITE setGameState NOTIFY stateChanged FINAL)
 		Q_PROPERTY(SavedGame* savedGame READ savedGame WRITE setSavedGame NOTIFY savedGameChanged FINAL)
-
+		Q_PROPERTY(Language* language READ language CONSTANT FINAL)
     private:
         enum ApplicationState { RUNNING = 0, SLOWED = 1, PAUSED = 2 } runningState = RUNNING;
         ApplicationState kbFocusRun[4] = { RUNNING, RUNNING, SLOWED, PAUSED };
@@ -135,7 +135,7 @@ struct SaveDesc
         /// Pops the last state from the state stack.
         void popState();
         /// Gets the currently loaded language.
-        Language *getLanguage() const { return _lang; }
+		Language *language() const { return _lang; }
         /// Gets the currently loaded saved game.
 		SavedGame *savedGame() const { return _save; }
         /// Sets a new saved game for the game.

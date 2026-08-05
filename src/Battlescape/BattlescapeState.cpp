@@ -2773,7 +2773,7 @@ inline void BattlescapeState::handle(Action *action)
 								if (bu->getFatalWound((UnitBodyPart)i))
 								{
 									ss << "\n";
-									ss << game.getLanguage()->getString(PARTS_STRING[i]);
+									ss << game.language()->getString(PARTS_STRING[i]);
 								}
 							}
 							game.pushState(new InfoboxState(ss.str()));
@@ -3091,7 +3091,7 @@ inline void BattlescapeState::handle(Action *action)
 								{
 									debug("Have you paid your taxes yet?");
 									unitUnderTheCursor->moraleChange(-moraleLoss);
-									game.pushState(new InfoboxState(game.getLanguage()->getString("STR_MORALE_ATTACK_SUCCESSFUL")));
+									game.pushState(new InfoboxState(game.language()->getString("STR_MORALE_ATTACK_SUCCESSFUL")));
 								}
 							}
 							else
@@ -3103,7 +3103,7 @@ inline void BattlescapeState::handle(Action *action)
 									//unitUnderTheCursor->recoverTimeUnits();
 									unitUnderTheCursor->allowReselect();
 									unitUnderTheCursor->abortTurn(); // resets unit status to STANDING
-									game.pushState(new InfoboxState(game.getLanguage()->getString("STR_MIND_CONTROL_SUCCESSFUL")));
+									game.pushState(new InfoboxState(game.language()->getString("STR_MIND_CONTROL_SUCCESSFUL")));
 								}
 							}
 						}

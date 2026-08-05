@@ -229,7 +229,7 @@ AlienInventoryState::AlienInventoryState(BattleUnit *unit)
 			{
 				if (unit->getFatalWound((UnitBodyPart)i))
 				{
-					ss << game.getLanguage()->getString(PARTS_STRING[i]);
+					ss << game.language()->getString(PARTS_STRING[i]);
 					ss << "\n";
 				}
 			}

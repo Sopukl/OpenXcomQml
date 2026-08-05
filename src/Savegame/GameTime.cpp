@@ -210,7 +210,7 @@ int GameTime::getDay() const
  */
 std::string GameTime::getDayString() const
 {
-	Language *lang = game.getLanguage();
+	Language *lang = game.language();
 	std::string s;
 	switch (_day)
 	{

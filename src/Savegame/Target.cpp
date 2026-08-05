@@ -207,7 +207,7 @@ void Target::set_Name(const QString &newName)
  */
 std::string Target::getDefaultName() const
 {
-	return game.getLanguage()->getString(getMarkerName()).arg(_id);
+	return game.language()->getString(getMarkerName()).arg(_id);
 }
 
 /**

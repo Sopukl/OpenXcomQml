@@ -257,7 +257,7 @@ static bool _isCurrentGameType(const SaveInfo &saveInfo, const std::string &curM
  */
 std::vector<SaveInfo> SavedGame::getList(bool autoquick)
 {
-	Language *lang = game.getLanguage();
+	Language *lang = game.language();
 	std::vector<SaveInfo> info;
 	std::string curMaster = Options::getActiveMaster();
 	qDebug() << curMaster << Options::getMasterUserFolder();
@@ -1997,7 +1997,7 @@ void SavedGame::getDependablePurchase(std::vector<RuleItem *> & dependables, con
 	for (const auto& itemType : mod->getItemsList())
 	{
 		RuleItem *item = mod->getItem(itemType);
-		if (item->getBuyCost() != 0)
+		if (item->buyCost() != 0)
 		{
 			const auto& reqs = item->getRequirements();
 			bool found = std::find(reqs.begin(), reqs.end(), research) != reqs.end();
@@ -2025,7 +2025,7 @@ void SavedGame::getDependableCraft(std::vector<RuleCraft *> & dependables, const
 	for (const auto& craftType : mod->getCraftsList())
 	{
 		RuleCraft *craftItem = mod->getCraft(craftType);
-		if (craftItem->getBuyCost() != 0)
+		if (craftItem->buyCost() != 0)
 		{
 			const auto& reqs = craftItem->getRequirements();
 			if (std::find(reqs.begin(), reqs.end(), research->getName()) != reqs.end())

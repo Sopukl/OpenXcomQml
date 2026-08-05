@@ -308,7 +308,7 @@ public:
 	/// Gets the craft's monthly buy limit message.
 	const std::string& getMonthlyBuyLimitMessage() const { return _monthlyBuyLimitMessage; }
 	/// Gets the craft's cost.
-	int getBuyCost() const;
+	int buyCost() const;
 	/// Gets the craft's rent for a month.
 	int getRentCost() const;
 	/// Gets the craft's value.

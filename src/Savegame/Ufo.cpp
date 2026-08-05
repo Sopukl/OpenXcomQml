@@ -362,7 +362,7 @@ int Ufo::getUniqueId() const
  */
 std::string Ufo::getDefaultName() const
 {
-	auto lang = game.getLanguage();
+	auto lang = game.language();
 	switch (_status)
 	{
 	case LANDED:

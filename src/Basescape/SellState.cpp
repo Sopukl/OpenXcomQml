@@ -266,12 +266,12 @@ void SellState::delayedInit()
 		}
 		if (qty > 0 && (options1.canSellLiveAliens() || !rule->isAlien()))
 		{
-			TransferRow row = { TRANSFER_ITEM, rule, ltr(itemType), rule->getSellCostAdjusted(_base, game.savedGame()), qty, 0, 0, rule->getListOrder(), rule->getSize(), qty * rule->getSize(), (int64_t)qty * rule->getSellCostAdjusted(_base, game.savedGame()) };
+			TransferRow row = { TRANSFER_ITEM, rule, ltr(itemType), rule->getSellCostAdjusted(_base, game.savedGame()), qty, 0, 0, rule->getListOrder(), rule->size(), qty * rule->size(), (int64_t)qty * rule->getSellCostAdjusted(_base, game.savedGame()) };
 			if ((_debriefingState != 0) && (game.savedGame()->getAutosell(rule)))
 			{
 				row.amount = qty;
 				_total += row.cost * qty;
-				_spaceChange -= qty * rule->getSize();
+				_spaceChange -= qty * rule->size();
 			}
 			_items.push_back(row);
 			std::string cat = getCategory(_items.size() - 1);
@@ -1172,7 +1172,7 @@ void SellState::changeByValue(int change, int dir)
 		soldier = (Soldier*)getRow().rule;
 		if (soldier->getArmor()->getStoreItem())
 		{
-			_spaceChange += dir * soldier->getArmor()->getStoreItem()->getSize();
+			_spaceChange += dir * soldier->getArmor()->getStoreItem()->size();
 		}
 		break;
 	case TRANSFER_CRAFT:
@@ -1180,7 +1180,7 @@ void SellState::changeByValue(int change, int dir)
 		break;
 	case TRANSFER_ITEM:
 		item = (const RuleItem*)getRow().rule;
-		_spaceChange -= dir * change * item->getSize();
+		_spaceChange -= dir * change * item->size();
 		break;
 	default:
 		//TRANSFER_SCIENTIST and TRANSFER_ENGINEER do not own anything that takes storage

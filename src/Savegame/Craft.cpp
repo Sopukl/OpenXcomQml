@@ -442,7 +442,7 @@ void Craft::changeRules(RuleCraft *rules)
  */
 std::string Craft::getDefaultName() const
 {
-	auto language = game.getLanguage();
+	auto language = game.language();
 	return language->getString("STR_CRAFTNAME")
 				.arg(language->getString(getType())).arg(_id);
 }
@@ -694,12 +694,12 @@ double Craft::getTotalItemStorageSize() const
 
 	for (const auto* v : _vehicles)
 	{
-		total += v->getRules()->getSize();
+		total += v->getRules()->size();
 
 		auto* clip = v->getRules()->getVehicleClipAmmo();
 		if (clip)
 		{
-			total += clip->getSize() *  v->getRules()->getVehicleClipsLoaded();
+			total += clip->size() *  v->getRules()->getVehicleClipsLoaded();
 		}
 	}
 
@@ -707,12 +707,12 @@ double Craft::getTotalItemStorageSize() const
 	{
 		if (w)
 		{
-			total += w->getRules()->getLauncherItem()->getSize();
+			total += w->getRules()->getLauncherItem()->size();
 
 			auto* clip = w->getRules()->getClipItem();
 			if (clip)
 			{
-				total += clip->getSize() * w->getClipsLoaded();
+				total += clip->size() * w->getClipsLoaded();
 			}
 		}
 	}

@@ -25,7 +25,7 @@ namespace OpenXcom
 
 HitLog::HitLog() : _lastEventType(HITLOG_EMPTY), _lastFaction(FACTION_PLAYER)
 {
-	Language *lang = game.getLanguage();
+	Language *lang = game.language();
 	// cache
 	_newTurn = lang->getString("STR_HIT_LOG_NEW_TURN");
 	_reactionFire = lang->getString("STR_HIT_LOG_REACTION_FIRE");

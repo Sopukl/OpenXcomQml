@@ -603,7 +603,7 @@ void Soldier::setCraftAndMoveEquipment(Craft* craft, Base* base, bool isNewBattl
  */
 std::string Soldier::getCraftString(const BaseSumDailyRecovery& recovery) const
 {
-	Language *lang = game.getLanguage();
+	Language *lang = game.language();
 	std::string s;
 	if (_death)
 	{

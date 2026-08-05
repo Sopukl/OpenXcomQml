@@ -223,7 +223,7 @@ void CraftWeaponsState::lstWeaponsClick(Action *)
 				{
 					cQty = _craft->getItems()->getItem(rule);
 					totalItems += cQty;
-					totalItemStorageSize += cQty * rule->getSize();
+					totalItemStorageSize += cQty * rule->size();
 				}
 			}
 		}

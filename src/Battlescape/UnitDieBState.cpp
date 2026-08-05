@@ -199,7 +199,7 @@ void UnitDieBState::think()
 					if (_unit->getNotificationShown() < 2)
 					{
 						_unit->setNotificationShown(2);
-						game.pushState(new InfoboxOKState(game.getLanguage()->getString("STR_HAS_DIED_FROM_A_FATAL_WOUND", _unit->getGender()).arg(_unit->getName())));
+						game.pushState(new InfoboxOKState(game.language()->getString("STR_HAS_DIED_FROM_A_FATAL_WOUND", _unit->getGender()).arg(_unit->getName())));
 					}
 				}
 				else if (options1.battleNotifyDeath() && _unit->getGeoscapeSoldier() != 0)
@@ -208,7 +208,7 @@ void UnitDieBState::think()
 					if (_unit->getNotificationShown() < 2)
 					{
 						_unit->setNotificationShown(2);
-						game.pushState(new InfoboxState(game.getLanguage()->getString("STR_HAS_BEEN_KILLED", _unit->getGender()).arg(_unit->getName())));
+						game.pushState(new InfoboxState(game.language()->getString("STR_HAS_BEEN_KILLED", _unit->getGender()).arg(_unit->getName())));
 					}
 				}
 			}
@@ -217,7 +217,7 @@ void UnitDieBState::think()
 				if (_unit->getNotificationShown() < 1)
 				{
 					_unit->setNotificationShown(1);
-					game.pushState(new InfoboxOKState(game.getLanguage()->getString("STR_HAS_BECOME_UNCONSCIOUS", _unit->getGender()).arg(_unit->getName())));
+					game.pushState(new InfoboxOKState(game.language()->getString("STR_HAS_BECOME_UNCONSCIOUS", _unit->getGender()).arg(_unit->getName())));
 				}
 			}
 		}

@@ -201,19 +201,19 @@ void SoldierDiaryOverviewState::init()
 		const BattleUnitKills *cause = _soldier->getDeath()->getCause();
 		if (cause)
 		{
-			deathTitleText = game.getLanguage()->getString("STR_KILLED_IN_ACTION", _soldier->getGender());
+			deathTitleText = game.language()->getString("STR_KILLED_IN_ACTION", _soldier->getGender());
 			deathInfoText = ltr("STR_KILLER_AND_WEAPON")
 				.arg(cause->getUnitName())
 				.arg(ltr(cause->weapon));
 		}
 		else
 		{
-			deathTitleText = game.getLanguage()->getString("STR_MISSING_IN_ACTION", _soldier->getGender());
+			deathTitleText = game.language()->getString("STR_MISSING_IN_ACTION", _soldier->getGender());
 		}
 
 		std::ostringstream deathDateText;
 		const GameTime *t = _soldier->getDeath()->getTime();
-		deathDateText << t->getDayString() << " " << game.getLanguage()->getString(t->getMonthString()) << " " << t->getYear();
+		deathDateText << t->getDayString() << " " << game.language()->getString(t->getMonthString()) << " " << t->getYear();
 
 		_txtDeathTitle->setText(deathTitleText);
 		_txtDeathDate->setText(deathDateText.str());

@@ -323,7 +323,7 @@ void ComboBox::setOptions(const std::vector<std::string> &options, bool translat
 	for (const auto& option : options)
 	{
 		if (translate)
-			_list->addRow(1, game.getLanguage()->getString(option).c_str());
+			_list->addRow(1, game.language()->getString(option).c_str());
 		else
 			_list->addRow(1, option.c_str());
 	}

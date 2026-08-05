@@ -141,7 +141,7 @@ public:
 	/// Gets the monthly hiring limit message.
 	const std::string& getMonthlyBuyLimitMessage() const { return _monthlyBuyLimitMessage; }
 	/// Gets the cost of the soldier.
-	int getBuyCost() const;
+	int buyCost() const;
 	/// Does salary depend on rank?
 	bool isSalaryDynamic() const;
 	/// Gets the list of defined skills.

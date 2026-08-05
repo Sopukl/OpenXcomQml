@@ -18,8 +18,7 @@
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-
-
+#include <QtQml>
 #include "LocalizedText.h"
 #include "FileMap.h"
 
@@ -38,8 +37,11 @@ enum SoldierGender : char;
  * Contains strings used throughout the game for localization.
  * Languages are just a set of strings identified by an ID string.
  */
-class Language
+class Language: public QObject
 {
+	Q_OBJECT
+	QML_ELEMENT
+
 private:
 	std::map<std::string, LocalizedText> _strings;
 	LanguagePlurality *_handler;
@@ -68,6 +70,7 @@ public:
 	void toHtml(const std::string &filename) const;
 	/// Get a localized text.
 	LocalizedText getString(const std::string &id) const;
+	Q_INVOKABLE QString string(QString id);
 	/// Get a quantity-depended localized text.
 	LocalizedText getString(const std::string &id, unsigned n) const;
 	/// Get a gender-depended localized text.

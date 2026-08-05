@@ -333,7 +333,7 @@ UnitStats RuleSoldier::getDogfightExperience() const
  * Gets the cost of hiring this soldier.
  * @return The cost.
  */
-int RuleSoldier::getBuyCost() const
+int RuleSoldier::buyCost() const
 {
 	return _costBuy;
 }

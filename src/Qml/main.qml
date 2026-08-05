@@ -115,7 +115,9 @@ Window {
             console.log("items")
             console.log(base.storage + ':' + base.storage.content)
             for(let it of base.storage.content)
-                console.log(it+':'+it.item+':'+it.count)
+            {
+                let storedItem = it.item;
+                console.log(Game.language.string(storedItem.name)+':'+storedItem.size+':'+storedItem.sellCost)}
         }
     }
 

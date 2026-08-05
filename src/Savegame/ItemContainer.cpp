@@ -221,7 +221,7 @@ namespace OpenXcom
 		double total = 0;
 		for (const auto& pair : m_Content)
 		{
-			total += pair.item()->getSize() * pair.count();
+			total += pair.item()->size() * pair.count();
 		}
 		return total;
 	}

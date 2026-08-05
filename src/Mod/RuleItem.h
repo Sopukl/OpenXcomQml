@@ -19,7 +19,7 @@
  */
 
 
-
+#include <QtQml>
 #include "../Engine/Yaml.h"
 #include "LoadYaml.h"
 #include "RuleStatBonus.h"
@@ -352,8 +352,14 @@ struct BattleActionAttack
  * storage size, sell price, etc.
  * @sa Item
  */
-class RuleItem
+class RuleItem: public QObject
 {
+	Q_OBJECT
+	QML_ELEMENT
+	Q_PROPERTY(double size READ size CONSTANT FINAL)
+	Q_PROPERTY(int buyCost READ buyCost CONSTANT FINAL)
+	Q_PROPERTY(int sellCost READ sellCost CONSTANT FINAL)
+	Q_PROPERTY(QString name READ name CONSTANT FINAL)
 public:
 	/// Maximum number of ammo slots on weapon.
 	static const int AmmoSlotMax = 4;
@@ -517,6 +523,7 @@ public:
 	/// Gets the item's type.
 	const std::string &getType() const;
 	/// Gets the item's name.
+	QString name() const;
 	const std::string &getName() const;
 	/// Gets the item's name when loaded in weapon.
 	const std::string &getNameAsAmmo() const;
@@ -543,18 +550,18 @@ public:
 	/// Gets the fixed ammo slot of the primary vehicle weapon.
 	int getVehicleFixedAmmoSlot() const { return _vehicleFixedAmmoSlot; }
 	/// Gets the item's size.
-	double getSize() const;
+	double size() const;
 
 	/// Gets the item's monthly buy limit.
 	int getMonthlyBuyLimit() const { return _monthlyBuyLimit; }
 	/// Gets the item's monthly buy limit message.
 	const std::string& getMonthlyBuyLimitMessage() const { return _monthlyBuyLimitMessage; }
 	/// Gets the item's basic purchase cost.
-	int getBuyCost() const;
+	int buyCost() const;
 	/// Gets the item's purchase cost.
 	int getBuyCostAdjusted(const Base* base, const SavedGame* save) const;
 	/// Gets the item's basic sale cost.
-	int getSellCost() const;
+	int sellCost() const;
 	/// Gets the item's sale cost.
 	int getSellCostAdjusted(const Base* base, const SavedGame* save) const;
 	/// Gets the item's transfer time.

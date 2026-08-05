@@ -74,7 +74,7 @@ void MedikitView::draw()
 	{
 		return;
 	}
-	ss << game.getLanguage()->getString(PARTS_STRING[_selectedPart]);
+	ss << game.language()->getString(PARTS_STRING[_selectedPart]);
 	ss1 << fatal_wound;
 	_partTxt->setText(ss.str());
 	_woundTxt->setText(ss1.str());

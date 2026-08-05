@@ -214,7 +214,7 @@ void Transfer::setEngineers(int engineers)
  */
 std::string Transfer::getName() const
 {
-	Language *lang = game.getLanguage();
+	Language *lang = game.language();
 		;
 	if (_soldier != 0)
 	{

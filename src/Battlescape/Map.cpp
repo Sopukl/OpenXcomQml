@@ -394,7 +394,7 @@ void Map::setPalette(const SDL_Color *colors, int firstcolor, int ncolors)
 	_message->setPalette(colors, firstcolor, ncolors);
 	refreshHiddenMovementBackground();
 	_message->initText(game.getMod()->getFont("FONT_BIG"), game.getMod()->getFont("FONT_SMALL"));
-	_message->setText(game.getLanguage()->getString("STR_HIDDEN_MOVEMENT"), game.getLanguage()->getString("STR_THINKING"));
+	_message->setText(game.language()->getString("STR_HIDDEN_MOVEMENT"), game.language()->getString("STR_THINKING"));
 }
 
 void Map::refreshHiddenMovementBackground()
