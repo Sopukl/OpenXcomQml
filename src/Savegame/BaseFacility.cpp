@@ -230,7 +230,7 @@ const RuleItem* BaseFacility::rearm()
 	const RuleItem* ammoItem = nullptr;
 	if (_rules->getAmmoItem())
 	{
-		int ammoAvailable = _base->getStorageItems().getItem(_rules->getAmmoItem());
+		int ammoAvailable = _base->getStorageItems().countOf(_rules->getAmmoItem());
 		if (ammoAvailable < ammoUsed)
 		{
 			if (!_ammoMissingReported)

@@ -174,7 +174,7 @@ namespace OpenXcom
 	 * @param id Item ID.
 	 * @return Item quantity.
 	 */
-	int ItemContainer::getItem(const std::string &id) const
+	int ItemContainer::countOf(const std::string &id) const
 	{
 		if (Mod::isEmptyRuleName(id))
 		{
@@ -191,7 +191,7 @@ namespace OpenXcom
 	 * @param id Item ID.
 	 * @return Item quantity.
 	 */
-	int ItemContainer::getItem(const RuleItem* item) const
+	int ItemContainer::countOf(const RuleItem* item) const
 	{
 		auto it = str::find_if(m_Content, [item](auto& ic) { return ic.item() == item; });
 		return (it != m_Content.end())?it->count()
@@ -202,7 +202,7 @@ namespace OpenXcom
 	 * Returns the total quantity of the items in the container.
 	 * @return Total item quantity.
 	 */
-	int ItemContainer::getTotalQuantity() const
+	int ItemContainer::totalCount() const
 	{
 		int total = 0;
 		for (const auto& pair : m_Content)
@@ -216,7 +216,7 @@ namespace OpenXcom
 	 * Returns the total size of the items in the container.
 	 * @return Total item size.
 	 */
-	double ItemContainer::getTotalSize() const
+	double ItemContainer::totalSize() const
 	{
 		double total = 0;
 		for (const auto& pair : m_Content)

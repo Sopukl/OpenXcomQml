@@ -120,14 +120,14 @@ CraftWeaponsState::CraftWeaponsState(Base *base, size_t craft, size_t weapon) : 
 		{
 			isResearched = isResearched && game.savedGame()->isResearched(w->getClipItem()->getRequirements());
 		}
-		if (isResearched && _base->getStorageItems().getItem(w->getLauncherItem()) > 0 && c->isValidWeaponSlot(weapon, w->getWeaponType()))
+		if (isResearched && _base->getStorageItems().countOf(w->getLauncherItem()) > 0 && c->isValidWeaponSlot(weapon, w->getWeaponType()))
 		{
 			_weapons.push_back(w);
 			std::ostringstream ss, ss2;
-			ss << _base->getStorageItems().getItem(w->getLauncherItem());
+			ss << _base->getStorageItems().countOf(w->getLauncherItem());
 			if (w->getClipItem())
 			{
-				ss2 << _base->getStorageItems().getItem(w->getClipItem());
+				ss2 << _base->getStorageItems().countOf(w->getClipItem());
 			}
 			else
 			{
@@ -221,7 +221,7 @@ void CraftWeaponsState::lstWeaponsClick(Action *)
 				}
 				else
 				{
-					cQty = _craft->getItems()->getItem(rule);
+					cQty = _craft->getItems()->countOf(rule);
 					totalItems += cQty;
 					totalItemStorageSize += cQty * rule->size();
 				}

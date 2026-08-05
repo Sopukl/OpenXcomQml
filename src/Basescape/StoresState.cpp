@@ -246,7 +246,7 @@ void StoresState::initList()
 		if (!grandTotal)
 		{
 			// items in stores from this base only
-			qty += _base->getStorageItems().getItem(rule);
+			qty += _base->getStorageItems().countOf(rule);
 		}
 		else
 		{
@@ -255,7 +255,7 @@ void StoresState::initList()
 			for (auto* xbase : game.savedGame()->bases())
 			{
 				// 1. items in base stores
-				qty += xbase->getStorageItems().getItem(rule);
+				qty += xbase->getStorageItems().countOf(rule);
 
 				// 1b. items from base defense facilities
 				for (const auto* facility : xbase->getFacilities())

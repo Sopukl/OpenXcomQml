@@ -508,7 +508,7 @@ void Soldier::autoMoveEquipment(Craft* craft, Base* base, int toBase)
 			const auto* invItemMain = invItem->getItemType();
 			if (toBase > 0)
 			{
-				if (onTheCraft->getItem(invItemMain) > 0)
+				if (onTheCraft->countOf(invItemMain) > 0)
 				{
 					inTheBase.addItem(invItemMain, 1);
 					onTheCraft->removeItem(invItemMain, 1);
@@ -517,7 +517,7 @@ void Soldier::autoMoveEquipment(Craft* craft, Base* base, int toBase)
 			}
 			else if (toBase < 0)
 			{
-				if (inTheBase.getItem(invItemMain) > 0)
+				if (inTheBase.countOf(invItemMain) > 0)
 				{
 					inTheBase.removeItem(invItemMain, 1);
 					onTheCraft->addItem(invItemMain, 1);
@@ -533,7 +533,7 @@ void Soldier::autoMoveEquipment(Craft* craft, Base* base, int toBase)
 			{
 				if (toBase > 0)
 				{
-					if (onTheCraft->getItem(invItemAmmo) > 0)
+					if (onTheCraft->countOf(invItemAmmo) > 0)
 					{
 						inTheBase.addItem(invItemAmmo, 1);
 						onTheCraft->removeItem(invItemAmmo, 1);
@@ -542,7 +542,7 @@ void Soldier::autoMoveEquipment(Craft* craft, Base* base, int toBase)
 				}
 				else if (toBase < 0)
 				{
-					if (inTheBase.getItem(invItemAmmo) > 0)
+					if (inTheBase.countOf(invItemAmmo) > 0)
 					{
 						inTheBase.removeItem(invItemAmmo, 1);
 						onTheCraft->addItem(invItemAmmo, 1);

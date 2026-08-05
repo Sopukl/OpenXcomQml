@@ -220,9 +220,9 @@ void ProductionCompleteState::lstSummaryClick(Action *)
 	if (itemRule)
 	{
 		// check if we sold something in the meantime
-		if (_base->getStorageItems().getItem(itemRule) < itemCount)
+		if (_base->getStorageItems().countOf(itemRule) < itemCount)
 		{
-			itemCount = _base->getStorageItems().getItem(itemRule);
+			itemCount = _base->getStorageItems().countOf(itemRule);
 			_randomProductionInfo[itemName] -= itemCount; // just decrease amount by the maximum we can sell
 		}
 		else

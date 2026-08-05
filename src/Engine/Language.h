@@ -70,7 +70,7 @@ public:
 	void toHtml(const std::string &filename) const;
 	/// Get a localized text.
 	LocalizedText getString(const std::string &id) const;
-	Q_INVOKABLE QString string(QString id);
+	Q_INVOKABLE QString get(QString id);
 	/// Get a quantity-depended localized text.
 	LocalizedText getString(const std::string &id, unsigned n) const;
 	/// Get a gender-depended localized text.

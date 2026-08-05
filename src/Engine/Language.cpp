@@ -272,7 +272,7 @@ LocalizedText Language::getString(const std::string &id) const
 	}
 }
 
-QString Language::string(QString id)
+QString Language::get(QString id)
 {
 	if (id.isEmpty())
 	{

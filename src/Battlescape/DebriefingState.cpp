@@ -421,7 +421,7 @@ void DebriefingState::init()
 		{
 			RuleItem *rule = game.getMod()->getItem(itemType);
 
-			int qty = _base->getStorageItems().getItem(rule);
+			int qty = _base->getStorageItems().countOf(rule);
 			if (qty > 0 && (options1.canSellLiveAliens() || !rule->isAlien()))
 			{
 
@@ -437,7 +437,7 @@ void DebriefingState::init()
 					continue;
 				}
 
-				qty -= origBaseItems->getItem(rule);
+				qty -= origBaseItems->countOf(rule);
 				if (qty > 0)
 				{
 					_recoveredItems[rule] = qty;
@@ -2201,7 +2201,7 @@ void DebriefingState::reequipCraft(Base *base, Craft *craft, bool vehicleItemsCa
 	auto craftItemsCopy = craft->getItems()->content();
 	for (const auto& pair : craftItemsCopy)
 	{
-		int qty = base->getStorageItems().getItem(pair.item());
+		int qty = base->getStorageItems().countOf(pair.item());
 		if (qty >= pair.count())
 		{
 			base->getStorageItems().removeItem(pair.item(), pair.count());
@@ -2236,7 +2236,7 @@ void DebriefingState::reequipCraft(Base *base, Craft *craft, bool vehicleItemsCa
 	// Ok, now read those vehicles
 	for (const auto& pair : craftVehicles.content())
 	{
-		int qty = base->getStorageItems().getItem(pair.item());
+		int qty = base->getStorageItems().countOf(pair.item());
 		const RuleItem *tankRule = pair.item();
 		int size = tankRule->getVehicleUnit()->getArmor()->getTotalSize();
 		int canBeAdded = std::min(qty, pair.count());
@@ -2259,7 +2259,7 @@ void DebriefingState::reequipCraft(Base *base, Craft *craft, bool vehicleItemsCa
 			const RuleItem *ammo = tankRule->getVehicleClipAmmo();
 			int ammoPerVehicle = tankRule->getVehicleClipsLoaded();
 
-			int baqty = base->getStorageItems().getItem(ammo); // Ammo Quantity for this vehicle-type on the base
+			int baqty = base->getStorageItems().countOf(ammo); // Ammo Quantity for this vehicle-type on the base
 			if (baqty < pair.count() * ammoPerVehicle)
 			{ // missing ammo
 				int missing = (pair.count() * ammoPerVehicle) - baqty;

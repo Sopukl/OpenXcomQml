@@ -227,7 +227,7 @@ void ManageAlienContainmentState::resetListAndTotals()
 	{
 		RuleItem *rule = game.getMod()->getItem(itemType, true);
 
-		int qty = _base->getStorageItems().getItem(rule);
+		int qty = _base->getStorageItems().countOf(rule);
 		if (qty > 0 && rule->isAlien() && rule->getPrisonType() == _prisonType)
 		{
 			_qtys.push_back(0);
@@ -542,7 +542,7 @@ void ManageAlienContainmentState::lstItemsMousePress(Action *action)
  */
 int ManageAlienContainmentState::getQuantity()
 {
-	return _base->getStorageItems().getItem(_aliens[_sel]);
+	return _base->getStorageItems().countOf(_aliens[_sel]);
 }
 
 /**

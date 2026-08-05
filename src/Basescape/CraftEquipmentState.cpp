@@ -161,11 +161,11 @@ CraftEquipmentState::CraftEquipmentState(Base *base, size_t craft) :
 	{
 		RuleItem *rule = game.getMod()->getItem(itemType);
 		Unit* isVehicle = rule->getVehicleUnit();
-		int cQty = isVehicle ? c->getVehicleCount(itemType) : c->getItems()->getItem(rule);
+		int cQty = isVehicle ? c->getVehicleCount(itemType) : c->getItems()->countOf(rule);
 
 		if ((isVehicle || rule->isInventoryItem()) && rule->canBeEquippedToCraftInventory() &&
 			game.savedGame()->isResearched(rule->getRequirements()) &&
-			(_base->getStorageItems().getItem(rule) > 0 || cQty > 0))
+			(_base->getStorageItems().countOf(rule) > 0 || cQty > 0))
 		{
 			if (rule->getCategories().empty())
 			{
@@ -271,7 +271,7 @@ void CraftEquipmentState::init()
 				// now that we're back from the inventory screen, we need to remove all the excess base gear
 				for (_sel = 0; _sel != _items.size(); ++_sel)
 				{
-					int excessQty = c->getItems()->getItem(_items[_sel]) - (c->getExtraItems()->getItem(_items[_sel]) + c->getSoldierItems()->getItem(_items[_sel]));
+					int excessQty = c->getItems()->countOf(_items[_sel]) - (c->getExtraItems()->countOf(_items[_sel]) + c->getSoldierItems()->countOf(_items[_sel]));
 					moveLeftByValue(excessQty);
 				}
 			}
@@ -355,16 +355,16 @@ void CraftEquipmentState::initList()
 		}
 		else
 		{
-			cQty = c->getItems()->getItem(rule);
+			cQty = c->getItems()->countOf(rule);
 			_totalItems += cQty;
 			_totalItemStorageSize += cQty * rule->size();
 		}
 
-		int bQty = _base->getStorageItems().getItem(rule);
+		int bQty = _base->getStorageItems().countOf(rule);
 		int reserved = 0;
 		if (options1.oxceAlternateCraftEquipmentManagement() && !_isNewBattle)
 		{
-			reserved = c->getSoldierItems()->getItem(rule);
+			reserved = c->getSoldierItems()->countOf(rule);
 		}
 		if ((isVehicle || rule->isInventoryItem()) && rule->canBeEquippedToCraftInventory() &&
 			(bQty > 0 || cQty > 0 || reserved > 0))
@@ -406,7 +406,7 @@ void CraftEquipmentState::initList()
 					{
 						for (auto* ammoRule : *rule->getPrimaryCompatibleAmmo())
 						{
-							if (_base->getStorageItems().getItem(ammoRule) > 0 || c->getItems()->getItem(ammoRule) > 0)
+							if (_base->getStorageItems().countOf(ammoRule) > 0 || c->getItems()->countOf(ammoRule) > 0)
 							{
 								if (ammoRule->isInventoryItem() && ammoRule->canBeEquippedToCraftInventory() && game.savedGame()->isResearched(ammoRule->getRequirements()))
 								{
@@ -656,12 +656,12 @@ void CraftEquipmentState::updateQuantity()
 	}
 	else
 	{
-		cQty = c->getItems()->getItem(item);
+		cQty = c->getItems()->countOf(item);
 	}
 	std::ostringstream ss, ss2;
 	if (!_isNewBattle)
 	{
-		ss << _base->getStorageItems().getItem(item);
+		ss << _base->getStorageItems().countOf(item);
 	}
 	else
 	{
@@ -669,7 +669,7 @@ void CraftEquipmentState::updateQuantity()
 	}
 	if (options1.oxceAlternateCraftEquipmentManagement() && !_isNewBattle)
 	{
-		int reserved = c->getSoldierItems()->getItem(item);
+		int reserved = c->getSoldierItems()->countOf(item);
 		if (item->getVehicleUnit())
 			ss2 << cQty;
 		else if (cQty - reserved > 0)
@@ -728,11 +728,11 @@ void CraftEquipmentState::moveLeftByValue(int change)
 	const RuleItem *item = game.getMod()->getItem(_items[_sel], true);
 	int cQty = 0;
 	if (item->getVehicleUnit()) cQty = c->getVehicleCount(_items[_sel]);
-	else cQty = c->getItems()->getItem(item);
+	else cQty = c->getItems()->countOf(item);
 	if (change <= 0 || cQty <= 0) return;
 	if (options1.oxceAlternateCraftEquipmentManagement() && !_isNewBattle)
 	{
-		int reserved = c->getSoldierItems()->getItem(item);
+		int reserved = c->getSoldierItems()->countOf(item);
 		if (cQty - reserved > 0)
 		{
 			change = std::min(cQty - reserved, change);
@@ -816,7 +816,7 @@ void CraftEquipmentState::moveRightByValue(int change, bool suppressErrors)
 {
 	Craft *c = _base->crafts().at(_craft);
 	const RuleItem *item = game.getMod()->getItem(_items[_sel], true);
-	int bqty = _base->getStorageItems().getItem(item);
+	int bqty = _base->getStorageItems().countOf(item);
 	if (_isNewBattle)
 	{
 		if (change == INT_MAX)
@@ -842,7 +842,7 @@ void CraftEquipmentState::moveRightByValue(int change, bool suppressErrors)
 				const RuleItem *ammo = item->getVehicleClipAmmo();
 				int ammoPerVehicle = item->getVehicleClipsLoaded();
 
-				int baseQty = _base->getStorageItems().getItem(ammo) / ammoPerVehicle;
+				int baseQty = _base->getStorageItems().countOf(ammo) / ammoPerVehicle;
 				if (_isNewBattle)
 					baseQty = change;
 				int canBeAdded = std::min(change, baseQty);
@@ -983,9 +983,9 @@ void CraftEquipmentState::btnInventoryClick(Action *)
 			for (_sel = 0; _sel != _items.size(); ++_sel)
 			{
 				RuleItem* rule = game.getMod()->getItem(_items[_sel], true);
-				if (craft->getItems()->getItem(rule) > 0)
+				if (craft->getItems()->countOf(rule) > 0)
 				{
-					extras.addItem(rule, craft->getItems()->getItem(rule) - craft->getSoldierItems()->getItem(rule));
+					extras.addItem(rule, craft->getItems()->countOf(rule) - craft->getSoldierItems()->countOf(rule));
 				}
 				if (!rule->getVehicleUnit() && rule->canBeEquippedBeforeBaseDefense())
 				{
@@ -1031,7 +1031,7 @@ void CraftEquipmentState::saveGlobalLoadout(int index)
 		}
 		else
 		{
-			cQty = c->getItems()->getItem(item);
+			cQty = c->getItems()->countOf(item);
 		}
 		if (cQty > 0)
 		{
@@ -1075,7 +1075,7 @@ void CraftEquipmentState::loadGlobalLoadout(int index, bool onlyAddItems)
 	for (_sel = 0; _sel != _items.size(); ++_sel)
 	{
 		RuleItem *item = game.getMod()->getItem(_items[_sel], true);
-		int tQty = tmpl->getItem(item);
+		int tQty = tmpl->countOf(item);
 		moveRightByValue(tQty, true);
 	}
 
@@ -1108,10 +1108,10 @@ void CraftEquipmentState::loadGlobalLoadout(int index, bool onlyAddItems)
 			}
 			else
 			{
-				cQty = c->getItems()->getItem(item);
+				cQty = c->getItems()->countOf(item);
 				if (onlyAddItems)
 				{
-					cQty -= craftItemsBackup.getItem(item); // i.e. only count newly added items
+					cQty -= craftItemsBackup.countOf(item); // i.e. only count newly added items
 				}
 			}
 			int missing = templateItem.count() - cQty;

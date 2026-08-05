@@ -117,7 +117,7 @@ Window {
             for(let it of base.storage.content)
             {
                 let storedItem = it.item;
-                console.log(Game.language.string(storedItem.name)+':'+storedItem.size+':'+storedItem.sellCost)}
+                console.log(Game.language.get(storedItem.name)+':'+storedItem.size+':'+storedItem.sellCost)}
         }
     }
 

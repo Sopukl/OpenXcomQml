@@ -112,7 +112,6 @@ class Base : public Target
 {
 	Q_OBJECT
 
-	Q_PROPERTY(QString name READ name NOTIFY nameChanged FINAL)
 	Q_PROPERTY(std::vector<Craft*> crafts READ crafts NOTIFY craftsChanged FINAL)
 	Q_PROPERTY(std::vector<Soldier*> soldiers READ soldiers NOTIFY soldiersChanged FINAL)
 	Q_PROPERTY(ItemContainer* storage READ storage CONSTANT FINAL)
@@ -158,7 +157,6 @@ public:
 	std::string getType() const override;
 	/// Gets the base's name.
 	std::string getName() const override;
-	QString name() const;
 	/// Gets the base's marker sprite.
 	int getMarker() const override;
 	/// Gets the base's facilities.

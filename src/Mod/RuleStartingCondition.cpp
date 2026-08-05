@@ -264,7 +264,7 @@ bool RuleStartingCondition::isItemPermitted(const std::string& itemType, Mod* mo
 			{
 				for (auto* ammoRule : *item->getPrimaryCompatibleAmmo())
 				{
-					if (craft->getItems()->getItem(ammoRule) > 0)
+					if (craft->getItems()->countOf(ammoRule) > 0)
 					{
 						for (auto& cat : ammoRule->getCategories())
 						{

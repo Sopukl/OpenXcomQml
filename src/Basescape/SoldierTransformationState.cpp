@@ -217,8 +217,8 @@ void SoldierTransformationState::initTransformationData()
 		const auto* rule = game.getMod()->getItem(requiredItem.first);
 		if (rule != 0)
 		{
-			s2 << _base->getStorageItems().getItem(rule);
-			transformationPossible &= (_base->getStorageItems().getItem(rule) >= requiredItem.second);
+			s2 << _base->getStorageItems().countOf(rule);
+			transformationPossible &= (_base->getStorageItems().countOf(rule) >= requiredItem.second);
 		}
 
 		_lstRequiredItems->addRow(3, ltr(requiredItem.first).c_str(), s1.str().c_str(), s2.str().c_str());

@@ -68,6 +68,7 @@ private:
 	TransferSortDirection _previousSort, _currentSort;
 
 	/// Gets the category of the current selection.
+	std::string getCategory(const TransferRow&) const;
 	std::string getCategory(int sel) const;
 	/// Determines if the current selection belongs to a given category.
 	bool belongsToCategory(int sel, const std::string &cat) const;

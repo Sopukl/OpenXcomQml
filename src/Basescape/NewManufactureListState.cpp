@@ -443,7 +443,7 @@ void NewManufactureListState::fillProductionList(bool refreshCategories)
 			}
 			for (auto& iter : manuf->getRequiredItems())
 			{
-				productionPossible = std::min(productionPossible, itemContainer.getItem(iter.first) / iter.second);
+				productionPossible = std::min(productionPossible, itemContainer.countOf(iter.first) / iter.second);
 			}
 			std::ostringstream ss;
 			if (productionPossible <= 0)

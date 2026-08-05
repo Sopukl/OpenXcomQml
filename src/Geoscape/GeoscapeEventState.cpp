@@ -358,7 +358,7 @@ void GeoscapeEventState::eventLogic()
 			int removed = 0;
 			for (auto* xbase : save->bases())
 			{
-				int bQty = xbase->getStorageItems().getItem(r);
+				int bQty = xbase->getStorageItems().countOf(r);
 				if (bQty > 0)
 				{
 					int toRemove = std::min(bQty, ti.second);
@@ -374,7 +374,7 @@ void GeoscapeEventState::eventLogic()
 				{
 					for (auto* xcraft : xbase->crafts())
 					{
-						int cQty = xcraft->getItems()->getItem(r);
+						int cQty = xcraft->getItems()->countOf(r);
 						if (cQty > 0 && xcraft->getStatus() != "STR_OUT")
 						{
 							int toRemove = std::min(cQty, ti.second);

@@ -127,12 +127,12 @@ SoldierArmorState::SoldierArmorState(Base *base, size_t soldier, SoldierArmorOri
 		{
 			_armors.push_back(ArmorItem(a->getType(), ltr(a->getType()), ""));
 		}
-		else if (_base->getStorageItems().getItem(a->getStoreItem()) > 0 || a->getStoreItem() == s->getArmor()->getStoreItem())
+		else if (_base->getStorageItems().countOf(a->getStoreItem()) > 0 || a->getStoreItem() == s->getArmor()->getStoreItem())
 		{
 			std::ostringstream ss;
 			if (game.savedGame()->getMonthsPassed() > -1)
 			{
-				ss << _base->getStorageItems().getItem(a->getStoreItem());
+				ss << _base->getStorageItems().countOf(a->getStoreItem());
 			}
 			else
 			{

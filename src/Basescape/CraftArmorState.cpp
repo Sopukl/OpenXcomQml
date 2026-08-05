@@ -537,7 +537,7 @@ void CraftArmorState::lstSoldiersClick(Action *action)
 				{
 					if (a->getStoreItem() == nullptr ||
 						a->getStoreItem() == s->getArmor()->getStoreItem() ||
-						_base->getStorageItems().getItem(a->getStoreItem()) > 0)
+						_base->getStorageItems().countOf(a->getStoreItem()) > 0)
 					{
 						if (s->getArmor()->getStoreItem())
 						{
@@ -618,7 +618,7 @@ void CraftArmorState::btnDeequipAllArmorClick(Action *action)
 				row++;
 				continue;
 			}
-			if (a->getStoreItem() == nullptr || _base->getStorageItems().getItem(a->getStoreItem()) > 0)
+			if (a->getStoreItem() == nullptr || _base->getStorageItems().countOf(a->getStoreItem()) > 0)
 			{
 				if (soldier->getArmor()->getStoreItem())
 				{
@@ -658,7 +658,7 @@ void CraftArmorState::btnDeequipCraftArmorClick(Action *action)
 				row++;
 				continue;
 			}
-			if (a->getStoreItem() == nullptr || _base->getStorageItems().getItem(a->getStoreItem()) > 0)
+			if (a->getStoreItem() == nullptr || _base->getStorageItems().countOf(a->getStoreItem()) > 0)
 			{
 				if (s->getArmor()->getStoreItem())
 				{

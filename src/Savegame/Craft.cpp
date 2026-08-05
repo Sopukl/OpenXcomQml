@@ -603,7 +603,7 @@ int Craft::getNumWeapons(bool onlyLoaded) const
  */
 int Craft::getNumEquipment() const
 {
-	return _items->getTotalQuantity();
+	return _items->totalCount();
 }
 
 /**
@@ -690,7 +690,7 @@ void Craft::calculateTotalSoldierEquipment()
  */
 double Craft::getTotalItemStorageSize() const
 {
-	double total = _items->getTotalSize();
+	double total = _items->totalSize();
 
 	for (const auto* v : _vehicles)
 	{
@@ -725,7 +725,7 @@ double Craft::getTotalItemStorageSize() const
  */
 int Craft::getTotalItemCount(const RuleItem* item) const
 {
-	int qty = _items->getItem(item);
+	int qty = _items->countOf(item);
 
 	for (const auto* v : _vehicles)
 	{
@@ -1310,7 +1310,7 @@ std::string Craft::refuel()
 		}
 		else
 		{
-			if (_base->getStorageItems().getItem(item) > 0)
+			if (_base->getStorageItems().countOf(item) > 0)
 			{
 				_base->getStorageItems().removeItem(item);
 				setFuel(_fuel + _rules->getRefuelRate());
@@ -1365,7 +1365,7 @@ const RuleItem* Craft::rearm()
 		if (cw != 0 && cw->isRearming())
 		{
 			auto* clip = cw->getRules()->getClipItem();
-			int available = _base->getStorageItems().getItem(clip);
+			int available = _base->getStorageItems().countOf(clip);
 			if (clip == nullptr)
 			{
 				cw->rearm(0, 0);
@@ -1497,7 +1497,7 @@ bool Craft::areRequiredItemsOnboard(const std::map<std::string, int>& requiredIt
 {
 	for (const auto& mapItem : requiredItems)
 	{
-		if (_items->getItem(mapItem.first) < mapItem.second)
+		if (_items->countOf(mapItem.first) < mapItem.second)
 		{
 			return false;
 		}
@@ -1522,11 +1522,11 @@ void Craft::destroyRequiredItems(const std::map<std::string, int>& requiredItems
  */
 bool Craft::areTooManyItemsOnboard()
 {
-	if (_items->getTotalQuantity() > getMaxItemsClamped())
+	if (_items->totalCount() > getMaxItemsClamped())
 	{
 		return true;
 	}
-	if (_items->getTotalSize() > getMaxStorageSpaceClamped() + 0.05)
+	if (_items->totalSize() > getMaxStorageSpaceClamped() + 0.05)
 	{
 		return true;
 	}

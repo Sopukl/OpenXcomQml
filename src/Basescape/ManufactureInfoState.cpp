@@ -653,7 +653,7 @@ void ManufactureInfoState::lessUnitClick(Action *action)
 				}
 				for (auto& item : manufRule->getRequiredItems())
 				{
-					productionPossible = std::min(productionPossible, _base->getStorageItems().getItem(item.first) / item.second);
+					productionPossible = std::min(productionPossible, _base->getStorageItems().countOf(item.first) / item.second);
 				}
 				productionPossible = std::max(0, productionPossible);
 

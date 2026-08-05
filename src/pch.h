@@ -26,4 +26,7 @@
 #include <QString>
 #include <QVector>
 #include <QDebug>
+
+namespace str = std::ranges;
+
 #endif

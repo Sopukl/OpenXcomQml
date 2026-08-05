@@ -39,5 +39,6 @@
         <file>OpenXcom/Geoscape/Intercept.qml</file>
         <file>OpenXcom/Geoscape/Funding.qml</file>
         <file>OpenXcom/Basescape/Sell.qml</file>
+        <file>OpenXcom/Controls/ComboBox.qml</file>
     </qresource>
 </RCC>

@@ -964,7 +964,7 @@ bool InventoryState::tryArmorChange(const std::string& armorName)
 			// is the armor physically available?
 			if (next->getStoreItem() && prev->getStoreItem() != next->getStoreItem())
 			{
-				if (_base->getStorageItems().getItem(next->getStoreItem()) <= 0)
+				if (_base->getStorageItems().countOf(next->getStoreItem()) <= 0)
 				{
 					armorAvailable = false;
 				}

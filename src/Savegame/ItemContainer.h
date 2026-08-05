@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU General Public License
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
-#include <qqml.h>
+#include <QtQml>
 #include "../Engine/Yaml.h"
 
 namespace OpenXcom
@@ -70,13 +70,13 @@ class RuleItem;
 		/// Removes an item from the container.
 		void removeItem(const RuleItem* item, int qty = 1);
 		/// Gets an item in the container.
-		int getItem(const std::string &id) const;
+		int countOf(const std::string &id) const;
 		/// Gets an item in the container.
-		int getItem(const RuleItem* item) const;
+		int countOf(const RuleItem* item) const;
 		/// Gets the total quantity of items in the container.
-		int getTotalQuantity() const;
+		int totalCount() const;
 		/// Gets the total size of items in the container.
-		double getTotalSize() const;
+		double totalSize() const;
 		/// Check if have any item
 		bool empty() const { return m_Content.empty(); }
 		/// Clear all content.

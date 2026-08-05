@@ -195,7 +195,7 @@ void GlobalAlienContainmentState::fillPrisonerList()
 				RuleItem* rule = game.getMod()->getItem(itemType, true);
 				if (rule->isAlien() && rule->getPrisonType() == prisonType)
 				{
-					int qty = xbase->getStorageItems().getItem(rule);
+					int qty = xbase->getStorageItems().countOf(rule);
 					if (qty > 0)
 					{
 						std::ostringstream ss;

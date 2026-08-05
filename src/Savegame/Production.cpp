@@ -120,7 +120,7 @@ bool Production::haveEnoughMaterialsForOneMoreUnit(Base * b, const Mod *m) const
 {
 	for (const auto& i : _rules->getRequiredItems())
 	{
-		if (b->getStorageItems().getItem(i.first) < i.second)
+		if (b->getStorageItems().countOf(i.first) < i.second)
 			return false;
 	}
 	for (const auto& i : _rules->getRequiredCrafts())

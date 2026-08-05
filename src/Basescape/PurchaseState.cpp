@@ -270,7 +270,7 @@ PurchaseState::PurchaseState(Base *base, CannotReequipState *parent) : _base(bas
 		RuleItem *rule = game.getMod()->getItem(itemType);
 		if (itemFilter(rule))
 		{
-			TransferRow row = { TRANSFER_ITEM, rule, ltr(rule->getType()), rule->getBuyCostAdjusted(_base, game.savedGame()), _base->getStorageItems().getItem(rule), 0, 0, rule->getListOrder(), 0, 0, 0 };
+			TransferRow row = { TRANSFER_ITEM, rule, ltr(rule->getType()), rule->getBuyCostAdjusted(_base, game.savedGame()), _base->getStorageItems().countOf(rule), 0, 0, rule->getListOrder(), 0, 0, 0 };
 			_items.push_back(row);
 			std::string cat = getCategory(_items.size() - 1);
 			if (std::find(_cats.begin(), _cats.end(), cat) == _cats.end())
@@ -536,7 +536,7 @@ bool PurchaseState::isEquipped(int sel) const
 			// iterate all craft, also craft which are currently not at the base
 			for (auto* xcraft : _base->crafts())
 			{
-				if (xcraft->getItems()->getItem(rule) > 0)
+				if (xcraft->getItems()->countOf(rule) > 0)
 					return true;
 			}
 		}

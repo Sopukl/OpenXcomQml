@@ -291,7 +291,7 @@ void PlaceFacilityState::viewClick(Action *)
 		{
 			for (const auto& item: _rule->getBuildCostItems())
 			{
-				int needed = (item.second.first - refundItemsTemp[item.first]) - _base->getStorageItems().getItem(item.first);
+				int needed = (item.second.first - refundItemsTemp[item.first]) - _base->getStorageItems().countOf(item.first);
 				if (needed > 0)
 				{
 					game.popState();

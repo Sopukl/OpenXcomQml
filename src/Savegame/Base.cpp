@@ -407,11 +407,6 @@ std::string Base::getName() const
 	return _name;
 }
 
-QString Base::name() const
-{
-	return QString::fromStdString(getName());
-}
-
 /**
  * Returns the globe marker for the base.
  * @return Marker sprite, -1 if none.
@@ -830,7 +825,7 @@ int Base::getAvailableQuarters() const
  */
 double Base::getUsedStores(bool excludeNormalItems) const
 {
-	double total = excludeNormalItems ? 0.0 : _items.getTotalSize();
+	double total = excludeNormalItems ? 0.0 : _items.totalSize();
 	for (const auto* xcraft : _crafts)
 	{
 		total += xcraft->getTotalItemStorageSize();
@@ -1642,7 +1637,7 @@ void Base::setupDefenses(AlienMission* am)
 				const RuleItem *ammo = rule->getVehicleClipAmmo();
 				int ammoPerVehicle = rule->getVehicleClipsLoaded();
 
-				int baseQty = _items.getItem(ammo) / ammoPerVehicle;
+				int baseQty = _items.countOf(ammo) / ammoPerVehicle;
 				if (!baseQty)
 				{
 					++iter;
