@@ -22,7 +22,6 @@
 #include "../Interface/TextButton.h"
 #include "../Interface/Window.h"
 #include "../Interface/Text.h"
-#include "AbandonGameState.h"
 #include "ListLoadState.h"
 #include "ListSaveState.h"
 #include "../Engine/Options.h"
@@ -204,7 +203,8 @@ void PauseState::btnOptionsClick(Action *)
  */
 void PauseState::btnAbandonClick(Action *)
 {
-	game.pushState(new AbandonGameState(_origin));
+	game.openPopupWindow("/OpenXcom/Menu/AbandonGame.qml",
+						 {{"origin", _origin}});
 }
 
 /**

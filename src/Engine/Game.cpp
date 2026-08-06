@@ -40,6 +40,8 @@
 #include "Unicode.h"
 #include "../Ufopaedia/UfopaediaStartState.h"
 #include "../Menu/NotesState.h"
+#include "../Menu/MainMenuState.h"
+#include "../Menu/SaveGameState.h"
 #include "../Geoscape/GeoscapeState.h"
 #include "../Geoscape/BaseNameState.h"
 #include "../Geoscape/BuildNewBaseState.h"
@@ -926,6 +928,33 @@ void Game::newGame(int difficulty, bool ironMan)
 		// custom location, custom name
 		Q_EMIT createNewBase(gs, base, true);
 		//pushState(new BuildNewBaseState(base, gs->getGlobe(), true));
+	}
+}
+
+void Game::abandonGame()
+{
+	// Reset touch flags
+	resetTouchButtonFlags();
+
+	if(auto savedBattle = savedGame()->getSavedBattle())
+	{
+		if (auto ambientSound = savedBattle->getAmbientSound();
+				 ambientSound != Mod::NO_SOUND)
+			mod()->getSoundByDepth(0, ambientSound)->stopLoop();
+	}
+
+	if (!savedGame()->isIronman())
+	{
+		Screen::updateScale(options1.geoscapeScale(), options1.baseXGeoscape, options1.baseYGeoscape, true);
+		getScreen()->resetDisplay(false);
+
+		setGameState(GameState::MENU);
+		setState(new MainMenuState);
+		setSavedGame(0);
+	}
+	else
+	{
+		pushState(new SaveGameState(OPT_GEOSCAPE, SAVE_IRONMAN_END, /*_palette*/nullptr));
 	}
 }
 

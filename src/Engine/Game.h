@@ -224,6 +224,7 @@ struct SaveDesc
 		Q_INVOKABLE QVector<SaveDesc> saves() const;
 
 		Q_INVOKABLE void newGame(int difficulty, bool ironMan);
+		Q_INVOKABLE void abandonGame();
 		Q_INVOKABLE void loadGame(QString fileName);
 		Q_INVOKABLE QJsonArray getLanguages() const;
 		Q_INVOKABLE QJsonArray getModsInfo() const;

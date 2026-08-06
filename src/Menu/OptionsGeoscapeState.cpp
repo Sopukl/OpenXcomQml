@@ -23,7 +23,7 @@
 #include "../Interface/ToggleTextButton.h"
 #include "../Interface/ComboBox.h"
 #include "../Engine/Action.h"
-#include "../Engine/Options.h"
+#include "../Engine/Options1.h"
 
 namespace OpenXcom
 {

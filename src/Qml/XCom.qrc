@@ -1,36 +1,10 @@
 <RCC>
     <qresource prefix="/">
         <file>main.qml</file>
-        <file>OpenXcom/MainMenu/Menu.qml</file>
-        <file>OpenXcom/MainMenu/qmldir</file>
         <file>OpenXcom/qmldir</file>
         <file>LoadingFrame.qml</file>
         <file>GameFrame.qml</file>
-        <file>OpenXcom/MainMenu/NewGame.qml</file>
-        <file>OpenXcom/MainMenu/NewBattle.qml</file>
-        <file>OpenXcom/MainMenu/Controls/ComboBox.qml</file>
-        <file>OpenXcom/MainMenu/Controls/Popup.qml</file>
-        <file>OpenXcom/MainMenu/Controls/Button.qml</file>
-        <file>OpenXcom/MainMenu/Controls/qmldir</file>
-        <file>OpenXcom/MainMenu/Options.qml</file>
         <file>OpenXcom/Xcom.qml</file>
-        <file>OpenXcom/MainMenu/Options/Video.qml</file>
-        <file>OpenXcom/MainMenu/Controls/GroupBox.qml</file>
-        <file>OpenXcom/MainMenu/Options/Page.qml</file>
-        <file>OpenXcom/MainMenu/Mods.qml</file>
-        <file>OpenXcom/MainMenu/Controls/CheckBox.qml</file>
-        <file>OpenXcom/MainMenu/Options/Audio.qml</file>
-        <file>OpenXcom/MainMenu/Controls/Slider.qml</file>
-        <file>OpenXcom/MainMenu/Options/Geoscape.qml</file>
-        <file>OpenXcom/MainMenu/Options/BattleScape.qml</file>
-        <file>OpenXcom/MainMenu/Options/Controls.qml</file>
-        <file>OpenXcom/MainMenu/Options/Advanced.qml</file>
-        <file>OpenXcom/MainMenu/Options/Folders.qml</file>
-        <file>OpenXcom/MainMenu/LoadGame.qml</file>
-        <file>OpenXcom/MainMenu/Options/Advanced/OXC.qml</file>
-        <file>OpenXcom/MainMenu/Options/Advanced/OXCE.qml</file>
-        <file>OpenXcom/MainMenu/Options/Controls/BoolOption.qml</file>
-        <file>OpenXcom/MainMenu/Options/Controls/IntOption.qml</file>
         <file>OpenXcom/Geoscape/BuildNewBase.qml</file>
         <file>OpenXcom/Controls/Popup.qml</file>
         <file>OpenXcom/Controls/ErrorMessage.qml</file>
@@ -40,5 +14,32 @@
         <file>OpenXcom/Geoscape/Funding.qml</file>
         <file>OpenXcom/Basescape/Sell.qml</file>
         <file>OpenXcom/Controls/ComboBox.qml</file>
+        <file>OpenXcom/Menu/Controls/Button.qml</file>
+        <file>OpenXcom/Menu/Controls/CheckBox.qml</file>
+        <file>OpenXcom/Menu/Controls/ComboBox.qml</file>
+        <file>OpenXcom/Menu/Controls/GroupBox.qml</file>
+        <file>OpenXcom/Menu/Controls/Popup.qml</file>
+        <file>OpenXcom/Menu/Controls/qmldir</file>
+        <file>OpenXcom/Menu/Controls/Slider.qml</file>
+        <file>OpenXcom/Menu/Options/Advanced/OXC.qml</file>
+        <file>OpenXcom/Menu/Options/Advanced/OXCE.qml</file>
+        <file>OpenXcom/Menu/Options/Controls/BoolOption.qml</file>
+        <file>OpenXcom/Menu/Options/Controls/IntOption.qml</file>
+        <file>OpenXcom/Menu/Options/Advanced.qml</file>
+        <file>OpenXcom/Menu/Options/Audio.qml</file>
+        <file>OpenXcom/Menu/Options/BattleScape.qml</file>
+        <file>OpenXcom/Menu/Options/Controls.qml</file>
+        <file>OpenXcom/Menu/Options/Folders.qml</file>
+        <file>OpenXcom/Menu/Options/Geoscape.qml</file>
+        <file>OpenXcom/Menu/Options/Page.qml</file>
+        <file>OpenXcom/Menu/Options/Video.qml</file>
+        <file>OpenXcom/Menu/LoadGame.qml</file>
+        <file>OpenXcom/Menu/Menu.qml</file>
+        <file>OpenXcom/Menu/Mods.qml</file>
+        <file>OpenXcom/Menu/NewBattle.qml</file>
+        <file>OpenXcom/Menu/NewGame.qml</file>
+        <file>OpenXcom/Menu/Options.qml</file>
+        <file>OpenXcom/Menu/qmldir</file>
+        <file>OpenXcom/Menu/AbandonGame.qml</file>
     </qresource>
 </RCC>
