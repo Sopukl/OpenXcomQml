@@ -162,7 +162,7 @@ void SaveGameState::think()
 		case SAVE_DEFAULT:
 			// manual save, close the save screen
 			game.popState();
-			if (!game.savedGame()->isIronman())
+			if (!game.savedGame()->isIronMan())
 			{
 				// and pause screen too
 				game.popState();

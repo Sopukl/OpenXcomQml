@@ -843,7 +843,7 @@ void BattlescapeState::init()
 	{
 		int currentTurn = _autosave;
 		_autosave = 0;
-		if (game.savedGame()->isIronman())
+		if (game.savedGame()->isIronMan())
 		{
 			game.pushState(new SaveGameState(OPT_BATTLESCAPE, SAVE_IRONMAN, _palette));
 		}
@@ -3120,7 +3120,7 @@ inline void BattlescapeState::handle(Action *action)
 					}
 				}
 				// quick save and quick load
-				if (!game.savedGame()->isIronman() && !_save->isPreview())
+				if (!game.savedGame()->isIronMan() && !_save->isPreview())
 				{
 					if (key == options1.keyQuickSave())
 					{
@@ -3641,7 +3641,7 @@ void BattlescapeState::finishBattle(bool abort, int inExitArea)
 				game.savedGame()->setEnding(END_LOSE);
 			}
 			// Autosave if game is over
-			if (game.savedGame()->getEnding() != END_NONE && game.savedGame()->isIronman())
+			if (game.savedGame()->getEnding() != END_NONE && game.savedGame()->isIronMan())
 			{
 				game.pushState(new SaveGameState(OPT_BATTLESCAPE, SAVE_IRONMAN, _palette));
 			}

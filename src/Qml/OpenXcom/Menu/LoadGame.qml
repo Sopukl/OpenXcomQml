@@ -16,24 +16,78 @@ XC.Popup {
         }
         Text {
             id: caption
-            font.pixelSize: 8
+            font.pixelSize: 12
+            anchors.horizontalCenter: parent.horizontalCenter
             color: "white"
-            text: "Select save game for loading"
+            text: Game.language.get("STR_SELECT_GAME_TO_LOAD")
             height: contentHeight
+        }
+
+        Rectangle {
+            id: header
+            anchors {
+                left: parent.left
+                right: parent.right
+                top: caption.bottom
+            }
+            height: 10
+            color: "#00000000"
+            border.color: "#FFFFFF"
+            Rectangle {
+                id: bl
+                height: 10
+                width: 200
+                color: "blue"
+                anchors.left: parent.left
+                Row {
+                    Text {
+                        font.pixelSize: 8
+                        text: "Name:"
+                    }
+                    Button {
+                        width: 10
+                        height: 10
+                        display: Button.IconOnly
+                        padding: 0
+                        icon{
+                            source: "qrc:/Images/Triangle.svg"
+                            color: "red"
+
+                        }
+                        onClicked: {
+                            if(rotation === 180)
+                                rotation = 0
+                            else
+                                rotation = 180
+                        }
+                    }
+                }
+            }
+            Rectangle {
+                id: rd
+                height: 10
+                color: "red"
+                anchors{
+                    left: bl.right
+                    right:parent.right
+                }
+            }
+
         }
 
         ListView {
             id: savesList
             anchors {
-                top: caption.bottom
-                topMargin: 2
+                top: header.bottom
+                topMargin: 1
                 bottom: description.top
-                bottomMargin: 2
+                bottomMargin: 1
                 left: parent.left
                 right: parent.right
             }
             spacing: 1
             model: Game.saves()
+            clip: true
 
             delegate: MouseArea {
                 height: 10
@@ -51,7 +105,10 @@ XC.Popup {
                     descTxt.text = containsMouse?details:""
                 onClicked: savesList.currentIndex = index
 
-                onDoubleClicked: Game.loadGame(fileName)
+                onDoubleClicked: {
+                    Game.loadGame(fileName)
+                    popup.close();
+                }
 
                 Rectangle {
                     anchors.fill: parent
@@ -97,7 +154,7 @@ XC.Popup {
             id: description
             height: childrenRect.height
             anchors{
-                bottom: btns.top
+                bottom: btnCancel.top
                 left: parent.left
                 right: parent.right
             }
@@ -117,30 +174,27 @@ XC.Popup {
                 color: "white"
             }
         }
-        Item {
-            id: btns
-            height: childrenRect.height
+
+        XC.Button {
+            id: btnDone
+            text: Game.language.get("STR_OK")
+            //onClicked: popup.close()
             anchors{
                 bottom: parent.bottom
                 left: parent.left
+                right: parent.horizontalCenter
+                rightMargin: 1
+            }
+        }
+        XC.Button {
+            id: btnCancel
+            text: Game.language.get("STR_CANCEL")
+            onClicked: popup.close()
+            anchors{
+                bottom: parent.bottom
+                left: parent.horizontalCenter
+                leftMargin: 1
                 right: parent.right
-            }
-
-
-            XC.Button {
-                text: "Загрузить"
-                onClicked: {
-                    let curItem = savesList.currentItem
-                    if(curItem)
-                        Game.loadGame(curItem.fileName)
-                }
-                anchors.left: parent.left
-            }
-
-            XC.Button {
-                text: "Отмена"
-                onClicked: popup.close()
-                anchors.right: parent.right
             }
         }
     }

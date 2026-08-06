@@ -22,7 +22,7 @@
 #include "../Interface/TextButton.h"
 #include "../Interface/Window.h"
 #include "../Interface/Text.h"
-#include "ListLoadState.h"
+//#include "ListLoadState.h"
 #include "ListSaveState.h"
 #include "../Engine/Options.h"
 #include "OptionsVideoState.h"
@@ -124,7 +124,7 @@ PauseState::PauseState(OptionsOrigin origin) : _origin(origin)
 		applyBattlescapeTheme("pauseMenu");
 	}
 
-	if (game.savedGame()->isIronman())
+	if (game.savedGame()->isIronMan())
 	{
 		_btnLoad->setVisible(false);
 		_btnSave->setVisible(false);
@@ -142,7 +142,7 @@ PauseState::PauseState(OptionsOrigin origin) : _origin(origin)
 		{
 			_btnSave->setVisible(false); // non-ironman + ironman
 
-			if (game.savedGame()->isIronman())
+			if (game.savedGame()->isIronMan())
 			{
 				_btnAbandon->setVisible(false); // ironman only
 			}
@@ -164,7 +164,8 @@ PauseState::~PauseState()
  */
 void PauseState::btnLoadClick(Action *)
 {
-	game.pushState(new ListLoadState(_origin));
+	game.openPopupWindow("/OpenXcom/Menu/LoadGame.qml");
+	//game.pushState(new ListLoadState(_origin));
 }
 
 /**

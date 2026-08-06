@@ -2,5 +2,6 @@
     <qresource prefix="/">
         <file>Images/CheckboxOn.svg</file>
         <file>Images/Delete.svg</file>
+        <file>Images/Triangle.svg</file>
     </qresource>
 </RCC>

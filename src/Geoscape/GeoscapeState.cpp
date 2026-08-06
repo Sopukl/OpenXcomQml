@@ -674,7 +674,7 @@ void GeoscapeState::handle(Action *action)
 			}
 		}
 		// quick save and quick load
-		if (!game.savedGame()->isIronman())
+		if (!game.savedGame()->isIronMan())
 		{
 			if (action->getDetails()->key.keysym.sym == options1.keyQuickSave())
 			{
@@ -717,7 +717,7 @@ void GeoscapeState::init()
 	_globe->draw();
 
 	// Pop up save screen if it's a new ironman game
-	if (game.savedGame()->isIronman() && game.savedGame()->getName().empty())
+	if (game.savedGame()->isIronMan() && game.savedGame()->getName().empty())
 	{
 		popup(new ListSaveState(OPT_GEOSCAPE));
 	}
@@ -961,7 +961,7 @@ void GeoscapeState::time5Seconds()
 	if (game.savedGame()->getEnding() == END_LOSE)
 	{
 		game.pushState(new CutsceneState(game.mod()->getLoseDefeatCutscene()));
-		if (game.savedGame()->isIronman())
+		if (game.savedGame()->isIronMan())
 		{
 			game.pushState(new SaveGameState(OPT_GEOSCAPE, SAVE_IRONMAN, _palette));
 		}
@@ -2820,7 +2820,7 @@ void GeoscapeState::time1Day()
 	}
 	if (performGeoAutosave)
 	{
-		if (saveGame->isIronman())
+		if (saveGame->isIronMan())
 		{
 			popup(new SaveGameState(OPT_GEOSCAPE, SAVE_IRONMAN, _palette));
 		}
@@ -2829,7 +2829,7 @@ void GeoscapeState::time1Day()
 			popup(new SaveGameState(OPT_GEOSCAPE, SAVE_AUTO_GEOSCAPE, _palette, saveGame->getDaysPassed()));
 		}
 	}
-	else if (saveGame->getEnding() != END_NONE && saveGame->isIronman())
+	else if (saveGame->getEnding() != END_NONE && saveGame->isIronMan())
 	{
 		game.pushState(new SaveGameState(OPT_GEOSCAPE, SAVE_IRONMAN, _palette));
 	}

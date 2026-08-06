@@ -28,6 +28,7 @@ XC.Popup {
             }
             text: Game.language.get("STR_YES");
             onClicked: {
+                console.log("isIronMan: " + Game.savedGame.isIronMan)
                 Game.abandonGame()
                 popup.close();
             }

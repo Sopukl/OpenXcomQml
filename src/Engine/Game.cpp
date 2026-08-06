@@ -926,8 +926,8 @@ void Game::newGame(int difficulty, bool ironMan)
 	else
 	{
 		// custom location, custom name
-		Q_EMIT createNewBase(gs, base, true);
-		//pushState(new BuildNewBaseState(base, gs->getGlobe(), true));
+		//Q_EMIT createNewBase(gs, base, true);
+		pushState(new BuildNewBaseState(base, gs->getGlobe(), true));
 	}
 }
 
@@ -943,7 +943,7 @@ void Game::abandonGame()
 			mod()->getSoundByDepth(0, ambientSound)->stopLoop();
 	}
 
-	if (!savedGame()->isIronman())
+	if (!savedGame()->isIronMan())
 	{
 		Screen::updateScale(options1.geoscapeScale(), options1.baseXGeoscape, options1.baseYGeoscape, true);
 		getScreen()->resetDisplay(false);

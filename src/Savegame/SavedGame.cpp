@@ -1010,7 +1010,7 @@ void SavedGame::setEnding(GameEnding end)
  * Ironman games cannot be manually saved.
  * @return Tony Stark
  */
-bool SavedGame::isIronman() const
+bool SavedGame::isIronMan() const
 {
 	return _ironman;
 }

@@ -870,7 +870,7 @@ void DebriefingState::btnOkClick(Action *)
 	else
 	{
 		// Autosave after mission
-		if (game.savedGame()->isIronman())
+		if (game.savedGame()->isIronMan())
 		{
 			game.pushState(new SaveGameState(OPT_GEOSCAPE, SAVE_IRONMAN, _palette));
 		}
@@ -1205,7 +1205,7 @@ void DebriefingState::prepareDebriefing()
 		}
 	}
 
-	if (!base && save->isIronman())
+	if (!base && save->isIronMan())
 	{
 		throw Exception("Your save is corrupted. Try asking someone on the Openxcom forum to fix it for you.");
 	}

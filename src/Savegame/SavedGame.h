@@ -102,6 +102,7 @@ class SavedGame: public QObject
 	Q_OBJECT
 	Q_PROPERTY(std::vector<OpenXcom::Base*> bases READ bases NOTIFY basesChanged FINAL)
 	Q_PROPERTY(std::vector<OpenXcom::Country*> countries READ countries CONSTANT FINAL)
+	Q_PROPERTY(bool isIronMan READ isIronMan CONSTANT FINAL)
 
 	QML_ELEMENT
 public:
@@ -215,7 +216,7 @@ public:
 	/// Sets the game ending.
 	void setEnding(GameEnding end);
 	/// Gets if the game is in ironman mode.
-	bool isIronman() const;
+	bool isIronMan() const;
 	/// Sets if the game is in ironman mode.
 	void setIronman(bool ironman);
 	/// Gets the current funds.

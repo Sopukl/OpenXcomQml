@@ -349,7 +349,7 @@ void MonthlyReportState::btnOkClick(Action *)
 			game.pushState(new PsiTrainingState);
 		}
 		// Autosave
-		if (game.savedGame()->isIronman())
+		if (game.savedGame()->isIronMan())
 		{
 			game.pushState(new SaveGameState(OPT_GEOSCAPE, SAVE_IRONMAN, _palette));
 		}
@@ -377,7 +377,7 @@ void MonthlyReportState::btnOkClick(Action *)
 			}
 
 			game.pushState(new CutsceneState(cutsceneId));
-			if (game.savedGame()->isIronman())
+			if (game.savedGame()->isIronMan())
 			{
 				game.pushState(new SaveGameState(OPT_GEOSCAPE, SAVE_IRONMAN, _palette));
 			}
