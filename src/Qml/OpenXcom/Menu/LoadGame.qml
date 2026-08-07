@@ -9,6 +9,11 @@ XC.Popup {
     width: 320
     height: 200
 
+    component SmallText: Text {
+        font.pixelSize: 8
+        color: "white"
+    }
+
     Item {
         anchors {
             fill: parent
@@ -37,9 +42,7 @@ XC.Popup {
                 width: 200
                 anchors.left: parent.left
                 Row {
-                    Text {
-                        font.pixelSize: 8
-                        color: "white"
+                    SmallText {
                         text: Game.language.get("STR_NAME")
                     }
                     Button {
@@ -50,7 +53,6 @@ XC.Popup {
                         icon{
                             source: "qrc:/Images/Triangle.svg"
                             color: "white"
-
                         }
                         onClicked: {
                             if(rotation === 180)
@@ -69,9 +71,7 @@ XC.Popup {
                     right:parent.right
                 }
                 Row {
-                    Text {
-                        font.pixelSize: 8
-                        color: "white"
+                    SmallText {
                         text: Game.language.get("STR_DATE")
                     }
                     Button {
@@ -120,8 +120,6 @@ XC.Popup {
                 required property string isoTime
                 required property int index
 
-                onContainsMouseChanged:
-                    descTxt.text = containsMouse?details:""
                 onClicked: {
                     savesList.currentIndex = index
                     Game.loadGame(fileName)
@@ -133,7 +131,7 @@ XC.Popup {
                     popup.close();
                 }
 
-                Text {
+                SmallText {
                     anchors{
                         verticalCenter: parent.verticalCenter
                         left: parent.left
@@ -141,10 +139,8 @@ XC.Popup {
                     text: displayName
                     height: contentHeight
                     width: contentWidth
-                    font.pixelSize: 8
-                    color: "#FFFFFF"
                 }
-                Text {
+                SmallText {
                     anchors{
                         verticalCenter: parent.verticalCenter
                         right: delImg.left
@@ -153,8 +149,6 @@ XC.Popup {
                     text: isoDate+':' + isoTime
                     height: contentHeight
                     width: contentWidth
-                    font.pixelSize: 8
-                    color: "#FFFFFF"
                 }
                 ColorImage {
                     id: delImg
@@ -176,8 +170,8 @@ XC.Popup {
                 hoverEnabled: true
                 onPressed: function(mouse){mouse.accepted = false;}
                 onWheel: function(wheel){wheel.accepted = false}
-                onPositionChanged: (mouse)=>{
-
+                onPositionChanged: function(mouse)
+                {
                     let pos = mapToItem(savesList.contentItem, Qt.point(mouse.x,mouse.y))
                     let idx = savesList.indexAt(pos.x, pos.y);
                     if(idx !== -1)
@@ -188,7 +182,6 @@ XC.Popup {
 
                     mouse.accepted = false
                 }
-
             }
         }
 
@@ -201,19 +194,14 @@ XC.Popup {
                 right: parent.right
             }
 
-
-            Text {
+            SmallText {
                 text: "Desc"
                 anchors.left: parent.left
-                font.pixelSize: 8
-                color: "white"
             }
 
-            Text {
+            SmallText {
                 id: descTxt
                 anchors.right: parent.right
-                font.pixelSize: 8
-                color: "white"
             }
         }
 
