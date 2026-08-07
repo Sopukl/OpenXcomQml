@@ -42,5 +42,6 @@
         <file>OpenXcom/Menu/qmldir</file>
         <file>OpenXcom/Menu/AbandonGame.qml</file>
         <file>OpenXcom/Menu/DeleteGame.qml</file>
+        <file>OpenXcom/Menu/ListGames.qml</file>
     </qresource>
 </RCC>
