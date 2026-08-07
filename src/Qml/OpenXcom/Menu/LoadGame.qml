@@ -208,7 +208,7 @@ XC.Popup {
                             updateSavesList();
                         }
                         onClicked: {
-                            let confirmPopup = Qt.createComponent("Controls/Confirm.qml")
+                            let confirmPopup = Qt.createComponent("DeleteGame.qml")
                                                  .createObject(popup)
                             confirmPopup.accepted.connect(deleteAccepted)
                             confirmPopup.open()

@@ -41,6 +41,6 @@
         <file>OpenXcom/Menu/Options.qml</file>
         <file>OpenXcom/Menu/qmldir</file>
         <file>OpenXcom/Menu/AbandonGame.qml</file>
-        <file>OpenXcom/Menu/Controls/Confirm.qml</file>
+        <file>OpenXcom/Menu/DeleteGame.qml</file>
     </qresource>
 </RCC>

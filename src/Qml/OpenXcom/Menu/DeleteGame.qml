@@ -1,7 +1,8 @@
 import QtQuick
 import OpenXcom 1.0
+import "Controls" as XC
 
-Popup {
+XC.Popup {
     id: popup
     width: 256
     height: 100
@@ -21,7 +22,7 @@ Popup {
             clip: true
             color: "white"
         }
-        Button {
+        XC.Button {
             id: btnDone
             text: Game.language.get("STR_OK")
             onClicked: {
@@ -35,7 +36,7 @@ Popup {
                 rightMargin: 1
             }
         }
-        Button {
+        XC.Button {
             id: btnCancel
             text: Game.language.get("STR_CANCEL")
             onClicked: close()
