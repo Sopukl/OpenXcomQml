@@ -9,6 +9,35 @@ XC.Popup {
     width: 320
     height: 200
 
+    property bool sortByName: true
+    property bool sortAscended: true
+    property var saves
+
+    function updateSavesList() {
+        let origin = Game.saves()
+        let fSortByName = (a, b) => {
+            let res = a.displayName.localeCompare(b.displayName)
+            return sortAscended?res:!res
+        }
+
+        let fSortByDate = (a, b) => {
+            let res = a.isoDateTime.localeCompare(b.isoDateTime)
+            return sortAscended?res:!res
+        }
+
+        let sortFunc = sortByName?fSortByName
+                                 :fSortByDate;
+
+        let autoSaves = origin.filter((saveDesk)=>{return saveDesk.isAutoSave()})
+                             .sort(sortFunc)
+
+        let commonSaves = origin.filter((saveDesk)=>{return !saveDesk.isAutoSave()})
+                               .sort(sortFunc)
+
+        saves = [...autoSaves, ...commonSaves]
+        savesList.model = saves
+    }
+
     component SmallText: Text {
         font.pixelSize: 8
         color: "white"
@@ -51,14 +80,22 @@ XC.Popup {
                         display: Button.IconOnly
                         padding: 0
                         icon{
-                            source: "qrc:/Images/Triangle.svg"
+                            source: sortByName?"qrc:/Images/Triangle.svg"
+                                              :""
                             color: "white"
                         }
+                        rotation: sortAscended?0:180
                         onClicked: {
-                            if(rotation === 180)
-                                rotation = 0
+                            if(sortByName)
+                            {
+                                sortAscended = !sortAscended
+                            }
                             else
-                                rotation = 180
+                            {
+                                sortByName = true;
+                                sortAscended = true;
+                            }
+                            updateSavesList()
                         }
                     }
                 }
@@ -80,15 +117,22 @@ XC.Popup {
                         display: Button.IconOnly
                         padding: 0
                         icon{
-                            source: "qrc:/Images/Triangle.svg"
+                            source: sortByName?""
+                                              :"qrc:/Images/Triangle.svg"
                             color: "white"
-
                         }
+                        rotation: sortAscended?0:180
                         onClicked: {
-                            if(rotation === 180)
-                                rotation = 0
+                            if(sortByName)
+                            {
+                                sortByName = false;
+                                sortAscended = true;
+                            }
                             else
-                                rotation = 180
+                            {
+                                sortAscended = !sortAscended;
+                            }
+                            updateSavesList()
                         }
                     }
                 }
@@ -105,7 +149,6 @@ XC.Popup {
                 left: parent.left
                 right: parent.right
             }
-            model: Game.saves()
             clip: true
             property int highlightedIdx: -1
 
@@ -116,14 +159,11 @@ XC.Popup {
                 required property string fileName
                 required property string details
                 required property string displayName
-                required property string isoDate
-                required property string isoTime
+                required property string isoDateTime
                 required property int index
 
                 onClicked: {
                     savesList.currentIndex = index
-                    Game.loadGame(fileName)
-                    popup.close();
                 }
 
                 onDoubleClicked: {
@@ -146,7 +186,7 @@ XC.Popup {
                         right: delImg.left
                         rightMargin: 2
                     }
-                    text: isoDate+':' + isoTime
+                    text: isoDateTime
                     height: contentHeight
                     width: contentWidth
                 }
@@ -157,6 +197,20 @@ XC.Popup {
                     height: parent.height
                     source: "qrc:/Images/Delete.svg"
                     color: "#FFFFFF"
+                    MouseArea {
+                        anchors.fill: parent
+                        function deleteAccepted()
+                        {
+                            Game.deleteSaveGame(fileName);
+                            updateSavesList();
+                        }
+                        onClicked: {
+                            let confirmPopup = Qt.createComponent("Controls/Confirm.qml")
+                                                 .createObject(popup)
+                            confirmPopup.accepted.connect(deleteAccepted)
+                            confirmPopup.open()
+                        }
+                    }
                 }
                 Rectangle {
                     anchors.fill: parent
@@ -228,4 +282,5 @@ XC.Popup {
             }
         }
     }
+    Component.onCompleted: updateSavesList()
 }

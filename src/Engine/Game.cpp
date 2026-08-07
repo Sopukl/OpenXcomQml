@@ -871,20 +871,26 @@ QVector<SaveDesc> Game::saves() const
 {
 	auto _saves = SavedGame::getList(true);
 	QVector<SaveDesc> result;
+	result.reserve(_saves.size());
 
 	SaveDesc sd;
 	for(const auto& s: _saves)
 	{
 		sd.fileName    = QString::fromStdString(s.fileName);
 		sd.displayName = QString::fromStdString(s.displayName);
-		sd.isoDate     = QString::fromStdString(s.isoDate);
-		sd.isoTime     = QString::fromStdString(s.isoTime);
 		sd.details     = QString::fromStdString(s.details);
+		sd.isoDateTime = QString::fromStdString(s.isoDate) + ':' + QString::fromStdString(s.isoTime);
 		result.push_back(sd);
 	}
 
 	return result;
 }
+
+bool SaveDesc::isAutoSave() const
+{
+	return fileName.endsWith(".asav");
+}
+
 
 void Game::newGame(int difficulty, bool ironMan)
 {
@@ -1089,6 +1095,14 @@ void Game::setModsInfo(QJsonArray mods)
 						 m[u"enabled"].toBool());
 	options1.mods = std::move(res);
 	options1.saveSettings();
+}
+
+void Game::deleteSaveGame(QString filename)
+{
+	if (!CrossPlatform::deleteFile(Options::getMasterUserFolder() + filename.toStdString()))
+	{
+		game.errorMessage(language()->get("STR_DELETE_UNSUCCESSFUL"));
+	}
 }
 
 }

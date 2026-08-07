@@ -47,15 +47,15 @@ struct SaveDesc
 
 	Q_PROPERTY(QString fileName MEMBER fileName)
 	Q_PROPERTY(QString displayName MEMBER displayName)
-	Q_PROPERTY(QString isoDate MEMBER isoDate)
-	Q_PROPERTY(QString isoTime MEMBER isoTime)
+	Q_PROPERTY(QString isoDateTime MEMBER isoDateTime)
 	Q_PROPERTY(QString details MEMBER details)
   public:
 
 	QString fileName;
 	QString displayName;
-	QString isoDate, isoTime;
+	QString isoDateTime;
 	QString details;
+	Q_INVOKABLE bool isAutoSave() const;
 };
 
 /**
@@ -229,6 +229,7 @@ struct SaveDesc
 		Q_INVOKABLE QJsonArray getLanguages() const;
 		Q_INVOKABLE QJsonArray getModsInfo() const;
 		Q_INVOKABLE void setModsInfo(QJsonArray);
+		Q_INVOKABLE void deleteSaveGame(QString filePath);
 
 	  signals:
 		void aboutToQuit();
