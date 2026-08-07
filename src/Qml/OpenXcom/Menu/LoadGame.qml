@@ -23,7 +23,7 @@ XC.Popup {
             height: contentHeight
         }
 
-        Rectangle {
+        Item {
             id: header
             anchors {
                 left: parent.left
@@ -31,18 +31,16 @@ XC.Popup {
                 top: caption.bottom
             }
             height: 10
-            color: "#00000000"
-            border.color: "#FFFFFF"
-            Rectangle {
+            Item {
                 id: bl
                 height: 10
                 width: 200
-                color: "blue"
                 anchors.left: parent.left
                 Row {
                     Text {
                         font.pixelSize: 8
-                        text: "Name:"
+                        color: "white"
+                        text: Game.language.get("STR_NAME")
                     }
                     Button {
                         width: 10
@@ -51,7 +49,7 @@ XC.Popup {
                         padding: 0
                         icon{
                             source: "qrc:/Images/Triangle.svg"
-                            color: "red"
+                            color: "white"
 
                         }
                         onClicked: {
@@ -63,16 +61,38 @@ XC.Popup {
                     }
                 }
             }
-            Rectangle {
+            Item {
                 id: rd
                 height: 10
-                color: "red"
                 anchors{
                     left: bl.right
                     right:parent.right
                 }
-            }
+                Row {
+                    Text {
+                        font.pixelSize: 8
+                        color: "white"
+                        text: Game.language.get("STR_DATE")
+                    }
+                    Button {
+                        width: 10
+                        height: 10
+                        display: Button.IconOnly
+                        padding: 0
+                        icon{
+                            source: "qrc:/Images/Triangle.svg"
+                            color: "white"
 
+                        }
+                        onClicked: {
+                            if(rotation === 180)
+                                rotation = 0
+                            else
+                                rotation = 180
+                        }
+                    }
+                }
+            }
         }
 
         ListView {
@@ -85,14 +105,13 @@ XC.Popup {
                 left: parent.left
                 right: parent.right
             }
-            spacing: 1
             model: Game.saves()
             clip: true
+            property int highlightedIdx: -1
 
             delegate: MouseArea {
                 height: 10
                 width: savesList.width
-                hoverEnabled: true
 
                 required property string fileName
                 required property string details
@@ -103,17 +122,15 @@ XC.Popup {
 
                 onContainsMouseChanged:
                     descTxt.text = containsMouse?details:""
-                onClicked: savesList.currentIndex = index
-
-                onDoubleClicked: {
+                onClicked: {
+                    savesList.currentIndex = index
                     Game.loadGame(fileName)
                     popup.close();
                 }
 
-                Rectangle {
-                    anchors.fill: parent
-                    color: (index===savesList.currentIndex)?"#800000FF":
-                                                            "#80FF00FF"
+                onDoubleClicked: {
+                    Game.loadGame(fileName)
+                    popup.close();
                 }
 
                 Text {
@@ -147,6 +164,31 @@ XC.Popup {
                     source: "qrc:/Images/Delete.svg"
                     color: "#FFFFFF"
                 }
+                Rectangle {
+                    anchors.fill: parent
+                    color: "white"
+                    opacity: (index === savesList.highlightedIdx)?0.2:0.0
+                }
+            }
+            MouseArea {
+                anchors.fill: parent
+                propagateComposedEvents: true
+                hoverEnabled: true
+                onPressed: function(mouse){mouse.accepted = false;}
+                onWheel: function(wheel){wheel.accepted = false}
+                onPositionChanged: (mouse)=>{
+
+                    let pos = mapToItem(savesList.contentItem, Qt.point(mouse.x,mouse.y))
+                    let idx = savesList.indexAt(pos.x, pos.y);
+                    if(idx !== -1)
+                    {
+                        descTxt.text = savesList.itemAtIndex(idx).details
+                        savesList.highlightedIdx = idx;
+                    }
+
+                    mouse.accepted = false
+                }
+
             }
         }
 
