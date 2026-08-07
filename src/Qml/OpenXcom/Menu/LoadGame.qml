@@ -11,7 +11,6 @@ XC.Popup {
 
     property bool sortByName: true
     property bool sortAscended: true
-    property var saves
 
     function updateSavesList() {
         let origin = Game.saves()
@@ -34,14 +33,33 @@ XC.Popup {
         let commonSaves = origin.filter((saveDesk)=>{return !saveDesk.isAutoSave()})
                                .sort(sortFunc)
 
-        saves = [...autoSaves, ...commonSaves]
-        savesList.model = saves
+        savesList.model = [...autoSaves, ...commonSaves]
     }
 
     component SmallText: Text {
         font.pixelSize: 8
         color: "white"
     }
+    component SortButton: Button {
+        width: 10
+        height: 10
+        display: Button.IconOnly
+        property bool selected
+        padding: 1
+        background: Rectangle {
+            color: "#00000000"
+            border.color: selected?"#FFFFFFFF"
+                                  :"#80FFFFFF"
+        }
+
+        icon{
+            source: selected?"qrc:/Images/Triangle.svg"
+                            :""
+            color: "#FFFFFFFF"
+        }
+        rotation: sortAscended?0:180
+    }
+
 
     Item {
         anchors {
@@ -74,17 +92,8 @@ XC.Popup {
                     SmallText {
                         text: Game.language.get("STR_NAME")
                     }
-                    Button {
-                        width: 10
-                        height: 10
-                        display: Button.IconOnly
-                        padding: 0
-                        icon{
-                            source: sortByName?"qrc:/Images/Triangle.svg"
-                                              :""
-                            color: "white"
-                        }
-                        rotation: sortAscended?0:180
+                    SortButton {
+                        selected: sortByName
                         onClicked: {
                             if(sortByName)
                             {
@@ -111,17 +120,8 @@ XC.Popup {
                     SmallText {
                         text: Game.language.get("STR_DATE")
                     }
-                    Button {
-                        width: 10
-                        height: 10
-                        display: Button.IconOnly
-                        padding: 0
-                        icon{
-                            source: sortByName?""
-                                              :"qrc:/Images/Triangle.svg"
-                            color: "white"
-                        }
-                        rotation: sortAscended?0:180
+                    SortButton {
+                        selected: !sortByName
                         onClicked: {
                             if(sortByName)
                             {
@@ -151,6 +151,9 @@ XC.Popup {
             }
             clip: true
             property int highlightedIdx: -1
+            highlight: Rectangle {
+                color: "#4000FFFF"
+            }
 
             delegate: MouseArea {
                 height: 10
@@ -226,7 +229,8 @@ XC.Popup {
                 onWheel: function(wheel){wheel.accepted = false}
                 onPositionChanged: function(mouse)
                 {
-                    let pos = mapToItem(savesList.contentItem, Qt.point(mouse.x,mouse.y))
+                    let pos = mapToItem(savesList.contentItem,
+                                        Qt.point(mouse.x,mouse.y))
                     let idx = savesList.indexAt(pos.x, pos.y);
                     if(idx !== -1)
                     {
