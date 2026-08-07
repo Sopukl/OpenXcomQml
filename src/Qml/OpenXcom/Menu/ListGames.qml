@@ -16,8 +16,12 @@ XC.Popup {
     property var saves: []
     signal acceptedSavedGame(int index);
 
+    function initSavesList() {
+        return [];
+    }
+
     function updateSavesList() {
-        let origin = Game.saves()
+        let origin = initSavesList()
         let fSortByName = (a, b) => {
             let res = a.displayName.localeCompare(b.displayName)
             return sortAscended?res:!res
