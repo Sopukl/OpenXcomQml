@@ -1,0 +1,5 @@
+module Controls
+
+ComboBox 1.0 ComboBox.qml
+Popup    1.0 Popup.qml
+Button   1.0 Button.qml

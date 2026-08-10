@@ -150,6 +150,7 @@ class Mod: public QObject
 	Q_OBJECT
 	QML_ELEMENT
 	Q_PROPERTY(QStringList itemsList READ itemsList CONSTANT FINAL)
+	Q_PROPERTY(QVector<Armor*> armorsForSoldiers READ armorsForSoldiers CONSTANT FINAL )
 public:
 	/// Number of color per opacity level.
 	constexpr static int TransparenciesPaletteColors = 256;
@@ -748,6 +749,7 @@ public:
 	/// Gets the all armors.
 	const std::vector<std::string> &getArmorsList() const;
 	/// Gets the available armors for soldiers.
+	QVector<Armor*> armorsForSoldiers() const;
 	const std::vector<const Armor*> &getArmorsForSoldiers() const;
 	/// Check if item is used for armor storage.
 	bool isArmorStorageItem(const RuleItem* item) const;

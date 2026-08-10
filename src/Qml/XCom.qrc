@@ -43,5 +43,7 @@
         <file>OpenXcom/Menu/AbandonGame.qml</file>
         <file>OpenXcom/Menu/DeleteGame.qml</file>
         <file>OpenXcom/Menu/ListGames.qml</file>
+        <file>OpenXcom/Basescape/SoldierArmor.qml</file>
+        <file>OpenXcom/Controls/qmldir</file>
     </qresource>
 </RCC>

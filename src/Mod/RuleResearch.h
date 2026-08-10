@@ -18,7 +18,7 @@
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-
+#include <QtQml>
 #include "../Engine/Yaml.h"
 #include "RuleBaseFacilityFunctions.h"
 #include "ModScript.h"
@@ -40,8 +40,10 @@ class Mod;
  *  - G which need C & D
  * both F and G can unlock E.
  */
-class RuleResearch
+class RuleResearch: public QObject
 {
+	Q_OBJECT
+	QML_ELEMENT
  private:
 	std::string _name, _lookup, _cutscene, _spawnedItem, _spawnedEvent;
 	int _spawnedItemCount;

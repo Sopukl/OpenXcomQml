@@ -19,10 +19,6 @@
  */
 #include "ItemContainer.h"
 #include "Craft.h"
-
-
-
-
 #include "../Engine/Yaml.h"
 #include "../Mod/RuleBaseFacilityFunctions.h"
 
@@ -112,6 +108,7 @@ class Base : public Target
 {
 	Q_OBJECT
 
+	QML_ELEMENT
 	Q_PROPERTY(std::vector<Craft*> crafts READ crafts NOTIFY craftsChanged FINAL)
 	Q_PROPERTY(std::vector<Soldier*> soldiers READ soldiers NOTIFY soldiersChanged FINAL)
 	Q_PROPERTY(ItemContainer* storage READ storage CONSTANT FINAL)

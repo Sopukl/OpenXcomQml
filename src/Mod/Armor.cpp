@@ -391,6 +391,11 @@ const std::string& Armor::getUfopediaType() const
 	return _type;
 }
 
+QString Armor::type() const
+{
+	return QString::fromStdString(getType());
+}
+
 /**
  * Returns the language string that names
  * this armor. Each armor has a unique name. Coveralls, Power Suit,...

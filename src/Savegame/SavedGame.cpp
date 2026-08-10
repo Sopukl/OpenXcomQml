@@ -2217,6 +2217,17 @@ bool SavedGame::isResearched(const std::vector<std::string> &research, bool cons
 	return true;
 }
 
+bool SavedGame::isResearched(RuleResearch *research, bool considerDebugMode, bool skipDisabled) const
+{
+	if (research == nullptr)
+		return true;
+
+	if (skipDisabled && isResearchRuleStatusDisabled(research->getName()))
+		return false;
+
+	return haveReserchVector(_discovered, research);
+}
+
 /**
  * Returns if a certain list of research topics has been completed.
  * @param research List of research IDs.

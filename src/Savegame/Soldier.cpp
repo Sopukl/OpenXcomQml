@@ -963,6 +963,7 @@ void Soldier::setArmor(Armor *armor, bool resetCustomDeployment)
 	}
 
 	_armor = armor;
+	Q_EMIT armorChanged();
 }
 
 /**

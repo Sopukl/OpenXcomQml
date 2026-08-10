@@ -72,7 +72,7 @@ class RuleItem;
 		/// Gets an item in the container.
 		int countOf(const std::string &id) const;
 		/// Gets an item in the container.
-		int countOf(const RuleItem* item) const;
+		Q_INVOKABLE int countOf(const RuleItem* item) const;
 		/// Gets the total quantity of items in the container.
 		int totalCount() const;
 		/// Gets the total size of items in the container.

@@ -4396,6 +4396,16 @@ const std::vector<std::string> &Mod::getArmorsList() const
 	return _armorsIndex;
 }
 
+QVector<Armor*> Mod::armorsForSoldiers() const
+{
+	QVector<Armor*> res;
+	res.resize(_armorsForSoldiersCache.size());
+
+	for(auto a: getArmorsForSoldiers())
+		res.push_back((Armor*)a);
+	return res;
+}
+
 /**
  * Gets the available armors for soldiers.
  */

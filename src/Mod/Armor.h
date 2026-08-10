@@ -87,8 +87,11 @@ struct ArmorMoveCost
  * Not only soldier armor, but also alien armor - some alien races wear
  * Soldier Armor, Leader Armor or Commander Armor depending on their rank.
  */
-class Armor
+class Armor: public QObject
 {
+	Q_OBJECT
+	QML_ELEMENT
+	Q_PROPERTY(QString type READ type CONSTANT FINAL)
 public:
 
 	/// Name of class used in script.
@@ -207,12 +210,13 @@ public:
 	/// Cross link with other rules.
 	void afterLoad(const Mod* mod);
 	/// Gets whether or not there is an infinite supply of this armor.
-	bool hasInfiniteSupply() const { return _infiniteSupply; }
+	Q_INVOKABLE bool hasInfiniteSupply() const { return _infiniteSupply; }
 
 	/// Gets the custom name of the Ufopedia article related to this armor.
 	const std::string& getUfopediaType() const;
 
 	/// Gets the armor's type.
+	QString type() const;
 	const std::string& getType() const;
 	/// Gets the unit's sprite sheet.
 	std::string getSpriteSheet() const;
@@ -237,11 +241,11 @@ public:
 	/// Gets the Geoscape corpse item.
 	const RuleItem* getSelfDestructItem() const { return _selfDestructItem ? _selfDestructItem : _corpseGeo && _corpseGeo->getPower() > 0 ? _corpseGeo : nullptr; }
 	/// Gets the stores item.
-	const RuleItem* getStoreItem() const;
+	Q_INVOKABLE const RuleItem* getStoreItem() const;
 	/// Gets the special weapon type.
 	const RuleItem* getSpecialWeapon() const;
 	/// Gets the research required to be able to equip this armor.
-	const RuleResearch* getRequiredResearch() const;
+	Q_INVOKABLE const RuleResearch* getRequiredResearch() const;
 	/// Gets the commendation required to be able to equip this armor.
 	const RuleCommendations* getRequiredAward() const { return _requiresAward; }
 	/// Gets the soldier bonus required to be able to equip this armor.
@@ -463,7 +467,7 @@ public:
 	/// Gets the armor's supported soldier ranks.
 	const std::vector<int>& getRanksRaw() const { return _ranks; }
 	/// Check if a soldier can use this armor.
-	bool getCanBeUsedBy(const Soldier* soldier) const;
+	Q_INVOKABLE bool getCanBeUsedBy(const Soldier* soldier) const;
 
 
 	/// Gets the index of the sprite in the CustomArmorPreview sprite set

@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU General Public License
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
-#include <QObject>
+#include <QtQml>
 #include "../Engine/Yaml.h"
 #include "../Mod/Unit.h"
 #include "../Mod/StatString.h"
@@ -54,8 +54,10 @@ struct BaseSumDailyRecovery;
 class Soldier: public QObject
 {
 	Q_OBJECT
+	QML_ELEMENT
 	Q_PROPERTY(QString name READ name WRITE setName NOTIFY nameChanged FINAL)
 	Q_PROPERTY(Craft* craft READ getCraft NOTIFY craftChanged FINAL)
+	Q_PROPERTY(Armor* armor READ getArmor WRITE setArmor NOTIFY armorChanged FINAL)
 public:
 
 	/// Name of class used in script.
@@ -314,6 +316,7 @@ public:
   signals:
 	void nameChanged();
 	void craftChanged();
+	void armorChanged();
 private:
 	std::string generateCallsign(const std::vector<SoldierNamePool*> &names);
 	/// Automatically move equipment between the craft and the base when assigning/deassigning/reassigning soldiers.

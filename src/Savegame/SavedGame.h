@@ -350,7 +350,8 @@ public:
 	/// Gets if a certain list of research topics has been completed.
 	bool isResearched(const std::vector<std::string> &research, bool considerDebugMode = true) const;
 	/// Gets if a certain list of research topics has been completed.
-	bool isResearched(const std::vector<const RuleResearch *> &research, bool considerDebugMode = true, bool skipDisabled = false) const;
+	Q_INVOKABLE bool isResearched(RuleResearch* research, bool considerDebugMode = true, bool skipDisabled = false) const;
+	Q_INVOKABLE bool isResearched(const std::vector<const RuleResearch *> &research, bool considerDebugMode = true, bool skipDisabled = false) const;
 	/// Gets if a certain item has been obtained.
 	bool isItemObtained(const std::string &itemType, const Mod* mod) const;
 	/// Gets if a certain facility has been built.
@@ -424,7 +425,7 @@ public:
 	/// Select a soldier nationality based on mod rules and location on the globe.
 	int selectSoldierNationalityByLocation(const Mod* mod, const RuleSoldier* rule, const Target* target) const;
 	/// Return the month counter.
-	int getMonthsPassed() const;
+	Q_INVOKABLE int getMonthsPassed() const;
 	/// Return the day counter.
 	int getDaysPassed() const { return _daysPassed; }
 	void increaseDaysPassed() { _daysPassed++; }
