@@ -22,7 +22,6 @@
 #include "../Engine/Collections.h"
 #include "../Savegame/GameTime.h"
 #include "../Savegame/Soldier.h"
-// #include "RuleDamageType.h"
 #include "RuleAlienMission.h"
 #include "RuleBaseFacilityFunctions.h"
 #include "RuleItem.h"

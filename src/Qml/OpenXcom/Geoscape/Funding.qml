@@ -18,6 +18,29 @@ XC.Popup {
     property int sortOrder: Qt.AscendingOrder
     property int totalFunding: 0
 
+    SortFilterProxyModel {
+        id: fundingProxy
+        model: ListModel {}
+
+        sorters: [
+            RoleSorter {
+                id: nameSorter
+                roleName: "name"
+                enabled: sortColumn === "name"
+                sortOrder: popup.sortOrder
+            },
+            RoleSorter {
+                roleName: "funding"
+                enabled: sortColumn === "funding"
+                sortOrder: popup.sortOrder
+            },
+            RoleSorter {
+                roleName: "fundingDiff"
+                enabled: sortColumn === "fundingDiff"
+                sortOrder: popup.sortOrder
+            }
+        ]
+    }
     component HeaderTab: MouseArea {
         height: tableHeader.height
         property string tabName
@@ -64,30 +87,6 @@ XC.Popup {
         cursorShape: Qt.PointingHandCursor
     }
 
-    SortFilterProxyModel {
-        id: fundingProxy
-        model: ListModel {}
-
-        sorters: [
-            RoleSorter {
-                id: nameSorter
-                roleName: "name"
-                enabled: sortColumn === "name"
-                sortOrder: popup.sortOrder
-            },
-            RoleSorter {
-                roleName: "funding"
-                enabled: sortColumn === "funding"
-                sortOrder: popup.sortOrder
-            },
-            RoleSorter {
-                roleName: "fundingDiff"
-                enabled: sortColumn === "fundingDiff"
-                sortOrder: popup.sortOrder
-            }
-        ]
-    }
-
     Text {
         id: caption
         anchors {
@@ -99,7 +98,7 @@ XC.Popup {
             pixelSize: 12
             bold: true
         }
-        text: "International Relations"
+        text: Game.language.get("STR_INTERNATIONAL_RELATIONS")
         color: "#64CCBC"
     }
 
@@ -115,21 +114,22 @@ XC.Popup {
         spacing: 0
 
         HeaderTab {
-            width: list.width * colNameRatio
-            tabName: "Country"
+            id: countryTab
+            width: 100
+            tabName: Game.language.get("STR_COUNTRY")
             sortName: "name"
         }
-
         HeaderTab {
-            width: list.width * colFundingRatio
-            tabName: "Funding"
+            id: fundingTab
+            width: 100
+            tabName: Game.language.get("STR_FUNDING")
             sortName: "funding"
             alignLeft: false
         }
-
         HeaderTab {
-            width: list.width * colChangeRatio
-            tabName: "Change"
+            id: changeTab
+            width: 72
+            tabName: Game.language.get("STR_CHANGE")
             sortName: "fundingDiff"
             alignLeft: false
         }
@@ -148,15 +148,14 @@ XC.Popup {
             rightMargin: 5
         }
         clip: true
-        spacing: 1
-        model: fundingProxy
+        spacing: tableHeader.spacing
 
         highlight: Rectangle {
             width: list.width
             height: 10
             color: "white"
             opacity: 0.2
-            y: ListView.view.currentItem.y
+            y: ListView.view.currentItem?.y??0
         }
 
         delegate: MouseArea {
@@ -174,7 +173,7 @@ XC.Popup {
                 spacing: 0
 
                 Text {
-                    width: list.width * colNameRatio
+                    width: countryTab.width
                     height: parent.height
                     text: name
                     font.pixelSize: 8
@@ -184,28 +183,26 @@ XC.Popup {
                 }
 
                 Text {
-                    width: list.width * colFundingRatio
+                    width: fundingTab.width
                     height: parent.height
                     text: {
                         const sign = funding < 0 ? "-" : "";
-                        return `${sign}$${Math.abs(funding).toLocaleString()}`;
-                    }
-                    font.pixelSize: 8
+                        return `${sign}$${Math.abs(funding)}`;
+                    }                    font.pixelSize: 8
                     color: "white"
                     horizontalAlignment: Text.AlignRight
                     verticalAlignment: Text.AlignVCenter
                 }
 
                 Text {
-                    width: list.width * colChangeRatio
+                    width: changeTab.width
                     height: parent.height
                     text: {
                         const sign = fundingDiff === 0 ? ''  :
                                      fundingDiff < 0   ? "-" : "+";
 
-                        return `${sign}$${Math.abs(fundingDiff).toLocaleString()}`;
+                        return `${sign}$${Math.abs(fundingDiff)}`;
                     }
-
                     font.pixelSize: 8
                     color: "white"
                     horizontalAlignment: Text.AlignRight
@@ -226,7 +223,7 @@ XC.Popup {
 
         font.pixelSize: 10
         color: "white"
-        text: `TOTAL: ${totalFunding}`
+        text: `${Game.language.get("STR_TOTAL_UC")}: ${totalFunding}`
 
     }
 
@@ -237,14 +234,17 @@ XC.Popup {
             bottom: parent.bottom
             bottomMargin: 2
         }
-        width: 100
-        text: "Ok"
+        width: 50
+        height: 12
+        text: Game.language.get("STR_OK")
         onClicked: popup.close()
     }
 
     Component.onCompleted: {
         let fund = 0;
         let diff = 0;
+
+        let fundingStr, fundingDiffStr, sign;
 
         totalFunding = 0;
         for (let country of Game.savedGame.countries)
@@ -264,5 +264,6 @@ XC.Popup {
                 "fundingDiff": diff
             });
         }
+        list.model = fundingProxy;
     }
 }
