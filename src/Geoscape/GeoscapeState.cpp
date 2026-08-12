@@ -69,7 +69,6 @@
 #include "../Basescape/GlobalAlienContainmentState.h"
 #include "../Menu/CutsceneState.h"
 #include "GraphsState.h"
-#include "FundingState.h"
 #include "ExtendedGeoscapeLinksState.h"
 #include "MonthlyReportState.h"
 #include "ProductionCompleteState.h"
@@ -3178,7 +3177,6 @@ void GeoscapeState::btnFundingClick(Action *)
 	}
 	else
 	{
-		//game.pushState(new FundingState);
 		game.openPopupWindow("/OpenXcom/Geoscape/Funding.qml");
 
 	}

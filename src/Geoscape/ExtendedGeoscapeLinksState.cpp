@@ -18,7 +18,6 @@
  */
 
 #include "ExtendedGeoscapeLinksState.h"
-#include "FundingState.h"
 #include "GeoscapeState.h"
 #include "../Engine/Game.h"
 #include "../Engine/Action.h"
@@ -149,8 +148,7 @@ ExtendedGeoscapeLinksState::ExtendedGeoscapeLinksState(GeoscapeState* parent) : 
 void ExtendedGeoscapeLinksState::btnFundingClick(Action *)
 {
 	game.popState();
-	game.pushState(new FundingState);
-	//game.openPopupWindow("/OpenXcom/Geoscape/Funding.qml");
+	game.openPopupWindow("/OpenXcom/Geoscape/Funding.qml");
 }
 
 void ExtendedGeoscapeLinksState::btnTechTreeClick(Action *)
