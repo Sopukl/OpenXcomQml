@@ -18,12 +18,6 @@
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-
-
-
-#include <bitset>
-#include <array>
-#include <SDL.h>
 #include "../Engine/Yaml.h"
 #include "../Engine/Options.h"
 #include "../Engine/FileMap.h"
