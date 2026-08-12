@@ -18,9 +18,8 @@
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "../Engine/Yaml.h"
-#include "../Engine/Options.h"
-#include "../Engine/FileMap.h"
+//#include "../Engine/Yaml.h"
+#include "../Engine/Options1.h"
 #include "../Engine/Collections.h"
 #include "../Savegame/GameTime.h"
 #include "../Savegame/Soldier.h"
