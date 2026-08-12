@@ -54,6 +54,8 @@
 #include "../fallthrough.h"
 #include "../version.h"
 #include <QJsonObject>
+#include "../GameRenderer.h"
+#include <QQmlComponent>
 
 namespace OpenXcom
 {
@@ -1103,6 +1105,19 @@ void Game::deleteSaveGame(QString filename)
 	{
 		game.errorMessage(language()->get("STR_DELETE_UNSUCCESSFUL"));
 	}
+}
+
+QObject *createQmlItem(QString url, QVariantMap params)
+{
+	QQmlComponent component(qmlEngine(&game), url);
+	qDebug() << component.errorString();
+
+	auto object = component.createWithInitialProperties(params);
+
+	object->setProperty("parent", QVariant::fromValue(getGameRenderer()));
+	QMetaObject::invokeMethod(object, "open");
+	return object;
+
 }
 
 }

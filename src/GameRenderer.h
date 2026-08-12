@@ -33,4 +33,6 @@ namespace OpenXcom
 		Uint8 convertMouseButton(Qt::MouseButton button);
 		void initSDL();
 	};
+
+	GameRenderer* getGameRenderer();
 }

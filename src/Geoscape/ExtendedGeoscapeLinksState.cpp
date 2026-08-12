@@ -148,7 +148,8 @@ ExtendedGeoscapeLinksState::ExtendedGeoscapeLinksState(GeoscapeState* parent) : 
 void ExtendedGeoscapeLinksState::btnFundingClick(Action *)
 {
 	game.popState();
-	game.openPopupWindow("/OpenXcom/Geoscape/Funding.qml");
+	createQmlItem("qrc:/OpenXcom/Geoscape/Funding.qml");
+	//game.openPopupWindow("/OpenXcom/Geoscape/Funding.qml");
 }
 
 void ExtendedGeoscapeLinksState::btnTechTreeClick(Action *)

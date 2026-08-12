@@ -111,6 +111,7 @@ SDLKey convertScanCodeToSDLKey(quint32 scanCode)
 
 namespace OpenXcom
 {
+	GameRenderer *gameRenderer = nullptr;
 	SDLMod convertQtModifiers(Qt::KeyboardModifiers qtMods)
 	{
 		SDLMod sdlMods = KMOD_NONE;
@@ -145,6 +146,7 @@ namespace OpenXcom
 	GameRenderer::GameRenderer(QQuickItem *parent):
 		QQuickPaintedItem(parent)
 	{
+		gameRenderer = this;
 		setAcceptHoverEvents(true);
 		setAcceptedMouseButtons(Qt::AllButtons);
 		setFocus(true);
@@ -337,4 +339,10 @@ namespace OpenXcom
 		e.active.state = SDL_APPINPUTFOCUS;
 		SDL_PushEvent(&e);
 	}
+
+	GameRenderer *getGameRenderer()
+	{
+		return gameRenderer;
+	}
+
 }

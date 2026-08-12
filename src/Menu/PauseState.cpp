@@ -164,7 +164,8 @@ PauseState::~PauseState()
  */
 void PauseState::btnLoadClick(Action *)
 {
-	game.openPopupWindow("/OpenXcom/Menu/LoadGame.qml");
+	createQmlItem("qrc:/OpenXcom/Menu/LoadGame.qml");
+
 	//game.pushState(new ListLoadState(_origin));
 }
 
@@ -204,8 +205,7 @@ void PauseState::btnOptionsClick(Action *)
  */
 void PauseState::btnAbandonClick(Action *)
 {
-	game.openPopupWindow("/OpenXcom/Menu/AbandonGame.qml",
-						 {{"origin", _origin}});
+	createQmlItem("qrc:/OpenXcom/Menu/AbandonGame.qml");
 }
 
 /**

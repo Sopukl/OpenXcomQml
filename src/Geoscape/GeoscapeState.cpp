@@ -2995,8 +2995,8 @@ void GeoscapeState::btnInterceptClick(Action *)
 	{
 		return;
 	}
-	//game.pushState(new InterceptState(_globe, false));
-	game.openPopupWindow("/OpenXcom/Geoscape/Intercept.qml");
+	game.pushState(new InterceptState(_globe, false));
+	//game.openPopupWindow("/OpenXcom/Geoscape/Intercept.qml");
 }
 
 /**
@@ -3177,8 +3177,8 @@ void GeoscapeState::btnFundingClick(Action *)
 	}
 	else
 	{
-		game.openPopupWindow("/OpenXcom/Geoscape/Funding.qml");
-
+		//game.openPopupWindow("/OpenXcom/Geoscape/Funding.qml");
+		createQmlItem("qrc:/OpenXcom/Geoscape/Funding.qml");
 	}
 }
 

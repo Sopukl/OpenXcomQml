@@ -367,7 +367,7 @@ void BasescapeState::btnPurchaseClick(Action *)
 void BasescapeState::btnSellClick(Action *)
 {
 	//game.pushState(new SellState(_base, 0));
-	game.openPopupWindow("/OpenXcom/Basescape/Sell.qml", {{"base", QVariant::fromValue(_base)}});
+	createQmlItem("qrc:/OpenXcom/Basescape/Sell.qml", {{"base", QVariant::fromValue(_base)}});
 }
 
 /**

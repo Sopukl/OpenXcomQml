@@ -235,10 +235,11 @@ struct SaveDesc
 		void aboutToQuit();
 		void stateChanged();
 		void createNewBase(OpenXcom::GeoscapeState* geoscape, OpenXcom::Base* base, bool isFirst);
-		void openPopupWindow(QString url, QVariantMap params = {});
 		void errorMessage(QString message);
 		void savedGameChanged();
 		void modChanged();
 	};
 	inline Game game;
+
+	QObject* createQmlItem(QString url, QVariantMap params = {});
 }

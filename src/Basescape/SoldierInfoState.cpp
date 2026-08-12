@@ -708,10 +708,10 @@ void SoldierInfoState::btnArmorClick(Action *)
 {
 	if (!_soldier->getCraft() || (_soldier->getCraft() && _soldier->getCraft()->getStatus() != "STR_OUT"))
 	{
-		game.pushState(new SoldierArmorState(_base, _soldierId, SA_GEOSCAPE));
-		game.openPopupWindow("/OpenXcom/Basescape/SoldierArmor.qml",
-							 {{"base",    QVariant::fromValue(_base)},
-							  {"soldier", QVariant::fromValue(_soldier)}});
+		//game.pushState(new SoldierArmorState(_base, _soldierId, SA_GEOSCAPE));
+		createQmlItem("qrc:/OpenXcom/Basescape/SoldierArmor.qml",
+			{{"base",    QVariant::fromValue(_base)},
+			 {"soldier", QVariant::fromValue(_soldier)}});
 	}
 }
 
