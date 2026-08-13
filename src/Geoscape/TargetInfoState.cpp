@@ -166,6 +166,8 @@ void TargetInfoState::btnOkClick(Action *)
 void TargetInfoState::btnInfoClick(Action *)
 {
 	game.pushState(new BriefingLightState(_deploymentRule));
+	createQmlItem("qrc:/OpenXcom/Battlescape/BriefingLight.qml",
+				  {{"alienDeployment", QVariant::fromValue(_deploymentRule)}});
 }
 
 /**

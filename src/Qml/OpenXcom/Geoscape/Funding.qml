@@ -8,7 +8,7 @@ XC.Popup {
     width: 320
     height: 200
 
-    bgImage.source: "image://xcom/fundingWindow"
+    bgImage.source: "image://xcom/Interface/fundingWindow"
 
     readonly property real colNameRatio: 108 / 260
     readonly property real colFundingRatio: 100 / 260

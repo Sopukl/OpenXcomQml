@@ -5,7 +5,7 @@ Popup {
     width: 256
     height: 160
     required property string errorText
-    bgImage.source: "image://xcom/itemsArriving"
+    bgImage.source: "image://xcom/Interface/itemsArriving"
 
     Text {
         id: q12

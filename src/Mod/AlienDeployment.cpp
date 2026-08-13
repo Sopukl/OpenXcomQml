@@ -25,6 +25,17 @@
 namespace OpenXcom
 {
 
+QString BriefingData::getBackground() const
+{
+	return QString::fromStdString(background);
+}
+
+int BriefingData::paletteOffset() const
+{
+	return palette;
+}
+
+
 /**
  * Creates a blank ruleset for a certain
  * type of deployment data.

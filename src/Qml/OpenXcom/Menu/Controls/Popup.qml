@@ -22,7 +22,7 @@ Popup {
             visible: source !== ""
             width: 320
             height: 200
-            source: "image://xcom/mainMenu"
+            source: "image://xcom/Interface/mainMenu"
         }
     }
 

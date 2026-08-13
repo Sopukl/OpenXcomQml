@@ -2556,7 +2556,7 @@ std::vector<Craft*>::iterator Base::removeCraft(Craft *craft, bool unload)
 
 void Base::set_Name(QString newName)
 {
-	setName(newName.toUtf8().toStdString());
+	setName(newName.toStdString());
 }
 
 }

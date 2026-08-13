@@ -5,7 +5,7 @@ import OpenXcom 1.0
 XC.Popup {
     width:  192
     height: 160
-    bgImage.source: "image://xcom/soldierArmor#PAL_BATTLESCAPE"
+    bgImage.source: "image://xcom/Interface/soldierArmor#PAL_BATTLESCAPE"
     required property Base base
     required property Soldier soldier
 

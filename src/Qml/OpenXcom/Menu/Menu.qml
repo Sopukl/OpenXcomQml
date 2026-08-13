@@ -20,7 +20,7 @@ Item {
         anchors.centerIn: parent
         width: 320
         height: 200
-        source: "image://xcom/mainMenu"
+        source: "image://xcom/Interface/mainMenu"
     }
     Rectangle {
         anchors.fill: parent

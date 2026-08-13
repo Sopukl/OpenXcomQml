@@ -7,7 +7,7 @@ XC.Popup {
     width: 320
     height: 200
     required property Base base
-    bgImage.source: "image://xcom/fundingWindow"
+    bgImage.source: "image://xcom/Interface/fundingWindow"
     component HeaderText: Text {
         font{
             pixelSize: 9

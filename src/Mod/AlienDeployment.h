@@ -18,8 +18,7 @@
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-
-
+#include <QtQml>
 #include "../Engine/Yaml.h"
 #include "../Savegame/WeightedOptions.h"
 
@@ -45,10 +44,22 @@ struct DeploymentData
 };
 struct BriefingData
 {
-	int palette, textOffset;
-	std::string title, desc, music, background, cutscene;
-	bool showCraft, showTarget;
-	BriefingData() : palette(0), textOffset(0), music("GMDEFEND"), background("BACK16.SCR"), showCraft(true), showTarget(true) { /*Empty by Design*/ };
+	Q_GADGET
+	Q_PROPERTY(QString background READ getBackground FINAL)
+	Q_PROPERTY(int paletteOffset  READ paletteOffset FINAL)
+  public:
+	int palette = 0;
+	int textOffset = 0;
+	std::string title = "",
+				desc = "",
+				music = "GMDEFEND",
+				background = "BACK16.SCR",
+				cutscene = "";
+	bool showCraft = true,
+		 showTarget = true;
+
+	QString getBackground() const;
+	int paletteOffset() const;
 };
 enum MapBlockFilterType : int { MFT_NONE, MFT_BY_MAPSCRIPT, MFT_BY_REINFORCEMENTS, MFT_BY_BOTH_UNION, MFT_BY_BOTH_INTERSECTION };
 struct ReinforcementsData
@@ -87,8 +98,12 @@ enum EscapeType : int { ESCAPE_NONE, ESCAPE_EXIT, ESCAPE_ENTRY, ESCAPE_EITHER };
  *   + to match to a specific unit (=race/rank combination) that should be deployed.
  * @sa Node
  */
-class AlienDeployment
+class AlienDeployment: public QObject
 {
+	Q_OBJECT
+	QML_ELEMENT
+
+	Q_PROPERTY(BriefingData briefingData READ getBriefingData CONSTANT FINAL)
 private:
 	std::string _type;
 	std::string _customUfo;
@@ -224,11 +239,11 @@ public:
 	/// Gets the cutscene to play when this mission is aborted.
 	std::string getAbortCutscene() const;
 	/// Gets geoscape event rule name to spawn after success mission.
-	std::string chooseSuccessEvent() const { return _successEvents.choose(); };
+	std::string chooseSuccessEvent() const { return _successEvents.choose(); }
 	/// Gets geoscape event rule name to despawn after success mission.
-	std::string chooseDespawnEvent() const { return _despawnEvents.choose(); };
+	std::string chooseDespawnEvent() const { return _despawnEvents.choose(); }
 	/// Gets geoscape event rule name to spawn after failure mission.
-	std::string chooseFailureEvent() const { return _failureEvents.choose(); };
+	std::string chooseFailureEvent() const { return _failureEvents.choose(); }
 	/// Gets the alert message for this mission type.
 	std::string getAlertMessage() const;
 	/// Gets the alert background for this mission type.
@@ -329,3 +344,4 @@ bool read(ryml::ConstNodeRef const& n, BriefingData* val);
 bool read(ryml::ConstNodeRef const& n, ReinforcementsData* val);
 
 }
+Q_DECLARE_METATYPE(OpenXcom::BriefingData)
