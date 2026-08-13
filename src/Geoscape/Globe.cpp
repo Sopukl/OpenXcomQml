@@ -785,7 +785,6 @@ bool Globe::targetNear(Target* target, int x, int y) const
  */
 std::vector<Target*> Globe::getTargets(int x, int y, bool craft, Craft *currentCraft) const
 {
-	qDebug() << "Globe::getTargets " << x << y;
 	std::vector<Target*> v;
 	{
 		for (auto* xbase : game.savedGame()->bases())

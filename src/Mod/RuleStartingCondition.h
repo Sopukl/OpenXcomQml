@@ -18,8 +18,7 @@
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-
-
+#include <QtQml>
 #include "../Engine/Yaml.h"
 
 namespace OpenXcom
@@ -32,9 +31,29 @@ class RuleCraft;
 /**
  * Represents a specific Starting Condition.
  */
-class RuleStartingCondition
+class RuleStartingCondition: public QObject
 {
-private:
+	Q_OBJECT
+	QML_ELEMENT
+
+	Q_PROPERTY(QStringList allowedArmors READ allowedArmors CONSTANT FINAL)
+	Q_PROPERTY(QStringList forbiddenArmors READ forbiddenArmors CONSTANT FINAL)
+
+	Q_PROPERTY(QStringList allowedVehicles READ allowedVehicles CONSTANT FINAL)
+	Q_PROPERTY(QStringList forbiddenVehicles READ forbiddenVehicles CONSTANT FINAL)
+
+	Q_PROPERTY(QStringList allowedItems READ allowedItems CONSTANT FINAL)
+	Q_PROPERTY(QStringList forbiddenItems READ forbiddenItems CONSTANT FINAL)
+
+	Q_PROPERTY(QStringList allowedItemCategories READ allowedItemCategories CONSTANT FINAL)
+	Q_PROPERTY(QStringList forbiddenItemCategories READ forbiddenItemCategories CONSTANT FINAL)
+
+	Q_PROPERTY(QStringList allowedCraft READ allowedCraft CONSTANT FINAL)
+	Q_PROPERTY(QStringList forbiddenCraft READ forbiddenCraft CONSTANT FINAL)
+
+	Q_PROPERTY(QStringList allowedSoldierTypes READ allowedSoldierTypes CONSTANT FINAL)
+	Q_PROPERTY(QStringList forbiddenSoldierTypes READ forbiddenSoldierTypes CONSTANT FINAL)
+  private:
 	std::string _type;
 	std::map<std::string, std::map<std::string, int> > _defaultArmor;
 	std::vector<std::string> _allowedArmors, _forbiddenArmors;
@@ -93,6 +112,19 @@ public:
 	bool isVehiclePermitted(const std::string& vehicleType) const;
 	/// Checks if the item type is permitted.
 	bool isItemPermitted(const std::string& itemType, Mod* mod, Craft* craft) const;
+
+	QStringList allowedArmors() const;
+	QStringList forbiddenArmors() const;
+	QStringList allowedVehicles() const;
+	QStringList forbiddenVehicles() const;
+	QStringList allowedItems() const;
+	QStringList forbiddenItems() const;
+	QStringList allowedItemCategories() const;
+	QStringList forbiddenItemCategories() const;
+	QStringList allowedCraft() const;
+	QStringList forbiddenCraft() const;
+	QStringList allowedSoldierTypes() const;
+	QStringList forbiddenSoldierTypes() const;
 };
 
 }

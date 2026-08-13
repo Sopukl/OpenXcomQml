@@ -31,6 +31,7 @@
 #include "Savegame/Soldier.h"
 #include "Geoscape/GeoscapeState.h"
 #include "Mod/AlienDeployment.h"
+#include "Mod/RuleStartingCondition.h"
 #include <QGuiApplication>
 #include "GameRenderer.h"
 #include "XcomImagesProvider.h"
@@ -118,6 +119,7 @@ int main(int argc, char *argv[])
 	qmlRegisterType<OpenXcom::Craft>("OpenXcom", 1, 0, "Craft");
 	qmlRegisterType<OpenXcom::Country>("OpenXcom", 1, 0, "Country");
 	qmlRegisterType<OpenXcom::Options1>("OpenXcom", 1, 0, "Options1");
+	qmlRegisterType<OpenXcom::RuleStartingCondition>("OpenXcom", 1, 0, "RuleStartingCondition");
 
 	qmlRegisterUncreatableType<OpenXcom::BriefingData>("OpenXcom", 1, 0, "BriefingData", "Cannot create");
 	qmlRegisterType<OpenXcom::AlienDeployment>("OpenXcom", 1, 0, "AlienDeployment");

@@ -18,87 +18,92 @@
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include <QtQml>
 #include "../Engine/Options1.h"
 #include "../Engine/Collections.h"
 #include "../Savegame/GameTime.h"
 #include "../Savegame/Soldier.h"
 #include "RuleAlienMission.h"
+#include "RuleStartingCondition.h"
 #include "RuleBaseFacilityFunctions.h"
 #include "RuleItem.h"
 
 namespace OpenXcom
 {
+	class Surface;
+	class SurfaceSet;
+	class Font;
+	class Palette;
+	class Music;
+	class SoundSet;
+	class Sound;
+	class CatFile;
+	class GMCatFile;
+	class Music;
+	class Palette;
+	class SavedGame;
+	class Soldier;
+	class RuleCountry;
+	class RuleRegion;
+	class RuleBaseFacility;
+	class RuleCraft;
+	class RuleCraftWeapon;
+	class RuleItemCategory;
+	class RuleItem;
+	class RuleWeaponSet;
+	struct RuleDamageType;
+	class RuleUfo;
+	class RuleTerrain;
+	class MapDataSet;
+	class RuleSkill;
+	class RuleSoldier;
+	class Unit;
+	class Armor;
+	class ArticleDefinition;
+	class RuleInventory;
+	class RuleResearch;
+	class RuleManufacture;
+	class RuleManufactureShortcut;
+	class RuleSoldierBonus;
+	class RuleSoldierTransformation;
+	class AlienRace;
+	class RuleEnviroEffects;
+	class RuleStartingCondition;
+	class AlienDeployment;
+	class UfoTrajectory;
+	class RuleAlienMission;
+	class Base;
+	class MCDPatch;
+	class ExtraSprites;
+	class ExtraSounds;
+	class CustomPalettes;
+	class ExtraStrings;
+	class RuleCommendations;
+	class StatString;
+	class RuleInterface;
+	class RuleGlobe;
+	class RuleConverter;
+	class SoundDefinition;
+	class MapScript;
+	class ModInfo;
+	class RuleVideo;
+	class RuleMusic;
+	class RuleArcScript;
+	class RuleEventScript;
+	class RuleEvent;
+	class RuleMissionScript;
+	class ModScript;
+	class ModScriptGlobal;
+	class ScriptParserBase;
+	class ScriptGlobal;
+	struct StatAdjustment;
 
-class Surface;
-class SurfaceSet;
-class Font;
-class Palette;
-class Music;
-class SoundSet;
-class Sound;
-class CatFile;
-class GMCatFile;
-class Music;
-class Palette;
-class SavedGame;
-class Soldier;
-class RuleCountry;
-class RuleRegion;
-class RuleBaseFacility;
-class RuleCraft;
-class RuleCraftWeapon;
-class RuleItemCategory;
-class RuleItem;
-class RuleWeaponSet;
-struct RuleDamageType;
-class RuleUfo;
-class RuleTerrain;
-class MapDataSet;
-class RuleSkill;
-class RuleSoldier;
-class Unit;
-class Armor;
-class ArticleDefinition;
-class RuleInventory;
-class RuleResearch;
-class RuleManufacture;
-class RuleManufactureShortcut;
-class RuleSoldierBonus;
-class RuleSoldierTransformation;
-class AlienRace;
-class RuleEnviroEffects;
-class RuleStartingCondition;
-class AlienDeployment;
-class UfoTrajectory;
-class RuleAlienMission;
-class Base;
-class MCDPatch;
-class ExtraSprites;
-class ExtraSounds;
-class CustomPalettes;
-class ExtraStrings;
-class RuleCommendations;
-class StatString;
-class RuleInterface;
-class RuleGlobe;
-class RuleConverter;
-class SoundDefinition;
-class MapScript;
-class ModInfo;
-class RuleVideo;
-class RuleMusic;
-class RuleArcScript;
-class RuleEventScript;
-class RuleEvent;
-class RuleMissionScript;
-class ModScript;
-class ModScriptGlobal;
-class ScriptParserBase;
-class ScriptGlobal;
-struct StatAdjustment;
+	enum GameDifficulty : int;
+	enum AIAttackWeight : int;
+}
 
-enum GameDifficulty : int;
-enum AIAttackWeight : int;
+namespace OpenXcom
+{
 
 /**
  * Mod data used when loading resources
@@ -727,6 +732,7 @@ public:
 	/// Gets the available enviro effects.
 	const std::vector<std::string>& getEnviroEffectsList() const;
 	/// Gets a starting condition.
+	Q_INVOKABLE OpenXcom::RuleStartingCondition* startingCondition(QString name) const;
 	RuleStartingCondition* getStartingCondition(const std::string& name) const;
 	/// Gets the available starting conditions.
 	const std::vector<std::string>& getStartingConditionsList() const;

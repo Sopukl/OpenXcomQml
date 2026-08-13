@@ -301,4 +301,73 @@ bool RuleStartingCondition::isItemPermitted(const std::string& itemType, Mod* mo
 	return itemCheckSubResult && categoryCheckSubResult;
 }
 
+QStringList QStringListFromStd(const std::vector<std::string>& strings)
+{
+	QStringList res;
+
+	for(const auto& it: strings)
+		res.push_back(QString::fromStdString(it));
+
+	return res;
+}
+
+QStringList RuleStartingCondition::allowedArmors() const
+{
+	return QStringListFromStd(_allowedArmors);
+}
+
+QStringList RuleStartingCondition::forbiddenArmors() const
+{
+	return QStringListFromStd(_forbiddenArmors);
+}
+
+QStringList RuleStartingCondition::allowedVehicles() const
+{
+	return QStringListFromStd(_allowedVehicles);
+}
+
+QStringList RuleStartingCondition::forbiddenVehicles() const
+{
+	return QStringListFromStd(_forbiddenVehicles);
+}
+
+QStringList RuleStartingCondition::allowedItems() const
+{
+	return QStringListFromStd(_allowedItems);
+}
+
+QStringList RuleStartingCondition::forbiddenItems() const
+{
+	return QStringListFromStd(_forbiddenItems);
+}
+
+QStringList RuleStartingCondition::allowedItemCategories() const
+{
+	return QStringListFromStd(_allowedItemCategories);
+}
+
+QStringList RuleStartingCondition::forbiddenItemCategories() const
+{
+	return QStringListFromStd(_forbiddenItemCategories);
+}
+
+QStringList RuleStartingCondition::allowedCraft() const
+{
+	return QStringListFromStd(_allowedCraft);
+}
+
+QStringList RuleStartingCondition::forbiddenCraft() const
+{
+	return QStringListFromStd(_forbiddenCraft);
+}
+
+QStringList RuleStartingCondition::allowedSoldierTypes() const
+{
+	return QStringListFromStd(_allowedSoldierTypes);
+}
+
+QStringList RuleStartingCondition::forbiddenSoldierTypes() const
+{
+	return QStringListFromStd(_forbiddenSoldierTypes);
+}
 }

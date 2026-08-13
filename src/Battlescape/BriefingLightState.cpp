@@ -110,8 +110,11 @@ void BriefingLightState::checkStartingCondition(AlienDeployment *deployment)
 	const RuleStartingCondition *startingCondition = game.mod()->getStartingCondition(deployment->getStartingCondition());
 	if (startingCondition != 0)
 	{
-		auto& list = startingCondition->getForbiddenArmors().empty() ? startingCondition->getAllowedArmors() : startingCondition->getForbiddenArmors();
-		const std::string messageCode = startingCondition->getForbiddenArmors().empty() ? "STR_STARTING_CONDITION_ARMORS_ALLOWED" : "STR_STARTING_CONDITION_ARMORS_FORBIDDEN";
+		auto& list = startingCondition->getForbiddenArmors().empty() ? startingCondition->getAllowedArmors()
+																	 : startingCondition->getForbiddenArmors();
+
+		const std::string messageCode = startingCondition->getForbiddenArmors().empty() ? "STR_STARTING_CONDITION_ARMORS_ALLOWED"
+																						: "STR_STARTING_CONDITION_ARMORS_FORBIDDEN";
 		if (!list.empty())
 		{
 			_txtArmors->setText(ltr(messageCode).arg("")); // passing empty argument, because it is obsolete since a list display was introduced

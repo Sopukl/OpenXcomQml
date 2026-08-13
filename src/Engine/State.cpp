@@ -601,7 +601,6 @@ void State::setModPalette()
  */
 void State::setStandardPalette(const std::string &palette, int backpals)
 {
-	qDebug() << QString::fromStdString(palette) << backpals;
 	setStatePalette(game.mod()->getPalette(palette)->getColors(), 0, 256);
 	if (palette == "PAL_GEOSCAPE")
 	{

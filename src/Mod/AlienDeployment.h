@@ -45,8 +45,9 @@ struct DeploymentData
 struct BriefingData
 {
 	Q_GADGET
-	Q_PROPERTY(QString background READ getBackground FINAL)
-	Q_PROPERTY(int paletteOffset  READ paletteOffset FINAL)
+	Q_PROPERTY(QString background  READ getBackground  FINAL)
+	Q_PROPERTY(QString description READ getDescription FINAL)
+	Q_PROPERTY(int paletteOffset   READ paletteOffset  FINAL)
   public:
 	int palette = 0;
 	int textOffset = 0;
@@ -60,6 +61,7 @@ struct BriefingData
 
 	QString getBackground() const;
 	int paletteOffset() const;
+	QString getDescription() const;
 };
 enum MapBlockFilterType : int { MFT_NONE, MFT_BY_MAPSCRIPT, MFT_BY_REINFORCEMENTS, MFT_BY_BOTH_UNION, MFT_BY_BOTH_INTERSECTION };
 struct ReinforcementsData
@@ -104,6 +106,9 @@ class AlienDeployment: public QObject
 	QML_ELEMENT
 
 	Q_PROPERTY(BriefingData briefingData READ getBriefingData CONSTANT FINAL)
+	Q_PROPERTY(QString type READ type CONSTANT FINAL)
+	Q_PROPERTY(QString alertDescription READ alertDescription CONSTANT FINAL)
+	Q_PROPERTY(QString startingCondition READ startingCondition CONSTANT FINAL)
 private:
 	std::string _type;
 	std::string _customUfo;
@@ -160,12 +165,14 @@ public:
 	/// Loads Alien Deployment data from YAML.
 	void load(const YAML::YamlNodeReader& node, Mod *mod);
 	/// Gets the Alien Deployment's type.
+	QString type() const;
 	const std::string& getType() const;
 	/// Gets the custom UFO name to use for the dummy/blank 'addUFO' mapscript command.
 	const std::string& getCustomUfoName() const { return _customUfo; }
 	/// Gets the Alien Deployment's enviro effects.
 	const std::string& getEnviroEffects() const;
 	/// Gets the Alien Deployment's starting condition.
+	QString startingCondition() const;
 	const std::string& getStartingCondition() const;
 	/// Gets the research topic to be unlocked after a successful mission.
 	const std::string& getUnlockedResearchOnSuccess() const { return _unlockedResearchOnSuccess; }
@@ -249,6 +256,7 @@ public:
 	/// Gets the alert background for this mission type.
 	std::string getAlertBackground() const;
 	/// Gets the alert description for this mission type.
+	QString alertDescription() const;
 	std::string getAlertDescription() const;
 	/// Gets the alert sound for this mission type.
 	int getAlertSound() const;

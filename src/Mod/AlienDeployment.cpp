@@ -35,6 +35,11 @@ int BriefingData::paletteOffset() const
 	return palette;
 }
 
+QString BriefingData::getDescription() const
+{
+	return QString::fromStdString(desc);
+}
+
 
 /**
  * Creates a blank ruleset for a certain
@@ -227,6 +232,11 @@ void AlienDeployment::load(const YAML::YamlNodeReader& node, Mod *mod)
 	reader.tryRead("noWeaponPile", _noWeaponPile);
 }
 
+QString AlienDeployment::type() const
+{
+	return QString::fromStdString(_type);
+}
+
 /**
  * Returns the language string that names
  * this deployment. Each deployment type has a unique name.
@@ -244,6 +254,11 @@ const std::string& AlienDeployment::getType() const
 const std::string& AlienDeployment::getEnviroEffects() const
 {
 	return _enviroEffects;
+}
+
+QString AlienDeployment::startingCondition() const
+{
+	return QString::fromStdString(_startingCondition);
 }
 
 /**
@@ -529,6 +544,11 @@ std::string AlienDeployment::getAlertMessage() const
 std::string AlienDeployment::getAlertBackground() const
 {
 	return _alertBackground;
+}
+
+QString AlienDeployment::alertDescription() const
+{
+	return QString::fromStdString(_alertDescription);
 }
 
 /**

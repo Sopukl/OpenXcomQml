@@ -4334,6 +4334,11 @@ const std::vector<std::string>& Mod::getEnviroEffectsList() const
 	return _enviroEffectsIndex;
 }
 
+RuleStartingCondition *Mod::startingCondition(QString name) const
+{
+	return getStartingCondition(name.toStdString());
+}
+
 /**
  * Returns the info about a specific starting condition.
  * @param name Starting condition name.
