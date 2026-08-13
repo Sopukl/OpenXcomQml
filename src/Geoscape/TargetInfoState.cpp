@@ -31,7 +31,6 @@
 #include "../Engine/Options.h"
 #include "InterceptState.h"
 #include "../Engine/Action.h"
-#include "../Battlescape/BriefingLightState.h"
 
 namespace OpenXcom
 {
@@ -165,7 +164,6 @@ void TargetInfoState::btnOkClick(Action *)
  */
 void TargetInfoState::btnInfoClick(Action *)
 {
-	game.pushState(new BriefingLightState(_deploymentRule));
 	createQmlItem("qrc:/OpenXcom/Battlescape/BriefingLight.qml",
 				  {{"alienDeployment", QVariant::fromValue(_deploymentRule)}});
 }
