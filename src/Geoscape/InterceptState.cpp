@@ -480,6 +480,7 @@ void InterceptState::lstCraftsLeftClick(Action *)
 			else
 			{
 				game.pushState(new ConfirmDestinationState(_selCrafts, _target));
+				createQmlItem("qrc:/OpenXcom/Geoscape/ConfirmDestination.qml");
 			}
 		 }
 	}

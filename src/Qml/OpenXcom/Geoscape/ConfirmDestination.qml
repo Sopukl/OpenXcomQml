@@ -4,4 +4,5 @@ import OpenXcom.Controls 1.0
 Dialog {
     width: 244
     height: 72
+    bgImage.source: "image://xcom/Interface/confirmDestination"
 }
