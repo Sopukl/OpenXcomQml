@@ -2996,7 +2996,7 @@ void GeoscapeState::btnInterceptClick(Action *)
 		return;
 	}
 	game.pushState(new InterceptState(_globe, false));
-	//game.openPopupWindow("/OpenXcom/Geoscape/Intercept.qml");
+	createQmlItem("qrc:/OpenXcom/Geoscape/Intercept.qml");
 }
 
 /**

@@ -46,5 +46,6 @@
         <file>OpenXcom/Basescape/SoldierArmor.qml</file>
         <file>OpenXcom/Controls/qmldir</file>
         <file>OpenXcom/Battlescape/BriefingLight.qml</file>
+        <file>OpenXcom/Geoscape/ConfirmDestination.qml</file>
     </qresource>
 </RCC>

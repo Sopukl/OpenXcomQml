@@ -6,7 +6,7 @@ XC.Popup {
     width: 320
     height: 140
 
-    bgImage.source: "image://xcom/Interface/intercept"
+    bgImage.source: "image://xcom/Interface/intercept#PAL_GEOSCAPE:4"
 
     Text {
         anchors.horizontalCenter: parent.horizontalCenter
