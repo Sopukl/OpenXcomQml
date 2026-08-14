@@ -1,10 +1,10 @@
 import QtQuick
 import QtQuick.Controls
 import OpenXcom 1.0
-import OpenXcom.Menu.Controls 1.0 as XC
+import OpenXcom.Controls 1.0 as XC
 import "./Options" as Pages
 
-XC.Popup {
+XC.Dialog {
     width: 320
     height: 200
 

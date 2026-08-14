@@ -6,7 +6,7 @@
         <file>GameFrame.qml</file>
         <file>OpenXcom/Xcom.qml</file>
         <file>OpenXcom/Geoscape/BuildNewBase.qml</file>
-        <file>OpenXcom/Controls/Popup.qml</file>
+        <file>OpenXcom/Controls/Dialog.qml</file>
         <file>OpenXcom/Controls/ErrorMessage.qml</file>
         <file>OpenXcom/Controls/Button.qml</file>
         <file>OpenXcom/Geoscape/BaseName.qml</file>
@@ -14,13 +14,6 @@
         <file>OpenXcom/Geoscape/Funding.qml</file>
         <file>OpenXcom/Basescape/Sell.qml</file>
         <file>OpenXcom/Controls/ComboBox.qml</file>
-        <file>OpenXcom/Menu/Controls/Button.qml</file>
-        <file>OpenXcom/Menu/Controls/CheckBox.qml</file>
-        <file>OpenXcom/Menu/Controls/ComboBox.qml</file>
-        <file>OpenXcom/Menu/Controls/GroupBox.qml</file>
-        <file>OpenXcom/Menu/Controls/Popup.qml</file>
-        <file>OpenXcom/Menu/Controls/qmldir</file>
-        <file>OpenXcom/Menu/Controls/Slider.qml</file>
         <file>OpenXcom/Menu/Options/Advanced/OXC.qml</file>
         <file>OpenXcom/Menu/Options/Advanced/OXCE.qml</file>
         <file>OpenXcom/Menu/Options/Controls/BoolOption.qml</file>
@@ -47,5 +40,8 @@
         <file>OpenXcom/Controls/qmldir</file>
         <file>OpenXcom/Battlescape/BriefingLight.qml</file>
         <file>OpenXcom/Geoscape/ConfirmDestination.qml</file>
+        <file>OpenXcom/Controls/CheckBox.qml</file>
+        <file>OpenXcom/Controls/GroupBox.qml</file>
+        <file>OpenXcom/Controls/Slider.qml</file>
     </qresource>
 </RCC>

@@ -1,5 +1,7 @@
 import QtQuick 2.15
+import OpenXcom.Controls 1.0
 
-Item {
-
+Dialog {
+    width: 244
+    height: 72
 }

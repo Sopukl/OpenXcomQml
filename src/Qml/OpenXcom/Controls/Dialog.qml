@@ -2,7 +2,7 @@ import QtQuick
 import QtQuick.Controls
 import OpenXcom 1.0
 
-Popup {
+Dialog {
     id: popup
     property alias bgImage: _bgImage
     anchors.centerIn: parent

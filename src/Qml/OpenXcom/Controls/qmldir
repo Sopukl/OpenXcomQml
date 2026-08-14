@@ -1,5 +1,8 @@
 module Controls
 
-ComboBox 1.0 ComboBox.qml
-Popup    1.0 Popup.qml
 Button   1.0 Button.qml
+ComboBox 1.0 ComboBox.qml
+CheckBox 1.0 CheckBox.qml
+GroupBox 1.0 GroupBox.qml
+Slider   1.0 Slider.qml
+Dialog   1.0 Dialog.qml

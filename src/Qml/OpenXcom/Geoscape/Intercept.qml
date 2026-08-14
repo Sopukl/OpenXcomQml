@@ -2,7 +2,7 @@ import QtQuick
 import OpenXcom 1.0
 import "../Controls" as XC
 
-XC.Popup {
+XC.Dialog {
     width: 320
     height: 140
 

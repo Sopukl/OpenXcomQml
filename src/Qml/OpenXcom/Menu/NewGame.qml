@@ -1,9 +1,9 @@
 import QtQuick
 import QtQuick.Controls
 import OpenXcom 1.0
-import OpenXcom.Menu.Controls 1.0 as XC
+import OpenXcom.Controls 1.0 as XC
 
-XC.Popup {
+XC.Dialog {
     id: popup
     anchors.centerIn: parent
     width: 192

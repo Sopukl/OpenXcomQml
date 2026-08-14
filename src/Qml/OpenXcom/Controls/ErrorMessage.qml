@@ -1,6 +1,6 @@
 import QtQuick 2.15
 
-Popup {
+Dialog {
     id: ctrl
     width: 256
     height: 160

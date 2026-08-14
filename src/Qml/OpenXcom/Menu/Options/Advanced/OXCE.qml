@@ -1,7 +1,7 @@
 import QtQuick
 import QtQuick.Controls
 import OpenXcom 1.0
-import OpenXcom.Menu.Controls 1.0 as XC
+import OpenXcom.Controls 1.0 as XC
 import "../Controls"
 
 Flickable {
