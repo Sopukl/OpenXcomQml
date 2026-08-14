@@ -19,10 +19,6 @@
 #include <QElapsedTimer>
 #include "Mod.h"
 #include "ModScript.h"
-
-
-
-
 #include "../version.h"
 #include "../Engine/CrossPlatform.h"
 #include "../Engine/FileMap.h"
@@ -110,10 +106,24 @@
 #include "RuleSoldierTransformation.h"
 #include "RuleSoldierBonus.h"
 
+
 #define ARRAYLEN(x) (std::size(x))
 
 namespace OpenXcom
 {
+
+LoadRuleException::LoadRuleException(const std::string &parent, const YAML::YamlNodeReader &reader, const std::string &message):
+	Exception{"Error for '" + parent + "': " + message + " at line " + std::to_string(reader.getLocationInFile().line)}
+{
+
+}
+
+LoadRuleException::LoadRuleException(const std::string &parent, const std::string &message):
+	Exception{ "Error for '" + parent + "': " + message}
+{
+
+}
+
 
 namespace
 {
@@ -6720,6 +6730,7 @@ static auto dummyParseDate = ([]
 
 	return 0;
 })();
+
 #endif
 
 }

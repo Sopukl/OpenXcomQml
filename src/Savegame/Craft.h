@@ -18,10 +18,6 @@
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "MovingTarget.h"
-
-
-
-
 #include "../Mod/RuleCraft.h"
 #include "../Engine/Script.h"
 #include "../Battlescape/Position.h"

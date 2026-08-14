@@ -125,16 +125,8 @@ struct ModData
  */
 struct LoadRuleException : Exception
 {
-	LoadRuleException(const std::string& parent, const YAML::YamlNodeReader& reader, const std::string& message)
-		: Exception{"Error for '" + parent + "': " + message + " at line " + std::to_string(reader.getLocationInFile().line)}
-	{
-
-	}
-
-	LoadRuleException(const std::string& parent, const std::string& message) : Exception{ "Error for '" + parent + "': " + message}
-	{
-
-	}
+	LoadRuleException(const std::string& parent, const YAML::YamlNodeReader& reader, const std::string& message);
+	LoadRuleException(const std::string& parent, const std::string& message);
 };
 
 /**

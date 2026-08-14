@@ -22,8 +22,6 @@
 #include <QQuickItem>
 #include <QMutex>
 #include <QImage>
-#include <QJsonArray>
-#include <QJsonObject>
 #include "../Savegame/SavedGame.h"
 #include "../Savegame/Base.h"
 
