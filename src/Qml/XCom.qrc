@@ -27,12 +27,10 @@
         <file>OpenXcom/Menu/Options/Page.qml</file>
         <file>OpenXcom/Menu/Options/Video.qml</file>
         <file>OpenXcom/Menu/LoadGame.qml</file>
-        <file>OpenXcom/Menu/Menu.qml</file>
         <file>OpenXcom/Menu/Mods.qml</file>
         <file>OpenXcom/Menu/NewBattle.qml</file>
         <file>OpenXcom/Menu/NewGame.qml</file>
         <file>OpenXcom/Menu/Options.qml</file>
-        <file>OpenXcom/Menu/qmldir</file>
         <file>OpenXcom/Menu/AbandonGame.qml</file>
         <file>OpenXcom/Menu/DeleteGame.qml</file>
         <file>OpenXcom/Menu/ListGames.qml</file>
@@ -44,5 +42,6 @@
         <file>OpenXcom/Controls/GroupBox.qml</file>
         <file>OpenXcom/Controls/Slider.qml</file>
         <file>OpenXcom/Menu/MainMenu.qml</file>
+        <file>OpenXcom/Menu/Pause.qml</file>
     </qresource>
 </RCC>

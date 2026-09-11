@@ -114,7 +114,7 @@ struct SaveDesc
         /// Starts the game's state machine.
         void run();
         /// Quits the game.
-        void quit();
+		Q_INVOKABLE void quit();
         /// Sets the game's audio volume.
         void setVolume(int sound, int music, int ui);
         /// Adjusts a linear volume level to an exponential one.

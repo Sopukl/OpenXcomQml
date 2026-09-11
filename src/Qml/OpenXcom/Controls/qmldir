@@ -6,3 +6,4 @@ CheckBox 1.0 CheckBox.qml
 GroupBox 1.0 GroupBox.qml
 Slider   1.0 Slider.qml
 Dialog   1.0 Dialog.qml
+DLGContent 1.0 DLGContent.qml

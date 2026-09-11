@@ -65,6 +65,8 @@ XC.Dialog {
         text: "Quit"
         x: 132
         y: 114
+
+        onClicked: Game.quit();
     }
 
     Text {

@@ -5,9 +5,21 @@ import OpenXcom 1.0
 Dialog {
     id: popup
     property alias bgImage: _bgImage
+    topPadding: 0
+    bottomPadding: 0
+    leftPadding: 0
+    rightPadding: 0
+    topMargin: 0
+    bottomMargin: 0
+    leftMargin: 0
+    rightMargin: 0
+    topInset: 0
+    bottomInset: 0
+    leftInset: 0
+    rightInset: 0
+
     anchors.centerIn: parent
     modal: true
-    padding: 0
     closePolicy: Popup.CloseOnEscape
     onOpened: forceActiveFocus()
     background: Item {
@@ -49,4 +61,17 @@ Dialog {
         z: 999
     }
     onClosed: destroy()
+    enter: Transition {
+        ParallelAnimation {
+            NumberAnimation { property: "scale"; from: 0.0; to: 1.0; duration: 200; }
+            NumberAnimation { property: "opacity"; from: 0.0; to: 1.0; duration: 200 }
+        }
+    }
+
+    exit: Transition {
+        ParallelAnimation {
+            NumberAnimation { property: "scale"; from: 1.0; to: 0.0; duration: 200;}
+            NumberAnimation { property: "opacity"; from: 1.0; to: 0.0; duration: 200 }
+        }
+    }
 }

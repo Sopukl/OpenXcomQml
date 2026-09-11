@@ -17,12 +17,7 @@
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "GeoscapeState.h"
-
-
 #include <iomanip>
-
-
-
 #include "../Engine/RNG.h"
 #include "../Engine/Game.h"
 #include "../Engine/Action.h"
@@ -31,7 +26,6 @@
 #include "../Engine/Screen.h"
 #include "../Engine/Sound.h"
 #include "../Engine/Surface.h"
-#include "../Engine/Options.h"
 #include "../Engine/Collections.h"
 #include "../Engine/Unicode.h"
 #include "Globe.h"
@@ -3159,6 +3153,7 @@ void GeoscapeState::btnOptionsClick(Action *)
 		return;
 	}
 	game.pushState(new PauseState(OPT_GEOSCAPE));
+	game.openDialog("qrc:/OpenXcom/Menu/Pause.qml");
 }
 
 /**
