@@ -178,10 +178,7 @@ XC.Dialog {
                     savesList.currentIndex = index
                 }
 
-                onDoubleClicked: {
-                    acceptedSavedGame(index)
-                    popup.close();
-                }
+                onDoubleClicked: acceptedSavedGame(index)
 
                 TextInput {
                     anchors{
@@ -295,7 +292,7 @@ XC.Dialog {
         XC.Button {
             id: btnCancel
             text: Game.language.get("STR_CANCEL")
-            onClicked: popup.close()
+            onClicked: popup.reject()
             anchors{
                 bottom: parent.bottom
                 left: parent.horizontalCenter

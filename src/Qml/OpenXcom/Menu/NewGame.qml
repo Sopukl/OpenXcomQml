@@ -58,13 +58,13 @@ XC.Dialog {
                 onClicked: {
                     Game.newGame(diffList.model[diffList.currentIndex].value,
                                  ironCheckBox.checked)
-                    popup.close()
+                    popup.accept()
                 }
             }
             XC.Button {
                 width: 78
                 text: "Cancel"
-                onClicked: popup.close()
+                onClicked: popup.reject()
             }
         }
     }

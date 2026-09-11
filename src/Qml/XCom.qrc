@@ -43,5 +43,6 @@
         <file>OpenXcom/Controls/CheckBox.qml</file>
         <file>OpenXcom/Controls/GroupBox.qml</file>
         <file>OpenXcom/Controls/Slider.qml</file>
+        <file>OpenXcom/Menu/MainMenu.qml</file>
     </qresource>
 </RCC>

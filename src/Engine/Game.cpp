@@ -958,6 +958,7 @@ void Game::abandonGame()
 
 		setGameState(GameState::MENU);
 		setState(new MainMenuState);
+		game.openDialog("qrc:/OpenXcom/Menu/MainMenu.qml");
 		setSavedGame(0);
 	}
 	else

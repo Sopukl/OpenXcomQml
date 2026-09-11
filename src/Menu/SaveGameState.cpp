@@ -199,6 +199,7 @@ void SaveGameState::think()
 				game.getScreen()->resetDisplay(false);
 
 				game.setState(new MainMenuState);
+				game.openDialog("qrc:/OpenXcom/Menu/MainMenu.qml");
 				game.setSavedGame(0);
 			}
 

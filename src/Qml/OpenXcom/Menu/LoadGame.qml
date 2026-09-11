@@ -12,5 +12,6 @@ ListGames {
     onAcceptedSavedGame: (index)=>
     {
         Game.loadGame(saves[index].fileName)
+        popup.accept();
     }
 }

@@ -33,8 +33,6 @@
 #include "ModListState.h"
 #include "../Engine/Options.h"
 #include "../Engine/FileMap.h"
-#include "../Engine/SDL2Helpers.h"
-#include <fstream>
 
 namespace OpenXcom
 {
@@ -54,6 +52,7 @@ void GoToMainMenuState::init()
 	Screen::updateScale(options1.geoscapeScale(), options1.baseXGeoscape, options1.baseYGeoscape, true);
 	game.getScreen()->resetDisplay(false);
 	game.setState(new MainMenuState(_updateCheck));
+	game.openDialog("qrc:/OpenXcom/Menu/MainMenu.qml");
 }
 
 /**

@@ -26,8 +26,8 @@ Window {
     title: "OpenXcom"
     color: "#000000"
     property real eScale: {
-        let wScale = wnd.width/root.width
-        let hScale = wnd.height/root.height
+        let wScale = wnd.width/320
+        let hScale = wnd.height/240
         return Math.min(wScale, Math.min(hScale, Options1.geoscapeScale))
     }
 
@@ -50,66 +50,10 @@ Window {
                 Xcom.createWindow("/OpenXcom/Controls/ErrorMessage.qml",
                                   gameWindow, {"errorText": message}).open()
             }
+            function onOpenDialog(url, params = {}) {
+                console.log(url + " : " + params)
+                Xcom.createWindow(url, gameWindow, params).open()
+            }
         }
     }
-
-    Loader {
-        id: root
-        anchors.centerIn: parent
-        width: 320
-        height: 240
-
-        source: {
-            if(Game.state === Game.STARTING)
-                return "LoadingFrame.qml"
-            if(Game.state === Game.MENU)
-                return "GameFrame.qml"
-            return ""
-        }
-        scale: Options1.interfaceScale
-    }
-
-    Button {
-        anchors {
-            top: parent.top
-            topMargin: 10
-            right: parent.right
-            rightMargin: 10
-        }
-        width: 30
-        height: 30
-        onClicked: {
-            root.visible = !root.visible
-        }
-    }
-    XC.Button {
-        anchors {
-            top: parent.top
-            topMargin: 10
-            left: parent.left
-            leftMargin: 10
-        }
-        text: "BASE INFO"
-        palette.button: "white"
-        width: 60
-        height: 30
-        onClicked: {
-            let base = Game.savedGame.bases[0];
-            console.log("base: " + base.name)
-            console.log("soldiers")
-            for(let s of base.soldiers)
-                console.log(s.name)
-
-            console.log("crafts")
-            for(let c of base.crafts)
-                console.log(c.name)
-            console.log("items")
-            console.log(base.storage + ':' + base.storage.content)
-            for(let it of base.storage.content)
-            {
-                let storedItem = it.item;
-                console.log(Game.language.get(storedItem.name)+':'+storedItem.size+':'+storedItem.sellCost)}
-        }
-    }
-
 }

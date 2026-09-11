@@ -234,6 +234,7 @@ struct SaveDesc
 		void stateChanged();
 		void createNewBase(OpenXcom::GeoscapeState* geoscape, OpenXcom::Base* base, bool isFirst);
 		void errorMessage(QString message);
+		void openDialog(QString url, QVariantMap params = {});
 		void savedGameChanged();
 		void modChanged();
 	};
