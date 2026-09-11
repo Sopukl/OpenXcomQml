@@ -38,7 +38,9 @@ Dialog {
     }
 
     Rectangle {
-        anchors.fill: contentItem
+        width: popup.width
+        height: popup.height
+        anchors.centerIn: parent
         color: "#00000000"
         border {
             width: 1
