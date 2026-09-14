@@ -318,6 +318,8 @@ void Game::processEvents()
 
 void Game::processLogic()
 {
+	if(_states.empty())
+		return;
 	_states.back()->think();
 	_fpsCounter->think();
 	if (options1.maxFPS() > 0 && !(options1.useOpenGL() && options1.vSyncForOpenGL()))
@@ -384,10 +386,12 @@ void Game::run()
 		if (!_init)
 		{
 			_init = true;
-			_states.back()->init();
-
-				   // Unpress buttons
-			_states.back()->resetAll();
+			auto lastState = _states.back();
+			if(lastState)
+			{
+				lastState->init();
+				lastState->resetAll();
+			}
 
 				   // Refresh mouse position
 			SDL_Event ev;
@@ -397,7 +401,8 @@ void Game::run()
 			ev.motion.x = x;
 			ev.motion.y = y;
 			Action action = Action(&ev, _screen->getXScale(), _screen->getYScale(), _screen->getCursorTopBlackBand(), _screen->getCursorLeftBlackBand());
-			_states.back()->handle(&action);
+			if(lastState)
+				lastState->handle(&action);
 		}
 
 			   // Process events
@@ -494,7 +499,8 @@ void Game::setState(State *state)
 	{
 		popState();
 	}
-	pushState(state);
+	if(state)
+		pushState(state);
 	_init = false;
 }
 
@@ -856,19 +862,6 @@ void Game::resetTouchButtonFlags()
 	_scrollStep = 1;
 }
 
-Game::GameState Game::state() const
-{
-	return m_state;
-}
-void Game::setGameState(GameState newState)
-{
-	if(m_state != newState)
-	{
-		m_state = newState;
-		Q_EMIT stateChanged();
-	}
-}
-
 QVector<SaveDesc> Game::saves(bool autoquick) const
 {
 	auto _saves = SavedGame::getList(autoquick);
@@ -896,7 +889,6 @@ bool SaveDesc::isAutoSave() const
 
 void Game::newGame(int difficulty, bool ironMan)
 {
-	setGameState(GAME);
 	auto diff = GameDifficulty(difficulty);
 
 	// Reset touch flags
@@ -956,8 +948,7 @@ void Game::abandonGame()
 		Screen::updateScale(options1.geoscapeScale(), options1.baseXGeoscape, options1.baseYGeoscape, true);
 		getScreen()->resetDisplay(false);
 
-		setGameState(GameState::MENU);
-		setState(new MainMenuState);
+		setState(nullptr);
 		game.openDialog("qrc:/OpenXcom/Menu/MainMenu.qml");
 		setSavedGame(0);
 	}
@@ -1050,7 +1041,6 @@ void Game::loadGame(QString fileName)
 		error(e.what(), s);
 	}
 	CrossPlatform::flashWindow();
-	setGameState(GAME);
 }
 
 void Game::saveGame(QString oldFileName, QString newName)

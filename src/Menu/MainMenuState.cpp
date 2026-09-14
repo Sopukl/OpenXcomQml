@@ -53,7 +53,7 @@ void GoToMainMenuState::init()
 {
 	Screen::updateScale(options1.geoscapeScale(), options1.baseXGeoscape, options1.baseYGeoscape, true);
 	game.getScreen()->resetDisplay(false);
-	game.setState(new MainMenuState(_updateCheck));
+	//game.setState(new MainMenuState(_updateCheck));
 	game.openDialog("qrc:/OpenXcom/Menu/MainMenu.qml");
 }
 

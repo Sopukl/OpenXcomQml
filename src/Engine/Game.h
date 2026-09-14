@@ -66,13 +66,6 @@ struct SaveDesc
         Q_OBJECT
         friend class GameRenderer;
       public:
-        enum GameState {
-            STARTING,
-            MENU,
-            GAME
-        };
-        Q_ENUM(GameState)
-        Q_PROPERTY(GameState state READ state WRITE setGameState NOTIFY stateChanged FINAL)
 		Q_PROPERTY(SavedGame* savedGame READ savedGame WRITE setSavedGame NOTIFY savedGameChanged FINAL)
 		Q_PROPERTY(Language* language READ language CONSTANT FINAL)
 		Q_PROPERTY(Mod* mod READ mod NOTIFY modChanged FINAL)
@@ -99,7 +92,6 @@ struct SaveDesc
 
         void processEvents();
         void processLogic();
-        GameState m_state = STARTING;
 
       public:
         QImage gameImage;
@@ -215,9 +207,6 @@ struct SaveDesc
         /// Gets the scroll step value.
         int getScrollStep() const { return _scrollStep; }
 
-		GameState state() const;
-		void setGameState(GameState);
-
 		Q_INVOKABLE QVector<SaveDesc> saves(bool autoquick) const;
 
 		Q_INVOKABLE void newGame(int difficulty, bool ironMan);
@@ -232,7 +221,6 @@ struct SaveDesc
 
 	  signals:
 		void aboutToQuit();
-		void stateChanged();
 		void createNewBase(OpenXcom::GeoscapeState* geoscape, OpenXcom::Base* base, bool isFirst);
 		void errorMessage(QString message);
 		void openDialog(QString url, QVariantMap params = {});

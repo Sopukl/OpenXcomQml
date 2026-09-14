@@ -3152,7 +3152,7 @@ void GeoscapeState::btnOptionsClick(Action *)
 	{
 		return;
 	}
-	game.pushState(new PauseState(OPT_GEOSCAPE));
+	//game.pushState(new PauseState(OPT_GEOSCAPE));
 	game.openDialog("qrc:/OpenXcom/Menu/Pause.qml");
 }
 

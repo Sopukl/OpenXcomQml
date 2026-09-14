@@ -198,7 +198,7 @@ void SaveGameState::think()
 				Screen::updateScale(options1.geoscapeScale(), options1.baseXGeoscape, options1.baseYGeoscape, true);
 				game.getScreen()->resetDisplay(false);
 
-				game.setState(new MainMenuState);
+				game.setState(nullptr);
 				game.openDialog("qrc:/OpenXcom/Menu/MainMenu.qml");
 				game.setSavedGame(0);
 			}

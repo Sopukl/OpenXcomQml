@@ -862,7 +862,7 @@ void DebriefingState::btnOkClick(Action *)
 	game.popState();
 	if (game.savedGame()->getMonthsPassed() == -1)
 	{
-		game.setState(new MainMenuState);
+		//game.setState(new MainMenuState);
 		game.openDialog("qrc:/OpenXcom/Menu/MainMenu.qml");
 	}
 	else

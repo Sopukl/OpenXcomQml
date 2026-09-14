@@ -142,7 +142,7 @@ void OptionsBaseState::restart(OptionsOrigin origin)
 
 	if (origin == OPT_MENU)
 	{
-		game.setState(new MainMenuState);
+		//game.setState(new MainMenuState);
 		game.openDialog("qrc:/OpenXcom/Menu/MainMenu.qml");
 	}
 	else if (origin == OPT_GEOSCAPE)

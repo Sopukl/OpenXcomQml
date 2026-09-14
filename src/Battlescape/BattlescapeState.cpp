@@ -1444,7 +1444,10 @@ void BattlescapeState::btnHelpClick(Action *)
 	}
 
 	if (allowButtons(true))
-		game.pushState(new PauseState(OPT_BATTLESCAPE));
+	{
+		//game.pushState(new PauseState(OPT_BATTLESCAPE));
+		game.openDialog("qrc:/OpenXcom/Menu/Pause.qml");
+	}
 }
 
 /**
