@@ -27,7 +27,6 @@
 #include "../Engine/Collections.h"
 #include "../Mod/Mod.h"
 #include "../Engine/LocalizedText.h"
-#include "../Engine/Options.h"
 #include "../Interface/ComboBox.h"
 #include "../Interface/TextButton.h"
 #include "../Interface/Window.h"

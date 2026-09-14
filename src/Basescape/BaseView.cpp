@@ -25,7 +25,7 @@
 #include "../Savegame/Craft.h"
 #include "../Interface/Text.h"
 #include "../Engine/Timer.h"
-#include "../Engine/Options.h"
+#include "../Engine/Options1.h"
 #include "../Mod/Texture.h"
 
 namespace OpenXcom

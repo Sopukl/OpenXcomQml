@@ -20,7 +20,6 @@
 #include "../Engine/Action.h"
 #include "../Engine/Game.h"
 #include "../Engine/LocalizedText.h"
-#include "../Engine/Options.h"
 #include "../Engine/Screen.h"
 #include "../Engine/Unicode.h"
 #include "../Interface/ComboBox.h"

@@ -22,7 +22,6 @@
 #include "../Mod/Mod.h"
 #include "../Mod/RuleSoldierTransformation.h"
 #include "../Engine/LocalizedText.h"
-#include "../Engine/Options.h"
 #include "../Interface/ComboBox.h"
 #include "../Engine/Action.h"
 #include "../Geoscape/AllocatePsiTrainingState.h"

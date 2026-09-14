@@ -26,7 +26,6 @@
 #include "../Mod/RuleEventScript.h"
 #include "../Mod/RuleMissionScript.h"
 #include "../Engine/LocalizedText.h"
-#include "../Engine/Options.h"
 #include "../Interface/TextButton.h"
 #include "../Interface/Window.h"
 #include "../Interface/Text.h"

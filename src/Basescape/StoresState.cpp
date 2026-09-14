@@ -18,10 +18,7 @@
  */
 #include "StoresState.h"
 #include "ItemLocationsState.h"
-#include "../Engine/CrossPlatform.h"
 #include "../Engine/Game.h"
-#include "../Engine/LocalizedText.h"
-#include "../Engine/Options.h"
 #include "../Interface/ArrowButton.h"
 #include "../Interface/Text.h"
 #include "../Interface/TextEdit.h"

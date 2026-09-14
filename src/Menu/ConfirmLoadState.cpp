@@ -22,7 +22,6 @@
 #include "../Interface/TextButton.h"
 #include "../Interface/Window.h"
 #include "../Interface/Text.h"
-#include "../Engine/Options.h"
 #include "LoadGameState.h"
 
 namespace OpenXcom
