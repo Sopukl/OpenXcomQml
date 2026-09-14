@@ -4,15 +4,16 @@ ListGames {
     id: popup
     width: 320
     height: 200
-    captionKey: "STR_SELECT_GAME_TO_LOAD"
+    captionKey: "STR_SELECT_SAVE_POSITION"
+    editebleNames: true
 
     function initSavesList() {
-        return Game.saves(true);
+        return Game.saves(false);
     }
 
     onAcceptedSavedGame: (index)=>
     {
-        Game.loadGame(saves[index].fileName)
+        Game.saveGame(saves[index].fileName, saves[index].displayName);
         popup.accept();
     }
 }

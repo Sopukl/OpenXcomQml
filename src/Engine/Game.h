@@ -41,7 +41,6 @@ class GeoscapeState;
 struct SaveDesc
 {
 	Q_GADGET
-	QML_UNCREATABLE("")
 
 	Q_PROPERTY(QString fileName MEMBER fileName)
 	Q_PROPERTY(QString displayName MEMBER displayName)
@@ -219,11 +218,13 @@ struct SaveDesc
 		GameState state() const;
 		void setGameState(GameState);
 
-		Q_INVOKABLE QVector<SaveDesc> saves() const;
+		Q_INVOKABLE QVector<SaveDesc> saves(bool autoquick) const;
 
 		Q_INVOKABLE void newGame(int difficulty, bool ironMan);
 		Q_INVOKABLE void abandonGame();
+		Q_INVOKABLE void abandonAndSaveGame();
 		Q_INVOKABLE void loadGame(QString fileName);
+		Q_INVOKABLE void saveGame(QString oldFileName, QString newName);
 		Q_INVOKABLE QJsonArray getLanguages() const;
 		Q_INVOKABLE QJsonArray getModsInfo() const;
 		Q_INVOKABLE void setModsInfo(QJsonArray);

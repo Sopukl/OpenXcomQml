@@ -9,6 +9,7 @@ XC.Dialog {
     width: 320
     height: 200
 
+    property string captionKey: "STR_SELECT_GAME_TO_LOAD"
     property bool editebleNames: false
     property bool sortByName: true
     property bool sortAscended: true
@@ -79,7 +80,7 @@ XC.Dialog {
             font.pixelSize: 12
             anchors.horizontalCenter: parent.horizontalCenter
             color: "white"
-            text: Game.language.get("STR_SELECT_GAME_TO_LOAD")
+            text: Game.language.get(captionKey)
             height: contentHeight
         }
 
@@ -192,6 +193,7 @@ XC.Dialog {
                         if(activeFocus)
                             savesList.currentIndex = index
                     }
+                    onEditingFinished: saves[index].displayName = text
 
                     text: displayName
                     height: contentHeight

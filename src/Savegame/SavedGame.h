@@ -196,6 +196,7 @@ public:
 	void loadTemplates(const YAML::YamlNodeReader& reader, const Mod* mod);
 	void loadUfopediaRuleStatus(const YAML::YamlNodeReader& reader);
 	/// Saves a saved game to YAML.
+	Q_INVOKABLE void save(QString filename, Mod *mod) const;
 	void save(const std::string &filename, Mod *mod) const;
 	/// Gets the game name.
 	std::string getName() const;

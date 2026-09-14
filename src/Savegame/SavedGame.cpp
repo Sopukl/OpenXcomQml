@@ -736,6 +736,11 @@ void SavedGame::loadUfopediaRuleStatus(const YAML::YamlNodeReader& reader)
 	reader.tryReadVal(_ufopediaRuleStatus);
 }
 
+void SavedGame::save(QString filename, Mod *mod) const
+{
+	save(filename.toStdString(), mod);
+}
+
 template <typename T, typename... Args>
 void saveVector(YAML::YamlNodeWriter& writer, const std::vector<T*>& vector, const ryml::csubstr& key, Args... args)
 {

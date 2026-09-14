@@ -43,5 +43,6 @@
         <file>OpenXcom/Controls/Slider.qml</file>
         <file>OpenXcom/Menu/MainMenu.qml</file>
         <file>OpenXcom/Menu/Pause.qml</file>
+        <file>OpenXcom/Menu/SaveGame.qml</file>
     </qresource>
 </RCC>

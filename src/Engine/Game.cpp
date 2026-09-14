@@ -869,9 +869,9 @@ void Game::setGameState(GameState newState)
 	}
 }
 
-QVector<SaveDesc> Game::saves() const
+QVector<SaveDesc> Game::saves(bool autoquick) const
 {
-	auto _saves = SavedGame::getList(true);
+	auto _saves = SavedGame::getList(autoquick);
 	QVector<SaveDesc> result;
 	result.reserve(_saves.size());
 
@@ -967,6 +967,11 @@ void Game::abandonGame()
 	}
 }
 
+void Game::abandonAndSaveGame()
+{
+	pushState(new SaveGameState(OPT_GEOSCAPE, SAVE_IRONMAN_END, nullptr));
+}
+
 void Game::loadGame(QString fileName)
 {
 	auto error = [this](const std::string &msg, SavedGame *save)
@@ -1047,6 +1052,38 @@ void Game::loadGame(QString fileName)
 	CrossPlatform::flashWindow();
 	setGameState(GAME);
 }
+
+void Game::saveGame(QString oldFileName, QString newName)
+{
+	game.savedGame()->setName(newName.toStdString());
+	auto newFilename = CrossPlatform::sanitizeFilename(newName.toStdString());
+
+	if (!oldFileName.isEmpty())
+	{
+		auto oldFilename = oldFileName.toStdString();
+
+		if (oldFilename != newFilename + ".sav")
+		{
+			while (CrossPlatform::fileExists(Options::getMasterUserFolder() + newFilename + ".sav"))
+			{
+				newFilename += "_";
+			}
+			std::string oldPath = Options::getMasterUserFolder() + oldFilename;
+			std::string newPath = Options::getMasterUserFolder() + newFilename + ".sav";
+			CrossPlatform::moveFile(oldPath, newPath);
+		}
+	}
+	else
+	{
+		while (CrossPlatform::fileExists(Options::getMasterUserFolder() + newFilename + ".sav"))
+		{
+			newFilename += "_";
+		}
+	}
+	newFilename += ".sav";
+	game.pushState(new SaveGameState(OptionsOrigin::OPT_MENU, newFilename, nullptr));
+}
+
 
 QJsonArray Game::getLanguages() const
 {
