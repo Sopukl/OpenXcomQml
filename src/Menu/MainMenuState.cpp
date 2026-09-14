@@ -17,7 +17,9 @@
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "MainMenuState.h"
-
+#include "../Engine/SDL2Helpers.h"
+#include <fstream>
+#include "../Engine/FileMap.h"
 #include "../version.h"
 #include "../Engine/Game.h"
 #include "../Mod/Mod.h"
