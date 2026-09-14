@@ -17,7 +17,6 @@
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "UnitInfoState.h"
-
 #include "../Savegame/BattleUnit.h"
 #include "../Savegame/SavedGame.h"
 #include "../Savegame/SavedBattleGame.h"
@@ -31,7 +30,6 @@
 #include "../Interface/TextButton.h"
 #include "../Engine/InteractiveSurface.h"
 #include "../Mod/Unit.h"
-#include "../Engine/Options.h"
 #include "BattlescapeGame.h"
 #include "BattlescapeState.h"
 #include "../Mod/RuleInterface.h"

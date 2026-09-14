@@ -23,7 +23,6 @@
 #include "../Interface/TextButton.h"
 #include "../Interface/Window.h"
 #include "../Interface/Text.h"
-#include "../Engine/Options.h"
 
 namespace OpenXcom
 {

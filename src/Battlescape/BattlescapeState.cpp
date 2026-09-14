@@ -17,7 +17,6 @@
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-
 #include <iomanip>
 #include "../fmath.h"
 #include <SDL_gfxPrimitives.h>

@@ -18,7 +18,6 @@
  */
 #include "ActionMenuState.h"
 #include "../Engine/Game.h"
-#include "../Engine/Options.h"
 #include "../Engine/LocalizedText.h"
 #include "../Engine/Action.h"
 #include "../Engine/Unicode.h"
@@ -37,7 +36,6 @@
 #include "../Savegame/HitLog.h"
 #include "Pathfinding.h"
 #include "TileEngine.h"
-#include "../Interface/Text.h"
 
 namespace OpenXcom
 {

@@ -17,7 +17,6 @@
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-
 #include "Pathfinding.h"
 #include "PathfindingOpenSet.h"
 #include "../Savegame/SavedBattleGame.h"
@@ -25,7 +24,6 @@
 #include "../Mod/Armor.h"
 #include "../Mod/Mod.h"
 #include "../Savegame/BattleUnit.h"
-#include "../Engine/Options.h"
 #include "../fmath.h"
 #include "BattlescapeGame.h"
 

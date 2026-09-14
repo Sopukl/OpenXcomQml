@@ -24,7 +24,6 @@
 #include "../Savegame/SavedBattleGame.h"
 #include "../Mod/Mod.h"
 #include "../Engine/Sound.h"
-#include "../Engine/Options.h"
 
 namespace OpenXcom
 {

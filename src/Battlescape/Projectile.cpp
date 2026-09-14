@@ -30,7 +30,6 @@
 #include "../Savegame/SavedBattleGame.h"
 #include "../Savegame/Tile.h"
 #include "../Engine/RNG.h"
-#include "../Engine/Options.h"
 #include "../fmath.h"
 
 namespace OpenXcom

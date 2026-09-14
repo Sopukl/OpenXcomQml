@@ -29,7 +29,6 @@
 #include "../Mod/Mod.h"
 #include "../Engine/Sound.h"
 #include "../Engine/RNG.h"
-#include "../Engine/Options.h"
 #include "../Mod/Armor.h"
 #include "InfoboxOKState.h"
 #include "InfoboxState.h"

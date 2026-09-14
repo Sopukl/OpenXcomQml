@@ -28,7 +28,6 @@
 #include "Camera.h"
 #include "../Engine/Timer.h"
 #include "../Engine/Action.h"
-#include "../Engine/Options.h"
 #include "../Savegame/SavedBattleGame.h"
 
 namespace OpenXcom

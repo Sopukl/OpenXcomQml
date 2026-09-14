@@ -17,8 +17,6 @@
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-
-
 #include "TileEngine.h"
 #include "DebriefingState.h"
 #include "CannotReequipState.h"
@@ -57,7 +55,6 @@
 #include "../Savegame/Ufo.h"
 #include "../Savegame/Vehicle.h"
 #include "../Savegame/BaseFacility.h"
-
 #include "../Menu/MainMenuState.h"
 #include "../Interface/Cursor.h"
 #include "../Engine/Exception.h"

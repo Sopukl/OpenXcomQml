@@ -17,7 +17,6 @@
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "CommendationState.h"
-
 #include "../Engine/Game.h"
 #include "../Mod/Mod.h"
 #include "../Engine/LocalizedText.h"
@@ -27,7 +26,6 @@
 #include "../Interface/TextList.h"
 #include "../Savegame/Soldier.h"
 #include "../Savegame/SoldierDiary.h"
-#include "../Engine/Options.h"
 #include "../Mod/RuleCommendations.h"
 #include "../Ufopaedia/Ufopaedia.h"
 

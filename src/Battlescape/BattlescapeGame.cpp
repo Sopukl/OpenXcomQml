@@ -56,7 +56,6 @@
 #include "../Engine/Logger.h"
 #include "../Savegame/BattleUnitStatistics.h"
 #include "ConfirmEndMissionState.h"
-#include "../fmath.h"
 
 namespace OpenXcom
 {

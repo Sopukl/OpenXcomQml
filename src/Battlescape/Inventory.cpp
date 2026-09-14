@@ -17,8 +17,6 @@
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "Inventory.h"
-
-
 #include "../Mod/Mod.h"
 #include "../Mod/RuleInventory.h"
 #include "../Mod/RuleInterface.h"
@@ -27,7 +25,6 @@
 #include "../Interface/Text.h"
 #include "../Interface/NumberText.h"
 #include "../Engine/Font.h"
-#include "../Engine/Options.h"
 #include "../Savegame/SavedGame.h"
 #include "../Savegame/SavedBattleGame.h"
 #include "../Mod/RuleEnviroEffects.h"
@@ -43,9 +40,7 @@
 #include "../Savegame/Tile.h"
 #include "PrimeGrenadeState.h"
 #include "../Ufopaedia/Ufopaedia.h"
-
 #include "../Engine/Screen.h"
-#include "../Engine/CrossPlatform.h"
 #include "TileEngine.h"
 
 namespace OpenXcom

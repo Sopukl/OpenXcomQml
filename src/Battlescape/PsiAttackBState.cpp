@@ -23,9 +23,8 @@
 #include "Map.h"
 #include "Camera.h"
 #include "../Savegame/SavedBattleGame.h"
+#include "../Savegame/BattleUnit.h"
 #include "../Savegame/Tile.h"
-#include "../Mod/Mod.h"
-#include "../Savegame/BattleUnitStatistics.h"
 
 namespace OpenXcom
 {

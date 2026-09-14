@@ -32,13 +32,11 @@
 #include "../Engine/RNG.h"
 #include "../Mod/Armor.h"
 #include "../Mod/RuleItem.h"
-#include "../Engine/Options.h"
 #include "AIModule.h"
 #include "Camera.h"
 #include "Explosion.h"
 #include "BattlescapeState.h"
 #include "../Savegame/BattleUnitStatistics.h"
-#include "../fmath.h"
 
 namespace OpenXcom
 {

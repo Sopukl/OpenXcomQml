@@ -19,13 +19,11 @@
 
 
 #include "UnitFallBState.h"
-
 #include "TileEngine.h"
 #include "Pathfinding.h"
 #include "../Savegame/BattleUnit.h"
 #include "../Savegame/SavedBattleGame.h"
 #include "../Savegame/Tile.h"
-#include "../Engine/Options.h"
 #include "../Mod/Armor.h"
 #include "../Mod/Mod.h"
 

@@ -21,8 +21,6 @@
 #include "InventoryState.h"
 #include "../Engine/Game.h"
 #include "../Engine/Action.h"
-#include "../Engine/Options.h"
-#include "../Engine/Unicode.h"
 #include "../Interface/Window.h"
 #include "../Interface/Text.h"
 #include "../Interface/TextButton.h"

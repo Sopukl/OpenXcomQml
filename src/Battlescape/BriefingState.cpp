@@ -35,7 +35,6 @@
 #include "../Savegame/Ufo.h"
 #include "../Mod/AlienDeployment.h"
 #include "../Mod/RuleUfo.h"
-#include "../Engine/Options.h"
 #include "../Engine/RNG.h"
 #include "../Engine/Screen.h"
 #include "../Menu/CutsceneState.h"

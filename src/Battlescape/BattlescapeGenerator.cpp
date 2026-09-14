@@ -17,7 +17,6 @@
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-
 #include "BattlescapeGenerator.h"
 #include "TileEngine.h"
 #include "Inventory.h"
@@ -40,7 +39,6 @@
 #include "../Savegame/EquipmentLayoutItem.h"
 #include "../Engine/Game.h"
 #include "../Engine/FileMap.h"
-#include "../Engine/Options.h"
 #include "../Engine/RNG.h"
 #include "../Engine/Exception.h"
 #include "../Engine/Logger.h"

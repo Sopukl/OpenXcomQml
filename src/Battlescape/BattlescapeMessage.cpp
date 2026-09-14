@@ -20,9 +20,8 @@
 #include "../Interface/Window.h"
 #include "../Interface/Text.h"
 #include "../Interface/ProgressBar.h"
-#include "../Engine/Options.h"
 #include "../Engine/Palette.h"
-
+#include "../Engine/Options1.h"
 namespace OpenXcom
 {
 

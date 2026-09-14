@@ -17,7 +17,6 @@
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "CannotReequipState.h"
-
 #include "../Engine/Game.h"
 #include "../Mod/Mod.h"
 #include "../Engine/LocalizedText.h"
@@ -25,7 +24,6 @@
 #include "../Interface/Window.h"
 #include "../Interface/Text.h"
 #include "../Interface/TextList.h"
-#include "../Engine/Options.h"
 #include "../Savegame/Base.h"
 #include "../Basescape/ManufactureState.h"
 #include "../Basescape/PurchaseState.h"

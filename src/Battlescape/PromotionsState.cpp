@@ -28,7 +28,6 @@
 #include "../Savegame/Base.h"
 #include "../Savegame/Soldier.h"
 #include "../Savegame/Transfer.h"
-#include "../Engine/Options.h"
 
 namespace OpenXcom
 {

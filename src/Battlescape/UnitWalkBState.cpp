@@ -28,7 +28,6 @@
 #include "../Savegame/SavedBattleGame.h"
 #include "../Savegame/Tile.h"
 #include "../Engine/Sound.h"
-#include "../Engine/Options.h"
 #include "../Engine/Logger.h"
 #include "../Mod/Armor.h"
 #include "../Mod/Mod.h"

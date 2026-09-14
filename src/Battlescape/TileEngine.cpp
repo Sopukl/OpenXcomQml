@@ -17,7 +17,6 @@
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-
 #include "TileEngine.h"
 #include "AIModule.h"
 #include "Map.h"
@@ -39,7 +38,6 @@
 #include "../Mod/Armor.h"
 #include "../Mod/RuleSkill.h"
 #include "Pathfinding.h"
-#include "../Engine/Options.h"
 #include "ProjectileFlyBState.h"
 #include "MeleeAttackBState.h"
 #include "../fmath.h"

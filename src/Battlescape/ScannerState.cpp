@@ -24,7 +24,6 @@
 #include "../Engine/Action.h"
 #include "../Engine/Timer.h"
 #include "../Engine/Screen.h"
-#include "../Engine/Options.h"
 #include "../Savegame/BattleUnit.h"
 #include "../Mod/Mod.h"
 #include "../Savegame/SavedGame.h"

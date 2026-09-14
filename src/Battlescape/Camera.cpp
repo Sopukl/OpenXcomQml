@@ -19,7 +19,7 @@
 #include "Camera.h"
 #include "Map.h"
 #include "../Engine/Action.h"
-#include "../Engine/Options.h"
+#include "../Engine/Options1.h"
 #include "../Engine/Timer.h"
 #include "../fmath.h"
 
