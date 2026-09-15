@@ -28,7 +28,6 @@
 #include "../Savegame/MovingTarget.h"
 #include "../Savegame/AlienBase.h"
 #include "../Savegame/MissionSite.h"
-#include "../Engine/Options.h"
 #include "InterceptState.h"
 #include "../Engine/Action.h"
 

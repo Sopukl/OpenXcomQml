@@ -42,7 +42,6 @@
 #include "../Savegame/Waypoint.h"
 #include "../Engine/ShaderMove.h"
 #include "../Engine/ShaderRepeat.h"
-#include "../Engine/Options.h"
 #include "../Savegame/MissionSite.h"
 #include "../Savegame/AlienBase.h"
 #include "../Savegame/BaseFacility.h"

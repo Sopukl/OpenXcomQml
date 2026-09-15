@@ -18,7 +18,6 @@
  */
 #include "UfoTrackerState.h"
 #include "InterceptState.h"
-
 #include "../Engine/Game.h"
 #include "../Mod/Mod.h"
 #include "../Engine/LocalizedText.h"
@@ -30,7 +29,6 @@
 #include "../Savegame/Ufo.h"
 #include "../Savegame/AlienBase.h"
 #include "../Savegame/SavedGame.h"
-#include "../Engine/Options.h"
 #include "Globe.h"
 #include "GeoscapeState.h"
 #include "UfoDetectedState.h"

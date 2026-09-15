@@ -18,14 +18,12 @@
  */
 #include "CraftErrorState.h"
 #include "../Engine/Game.h"
-#include "../Mod/Mod.h"
 #include "../Interface/TextButton.h"
 #include "../Interface/Window.h"
 #include "../Interface/Text.h"
 #include "GeoscapeState.h"
 #include "Globe.h"
 #include "../Savegame/Target.h"
-#include "../Engine/Options.h"
 
 namespace OpenXcom
 {

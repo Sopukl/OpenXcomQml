@@ -24,7 +24,6 @@
 #include "../Interface/Window.h"
 #include "../Interface/Text.h"
 #include "../Mod/RuleItem.h"
-#include "../Engine/Options.h"
 
 namespace OpenXcom
 {

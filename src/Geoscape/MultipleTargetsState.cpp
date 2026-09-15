@@ -31,7 +31,6 @@
 #include "UfoDetectedState.h"
 #include "GeoscapeCraftState.h"
 #include "TargetInfoState.h"
-#include "../Engine/Options.h"
 #include "../Engine/Action.h"
 
 namespace OpenXcom

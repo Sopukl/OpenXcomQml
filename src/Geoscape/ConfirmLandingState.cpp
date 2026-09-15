@@ -18,7 +18,6 @@
  */
 #include "CraftErrorState.h"
 #include "ConfirmLandingState.h"
-
 #include "../Engine/Game.h"
 #include "../Engine/LocalizedText.h"
 #include "../Interface/Window.h"
@@ -36,7 +35,6 @@
 #include "../Battlescape/BriefingState.h"
 #include "../Battlescape/BattlescapeGenerator.h"
 #include "../Engine/Exception.h"
-#include "../Engine/Options.h"
 #include "../Mod/RuleStartingCondition.h"
 #include "../Mod/AlienDeployment.h"
 #include "../Mod/AlienRace.h"

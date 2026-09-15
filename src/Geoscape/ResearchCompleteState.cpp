@@ -24,7 +24,6 @@
 #include "../Interface/Text.h"
 #include "../Mod/RuleResearch.h"
 #include "../Ufopaedia/Ufopaedia.h"
-#include "../Engine/Options.h"
 #include "../Savegame/Base.h"
 
 namespace OpenXcom

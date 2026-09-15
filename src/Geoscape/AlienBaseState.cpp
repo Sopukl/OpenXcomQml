@@ -31,7 +31,6 @@
 #include "../Mod/RuleRegion.h"
 #include "../Mod/RuleCountry.h"
 #include "../Savegame/AlienBase.h"
-#include "../Engine/Options.h"
 
 namespace OpenXcom
 {

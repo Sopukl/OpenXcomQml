@@ -27,7 +27,6 @@
 #include "../Savegame/SavedGame.h"
 #include "../Savegame/Base.h"
 #include "AllocatePsiTrainingState.h"
-#include "../Engine/Options.h"
 
 namespace OpenXcom
 {

@@ -26,7 +26,6 @@
 #include "../Interface/TextList.h"
 #include "../Mod/RuleItem.h"
 #include "../Basescape/PurchaseState.h"
-#include "../Engine/Options.h"
 
 namespace OpenXcom
 {

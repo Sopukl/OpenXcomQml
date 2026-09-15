@@ -17,7 +17,6 @@
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "UfoDetectedState.h"
-
 #include "../Engine/Game.h"
 #include "../Mod/Mod.h"
 #include "../Engine/LocalizedText.h"
@@ -30,7 +29,6 @@
 #include "GeoscapeState.h"
 #include "Globe.h"
 #include "../Savegame/SavedGame.h"
-#include "../Engine/Options.h"
 #include "../Engine/Unicode.h"
 #include "../Savegame/AlienMission.h"
 #include "InterceptState.h"

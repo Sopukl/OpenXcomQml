@@ -26,7 +26,6 @@
 #include "../Interface/TextButton.h"
 #include "../Savegame/Base.h"
 #include "../Basescape/PlaceLiftState.h"
-#include "../Engine/Options.h"
 #include "../Engine/RNG.h"
 
 namespace OpenXcom

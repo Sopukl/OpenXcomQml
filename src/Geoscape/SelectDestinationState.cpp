@@ -17,7 +17,6 @@
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "SelectDestinationState.h"
-
 #include "../Engine/Game.h"
 #include "../Engine/Screen.h"
 #include "../Engine/Action.h"
@@ -35,7 +34,6 @@
 #include "../Mod/AlienDeployment.h"
 #include "../Mod/RuleStartingCondition.h"
 #include "ConfirmCydoniaState.h"
-#include "../Engine/Options.h"
 
 namespace OpenXcom
 {

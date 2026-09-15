@@ -17,7 +17,6 @@
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "GeoscapeCraftState.h"
-
 #include "../fmath.h"
 #include "../Engine/Game.h"
 #include "../Mod/Mod.h"
@@ -35,7 +34,6 @@
 #include "../Savegame/SavedGame.h"
 #include "../Savegame/Waypoint.h"
 #include "SelectDestinationState.h"
-#include "../Engine/Options.h"
 #include "../Engine/Unicode.h"
 #include "Globe.h"
 

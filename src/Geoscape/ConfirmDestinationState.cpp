@@ -42,7 +42,6 @@
 #include "../Savegame/MissionSite.h"
 #include "../Savegame/AlienBase.h"
 #include "../Savegame/Soldier.h"
-#include "../Engine/Options.h"
 #include "../Engine/Sound.h"
 #include "../Ufopaedia/Ufopaedia.h"
 

@@ -18,7 +18,6 @@
  */
 #include "GeoscapeEventState.h"
 #include "GeoscapeState.h"
-
 #include "../Basescape/SellState.h"
 #include "../Engine/Game.h"
 #include "../Engine/LocalizedText.h"

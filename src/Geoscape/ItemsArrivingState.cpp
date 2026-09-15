@@ -17,8 +17,6 @@
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "ItemsArrivingState.h"
-
-
 #include "../Engine/Game.h"
 #include "../Mod/Mod.h"
 #include "../Interface/TextButton.h"
@@ -31,7 +29,6 @@
 #include "../Savegame/Craft.h"
 #include "../Mod/RuleItem.h"
 #include "GeoscapeState.h"
-#include "../Engine/Options.h"
 #include "../Basescape/BasescapeState.h"
 
 namespace OpenXcom

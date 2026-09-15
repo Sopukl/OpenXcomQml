@@ -27,7 +27,6 @@
 #include "../Savegame/SavedBattleGame.h"
 #include "../Savegame/SavedGame.h"
 #include "../Mod/AlienDeployment.h"
-#include "../Engine/Options.h"
 
 namespace OpenXcom
 {

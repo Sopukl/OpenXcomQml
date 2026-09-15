@@ -27,7 +27,6 @@
 #include "../Interface/Text.h"
 #include "../Interface/TextList.h"
 #include "GeoscapeState.h"
-#include "../Engine/Options.h"
 #include "../Basescape/BasescapeState.h"
 #include "../Basescape/ManufactureState.h"
 #include "../Savegame/Base.h"

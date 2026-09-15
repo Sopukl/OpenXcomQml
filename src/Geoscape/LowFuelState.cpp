@@ -18,13 +18,11 @@
  */
 #include "LowFuelState.h"
 #include "../Engine/Game.h"
-#include "../Mod/Mod.h"
 #include "../Interface/TextButton.h"
 #include "../Interface/Window.h"
 #include "../Interface/Text.h"
 #include "../Savegame/Craft.h"
 #include "GeoscapeState.h"
-#include "../Engine/Options.h"
 
 namespace OpenXcom
 {

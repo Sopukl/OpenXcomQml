@@ -38,7 +38,6 @@
 #include "../Engine/RNG.h"
 #include "../Engine/Sound.h"
 #include "../Engine/Timer.h"
-#include "../Engine/Options.h"
 #include "../Mod/RuleInterface.h"
 
 namespace OpenXcom

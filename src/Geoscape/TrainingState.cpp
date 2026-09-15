@@ -29,7 +29,6 @@
 #include "../Savegame/Base.h"
 #include "GeoscapeState.h"
 #include "AllocateTrainingState.h"
-#include "../Engine/Options.h"
 #include "../Mod/Mod.h"
 
 namespace OpenXcom

@@ -17,7 +17,6 @@
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "GraphsState.h"
-
 #include "../Engine/Game.h"
 #include "../Mod/Mod.h"
 #include "../Engine/Palette.h"
@@ -35,7 +34,6 @@
 #include "../Savegame/SavedGame.h"
 #include "../Interface/TextList.h"
 #include "../Engine/Action.h"
-#include "../Engine/Options.h"
 #include "../Engine/Unicode.h"
 #include "../Mod/RuleInterface.h"
 

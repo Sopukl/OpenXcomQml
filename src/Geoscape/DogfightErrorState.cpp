@@ -18,11 +18,9 @@
  */
 #include "DogfightErrorState.h"
 #include "../Engine/Game.h"
-#include "../Mod/Mod.h"
 #include "../Interface/TextButton.h"
 #include "../Interface/Window.h"
 #include "../Interface/Text.h"
-#include "../Engine/Options.h"
 #include "../Savegame/Craft.h"
 
 namespace OpenXcom

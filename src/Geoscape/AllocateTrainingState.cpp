@@ -17,7 +17,6 @@
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-
 #include "TrainingState.h"
 #include "AllocateTrainingState.h"
 #include "../Engine/Game.h"
@@ -31,7 +30,6 @@
 #include "../Interface/TextList.h"
 #include "../Savegame/Soldier.h"
 #include "../Engine/Action.h"
-#include "../Engine/Options.h"
 #include "../Interface/ComboBox.h"
 #include "../Mod/Mod.h"
 #include "../Basescape/SoldierInfoState.h"

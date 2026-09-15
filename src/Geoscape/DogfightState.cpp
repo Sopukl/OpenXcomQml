@@ -16,9 +16,8 @@
  * You should have received a copy of the GNU General Public License
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 #include "DogfightState.h"
-
-
 #include "GeoscapeState.h"
 #include "../Engine/Game.h"
 #include "../Engine/Screen.h"

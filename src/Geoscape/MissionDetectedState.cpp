@@ -25,7 +25,6 @@
 #include "GeoscapeState.h"
 #include "Globe.h"
 #include "../Savegame/MissionSite.h"
-#include "../Engine/Options.h"
 #include "InterceptState.h"
 #include "../Mod/AlienDeployment.h"
 

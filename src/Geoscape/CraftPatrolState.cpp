@@ -18,7 +18,6 @@
  */
 #include "CraftPatrolState.h"
 #include "../Engine/Game.h"
-#include "../Mod/Mod.h"
 #include "../Engine/LocalizedText.h"
 #include "../Interface/TextButton.h"
 #include "../Interface/Window.h"
@@ -26,7 +25,6 @@
 #include "../Savegame/Craft.h"
 #include "../Savegame/Target.h"
 #include "GeoscapeCraftState.h"
-#include "../Engine/Options.h"
 
 namespace OpenXcom
 {
