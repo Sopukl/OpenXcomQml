@@ -50,7 +50,6 @@
 #include "../Savegame/Transfer.h"
 #include "../Savegame/Soldier.h"
 #include "../Savegame/SoldierDiary.h"
-#include "../Menu/PauseState.h"
 #include "SelectMusicTrackState.h"
 #include "UfoTrackerState.h"
 #include "InterceptState.h"

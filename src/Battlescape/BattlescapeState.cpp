@@ -63,7 +63,6 @@
 #include "../Interface/BattlescapeButton.h"
 #include "../Interface/NumberText.h"
 #include "../Menu/CutsceneState.h"
-#include "../Menu/PauseState.h"
 #include "../Menu/LoadGameState.h"
 #include "../Menu/SaveGameState.h"
 #include "../Mod/Mod.h"
