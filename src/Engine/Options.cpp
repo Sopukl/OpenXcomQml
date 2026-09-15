@@ -975,7 +975,7 @@ void updateMods()
 	bool forceQuit = false;
 	for (auto* modInf : activeModsList)
 	{
-		if (ModConfirmExtendedState::isModNotValid(modInf, masterInf))
+		if (isModNotValid(modInf, masterInf))
 		{
 			Log(LOG_ERROR) << "- " << modInf->getId() << " v" << modInf->getVersion();
 			if (!modInf->isEngineOk())

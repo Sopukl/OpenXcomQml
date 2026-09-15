@@ -17,24 +17,25 @@
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "MainMenuState.h"
-#include "../Engine/SDL2Helpers.h"
-#include <fstream>
-#include "../Engine/FileMap.h"
-#include "../version.h"
+// #include "../Engine/SDL2Helpers.h"
+// #include <fstream>
+// #include "../Engine/FileMap.h"
+// #include "../version.h"
 #include "../Engine/Game.h"
-#include "../Mod/Mod.h"
-#include "../Engine/LocalizedText.h"
 #include "../Engine/Screen.h"
-#include "../Interface/TextButton.h"
-#include "../Interface/Window.h"
-#include "../Interface/Text.h"
-#include "NewGameState.h"
-#include "NewBattleState.h"
-#include "ListLoadState.h"
-#include "OptionsVideoState.h"
-#include "ModListState.h"
-#include "../Engine/Options.h"
-#include "../Engine/FileMap.h"
+// #include "../Mod/Mod.h"
+// #include "../Engine/LocalizedText.h"
+// #include "../Engine/Screen.h"
+// #include "../Interface/TextButton.h"
+// #include "../Interface/Window.h"
+// #include "../Interface/Text.h"
+// #include "NewGameState.h"
+// #include "NewBattleState.h"
+// #include "ListLoadState.h"
+// #include "OptionsVideoState.h"
+// #include "ModListState.h"
+// #include "../Engine/Options.h"
+// #include "../Engine/FileMap.h"
 
 namespace OpenXcom
 {

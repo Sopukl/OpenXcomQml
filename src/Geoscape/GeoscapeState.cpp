@@ -114,7 +114,6 @@
 #include "BaseDestroyedState.h"
 #include "../Menu/LoadGameState.h"
 #include "../Menu/SaveGameState.h"
-#include "../Menu/ListSaveState.h"
 #include "../Mod/RuleGlobe.h"
 #include "../Engine/Exception.h"
 #include "../Mod/AlienDeployment.h"
@@ -711,7 +710,8 @@ void GeoscapeState::init()
 	// Pop up save screen if it's a new ironman game
 	if (game.savedGame()->isIronMan() && game.savedGame()->getName().empty())
 	{
-		popup(new ListSaveState(OPT_GEOSCAPE));
+		//popup(new ListSaveState(OPT_GEOSCAPE));
+		game.openDialog("qrc:/OpenXcom/Menu/SaveGame.qml", {{"allowCancel", false}});
 	}
 
 	// Set music if it's not already playing

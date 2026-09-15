@@ -14,8 +14,13 @@ XC.Dialog {
     property bool sortByName: true
     property bool sortAscended: true
 
+    property bool allowCancel: true
+
     property var saves: []
     signal acceptedSavedGame(int index);
+
+    closePolicy: allowCancel?Popup.CloseOnEscape
+                            :Popup.NoAutoClose
 
     function initSavesList() {
         return [];
@@ -295,6 +300,7 @@ XC.Dialog {
             id: btnCancel
             text: Game.language.get("STR_CANCEL")
             onClicked: popup.reject()
+            visible: allowCancel
             anchors{
                 bottom: parent.bottom
                 left: parent.horizontalCenter
